@@ -44,6 +44,13 @@ class MedicalEnumeration extends MetaJsonLd implements MedicalEnumerationInterfa
     static public string $schemaTypeScope = 'https://schema.org/MedicalEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

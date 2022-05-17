@@ -41,6 +41,13 @@ class EvidenceLevelC extends MetaJsonLd implements EvidenceLevelCInterface, Medi
     static public string $schemaTypeScope = 'https://schema.org/EvidenceLevelC';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalEvidenceLevel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class FDAcategoryB extends MetaJsonLd implements FDAcategoryBInterface, DrugPreg
     static public string $schemaTypeScope = 'https://schema.org/FDAcategoryB';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DrugPregnancyCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

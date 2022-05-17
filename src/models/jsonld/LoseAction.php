@@ -41,6 +41,13 @@ class LoseAction extends MetaJsonLd implements LoseActionInterface, AchieveActio
     static public string $schemaTypeScope = 'https://schema.org/LoseAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AchieveAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

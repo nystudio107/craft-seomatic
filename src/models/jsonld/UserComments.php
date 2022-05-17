@@ -43,6 +43,13 @@ class UserComments extends MetaJsonLd implements UserCommentsInterface, UserInte
     static public string $schemaTypeScope = 'https://schema.org/UserComments';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

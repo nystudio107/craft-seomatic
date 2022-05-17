@@ -41,6 +41,13 @@ class Registry extends MetaJsonLd implements RegistryInterface, MedicalObservati
     static public string $schemaTypeScope = 'https://schema.org/Registry';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalObservationalStudyDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class UserPageVisits extends MetaJsonLd implements UserPageVisitsInterface, User
     static public string $schemaTypeScope = 'https://schema.org/UserPageVisits';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

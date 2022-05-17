@@ -41,6 +41,13 @@ class AggregateRating extends MetaJsonLd implements AggregateRatingInterface, Ra
     static public string $schemaTypeScope = 'https://schema.org/AggregateRating';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Rating';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

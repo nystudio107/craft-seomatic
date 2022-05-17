@@ -43,6 +43,13 @@ class PlasticSurgery extends MetaJsonLd implements PlasticSurgeryInterface, Medi
     static public string $schemaTypeScope = 'https://schema.org/PlasticSurgery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

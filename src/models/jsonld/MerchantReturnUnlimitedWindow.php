@@ -41,6 +41,13 @@ class MerchantReturnUnlimitedWindow extends MetaJsonLd implements MerchantReturn
     static public string $schemaTypeScope = 'https://schema.org/MerchantReturnUnlimitedWindow';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MerchantReturnEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

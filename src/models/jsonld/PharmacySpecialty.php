@@ -42,6 +42,13 @@ class PharmacySpecialty extends MetaJsonLd implements PharmacySpecialtyInterface
     static public string $schemaTypeScope = 'https://schema.org/PharmacySpecialty';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

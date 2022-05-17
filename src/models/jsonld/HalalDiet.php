@@ -41,6 +41,13 @@ class HalalDiet extends MetaJsonLd implements HalalDietInterface, RestrictedDiet
     static public string $schemaTypeScope = 'https://schema.org/HalalDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

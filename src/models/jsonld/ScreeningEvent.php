@@ -41,6 +41,13 @@ class ScreeningEvent extends MetaJsonLd implements ScreeningEventInterface, Even
     static public string $schemaTypeScope = 'https://schema.org/ScreeningEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

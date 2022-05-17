@@ -43,6 +43,13 @@ class Game extends MetaJsonLd implements GameInterface, CreativeWorkInterface, T
     static public string $schemaTypeScope = 'https://schema.org/Game';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

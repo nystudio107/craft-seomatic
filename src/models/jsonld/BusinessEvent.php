@@ -41,6 +41,13 @@ class BusinessEvent extends MetaJsonLd implements BusinessEventInterface, EventI
     static public string $schemaTypeScope = 'https://schema.org/BusinessEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

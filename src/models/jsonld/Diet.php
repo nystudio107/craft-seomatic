@@ -42,6 +42,13 @@ class Diet extends MetaJsonLd implements DietInterface, LifestyleModificationInt
     static public string $schemaTypeScope = 'https://schema.org/Diet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LifestyleModification';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

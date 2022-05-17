@@ -43,6 +43,13 @@ class Series extends MetaJsonLd implements SeriesInterface, IntangibleInterface,
     static public string $schemaTypeScope = 'https://schema.org/Series';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

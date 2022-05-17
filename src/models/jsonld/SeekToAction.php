@@ -43,6 +43,13 @@ class SeekToAction extends MetaJsonLd implements SeekToActionInterface, ActionIn
     static public string $schemaTypeScope = 'https://schema.org/SeekToAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

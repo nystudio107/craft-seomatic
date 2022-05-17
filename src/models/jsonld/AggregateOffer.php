@@ -46,6 +46,13 @@ class AggregateOffer extends MetaJsonLd implements AggregateOfferInterface, Offe
     static public string $schemaTypeScope = 'https://schema.org/AggregateOffer';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Offer';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

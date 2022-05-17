@@ -41,6 +41,13 @@ class CurrencyConversionService extends MetaJsonLd implements CurrencyConversion
     static public string $schemaTypeScope = 'https://schema.org/CurrencyConversionService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'FinancialProduct';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

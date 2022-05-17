@@ -45,6 +45,13 @@ class TrackAction extends MetaJsonLd implements TrackActionInterface, FindAction
     static public string $schemaTypeScope = 'https://schema.org/TrackAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'FindAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

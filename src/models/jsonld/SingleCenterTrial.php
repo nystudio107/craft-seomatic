@@ -41,6 +41,13 @@ class SingleCenterTrial extends MetaJsonLd implements SingleCenterTrialInterface
     static public string $schemaTypeScope = 'https://schema.org/SingleCenterTrial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalTrialDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

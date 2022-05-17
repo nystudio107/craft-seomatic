@@ -41,6 +41,13 @@ class EffectivenessHealthAspect extends MetaJsonLd implements EffectivenessHealt
     static public string $schemaTypeScope = 'https://schema.org/EffectivenessHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

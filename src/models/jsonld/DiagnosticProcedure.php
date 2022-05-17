@@ -42,6 +42,13 @@ class DiagnosticProcedure extends MetaJsonLd implements DiagnosticProcedureInter
     static public string $schemaTypeScope = 'https://schema.org/DiagnosticProcedure';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalProcedure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

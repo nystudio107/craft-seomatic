@@ -41,6 +41,13 @@ class MusicAlbum extends MetaJsonLd implements MusicAlbumInterface, MusicPlaylis
     static public string $schemaTypeScope = 'https://schema.org/MusicAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MusicPlaylist';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class DislikeAction extends MetaJsonLd implements DislikeActionInterface, ReactA
     static public string $schemaTypeScope = 'https://schema.org/DislikeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReactAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

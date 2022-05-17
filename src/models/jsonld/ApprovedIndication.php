@@ -43,6 +43,13 @@ class ApprovedIndication extends MetaJsonLd implements ApprovedIndicationInterfa
     static public string $schemaTypeScope = 'https://schema.org/ApprovedIndication';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalIndication';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

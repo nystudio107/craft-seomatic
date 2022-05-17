@@ -41,6 +41,13 @@ class RandomizedTrial extends MetaJsonLd implements RandomizedTrialInterface, Me
     static public string $schemaTypeScope = 'https://schema.org/RandomizedTrial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalTrialDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class ActionStatusType extends MetaJsonLd implements ActionStatusTypeInterface, 
     static public string $schemaTypeScope = 'https://schema.org/ActionStatusType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StatusEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -52,6 +52,13 @@ class Campground extends MetaJsonLd implements CampgroundInterface, LodgingBusin
     static public string $schemaTypeScope = 'https://schema.org/Campground';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LodgingBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

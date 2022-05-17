@@ -41,6 +41,13 @@ class CassetteFormat extends MetaJsonLd implements CassetteFormatInterface, Musi
     static public string $schemaTypeScope = 'https://schema.org/CassetteFormat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MusicReleaseFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

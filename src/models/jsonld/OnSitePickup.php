@@ -42,6 +42,13 @@ class OnSitePickup extends MetaJsonLd implements OnSitePickupInterface, Delivery
     static public string $schemaTypeScope = 'https://schema.org/OnSitePickup';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DeliveryMethod';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

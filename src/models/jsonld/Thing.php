@@ -41,6 +41,13 @@ class Thing extends MetaJsonLd implements ThingInterface
     static public string $schemaTypeScope = 'https://schema.org/Thing';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

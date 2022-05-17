@@ -43,6 +43,13 @@ class ConfirmAction extends MetaJsonLd implements ConfirmActionInterface, Inform
     static public string $schemaTypeScope = 'https://schema.org/ConfirmAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InformAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

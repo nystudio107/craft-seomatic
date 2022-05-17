@@ -41,6 +41,13 @@ class WPHeader extends MetaJsonLd implements WPHeaderInterface, WebPageElementIn
     static public string $schemaTypeScope = 'https://schema.org/WPHeader';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'WebPageElement';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

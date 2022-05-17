@@ -42,6 +42,13 @@ class ReturnAction extends MetaJsonLd implements ReturnActionInterface, Transfer
     static public string $schemaTypeScope = 'https://schema.org/ReturnAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'TransferAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

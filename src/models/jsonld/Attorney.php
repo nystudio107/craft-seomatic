@@ -42,6 +42,13 @@ class Attorney extends MetaJsonLd implements AttorneyInterface, LegalServiceInte
     static public string $schemaTypeScope = 'https://schema.org/Attorney';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LegalService';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

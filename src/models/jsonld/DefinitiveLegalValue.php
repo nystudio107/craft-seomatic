@@ -44,6 +44,13 @@ class DefinitiveLegalValue extends MetaJsonLd implements DefinitiveLegalValueInt
     static public string $schemaTypeScope = 'https://schema.org/DefinitiveLegalValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LegalValueLevel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

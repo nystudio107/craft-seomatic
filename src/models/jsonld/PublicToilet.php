@@ -43,6 +43,13 @@ class PublicToilet extends MetaJsonLd implements PublicToiletInterface, CivicStr
     static public string $schemaTypeScope = 'https://schema.org/PublicToilet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -45,6 +45,13 @@ class SizeSpecification extends MetaJsonLd implements SizeSpecificationInterface
     static public string $schemaTypeScope = 'https://schema.org/SizeSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'QualitativeValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

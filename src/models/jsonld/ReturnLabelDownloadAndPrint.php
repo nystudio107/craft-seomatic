@@ -42,6 +42,13 @@ class ReturnLabelDownloadAndPrint extends MetaJsonLd implements ReturnLabelDownl
     static public string $schemaTypeScope = 'https://schema.org/ReturnLabelDownloadAndPrint';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

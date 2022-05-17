@@ -42,6 +42,13 @@ class Taxon extends MetaJsonLd implements TaxonInterface, ThingInterface
     static public string $schemaTypeScope = 'https://schema.org/Taxon';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

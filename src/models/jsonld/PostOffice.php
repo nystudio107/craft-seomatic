@@ -41,6 +41,13 @@ class PostOffice extends MetaJsonLd implements PostOfficeInterface, GovernmentOf
     static public string $schemaTypeScope = 'https://schema.org/PostOffice';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentOffice';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

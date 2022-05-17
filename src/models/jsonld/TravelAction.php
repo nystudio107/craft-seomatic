@@ -42,6 +42,13 @@ class TravelAction extends MetaJsonLd implements TravelActionInterface, MoveActi
     static public string $schemaTypeScope = 'https://schema.org/TravelAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MoveAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class ArriveAction extends MetaJsonLd implements ArriveActionInterface, MoveActi
     static public string $schemaTypeScope = 'https://schema.org/ArriveAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MoveAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

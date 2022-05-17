@@ -41,6 +41,13 @@ class MRI extends MetaJsonLd implements MRIInterface, MedicalImagingTechniqueInt
     static public string $schemaTypeScope = 'https://schema.org/MRI';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalImagingTechnique';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

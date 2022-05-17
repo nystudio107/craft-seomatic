@@ -43,6 +43,13 @@ class TaxiReservation extends MetaJsonLd implements TaxiReservationInterface, Re
     static public string $schemaTypeScope = 'https://schema.org/TaxiReservation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Reservation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

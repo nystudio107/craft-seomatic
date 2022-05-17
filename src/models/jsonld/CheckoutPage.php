@@ -41,6 +41,13 @@ class CheckoutPage extends MetaJsonLd implements CheckoutPageInterface, WebPageI
     static public string $schemaTypeScope = 'https://schema.org/CheckoutPage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

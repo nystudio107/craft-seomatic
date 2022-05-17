@@ -41,6 +41,13 @@ class FullGameAvailability extends MetaJsonLd implements FullGameAvailabilityInt
     static public string $schemaTypeScope = 'https://schema.org/FullGameAvailability';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GameAvailabilityEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class AudioObject extends MetaJsonLd implements AudioObjectInterface, MediaObjec
     static public string $schemaTypeScope = 'https://schema.org/AudioObject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MediaObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

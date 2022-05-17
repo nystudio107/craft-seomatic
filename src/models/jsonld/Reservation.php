@@ -45,6 +45,13 @@ class Reservation extends MetaJsonLd implements ReservationInterface, Intangible
     static public string $schemaTypeScope = 'https://schema.org/Reservation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

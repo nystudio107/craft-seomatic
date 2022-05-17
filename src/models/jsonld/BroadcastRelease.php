@@ -41,6 +41,13 @@ class BroadcastRelease extends MetaJsonLd implements BroadcastReleaseInterface, 
     static public string $schemaTypeScope = 'https://schema.org/BroadcastRelease';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MusicAlbumReleaseType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class MusicRecording extends MetaJsonLd implements MusicRecordingInterface, Crea
     static public string $schemaTypeScope = 'https://schema.org/MusicRecording';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

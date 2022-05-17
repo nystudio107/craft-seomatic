@@ -43,6 +43,13 @@ class LegislationObject extends MetaJsonLd implements LegislationObjectInterface
     static public string $schemaTypeScope = 'https://schema.org/LegislationObject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Legislation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

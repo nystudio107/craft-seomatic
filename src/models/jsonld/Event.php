@@ -43,6 +43,13 @@ class Event extends MetaJsonLd implements EventInterface, ThingInterface
     static public string $schemaTypeScope = 'https://schema.org/Event';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

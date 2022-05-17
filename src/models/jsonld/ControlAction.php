@@ -41,6 +41,13 @@ class ControlAction extends MetaJsonLd implements ControlActionInterface, Action
     static public string $schemaTypeScope = 'https://schema.org/ControlAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

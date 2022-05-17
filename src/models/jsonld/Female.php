@@ -41,6 +41,13 @@ class Female extends MetaJsonLd implements FemaleInterface, GenderTypeInterface,
     static public string $schemaTypeScope = 'https://schema.org/Female';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GenderType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

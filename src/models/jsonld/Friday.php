@@ -41,6 +41,13 @@ class Friday extends MetaJsonLd implements FridayInterface, DayOfWeekInterface, 
     static public string $schemaTypeScope = 'https://schema.org/Friday';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DayOfWeek';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class EmergencyService extends MetaJsonLd implements EmergencyServiceInterface, 
     static public string $schemaTypeScope = 'https://schema.org/EmergencyService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

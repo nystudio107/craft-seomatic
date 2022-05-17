@@ -41,6 +41,13 @@ class ComedyEvent extends MetaJsonLd implements ComedyEventInterface, EventInter
     static public string $schemaTypeScope = 'https://schema.org/ComedyEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

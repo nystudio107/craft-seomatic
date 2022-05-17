@@ -43,6 +43,13 @@ class LendAction extends MetaJsonLd implements LendActionInterface, TransferActi
     static public string $schemaTypeScope = 'https://schema.org/LendAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'TransferAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

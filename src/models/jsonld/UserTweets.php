@@ -43,6 +43,13 @@ class UserTweets extends MetaJsonLd implements UserTweetsInterface, UserInteract
     static public string $schemaTypeScope = 'https://schema.org/UserTweets';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

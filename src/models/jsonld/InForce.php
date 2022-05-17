@@ -41,6 +41,13 @@ class InForce extends MetaJsonLd implements InForceInterface, LegalForceStatusIn
     static public string $schemaTypeScope = 'https://schema.org/InForce';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LegalForceStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

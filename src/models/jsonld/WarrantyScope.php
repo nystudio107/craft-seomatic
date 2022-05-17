@@ -45,6 +45,13 @@ class WarrantyScope extends MetaJsonLd implements WarrantyScopeInterface, Enumer
     static public string $schemaTypeScope = 'https://schema.org/WarrantyScope';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

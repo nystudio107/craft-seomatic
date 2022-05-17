@@ -41,6 +41,13 @@ class NightClub extends MetaJsonLd implements NightClubInterface, EntertainmentB
     static public string $schemaTypeScope = 'https://schema.org/NightClub';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EntertainmentBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

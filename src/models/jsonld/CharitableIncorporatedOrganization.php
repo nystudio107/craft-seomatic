@@ -42,6 +42,13 @@ class CharitableIncorporatedOrganization extends MetaJsonLd implements Charitabl
     static public string $schemaTypeScope = 'https://schema.org/CharitableIncorporatedOrganization';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UKNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

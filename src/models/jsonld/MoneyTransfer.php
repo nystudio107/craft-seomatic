@@ -42,6 +42,13 @@ class MoneyTransfer extends MetaJsonLd implements MoneyTransferInterface, Transf
     static public string $schemaTypeScope = 'https://schema.org/MoneyTransfer';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'TransferAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

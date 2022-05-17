@@ -41,6 +41,13 @@ class CatholicChurch extends MetaJsonLd implements CatholicChurchInterface, Chur
     static public string $schemaTypeScope = 'https://schema.org/CatholicChurch';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Church';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

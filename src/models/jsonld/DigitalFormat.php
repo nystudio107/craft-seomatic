@@ -41,6 +41,13 @@ class DigitalFormat extends MetaJsonLd implements DigitalFormatInterface, MusicR
     static public string $schemaTypeScope = 'https://schema.org/DigitalFormat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MusicReleaseFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

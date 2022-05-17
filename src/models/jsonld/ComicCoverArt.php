@@ -41,6 +41,13 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, ComicS
     static public string $schemaTypeScope = 'https://schema.org/ComicCoverArt';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ComicStory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

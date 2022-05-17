@@ -43,6 +43,13 @@ class UserInteraction extends MetaJsonLd implements UserInteractionInterface, Ev
     static public string $schemaTypeScope = 'https://schema.org/UserInteraction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -44,6 +44,13 @@ class FinancialProduct extends MetaJsonLd implements FinancialProductInterface, 
     static public string $schemaTypeScope = 'https://schema.org/FinancialProduct';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Service';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

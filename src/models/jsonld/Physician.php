@@ -41,6 +41,13 @@ class Physician extends MetaJsonLd implements PhysicianInterface, MedicalOrganiz
     static public string $schemaTypeScope = 'https://schema.org/Physician';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

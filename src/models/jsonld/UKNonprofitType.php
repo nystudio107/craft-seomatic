@@ -42,6 +42,13 @@ class UKNonprofitType extends MetaJsonLd implements UKNonprofitTypeInterface, No
     static public string $schemaTypeScope = 'https://schema.org/UKNonprofitType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'NonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

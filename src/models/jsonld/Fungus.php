@@ -41,6 +41,13 @@ class Fungus extends MetaJsonLd implements FungusInterface, InfectiousAgentClass
     static public string $schemaTypeScope = 'https://schema.org/Fungus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InfectiousAgentClass';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

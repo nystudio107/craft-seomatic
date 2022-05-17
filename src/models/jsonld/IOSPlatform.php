@@ -41,6 +41,13 @@ class IOSPlatform extends MetaJsonLd implements IOSPlatformInterface, DigitalPla
     static public string $schemaTypeScope = 'https://schema.org/IOSPlatform';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DigitalPlatformEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

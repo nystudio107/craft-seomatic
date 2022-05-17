@@ -42,6 +42,13 @@ class RadioBroadcastService extends MetaJsonLd implements RadioBroadcastServiceI
     static public string $schemaTypeScope = 'https://schema.org/RadioBroadcastService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BroadcastService';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

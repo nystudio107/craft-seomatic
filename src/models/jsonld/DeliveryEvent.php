@@ -41,6 +41,13 @@ class DeliveryEvent extends MetaJsonLd implements DeliveryEventInterface, EventI
     static public string $schemaTypeScope = 'https://schema.org/DeliveryEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

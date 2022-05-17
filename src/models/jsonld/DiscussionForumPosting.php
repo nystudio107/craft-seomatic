@@ -41,6 +41,13 @@ class DiscussionForumPosting extends MetaJsonLd implements DiscussionForumPostin
     static public string $schemaTypeScope = 'https://schema.org/DiscussionForumPosting';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'SocialMediaPosting';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

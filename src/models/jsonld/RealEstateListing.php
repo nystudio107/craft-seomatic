@@ -44,6 +44,13 @@ class RealEstateListing extends MetaJsonLd implements RealEstateListingInterface
     static public string $schemaTypeScope = 'https://schema.org/RealEstateListing';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'WebPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class DDxElement extends MetaJsonLd implements DDxElementInterface, MedicalIntan
     static public string $schemaTypeScope = 'https://schema.org/DDxElement';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalIntangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

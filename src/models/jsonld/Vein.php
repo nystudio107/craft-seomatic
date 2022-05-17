@@ -41,6 +41,13 @@ class Vein extends MetaJsonLd implements VeinInterface, VesselInterface, Anatomi
     static public string $schemaTypeScope = 'https://schema.org/Vein';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Vessel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

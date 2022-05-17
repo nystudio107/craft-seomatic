@@ -42,6 +42,13 @@ class AnaerobicActivity extends MetaJsonLd implements AnaerobicActivityInterface
     static public string $schemaTypeScope = 'https://schema.org/AnaerobicActivity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PhysicalActivityCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

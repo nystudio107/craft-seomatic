@@ -41,6 +41,13 @@ class HairSalon extends MetaJsonLd implements HairSalonInterface, HealthAndBeaut
     static public string $schemaTypeScope = 'https://schema.org/HairSalon';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAndBeautyBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class BankOrCreditUnion extends MetaJsonLd implements BankOrCreditUnionInterface
     static public string $schemaTypeScope = 'https://schema.org/BankOrCreditUnion';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'FinancialService';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

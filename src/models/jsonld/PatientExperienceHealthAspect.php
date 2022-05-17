@@ -43,6 +43,13 @@ class PatientExperienceHealthAspect extends MetaJsonLd implements PatientExperie
     static public string $schemaTypeScope = 'https://schema.org/PatientExperienceHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

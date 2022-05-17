@@ -53,6 +53,13 @@ class Claim extends MetaJsonLd implements ClaimInterface, CreativeWorkInterface,
     static public string $schemaTypeScope = 'https://schema.org/Claim';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

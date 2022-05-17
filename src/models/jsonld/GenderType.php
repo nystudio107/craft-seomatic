@@ -41,6 +41,13 @@ class GenderType extends MetaJsonLd implements GenderTypeInterface, EnumerationI
     static public string $schemaTypeScope = 'https://schema.org/GenderType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
     static public string $schemaTypeScope = 'https://schema.org/ExerciseAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PlayAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

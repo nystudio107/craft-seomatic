@@ -51,6 +51,13 @@ class TouristDestination extends MetaJsonLd implements TouristDestinationInterfa
     static public string $schemaTypeScope = 'https://schema.org/TouristDestination';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Place';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

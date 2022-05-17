@@ -43,6 +43,13 @@ class Recipe extends MetaJsonLd implements RecipeInterface, HowToInterface, Crea
     static public string $schemaTypeScope = 'https://schema.org/Recipe';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HowTo';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

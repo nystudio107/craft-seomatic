@@ -42,6 +42,13 @@ class DeactivateAction extends MetaJsonLd implements DeactivateActionInterface, 
     static public string $schemaTypeScope = 'https://schema.org/DeactivateAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ControlAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

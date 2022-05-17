@@ -49,6 +49,13 @@ class MedicalStudy extends MetaJsonLd implements MedicalStudyInterface, MedicalE
     static public string $schemaTypeScope = 'https://schema.org/MedicalStudy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

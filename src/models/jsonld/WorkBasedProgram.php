@@ -45,6 +45,13 @@ class WorkBasedProgram extends MetaJsonLd implements WorkBasedProgramInterface, 
     static public string $schemaTypeScope = 'https://schema.org/WorkBasedProgram';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EducationalOccupationalProgram';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

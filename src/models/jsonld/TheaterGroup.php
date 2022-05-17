@@ -42,6 +42,13 @@ class TheaterGroup extends MetaJsonLd implements TheaterGroupInterface, Performi
     static public string $schemaTypeScope = 'https://schema.org/TheaterGroup';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PerformingGroup';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

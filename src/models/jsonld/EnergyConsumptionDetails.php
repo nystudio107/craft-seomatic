@@ -47,6 +47,13 @@ class EnergyConsumptionDetails extends MetaJsonLd implements EnergyConsumptionDe
     static public string $schemaTypeScope = 'https://schema.org/EnergyConsumptionDetails';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class EBook extends MetaJsonLd implements EBookInterface, BookFormatTypeInterfac
     static public string $schemaTypeScope = 'https://schema.org/EBook';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BookFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

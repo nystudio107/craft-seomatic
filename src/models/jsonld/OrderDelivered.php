@@ -41,6 +41,13 @@ class OrderDelivered extends MetaJsonLd implements OrderDeliveredInterface, Orde
     static public string $schemaTypeScope = 'https://schema.org/OrderDelivered';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'OrderStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

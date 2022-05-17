@@ -42,6 +42,13 @@ class OTC extends MetaJsonLd implements OTCInterface, DrugPrescriptionStatusInte
     static public string $schemaTypeScope = 'https://schema.org/OTC';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DrugPrescriptionStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

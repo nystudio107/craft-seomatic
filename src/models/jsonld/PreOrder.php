@@ -41,6 +41,13 @@ class PreOrder extends MetaJsonLd implements PreOrderInterface, ItemAvailability
     static public string $schemaTypeScope = 'https://schema.org/PreOrder';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ItemAvailability';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class GovernmentOffice extends MetaJsonLd implements GovernmentOfficeInterface, 
     static public string $schemaTypeScope = 'https://schema.org/GovernmentOffice';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

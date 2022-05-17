@@ -48,6 +48,13 @@ class OfferShippingDetails extends MetaJsonLd implements OfferShippingDetailsInt
     static public string $schemaTypeScope = 'https://schema.org/OfferShippingDetails';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

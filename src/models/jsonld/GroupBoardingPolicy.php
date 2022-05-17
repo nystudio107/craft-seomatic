@@ -41,6 +41,13 @@ class GroupBoardingPolicy extends MetaJsonLd implements GroupBoardingPolicyInter
     static public string $schemaTypeScope = 'https://schema.org/GroupBoardingPolicy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BoardingPolicyType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

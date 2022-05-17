@@ -45,6 +45,13 @@ class MediaObject extends MetaJsonLd implements MediaObjectInterface, CreativeWo
     static public string $schemaTypeScope = 'https://schema.org/MediaObject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

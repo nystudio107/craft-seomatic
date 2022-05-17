@@ -41,6 +41,13 @@ class AmusementPark extends MetaJsonLd implements AmusementParkInterface, Entert
     static public string $schemaTypeScope = 'https://schema.org/AmusementPark';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EntertainmentBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

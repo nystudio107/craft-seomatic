@@ -41,6 +41,13 @@ class TattooParlor extends MetaJsonLd implements TattooParlorInterface, HealthAn
     static public string $schemaTypeScope = 'https://schema.org/TattooParlor';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAndBeautyBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

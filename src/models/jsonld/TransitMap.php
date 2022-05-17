@@ -41,6 +41,13 @@ class TransitMap extends MetaJsonLd implements TransitMapInterface, MapCategoryT
     static public string $schemaTypeScope = 'https://schema.org/TransitMap';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MapCategoryType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

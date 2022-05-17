@@ -41,6 +41,13 @@ class PostalAddress extends MetaJsonLd implements PostalAddressInterface, Contac
     static public string $schemaTypeScope = 'https://schema.org/PostalAddress';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ContactPoint';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class City extends MetaJsonLd implements CityInterface, AdministrativeAreaInterf
     static public string $schemaTypeScope = 'https://schema.org/City';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AdministrativeArea';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

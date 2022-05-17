@@ -41,6 +41,13 @@ class UpdateAction extends MetaJsonLd implements UpdateActionInterface, ActionIn
     static public string $schemaTypeScope = 'https://schema.org/UpdateAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

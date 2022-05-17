@@ -45,6 +45,13 @@ class InfectiousDisease extends MetaJsonLd implements InfectiousDiseaseInterface
     static public string $schemaTypeScope = 'https://schema.org/InfectiousDisease';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalCondition';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

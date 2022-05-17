@@ -41,6 +41,13 @@ class MedicalCode extends MetaJsonLd implements MedicalCodeInterface, MedicalInt
     static public string $schemaTypeScope = 'https://schema.org/MedicalCode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalIntangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

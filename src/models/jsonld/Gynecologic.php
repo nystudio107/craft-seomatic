@@ -43,6 +43,13 @@ class Gynecologic extends MetaJsonLd implements GynecologicInterface, MedicalBus
     static public string $schemaTypeScope = 'https://schema.org/Gynecologic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

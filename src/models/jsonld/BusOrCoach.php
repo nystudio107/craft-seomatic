@@ -43,6 +43,13 @@ class BusOrCoach extends MetaJsonLd implements BusOrCoachInterface, VehicleInter
     static public string $schemaTypeScope = 'https://schema.org/BusOrCoach';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Vehicle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

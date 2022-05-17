@@ -41,6 +41,13 @@ class SingleRelease extends MetaJsonLd implements SingleReleaseInterface, MusicA
     static public string $schemaTypeScope = 'https://schema.org/SingleRelease';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MusicAlbumReleaseType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

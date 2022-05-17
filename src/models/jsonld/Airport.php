@@ -41,6 +41,13 @@ class Airport extends MetaJsonLd implements AirportInterface, CivicStructureInte
     static public string $schemaTypeScope = 'https://schema.org/Airport';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

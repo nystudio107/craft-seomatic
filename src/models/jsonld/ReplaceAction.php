@@ -42,6 +42,13 @@ class ReplaceAction extends MetaJsonLd implements ReplaceActionInterface, Update
     static public string $schemaTypeScope = 'https://schema.org/ReplaceAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UpdateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

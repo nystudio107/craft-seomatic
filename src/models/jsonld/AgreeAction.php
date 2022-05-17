@@ -43,6 +43,13 @@ class AgreeAction extends MetaJsonLd implements AgreeActionInterface, ReactActio
     static public string $schemaTypeScope = 'https://schema.org/AgreeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReactAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

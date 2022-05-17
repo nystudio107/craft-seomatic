@@ -41,6 +41,13 @@ class BodyOfWater extends MetaJsonLd implements BodyOfWaterInterface, LandformIn
     static public string $schemaTypeScope = 'https://schema.org/BodyOfWater';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Landform';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

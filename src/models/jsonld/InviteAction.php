@@ -41,6 +41,13 @@ class InviteAction extends MetaJsonLd implements InviteActionInterface, Communic
     static public string $schemaTypeScope = 'https://schema.org/InviteAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

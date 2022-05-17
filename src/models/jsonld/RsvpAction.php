@@ -42,6 +42,13 @@ class RsvpAction extends MetaJsonLd implements RsvpActionInterface, InformAction
     static public string $schemaTypeScope = 'https://schema.org/RsvpAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InformAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class MovieTheater extends MetaJsonLd implements MovieTheaterInterface, CivicStr
     static public string $schemaTypeScope = 'https://schema.org/MovieTheater';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

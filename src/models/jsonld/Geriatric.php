@@ -42,6 +42,13 @@ class Geriatric extends MetaJsonLd implements GeriatricInterface, MedicalBusines
     static public string $schemaTypeScope = 'https://schema.org/Geriatric';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

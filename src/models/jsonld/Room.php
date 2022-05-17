@@ -46,6 +46,13 @@ class Room extends MetaJsonLd implements RoomInterface, AccommodationInterface, 
     static public string $schemaTypeScope = 'https://schema.org/Room';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Accommodation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

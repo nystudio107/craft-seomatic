@@ -41,6 +41,13 @@ class CategoryCode extends MetaJsonLd implements CategoryCodeInterface, DefinedT
     static public string $schemaTypeScope = 'https://schema.org/CategoryCode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DefinedTerm';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class HowToStep extends MetaJsonLd implements HowToStepInterface, ListItemInterf
     static public string $schemaTypeScope = 'https://schema.org/HowToStep';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ListItem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

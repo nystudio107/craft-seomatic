@@ -43,6 +43,13 @@ class Hostel extends MetaJsonLd implements HostelInterface, LodgingBusinessInter
     static public string $schemaTypeScope = 'https://schema.org/Hostel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LodgingBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class DrugStrength extends MetaJsonLd implements DrugStrengthInterface, MedicalI
     static public string $schemaTypeScope = 'https://schema.org/DrugStrength';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalIntangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

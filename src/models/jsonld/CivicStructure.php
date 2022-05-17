@@ -41,6 +41,13 @@ class CivicStructure extends MetaJsonLd implements CivicStructureInterface, Plac
     static public string $schemaTypeScope = 'https://schema.org/CivicStructure';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Place';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

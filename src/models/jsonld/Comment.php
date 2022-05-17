@@ -43,6 +43,13 @@ class Comment extends MetaJsonLd implements CommentInterface, CreativeWorkInterf
     static public string $schemaTypeScope = 'https://schema.org/Comment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

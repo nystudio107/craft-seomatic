@@ -42,6 +42,13 @@ class Rheumatologic extends MetaJsonLd implements RheumatologicInterface, Medica
     static public string $schemaTypeScope = 'https://schema.org/Rheumatologic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

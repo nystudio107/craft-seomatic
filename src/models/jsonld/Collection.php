@@ -41,6 +41,13 @@ class Collection extends MetaJsonLd implements CollectionInterface, CreativeWork
     static public string $schemaTypeScope = 'https://schema.org/Collection';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class DietNutrition extends MetaJsonLd implements DietNutritionInterface, Medica
     static public string $schemaTypeScope = 'https://schema.org/DietNutrition';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

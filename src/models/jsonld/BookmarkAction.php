@@ -41,6 +41,13 @@ class BookmarkAction extends MetaJsonLd implements BookmarkActionInterface, Orga
     static public string $schemaTypeScope = 'https://schema.org/BookmarkAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'OrganizeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

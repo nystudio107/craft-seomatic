@@ -44,6 +44,13 @@ class LocalBusiness extends MetaJsonLd implements LocalBusinessInterface, Organi
     static public string $schemaTypeScope = 'https://schema.org/LocalBusiness';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

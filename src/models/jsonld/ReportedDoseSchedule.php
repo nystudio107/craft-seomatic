@@ -41,6 +41,13 @@ class ReportedDoseSchedule extends MetaJsonLd implements ReportedDoseScheduleInt
     static public string $schemaTypeScope = 'https://schema.org/ReportedDoseSchedule';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DoseSchedule';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

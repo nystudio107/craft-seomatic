@@ -42,6 +42,13 @@ class ClaimReview extends MetaJsonLd implements ClaimReviewInterface, ReviewInte
     static public string $schemaTypeScope = 'https://schema.org/ClaimReview';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Review';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

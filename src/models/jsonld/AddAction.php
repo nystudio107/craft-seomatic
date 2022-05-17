@@ -41,6 +41,13 @@ class AddAction extends MetaJsonLd implements AddActionInterface, UpdateActionIn
     static public string $schemaTypeScope = 'https://schema.org/AddAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UpdateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

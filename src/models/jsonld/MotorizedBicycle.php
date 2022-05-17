@@ -42,6 +42,13 @@ class MotorizedBicycle extends MetaJsonLd implements MotorizedBicycleInterface, 
     static public string $schemaTypeScope = 'https://schema.org/MotorizedBicycle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Vehicle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

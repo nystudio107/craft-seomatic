@@ -41,6 +41,13 @@ class CoverArt extends MetaJsonLd implements CoverArtInterface, VisualArtworkInt
     static public string $schemaTypeScope = 'https://schema.org/CoverArt';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'VisualArtwork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

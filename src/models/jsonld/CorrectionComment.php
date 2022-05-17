@@ -41,6 +41,13 @@ class CorrectionComment extends MetaJsonLd implements CorrectionCommentInterface
     static public string $schemaTypeScope = 'https://schema.org/CorrectionComment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Comment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

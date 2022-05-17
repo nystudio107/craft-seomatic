@@ -41,6 +41,13 @@ class DefenceEstablishment extends MetaJsonLd implements DefenceEstablishmentInt
     static public string $schemaTypeScope = 'https://schema.org/DefenceEstablishment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBuilding';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

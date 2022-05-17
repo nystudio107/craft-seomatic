@@ -43,6 +43,13 @@ class PublicHealth extends MetaJsonLd implements PublicHealthInterface, MedicalB
     static public string $schemaTypeScope = 'https://schema.org/PublicHealth';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class VoteAction extends MetaJsonLd implements VoteActionInterface, ChooseAction
     static public string $schemaTypeScope = 'https://schema.org/VoteAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ChooseAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

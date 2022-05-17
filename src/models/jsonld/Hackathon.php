@@ -41,6 +41,13 @@ class Hackathon extends MetaJsonLd implements HackathonInterface, EventInterface
     static public string $schemaTypeScope = 'https://schema.org/Hackathon';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

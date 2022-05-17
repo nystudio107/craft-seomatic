@@ -41,6 +41,13 @@ class SafetyHealthAspect extends MetaJsonLd implements SafetyHealthAspectInterfa
     static public string $schemaTypeScope = 'https://schema.org/SafetyHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

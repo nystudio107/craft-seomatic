@@ -42,6 +42,13 @@ class BedType extends MetaJsonLd implements BedTypeInterface, QualitativeValueIn
     static public string $schemaTypeScope = 'https://schema.org/BedType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'QualitativeValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

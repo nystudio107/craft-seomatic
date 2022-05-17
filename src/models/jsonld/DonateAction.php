@@ -42,6 +42,13 @@ class DonateAction extends MetaJsonLd implements DonateActionInterface, TradeAct
     static public string $schemaTypeScope = 'https://schema.org/DonateAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'TradeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

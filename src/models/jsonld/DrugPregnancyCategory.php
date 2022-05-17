@@ -42,6 +42,13 @@ class DrugPregnancyCategory extends MetaJsonLd implements DrugPregnancyCategoryI
     static public string $schemaTypeScope = 'https://schema.org/DrugPregnancyCategory';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

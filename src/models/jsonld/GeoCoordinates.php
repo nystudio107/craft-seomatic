@@ -41,6 +41,13 @@ class GeoCoordinates extends MetaJsonLd implements GeoCoordinatesInterface, Stru
     static public string $schemaTypeScope = 'https://schema.org/GeoCoordinates';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

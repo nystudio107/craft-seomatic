@@ -41,6 +41,13 @@ class SpokenWordAlbum extends MetaJsonLd implements SpokenWordAlbumInterface, Mu
     static public string $schemaTypeScope = 'https://schema.org/SpokenWordAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MusicAlbumProductionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class DesktopWebPlatform extends MetaJsonLd implements DesktopWebPlatformInterfa
     static public string $schemaTypeScope = 'https://schema.org/DesktopWebPlatform';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DigitalPlatformEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

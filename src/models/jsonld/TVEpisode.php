@@ -41,6 +41,13 @@ class TVEpisode extends MetaJsonLd implements TVEpisodeInterface, EpisodeInterfa
     static public string $schemaTypeScope = 'https://schema.org/TVEpisode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Episode';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

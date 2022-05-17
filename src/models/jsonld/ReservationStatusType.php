@@ -41,6 +41,13 @@ class ReservationStatusType extends MetaJsonLd implements ReservationStatusTypeI
     static public string $schemaTypeScope = 'https://schema.org/ReservationStatusType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StatusEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

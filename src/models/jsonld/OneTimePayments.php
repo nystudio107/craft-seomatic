@@ -41,6 +41,13 @@ class OneTimePayments extends MetaJsonLd implements OneTimePaymentsInterface, Go
     static public string $schemaTypeScope = 'https://schema.org/OneTimePayments';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class OrderAction extends MetaJsonLd implements OrderActionInterface, TradeActio
     static public string $schemaTypeScope = 'https://schema.org/OrderAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'TradeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

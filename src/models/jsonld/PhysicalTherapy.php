@@ -42,6 +42,13 @@ class PhysicalTherapy extends MetaJsonLd implements PhysicalTherapyInterface, Me
     static public string $schemaTypeScope = 'https://schema.org/PhysicalTherapy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalTherapy';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

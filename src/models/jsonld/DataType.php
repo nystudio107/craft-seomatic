@@ -41,6 +41,13 @@ class DataType extends MetaJsonLd implements DataTypeInterface
     static public string $schemaTypeScope = 'https://schema.org/DataType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

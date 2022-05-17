@@ -42,6 +42,13 @@ class Reservoir extends MetaJsonLd implements ReservoirInterface, BodyOfWaterInt
     static public string $schemaTypeScope = 'https://schema.org/Reservoir';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BodyOfWater';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

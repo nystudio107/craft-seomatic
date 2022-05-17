@@ -41,6 +41,13 @@ class GatedResidenceCommunity extends MetaJsonLd implements GatedResidenceCommun
     static public string $schemaTypeScope = 'https://schema.org/GatedResidenceCommunity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Residence';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

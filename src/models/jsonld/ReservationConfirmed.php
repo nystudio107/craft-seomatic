@@ -41,6 +41,13 @@ class ReservationConfirmed extends MetaJsonLd implements ReservationConfirmedInt
     static public string $schemaTypeScope = 'https://schema.org/ReservationConfirmed';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReservationStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

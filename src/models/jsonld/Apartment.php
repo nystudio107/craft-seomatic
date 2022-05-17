@@ -45,6 +45,13 @@ class Apartment extends MetaJsonLd implements ApartmentInterface, AccommodationI
     static public string $schemaTypeScope = 'https://schema.org/Apartment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Accommodation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

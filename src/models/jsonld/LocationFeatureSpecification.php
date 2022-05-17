@@ -43,6 +43,13 @@ class LocationFeatureSpecification extends MetaJsonLd implements LocationFeature
     static public string $schemaTypeScope = 'https://schema.org/LocationFeatureSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PropertyValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

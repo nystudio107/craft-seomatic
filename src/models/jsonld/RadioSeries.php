@@ -42,6 +42,13 @@ class RadioSeries extends MetaJsonLd implements RadioSeriesInterface, CreativeWo
     static public string $schemaTypeScope = 'https://schema.org/RadioSeries';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWorkSeries';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

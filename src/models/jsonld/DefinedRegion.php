@@ -48,6 +48,13 @@ class DefinedRegion extends MetaJsonLd implements DefinedRegionInterface, Struct
     static public string $schemaTypeScope = 'https://schema.org/DefinedRegion';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

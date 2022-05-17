@@ -45,6 +45,13 @@ class AuthoritativeLegalValue extends MetaJsonLd implements AuthoritativeLegalVa
     static public string $schemaTypeScope = 'https://schema.org/AuthoritativeLegalValue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LegalValueLevel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

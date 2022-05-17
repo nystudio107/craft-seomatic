@@ -41,6 +41,13 @@ class TrainTrip extends MetaJsonLd implements TrainTripInterface, TripInterface,
     static public string $schemaTypeScope = 'https://schema.org/TrainTrip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Trip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

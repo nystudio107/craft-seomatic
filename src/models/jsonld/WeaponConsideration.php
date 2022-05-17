@@ -42,6 +42,13 @@ class WeaponConsideration extends MetaJsonLd implements WeaponConsiderationInter
     static public string $schemaTypeScope = 'https://schema.org/WeaponConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

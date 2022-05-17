@@ -43,6 +43,13 @@ class UserPlusOnes extends MetaJsonLd implements UserPlusOnesInterface, UserInte
     static public string $schemaTypeScope = 'https://schema.org/UserPlusOnes';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class AudiobookFormat extends MetaJsonLd implements AudiobookFormatInterface, Bo
     static public string $schemaTypeScope = 'https://schema.org/AudiobookFormat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BookFormatType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

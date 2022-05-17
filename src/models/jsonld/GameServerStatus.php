@@ -41,6 +41,13 @@ class GameServerStatus extends MetaJsonLd implements GameServerStatusInterface, 
     static public string $schemaTypeScope = 'https://schema.org/GameServerStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StatusEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

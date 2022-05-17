@@ -47,6 +47,13 @@ class Action extends MetaJsonLd implements ActionInterface, ThingInterface
     static public string $schemaTypeScope = 'https://schema.org/Action';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

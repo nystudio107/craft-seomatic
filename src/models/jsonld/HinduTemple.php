@@ -41,6 +41,13 @@ class HinduTemple extends MetaJsonLd implements HinduTempleInterface, PlaceOfWor
     static public string $schemaTypeScope = 'https://schema.org/HinduTemple';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PlaceOfWorship';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

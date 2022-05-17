@@ -41,6 +41,13 @@ class HobbyShop extends MetaJsonLd implements HobbyShopInterface, StoreInterface
     static public string $schemaTypeScope = 'https://schema.org/HobbyShop';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class TireShop extends MetaJsonLd implements TireShopInterface, StoreInterface, 
     static public string $schemaTypeScope = 'https://schema.org/TireShop';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

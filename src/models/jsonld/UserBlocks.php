@@ -43,6 +43,13 @@ class UserBlocks extends MetaJsonLd implements UserBlocksInterface, UserInteract
     static public string $schemaTypeScope = 'https://schema.org/UserBlocks';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

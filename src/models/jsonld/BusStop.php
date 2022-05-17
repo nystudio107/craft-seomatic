@@ -41,6 +41,13 @@ class BusStop extends MetaJsonLd implements BusStopInterface, CivicStructureInte
     static public string $schemaTypeScope = 'https://schema.org/BusStop';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

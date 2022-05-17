@@ -42,6 +42,13 @@ class HowToDirection extends MetaJsonLd implements HowToDirectionInterface, List
     static public string $schemaTypeScope = 'https://schema.org/HowToDirection';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ListItem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

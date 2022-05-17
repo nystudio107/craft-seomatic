@@ -41,6 +41,13 @@ class Retail extends MetaJsonLd implements RetailInterface, DrugCostCategoryInte
     static public string $schemaTypeScope = 'https://schema.org/Retail';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DrugCostCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

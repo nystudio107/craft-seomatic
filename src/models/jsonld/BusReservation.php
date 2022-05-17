@@ -44,6 +44,13 @@ class BusReservation extends MetaJsonLd implements BusReservationInterface, Rese
     static public string $schemaTypeScope = 'https://schema.org/BusReservation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Reservation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

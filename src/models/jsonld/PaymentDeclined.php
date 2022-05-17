@@ -41,6 +41,13 @@ class PaymentDeclined extends MetaJsonLd implements PaymentDeclinedInterface, Pa
     static public string $schemaTypeScope = 'https://schema.org/PaymentDeclined';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PaymentStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

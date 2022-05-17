@@ -42,6 +42,13 @@ class PathologyTest extends MetaJsonLd implements PathologyTestInterface, Medica
     static public string $schemaTypeScope = 'https://schema.org/PathologyTest';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalTest';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class UnincorporatedAssociationCharity extends MetaJsonLd implements Unincorpora
     static public string $schemaTypeScope = 'https://schema.org/UnincorporatedAssociationCharity';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UKNonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

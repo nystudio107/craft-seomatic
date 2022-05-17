@@ -41,6 +41,13 @@ class ViewAction extends MetaJsonLd implements ViewActionInterface, ConsumeActio
     static public string $schemaTypeScope = 'https://schema.org/ViewAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ConsumeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class ZoneBoardingPolicy extends MetaJsonLd implements ZoneBoardingPolicyInterfa
     static public string $schemaTypeScope = 'https://schema.org/ZoneBoardingPolicy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BoardingPolicyType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

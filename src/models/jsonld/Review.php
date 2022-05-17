@@ -41,6 +41,13 @@ class Review extends MetaJsonLd implements ReviewInterface, CreativeWorkInterfac
     static public string $schemaTypeScope = 'https://schema.org/Review';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

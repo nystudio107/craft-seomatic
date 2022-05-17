@@ -41,6 +41,13 @@ class DigitalDocument extends MetaJsonLd implements DigitalDocumentInterface, Cr
     static public string $schemaTypeScope = 'https://schema.org/DigitalDocument';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

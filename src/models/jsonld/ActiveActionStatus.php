@@ -42,6 +42,13 @@ class ActiveActionStatus extends MetaJsonLd implements ActiveActionStatusInterfa
     static public string $schemaTypeScope = 'https://schema.org/ActiveActionStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ActionStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

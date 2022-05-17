@@ -42,6 +42,13 @@ class Episode extends MetaJsonLd implements EpisodeInterface, CreativeWorkInterf
     static public string $schemaTypeScope = 'https://schema.org/Episode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

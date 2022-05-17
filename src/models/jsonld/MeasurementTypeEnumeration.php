@@ -43,6 +43,13 @@ class MeasurementTypeEnumeration extends MetaJsonLd implements MeasurementTypeEn
     static public string $schemaTypeScope = 'https://schema.org/MeasurementTypeEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

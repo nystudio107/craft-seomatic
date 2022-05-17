@@ -43,6 +43,13 @@ class EventCancelled extends MetaJsonLd implements EventCancelledInterface, Even
     static public string $schemaTypeScope = 'https://schema.org/EventCancelled';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EventStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

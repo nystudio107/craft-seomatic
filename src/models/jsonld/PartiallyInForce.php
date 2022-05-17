@@ -41,6 +41,13 @@ class PartiallyInForce extends MetaJsonLd implements PartiallyInForceInterface, 
     static public string $schemaTypeScope = 'https://schema.org/PartiallyInForce';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LegalForceStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class BusTrip extends MetaJsonLd implements BusTripInterface, TripInterface, Int
     static public string $schemaTypeScope = 'https://schema.org/BusTrip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Trip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

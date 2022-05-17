@@ -52,6 +52,13 @@ class Grant extends MetaJsonLd implements GrantInterface, IntangibleInterface, T
     static public string $schemaTypeScope = 'https://schema.org/Grant';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

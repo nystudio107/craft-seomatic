@@ -43,6 +43,13 @@ class ReviewNewsArticle extends MetaJsonLd implements ReviewNewsArticleInterface
     static public string $schemaTypeScope = 'https://schema.org/ReviewNewsArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CriticReview';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

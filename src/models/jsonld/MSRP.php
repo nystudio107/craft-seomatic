@@ -42,6 +42,13 @@ class MSRP extends MetaJsonLd implements MSRPInterface, PriceTypeEnumerationInte
     static public string $schemaTypeScope = 'https://schema.org/MSRP';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PriceTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

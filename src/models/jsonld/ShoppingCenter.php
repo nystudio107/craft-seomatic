@@ -41,6 +41,13 @@ class ShoppingCenter extends MetaJsonLd implements ShoppingCenterInterface, Loca
     static public string $schemaTypeScope = 'https://schema.org/ShoppingCenter';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

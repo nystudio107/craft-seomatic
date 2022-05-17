@@ -41,6 +41,13 @@ class UnitPriceSpecification extends MetaJsonLd implements UnitPriceSpecificatio
     static public string $schemaTypeScope = 'https://schema.org/UnitPriceSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PriceSpecification';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class OfflineTemporarily extends MetaJsonLd implements OfflineTemporarilyInterfa
     static public string $schemaTypeScope = 'https://schema.org/OfflineTemporarily';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GameServerStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

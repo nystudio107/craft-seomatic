@@ -42,6 +42,13 @@ class PaintAction extends MetaJsonLd implements PaintActionInterface, CreateActi
     static public string $schemaTypeScope = 'https://schema.org/PaintAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

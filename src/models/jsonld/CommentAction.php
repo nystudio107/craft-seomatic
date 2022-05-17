@@ -41,6 +41,13 @@ class CommentAction extends MetaJsonLd implements CommentActionInterface, Commun
     static public string $schemaTypeScope = 'https://schema.org/CommentAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

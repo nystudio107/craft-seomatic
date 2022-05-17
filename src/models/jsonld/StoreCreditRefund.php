@@ -42,6 +42,13 @@ class StoreCreditRefund extends MetaJsonLd implements StoreCreditRefundInterface
     static public string $schemaTypeScope = 'https://schema.org/StoreCreditRefund';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RefundTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

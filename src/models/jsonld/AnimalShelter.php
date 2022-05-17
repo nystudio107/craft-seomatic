@@ -41,6 +41,13 @@ class AnimalShelter extends MetaJsonLd implements AnimalShelterInterface, LocalB
     static public string $schemaTypeScope = 'https://schema.org/AnimalShelter';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

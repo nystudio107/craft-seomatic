@@ -41,6 +41,13 @@ class Completed extends MetaJsonLd implements CompletedInterface, MedicalStudySt
     static public string $schemaTypeScope = 'https://schema.org/Completed';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

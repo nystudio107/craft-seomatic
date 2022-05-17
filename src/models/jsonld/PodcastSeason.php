@@ -42,6 +42,13 @@ class PodcastSeason extends MetaJsonLd implements PodcastSeasonInterface, Creati
     static public string $schemaTypeScope = 'https://schema.org/PodcastSeason';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWorkSeason';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

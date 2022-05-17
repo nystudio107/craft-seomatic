@@ -41,6 +41,13 @@ class WriteAction extends MetaJsonLd implements WriteActionInterface, CreateActi
     static public string $schemaTypeScope = 'https://schema.org/WriteAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class DownloadAction extends MetaJsonLd implements DownloadActionInterface, Tran
     static public string $schemaTypeScope = 'https://schema.org/DownloadAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'TransferAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

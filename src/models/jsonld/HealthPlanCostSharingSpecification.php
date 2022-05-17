@@ -41,6 +41,13 @@ class HealthPlanCostSharingSpecification extends MetaJsonLd implements HealthPla
     static public string $schemaTypeScope = 'https://schema.org/HealthPlanCostSharingSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

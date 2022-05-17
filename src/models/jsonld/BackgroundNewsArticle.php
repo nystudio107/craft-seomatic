@@ -48,6 +48,13 @@ class BackgroundNewsArticle extends MetaJsonLd implements BackgroundNewsArticleI
     static public string $schemaTypeScope = 'https://schema.org/BackgroundNewsArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'NewsArticle';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class TheaterEvent extends MetaJsonLd implements TheaterEventInterface, EventInt
     static public string $schemaTypeScope = 'https://schema.org/TheaterEvent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Event';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

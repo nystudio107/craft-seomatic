@@ -45,6 +45,13 @@ class OfferForPurchase extends MetaJsonLd implements OfferForPurchaseInterface, 
     static public string $schemaTypeScope = 'https://schema.org/OfferForPurchase';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Offer';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

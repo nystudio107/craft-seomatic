@@ -41,6 +41,13 @@ class OrganizationRole extends MetaJsonLd implements OrganizationRoleInterface, 
     static public string $schemaTypeScope = 'https://schema.org/OrganizationRole';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Role';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

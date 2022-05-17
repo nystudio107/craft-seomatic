@@ -41,6 +41,13 @@ class LowSaltDiet extends MetaJsonLd implements LowSaltDietInterface, Restricted
     static public string $schemaTypeScope = 'https://schema.org/LowSaltDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Courthouse extends MetaJsonLd implements CourthouseInterface, GovernmentBu
     static public string $schemaTypeScope = 'https://schema.org/Courthouse';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBuilding';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

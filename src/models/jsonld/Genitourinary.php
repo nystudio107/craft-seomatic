@@ -41,6 +41,13 @@ class Genitourinary extends MetaJsonLd implements GenitourinaryInterface, Physic
     static public string $schemaTypeScope = 'https://schema.org/Genitourinary';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

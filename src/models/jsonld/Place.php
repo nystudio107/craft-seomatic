@@ -41,6 +41,13 @@ class Place extends MetaJsonLd implements PlaceInterface, ThingInterface
     static public string $schemaTypeScope = 'https://schema.org/Place';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

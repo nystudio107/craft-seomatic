@@ -41,6 +41,13 @@ class ReturnFeesEnumeration extends MetaJsonLd implements ReturnFeesEnumerationI
     static public string $schemaTypeScope = 'https://schema.org/ReturnFeesEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

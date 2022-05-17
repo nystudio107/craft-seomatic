@@ -41,6 +41,13 @@ class Artery extends MetaJsonLd implements ArteryInterface, VesselInterface, Ana
     static public string $schemaTypeScope = 'https://schema.org/Artery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Vessel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Embassy extends MetaJsonLd implements EmbassyInterface, GovernmentBuilding
     static public string $schemaTypeScope = 'https://schema.org/Embassy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBuilding';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

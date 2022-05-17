@@ -42,6 +42,13 @@ class RestockingFees extends MetaJsonLd implements RestockingFeesInterface, Retu
     static public string $schemaTypeScope = 'https://schema.org/RestockingFees';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReturnFeesEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

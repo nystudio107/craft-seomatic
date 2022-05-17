@@ -42,6 +42,13 @@ class RsvpResponseType extends MetaJsonLd implements RsvpResponseTypeInterface, 
     static public string $schemaTypeScope = 'https://schema.org/RsvpResponseType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

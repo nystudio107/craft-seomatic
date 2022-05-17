@@ -49,6 +49,13 @@ class Schema3DModel extends MetaJsonLd implements Schema3DModelInterface, MediaO
     static public string $schemaTypeScope = 'https://schema.org/3DModel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MediaObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

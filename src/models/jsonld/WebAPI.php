@@ -42,6 +42,13 @@ class WebAPI extends MetaJsonLd implements WebAPIInterface, ServiceInterface, In
     static public string $schemaTypeScope = 'https://schema.org/WebAPI';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Service';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

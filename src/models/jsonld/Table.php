@@ -41,6 +41,13 @@ class Table extends MetaJsonLd implements TableInterface, WebPageElementInterfac
     static public string $schemaTypeScope = 'https://schema.org/Table';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'WebPageElement';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

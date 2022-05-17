@@ -41,6 +41,13 @@ class AutoRepair extends MetaJsonLd implements AutoRepairInterface, AutomotiveBu
     static public string $schemaTypeScope = 'https://schema.org/AutoRepair';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AutomotiveBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

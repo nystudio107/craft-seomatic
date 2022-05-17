@@ -42,6 +42,13 @@ class HowItWorksHealthAspect extends MetaJsonLd implements HowItWorksHealthAspec
     static public string $schemaTypeScope = 'https://schema.org/HowItWorksHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

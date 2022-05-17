@@ -41,6 +41,13 @@ class CT extends MetaJsonLd implements CTInterface, MedicalImagingTechniqueInter
     static public string $schemaTypeScope = 'https://schema.org/CT';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalImagingTechnique';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

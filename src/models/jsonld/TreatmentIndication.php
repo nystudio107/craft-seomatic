@@ -41,6 +41,13 @@ class TreatmentIndication extends MetaJsonLd implements TreatmentIndicationInter
     static public string $schemaTypeScope = 'https://schema.org/TreatmentIndication';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalIndication';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

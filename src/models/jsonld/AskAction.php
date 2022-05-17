@@ -42,6 +42,13 @@ class AskAction extends MetaJsonLd implements AskActionInterface, CommunicateAct
     static public string $schemaTypeScope = 'https://schema.org/AskAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CommunicateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

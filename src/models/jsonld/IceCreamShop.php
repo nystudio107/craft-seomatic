@@ -41,6 +41,13 @@ class IceCreamShop extends MetaJsonLd implements IceCreamShopInterface, FoodEsta
     static public string $schemaTypeScope = 'https://schema.org/IceCreamShop';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'FoodEstablishment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

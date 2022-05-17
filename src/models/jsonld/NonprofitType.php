@@ -42,6 +42,13 @@ class NonprofitType extends MetaJsonLd implements NonprofitTypeInterface, Enumer
     static public string $schemaTypeScope = 'https://schema.org/NonprofitType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

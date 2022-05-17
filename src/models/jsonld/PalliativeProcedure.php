@@ -42,6 +42,13 @@ class PalliativeProcedure extends MetaJsonLd implements PalliativeProcedureInter
     static public string $schemaTypeScope = 'https://schema.org/PalliativeProcedure';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalTherapy';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

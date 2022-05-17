@@ -42,6 +42,13 @@ class Nerve extends MetaJsonLd implements NerveInterface, AnatomicalStructureInt
     static public string $schemaTypeScope = 'https://schema.org/Nerve';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AnatomicalStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

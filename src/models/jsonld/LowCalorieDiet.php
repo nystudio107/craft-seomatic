@@ -41,6 +41,13 @@ class LowCalorieDiet extends MetaJsonLd implements LowCalorieDietInterface, Rest
     static public string $schemaTypeScope = 'https://schema.org/LowCalorieDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

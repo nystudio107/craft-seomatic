@@ -41,6 +41,13 @@ class PublicSwimmingPool extends MetaJsonLd implements PublicSwimmingPoolInterfa
     static public string $schemaTypeScope = 'https://schema.org/PublicSwimmingPool';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'SportsActivityLocation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

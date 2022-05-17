@@ -42,6 +42,13 @@ class HowToItem extends MetaJsonLd implements HowToItemInterface, ListItemInterf
     static public string $schemaTypeScope = 'https://schema.org/HowToItem';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ListItem';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -44,6 +44,13 @@ class PublicationVolume extends MetaJsonLd implements PublicationVolumeInterface
     static public string $schemaTypeScope = 'https://schema.org/PublicationVolume';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

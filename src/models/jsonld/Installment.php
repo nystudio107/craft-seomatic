@@ -42,6 +42,13 @@ class Installment extends MetaJsonLd implements InstallmentInterface, PriceCompo
     static public string $schemaTypeScope = 'https://schema.org/Installment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

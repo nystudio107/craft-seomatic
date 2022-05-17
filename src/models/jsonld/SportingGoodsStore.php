@@ -41,6 +41,13 @@ class SportingGoodsStore extends MetaJsonLd implements SportingGoodsStoreInterfa
     static public string $schemaTypeScope = 'https://schema.org/SportingGoodsStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

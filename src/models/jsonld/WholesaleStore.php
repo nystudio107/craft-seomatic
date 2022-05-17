@@ -41,6 +41,13 @@ class WholesaleStore extends MetaJsonLd implements WholesaleStoreInterface, Stor
     static public string $schemaTypeScope = 'https://schema.org/WholesaleStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

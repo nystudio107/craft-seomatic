@@ -42,6 +42,13 @@ class Energy extends MetaJsonLd implements EnergyInterface, QuantityInterface, I
     static public string $schemaTypeScope = 'https://schema.org/Energy';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Quantity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class OrganizeAction extends MetaJsonLd implements OrganizeActionInterface, Acti
     static public string $schemaTypeScope = 'https://schema.org/OrganizeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

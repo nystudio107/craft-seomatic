@@ -41,6 +41,13 @@ class MulticellularParasite extends MetaJsonLd implements MulticellularParasiteI
     static public string $schemaTypeScope = 'https://schema.org/MulticellularParasite';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InfectiousAgentClass';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

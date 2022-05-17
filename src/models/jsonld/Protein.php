@@ -47,6 +47,13 @@ class Protein extends MetaJsonLd implements ProteinInterface, BioChemEntityInter
     static public string $schemaTypeScope = 'https://schema.org/Protein';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BioChemEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

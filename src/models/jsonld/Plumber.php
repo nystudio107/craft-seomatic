@@ -41,6 +41,13 @@ class Plumber extends MetaJsonLd implements PlumberInterface, HomeAndConstructio
     static public string $schemaTypeScope = 'https://schema.org/Plumber';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HomeAndConstructionBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

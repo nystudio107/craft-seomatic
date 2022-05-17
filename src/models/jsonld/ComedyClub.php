@@ -41,6 +41,13 @@ class ComedyClub extends MetaJsonLd implements ComedyClubInterface, Entertainmen
     static public string $schemaTypeScope = 'https://schema.org/ComedyClub';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EntertainmentBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

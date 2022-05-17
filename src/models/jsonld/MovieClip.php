@@ -41,6 +41,13 @@ class MovieClip extends MetaJsonLd implements MovieClipInterface, ClipInterface,
     static public string $schemaTypeScope = 'https://schema.org/MovieClip';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Clip';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

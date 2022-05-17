@@ -41,6 +41,13 @@ class SizeSystemMetric extends MetaJsonLd implements SizeSystemMetricInterface, 
     static public string $schemaTypeScope = 'https://schema.org/SizeSystemMetric';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'SizeSystemEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

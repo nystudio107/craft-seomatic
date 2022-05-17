@@ -42,6 +42,13 @@ class DepartAction extends MetaJsonLd implements DepartActionInterface, MoveActi
     static public string $schemaTypeScope = 'https://schema.org/DepartAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MoveAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

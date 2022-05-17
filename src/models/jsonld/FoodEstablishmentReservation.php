@@ -43,6 +43,13 @@ class FoodEstablishmentReservation extends MetaJsonLd implements FoodEstablishme
     static public string $schemaTypeScope = 'https://schema.org/FoodEstablishmentReservation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Reservation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

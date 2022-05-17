@@ -42,6 +42,13 @@ class SocialMediaPosting extends MetaJsonLd implements SocialMediaPostingInterfa
     static public string $schemaTypeScope = 'https://schema.org/SocialMediaPosting';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Article';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

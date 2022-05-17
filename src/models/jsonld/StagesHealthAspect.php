@@ -41,6 +41,13 @@ class StagesHealthAspect extends MetaJsonLd implements StagesHealthAspectInterfa
     static public string $schemaTypeScope = 'https://schema.org/StagesHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

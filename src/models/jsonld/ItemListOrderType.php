@@ -42,6 +42,13 @@ class ItemListOrderType extends MetaJsonLd implements ItemListOrderTypeInterface
     static public string $schemaTypeScope = 'https://schema.org/ItemListOrderType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

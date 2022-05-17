@@ -41,6 +41,13 @@ class NailSalon extends MetaJsonLd implements NailSalonInterface, HealthAndBeaut
     static public string $schemaTypeScope = 'https://schema.org/NailSalon';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAndBeautyBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

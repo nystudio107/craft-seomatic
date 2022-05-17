@@ -41,6 +41,13 @@ class BowlingAlley extends MetaJsonLd implements BowlingAlleyInterface, SportsAc
     static public string $schemaTypeScope = 'https://schema.org/BowlingAlley';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'SportsActivityLocation';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class HardwareStore extends MetaJsonLd implements HardwareStoreInterface, StoreI
     static public string $schemaTypeScope = 'https://schema.org/HardwareStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

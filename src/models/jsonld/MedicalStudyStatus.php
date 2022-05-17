@@ -41,6 +41,13 @@ class MedicalStudyStatus extends MetaJsonLd implements MedicalStudyStatusInterfa
     static public string $schemaTypeScope = 'https://schema.org/MedicalStudyStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

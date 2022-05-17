@@ -42,6 +42,13 @@ class NLNonprofitType extends MetaJsonLd implements NLNonprofitTypeInterface, No
     static public string $schemaTypeScope = 'https://schema.org/NLNonprofitType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'NonprofitType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

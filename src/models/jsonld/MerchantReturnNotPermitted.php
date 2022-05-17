@@ -41,6 +41,13 @@ class MerchantReturnNotPermitted extends MetaJsonLd implements MerchantReturnNot
     static public string $schemaTypeScope = 'https://schema.org/MerchantReturnNotPermitted';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MerchantReturnEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

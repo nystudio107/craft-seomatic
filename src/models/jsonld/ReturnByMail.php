@@ -41,6 +41,13 @@ class ReturnByMail extends MetaJsonLd implements ReturnByMailInterface, ReturnMe
     static public string $schemaTypeScope = 'https://schema.org/ReturnByMail';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReturnMethodEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Message extends MetaJsonLd implements MessageInterface, CreativeWorkInterf
     static public string $schemaTypeScope = 'https://schema.org/Message';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

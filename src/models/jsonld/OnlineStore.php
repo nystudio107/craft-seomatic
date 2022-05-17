@@ -41,6 +41,13 @@ class OnlineStore extends MetaJsonLd implements OnlineStoreInterface, OnlineBusi
     static public string $schemaTypeScope = 'https://schema.org/OnlineStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'OnlineBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

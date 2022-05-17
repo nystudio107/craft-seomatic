@@ -41,6 +41,13 @@ class WPAdBlock extends MetaJsonLd implements WPAdBlockInterface, WebPageElement
     static public string $schemaTypeScope = 'https://schema.org/WPAdBlock';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'WebPageElement';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

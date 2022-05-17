@@ -41,6 +41,13 @@ class DiabeticDiet extends MetaJsonLd implements DiabeticDietInterface, Restrict
     static public string $schemaTypeScope = 'https://schema.org/DiabeticDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

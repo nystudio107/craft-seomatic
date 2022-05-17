@@ -41,6 +41,13 @@ class SinglePlayer extends MetaJsonLd implements SinglePlayerInterface, GamePlay
     static public string $schemaTypeScope = 'https://schema.org/SinglePlayer';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GamePlayMode';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

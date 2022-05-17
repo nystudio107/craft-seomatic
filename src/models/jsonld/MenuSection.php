@@ -44,6 +44,13 @@ class MenuSection extends MetaJsonLd implements MenuSectionInterface, CreativeWo
     static public string $schemaTypeScope = 'https://schema.org/MenuSection';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

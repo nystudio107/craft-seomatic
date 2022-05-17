@@ -41,6 +41,13 @@ class ListItem extends MetaJsonLd implements ListItemInterface, IntangibleInterf
     static public string $schemaTypeScope = 'https://schema.org/ListItem';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class BackOrder extends MetaJsonLd implements BackOrderInterface, ItemAvailabili
     static public string $schemaTypeScope = 'https://schema.org/BackOrder';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ItemAvailability';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class DryCleaningOrLaundry extends MetaJsonLd implements DryCleaningOrLaundryInt
     static public string $schemaTypeScope = 'https://schema.org/DryCleaningOrLaundry';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

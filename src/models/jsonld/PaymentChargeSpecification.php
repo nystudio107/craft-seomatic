@@ -41,6 +41,13 @@ class PaymentChargeSpecification extends MetaJsonLd implements PaymentChargeSpec
     static public string $schemaTypeScope = 'https://schema.org/PaymentChargeSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PriceSpecification';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

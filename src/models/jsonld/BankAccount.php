@@ -42,6 +42,13 @@ class BankAccount extends MetaJsonLd implements BankAccountInterface, FinancialP
     static public string $schemaTypeScope = 'https://schema.org/BankAccount';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'FinancialProduct';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

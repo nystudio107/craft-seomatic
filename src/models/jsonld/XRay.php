@@ -41,6 +41,13 @@ class XRay extends MetaJsonLd implements XRayInterface, MedicalImagingTechniqueI
     static public string $schemaTypeScope = 'https://schema.org/XRay';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalImagingTechnique';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

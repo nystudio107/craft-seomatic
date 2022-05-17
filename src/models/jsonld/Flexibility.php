@@ -42,6 +42,13 @@ class Flexibility extends MetaJsonLd implements FlexibilityInterface, PhysicalAc
     static public string $schemaTypeScope = 'https://schema.org/Flexibility';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PhysicalActivityCategory';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

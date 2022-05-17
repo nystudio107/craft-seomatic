@@ -41,6 +41,13 @@ class ReturnAtKiosk extends MetaJsonLd implements ReturnAtKioskInterface, Return
     static public string $schemaTypeScope = 'https://schema.org/ReturnAtKiosk';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReturnMethodEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

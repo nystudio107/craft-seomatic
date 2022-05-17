@@ -43,6 +43,13 @@ class UserDownloads extends MetaJsonLd implements UserDownloadsInterface, UserIn
     static public string $schemaTypeScope = 'https://schema.org/UserDownloads';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

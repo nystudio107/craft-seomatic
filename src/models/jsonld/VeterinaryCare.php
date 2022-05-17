@@ -41,6 +41,13 @@ class VeterinaryCare extends MetaJsonLd implements VeterinaryCareInterface, Medi
     static public string $schemaTypeScope = 'https://schema.org/VeterinaryCare';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalOrganization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

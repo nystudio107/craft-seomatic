@@ -41,6 +41,13 @@ class Virus extends MetaJsonLd implements VirusInterface, InfectiousAgentClassIn
     static public string $schemaTypeScope = 'https://schema.org/Virus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InfectiousAgentClass';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

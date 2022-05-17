@@ -41,6 +41,13 @@ class Appearance extends MetaJsonLd implements AppearanceInterface, PhysicalExam
     static public string $schemaTypeScope = 'https://schema.org/Appearance';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -48,6 +48,13 @@ class Resort extends MetaJsonLd implements ResortInterface, LodgingBusinessInter
     static public string $schemaTypeScope = 'https://schema.org/Resort';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LodgingBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class InvestmentFund extends MetaJsonLd implements InvestmentFundInterface, Inve
     static public string $schemaTypeScope = 'https://schema.org/InvestmentFund';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InvestmentOrDeposit';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class EUEnergyEfficiencyCategoryC extends MetaJsonLd implements EUEnergyEfficien
     static public string $schemaTypeScope = 'https://schema.org/EUEnergyEfficiencyCategoryC';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EUEnergyEfficiencyEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

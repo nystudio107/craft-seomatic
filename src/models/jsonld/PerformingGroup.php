@@ -41,6 +41,13 @@ class PerformingGroup extends MetaJsonLd implements PerformingGroupInterface, Or
     static public string $schemaTypeScope = 'https://schema.org/PerformingGroup';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Organization';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

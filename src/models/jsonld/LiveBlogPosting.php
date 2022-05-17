@@ -42,6 +42,13 @@ class LiveBlogPosting extends MetaJsonLd implements LiveBlogPostingInterface, Bl
     static public string $schemaTypeScope = 'https://schema.org/LiveBlogPosting';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BlogPosting';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

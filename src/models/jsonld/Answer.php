@@ -42,6 +42,13 @@ class Answer extends MetaJsonLd implements AnswerInterface, CommentInterface, Cr
     static public string $schemaTypeScope = 'https://schema.org/Answer';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Comment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

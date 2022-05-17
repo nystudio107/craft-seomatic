@@ -41,6 +41,13 @@ class XPathType extends MetaJsonLd implements XPathTypeInterface, TextInterface
     static public string $schemaTypeScope = 'https://schema.org/XPathType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Text';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

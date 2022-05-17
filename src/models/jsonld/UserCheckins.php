@@ -43,6 +43,13 @@ class UserCheckins extends MetaJsonLd implements UserCheckinsInterface, UserInte
     static public string $schemaTypeScope = 'https://schema.org/UserCheckins';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UserInteraction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

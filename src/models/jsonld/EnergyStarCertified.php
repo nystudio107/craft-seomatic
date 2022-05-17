@@ -41,6 +41,13 @@ class EnergyStarCertified extends MetaJsonLd implements EnergyStarCertifiedInter
     static public string $schemaTypeScope = 'https://schema.org/EnergyStarCertified';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EnergyStarEnergyEfficiencyEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

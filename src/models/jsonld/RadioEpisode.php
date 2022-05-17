@@ -41,6 +41,13 @@ class RadioEpisode extends MetaJsonLd implements RadioEpisodeInterface, EpisodeI
     static public string $schemaTypeScope = 'https://schema.org/RadioEpisode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Episode';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

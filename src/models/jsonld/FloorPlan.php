@@ -49,6 +49,13 @@ class FloorPlan extends MetaJsonLd implements FloorPlanInterface, IntangibleInte
     static public string $schemaTypeScope = 'https://schema.org/FloorPlan';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class BasicIncome extends MetaJsonLd implements BasicIncomeInterface, Government
     static public string $schemaTypeScope = 'https://schema.org/BasicIncome';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

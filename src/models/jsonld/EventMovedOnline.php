@@ -43,6 +43,13 @@ class EventMovedOnline extends MetaJsonLd implements EventMovedOnlineInterface, 
     static public string $schemaTypeScope = 'https://schema.org/EventMovedOnline';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EventStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

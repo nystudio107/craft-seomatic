@@ -43,6 +43,13 @@ class WarrantyPromise extends MetaJsonLd implements WarrantyPromiseInterface, St
     static public string $schemaTypeScope = 'https://schema.org/WarrantyPromise';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -43,6 +43,13 @@ class NarcoticConsideration extends MetaJsonLd implements NarcoticConsiderationI
     static public string $schemaTypeScope = 'https://schema.org/NarcoticConsideration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AdultOrientedEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

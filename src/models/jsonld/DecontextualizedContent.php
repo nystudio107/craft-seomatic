@@ -60,6 +60,13 @@ class DecontextualizedContent extends MetaJsonLd implements DecontextualizedCont
     static public string $schemaTypeScope = 'https://schema.org/DecontextualizedContent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MediaManipulationRatingEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

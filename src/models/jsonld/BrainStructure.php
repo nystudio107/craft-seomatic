@@ -43,6 +43,13 @@ class BrainStructure extends MetaJsonLd implements BrainStructureInterface, Anat
     static public string $schemaTypeScope = 'https://schema.org/BrainStructure';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AnatomicalStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

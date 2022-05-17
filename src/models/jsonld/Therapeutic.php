@@ -41,6 +41,13 @@ class Therapeutic extends MetaJsonLd implements TherapeuticInterface, MedicalDev
     static public string $schemaTypeScope = 'https://schema.org/Therapeutic';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalDevicePurpose';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

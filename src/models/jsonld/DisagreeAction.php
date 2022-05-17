@@ -43,6 +43,13 @@ class DisagreeAction extends MetaJsonLd implements DisagreeActionInterface, Reac
     static public string $schemaTypeScope = 'https://schema.org/DisagreeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReactAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

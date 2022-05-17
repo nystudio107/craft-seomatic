@@ -41,6 +41,13 @@ class EventVenue extends MetaJsonLd implements EventVenueInterface, CivicStructu
     static public string $schemaTypeScope = 'https://schema.org/EventVenue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

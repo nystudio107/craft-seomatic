@@ -53,6 +53,13 @@ class FollowAction extends MetaJsonLd implements FollowActionInterface, Interact
     static public string $schemaTypeScope = 'https://schema.org/FollowAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InteractAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

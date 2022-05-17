@@ -42,6 +42,13 @@ class Endocrine extends MetaJsonLd implements EndocrineInterface, MedicalSpecial
     static public string $schemaTypeScope = 'https://schema.org/Endocrine';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

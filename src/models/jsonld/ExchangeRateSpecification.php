@@ -41,6 +41,13 @@ class ExchangeRateSpecification extends MetaJsonLd implements ExchangeRateSpecif
     static public string $schemaTypeScope = 'https://schema.org/ExchangeRateSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

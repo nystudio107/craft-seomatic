@@ -41,6 +41,13 @@ class EmailMessage extends MetaJsonLd implements EmailMessageInterface, MessageI
     static public string $schemaTypeScope = 'https://schema.org/EmailMessage';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Message';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

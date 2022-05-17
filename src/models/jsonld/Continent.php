@@ -41,6 +41,13 @@ class Continent extends MetaJsonLd implements ContinentInterface, LandformInterf
     static public string $schemaTypeScope = 'https://schema.org/Continent';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Landform';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

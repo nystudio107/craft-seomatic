@@ -41,6 +41,13 @@ class CityHall extends MetaJsonLd implements CityHallInterface, GovernmentBuildi
     static public string $schemaTypeScope = 'https://schema.org/CityHall';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBuilding';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

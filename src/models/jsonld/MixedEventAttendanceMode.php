@@ -42,6 +42,13 @@ class MixedEventAttendanceMode extends MetaJsonLd implements MixedEventAttendanc
     static public string $schemaTypeScope = 'https://schema.org/MixedEventAttendanceMode';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EventAttendanceModeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

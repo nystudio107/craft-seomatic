@@ -42,6 +42,13 @@ class MediaSubscription extends MetaJsonLd implements MediaSubscriptionInterface
     static public string $schemaTypeScope = 'https://schema.org/MediaSubscription';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

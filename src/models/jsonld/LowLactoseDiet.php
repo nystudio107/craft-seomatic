@@ -41,6 +41,13 @@ class LowLactoseDiet extends MetaJsonLd implements LowLactoseDietInterface, Rest
     static public string $schemaTypeScope = 'https://schema.org/LowLactoseDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Skin extends MetaJsonLd implements SkinInterface, PhysicalExamInterface, M
     static public string $schemaTypeScope = 'https://schema.org/Skin';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

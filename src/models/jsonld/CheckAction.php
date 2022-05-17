@@ -42,6 +42,13 @@ class CheckAction extends MetaJsonLd implements CheckActionInterface, FindAction
     static public string $schemaTypeScope = 'https://schema.org/CheckAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'FindAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

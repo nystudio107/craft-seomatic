@@ -41,6 +41,13 @@ class PaidLeave extends MetaJsonLd implements PaidLeaveInterface, GovernmentBene
     static public string $schemaTypeScope = 'https://schema.org/PaidLeave';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

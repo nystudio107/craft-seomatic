@@ -41,6 +41,13 @@ class Seat extends MetaJsonLd implements SeatInterface, IntangibleInterface, Thi
     static public string $schemaTypeScope = 'https://schema.org/Seat';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

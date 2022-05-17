@@ -41,6 +41,13 @@ class CookAction extends MetaJsonLd implements CookActionInterface, CreateAction
     static public string $schemaTypeScope = 'https://schema.org/CookAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

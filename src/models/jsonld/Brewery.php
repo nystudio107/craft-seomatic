@@ -41,6 +41,13 @@ class Brewery extends MetaJsonLd implements BreweryInterface, FoodEstablishmentI
     static public string $schemaTypeScope = 'https://schema.org/Brewery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'FoodEstablishment';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

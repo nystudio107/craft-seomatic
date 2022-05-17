@@ -42,6 +42,13 @@ class ActivateAction extends MetaJsonLd implements ActivateActionInterface, Cont
     static public string $schemaTypeScope = 'https://schema.org/ActivateAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ControlAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

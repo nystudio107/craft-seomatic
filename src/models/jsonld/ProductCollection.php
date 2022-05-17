@@ -42,6 +42,13 @@ class ProductCollection extends MetaJsonLd implements ProductCollectionInterface
     static public string $schemaTypeScope = 'https://schema.org/ProductCollection';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Product';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

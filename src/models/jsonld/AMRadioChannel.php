@@ -41,6 +41,13 @@ class AMRadioChannel extends MetaJsonLd implements AMRadioChannelInterface, Radi
     static public string $schemaTypeScope = 'https://schema.org/AMRadioChannel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RadioChannel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

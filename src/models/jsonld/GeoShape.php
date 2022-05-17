@@ -44,6 +44,13 @@ class GeoShape extends MetaJsonLd implements GeoShapeInterface, StructuredValueI
     static public string $schemaTypeScope = 'https://schema.org/GeoShape';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -42,6 +42,13 @@ class PaymentCard extends MetaJsonLd implements PaymentCardInterface, PaymentMet
     static public string $schemaTypeScope = 'https://schema.org/PaymentCard';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PaymentMethod';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

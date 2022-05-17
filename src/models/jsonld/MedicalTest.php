@@ -41,6 +41,13 @@ class MedicalTest extends MetaJsonLd implements MedicalTestInterface, MedicalEnt
     static public string $schemaTypeScope = 'https://schema.org/MedicalTest';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

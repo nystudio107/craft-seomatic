@@ -41,6 +41,13 @@ class ResearchProject extends MetaJsonLd implements ResearchProjectInterface, Pr
     static public string $schemaTypeScope = 'https://schema.org/ResearchProject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Project';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

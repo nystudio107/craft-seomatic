@@ -41,6 +41,13 @@ class URL extends MetaJsonLd implements URLInterface, TextInterface
     static public string $schemaTypeScope = 'https://schema.org/URL';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Text';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

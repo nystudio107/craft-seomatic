@@ -41,6 +41,13 @@ class OfficeEquipmentStore extends MetaJsonLd implements OfficeEquipmentStoreInt
     static public string $schemaTypeScope = 'https://schema.org/OfficeEquipmentStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

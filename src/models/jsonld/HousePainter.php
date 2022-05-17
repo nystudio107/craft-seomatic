@@ -41,6 +41,13 @@ class HousePainter extends MetaJsonLd implements HousePainterInterface, HomeAndC
     static public string $schemaTypeScope = 'https://schema.org/HousePainter';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HomeAndConstructionBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class BoatTerminal extends MetaJsonLd implements BoatTerminalInterface, CivicStr
     static public string $schemaTypeScope = 'https://schema.org/BoatTerminal';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CivicStructure';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

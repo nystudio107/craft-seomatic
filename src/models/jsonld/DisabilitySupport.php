@@ -41,6 +41,13 @@ class DisabilitySupport extends MetaJsonLd implements DisabilitySupportInterface
     static public string $schemaTypeScope = 'https://schema.org/DisabilitySupport';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBenefitsType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

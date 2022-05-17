@@ -41,6 +41,13 @@ class GlutenFreeDiet extends MetaJsonLd implements GlutenFreeDietInterface, Rest
     static public string $schemaTypeScope = 'https://schema.org/GlutenFreeDiet';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RestrictedDiet';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

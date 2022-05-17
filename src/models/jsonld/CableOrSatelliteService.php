@@ -42,6 +42,13 @@ class CableOrSatelliteService extends MetaJsonLd implements CableOrSatelliteServ
     static public string $schemaTypeScope = 'https://schema.org/CableOrSatelliteService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Service';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -45,6 +45,13 @@ class SatiricalArticle extends MetaJsonLd implements SatiricalArticleInterface, 
     static public string $schemaTypeScope = 'https://schema.org/SatiricalArticle';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Article';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

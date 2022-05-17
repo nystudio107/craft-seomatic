@@ -43,6 +43,13 @@ class DrugClass extends MetaJsonLd implements DrugClassInterface, MedicalEntityI
     static public string $schemaTypeScope = 'https://schema.org/DrugClass';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalEntity';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

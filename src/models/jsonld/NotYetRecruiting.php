@@ -41,6 +41,13 @@ class NotYetRecruiting extends MetaJsonLd implements NotYetRecruitingInterface, 
     static public string $schemaTypeScope = 'https://schema.org/NotYetRecruiting';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalStudyStatus';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

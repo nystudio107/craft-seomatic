@@ -41,6 +41,13 @@ class StatusEnumeration extends MetaJsonLd implements StatusEnumerationInterface
     static public string $schemaTypeScope = 'https://schema.org/StatusEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

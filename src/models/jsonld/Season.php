@@ -41,6 +41,13 @@ class Season extends MetaJsonLd implements SeasonInterface, CreativeWorkInterfac
     static public string $schemaTypeScope = 'https://schema.org/Season';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

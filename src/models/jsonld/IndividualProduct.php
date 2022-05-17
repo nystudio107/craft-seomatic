@@ -42,6 +42,13 @@ class IndividualProduct extends MetaJsonLd implements IndividualProductInterface
     static public string $schemaTypeScope = 'https://schema.org/IndividualProduct';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Product';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

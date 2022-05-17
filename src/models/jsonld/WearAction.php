@@ -41,6 +41,13 @@ class WearAction extends MetaJsonLd implements WearActionInterface, UseActionInt
     static public string $schemaTypeScope = 'https://schema.org/WearAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'UseAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

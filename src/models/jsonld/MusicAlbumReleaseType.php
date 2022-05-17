@@ -41,6 +41,13 @@ class MusicAlbumReleaseType extends MetaJsonLd implements MusicAlbumReleaseTypeI
     static public string $schemaTypeScope = 'https://schema.org/MusicAlbumReleaseType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Enumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Occupation extends MetaJsonLd implements OccupationInterface, IntangibleIn
     static public string $schemaTypeScope = 'https://schema.org/Occupation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

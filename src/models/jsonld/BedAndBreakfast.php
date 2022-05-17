@@ -43,6 +43,13 @@ class BedAndBreakfast extends MetaJsonLd implements BedAndBreakfastInterface, Lo
     static public string $schemaTypeScope = 'https://schema.org/BedAndBreakfast';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LodgingBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

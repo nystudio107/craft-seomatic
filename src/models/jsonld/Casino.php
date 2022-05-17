@@ -41,6 +41,13 @@ class Casino extends MetaJsonLd implements CasinoInterface, EntertainmentBusines
     static public string $schemaTypeScope = 'https://schema.org/Casino';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EntertainmentBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

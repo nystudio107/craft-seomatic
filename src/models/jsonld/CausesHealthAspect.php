@@ -41,6 +41,13 @@ class CausesHealthAspect extends MetaJsonLd implements CausesHealthAspectInterfa
     static public string $schemaTypeScope = 'https://schema.org/CausesHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

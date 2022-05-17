@@ -42,6 +42,13 @@ class Nursing extends MetaJsonLd implements NursingInterface, MedicalBusinessInt
     static public string $schemaTypeScope = 'https://schema.org/Nursing';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

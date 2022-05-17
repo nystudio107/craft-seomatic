@@ -41,6 +41,13 @@ class TVSeason extends MetaJsonLd implements TVSeasonInterface, CreativeWorkSeas
     static public string $schemaTypeScope = 'https://schema.org/TVSeason';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWorkSeason';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

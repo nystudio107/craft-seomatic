@@ -41,6 +41,13 @@ class RepaymentSpecification extends MetaJsonLd implements RepaymentSpecificatio
     static public string $schemaTypeScope = 'https://schema.org/RepaymentSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

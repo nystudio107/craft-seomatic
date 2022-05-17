@@ -44,6 +44,13 @@ class PriceSpecification extends MetaJsonLd implements PriceSpecificationInterfa
     static public string $schemaTypeScope = 'https://schema.org/PriceSpecification';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

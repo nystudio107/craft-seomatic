@@ -45,6 +45,13 @@ class MonetaryAmount extends MetaJsonLd implements MonetaryAmountInterface, Stru
     static public string $schemaTypeScope = 'https://schema.org/MonetaryAmount';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StructuredValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

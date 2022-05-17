@@ -42,6 +42,13 @@ class DoubleBlindedTrial extends MetaJsonLd implements DoubleBlindedTrialInterfa
     static public string $schemaTypeScope = 'https://schema.org/DoubleBlindedTrial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalTrialDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

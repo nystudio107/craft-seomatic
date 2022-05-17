@@ -41,6 +41,13 @@ class Ear extends MetaJsonLd implements EarInterface, PhysicalExamInterface, Med
     static public string $schemaTypeScope = 'https://schema.org/Ear';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PhysicalExam';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

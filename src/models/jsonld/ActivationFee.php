@@ -42,6 +42,13 @@ class ActivationFee extends MetaJsonLd implements ActivationFeeInterface, PriceC
     static public string $schemaTypeScope = 'https://schema.org/ActivationFee';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

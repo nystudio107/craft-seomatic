@@ -41,6 +41,13 @@ class SoundtrackAlbum extends MetaJsonLd implements SoundtrackAlbumInterface, Mu
     static public string $schemaTypeScope = 'https://schema.org/SoundtrackAlbum';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MusicAlbumProductionType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

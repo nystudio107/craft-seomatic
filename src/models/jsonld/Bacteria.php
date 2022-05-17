@@ -41,6 +41,13 @@ class Bacteria extends MetaJsonLd implements BacteriaInterface, InfectiousAgentC
     static public string $schemaTypeScope = 'https://schema.org/Bacteria';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'InfectiousAgentClass';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

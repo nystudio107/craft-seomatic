@@ -42,6 +42,13 @@ class ReservationPending extends MetaJsonLd implements ReservationPendingInterfa
     static public string $schemaTypeScope = 'https://schema.org/ReservationPending';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReservationStatusType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

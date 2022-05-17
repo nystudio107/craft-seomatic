@@ -42,6 +42,13 @@ class SearchAction extends MetaJsonLd implements SearchActionInterface, ActionIn
     static public string $schemaTypeScope = 'https://schema.org/SearchAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

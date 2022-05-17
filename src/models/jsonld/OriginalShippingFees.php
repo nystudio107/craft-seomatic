@@ -42,6 +42,13 @@ class OriginalShippingFees extends MetaJsonLd implements OriginalShippingFeesInt
     static public string $schemaTypeScope = 'https://schema.org/OriginalShippingFees';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReturnFeesEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

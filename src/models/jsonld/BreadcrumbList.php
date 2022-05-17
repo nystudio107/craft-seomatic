@@ -50,6 +50,13 @@ class BreadcrumbList extends MetaJsonLd implements BreadcrumbListInterface, Item
     static public string $schemaTypeScope = 'https://schema.org/BreadcrumbList';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ItemList';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

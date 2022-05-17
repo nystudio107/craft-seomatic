@@ -41,6 +41,13 @@ class MedicalObservationalStudyDesign extends MetaJsonLd implements MedicalObser
     static public string $schemaTypeScope = 'https://schema.org/MedicalObservationalStudyDesign';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

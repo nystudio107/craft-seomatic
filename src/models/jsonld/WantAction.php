@@ -41,6 +41,13 @@ class WantAction extends MetaJsonLd implements WantActionInterface, ReactActionI
     static public string $schemaTypeScope = 'https://schema.org/WantAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'ReactAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

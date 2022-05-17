@@ -41,6 +41,13 @@ class Male extends MetaJsonLd implements MaleInterface, GenderTypeInterface, Enu
     static public string $schemaTypeScope = 'https://schema.org/Male';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GenderType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

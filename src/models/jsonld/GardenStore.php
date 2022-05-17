@@ -41,6 +41,13 @@ class GardenStore extends MetaJsonLd implements GardenStoreInterface, StoreInter
     static public string $schemaTypeScope = 'https://schema.org/GardenStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

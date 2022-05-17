@@ -41,6 +41,13 @@ class AllergiesHealthAspect extends MetaJsonLd implements AllergiesHealthAspectI
     static public string $schemaTypeScope = 'https://schema.org/AllergiesHealthAspect';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'HealthAspectEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

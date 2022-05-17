@@ -41,6 +41,13 @@ class OrderStatus extends MetaJsonLd implements OrderStatusInterface, StatusEnum
     static public string $schemaTypeScope = 'https://schema.org/OrderStatus';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StatusEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class FoodService extends MetaJsonLd implements FoodServiceInterface, ServiceInt
     static public string $schemaTypeScope = 'https://schema.org/FoodService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Service';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

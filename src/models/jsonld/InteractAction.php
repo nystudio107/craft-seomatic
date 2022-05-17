@@ -41,6 +41,13 @@ class InteractAction extends MetaJsonLd implements InteractActionInterface, Acti
     static public string $schemaTypeScope = 'https://schema.org/InteractAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Action';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

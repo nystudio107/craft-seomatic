@@ -41,6 +41,13 @@ class RiverBodyOfWater extends MetaJsonLd implements RiverBodyOfWaterInterface, 
     static public string $schemaTypeScope = 'https://schema.org/RiverBodyOfWater';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'BodyOfWater';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

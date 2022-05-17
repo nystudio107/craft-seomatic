@@ -42,6 +42,13 @@ class Renal extends MetaJsonLd implements RenalInterface, MedicalSpecialtyInterf
     static public string $schemaTypeScope = 'https://schema.org/Renal';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalSpecialty';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class Sculpture extends MetaJsonLd implements SculptureInterface, CreativeWorkIn
     static public string $schemaTypeScope = 'https://schema.org/Sculpture';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CreativeWork';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

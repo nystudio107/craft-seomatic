@@ -42,6 +42,13 @@ class ListPrice extends MetaJsonLd implements ListPriceInterface, PriceTypeEnume
     static public string $schemaTypeScope = 'https://schema.org/ListPrice';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PriceTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class AuthorizeAction extends MetaJsonLd implements AuthorizeActionInterface, Al
     static public string $schemaTypeScope = 'https://schema.org/AuthorizeAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AllocateAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

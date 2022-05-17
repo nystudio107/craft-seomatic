@@ -44,6 +44,13 @@ class ParcelService extends MetaJsonLd implements ParcelServiceInterface, Delive
     static public string $schemaTypeScope = 'https://schema.org/ParcelService';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'DeliveryMethod';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

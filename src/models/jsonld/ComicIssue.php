@@ -46,6 +46,13 @@ class ComicIssue extends MetaJsonLd implements ComicIssueInterface, PublicationI
     static public string $schemaTypeScope = 'https://schema.org/ComicIssue';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PublicationIssue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

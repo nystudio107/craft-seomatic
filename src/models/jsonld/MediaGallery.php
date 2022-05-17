@@ -42,6 +42,13 @@ class MediaGallery extends MetaJsonLd implements MediaGalleryInterface, Collecti
     static public string $schemaTypeScope = 'https://schema.org/MediaGallery';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'CollectionPage';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

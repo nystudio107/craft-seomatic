@@ -41,6 +41,13 @@ class ClothingStore extends MetaJsonLd implements ClothingStoreInterface, StoreI
     static public string $schemaTypeScope = 'https://schema.org/ClothingStore';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Store';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

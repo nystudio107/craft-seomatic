@@ -41,6 +41,13 @@ class FMRadioChannel extends MetaJsonLd implements FMRadioChannelInterface, Radi
     static public string $schemaTypeScope = 'https://schema.org/FMRadioChannel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'RadioChannel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

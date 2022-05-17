@@ -42,6 +42,13 @@ class Clinician extends MetaJsonLd implements ClinicianInterface, MedicalAudienc
     static public string $schemaTypeScope = 'https://schema.org/Clinician';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalAudienceType';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

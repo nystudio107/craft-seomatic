@@ -42,6 +42,13 @@ class TipAction extends MetaJsonLd implements TipActionInterface, TradeActionInt
     static public string $schemaTypeScope = 'https://schema.org/TipAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'TradeAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

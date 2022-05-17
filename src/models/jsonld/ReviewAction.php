@@ -42,6 +42,13 @@ class ReviewAction extends MetaJsonLd implements ReviewActionInterface, AssessAc
     static public string $schemaTypeScope = 'https://schema.org/ReviewAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AssessAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

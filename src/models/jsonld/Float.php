@@ -41,6 +41,13 @@ class Float extends MetaJsonLd implements FloatInterface, NumberInterface
     static public string $schemaTypeScope = 'https://schema.org/Float';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Number';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

@@ -41,6 +41,13 @@ class EnergyStarEnergyEfficiencyEnumeration extends MetaJsonLd implements Energy
     static public string $schemaTypeScope = 'https://schema.org/EnergyStarEnergyEfficiencyEnumeration';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'EnergyEfficiencyEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

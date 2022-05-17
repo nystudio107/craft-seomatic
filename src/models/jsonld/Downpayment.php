@@ -42,6 +42,13 @@ class Downpayment extends MetaJsonLd implements DownpaymentInterface, PriceCompo
     static public string $schemaTypeScope = 'https://schema.org/Downpayment';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

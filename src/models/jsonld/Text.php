@@ -41,6 +41,13 @@ class Text extends MetaJsonLd implements TextInterface
     static public string $schemaTypeScope = 'https://schema.org/Text';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

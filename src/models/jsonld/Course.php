@@ -46,6 +46,13 @@ class Course extends MetaJsonLd implements CourseInterface, LearningResourceInte
     static public string $schemaTypeScope = 'https://schema.org/Course';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LearningResource';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

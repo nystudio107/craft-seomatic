@@ -41,6 +41,13 @@ class PlaceboControlledTrial extends MetaJsonLd implements PlaceboControlledTria
     static public string $schemaTypeScope = 'https://schema.org/PlaceboControlledTrial';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MedicalTrialDesign';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

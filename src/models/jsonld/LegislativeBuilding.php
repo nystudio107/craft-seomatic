@@ -41,6 +41,13 @@ class LegislativeBuilding extends MetaJsonLd implements LegislativeBuildingInter
     static public string $schemaTypeScope = 'https://schema.org/LegislativeBuilding';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'GovernmentBuilding';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

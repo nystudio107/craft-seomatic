@@ -41,6 +41,13 @@ class InsertAction extends MetaJsonLd implements InsertActionInterface, AddActio
     static public string $schemaTypeScope = 'https://schema.org/InsertAction';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'AddAction';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

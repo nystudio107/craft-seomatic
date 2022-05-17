@@ -45,6 +45,13 @@ class AlignmentObject extends MetaJsonLd implements AlignmentObjectInterface, In
     static public string $schemaTypeScope = 'https://schema.org/AlignmentObject';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Intangible';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

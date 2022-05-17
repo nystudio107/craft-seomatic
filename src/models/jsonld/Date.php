@@ -42,6 +42,13 @@ class Date extends MetaJsonLd implements DateInterface
     static public string $schemaTypeScope = 'https://schema.org/Date';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Thing';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

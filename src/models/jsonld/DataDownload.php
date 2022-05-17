@@ -41,6 +41,13 @@ class DataDownload extends MetaJsonLd implements DataDownloadInterface, MediaObj
     static public string $schemaTypeScope = 'https://schema.org/DataDownload';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'MediaObject';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

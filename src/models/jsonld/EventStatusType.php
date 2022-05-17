@@ -42,6 +42,13 @@ class EventStatusType extends MetaJsonLd implements EventStatusTypeInterface, St
     static public string $schemaTypeScope = 'https://schema.org/EventStatusType';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'StatusEnumeration';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

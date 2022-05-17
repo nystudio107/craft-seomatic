@@ -42,6 +42,13 @@ class LymphaticVessel extends MetaJsonLd implements LymphaticVesselInterface, Ve
     static public string $schemaTypeScope = 'https://schema.org/LymphaticVessel';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'Vessel';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

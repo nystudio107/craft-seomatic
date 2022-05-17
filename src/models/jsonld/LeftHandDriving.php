@@ -42,6 +42,13 @@ class LeftHandDriving extends MetaJsonLd implements LeftHandDrivingInterface, St
     static public string $schemaTypeScope = 'https://schema.org/LeftHandDriving';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'SteeringPositionValue';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string

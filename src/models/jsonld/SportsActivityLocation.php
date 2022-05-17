@@ -41,6 +41,13 @@ class SportsActivityLocation extends MetaJsonLd implements SportsActivityLocatio
     static public string $schemaTypeScope = 'https://schema.org/SportsActivityLocation';
 
     /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    static public string $schemaTypeExtends = 'LocalBusiness';
+
+    /**
      * The Schema.org Type Description
      *
      * @var string
