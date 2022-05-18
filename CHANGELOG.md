@@ -7,6 +7,9 @@
 ### Changed
 * Removed Bing from `SEARCH_ENGINE_SUBMISSION_URLS` due to it being deprecated ([#1043](https://github.com/nystudio107/craft-seomatic/issues/1043))
 
+### Fixed
+* Ensure the constant `Seomatic::SEOMATIC_PREVIEW_AUTHORIZATION_KEY` has `public` access
+
 ## 4.0.0 - 2022.05.16
 ### Added
 * Initial Craft CMS 4 release
