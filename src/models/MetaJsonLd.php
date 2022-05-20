@@ -70,7 +70,7 @@ class MetaJsonLd extends NonceItem
      *
      * @var string
      */
-    static public $schemaTypeExtends = '';
+    static public string $schemaTypeExtends = '';
 
     // Public Properties
     // =========================================================================
