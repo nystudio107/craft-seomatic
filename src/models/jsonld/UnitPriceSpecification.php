@@ -1,28 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\PriceSpecification;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * UnitPriceSpecification - The price asked for a given offer by the
- * respective organization or person.
+ * schema.org version: v14.0-release
+ * UnitPriceSpecification - The price asked for a given offer by the respective organization or person.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/UnitPriceSpecification
+ * @see       https://schema.org/UnitPriceSpecification
  */
-class UnitPriceSpecification extends PriceSpecification
+class UnitPriceSpecification extends MetaJsonLd implements UnitPriceSpecificationInterface, PriceSpecificationInterface, StructuredValueInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -42,13 +41,6 @@ class UnitPriceSpecification extends PriceSpecification
     static public $schemaTypeScope = 'https://schema.org/UnitPriceSpecification';
 
     /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = 'The price asked for a given offer by the respective organization or person.';
-
-    /**
      * The Schema.org Type Extends
      *
      * @var string
@@ -56,190 +48,133 @@ class UnitPriceSpecification extends PriceSpecification
     static public $schemaTypeExtends = 'PriceSpecification';
 
     /**
-     * The Schema.org composed Property Names
+     * The Schema.org Type Description
      *
-     * @var array
+     * @var string
      */
-    static public $schemaPropertyNames = [];
+    static public $schemaTypeDescription = <<<SCHEMADESC
+The price asked for a given offer by the respective organization or person.
+SCHEMADESC;
 
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
+    use UnitPriceSpecificationTrait;
+    use PriceSpecificationTrait;
+    use StructuredValueTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * This property specifies the minimal quantity and rounding increment that
-     * will be the basis for the billing. The unit of measurement is specified by
-     * the unitCode property.
-     *
-     * @var float [schema.org types: Number]
+     * @inheritdoc
      */
-    public $billingIncrement;
-
-    /**
-     * A short text or acronym indicating multiple price specifications for the
-     * same offer, e.g. SRP for the suggested retail price or INVOICE for the
-     * invoice price, mostly used in the car industry.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $priceType;
-
-    /**
-     * The reference quantity for which a certain price applies, e.g. 1 EUR per 4
-     * kWh of electricity. This property is a replacement for unitOfMeasurement
-     * for the advanced cases where the price does not relate to a standard unit.
-     *
-     * @var QuantitativeValue [schema.org types: QuantitativeValue]
-     */
-    public $referenceQuantity;
-
-    /**
-     * The unit of measurement given using the UN/CEFACT Common Code (3
-     * characters) or a URL. Other codes than the UN/CEFACT Common Code may be
-     * used with a prefix followed by a colon.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $unitCode;
-
-    /**
-     * A string or text indicating the unit of measurement. Useful if you cannot
-     * provide a standard unit code for unitCode.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $unitText;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'billingIncrement',
-        'priceType',
-        'referenceQuantity',
-        'unitCode',
-        'unitText'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'billingIncrement' => ['Number'],
-        'priceType' => ['Text'],
-        'referenceQuantity' => ['QuantitativeValue'],
-        'unitCode' => ['Text','URL'],
-        'unitText' => ['Text']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'billingIncrement' => 'This property specifies the minimal quantity and rounding increment that will be the basis for the billing. The unit of measurement is specified by the unitCode property.',
-        'priceType' => 'A short text or acronym indicating multiple price specifications for the same offer, e.g. SRP for the suggested retail price or INVOICE for the invoice price, mostly used in the car industry.',
-        'referenceQuantity' => 'The reference quantity for which a certain price applies, e.g. 1 EUR per 4 kWh of electricity. This property is a replacement for unitOfMeasurement for the advanced cases where the price does not relate to a standard unit.',
-        'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
-        'unitText' => 'A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'billingDuration' => ['Duration', 'QuantitativeValue', 'Number'],
+            'billingIncrement' => ['Number'],
+            'billingStart' => ['Number'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'eligibleQuantity' => ['QuantitativeValue'],
+            'eligibleTransactionVolume' => ['PriceSpecification'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'maxPrice' => ['Number'],
+            'minPrice' => ['Number'],
+            'name' => ['Text'],
+            'potentialAction' => ['Action'],
+            'price' => ['Number', 'Text'],
+            'priceComponentType' => ['PriceComponentTypeEnumeration'],
+            'priceCurrency' => ['Text'],
+            'priceType' => ['PriceTypeEnumeration', 'Text'],
+            'referenceQuantity' => ['QuantitativeValue'],
+            'sameAs' => ['URL'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'unitCode' => ['Text', 'URL'],
+            'unitText' => ['Text'],
+            'url' => ['URL'],
+            'validFrom' => ['DateTime', 'Date'],
+            'validThrough' => ['DateTime', 'Date'],
+            'valueAddedTaxIncluded' => ['Boolean']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'billingDuration' => 'Specifies for how long this price (or price component) will be billed. Can be used, for example, to model the contractual duration of a subscription or payment plan. Type can be either a Duration or a Number (in which case the unit of measurement, for example month, is specified by the unitCode property).',
+            'billingIncrement' => 'This property specifies the minimal quantity and rounding increment that will be the basis for the billing. The unit of measurement is specified by the unitCode property.',
+            'billingStart' => 'Specifies after how much time this price (or price component) becomes valid and billing starts. Can be used, for example, to model a price increase after the first year of a subscription. The unit of measurement is specified by the unitCode property.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'eligibleQuantity' => 'The interval and unit of measurement of ordering quantities for which the offer or price specification is valid. This allows e.g. specifying that a certain freight charge is valid only for a certain quantity.',
+            'eligibleTransactionVolume' => 'The transaction volume, in a monetary unit, for which the offer or price specification is valid, e.g. for indicating a minimal purchasing volume, to express free shipping above a certain order volume, or to limit the acceptance of credit cards to purchases to a certain minimal amount.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'maxPrice' => 'The highest price if the price is a range.',
+            'minPrice' => 'The lowest price if the price is a range.',
+            'name' => 'The name of the item.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'price' => 'The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes.  Usage guidelines:  * Use the [[priceCurrency]] property (with standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR") instead of including [ambiguous symbols](http://en.wikipedia.org/wiki/Dollar_sign#Currencies_that_use_the_dollar_or_peso_sign) such as \'$\' in the value. * Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator. * Note that both [RDFa](http://www.w3.org/TR/xhtml-rdfa-primer/#using-the-content-attribute) and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting. * Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols.       ',
+            'priceComponentType' => 'Identifies a price component (for example, a line item on an invoice), part of the total price for an offer.',
+            'priceCurrency' => 'The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".',
+            'priceType' => 'Defines the type of a price specified for an offered product, for example a list price, a (temporary) sale price or a manufacturer suggested retail price. If multiple prices are specified for an offer the [[priceType]] property can be used to identify the type of each such specified price. The value of priceType can be specified as a value from enumeration PriceTypeEnumeration or as a free form text string for price types that are not already predefined in PriceTypeEnumeration.',
+            'referenceQuantity' => 'The reference quantity for which a certain price applies, e.g. 1 EUR per 4 kWh of electricity. This property is a replacement for unitOfMeasurement for the advanced cases where the price does not relate to a standard unit.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'unitCode' => 'The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.',
+            'unitText' => 'A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for <a href=\'unitCode\'>unitCode</a>.',
+            'url' => 'URL of the item.',
+            'validFrom' => 'The date when the item becomes valid.',
+            'validThrough' => 'The date after when the item is not valid. For example the end of an offer, salary period, or a period of opening hours.',
+            'valueAddedTaxIncluded' => 'Specifies whether the applicable value-added tax (VAT) is included in the price specification or not.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['billingIncrement','priceType','referenceQuantity','unitCode','unitText'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

@@ -1,0 +1,76 @@
+<?php
+/**
+ * SEOmatic plugin for Craft CMS 3
+ *
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
+ *
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2022 nystudio107
+ */
+
+namespace nystudio107\seomatic\models\jsonld;
+
+/**
+ * schema.org version: v14.0-release
+ * Trait for NewsArticle.
+ *
+ * @author    nystudio107
+ * @package   Seomatic
+ * @see       https://schema.org/NewsArticle
+ */
+
+trait NewsArticleTrait
+{
+    
+    /**
+     * The edition of the print product in which the NewsArticle appears.
+     *
+     * @var string|Text
+     */
+    public $printEdition;
+
+    /**
+     * The number of the column in which the NewsArticle appears in the print
+     * edition.
+     *
+     * @var string|Text
+     */
+    public $printColumn;
+
+    /**
+     * If this NewsArticle appears in print, this field indicates the name of the
+     * page on which the article is found. Please note that this field is intended
+     * for the exact page name (e.g. A5, B18).
+     *
+     * @var string|Text
+     */
+    public $printPage;
+
+    /**
+     * If this NewsArticle appears in print, this field indicates the print
+     * section in which the article appeared.
+     *
+     * @var string|Text
+     */
+    public $printSection;
+
+    /**
+     * A [dateline](https://en.wikipedia.org/wiki/Dateline) is a brief piece of
+     * text included in news articles that describes where and when the story was
+     * written or filed though the date is often omitted. Sometimes only a
+     * placename is provided.  Structured representations of dateline-related
+     * information can also be expressed more explicitly using [[locationCreated]]
+     * (which represents where a work was created e.g. where a news report was
+     * written).  For location depicted or described in the content, use
+     * [[contentLocation]].  Dateline summaries are oriented more towards human
+     * readers than towards automated processing, and can vary substantially. Some
+     * examples: "BEIRUT, Lebanon, June 2.", "Paris, France", "December 19, 2017
+     * 11:43AM Reporting from Washington", "Beijing/Moscow", "QUEZON CITY,
+     * Philippines".       
+     *
+     * @var string|Text
+     */
+    public $dateline;
+
+}

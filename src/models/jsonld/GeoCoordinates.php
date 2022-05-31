@@ -1,27 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\StructuredValue;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
+ * schema.org version: v14.0-release
  * GeoCoordinates - The geographic coordinates of a place or event.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/GeoCoordinates
+ * @see       https://schema.org/GeoCoordinates
  */
-class GeoCoordinates extends StructuredValue
+class GeoCoordinates extends MetaJsonLd implements GeoCoordinatesInterface, StructuredValueInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -41,13 +41,6 @@ class GeoCoordinates extends StructuredValue
     static public $schemaTypeScope = 'https://schema.org/GeoCoordinates';
 
     /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = 'The geographic coordinates of a place or event.';
-
-    /**
      * The Schema.org Type Extends
      *
      * @var string
@@ -55,194 +48,110 @@ class GeoCoordinates extends StructuredValue
     static public $schemaTypeExtends = 'StructuredValue';
 
     /**
-     * The Schema.org composed Property Names
+     * The Schema.org Type Description
      *
-     * @var array
+     * @var string
      */
-    static public $schemaPropertyNames = [];
+    static public $schemaTypeDescription = <<<SCHEMADESC
+The geographic coordinates of a place or event.
+SCHEMADESC;
 
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
+    use GeoCoordinatesTrait;
+    use StructuredValueTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * Physical address of the item.
-     *
-     * @var mixed|PostalAddress|string [schema.org types: PostalAddress, Text]
+     * @inheritdoc
      */
-    public $address;
-
-    /**
-     * The country. For example, USA. You can also provide the two-letter ISO
-     * 3166-1 alpha-2 country code.
-     *
-     * @var mixed|Country|string [schema.org types: Country, Text]
-     */
-    public $addressCountry;
-
-    /**
-     * The elevation of a location (WGS 84). Values may be of the form 'NUMBER
-     * UNITOFMEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should
-     * be assumed to be a value in meters.
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $elevation;
-
-    /**
-     * The latitude of a location. For example 37.42242 (WGS 84).
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $latitude;
-
-    /**
-     * The longitude of a location. For example -122.08585 (WGS 84).
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
-     */
-    public $longitude;
-
-    /**
-     * The postal code. For example, 94043.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $postalCode;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'address',
-        'addressCountry',
-        'elevation',
-        'latitude',
-        'longitude',
-        'postalCode'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'address' => ['PostalAddress','Text'],
-        'addressCountry' => ['Country','Text'],
-        'elevation' => ['Number','Text'],
-        'latitude' => ['Number','Text'],
-        'longitude' => ['Number','Text'],
-        'postalCode' => ['Text']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'address' => 'Physical address of the item.',
-        'addressCountry' => 'The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.',
-        'elevation' => 'The elevation of a location (WGS 84). Values may be of the form \'NUMBER UNITOFMEASUREMENT\' (e.g., \'1,000 m\', \'3,200 ft\') while numbers alone should be assumed to be a value in meters.',
-        'latitude' => 'The latitude of a location. For example 37.42242 (WGS 84).',
-        'longitude' => 'The longitude of a location. For example -122.08585 (WGS 84).',
-        'postalCode' => 'The postal code. For example, 94043.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'address' => ['Text', 'PostalAddress'],
+            'addressCountry' => ['Country', 'Text'],
+            'alternateName' => ['Text'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'elevation' => ['Text', 'Number'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'latitude' => ['Text', 'Number'],
+            'longitude' => ['Number', 'Text'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'name' => ['Text'],
+            'postalCode' => ['Text'],
+            'potentialAction' => ['Action'],
+            'sameAs' => ['URL'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'address' => 'Physical address of the item.',
+            'addressCountry' => 'The country. For example, USA. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1).',
+            'alternateName' => 'An alias for the item.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'elevation' => 'The elevation of a location ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)). Values may be of the form \'NUMBER UNIT_OF_MEASUREMENT\' (e.g., \'1,000 m\', \'3,200 ft\') while numbers alone should be assumed to be a value in meters.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'latitude' => 'The latitude of a location. For example ```37.42242``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).',
+            'longitude' => 'The longitude of a location. For example ```-122.08585``` ([WGS 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'name' => 'The name of the item.',
+            'postalCode' => 'The postal code. For example, 94043.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['address','addressCountry','elevation','latitude','longitude','postalCode'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

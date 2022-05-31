@@ -1,29 +1,29 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Action;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * TradeAction - The act of participating in an exchange of goods and services
- * for monetary compensation. An agent trades an object, product or service
- * with a participant in exchange for a one time or periodic payment.
+ * schema.org version: v14.0-release
+ * TradeAction - The act of participating in an exchange of goods and services for monetary
+ * compensation. An agent trades an object, product or service with a
+ * participant in exchange for a one time or periodic payment.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/TradeAction
+ * @see       https://schema.org/TradeAction
  */
-class TradeAction extends Action
+class TradeAction extends MetaJsonLd implements TradeActionInterface, ActionInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -43,13 +43,6 @@ class TradeAction extends Action
     static public $schemaTypeScope = 'https://schema.org/TradeAction';
 
     /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = 'The act of participating in an exchange of goods and services for monetary compensation. An agent trades an object, product or service with a participant in exchange for a one time or periodic payment.';
-
-    /**
      * The Schema.org Type Extends
      *
      * @var string
@@ -57,177 +50,127 @@ class TradeAction extends Action
     static public $schemaTypeExtends = 'Action';
 
     /**
-     * The Schema.org composed Property Names
+     * The Schema.org Type Description
      *
-     * @var array
+     * @var string
      */
-    static public $schemaPropertyNames = [];
+    static public $schemaTypeDescription = <<<SCHEMADESC
+The act of participating in an exchange of goods and services for monetary compensation. An agent trades an object, product or service with a participant in exchange for a one time or periodic payment.
+SCHEMADESC;
 
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
+    use TradeActionTrait;
+    use ActionTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * The offer price of a product, or of a price component when attached to
-     * PriceSpecification and its subtypes. Usage guidelines: Use the
-     * priceCurrency property (with standard formats: ISO 4217 currency format
-     * e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names
-     * for Local Exchange Tradings Systems (LETS) and other currency types e.g.
-     * "Ithaca HOUR") instead of including ambiguous symbols such as '$' in the
-     * value. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a
-     * decimal point. Avoid using these symbols as a readability separator. Note
-     * that both RDFa and Microdata syntax allow the use of a "content=" attribute
-     * for publishing simple machine-readable values alongside more human-friendly
-     * formatting. Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to
-     * 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.
-     *
-     * @var mixed|float|string [schema.org types: Number, Text]
+     * @inheritdoc
      */
-    public $price;
-
-    /**
-     * The currency of the price, or a price component when attached to
-     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
-     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
-     * well known names for Local Exchange Tradings Systems (LETS) and other
-     * currency types e.g. "Ithaca HOUR".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $priceCurrency;
-
-    /**
-     * One or more detailed price specifications, indicating the unit price and
-     * delivery or payment charges.
-     *
-     * @var PriceSpecification [schema.org types: PriceSpecification]
-     */
-    public $priceSpecification;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'price',
-        'priceCurrency',
-        'priceSpecification'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'price' => ['Number','Text'],
-        'priceCurrency' => ['Text'],
-        'priceSpecification' => ['PriceSpecification']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'price' => 'The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes. Usage guidelines: Use the priceCurrency property (with standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR") instead of including ambiguous symbols such as \'$\' in the value. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator. Note that both RDFa and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting. Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols.',
-        'priceCurrency' => 'The currency of the price, or a price component when attached to PriceSpecification and its subtypes. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
-        'priceSpecification' => 'One or more detailed price specifications, indicating the unit price and delivery or payment charges.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'actionStatus' => ['ActionStatusType'],
+            'additionalType' => ['URL'],
+            'agent' => ['Organization', 'Person'],
+            'alternateName' => ['Text'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'endTime' => ['DateTime', 'Time'],
+            'error' => ['Thing'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'instrument' => ['Thing'],
+            'location' => ['PostalAddress', 'Text', 'Place', 'VirtualLocation'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'name' => ['Text'],
+            'object' => ['Thing'],
+            'participant' => ['Organization', 'Person'],
+            'potentialAction' => ['Action'],
+            'price' => ['Number', 'Text'],
+            'priceCurrency' => ['Text'],
+            'priceSpecification' => ['PriceSpecification'],
+            'provider' => ['Organization', 'Person'],
+            'result' => ['Thing'],
+            'sameAs' => ['URL'],
+            'startTime' => ['DateTime', 'Time'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'target' => ['EntryPoint'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'actionStatus' => 'Indicates the current disposition of the Action.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'agent' => 'The direct performer or driver of the action (animate or inanimate). e.g. *John* wrote a book.',
+            'alternateName' => 'An alias for the item.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. e.g. John wrote a book from January to *December*. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file.  Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
+            'error' => 'For failed actions, more information on the cause of the failure.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'instrument' => 'The object that helped the agent perform the action. e.g. John wrote a book with *a pen*.',
+            'location' => 'The location of, for example, where an event is happening, where an organization is located, or where an action takes place.',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'name' => 'The name of the item.',
+            'object' => 'The object upon which the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn\'t). e.g. John read *a book*.',
+            'participant' => 'Other co-agents that participated in the action indirectly. e.g. John wrote a book with *Steve*.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'price' => 'The offer price of a product, or of a price component when attached to PriceSpecification and its subtypes.  Usage guidelines:  * Use the [[priceCurrency]] property (with standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR") instead of including [ambiguous symbols](http://en.wikipedia.org/wiki/Dollar_sign#Currencies_that_use_the_dollar_or_peso_sign) such as \'$\' in the value. * Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator. * Note that both [RDFa](http://www.w3.org/TR/xhtml-rdfa-primer/#using-the-content-attribute) and Microdata syntax allow the use of a "content=" attribute for publishing simple machine-readable values alongside more human-friendly formatting. * Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols.       ',
+            'priceCurrency' => 'The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".',
+            'priceSpecification' => 'One or more detailed price specifications, indicating the unit price and delivery or payment charges.',
+            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',
+            'result' => 'The result produced in the action. e.g. John wrote *a book*.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'startTime' => 'The startTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to start. For actions that span a period of time, when the action was performed. e.g. John wrote a book from *January* to December. For media, including audio and video, it\'s the time offset of the start of a clip within a larger file.  Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'target' => 'Indicates a target EntryPoint for an Action.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['price','priceCurrency','priceSpecification'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

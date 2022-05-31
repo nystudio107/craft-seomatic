@@ -1,27 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
+ * schema.org version: v14.0-release
  * Ticket - Used to describe a ticket to an event, a flight, a bus ride, etc.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/Ticket
+ * @see       https://schema.org/Ticket
  */
-class Ticket extends Intangible
+class Ticket extends MetaJsonLd implements TicketInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -41,13 +41,6 @@ class Ticket extends Intangible
     static public $schemaTypeScope = 'https://schema.org/Ticket';
 
     /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = 'Used to describe a ticket to an event, a flight, a bus ride, etc.';
-
-    /**
      * The Schema.org Type Extends
      *
      * @var string
@@ -55,221 +48,113 @@ class Ticket extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org composed Property Names
+     * The Schema.org Type Description
      *
-     * @var array
+     * @var string
      */
-    static public $schemaPropertyNames = [];
+    static public $schemaTypeDescription = <<<SCHEMADESC
+Used to describe a ticket to an event, a flight, a bus ride, etc.
+SCHEMADESC;
 
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
+    use TicketTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * The date the ticket was issued.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
+     * @inheritdoc
      */
-    public $dateIssued;
-
-    /**
-     * The organization issuing the ticket or permit.
-     *
-     * @var Organization [schema.org types: Organization]
-     */
-    public $issuedBy;
-
-    /**
-     * The currency of the price, or a price component when attached to
-     * PriceSpecification and its subtypes. Use standard formats: ISO 4217
-     * currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC";
-     * well known names for Local Exchange Tradings Systems (LETS) and other
-     * currency types e.g. "Ithaca HOUR".
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $priceCurrency;
-
-    /**
-     * The unique identifier for the ticket.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $ticketNumber;
-
-    /**
-     * Reference to an asset (e.g., Barcode, QR code image or PDF) usable for
-     * entrance.
-     *
-     * @var mixed|string|string [schema.org types: Text, URL]
-     */
-    public $ticketToken;
-
-    /**
-     * The seat associated with the ticket.
-     *
-     * @var Seat [schema.org types: Seat]
-     */
-    public $ticketedSeat;
-
-    /**
-     * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode 'DIGIT
-     * ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar
-     * Unicode symbols. Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to
-     * indicate a decimal point. Avoid using these symbols as a readability
-     * separator.
-     *
-     * @var mixed|float|PriceSpecification|string [schema.org types: Number, PriceSpecification, Text]
-     */
-    public $totalPrice;
-
-    /**
-     * The person or organization the reservation or ticket is for.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $underName;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'dateIssued',
-        'issuedBy',
-        'priceCurrency',
-        'ticketNumber',
-        'ticketToken',
-        'ticketedSeat',
-        'totalPrice',
-        'underName'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'dateIssued' => ['Date','DateTime'],
-        'issuedBy' => ['Organization'],
-        'priceCurrency' => ['Text'],
-        'ticketNumber' => ['Text'],
-        'ticketToken' => ['Text','URL'],
-        'ticketedSeat' => ['Seat'],
-        'totalPrice' => ['Number','PriceSpecification','Text'],
-        'underName' => ['Organization','Person']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'dateIssued' => 'The date the ticket was issued.',
-        'issuedBy' => 'The organization issuing the ticket or permit.',
-        'priceCurrency' => 'The currency of the price, or a price component when attached to PriceSpecification and its subtypes. Use standard formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".',
-        'ticketNumber' => 'The unique identifier for the ticket.',
-        'ticketToken' => 'Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.',
-        'ticketedSeat' => 'The seat associated with the ticket.',
-        'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc. Usage guidelines: Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
-        'underName' => 'The person or organization the reservation or ticket is for.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'dateIssued' => ['Date', 'DateTime'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'issuedBy' => ['Organization'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'name' => ['Text'],
+            'potentialAction' => ['Action'],
+            'priceCurrency' => ['Text'],
+            'sameAs' => ['URL'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'ticketNumber' => ['Text'],
+            'ticketToken' => ['URL', 'Text'],
+            'ticketedSeat' => ['Seat'],
+            'totalPrice' => ['PriceSpecification', 'Number', 'Text'],
+            'underName' => ['Organization', 'Person'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'dateIssued' => 'The date the ticket was issued.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'issuedBy' => 'The organization issuing the ticket or permit.',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'name' => 'The name of the item.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'priceCurrency' => 'The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. "BTC"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. "Ithaca HOUR".',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'ticketNumber' => 'The unique identifier for the ticket.',
+            'ticketToken' => 'Reference to an asset (e.g., Barcode, QR code image or PDF) usable for entrance.',
+            'ticketedSeat' => 'The seat associated with the ticket.',
+            'totalPrice' => 'The total price for the reservation or ticket, including applicable taxes, shipping, etc.  Usage guidelines:  * Use values from 0123456789 (Unicode \'DIGIT ZERO\' (U+0030) to \'DIGIT NINE\' (U+0039)) rather than superficially similiar Unicode symbols. * Use \'.\' (Unicode \'FULL STOP\' (U+002E)) rather than \',\' to indicate a decimal point. Avoid using these symbols as a readability separator.',
+            'underName' => 'The person or organization the reservation or ticket is for.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['dateIssued','issuedBy','priceCurrency','ticketNumber','ticketToken','ticketedSeat','totalPrice','underName'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

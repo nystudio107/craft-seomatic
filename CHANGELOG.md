@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.4.31 - 2022.05.31
+### Added
+* Added Schema.org v14 JSON-LD models, generated via [SchemaGen](https://github.com/nystudio107/schemagen) ([#1092](https://github.com/nystudio107/craft-seomatic/issues/1092))
+
+### Changed
+* Removed Bing from `SEARCH_ENGINE_SUBMISSION_URLS` due to it being deprecated ([#1043](https://github.com/nystudio107/craft-seomatic/issues/1043))
+
+### Fixed
+* Don't allow the autocomplete object inspection to recurse infinitely, set a cap of 10 levels deep ([#1132](https://github.com/nystudio107/craft-seomatic/issues/1132))
+
 ## 3.4.30 - 2022.04.18
 ### Changed
 * Ensure that the `currentSite` is set to the requested one when processing headless requests via API endpoint or GraphQL, to ensure things like `siteUrl()` etc. resolve correctly ([#1111](https://github.com/nystudio107/craft-seomatic/issues/1111))

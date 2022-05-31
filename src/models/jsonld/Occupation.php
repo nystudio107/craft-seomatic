@@ -1,28 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * Occupation - A profession, may involve prolonged training and/or a formal
- * qualification.
+ * schema.org version: v14.0-release
+ * Occupation - A profession, may involve prolonged training and/or a formal qualification.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/Occupation
+ * @see       https://schema.org/Occupation
  */
-class Occupation extends Intangible
+class Occupation extends MetaJsonLd implements OccupationInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -42,13 +41,6 @@ class Occupation extends Intangible
     static public $schemaTypeScope = 'https://schema.org/Occupation';
 
     /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = 'A profession, may involve prolonged training and/or a formal qualification.';
-
-    /**
      * The Schema.org Type Extends
      *
      * @var string
@@ -56,223 +48,113 @@ class Occupation extends Intangible
     static public $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org composed Property Names
+     * The Schema.org Type Description
      *
-     * @var array
+     * @var string
      */
-    static public $schemaPropertyNames = [];
+    static public $schemaTypeDescription = <<<SCHEMADESC
+A profession, may involve prolonged training and/or a formal qualification.
+SCHEMADESC;
 
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
+    use OccupationTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
+    // Public methods
     // =========================================================================
 
     /**
-     * Educational background needed for the position or Occupation.
-     *
-     * @var mixed|EducationalOccupationalCredential|string [schema.org types: EducationalOccupationalCredential, Text]
+     * @inheritdoc
      */
-    public $educationRequirements;
-
-    /**
-     * An estimated salary for a job posting or occupation, based on a variety of
-     * variables including, but not limited to industry, job title, and location.
-     * Estimated salaries are often computed by outside organizations rather than
-     * the hiring organization, who may not have committed to the estimated value.
-     *
-     * @var mixed|MonetaryAmount|MonetaryAmountDistribution|float [schema.org types: MonetaryAmount, MonetaryAmountDistribution, Number]
-     */
-    public $estimatedSalary;
-
-    /**
-     * Description of skills and experience needed for the position or Occupation.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $experienceRequirements;
-
-    /**
-     * The region/country for which this occupational description is appropriate.
-     * Note that educational requirements and qualifications can vary between
-     * jurisdictions.
-     *
-     * @var AdministrativeArea [schema.org types: AdministrativeArea]
-     */
-    public $occupationLocation;
-
-    /**
-     * A category describing the job, preferably using a term from a taxonomy such
-     * as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each
-     * applicable value. Ideally the taxonomy should be identified, and both the
-     * textual label and formal code for the category should be provided. Note:
-     * for historical reasons, any textual label and formal code provided as a
-     * literal may be assumed to be from O*NET-SOC.
-     *
-     * @var mixed|CategoryCode|string [schema.org types: CategoryCode, Text]
-     */
-    public $occupationalCategory;
-
-    /**
-     * Specific qualifications required for this role or Occupation.
-     *
-     * @var mixed|EducationalOccupationalCredential|string [schema.org types: EducationalOccupationalCredential, Text]
-     */
-    public $qualifications;
-
-    /**
-     * Responsibilities associated with this role or Occupation.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $responsibilities;
-
-    /**
-     * A statement of knowledge, skill, ability, task or any other assertion
-     * expressing a competency that is desired or required to fulfill this role or
-     * to work in this occupation.
-     *
-     * @var mixed|DefinedTerm|string [schema.org types: DefinedTerm, Text]
-     */
-    public $skills;
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'educationRequirements',
-        'estimatedSalary',
-        'experienceRequirements',
-        'occupationLocation',
-        'occupationalCategory',
-        'qualifications',
-        'responsibilities',
-        'skills'
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'educationRequirements' => ['EducationalOccupationalCredential','Text'],
-        'estimatedSalary' => ['MonetaryAmount','MonetaryAmountDistribution','Number'],
-        'experienceRequirements' => ['Text'],
-        'occupationLocation' => ['AdministrativeArea'],
-        'occupationalCategory' => ['CategoryCode','Text'],
-        'qualifications' => ['EducationalOccupationalCredential','Text'],
-        'responsibilities' => ['Text'],
-        'skills' => ['DefinedTerm','Text']
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'educationRequirements' => 'Educational background needed for the position or Occupation.',
-        'estimatedSalary' => 'An estimated salary for a job posting or occupation, based on a variety of variables including, but not limited to industry, job title, and location. Estimated salaries are often computed by outside organizations rather than the hiring organization, who may not have committed to the estimated value.',
-        'experienceRequirements' => 'Description of skills and experience needed for the position or Occupation.',
-        'occupationLocation' => 'The region/country for which this occupational description is appropriate. Note that educational requirements and qualifications can vary between jurisdictions.',
-        'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided. Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
-        'qualifications' => 'Specific qualifications required for this role or Occupation.',
-        'responsibilities' => 'Responsibilities associated with this role or Occupation.',
-        'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is desired or required to fulfill this role or to work in this occupation.'
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-
-    // Public Methods
-    // =========================================================================
-
-    /**
-    * @inheritdoc
-    */
-    public function init()
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
-    * @inheritdoc
-    */
-    public function rules()
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'educationRequirements' => ['EducationalOccupationalCredential', 'Text'],
+            'estimatedSalary' => ['MonetaryAmountDistribution', 'MonetaryAmount', 'Number'],
+            'experienceRequirements' => ['Text', 'OccupationalExperienceRequirements'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'name' => ['Text'],
+            'occupationLocation' => ['AdministrativeArea'],
+            'occupationalCategory' => ['CategoryCode', 'Text'],
+            'potentialAction' => ['Action'],
+            'qualifications' => ['Text', 'EducationalOccupationalCredential'],
+            'responsibilities' => ['Text'],
+            'sameAs' => ['URL'],
+            'skills' => ['Text', 'DefinedTerm'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'educationRequirements' => 'Educational background needed for the position or Occupation.',
+            'estimatedSalary' => 'An estimated salary for a job posting or occupation, based on a variety of variables including, but not limited to industry, job title, and location. Estimated salaries  are often computed by outside organizations rather than the hiring organization, who may not have committed to the estimated value.',
+            'experienceRequirements' => 'Description of skills and experience needed for the position or Occupation.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'name' => 'The name of the item.',
+            'occupationLocation' => ' The region/country for which this occupational description is appropriate. Note that educational requirements and qualifications can vary between jurisdictions.',
+            'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html), [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.  Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'qualifications' => 'Specific qualifications required for this role or Occupation.',
+            'responsibilities' => 'Responsibilities associated with this role or Occupation.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is desired or required to fulfill this role or to work in this occupation.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['educationRequirements','estimatedSalary','experienceRequirements','occupationLocation','occupationalCategory','qualifications','responsibilities','skills'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;
