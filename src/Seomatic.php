@@ -110,11 +110,11 @@ class Seomatic extends Plugin
 
     public const DEVMODE_CACHE_DURATION = 30;
 
+    public const SEOMATIC_PREVIEW_AUTHORIZATION_KEY = 'seomaticPreviewAuthorizationKey';
+
     protected const FRONTEND_SEO_FILE_LINK = 'seomatic/seo-file-link/<url:[^\/]+>/<robots:[^\/]+>/<canonical:[^\/]+>/<inline:\d+>/<fileName:[-\w\.*]+>';
 
     protected const FRONTEND_PREVIEW_PATH = 'seomatic/preview-social-media';
-
-    protected const SEOMATIC_PREVIEW_AUTHORIZATION_KEY = 'seomaticPreviewAuthorizationKey';
 
     // Static Properties
     // =========================================================================

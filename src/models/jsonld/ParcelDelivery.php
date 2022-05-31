@@ -1,28 +1,28 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Intangible;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * ParcelDelivery - The delivery of a parcel either via the postal service or
- * a commercial service.
+ * schema.org version: v14.0-release
+ * ParcelDelivery - The delivery of a parcel either via the postal service or a commercial
+ * service.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/ParcelDelivery
+ * @see       https://schema.org/ParcelDelivery
  */
-class ParcelDelivery extends Intangible
+class ParcelDelivery extends MetaJsonLd implements ParcelDeliveryInterface, IntangibleInterface, ThingInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -32,253 +32,138 @@ class ParcelDelivery extends Intangible
      *
      * @var string
      */
-    static public $schemaTypeName = 'ParcelDelivery';
+    static public string $schemaTypeName = 'ParcelDelivery';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/ParcelDelivery';
-
-    /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = 'The delivery of a parcel either via the postal service or a commercial service.';
+    static public string $schemaTypeScope = 'https://schema.org/ParcelDelivery';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Intangible';
+    static public string $schemaTypeExtends = 'Intangible';
 
     /**
-     * The Schema.org composed Property Names
+     * The Schema.org Type Description
      *
-     * @var array
+     * @var string
      */
-    static public $schemaPropertyNames = [];
+    static public string $schemaTypeDescription = <<<SCHEMADESC
+The delivery of a parcel either via the postal service or a commercial service.
+SCHEMADESC;
 
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
+    use ParcelDeliveryTrait;
+    use IntangibleTrait;
+    use ThingTrait;
 
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
-    // =========================================================================
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'deliveryAddress',
-        'deliveryStatus',
-        'expectedArrivalFrom',
-        'expectedArrivalUntil',
-        'hasDeliveryMethod',
-        'itemShipped',
-        'originAddress',
-        'partOfOrder',
-        'provider',
-        'trackingNumber',
-        'trackingUrl'
-    ];
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'deliveryAddress' => ['PostalAddress'],
-        'deliveryStatus' => ['DeliveryEvent'],
-        'expectedArrivalFrom' => ['Date', 'DateTime'],
-        'expectedArrivalUntil' => ['Date', 'DateTime'],
-        'hasDeliveryMethod' => ['DeliveryMethod'],
-        'itemShipped' => ['Product'],
-        'originAddress' => ['PostalAddress'],
-        'partOfOrder' => ['Order'],
-        'provider' => ['Organization', 'Person'],
-        'trackingNumber' => ['Text'],
-        'trackingUrl' => ['URL']
-    ];
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'deliveryAddress' => 'Destination address.',
-        'deliveryStatus' => 'New entry added as the package passes through each leg of its journey (from shipment to final delivery).',
-        'expectedArrivalFrom' => 'The earliest date the package may arrive.',
-        'expectedArrivalUntil' => 'The latest date the package may arrive.',
-        'hasDeliveryMethod' => 'Method used for delivery or shipping.',
-        'itemShipped' => 'Item(s) being shipped.',
-        'originAddress' => 'Shipper\'s address.',
-        'partOfOrder' => 'The overall order the items in this delivery were included in.',
-        'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller. Supersedes carrier.',
-        'trackingNumber' => 'Shipper tracking number.',
-        'trackingUrl' => 'Tracking url for the parcel delivery.'
-    ];
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-    /**
-     * Destination address.
-     *
-     * @var PostalAddress [schema.org types: PostalAddress]
-     */
-    public $deliveryAddress;
-    /**
-     * New entry added as the package passes through each leg of its journey (from
-     * shipment to final delivery).
-     *
-     * @var DeliveryEvent [schema.org types: DeliveryEvent]
-     */
-    public $deliveryStatus;
-    /**
-     * The earliest date the package may arrive.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $expectedArrivalFrom;
-    /**
-     * The latest date the package may arrive.
-     *
-     * @var mixed|Date|DateTime [schema.org types: Date, DateTime]
-     */
-    public $expectedArrivalUntil;
-    /**
-     * Method used for delivery or shipping.
-     *
-     * @var DeliveryMethod [schema.org types: DeliveryMethod]
-     */
-    public $hasDeliveryMethod;
-    /**
-     * Item(s) being shipped.
-     *
-     * @var Product [schema.org types: Product]
-     */
-    public $itemShipped;
-
-    // Static Protected Properties
-    // =========================================================================
-    /**
-     * Shipper's address.
-     *
-     * @var PostalAddress [schema.org types: PostalAddress]
-     */
-    public $originAddress;
-    /**
-     * The overall order the items in this delivery were included in.
-     *
-     * @var Order [schema.org types: Order]
-     */
-    public $partOfOrder;
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller. Supersedes
-     * carrier.
-     *
-     * @var mixed|Organization|Person [schema.org types: Organization, Person]
-     */
-    public $provider;
-    /**
-     * Shipper tracking number.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $trackingNumber;
-    /**
-     * Tracking url for the parcel delivery.
-     *
-     * @var string [schema.org types: URL]
-     */
-    public $trackingUrl;
-
-    // Public Methods
+    // Public methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init(): void
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
      * @inheritdoc
      */
-    public function rules(): array
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'additionalType' => ['URL'],
+            'alternateName' => ['Text'],
+            'carrier' => ['Organization'],
+            'deliveryAddress' => ['PostalAddress'],
+            'deliveryStatus' => ['DeliveryEvent'],
+            'description' => ['Text'],
+            'disambiguatingDescription' => ['Text'],
+            'expectedArrivalFrom' => ['Date', 'DateTime'],
+            'expectedArrivalUntil' => ['Date', 'DateTime'],
+            'hasDeliveryMethod' => ['DeliveryMethod'],
+            'identifier' => ['URL', 'Text', 'PropertyValue'],
+            'image' => ['URL', 'ImageObject'],
+            'itemShipped' => ['Product'],
+            'mainEntityOfPage' => ['CreativeWork', 'URL'],
+            'name' => ['Text'],
+            'originAddress' => ['PostalAddress'],
+            'partOfOrder' => ['Order'],
+            'potentialAction' => ['Action'],
+            'provider' => ['Organization', 'Person'],
+            'sameAs' => ['URL'],
+            'subjectOf' => ['Event', 'CreativeWork'],
+            'trackingNumber' => ['Text'],
+            'trackingUrl' => ['URL'],
+            'url' => ['URL']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'alternateName' => 'An alias for the item.',
+            'carrier' => '\'carrier\' is an out-dated term indicating the \'provider\' for parcel delivery and flights.',
+            'deliveryAddress' => 'Destination address.',
+            'deliveryStatus' => 'New entry added as the package passes through each leg of its journey (from shipment to final delivery).',
+            'description' => 'A description of the item.',
+            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+            'expectedArrivalFrom' => 'The earliest date the package may arrive.',
+            'expectedArrivalUntil' => 'The latest date the package may arrive.',
+            'hasDeliveryMethod' => 'Method used for delivery or shipping.',
+            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+            'itemShipped' => 'Item(s) being shipped.',
+            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+            'name' => 'The name of the item.',
+            'originAddress' => 'Shipper\'s address.',
+            'partOfOrder' => 'The overall order the items in this delivery were included in.',
+            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',
+            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+            'subjectOf' => 'A CreativeWork or Event about this Thing.',
+            'trackingNumber' => 'Shipper tracking number.',
+            'trackingUrl' => 'Tracking url for the parcel delivery.',
+            'url' => 'URL of the item.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return ['description', 'name'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return ['image', 'url'];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['deliveryAddress', 'deliveryStatus', 'expectedArrivalFrom', 'expectedArrivalUntil', 'hasDeliveryMethod', 'itemShipped', 'originAddress', 'partOfOrder', 'provider', 'trackingNumber', 'trackingUrl'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;

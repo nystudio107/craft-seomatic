@@ -87,6 +87,8 @@ class Autocomplete
         'Variable' => 4,
     ];
 
+    const RECURSION_DEPTH_LIMIT = 10;
+
     // Public Static Methods
     // =========================================================================
 
@@ -110,7 +112,7 @@ class Autocomplete
                 $type = gettype($value);
                 switch ($type) {
                     case 'object':
-                        self::parseObject($completionList, $key, $value);
+                        self::parseObject($completionList, $key, $value, 0);
                         break;
 
                     case 'array':
@@ -155,10 +157,16 @@ class Autocomplete
      * @param array $completionList
      * @param string $name
      * @param $object
+     * @param int $recursionDepth
      * @param string $path
      */
-    public static function parseObject(array &$completionList, string $name, $object, string $path = '')
+    public static function parseObject(array &$completionList, string $name, $object, int $recursionDepth, string $path = '')
     {
+        // Only recurse `RECURSION_DEPTH_LIMIT` deep
+        if ($recursionDepth > self::RECURSION_DEPTH_LIMIT) {
+            return;
+        }
+        $recursionDepth++;
         // Create the docblock factory
         $factory = DocBlockFactory::createInstance();
 
@@ -166,13 +174,13 @@ class Autocomplete
         // The class itself
         self::getClassCompletion($completionList, $object, $factory, $name, $path);
         // ServiceLocator Components
-        self::getComponentCompletion($completionList, $object, $path);
+        self::getComponentCompletion($completionList, $object, $recursionDepth, $path);
         // Class properties
-        self::getPropertyCompletion($completionList, $object, $factory, $path);
+        self::getPropertyCompletion($completionList, $object, $factory, $recursionDepth, $path);
         // Class methods
         self::getMethodCompletion($completionList, $object, $factory, $path);
         // Behavior properties
-        self::getBehaviorCompletion($completionList, $object, $factory, $path);
+        self::getBehaviorCompletion($completionList, $object, $factory, $recursionDepth, $path);
     }
 
     // Protected Static Methods
@@ -222,9 +230,10 @@ class Autocomplete
     /**
      * @param array $completionList
      * @param $object
+     * @param $recursionDepth
      * @param $path
      */
-    protected static function getComponentCompletion(array &$completionList, $object, $path)
+    protected static function getComponentCompletion(array &$completionList, $object, $recursionDepth, $path)
     {
         if ($object instanceof ServiceLocator) {
             foreach ($object->getComponents() as $key => $value) {
@@ -235,7 +244,7 @@ class Autocomplete
                     // That's okay
                 }
                 if ($componentObject) {
-                    self::parseObject($completionList, $key, $componentObject, $path);
+                    self::parseObject($completionList, $key, $componentObject, $recursionDepth, $path);
                 }
             }
         }
@@ -247,7 +256,7 @@ class Autocomplete
      * @param DocBlockFactory $factory
      * @param string $path
      */
-    protected static function getPropertyCompletion(array &$completionList, $object, DocBlockFactory $factory, string $path)
+    protected static function getPropertyCompletion(array &$completionList, $object, DocBlockFactory $factory, $recursionDepth, string $path)
     {
         try {
             $reflectionClass = new ReflectionClass($object);
@@ -347,7 +356,7 @@ class Autocomplete
                 // Recurse through if this is an object
                 if (isset($object->$propertyName) && is_object($object->$propertyName)) {
                     if (!$customField && !in_array($propertyName, self::EXCLUDED_PROPERTY_NAMES, true)) {
-                        self::parseObject($completionList, $propertyName, $object->$propertyName, $path);
+                        self::parseObject($completionList, $propertyName, $object->$propertyName, $recursionDepth, $path);
                     }
                 }
             }
@@ -451,12 +460,12 @@ class Autocomplete
      * @param DocBlockFactory $factory
      * @param string $path
      */
-    protected static function getBehaviorCompletion(array &$completionList, $object, DocBlockFactory $factory, string $path)
+    protected static function getBehaviorCompletion(array &$completionList, $object, DocBlockFactory $factory, $recursionDepth, string $path)
     {
         if ($object instanceof Element) {
             $behaviorClass = $object->getBehavior('customFields');
             if ($behaviorClass) {
-                self::getPropertyCompletion($completionList, $behaviorClass, $factory, $path);
+                self::getPropertyCompletion($completionList, $behaviorClass, $factory, $recursionDepth, $path);
             }
         }
     }

@@ -49,105 +49,28 @@ class MetaJsonLd extends NonceItem
      *
      * @var string
      */
-    static public $schemaTypeName = 'JsonLd';
+    static public string $schemaTypeName = 'JsonLd';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/';
+    static public string $schemaTypeScope = 'https://schema.org/';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public $schemaTypeDescription = 'Generic JsonLd type.';
+    static public string $schemaTypeDescription = 'Generic JsonLd type.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = '';
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static public $schemaPropertyNames = [];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Static Protected Properties
-    // =========================================================================
-
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-    ];
-
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-    ];
-
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-    ];
-
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
+    static public string $schemaTypeExtends = '';
 
     // Public Properties
     // =========================================================================
@@ -246,6 +169,57 @@ class MetaJsonLd extends NonceItem
             'renderScriptTags' => true,
             'array' => false,
         ]);
+    }
+
+    /**
+     * Return the Schema.org Property Names
+     *
+     * @return array
+     */
+    public function getSchemaPropertyNames(): array
+    {
+        return array_keys($this->getSchemaPropertyExpectedTypes());
+    }
+
+
+    /**
+     * Return the Schema.org Property Expected Types
+     *
+     * @return array
+     */
+    public function getSchemaPropertyExpectedTypes(): array
+    {
+        return [];
+    }
+
+    /**
+     * Return the Schema.org Property Descriptions
+     *
+     * @return array
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [];
+    }
+
+    /**
+     * Return the Schema.org Google Required Schema for this type
+     *
+     * @return array
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return [];
+    }
+
+    /**
+     * Return the Schema.org Google Recommended Schema for this type
+     *
+     * @return array
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return [];
     }
 
     /**
@@ -388,10 +362,10 @@ class MetaJsonLd extends NonceItem
         $params
     )
     {
-        if (!in_array($attribute, static::$schemaPropertyNames, true)) {
+        if (!in_array($attribute, $this->getSchemaPropertyNames(), true)) {
             $this->addError($attribute, 'The attribute does not exist.');
         } else {
-            $expectedTypes = static::$schemaPropertyExpectedTypes[$attribute];
+            $expectedTypes = $this->getSchemaPropertyExpectedTypes()[$attribute];
             $validated = false;
             $dataToValidate = $this->$attribute;
             if (!is_array($dataToValidate)) {

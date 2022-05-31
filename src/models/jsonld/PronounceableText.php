@@ -1,27 +1,27 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2017 nystudio107
+ * @copyright Copyright (c) 2022 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
-use nystudio107\seomatic\models\jsonld\Text;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
+ * schema.org version: v14.0-release
  * PronounceableText - Data type: PronounceableText.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.0.0
- * @see       http://schema.org/PronounceableText
+ * @see       https://schema.org/PronounceableText
  */
-class PronounceableText extends Text
+class PronounceableText extends MetaJsonLd implements PronounceableTextInterface, TextInterface
 {
     // Static Public Properties
     // =========================================================================
@@ -31,189 +31,97 @@ class PronounceableText extends Text
      *
      * @var string
      */
-    static public $schemaTypeName = 'PronounceableText';
+    static public string $schemaTypeName = 'PronounceableText';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public $schemaTypeScope = 'https://schema.org/PronounceableText';
-
-    /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = 'Data type: PronounceableText.';
+    static public string $schemaTypeScope = 'https://schema.org/PronounceableText';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public $schemaTypeExtends = 'Text';
+    static public string $schemaTypeExtends = 'Text';
 
     /**
-     * The Schema.org composed Property Names
+     * The Schema.org Type Description
      *
-     * @var array
+     * @var string
      */
-    static public $schemaPropertyNames = [];
+    static public string $schemaTypeDescription = <<<SCHEMADESC
+Data type: PronounceableText.
+SCHEMADESC;
 
-    /**
-     * The Schema.org composed Property Expected Types
-     *
-     * @var array
-     */
-    static public $schemaPropertyExpectedTypes = [];
+    use PronounceableTextTrait;
+    use TextTrait;
 
-    /**
-     * The Schema.org composed Property Descriptions
-     *
-     * @var array
-     */
-    static public $schemaPropertyDescriptions = [];
-
-    /**
-     * The Schema.org composed Google Required Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRequiredSchema = [];
-
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static public $googleRecommendedSchema = [];
-
-    // Public Properties
-    // =========================================================================
-    /**
-     * The Schema.org Property Names
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyNames = [
-        'inLanguage',
-        'phoneticText',
-        'speechToTextMarkup',
-        'textValue'
-    ];
-    /**
-     * The Schema.org Property Expected Types
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyExpectedTypes = [
-        'inLanguage' => ['Language', 'Text'],
-        'phoneticText' => ['Text'],
-        'speechToTextMarkup' => ['Text'],
-        'textValue' => ['Text']
-    ];
-    /**
-     * The Schema.org Property Descriptions
-     *
-     * @var array
-     */
-    static protected $_schemaPropertyDescriptions = [
-        'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the IETF BCP 47 standard. See also availableLanguage. Supersedes language.',
-        'phoneticText' => 'Representation of a text textValue using the specified speechToTextMarkup. For example the city name of Houston in IPA: /ˈhjuːstən/.',
-        'speechToTextMarkup' => 'Form of markup used. eg. SSML or IPA.',
-        'textValue' => 'Text value being annotated.'
-    ];
-    /**
-     * The Schema.org Google Required Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRequiredSchema = [
-    ];
-
-    // Static Protected Properties
-    // =========================================================================
-    /**
-     * The Schema.org composed Google Recommended Schema for this type
-     *
-     * @var array
-     */
-    static protected $_googleRecommendedSchema = [
-    ];
-    /**
-     * The language of the content or performance or used in an action. Please use
-     * one of the language codes from the IETF BCP 47 standard. See also
-     * availableLanguage. Supersedes language.
-     *
-     * @var mixed|Language|string [schema.org types: Language, Text]
-     */
-    public $inLanguage;
-    /**
-     * Representation of a text textValue using the specified speechToTextMarkup.
-     * For example the city name of Houston in IPA: /ˈhjuːstən/.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $phoneticText;
-    /**
-     * Form of markup used. eg. SSML or IPA.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $speechToTextMarkup;
-    /**
-     * Text value being annotated.
-     *
-     * @var string [schema.org types: Text]
-     */
-    public $textValue;
-
-    // Public Methods
+    // Public methods
     // =========================================================================
 
     /**
      * @inheritdoc
      */
-    public function init(): void
+    public function getSchemaPropertyNames(): array
     {
-        parent::init();
-        self::$schemaPropertyNames = array_merge(
-            parent::$schemaPropertyNames,
-            self::$_schemaPropertyNames
-        );
-
-        self::$schemaPropertyExpectedTypes = array_merge(
-            parent::$schemaPropertyExpectedTypes,
-            self::$_schemaPropertyExpectedTypes
-        );
-
-        self::$schemaPropertyDescriptions = array_merge(
-            parent::$schemaPropertyDescriptions,
-            self::$_schemaPropertyDescriptions
-        );
-
-        self::$googleRequiredSchema = array_merge(
-            parent::$googleRequiredSchema,
-            self::$_googleRequiredSchema
-        );
-
-        self::$googleRecommendedSchema = array_merge(
-            parent::$googleRecommendedSchema,
-            self::$_googleRecommendedSchema
-        );
+        return array_keys($this->getSchemaPropertyExpectedTypes());
     }
 
     /**
      * @inheritdoc
      */
-    public function rules(): array
+    public function getSchemaPropertyExpectedTypes(): array
     {
-        $rules = parent::rules();
+        return [
+            'inLanguage' => ['Text', 'Language'],
+            'phoneticText' => ['Text'],
+            'speechToTextMarkup' => ['Text'],
+            'textValue' => ['Text']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+            'inLanguage' => 'The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[availableLanguage]].',
+            'phoneticText' => 'Representation of a text [[textValue]] using the specified [[speechToTextMarkup]]. For example the city name of Houston in IPA: /ˈhjuːstən/.',
+            'speechToTextMarkup' => 'Form of markup used. eg. [SSML](https://www.w3.org/TR/speech-synthesis11) or [IPA](https://www.wikidata.org/wiki/Property:P898).',
+            'textValue' => 'Text value being annotated.'
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
         $rules = array_merge($rules, [
-            [['inLanguage', 'phoneticText', 'speechToTextMarkup', 'textValue'], 'validateJsonSchema'],
-            [self::$_googleRequiredSchema, 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [self::$_googleRecommendedSchema, 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
         ]);
 
         return $rules;
