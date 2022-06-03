@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.32 - UNRELEASED
+### Changed
+* Only strip the `tokenParm` URL parameter from the canonical URL, leaving others intact if explicitly set by the developer (generally query strings should not be in canonical URLs, but there are exceptions)
+
 ## 3.4.31 - 2022.05.31
 ### Added
 * Added Schema.org v14 JSON-LD models, generated via [SchemaGen](https://github.com/nystudio107/schemagen) ([#1092](https://github.com/nystudio107/craft-seomatic/issues/1092))
