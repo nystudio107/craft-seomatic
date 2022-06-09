@@ -4,7 +4,7 @@
 Contact: mailto:user@example.com
 
 # (required) Expiration date for the security information herein
-Expires: {{ date('1year')|atom }}
+Expires: {{ date('+1 year')|atom }}
 
 # (optional) OpenPGP key:
 Encryption: {{ url('pgp-key.txt') }}
