@@ -1,15 +1,16 @@
 # security.txt file for {{ siteUrl }} - more info: https://securitytxt.org/
+
 # (required) Contact email address for security issues
-Contact: user@example.com
+Contact: mailto:user@example.com
 
 # (required) Expiration date for the security information herein
-Expiration: {{ date('1year')|atom }}
+Expires: {{ date('1year')|atom }}
 
 # (optional) OpenPGP key:
-Encryption: {{ siteUrl }}pgp-key.txt
+Encryption: {{ url('pgp-key.txt') }}
 
 # (optional) Security policy page:
-Policy: {{ siteUrl }}security-policy
+Policy: {{ url('security-policy') }}
 
 # (optional) Security acknowledgements page:
-Acknowledgements: {{ siteUrl }}hall-of-fame
+Acknowledgements: {{ url('hall-of-fame') }}
