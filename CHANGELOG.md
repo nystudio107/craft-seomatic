@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
-## 4.0.2 - UNRELEASED
+## 4.0.2 - 2022.06.16
+### Fixed
+* Fixed an issue where a pinned version of `davechild/textstatistics` caused SEOmatic to not work with other plugins that required a more recent version of the package ([#1153](https://github.com/nystudio107/craft-seomatic/issues/1153))
+
 ### Changed
 * Only strip the `tokenParm` URL parameter from the canonical URL, leaving others intact if explicitly set by the developer (generally query strings should not be in canonical URLs, but there are exceptions)
 
