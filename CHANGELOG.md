@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.32 - UNRELEASED
+## 3.4.32 - 2022.06.16
 ### Changed
 * Only strip the `tokenParm` URL parameter from the canonical URL, leaving others intact if explicitly set by the developer (generally query strings should not be in canonical URLs, but there are exceptions)
 
