@@ -1053,9 +1053,20 @@ class SettingsController extends Controller
      * Plugin settings
      *
      * @return Response The rendered result
+     * @throws ForbiddenHttpException
      */
     public function actionPlugin(): Response
     {
+        // Ensure they have permission to edit the plugin settings
+        $currentUser = Craft::$app->getUser()->getIdentity();
+        if (!$currentUser->can('seomatic:plugin-settings')) {
+            throw new ForbiddenHttpException('You do not have permission to edit SEOmatic plugin settings.');
+        }
+        $general = Craft::$app->getConfig()->getGeneral();
+        if (!$general->allowAdminChanges) {
+            throw new ForbiddenHttpException('Unable to edit SEOmatic plugin settings because admin changes are disabled in this environment.');
+        }
+        // Edit the plugin settings
         $variables = [];
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Plugin Settings');
@@ -1271,6 +1282,16 @@ class SettingsController extends Controller
      */
     public function actionSavePluginSettings()
     {
+        // Ensure they have permission to edit the plugin settings
+        $currentUser = Craft::$app->getUser()->getIdentity();
+        if (!$currentUser->can('seomatic:plugin-settings')) {
+            throw new ForbiddenHttpException('You do not have permission to edit SEOmatic plugin settings.');
+        }
+        $general = Craft::$app->getConfig()->getGeneral();
+        if (!$general->allowAdminChanges) {
+            throw new ForbiddenHttpException('Unable to edit SEOmatic plugin settings because admin changes are disabled in this environment.');
+        }
+        // Save the plugin settings
         $this->requirePostRequest();
         $pluginHandle = Craft::$app->getRequest()->getRequiredBodyParam('pluginHandle');
         $settings = Craft::$app->getRequest()->getBodyParam('settings', []);
