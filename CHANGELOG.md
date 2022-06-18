@@ -1,13 +1,14 @@
 # SEOmatic Changelog
 
-## 4.0.2 - 2022.06.16
+## 4.0.2 - 2022.06.18
+### Changed
+* Only strip the `tokenParm` URL parameter from the canonical URL, leaving others intact if explicitly set by the developer (generally query strings should not be in canonical URLs, but there are exceptions)
+* Don't provide link to Plugin Settings or allow them to be accessed without permission, or without `allowAdminChanges` being enabled ([#1150](https://github.com/nystudio107/craft-seomatic/issues/1150))
+
 ### Fixed
 * Fixed an issue where a pinned version of `davechild/textstatistics` caused SEOmatic to not work with other plugins that required a more recent version of the package ([#1153](https://github.com/nystudio107/craft-seomatic/issues/1153))
 * Fixed an issue where a GraphQL frontendTemplates request for a disabled file results in error ([#1156](https://github.com/nystudio107/craft-seomatic/issues/1156))
 * Fix `security.txt` template ([#1154](https://github.com/nystudio107/craft-seomatic/pull/1154))
-
-### Changed
-* Only strip the `tokenParm` URL parameter from the canonical URL, leaving others intact if explicitly set by the developer (generally query strings should not be in canonical URLs, but there are exceptions)
 
 ## 4.0.1 - 2022.05.31
 ### Added
