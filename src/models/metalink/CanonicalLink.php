@@ -11,12 +11,11 @@
 
 namespace nystudio107\seomatic\models\metalink;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\models\MetaLink;
-use nystudio107\seomatic\helpers\UrlHelper;
-
 use Craft;
 use craft\helpers\StringHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\MetaLink;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -68,7 +67,7 @@ class CanonicalLink extends MetaLink
         if ($shouldRender) {
             $request = Craft::$app->getRequest();
             $response = Craft::$app->getResponse();
-                // Don't render a canonical url for http status codes >= 400
+            // Don't render a canonical url for http status codes >= 400
             if (!$request->isConsoleRequest
                 && !Seomatic::$previewingMetaContainers
                 && $response->statusCode >= 400
@@ -98,9 +97,12 @@ class CanonicalLink extends MetaLink
                 }
                 $url = UrlHelper::absoluteUrlWithProtocol($data['href']);
                 // The URL should be stripped of its query string already, but because
-                // Craft adds the `token` URL param back in via UrlHelper, strip it again
+                // Craft adds the `tokenParam` URL param back in via UrlHelper, strip it again
                 if (Seomatic::$plugin->metaContainers->paginationPage === '1') {
-                    $url = preg_replace('/\?.*/', '', $url);
+                    $token = Craft::$app->getConfig()->getGeneral()->tokenParam;
+                    $url = preg_replace('~([?&])' . $token . '=[^&]*~', '$1', $url);
+                    $url = rtrim($url, '?&');
+                    $url = str_replace(['&&', '?&'], ['&', '?'], $url);
                     $data['href'] = $url;
                 }
             }

@@ -1,8 +1,12 @@
+{% set pluginSettings = "[Plugin Settings](" ~ cpUrl('seomatic/plugin') ~ ")" %}
+{% if not craft.app.config.general.allowAdminChanges %}
+    {% set pluginSettings = "Plugin Settings" %}
+{% endif %}
 <div class="field" style="margin: 0;">
     <p class="notice">
         Environment: <strong>{{ seomatic.getEnvironment() }}</strong>
         <span class="info">
-            {{ ("The SEOmatic environment, either `live`, `staging`, or `local`. This setting controls whether certain things render, and is configured in [Plugin Settings](" ~ cpUrl('seomatic/plugin') ~ ").<br><br>Only in the `live` production environment will Google Analytics and other tracking tags send analytics data.<br><br> SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.") | md | striptags('<code><br><a>') | raw }}
+            {{ ("The SEOmatic environment, either `live`, `staging`, or `local`. This setting controls whether certain things render, and is configured in " ~ pluginSettings ~ ".<br><br>Only in the `live` production environment will Google Analytics and other tracking tags send analytics data.<br><br> SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.") | md | striptags('<code><br><a>') | raw }}
         </span>
     </p>
 </div>
