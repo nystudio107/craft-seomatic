@@ -53,7 +53,7 @@ class FrontendContainerResolver
 
         if (!empty($arguments['type'])) {
             $containerItems = [
-                $arguments['type'] => $containerItems[$arguments['type']]
+                $arguments['type'] => $containerItems[$arguments['type']] ?? []
             ];
         }
 
