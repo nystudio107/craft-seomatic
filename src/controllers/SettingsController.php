@@ -502,6 +502,9 @@ class SettingsController extends Controller
                     $hasErrors = true;
                 }
             }
+            if (!$metaBundle->metaGlobalVars->validate()) {
+                $hasErrors = true;
+            }
 
             if ($hasErrors) {
                 Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save settings due to a Twig error."));
