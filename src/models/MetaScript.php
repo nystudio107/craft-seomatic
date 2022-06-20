@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models;
 use Craft;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\validators\TwigExpressionValidator;
+use nystudio107\twigfield\validators\TwigTemplateValidator;
 use yii\web\View;
 use function is_string;
 
@@ -183,7 +183,7 @@ class MetaScript extends NonceItem
                     'templateString',
                     'bodyTemplateString',
                 ],
-                TwigExpressionValidator::class,
+                TwigTemplateValidator::class,
             ],
             [['vars'], 'safe'],
             [['dataLayer'], 'safe'],

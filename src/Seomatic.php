@@ -75,6 +75,8 @@ use nystudio107\seomatic\services\Tag as TagService;
 use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
+use nystudio107\twigfield\events\RegisterTwigValidatorVariablesEvent;
+use nystudio107\twigfield\validators\TwigTemplateValidator;
 use yii\base\Event;
 use yii\base\View as BaseView;
 use yii\web\View as YiiView;
@@ -888,6 +890,18 @@ class Seomatic extends Plugin
                     'heading' => Craft::t('seomatic', 'SEOmatic'),
                     'permissions' => $this->customAdminCpPermissions(),
                 ];
+            }
+        );
+        // Handler: TwigTemplateValidator::EVENT_REGISTER_TWIG_VALIDATOR_VARIABLES
+        Event::on(TwigTemplateValidator::class,
+            TwigTemplateValidator::EVENT_REGISTER_TWIG_VALIDATOR_VARIABLES,
+            function (RegisterTwigValidatorVariablesEvent $event) {
+                if (Seomatic::$seomaticVariable === null) {
+                    Seomatic::$seomaticVariable = new SeomaticVariable();
+                    Seomatic::$plugin->metaContainers->loadGlobalMetaContainers();
+                    Seomatic::$seomaticVariable->init();
+                }
+                $event->variables['seomatic'] = Seomatic::$seomaticVariable;
             }
         );
     }
