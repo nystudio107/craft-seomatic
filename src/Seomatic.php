@@ -78,6 +78,8 @@ use nystudio107\seomatic\services\Tag as TagService;
 use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
+use nystudio107\twigfield\events\RegisterTwigValidatorVariablesEvent;
+use nystudio107\twigfield\validators\TwigTemplateValidator;
 use yii\base\Event;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
@@ -591,7 +593,7 @@ class Seomatic extends Plugin
         Event::on(
             SitesService::class,
             SitesService::EVENT_AFTER_SAVE_SITE,
-            function() use ($updateMetaBundles) {
+            function () use ($updateMetaBundles) {
                 $updateMetaBundles('SitesService::EVENT_AFTER_SAVE_SITE');
             }
         );
@@ -600,7 +602,7 @@ class Seomatic extends Plugin
         Event::on(
             SitesService::class,
             SitesService::EVENT_AFTER_DELETE_SITE,
-            function() use ($updateMetaBundles) {
+            function () use ($updateMetaBundles) {
                 $updateMetaBundles('SitesService::EVENT_AFTER_DELETE_SITE');
             }
         );
@@ -847,6 +849,18 @@ class Seomatic extends Plugin
                 );
                 // Register our custom permissions
                 $event->permissions[Craft::t('seomatic', 'SEOmatic')] = $this->customAdminCpPermissions();
+            }
+        );
+        // Handler: TwigTemplateValidator::EVENT_REGISTER_TWIG_VALIDATOR_VARIABLES
+        Event::on(TwigTemplateValidator::class,
+            TwigTemplateValidator::EVENT_REGISTER_TWIG_VALIDATOR_VARIABLES,
+            function (RegisterTwigValidatorVariablesEvent $event) {
+                if (Seomatic::$seomaticVariable === null) {
+                    Seomatic::$seomaticVariable = new SeomaticVariable();
+                    Seomatic::$plugin->metaContainers->loadGlobalMetaContainers();
+                    Seomatic::$seomaticVariable->init();
+                }
+                $event->variables['seomatic'] = Seomatic::$seomaticVariable;
             }
         );
     }
