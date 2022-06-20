@@ -18,7 +18,6 @@ use craft\web\Controller;
 use DateTime;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Autocomplete as AutocompleteHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
@@ -80,8 +79,6 @@ class SettingsController extends Controller
         'genericUrl' => 'Identity Entity URL',
         'genericImage' => 'Identity Entity Brand',
     ];
-
-    const AUTOCOMPLETE_CACHE_DURATION = 60;
 
     // Protected Properties
     // =========================================================================
@@ -1302,6 +1299,7 @@ class SettingsController extends Controller
      */
     protected function addVarsToAutocompleteCache(string $additionalCompletionsCacheKey, $vars)
     {
+        return;
         $additionalCompletions = [];
         foreach ($vars as $key => $value) {
             $additionalCompletions[$key] = [

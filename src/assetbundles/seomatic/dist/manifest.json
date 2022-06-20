@@ -4,13 +4,10 @@
   "seomatic.js": "js/seomatic.js",
   "seomatic-meta.js": "js/seomatic-meta.js",
   "seomatic-tokens.js": "js/seomatic-tokens.js",
-  "javascript-editor.js": "js/javascript-editor.js",
   "runtime.js": "js/runtime.js",
   "vendors.css": "css/vendors.css",
   "vendors.js": "js/vendors.js",
   "styles.css": "css/styles.css",
-  "editor.worker.js": "editor.worker.js",
-  "fonts/codicon.ttf": "fonts/codicon.ttf",
   "img/Seomatic-icon.svg": "img/Seomatic-icon.svg",
   "img/no_image_set.png": "img/no_image_set.png",
   "img/missing_image.png": "img/missing_image.png",
@@ -19,7 +16,6 @@
   "seomatic.js.map": "js/seomatic.js.map",
   "seomatic-meta.js.map": "js/seomatic-meta.js.map",
   "seomatic-tokens.js.map": "js/seomatic-tokens.js.map",
-  "javascript-editor.js.map": "js/javascript-editor.js.map",
   "runtime.js.map": "js/runtime.js.map",
   "vendors.js.map": "js/vendors.js.map"
 }
