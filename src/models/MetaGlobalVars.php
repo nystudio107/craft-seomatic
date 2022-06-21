@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\InheritableSettingsModel;
 
 /**
- * @inheritdoc
+ * Global variables object, containing the values used to derive meta tags
+ *
  * @method void setLanguage(string $language)
  *
  * @author    nystudio107

@@ -40,6 +40,9 @@ use Throwable;
 use function in_array;
 
 /**
+ * Meta bundle functions for SEOmatic
+ * An instance of the service is available via [[`Seomatic::$plugin->metaBundles`|`seomatic.bundles`]]
+ *
  * @author    nystudio107Meta bundle failed validation
  * @package   Seomatic
  * @since     3.0.0

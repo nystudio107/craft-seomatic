@@ -50,6 +50,9 @@ use function is_array;
 use function is_object;
 
 /**
+ * Meta container functions for SEOmatic
+ * An instance of the service is available via [[`Seomatic::$plugin->metaContainers`|`seomatic.containers`]]
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
