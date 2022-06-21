@@ -79,6 +79,7 @@ use nystudio107\seomatic\services\Tag as TagService;
 use nystudio107\seomatic\services\Title as TitleService;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
+use nystudio107\twigfield\autocompletes\EnvironmentVariableAutocomplete;
 use nystudio107\twigfield\events\RegisterTwigfieldAutocompletesEvent;
 use nystudio107\twigfield\events\RegisterTwigValidatorVariablesEvent;
 use nystudio107\twigfield\services\AutocompleteService;
@@ -128,6 +129,7 @@ class Seomatic extends Plugin
         'ProductInterface',
     ];
 
+    const SEOMATIC_EXPRESSION_FIELD_TYPE = 'SeomaticExpressionField';
     const SEOMATIC_TRACKING_FIELD_TYPE = 'SeomaticTrackingField';
 
     // Static Properties
@@ -859,6 +861,9 @@ class Seomatic extends Plugin
         // Handler: AutocompleteService::EVENT_REGISTER_TWIGFIELD_AUTOCOMPLETES
         Event::on(AutocompleteService::class, AutocompleteService::EVENT_REGISTER_TWIGFIELD_AUTOCOMPLETES,
             function (RegisterTwigfieldAutocompletesEvent $event) {
+                if ($event->fieldType === self::SEOMATIC_EXPRESSION_FIELD_TYPE) {
+                    $event->types[] = EnvironmentVariableAutocomplete::class;
+                }
                 if ($event->fieldType === self::SEOMATIC_TRACKING_FIELD_TYPE) {
                     $event->types[] = TrackingVarsAutocomplete::class;
                 }
