@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\InheritableSettingsModel;
 
 /**
- * @inheritdoc
+ * Global variables object, containing the values used to derive meta tags
+ *
  * @method void setLanguage(string $language)
  *
  * @author    nystudio107
@@ -260,26 +261,26 @@ class MetaGlobalVars extends InheritableSettingsModel
             ],
             [
                 'twitterCard', 'in', 'range' => [
-                    'summary',
-                    'summary_large_image',
-                    'app',
-                    'player',
-                ],
+                'summary',
+                'summary_large_image',
+                'app',
+                'player',
+            ],
             ],
             [
                 'robots', 'in', 'range' => [
-                    'all',
-                    'index',
-                    'noindex',
-                    'follow',
-                    'nofollow',
-                    'none',
-                    'noodp',
-                    'noarchive',
-                    'nosnippet',
-                    'noimageindex',
-                    'nocache',
-                ],
+                'all',
+                'index',
+                'noindex',
+                'follow',
+                'nofollow',
+                'none',
+                'noodp',
+                'noarchive',
+                'nosnippet',
+                'noimageindex',
+                'nocache',
+            ],
             ],
         ];
     }

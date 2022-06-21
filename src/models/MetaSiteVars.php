@@ -11,18 +11,16 @@
 
 namespace nystudio107\seomatic\models;
 
-use craft\helpers\DateTimeHelper;
-use nystudio107\seomatic\base\VarsModel;
-use nystudio107\seomatic\helpers\Json as JsonHelper;
-
 use Craft;
+use craft\helpers\DateTimeHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
-
+use nystudio107\seomatic\base\VarsModel;
+use nystudio107\seomatic\helpers\Json as JsonHelper;
 use yii\web\ServerErrorHttpException;
 
 /**
- * @inheritdoc
+ * Site variables object, containing values that determine side-wide settings
  *
  * @author    nystudio107
  * @package   Seomatic

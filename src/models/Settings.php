@@ -19,6 +19,8 @@ use nystudio107\seomatic\Seomatic;
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
+ * Plugin settings object, containing values for configuring the plugin
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
