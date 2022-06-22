@@ -9,19 +9,6 @@
 
 namespace nystudio107\seomatic\fields;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-use nystudio107\seomatic\helpers\Migration as MigrationHelper;
-use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
-use nystudio107\seomatic\helpers\Schema as SchemaHelper;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\seoelements\SeoEntry;
-use nystudio107\seomatic\services\MetaContainers;
-
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
@@ -30,7 +17,17 @@ use craft\base\PreviewableFieldInterface;
 use craft\elements\Asset;
 use craft\helpers\Json;
 use craft\helpers\StringHelper;
-
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\helpers\Migration as MigrationHelper;
+use nystudio107\seomatic\helpers\PullField as PullFieldHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\seoelements\SeoEntry;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\MetaContainers;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 use yii\db\Schema;
@@ -286,7 +283,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 'vendors.js',
                 'commons.js',
                 'seomatic.js',
-                'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
         } catch (InvalidConfigException $e) {
@@ -329,7 +325,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 'vendors.js',
                 'commons.js',
                 'seomatic.js',
-                'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
         } catch (InvalidConfigException $e) {
@@ -395,7 +390,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         if ($element !== null && $element->uri !== null) {
             $siteId = $element->siteId;
             $uri = $element->uri;
-            $cacheKey = self::CACHE_KEY.$uri.$siteId.$this->elementDisplayPreviewType;
+            $cacheKey = self::CACHE_KEY . $uri . $siteId . $this->elementDisplayPreviewType;
             $metaBundleSourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundleSourceType);
             $metaBundleSourceType = SeoEntry::getMetaBundleType();
@@ -406,14 +401,14 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $dependency = new TagDependency([
                 'tags' => [
                     MetaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
-                    MetaContainers::METACONTAINER_CACHE_TAG.$metaBundleSourceId.$metaBundleSourceType.$siteId,
-                    MetaContainers::METACONTAINER_CACHE_TAG.$uri.$siteId,
+                    MetaContainers::METACONTAINER_CACHE_TAG . $metaBundleSourceId . $metaBundleSourceType . $siteId,
+                    MetaContainers::METACONTAINER_CACHE_TAG . $uri . $siteId,
                 ],
             ]);
             $cache = Craft::$app->getCache();
             $cacheDuration = null;
             $html = $cache->getOrSet(
-                self::CACHE_KEY.$cacheKey,
+                self::CACHE_KEY . $cacheKey,
                 function () use ($uri, $siteId, $element) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
                     $variables = [
@@ -446,16 +441,17 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
     /**
      * @param Element $element
-     * @param string  $groupName
-     * @param array   $variables
+     * @param string $groupName
+     * @param array $variables
      */
     protected function setContentFieldSourceVariables(
         Element $element,
-        string $groupName,
-        array &$variables
-    ) {
+        string  $groupName,
+        array   &$variables
+    )
+    {
         $variables['textFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => $groupName.' Fields'], 'title' => 'Title'],
+            ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromElement(
                 $element,
                 FieldHelper::TEXT_FIELD_CLASS_KEY,
@@ -463,7 +459,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             )
         );
         $variables['assetFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => $groupName.' Fields']],
+            ['entryGroup' => ['optgroup' => $groupName . ' Fields']],
             FieldHelper::fieldsOfTypeFromElement(
                 $element,
                 FieldHelper::ASSET_FIELD_CLASS_KEY,

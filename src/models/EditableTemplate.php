@@ -11,11 +11,10 @@
 
 namespace nystudio107\seomatic\models;
 
+use Craft;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\validators\TwigExpressionValidator;
-
-use Craft;
+use nystudio107\twigfield\validators\TwigTemplateValidator;
 
 /**
  * @author    nystudio107
@@ -87,7 +86,7 @@ class EditableTemplate extends FrontendTemplate
         } else {
             // Next try from our plugin directory first
             $path = Craft::getAlias('@nystudio107/seomatic/templates/')
-                .$this->template;
+                . $this->template;
             if (file_exists($path)) {
                 $this->templateString = @file_get_contents($path);
             }
@@ -103,7 +102,7 @@ class EditableTemplate extends FrontendTemplate
         $rules = array_merge($rules, [
             [['templateString'], 'required'],
             [['templateString'], 'string'],
-            [['templateString'], TwigExpressionValidator::class],
+            [['templateString'], TwigTemplateValidator::class],
         ]);
 
         return $rules;

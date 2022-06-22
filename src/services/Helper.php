@@ -30,6 +30,9 @@ use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
 /**
+ * Helper functions for SEOmatic
+ * An instance of the service is available via [[`Seomatic::$plugin->helper`|`seomatic.helper`]]
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
@@ -40,11 +43,11 @@ class Helper extends Component
     // =========================================================================
 
     const TWITTER_TRANSFORM_MAP = [
-            'summary' => 'twitter-summary',
-            'summary_large_image' => 'twitter-large',
-            'app' => 'twitter-large',
-            'player' => 'twitter-large',
-        ];
+        'summary' => 'twitter-summary',
+        'summary_large_image' => 'twitter-large',
+        'app' => 'twitter-large',
+        'player' => 'twitter-large',
+    ];
 
     // Public Methods
     // =========================================================================
@@ -89,7 +92,7 @@ class Helper extends Component
 
         $metaSiteVars = Seomatic::$plugin->metaContainers->metaSiteVars;
         if ($metaSiteVars && !empty($metaSiteVars->siteLinksQueryInput)) {
-            $result = 'required name='.$metaSiteVars->siteLinksQueryInput;
+            $result = 'required name=' . $metaSiteVars->siteLinksQueryInput;
         }
 
         return $result;
@@ -118,7 +121,8 @@ class Helper extends Component
      * @param string $handle
      * @return array|null
      */
-    public static function sameAsByHandle(string $handle) {
+    public static function sameAsByHandle(string $handle)
+    {
         $result = null;
 
         $sameAs = Seomatic::$plugin->metaContainers->metaSiteVars->sameAsLinks;
@@ -184,9 +188,9 @@ class Helper extends Component
      * truncating occurs, the string is further truncated so that the substring
      * may be appended without exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -201,9 +205,9 @@ class Helper extends Component
      * string is further truncated so that the substring may be appended without
      * exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -220,7 +224,7 @@ class Helper extends Component
      * `hreflangLanguage`, and `url` as keys.
      *
      * @param string|null $uri
-     * @param int|null    $siteId
+     * @param int|null $siteId
      *
      * @return array
      */
@@ -236,7 +240,7 @@ class Helper extends Component
      * @param        $url
      * @param string $robots
      * @param string $canonical
-     * @param bool   $inline
+     * @param bool $inline
      *
      * @return \Twig\Markup
      * @throws \yii\base\Exception
@@ -252,15 +256,15 @@ class Helper extends Component
         $inlineStr = $inline === true ? '1' : '0';
         // Compose the base64 encoded URL
         $seoFileLink = 'seomatic/seo-file-link/'
-            .base64_encode($url)
-            .'/'
-            .base64_encode($robots)
-            .'/'
-            .base64_encode($canonical)
-            .'/'
-            .$inlineStr
-            .'/'
-            .$fileName;
+            . base64_encode($url)
+            . '/'
+            . base64_encode($robots)
+            . '/'
+            . base64_encode($canonical)
+            . '/'
+            . $inlineStr
+            . '/'
+            . $fileName;
 
         return Template::raw(UrlHelper::siteUrl($seoFileLink));
     }
@@ -269,7 +273,7 @@ class Helper extends Component
      * Load the appropriate meta containers for the given $uri and optional
      * $siteId
      *
-     * @param string   $uri
+     * @param string $uri
      * @param int|null $siteId
      */
     public static function loadMetadataForUri(string $uri = '', int $siteId = null)
@@ -302,8 +306,8 @@ class Helper extends Component
     /**
      * Return a sitemap for each site in the same site group
      *
-     * @deprecated use sitemapIndex() instead
      * @return string
+     * @deprecated use sitemapIndex() instead
      */
     public static function siteGroupSitemaps(): string
     {
@@ -311,8 +315,8 @@ class Helper extends Component
     }
 
     /**
-     * @param string   $sourceType
-     * @param string   $sourceHandle
+     * @param string $sourceType
+     * @param string $sourceHandle
      * @param int|null $siteId
      *
      * @return string
@@ -352,7 +356,7 @@ class Helper extends Component
      * together.
      *
      * @param MatrixBlockQuery $matrixQuery
-     * @param string           $fieldHandle
+     * @param string $fieldHandle
      *
      * @return string
      */
@@ -366,8 +370,8 @@ class Helper extends Component
      * delimited string
      *
      * @param string $text
-     * @param int    $limit
-     * @param bool   $useStopWords
+     * @param int $limit
+     * @param bool $useStopWords
      *
      * @return string
      */
@@ -381,7 +385,7 @@ class Helper extends Component
      * text
      *
      * @param string $text
-     * @param bool   $useStopWords
+     * @param bool $useStopWords
      *
      * @return string
      */
@@ -430,10 +434,10 @@ class Helper extends Component
      * Transform the $asset for social media sites in $transformName and
      * optional $siteId
      *
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string URL to the transformed image
      */
@@ -446,10 +450,10 @@ class Helper extends Component
      * Get the width of the transformed social image for $transformName and
      * optional $siteId
      *
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string URL to the transformed image
      */
@@ -458,7 +462,8 @@ class Helper extends Component
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId, $transformMode);
     }
 
@@ -466,10 +471,10 @@ class Helper extends Component
      * Get the height of the transformed social image for $transformName and
      * optional $siteId
      *
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string URL to the transformed image
      */
@@ -478,7 +483,8 @@ class Helper extends Component
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId, $transformMode);
     }
 

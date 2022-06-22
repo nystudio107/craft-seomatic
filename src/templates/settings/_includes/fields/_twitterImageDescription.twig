@@ -10,12 +10,14 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro twitterImageDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro twitterImageDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
         </div>
 
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
+
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
@@ -32,7 +34,8 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label for="metaBundleSettings-twitterImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-twitterImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "twitterImageDescriptionField" ~ suffix,
                         name: "twitterImageDescriptionField",
@@ -46,16 +49,26 @@
 
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textAreaField({
-                    id: "twitterImageDescription" ~ suffix,
-                    name: "twitterImageDescription",
-                    value: metaGlobalVars.twitterImageDescription,
-                    class: "nicetext",
-                    maxlength: 420,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("twitterImageDescription"),
-                }) }}
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "twitterImageDescription" ~ suffix,
+                        name: "twitterImageDescription",
+                        value: metaGlobalVars.twitterImageDescription,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("twitterImageDescription"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.textAreaField({
+                        id: "twitterImageDescription" ~ suffix,
+                        name: "twitterImageDescription",
+                        value: metaGlobalVars.twitterImageDescription,
+                        class: "nicetext",
+                        maxlength: 420,
+                        showCharsLeft: true,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("twitterImageDescription"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
     {% endmacro %}
@@ -72,11 +85,11 @@
     {% set textOptions = { sameAsSeo: "Same As SEO Image Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {{ _self.twitterImageDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.twitterImageDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.twitterImageDescriptionField(textOptions, textFieldSources,  metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.twitterImageDescriptionField(textOptions, textFieldSources,  metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
 {% endembed %}
