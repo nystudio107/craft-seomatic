@@ -3,7 +3,6 @@
   "content-seo.js": "js/content-seo.js",
   "seomatic.js": "js/seomatic.js",
   "seomatic-meta.js": "js/seomatic-meta.js",
-  "seomatic-tokens.js": "js/seomatic-tokens.js",
   "runtime.js": "js/runtime.js",
   "vendors.css": "css/vendors.css",
   "vendors.js": "js/vendors.js",
@@ -15,7 +14,6 @@
   "content-seo.js.map": "js/content-seo.js.map",
   "seomatic.js.map": "js/seomatic.js.map",
   "seomatic-meta.js.map": "js/seomatic-meta.js.map",
-  "seomatic-tokens.js.map": "js/seomatic-tokens.js.map",
   "runtime.js.map": "js/runtime.js.map",
   "vendors.js.map": "js/vendors.js.map"
 }
