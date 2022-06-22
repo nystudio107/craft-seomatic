@@ -290,7 +290,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 'vendors.js',
                 'commons.js',
                 'seomatic.js',
-                'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
         } catch (InvalidConfigException $e) {
@@ -333,7 +332,6 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 'vendors.js',
                 'commons.js',
                 'seomatic.js',
-                'seomatic-tokens.js',
                 'seomatic-meta.js',
             ]);
         } catch (InvalidConfigException $e) {
