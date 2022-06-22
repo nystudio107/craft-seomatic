@@ -211,11 +211,11 @@ class MetaGlobalVars extends InheritableSettingsModel
         if (!empty($this->canonicalUrl)) {
             if (is_string($this->canonicalUrl)) {
                 if (strpos($this->canonicalUrl, 'craft.app.request.pathInfo') !== false) {
-                    $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
+                    $this->canonicalUrl = '{{ seomatic.helper.safeCanonicalUrl() }}';
                 }
             } else {
                 // Ensure that `canonicalUrl` is always a string
-                $this->canonicalUrl = '{seomatic.helper.safeCanonicalUrl()}';
+                $this->canonicalUrl = '{{ seomatic.helper.safeCanonicalUrl() }}';
             }
         }
     }
