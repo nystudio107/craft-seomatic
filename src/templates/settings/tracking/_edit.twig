@@ -4,6 +4,7 @@
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
+{% import "twigfield/twigfield" as twigfield %}
 
 {% block header %}
     {{ block('pageTitle') }}
@@ -25,7 +26,6 @@
 {% block content %}
 
     {% include "seomatic/settings/_includes/environment-warning.twig" %}
-    {% include "seomatic/settings/_includes/monaco-editor-css.twig" with {baseAssetsUrl: baseAssetsUrl} only %}
 
     <input type="hidden" name="action" value="seomatic/settings/save-tracking">
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
@@ -38,51 +38,52 @@
                 <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
                 {% namespace "scripts[#{scriptHandle}]" %}
                     <div class="field seomatic-script-lightswitch">
-                    {{ forms.lightswitchField({
-                        label: "#{scriptData.name} Enabled"|t("seomatic"),
-                        instructions: "#{scriptData.description}"|t("seomatic"),
-                        id: "include",
-                        name: "include",
-                        on: scriptData.include,
-                        warning: false,
-                        errors: scriptData.getErrors("include"),
-                    }) }}
+                        {{ forms.lightswitchField({
+                            label: "#{scriptData.name} Enabled"|t("seomatic"),
+                            instructions: "#{scriptData.description}"|t("seomatic"),
+                            id: "include",
+                            name: "include",
+                            on: scriptData.include,
+                            warning: false,
+                            errors: scriptData.getErrors("include"),
+                        }) }}
                     </div>
-                    <div class="seomatic-script-container" {% if not scriptData.include %}style="display: none;"{% endif %}>
+                    <div class="seomatic-script-container"
+                         {% if not scriptData.include %}style="display: none;"{% endif %}>
                         {% for varHandle,varData in scriptData.vars %}
                             {% switch varData.type %}
-                                {% case "bool" %}
-                                    {{ forms.lightswitchField({
+                            {% case "bool" %}
+                                {{ forms.lightswitchField({
+                                    label: "#{varData.title}"|t("seomatic"),
+                                    instructions: "#{varData.instructions}"|t("seomatic"),
+                                    id: "vars-#{varHandle}",
+                                    name: "vars[#{varHandle}]",
+                                    on: varData.value,
+                                    warning: false,
+                                }) }}
+
+                            {% case "string" %}
+                                {% if seomatic.helper.craft31 %}
+                                    {{ forms.autosuggestField({
+                                        label: "#{varData.title}"|t("seomatic"),
+                                        instructions: "#{varData.instructions}"|t("seomatic"),
+                                        suggestEnvVars: true,
+                                        id: "vars-#{varHandle}",
+                                        name: "vars[#{varHandle}]",
+                                        value: varData.value ?? "",
+                                        warning: false,
+                                    }) }}
+                                {% else %}
+                                    {{ forms.textField({
                                         label: "#{varData.title}"|t("seomatic"),
                                         instructions: "#{varData.instructions}"|t("seomatic"),
                                         id: "vars-#{varHandle}",
                                         name: "vars[#{varHandle}]",
-                                        on: varData.value,
+                                        value: varData.value ?? "",
                                         warning: false,
                                     }) }}
-
-                                {% case "string" %}
-                                    {% if seomatic.helper.craft31 %}
-                                        {{ forms.autosuggestField({
-                                            label: "#{varData.title}"|t("seomatic"),
-                                            instructions: "#{varData.instructions}"|t("seomatic"),
-                                            suggestEnvVars: true,
-                                            id: "vars-#{varHandle}",
-                                            name: "vars[#{varHandle}]",
-                                            value: varData.value ?? "",
-                                            warning: false,
-                                        }) }}
-                                    {% else %}
-                                        {{ forms.textField({
-                                            label: "#{varData.title}"|t("seomatic"),
-                                            instructions: "#{varData.instructions}"|t("seomatic"),
-                                            id: "vars-#{varHandle}",
-                                            name: "vars[#{varHandle}]",
-                                            value: varData.value ?? "",
-                                            warning: false,
-                                        }) }}
-                                    {% endif %}
-                                {% default %}
+                                {% endif %}
+                            {% default %}
 
                             {% endswitch %}
                         {% endfor %}
@@ -116,7 +117,7 @@
                                 errors: scriptData.getErrors("tagAttrs"),
                             }) }}
 
-                            {{ forms.textAreaField({
+                            {{ twigfield.textAreaField({
                                 label: "Script Template"|t("seomatic"),
                                 instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
                                 id: "templateString",
@@ -125,10 +126,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("templateString"),
-                            }) }}
-                            {% js %}
-                                makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "{{ scriptData.name }}");
-                            {% endjs %}
+                            }, "SeomaticTrackingField", "monaco-editor-background-frame") }}
                             {{ forms.selectField({
                                 label: "Script Render Location"|t("seomatic"),
                                 instructions: "Determines where in the HTML document the script renders."|t("seomatic"),
@@ -145,7 +143,7 @@
                         {% endif %}
 
                         {% if scriptData.bodyTemplatePath is defined and scriptData.bodyTemplatePath | length %}
-                            {{ forms.textAreaField({
+                            {{ twigfield.textAreaField({
                                 label: "Body Script Template"|t("seomatic"),
                                 instructions: "The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
                                 id: "bodyTemplateString",
@@ -154,10 +152,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("bodyTemplateString"),
-                            }) }}
-                            {% js %}
-                                makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}");
-                            {% endjs %}
+                            }, "SeomaticTrackingField", "monaco-editor-background-frame") }}
 
                             {{ forms.selectField({
                                 label: "Body Script Render Location"|t("seomatic"),

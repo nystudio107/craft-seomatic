@@ -1,37 +1,34 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
+{% import "twigfield/twigfield" as twigfield %}
 
 <fieldset>
-<div class="flex">
-    <div class="flex-grow"></div>
-    <a href="{{ seomatic.helper.siteUrl("/security.txt") }}" class="btn livepreviewbtn" rel="noopener" target="_blank">{{ 'View security.txt'|t("seomatic") }}</a>
-</div>
-
-    {% include "seomatic/settings/_includes/monaco-editor-css.twig" with {baseAssetsUrl: baseAssetsUrl} only %}
+    <div class="flex">
+        <div class="flex-grow"></div>
+        <a href="{{ seomatic.helper.siteUrl("/security.txt") }}" class="btn livepreviewbtn" rel="noopener"
+           target="_blank">{{ 'View security.txt'|t("seomatic") }}</a>
+    </div>
 
     {% namespace "securityTemplate" %}
-    {{ forms.lightswitchField({
-        label: "Security.txt Enabled"|t("seomatic"),
-        instructions: "Whether the `security.txt` template should be rendered"|t("seomatic"),
-        id: "include",
-        name: "include",
-        on: securityTemplate.include,
-        warning: false,
-        errors: securityTemplate.getErrors("include"),
-    }) }}
+        {{ forms.lightswitchField({
+            label: "Security.txt Enabled"|t("seomatic"),
+            instructions: "Whether the `security.txt` template should be rendered"|t("seomatic"),
+            id: "include",
+            name: "include",
+            on: securityTemplate.include,
+            warning: false,
+            errors: securityTemplate.getErrors("include"),
+        }) }}
 
-    {{ forms.textAreaField({
-        label: "Security.txt Template"|t("seomatic"),
-        instructions: "[security.txt](https://securitytxt.org/) defines a standard to help organizations define the process for security researchers to disclose security vulnerabilities securely"|t("seomatic") |raw,
-        id: "templateString",
-        name: "templateString",
-        value: securityTemplate.templateString,
-        class: "seomatic-javascript-editor selectize-text hidden",
-        warning: false,
-        errors: securityTemplate.getErrors("templateString"),
-    }) }}
-    {% js %}
-        makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "");
-    {% endjs %}
-{% endnamespace %}
+        {{ twigfield.textAreaField({
+            label: "Security.txt Template"|t("seomatic"),
+            instructions: "[security.txt](https://securitytxt.org/) defines a standard to help organizations define the process for security researchers to disclose security vulnerabilities securely"|t("seomatic") |raw,
+            id: "templateString",
+            name: "templateString",
+            value: securityTemplate.templateString,
+            class: "seomatic-javascript-editor selectize-text hidden",
+            warning: false,
+            errors: securityTemplate.getErrors("templateString"),
+        }, "Twigfield", "monaco-editor-background-frame") }}
+    {% endnamespace %}
 </fieldset>

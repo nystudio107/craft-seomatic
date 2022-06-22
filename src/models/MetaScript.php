@@ -11,13 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\validators\TwigExpressionValidator;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
+use nystudio107\twigfield\validators\TwigTemplateValidator;
 use yii\web\View;
 
 /**
@@ -133,13 +131,13 @@ class MetaScript extends NonceItem
         $result = '';
         // Try it from our plugin directory first
         $path = Craft::getAlias('@nystudio107/seomatic/templates/')
-            .$templatePath;
+            . $templatePath;
         if (file_exists($path)) {
             $result = @file_get_contents($path);
         } else {
             // Next try it from the Craft template directory
             $path = Craft::getAlias('@templates/')
-                .$templatePath;
+                . $templatePath;
             if (file_exists($path)) {
                 $result = @file_get_contents($path);
             }
@@ -185,7 +183,7 @@ class MetaScript extends NonceItem
                     'templateString',
                     'bodyTemplateString',
                 ],
-                TwigExpressionValidator::class,
+                TwigTemplateValidator::class,
             ],
             [['vars'], 'safe'],
             [['dataLayer'], 'safe'],
@@ -267,7 +265,7 @@ class MetaScript extends NonceItem
         }
 
         if (empty($html) && !empty($this->templatePath)) {
-            $html = '/* '.$this->name.Craft::t('seomatic', ' script did not render').' */'.PHP_EOL;
+            $html = '/* ' . $this->name . Craft::t('seomatic', ' script did not render') . ' */' . PHP_EOL;
         }
 
         return $html;

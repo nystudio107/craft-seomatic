@@ -9,7 +9,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\services\JsonLd as JsonLdService;
 
@@ -20,47 +19,47 @@ use nystudio107\seomatic\services\JsonLd as JsonLdService;
  */
 
 return [
-    MetaJsonLdContainer::CONTAINER_TYPE.JsonLdService::GENERAL_HANDLE => [
-        'name'         => 'General',
-        'description'  => 'JsonLd Tags',
-        'handle'       => JsonLdService::GENERAL_HANDLE,
-        'class'        => (string)MetaJsonLdContainer::class,
-        'include'      => true,
+    MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE => [
+        'name' => 'General',
+        'description' => 'JsonLd Tags',
+        'handle' => JsonLdService::GENERAL_HANDLE,
+        'class' => (string)MetaJsonLdContainer::class,
+        'include' => true,
         'dependencies' => [
         ],
-        'data'         => [
+        'data' => [
             'mainEntityOfPage' => [
-                'type'             => '{seomatic.meta.mainEntityOfPage}',
-                'name'             => '{seomatic.meta.seoTitle}',
-                'headline'         => '{seomatic.meta.seoTitle}',
-                'description'      => '{seomatic.meta.seoDescription}',
-                'url'              => '{seomatic.meta.canonicalUrl}',
-                'mainEntityOfPage' => '{seomatic.meta.canonicalUrl}',
-                'dateCreated'      => '{entry.dateCreated |atom}',
-                'dateModified'     => '{entry.dateUpdated |atom}',
-                'datePublished'    => '{entry.postDate |atom}',
-                'copyrightYear'    => '{entry.postDate | date("Y")}',
-                'inLanguage'       => '{seomatic.meta.language}',
-                'copyrightHolder'  => [
-                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
+                'type' => '{{ seomatic.meta.mainEntityOfPage }}',
+                'name' => '{{ seomatic.meta.seoTitle }}',
+                'headline' => '{{ seomatic.meta.seoTitle }}',
+                'description' => '{{ seomatic.meta.seoDescription }}',
+                'url' => '{{ seomatic.meta.canonicalUrl }}',
+                'mainEntityOfPage' => '{{ seomatic.meta.canonicalUrl }}',
+                'dateCreated' => '{{ entry.dateCreated |atom }}',
+                'dateModified' => '{{ entry.dateUpdated |atom }}',
+                'datePublished' => '{{ entry.postDate |atom }}',
+                'copyrightYear' => '{{ entry.postDate | date("Y") }}',
+                'inLanguage' => '{{ seomatic.meta.language }}',
+                'copyrightHolder' => [
+                    'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                 ],
-                'author'           => [
-                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#identity',
+                'author' => [
+                    'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                 ],
-                'creator'          => [
-                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
+                'creator' => [
+                    'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#creator',
                 ],
-                'publisher'        => [
-                    'id' => '{parseEnv(seomatic.site.identity.genericUrl)}#creator',
+                'publisher' => [
+                    'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#creator',
                 ],
-                'image'            => [
+                'image' => [
                     'type' => 'ImageObject',
-                    'url'  => '{seomatic.meta.seoImage}',
+                    'url' => '{{ seomatic.meta.seoImage }}',
                 ],
-                'potentialAction'  => [
-                    'type'        => 'SearchAction',
-                    'target'      => '{seomatic.site.siteLinksSearchTarget}',
-                    'query-input' => '{seomatic.helper.siteLinksQueryInput()}',
+                'potentialAction' => [
+                    'type' => 'SearchAction',
+                    'target' => '{{ seomatic.site.siteLinksSearchTarget }}',
+                    'query-input' => '{{ seomatic.helper.siteLinksQueryInput() }}',
                 ],
             ],
         ],
