@@ -31,6 +31,9 @@ use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
 /**
+ * Helper functions for SEOmatic
+ * An instance of the service is available via [[`Seomatic::$plugin->helper`|`seomatic.helper`]]
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0

@@ -10,11 +10,14 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro ogTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro ogTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "The Facebook OpenGraph Title is displayed in bold at the top of your Facebook card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
         </div>
+
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
+
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
@@ -31,7 +34,8 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label for="metaBundleSettings-ogTitleField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-ogTitleField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "ogTitleField" ~ suffix,
                         name: "ogTitleField",
@@ -45,16 +49,26 @@
 
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.text({
-                    id: "ogTitle" ~ suffix,
-                    name: "ogTitle",
-                    value: metaGlobalVars.ogTitle,
-                    class: "nicetext",
-                    maxlength: seomatic.config.maxTitleLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("ogTitle"),
-                }) }}
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "ogTitle" ~ suffix,
+                        name: "ogTitle",
+                        value: metaGlobalVars.ogTitle,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("ogTitle"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.text({
+                        id: "ogTitle" ~ suffix,
+                        name: "ogTitle",
+                        value: metaGlobalVars.ogTitle,
+                        class: "nicetext",
+                        maxlength: seomatic.config.maxTitleLength,
+                        showCharsLeft: true,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("ogTitle"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
     {% endmacro %}
@@ -70,10 +84,10 @@
     {% set textOptions = { sameAsSeo: "Same as SEO Title"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.ogTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 {% endembed %}

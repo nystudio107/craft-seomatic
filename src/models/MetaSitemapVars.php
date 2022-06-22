@@ -15,7 +15,7 @@ use craft\validators\ArrayValidator;
 use nystudio107\seomatic\base\InheritableSettingsModel;
 
 /**
- * @inheritdoc
+ * Sitemap variables object, containing values for the sitemap settings
  *
  * @author    nystudio107
  * @package   Seomatic

@@ -23,7 +23,7 @@ use function is_array;
 use function is_string;
 
 /**
- * @inheritdoc
+ * Site variables object, containing values that determine side-wide settings
  *
  * @author    nystudio107
  * @package   Seomatic

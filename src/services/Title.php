@@ -11,14 +11,16 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\Seomatic;
+use craft\helpers\Template as TemplateHelper;
 use nystudio107\seomatic\base\MetaService;
 use nystudio107\seomatic\models\MetaTitle;
 use nystudio107\seomatic\models\MetaTitleContainer;
-
-use craft\helpers\Template as TemplateHelper;
+use nystudio107\seomatic\Seomatic;
 
 /**
+ * Title service for creating and accessing MetaTitle objects in their meta container
+ * An instance of the service is available via [[`Seomatic::$plugin->title`|`seomatic.title`]]
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
@@ -63,7 +65,7 @@ class Title extends MetaService
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaTitleContainer::CONTAINER_TYPE.$handle;
+        $key = MetaTitleContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
 
         /** @var MetaTitle $metaItem */
@@ -87,7 +89,7 @@ class Title extends MetaService
      */
     public function container(string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaTitleContainer::CONTAINER_TYPE.$handle;
+        $key = MetaTitleContainer::CONTAINER_TYPE . $handle;
 
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }

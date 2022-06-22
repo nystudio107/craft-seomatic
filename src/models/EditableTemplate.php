@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models;
 use Craft;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\seomatic\validators\TwigExpressionValidator;
+use nystudio107\twigfield\validators\TwigTemplateValidator;
 
 /**
  * @author    nystudio107
@@ -99,7 +99,7 @@ class EditableTemplate extends FrontendTemplate
         $rules = array_merge($rules, [
             [['templateString'], 'required'],
             [['templateString'], 'string'],
-            [['templateString'], TwigExpressionValidator::class],
+            [['templateString'], TwigTemplateValidator::class],
         ]);
 
         return $rules;

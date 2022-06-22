@@ -4,6 +4,7 @@
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
+{% import "twigfield/twigfield" as twigfield %}
 
 {% block header %}
     {{ block('pageTitle') }}
@@ -25,7 +26,6 @@
 {% block content %}
 
     {% include "seomatic/settings/_includes/environment-warning.twig" %}
-    {% include "seomatic/settings/_includes/monaco-editor-css.twig" with {baseAssetsUrl: baseAssetsUrl} only %}
 
     <input type="hidden" name="action" value="seomatic/settings/save-tracking">
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
@@ -109,7 +109,7 @@
                                 errors: scriptData.getErrors("tagAttrs"),
                             }) }}
 
-                            {{ forms.textAreaField({
+                            {{ twigfield.textAreaField({
                                 label: "Script Template"|t("seomatic"),
                                 instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
                                 id: "templateString",
@@ -118,10 +118,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("templateString"),
-                            }) }}
-                            {% js %}
-                            makeMonacoEditor("{{ "templateString"|namespaceInputId }}", "{{ scriptData.name }}");
-                            {% endjs %}
+                            }, "SeomaticTrackingField", "monaco-editor-background-frame") }}
                             {{ forms.selectField({
                                 label: "Script Render Location"|t("seomatic"),
                                 instructions: "Determines where in the HTML document the script renders."|t("seomatic"),
@@ -138,7 +135,7 @@
                         {% endif %}
 
                         {% if scriptData.bodyTemplatePath is defined and scriptData.bodyTemplatePath | length %}
-                            {{ forms.textAreaField({
+                            {{ twigfield.textAreaField({
                                 label: "Body Script Template"|t("seomatic"),
                                 instructions: "The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
                                 id: "bodyTemplateString",
@@ -147,10 +144,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("bodyTemplateString"),
-                            }) }}
-                            {% js %}
-                            makeMonacoEditor("{{ "bodyTemplateString"|namespaceInputId }}");
-                            {% endjs %}
+                            }, "SeomaticTrackingField", "monaco-editor-background-frame") }}
 
                             {{ forms.selectField({
                                 label: "Body Script Render Location"|t("seomatic"),

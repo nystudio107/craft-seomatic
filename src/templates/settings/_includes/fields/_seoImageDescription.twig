@@ -10,12 +10,14 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro seoImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro seoImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
         </div>
 
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
+
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
@@ -32,7 +34,8 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label for="metaBundleSettings-seoImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-seoImageDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "seoImageDescriptionField" ~ suffix,
                         name: "seoImageDescriptionField",
@@ -46,16 +49,26 @@
 
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textArea({
-                    id: "seoImageDescription" ~ suffix,
-                    name: "seoImageDescription",
-                    value: metaGlobalVars.seoImageDescription,
-                    class: "nicetext",
-                    maxlength: seomatic.config.maxDescriptionLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("seoImageDescription"),
-                }) }}
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "seoImageDescription" ~ suffix,
+                        name: "seoImageDescription",
+                        value: metaGlobalVars.seoImageDescription,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("seoImageDescription"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.textArea({
+                        id: "seoImageDescription" ~ suffix,
+                        name: "seoImageDescription",
+                        value: metaGlobalVars.seoImageDescription,
+                        class: "nicetext",
+                        maxlength: seomatic.config.maxDescriptionLength,
+                        showCharsLeft: true,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("seoImageDescription"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
     {% endmacro %}
@@ -69,11 +82,11 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.seoImageDescriptionField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
 {% endembed %}

@@ -17,8 +17,8 @@ use craft\models\Site;
 use craft\web\Controller;
 use DateTime;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
 use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Autocomplete as AutocompleteHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
@@ -80,8 +80,6 @@ class SettingsController extends Controller
         'genericUrl' => 'Identity Entity URL',
         'genericImage' => 'Identity Entity Brand',
     ];
-
-    const AUTOCOMPLETE_CACHE_DURATION = 60;
 
     // Protected Properties
     // =========================================================================
@@ -405,6 +403,9 @@ class SettingsController extends Controller
                 if (!$securityContainer->validate()) {
                     $hasErrors = true;
                 }
+            }
+            if (!$metaBundle->metaGlobalVars->validate()) {
+                $hasErrors = true;
             }
 
             if ($hasErrors) {
@@ -913,9 +914,10 @@ class SettingsController extends Controller
                 MetaScriptContainer::CONTAINER_TYPE
             );
         }
-        // Add in the variables to the autocomplete cache
+        // Add in the variables to the autocomplete cache so they can be accessed across requests
         $subSectionSettings = $variables['scripts'][$subSection];
-        $this->addVarsToAutocompleteCache($subSectionSettings->name, $subSectionSettings->vars);
+        $cache = Craft::$app->getCache();
+        $cache->set(TrackingVarsAutocomplete::TRACKING_VARS_CACHE_KEY, $subSectionSettings->vars, TrackingVarsAutocomplete::TRACKING_VARS_CACHE_DURATION);
         // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
@@ -1293,28 +1295,5 @@ class SettingsController extends Controller
                 $settings['genericImageHeight'] = $asset->getHeight();
             }
         }
-    }
-
-    /**
-     * @param string $additionalCompletionsCacheKey
-     * @param $vars
-     * @return void
-     */
-    protected function addVarsToAutocompleteCache(string $additionalCompletionsCacheKey, $vars)
-    {
-        $additionalCompletions = [];
-        foreach ($vars as $key => $value) {
-            $additionalCompletions[$key] = [
-                '__completions' => [
-                    'detail' => $value['title'],
-                    'documentation' => $value['instructions'],
-                    'kind' => AutocompleteHelper::CompletionItemKind['Variable'],
-                    'label' => $key,
-                    'sortText' => $key,
-                ]
-            ];
-        }
-        $cache = Craft::$app->getCache();
-        $cache->set([AutocompleteHelper::class, $additionalCompletionsCacheKey], $additionalCompletions, self::AUTOCOMPLETE_CACHE_DURATION);
     }
 }
