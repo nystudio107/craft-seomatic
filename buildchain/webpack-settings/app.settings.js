@@ -15,7 +15,6 @@ module.exports = {
     'content-seo': '@/js/content-seo.js',
     'seomatic': '@/js/seomatic.js',
     'seomatic-meta': '@/js/seomatic-meta.js',
-    'seomatic-tokens': '@/js/seomatic-tokens.js',
   },
   extensions: ['.ts', '.js', '.vue', '.json'],
   name: 'seomatic',
