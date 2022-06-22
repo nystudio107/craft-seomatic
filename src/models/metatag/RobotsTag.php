@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\models\metatag;
 
+use Craft;
 use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\services\Helper as SeomaticHelper;
-
-use Craft;
 
 /**
  * @author    nystudio107
@@ -44,7 +43,7 @@ class RobotsTag extends MetaTag
     {
         // Handle a bug where 'content' could be permanently set to 'none'
         if ($this->content === 'none') {
-            $this->content = $this->environment['live']['content'] ?? '{seomatic.meta.robots}';
+            $this->content = $this->environment['live']['content'] ?? '{{ seomatic.meta.robots }}';
         }
         parent::init();
     }

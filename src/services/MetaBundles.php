@@ -288,7 +288,7 @@ class MetaBundles extends Component
             // been set that way by the environment, whereas to be changeable via the GUI, it needs to be set to {seomatic.meta.robots}
             $robotsTag = $metaBundle->metaContainers[MetaTagContainer::CONTAINER_TYPE . TagService::GENERAL_HANDLE]->data['robots'] ?? null;
             if (!empty($robotsTag)) {
-                $robotsTag->content = $robotsTag->environment['live']['content'] ?? '{seomatic.meta.robots}';
+                $robotsTag->content = $robotsTag->environment['live']['content'] ?? '{{ seomatic.meta.robots }}';
             }
 
             $metaBundleRecord->setAttributes($metaBundle->getAttributes(), false);
