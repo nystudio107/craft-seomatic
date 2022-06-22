@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireOgImageField(ogImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro entireOgImageField(ogImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
                 {{ _self.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
@@ -50,7 +50,7 @@
             {% set ogImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
@@ -59,7 +59,7 @@
             {% set ogImageElement = craft.assets.id(metaBundleSettings.ogImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.entireOgImageField(ogImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
     {# ############## OpenGraph Image Macros ############## #}
@@ -113,11 +113,13 @@
         </div>
     {% endmacro %}
 
-    {% macro ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display on Facebook posts that link to the web page."|t("seomatic") }}</p>
         </div>
+
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -169,15 +171,25 @@
         {% endnamespace %}
 
         {% namespace "metaGlobalVars" %}
-            <div class="heading seomatic-imageSourceFromUrl">
-                {{ forms.text({
-                    id: "ogImage" ~ suffix,
-                    name: "ogImage",
-                    value: metaGlobalVars.ogImage,
-                    class: "nicetext",
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("ogImage"),
-                }) }}
+            <div class="input ltr seomatic-imageSourceFromUrl">
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "ogImage" ~ suffix,
+                        name: "ogImage",
+                        value: metaGlobalVars.ogImage,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("ogImage"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.text({
+                        id: "ogImage" ~ suffix,
+                        name: "ogImage",
+                        value: metaGlobalVars.ogImage,
+                        class: "nicetext",
+                        warning: false,
+                        errors: metaBundleSettings.getErrors("ogImage"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
     {% endmacro %}
