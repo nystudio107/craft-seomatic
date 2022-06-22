@@ -11,15 +11,17 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\seomatic\Seomatic;
+use craft\helpers\ArrayHelper;
+use craft\helpers\Template as TemplateHelper;
 use nystudio107\seomatic\base\MetaService;
 use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\models\MetaLinkContainer;
-
-use craft\helpers\ArrayHelper;
-use craft\helpers\Template as TemplateHelper;
+use nystudio107\seomatic\Seomatic;
 
 /**
+ * Link service for creating and accessing MetaLink objects in their meta container
+ * An instance of the service is available via [[`Seomatic::$plugin->link`|`seomatic.link`]]
+ *
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
@@ -73,7 +75,7 @@ class Link extends MetaService
      */
     public function add($metaItem, string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaLinkContainer::CONTAINER_TYPE.$handle;
+        $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
         Seomatic::$plugin->metaContainers->addToMetaContainer($metaItem, $key);
 
         /** @var MetaLink $metaItem */
@@ -97,7 +99,7 @@ class Link extends MetaService
      */
     public function container(string $handle = self::GENERAL_HANDLE)
     {
-        $key = MetaLinkContainer::CONTAINER_TYPE.$handle;
+        $key = MetaLinkContainer::CONTAINER_TYPE . $handle;
 
         return Seomatic::$plugin->metaContainers->getMetaContainer($key);
     }

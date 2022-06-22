@@ -14,7 +14,8 @@ namespace nystudio107\seomatic\models;
 use nystudio107\seomatic\base\InheritableSettingsModel;
 
 /**
- * @inheritdoc
+ * Global variables object, containing the values used to derive meta tags
+ *
  * @method void setLanguage(string $language)
  *
  * @author    nystudio107
@@ -40,7 +41,7 @@ class MetaGlobalVars extends InheritableSettingsModel
     // Public Properties
     // =========================================================================
     /**
-     * @var string
+     * @var string The current language
      */
     public $language;
     /**
@@ -66,95 +67,96 @@ class MetaGlobalVars extends InheritableSettingsModel
      */
     public $seoKeywords;
     /**
-     * @var string
+     * @var string Fully qualified URL to the SEO image
      */
     public $seoImage;
     /**
-     * @var string
+     * @var string Width of the SEO image
      */
     public $seoImageWidth;
     /**
-     * @var string
+     * @var string Height of the SEO image
      */
     public $seoImageHeight;
     /**
-     * @var string
+     * @var string SEO image description
      */
     public $seoImageDescription;
     /**
-     * @var string
+     * @var string The search engine friendly URL that you want the search engines to treat as authoritative.
      */
     public $canonicalUrl;
     /**
-     * @var string
+     * @var string The robots meta tag lets you utilize a granular, page-specific approach to controlling how
+     * an individual page should be indexed and served to users in search results.
      */
     public $robots;
     /**
-     * @var string
+     * @var string The type of OpenGraph object representing the page
      */
     public $ogType;
     /**
-     * @var string
+     * @var string The title for the OpenGraph object, which appears when sharing it on Facebook
      */
     public $ogTitle;
     /**
-     * @var string
+     * @var string Where the site name should be positioned in the `og:title` tag
      */
     public $ogSiteNamePosition;
     /**
-     * @var string
+     * @var string The description of the OpenGraph object, which appears when sharing it on Facebook
      */
     public $ogDescription;
     /**
-     * @var string
+     * @var string Fully qualified URL to the image representing the OpenGraph object, which appears when sharing it on Facebook
      */
     public $ogImage;
     /**
-     * @var string
+     * @var string The width of the ogImage
      */
     public $ogImageWidth;
     /**
-     * @var string
+     * @var string The height of the ogImage
      */
     public $ogImageHeight;
     /**
-     * @var string
+     * @var string The description of the ogImage
      */
     public $ogImageDescription;
     /**
-     * @var string
+     * @var string The type of Twitter card to use
      */
     public $twitterCard;
     /**
-     * @var string
+     * @var string Twitter username for the content creator / author, without the preceding @
      */
     public $twitterCreator;
     /**
-     * @var string
+     * @var string The title for the Twitter card, which appears when sharing it on Twitter
      */
     public $twitterTitle;
     /**
-     * @var string
+     * @var string Where the site name should be positioned in the `twitter:title` tag
      */
     public $twitterSiteNamePosition;
     /**
-     * @var string
+     * @var string The description of the Twitter card, which appears when sharing it on Twitter
      */
     public $twitterDescription;
     /**
-     * @var string
+     * @var string Fully qualified URL to the Twitter image, which appears when sharing it on Twitter
      */
     public $twitterImage;
     /**
-     * @var string
+     * @var string The width of the Twitter image
      */
     public $twitterImageWidth;
     /**
-     * @var string
+     * @var string The height of the Twitter image
      */
     public $twitterImageHeight;
     /**
-     * @var string
+     * @var string The description of the Twitter image
      */
     public $twitterImageDescription;
 

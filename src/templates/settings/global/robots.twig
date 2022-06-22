@@ -17,9 +17,6 @@
 
 {% block foot %}
     {{ parent() }}
-    {{ seomatic.manifest.registerJsModules([
-        'javascript-editor.js',
-    ]) }}
 {% endblock %}
 
 {% block contextMenu %}
