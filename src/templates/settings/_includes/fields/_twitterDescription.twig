@@ -10,11 +10,13 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro twitterDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro twitterDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "Twitter descriptions are displayed below the Twitter Title in your Twitter Cards. Use them to provide a summary of what your page is about."|t("seomatic") }}</p>
         </div>
+
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -32,7 +34,8 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label for="metaBundleSettings-twitterDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-twitterDescriptionField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "twitterDescriptionField" ~ suffix,
                         name: "twitterDescriptionField",
@@ -46,16 +49,26 @@
 
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.textArea({
-                    id: "twitterDescription" ~ suffix,
-                    name: "twitterDescription",
-                    value: metaGlobalVars.twitterDescription,
-                    class: "nicetext",
-                    maxlength: 200,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("twitterDescription"),
-                }) }}
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "twitterDescription" ~ suffix,
+                        name: "twitterDescription",
+                        value: metaGlobalVars.twitterDescription,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("twitterDescription"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.textArea({
+                        id: "twitterDescription" ~ suffix,
+                        name: "twitterDescription",
+                        value: metaGlobalVars.twitterDescription,
+                        class: "nicetext",
+                        maxlength: 200,
+                        showCharsLeft: true,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("twitterDescription"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
 
@@ -74,11 +87,11 @@
     {% set textOptions = { sameAsSeo: "Same as SEO Description"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
-        {{ _self.twitterDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.twitterDescriptionField(textOptions, textFieldSources, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.twitterDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.twitterDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
 {% endembed %}

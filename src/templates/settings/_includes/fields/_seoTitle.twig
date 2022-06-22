@@ -10,11 +10,14 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro seoTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro seoTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
         </div>
+        
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
+
         {% namespace "metaBundleSettings" %}
             <div class="heading">
                 {{ forms.select({
@@ -31,7 +34,8 @@
         {% if textFieldSources is defined and textFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label for="metaBundleSettings-seoTitleField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-seoTitleField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "seoTitleField" ~ suffix,
                         name: "seoTitleField",
@@ -45,16 +49,26 @@
 
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
-                {{ forms.text({
-                    id: "seoTitle" ~ suffix,
-                    name: "seoTitle",
-                    value: metaGlobalVars.seoTitle,
-                    class: "nicetext",
-                    maxlength: seomaticConfig.maxTitleLength,
-                    showCharsLeft: true,
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("seoTitle"),
-                }) }}
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "seoTitle" ~ suffix,
+                        name: "seoTitle",
+                        value: metaGlobalVars.seoTitle,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("seoTitle"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.text({
+                        id: "seoTitle" ~ suffix,
+                        name: "seoTitle",
+                        value: metaGlobalVars.seoTitle,
+                        class: "nicetext",
+                        maxlength: seomaticConfig.maxTitleLength,
+                        showCharsLeft: true,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("seoTitle"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
     {% endmacro %}
@@ -68,10 +82,10 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.seoTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.seoTitleField(textOptions, textFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.seoTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.seoTitleField(textOptions, textFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 {% endembed %}

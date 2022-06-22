@@ -10,10 +10,10 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireSeoImageField(seoImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro entireSeoImageField(seoImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
+                {{ _self.seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
                 {{ _self.seoImageTransformField(field, metaBundleSettings, suffix) }}
@@ -50,7 +50,7 @@
             {% set seoImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
@@ -59,7 +59,7 @@
             {% set seoImageElement = craft.assets.id(metaBundleSettings.seoImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
 
@@ -114,11 +114,13 @@
         </div>
     {% endmacro %}
 
-    {% macro seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
         </div>
+
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -171,15 +173,25 @@
         {% endnamespace %}
 
         {% namespace "metaGlobalVars" %}
-            <div class="heading seomatic-imageSourceFromUrl">
-                {{ forms.text({
-                    id: "seoImage" ~ suffix,
-                    name: "seoImage",
-                    value: metaGlobalVars.seoImage,
-                    class: "nicetext",
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("seoImage"),
-                }) }}
+            <div class="input ltr seomatic-imageSourceFromUrl">
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "seoImage" ~ suffix,
+                        name: "seoImage",
+                        value: metaGlobalVars.seoImage,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("seoImage"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.text({
+                        id: "seoImage" ~ suffix,
+                        name: "seoImage",
+                        value: metaGlobalVars.seoImage,
+                        class: "nicetext",
+                        warning: false,
+                        errors: metaBundleSettings.getErrors("seoImage"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
     {% endmacro %}

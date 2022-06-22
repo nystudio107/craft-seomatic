@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireTwitterImageField(twitterImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro entireTwitterImageField(twitterImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
                 {{ _self.twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
@@ -50,7 +50,7 @@
             {% set twitterImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}
+        {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
@@ -59,7 +59,7 @@
             {% set twitterImageElement = craft.assets.id(metaBundleSettings.twitterImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireTwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "") }}
+        {{ _self.entireTwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
 
@@ -115,11 +115,13 @@
         </div>
     {% endmacro %}
 
-    {% macro twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) %}
+    {% macro twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as Twitter Cards on tweets that link to the web page."|t("seomatic") }}</p>
         </div>
+
         {% import "_includes/forms" as forms %}
+        {% import "twigfield/twigfield" as twigfield %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -172,15 +174,25 @@
         {% endnamespace %}
 
         {% namespace "metaGlobalVars" %}
-            <div class="heading seomatic-imageSourceFromUrl">
-                {{ forms.text({
-                    id: "twitterImage" ~ suffix,
-                    name: "twitterImage",
-                    value: metaGlobalVars.twitterImage,
-                    class: "nicetext",
-                    warning: false,
-                    errors: metaGlobalVars.getErrors("twitterImage"),
-                }) }}
+            <div class="input ltr seomatic-imageSourceFromUrl">
+                {% if pageContext != "field" %}
+                    {{ twigfield.textField({
+                        id: "twitterImage" ~ suffix,
+                        name: "twitterImage",
+                        value: metaGlobalVars.twitterImage,
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("twitterImage"),
+                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                {% else %}
+                    {{ forms.text({
+                        id: "twitterImage" ~ suffix,
+                        name: "twitterImage",
+                        value: metaGlobalVars.twitterImage,
+                        class: "nicetext",
+                        warning: false,
+                        errors: metaGlobalVars.getErrors("twitterImage"),
+                    }) }}
+                {% endif %}
             </div>
         {% endnamespace %}
     {% endmacro %}
