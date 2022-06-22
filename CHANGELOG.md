@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 4.0.3 - 2022.06.22
+### Added
+* Integrated [Twigfield](https://github.com/nystudio107/craft-twigfield) into SEOmatic, so fields that allow Twig expressions now have an editor with full autocomplete of the Craft and SEOmatic APIs
+* SEOmatic SEO Settings fields do not utilize the Twigfield editor, to keep things simple for content authors (though they still parse as Twig expressions)
+* Switched the default Twig expressions from single-bracket `{ }` to double-bracket `{{ }}` for consistency's sake in the `seomatic-config` settings (single-bracket expressions still work, however)
+
+### Changed
+* The SEO Keywords field no longer uses a tokenized input, to allow for the use of the Twigfield editor
+* Updated the docs to add **The Meta Cascade** to the **Overview** section to better explain how SEOmatic works
+
 ## 4.0.2 - 2022.06.18
 ### Changed
 * Only strip the `tokenParm` URL parameter from the canonical URL, leaving others intact if explicitly set by the developer (generally query strings should not be in canonical URLs, but there are exceptions)
