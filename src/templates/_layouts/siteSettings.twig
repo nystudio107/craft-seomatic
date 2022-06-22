@@ -7,7 +7,6 @@
 {% block foot %}
     {{ parent() }}
     {{ seomatic.manifest.registerJsModules([
-        'seomatic-tokens.js',
         'seomatic-meta.js',
     ]) }}
 {% endblock %}
@@ -60,7 +59,9 @@
                 {% if item.heading is defined %}
                     <li class="heading"><span>{{ item.heading }}</span></li>
                 {% else %}
-                    <li><a href="{{ url("seomatic/site/#{id}/#{currentSiteHandle}") }}"{% if id == selectedItem %} class="sel"{% endif %}>{{ item.title }}</a></li>
+                    <li>
+                        <a href="{{ url("seomatic/site/#{id}/#{currentSiteHandle}") }}"{% if id == selectedItem %} class="sel"{% endif %}>{{ item.title }}</a>
+                    </li>
                 {% endif %}
             {% endfor %}
         </ul>
