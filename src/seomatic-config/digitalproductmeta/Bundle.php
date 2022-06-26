@@ -19,29 +19,29 @@ use nystudio107\seomatic\seoelements\SeoDigitalProduct;
  */
 
 return [
-    'bundleVersion'              => '1.0.32',
-    'sourceBundleType'           => SeoDigitalProduct::getMetaBundleType(),
-    'sourceId'                   => null,
-    'sourceName'                 => null,
-    'sourceHandle'               => null,
-    'sourceType'                 => 'digitalproduct',
-    'typeId'                     => null,
-    'sourceTemplate'             => '',
-    'sourceSiteId'               => null,
-    'sourceAltSiteSettings'      => [
+    'bundleVersion' => '1.0.33',
+    'sourceBundleType' => SeoDigitalProduct::getMetaBundleType(),
+    'sourceId' => null,
+    'sourceName' => null,
+    'sourceHandle' => null,
+    'sourceType' => 'digitalproduct',
+    'typeId' => null,
+    'sourceTemplate' => '',
+    'sourceSiteId' => null,
+    'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated'          => new \DateTime(),
-    'metaGlobalVars'             => Config::getConfigFromFile('digitalproductmeta/GlobalVars'),
-    'metaSiteVars'               => Config::getConfigFromFile('digitalproductmeta/SiteVars'),
-    'metaSitemapVars'            => Config::getConfigFromFile('digitalproductmeta/SitemapVars'),
-    'metaBundleSettings'         => Config::getConfigFromFile('digitalproductmeta/BundleSettings'),
-    'metaContainers'             => Config::getMergedConfigFromFiles([
+    'sourceDateUpdated' => new \DateTime(),
+    'metaGlobalVars' => Config::getConfigFromFile('digitalproductmeta/GlobalVars'),
+    'metaSiteVars' => Config::getConfigFromFile('digitalproductmeta/SiteVars'),
+    'metaSitemapVars' => Config::getConfigFromFile('digitalproductmeta/SitemapVars'),
+    'metaBundleSettings' => Config::getConfigFromFile('digitalproductmeta/BundleSettings'),
+    'metaContainers' => Config::getMergedConfigFromFiles([
         'digitalproductmeta/TagContainer',
         'digitalproductmeta/LinkContainer',
         'digitalproductmeta/ScriptContainer',
         'digitalproductmeta/JsonLdContainer',
         'digitalproductmeta/TitleContainer',
     ]),
-    'redirectsContainer'         => Config::getConfigFromFile('digitalproductmeta/RedirectsContainer'),
+    'redirectsContainer' => Config::getConfigFromFile('digitalproductmeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('digitalproductmeta/FrontendTemplatesContainer'),
 ];

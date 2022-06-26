@@ -19,29 +19,29 @@ use nystudio107\seomatic\seoelements\SeoProduct;
  */
 
 return [
-    'bundleVersion'              => '1.0.33',
-    'sourceBundleType'           => SeoProduct::getMetaBundleType(),
-    'sourceId'                   => null,
-    'sourceName'                 => null,
-    'sourceHandle'               => null,
-    'sourceType'                 => 'product',
-    'typeId'                     => null,
-    'sourceTemplate'             => '',
-    'sourceSiteId'               => null,
-    'sourceAltSiteSettings'      => [
+    'bundleVersion' => '1.0.34',
+    'sourceBundleType' => SeoProduct::getMetaBundleType(),
+    'sourceId' => null,
+    'sourceName' => null,
+    'sourceHandle' => null,
+    'sourceType' => 'product',
+    'typeId' => null,
+    'sourceTemplate' => '',
+    'sourceSiteId' => null,
+    'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated'          => new \DateTime(),
-    'metaGlobalVars'             => Config::getConfigFromFile('productmeta/GlobalVars'),
-    'metaSiteVars'               => Config::getConfigFromFile('productmeta/SiteVars'),
-    'metaSitemapVars'            => Config::getConfigFromFile('productmeta/SitemapVars'),
-    'metaBundleSettings'         => Config::getConfigFromFile('productmeta/BundleSettings'),
-    'metaContainers'             => Config::getMergedConfigFromFiles([
+    'sourceDateUpdated' => new \DateTime(),
+    'metaGlobalVars' => Config::getConfigFromFile('productmeta/GlobalVars'),
+    'metaSiteVars' => Config::getConfigFromFile('productmeta/SiteVars'),
+    'metaSitemapVars' => Config::getConfigFromFile('productmeta/SitemapVars'),
+    'metaBundleSettings' => Config::getConfigFromFile('productmeta/BundleSettings'),
+    'metaContainers' => Config::getMergedConfigFromFiles([
         'productmeta/TagContainer',
         'productmeta/LinkContainer',
         'productmeta/ScriptContainer',
         'productmeta/JsonLdContainer',
         'productmeta/TitleContainer',
     ]),
-    'redirectsContainer'         => Config::getConfigFromFile('productmeta/RedirectsContainer'),
+    'redirectsContainer' => Config::getConfigFromFile('productmeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('productmeta/FrontendTemplatesContainer'),
 ];
