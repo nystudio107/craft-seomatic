@@ -38,7 +38,7 @@ return [
                 'dateCreated' => '{{ product.dateCreated|atom}',
                 'dateModified' => '{{ product.dateUpdated|atom}',
                 'datePublished' => '{{ product.postDate|atom}',
-                'copyrightYear' => '{{ product.postDate|date("Y")}',
+                'copyrightYear' => '{{ product.postDate|date("Y") }}',
                 'inLanguage' => '{{ seomatic.meta.language}',
                 'copyrightHolder' => [
                     'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
@@ -59,14 +59,14 @@ return [
                 'potentialAction' => [
                     'type' => 'SearchAction',
                     'target' => '{{ seomatic.site.siteLinksSearchTarget}',
-                    'query-input' => '{{ seomatic.helper.siteLinksQueryInput()}',
+                    'query-input' => '{{ seomatic.helper.siteLinksQueryInput() }}',
                 ],
-                'sku' => '{{ product.getDefaultVariant().getSku()}',
+                'sku' => '{{ product.getDefaultVariant().getSku() }}',
                 'offers' => [
                     'type' => 'Offer',
                     'url' => '{{ seomatic.meta.canonicalUrl}',
-                    'price' => '{{ product.getDefaultVariant().getPrice()|number_format(2, ".", "")}',
-                    'priceCurrency' => '{{ {craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso()}}',
+                    'price' => '{{ product.getDefaultVariant().getPrice()|number_format(2, ".", "") }}',
+                    'priceCurrency' => '{{ craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso() }}',
                     'offeredBy' => [
                         'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                     ],

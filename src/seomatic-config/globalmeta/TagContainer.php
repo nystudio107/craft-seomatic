@@ -101,7 +101,7 @@ return [
             ],
             'og:locale' => [
                 'charset' => '',
-                'content' => '{{ { craft.app.language |replace({"-": "_"}) } }}',
+                'content' => '{{ craft.app.language |replace({"-": "_"}) }}',
                 'httpEquiv' => '',
                 'name' => '',
                 'property' => 'og:locale',
