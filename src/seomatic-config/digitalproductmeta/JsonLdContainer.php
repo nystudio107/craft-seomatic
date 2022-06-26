@@ -66,7 +66,7 @@ return [
                     'type' => 'Offer',
                     'url' => '{{ seomatic.meta.canonicalUrl }}',
                     'price' => '{{ product.getPrice()|number_format(2, ".", "") }}',
-                    'priceCurrency' => '{{ {craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso()} }}',
+                    'priceCurrency' => '{{ craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso() }}',
                     'offeredBy' => [
                         'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                     ],
