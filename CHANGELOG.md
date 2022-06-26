@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.4 - 2022.06.26
+### Fixed
+* Fixed issues with some of the default values in `seomatic-config` that would cause some meta values to be unparsed ([#1164](https://github.com/nystudio107/craft-seomatic/issues/1164))
+
 ## 4.0.3 - 2022.06.22
 ### Added
 * Integrated [Twigfield](https://github.com/nystudio107/craft-twigfield) into SEOmatic, so fields that allow Twig expressions now have an editor with full autocomplete of the Craft and SEOmatic APIs
