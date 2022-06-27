@@ -29,17 +29,17 @@ return [
         ],
         'data' => [
             'mainEntityOfPage' => [
-                'type' => '{{ seomatic.meta.mainEntityOfPage}',
-                'name' => '{{ seomatic.meta.seoTitle}',
-                'headline' => '{{ seomatic.meta.seoTitle}',
-                'description' => '{{ seomatic.meta.seoDescription}',
-                'url' => '{{ seomatic.meta.canonicalUrl}',
-                'mainEntityOfPage' => '{{ seomatic.meta.canonicalUrl}',
-                'dateCreated' => '{{ product.dateCreated|atom}',
-                'dateModified' => '{{ product.dateUpdated|atom}',
-                'datePublished' => '{{ product.postDate|atom}',
+                'type' => '{{ seomatic.meta.mainEntityOfPage }}',
+                'name' => '{{ seomatic.meta.seoTitle }}',
+                'headline' => '{{ seomatic.meta.seoTitle }}',
+                'description' => '{{ seomatic.meta.seoDescription }}',
+                'url' => '{{ seomatic.meta.canonicalUrl }}',
+                'mainEntityOfPage' => '{{ seomatic.meta.canonicalUrl }}',
+                'dateCreated' => '{{ product.dateCreated|atom }}',
+                'dateModified' => '{{ product.dateUpdated|atom }}',
+                'datePublished' => '{{ product.postDate|atom }}',
                 'copyrightYear' => '{{ product.postDate|date("Y") }}',
-                'inLanguage' => '{{ seomatic.meta.language}',
+                'inLanguage' => '{{ seomatic.meta.language }}',
                 'copyrightHolder' => [
                     'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                 ],
@@ -54,17 +54,17 @@ return [
                 ],
                 'image' => [
                     'type' => 'ImageObject',
-                    'url' => '{{ seomatic.meta.seoImage}',
+                    'url' => '{{ seomatic.meta.seoImage }}',
                 ],
                 'potentialAction' => [
                     'type' => 'SearchAction',
-                    'target' => '{{ seomatic.site.siteLinksSearchTarget}',
+                    'target' => '{{ seomatic.site.siteLinksSearchTarget }}',
                     'query-input' => '{{ seomatic.helper.siteLinksQueryInput() }}',
                 ],
                 'sku' => '{{ product.getDefaultVariant().getSku() }}',
                 'offers' => [
                     'type' => 'Offer',
-                    'url' => '{{ seomatic.meta.canonicalUrl}',
+                    'url' => '{{ seomatic.meta.canonicalUrl }}',
                     'price' => '{{ product.getDefaultVariant().getPrice()|number_format(2, ".", "") }}',
                     'priceCurrency' => '{{ craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso() }}',
                     'offeredBy' => [
