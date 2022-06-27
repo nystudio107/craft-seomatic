@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.5 - 2022.06.27
+### Fixed
+* Fixed issues with some of the default values in `seomatic-config` for the `productmeta` 
+
 ## 4.0.4 - 2022.06.26
 ### Fixed
 * Fixed issues with some of the default values in `seomatic-config` that would cause some meta values to be unparsed ([#1164](https://github.com/nystudio107/craft-seomatic/issues/1164))
