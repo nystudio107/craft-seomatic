@@ -1,6 +1,9 @@
 <?php
 namespace nystudio107\seomatic\helpers;
 
+use nystudio107\seomatic\events\RegisterSitemapsEvent;
+use nystudio107\seomatic\events\SitemapGeneratedEvent;
+use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -20,6 +23,7 @@ use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
 
+use yii\base\Event;
 use yii\base\Exception;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -31,6 +35,14 @@ use yii\helpers\Html;
  */
 class Sitemap
 {
+    // Constants
+    // =========================================================================
+
+    const EVENT_SITEMAP_GENERATED = 'sitemapGenerated';
+
+    // Static Methods
+    // =========================================================================
+
     public static function generateSitemap(array $params)
     {
         /** @var \craft\queue\Queue $queue */
@@ -226,7 +238,7 @@ class Sitemap
                                     // Make sure to only include the `hreflang` if the element exists,
                                     // and sitemaps are on for it
                                     if ($altElement && $altElement->url) {
-                                        list($altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId, $altTypeId)
+                                        [$altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId, $altTypeId]
                                             = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($altElement);
                                         $altMetaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                                             $altSourceBundleType,
@@ -355,6 +367,7 @@ class Sitemap
             ],
         ]);
         $lines = implode('', $lines);
+
         // Cache sitemap cache; we use this instead of Seomatic::$cacheDuration because for
         // Control Panel requests, we set Seomatic::$cacheDuration = 1 so that they are never
         // cached
@@ -374,8 +387,18 @@ class Sitemap
         if ($plugin !== null) {
             FastcgiCacheBust::$plugin->cache->clearAll();
         }
-    }
 
+        // Fire event
+        $event = new SitemapGeneratedEvent([
+          'siteId' => $siteId,
+          'groupId' => $groupId,
+          'handle' => $handle,
+          'type' => $type,
+          'cacheKey' => $cacheKey,
+          'cacheDependency' => $dependency,
+        ]);
+        Event::trigger(Sitemap::class, Sitemap::EVENT_SITEMAP_GENERATED, $event);
+    }
 
     /**
      * Combine any per-entry type field settings from $element with the passed in
@@ -388,7 +411,7 @@ class Sitemap
     protected static function combineEntryTypeSettings($seoElement, Element $element, MetaBundle $metaBundle)
     {
         if (!empty($seoElement::typeMenuFromHandle($metaBundle->sourceHandle))) {
-            list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
+            [$sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId]
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             $entryTypeBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
                 $sourceBundleType,
