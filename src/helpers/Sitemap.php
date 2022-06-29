@@ -394,11 +394,10 @@ class Sitemap
           'groupId' => $groupId,
           'handle' => $handle,
           'type' => $type,
-          'sitemap' => $lines,
+          'cacheKey' => $cacheKey,
         ]);
         Event::trigger(Sitemap::class, Sitemap::EVENT_SITEMAP_GENERATED, $event);
     }
-
 
     /**
      * Combine any per-entry type field settings from $element with the passed in

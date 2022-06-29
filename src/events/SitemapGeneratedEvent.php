@@ -44,7 +44,7 @@ class SitemapGeneratedEvent extends Event
     public $type;
 
     /**
-     * @var string Generated sitemap
+     * @var string Cache key of generated sitemap
      */
-    public $sitemap;
+    public $cacheKey;
 }
