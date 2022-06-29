@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.6 - UNRELEASED
+### Changed
+* Require `nystudio107/craft-twigfield` version `^1.0.9`
+
 ## 4.0.5 - 2022.06.27
 ### Fixed
 * Fixed issues with some of the default values in `seomatic-config` for the `productmeta` 
