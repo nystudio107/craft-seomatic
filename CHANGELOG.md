@@ -1,12 +1,13 @@
 # SEOmatic Changelog
 
-## 3.4.36 - UNRELEASED
+## 3.4.36 - 2022.06.30
 ### Changed
 * Require `nystudio107/craft-twigfield` version `^1.0.9`
 * Add an additional CP route for Solspace Calendar, which allows characters like `-`'s in their handles ([#1170](https://github.com/nystudio107/craft-seomatic/issues/1170))
 
 ### Fixed
 * Fixed an issue where the `ads.txt`, `humans.txt`, `robots.txt`, and `security.txt` preview links in the CP would 404 on a site where the primary site URL wasn't a root URL ([#1168](https://github.com/nystudio107/craft-seomatic/issues/1168))
+* Fixed an issue with some of the default values in `seomatic-config` for Twitter meta tags ([#1171](https://github.com/nystudio107/craft-seomatic/issues/1171))
 
 ## 3.4.35 - 2022.06.27
 ### Fixed
