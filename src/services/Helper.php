@@ -54,6 +54,21 @@ class Helper extends Component
     // =========================================================================
 
     /**
+     * Return a base URL to the $path, removing any language segments that may
+     * be present, for files like robots.txt that must be served from the root
+     *
+     * @param $path
+     * @return string
+     * @throws Exception
+     */
+    public static function baseSiteUrl($path): string
+    {
+        $baseUrl = UrlHelper::hostInfo(UrlHelper::siteUrl($path));
+
+        return rtrim($baseUrl, '/') . '/' . ltrim($path, '/');
+    }
+
+    /**
      * Sanitize user input by decoding any HTML Entities, URL decoding the text,
      * then removing any newlines, stripping tags, stripping Twig tags, and changing
      * single {}'s into ()'s
