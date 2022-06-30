@@ -958,6 +958,13 @@ class Seomatic extends Plugin
             'seomatic/edit-content/<subSection:{handle}>/<sourceBundleType:{handle}>/<sourceHandle:{handle}>/<siteHandle:{handle}>' =>
                 'seomatic/settings/edit-content',
 
+            // Seemingly duplicate route needed to handle Solspace Calendar, which allows characters like -'s
+            // in their handles
+            'seomatic/edit-content/<subSection:{handle}>/<sourceBundleType:{handle}>/<sourceHandle:{slug}>' =>
+                'seomatic/settings/edit-content',
+            'seomatic/edit-content/<subSection:{handle}>/<sourceBundleType:{handle}>/<sourceHandle:{slug}>/<siteHandle:{handle}>' =>
+                'seomatic/settings/edit-content',
+
             'seomatic/site' => [
                 'route' => 'seomatic/settings/site',
                 'defaults' => ['subSection' => 'identity'],
