@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.6 - UNRELEASED
+## 4.0.6 - 2022.06.30
 ### Changed
 * Require `nystudio107/craft-twigfield` version `^1.0.9`
 * Add an additional CP route for Solspace Calendar, which allows characters like `-`'s in their handles ([#1170](https://github.com/nystudio107/craft-seomatic/issues/1170))
