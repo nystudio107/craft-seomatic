@@ -3,6 +3,7 @@
 ## 4.0.6 - UNRELEASED
 ### Changed
 * Require `nystudio107/craft-twigfield` version `^1.0.9`
+* Add an additional CP route for Solspace Calendar, which allows characters like `-`'s in their handles ([#1170](https://github.com/nystudio107/craft-seomatic/issues/1170))
 
 ### Fixed
 * Fixed an issue where the `ads.txt`, `humans.txt`, `robots.txt`, and `security.txt` preview links in the CP would 404 on a site where the primary site URL wasn't a root URL ([#1168](https://github.com/nystudio107/craft-seomatic/issues/1168))
