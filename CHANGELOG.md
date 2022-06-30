@@ -4,6 +4,9 @@
 ### Changed
 * Require `nystudio107/craft-twigfield` version `^1.0.9`
 
+### Fixed
+* Fixed an issue where the `ads.txt`, `humans.txt`, `robots.txt`, and `security.txt` preview links in the CP would 404 on a site where the primary site URL wasn't a root URL ([#1168](https://github.com/nystudio107/craft-seomatic/issues/1168))
+
 ## 4.0.5 - 2022.06.27
 ### Fixed
 * Fixed issues with some of the default values in `seomatic-config` for the `productmeta` 
