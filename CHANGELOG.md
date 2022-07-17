@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.37 - UNRELEASED
+### Changed
+* Add `allow-plugins` to `composer.json` to allow CI tests to work
+
 ## 3.4.36 - 2022.06.30
 ### Changed
 * Require `nystudio107/craft-twigfield` version `^1.0.9`
