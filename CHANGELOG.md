@@ -3,6 +3,11 @@
 ## 3.4.37 - UNRELEASED
 ### Changed
 * Add `allow-plugins` to `composer.json` to allow CI tests to work
+* Handle passed in `array`s and `ElementQuery`s in `assetFromAssetOrIdOrQuery()`
+* Bumped the `bundleVersion` to ensure that meta bundles are updated with the new settings
+
+### Fixed
+* Fixed an issue that could case Craft to log deprecation errors; you may need to re-save your Content SEO settings for it to take effect ([#1185](https://github.com/nystudio107/craft-seomatic/issues/1185))
 
 ## 3.4.36 - 2022.06.30
 ### Changed
