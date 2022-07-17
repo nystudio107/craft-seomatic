@@ -19,29 +19,29 @@ use nystudio107\seomatic\seoelements\SeoCategory;
  */
 
 return [
-    'bundleVersion'              => '1.0.26',
-    'sourceBundleType'           => SeoCategory::getMetaBundleType(),
-    'sourceId'                   => null,
-    'sourceName'                 => null,
-    'sourceHandle'               => null,
-    'sourceType'                 => 'category',
-    'typeId'                     => null,
-    'sourceTemplate'             => '',
-    'sourceSiteId'               => null,
-    'sourceAltSiteSettings'      => [
+    'bundleVersion' => '1.0.27',
+    'sourceBundleType' => SeoCategory::getMetaBundleType(),
+    'sourceId' => null,
+    'sourceName' => null,
+    'sourceHandle' => null,
+    'sourceType' => 'category',
+    'typeId' => null,
+    'sourceTemplate' => '',
+    'sourceSiteId' => null,
+    'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated'          => new \DateTime(),
-    'metaGlobalVars'             => Config::getConfigFromFile('categorymeta/GlobalVars'),
-    'metaSiteVars'               => Config::getConfigFromFile('categorymeta/SiteVars'),
-    'metaSitemapVars'            => Config::getConfigFromFile('categorymeta/SitemapVars'),
-    'metaBundleSettings'         => Config::getConfigFromFile('categorymeta/BundleSettings'),
-    'metaContainers'             => Config::getMergedConfigFromFiles([
+    'sourceDateUpdated' => new \DateTime(),
+    'metaGlobalVars' => Config::getConfigFromFile('categorymeta/GlobalVars'),
+    'metaSiteVars' => Config::getConfigFromFile('categorymeta/SiteVars'),
+    'metaSitemapVars' => Config::getConfigFromFile('categorymeta/SitemapVars'),
+    'metaBundleSettings' => Config::getConfigFromFile('categorymeta/BundleSettings'),
+    'metaContainers' => Config::getMergedConfigFromFiles([
         'categorymeta/TagContainer',
         'categorymeta/LinkContainer',
         'categorymeta/ScriptContainer',
         'categorymeta/JsonLdContainer',
         'categorymeta/TitleContainer',
     ]),
-    'redirectsContainer'         => Config::getConfigFromFile('categorymeta/RedirectsContainer'),
+    'redirectsContainer' => Config::getConfigFromFile('categorymeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('categorymeta/FrontendTemplatesContainer'),
 ];
