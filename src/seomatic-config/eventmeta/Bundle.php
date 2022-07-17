@@ -19,29 +19,29 @@ use nystudio107\seomatic\seoelements\SeoEvent;
  */
 
 return [
-    'bundleVersion'              => '1.0.1',
-    'sourceBundleType'           => SeoEvent::getMetaBundleType(),
-    'sourceId'                   => null,
-    'sourceName'                 => null,
-    'sourceHandle'               => null,
-    'sourceType'                 => 'event',
-    'typeId'                     => null,
-    'sourceTemplate'             => '',
-    'sourceSiteId'               => null,
-    'sourceAltSiteSettings'      => [
+    'bundleVersion' => '1.0.2',
+    'sourceBundleType' => SeoEvent::getMetaBundleType(),
+    'sourceId' => null,
+    'sourceName' => null,
+    'sourceHandle' => null,
+    'sourceType' => 'event',
+    'typeId' => null,
+    'sourceTemplate' => '',
+    'sourceSiteId' => null,
+    'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated'          => new \DateTime(),
-    'metaGlobalVars'             => Config::getConfigFromFile('eventmeta/GlobalVars'),
-    'metaSiteVars'               => Config::getConfigFromFile('eventmeta/SiteVars'),
-    'metaSitemapVars'            => Config::getConfigFromFile('eventmeta/SitemapVars'),
-    'metaBundleSettings'         => Config::getConfigFromFile('eventmeta/BundleSettings'),
-    'metaContainers'             => Config::getMergedConfigFromFiles([
+    'sourceDateUpdated' => new \DateTime(),
+    'metaGlobalVars' => Config::getConfigFromFile('eventmeta/GlobalVars'),
+    'metaSiteVars' => Config::getConfigFromFile('eventmeta/SiteVars'),
+    'metaSitemapVars' => Config::getConfigFromFile('eventmeta/SitemapVars'),
+    'metaBundleSettings' => Config::getConfigFromFile('eventmeta/BundleSettings'),
+    'metaContainers' => Config::getMergedConfigFromFiles([
         'eventmeta/TagContainer',
         'eventmeta/LinkContainer',
         'eventmeta/ScriptContainer',
         'eventmeta/JsonLdContainer',
         'eventmeta/TitleContainer',
     ]),
-    'redirectsContainer'         => Config::getConfigFromFile('eventmeta/RedirectsContainer'),
+    'redirectsContainer' => Config::getConfigFromFile('eventmeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('eventmeta/FrontendTemplatesContainer'),
 ];
