@@ -11,15 +11,14 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
-
 use Craft;
 use craft\elements\Asset;
+use craft\elements\db\ElementQuery;
 use craft\helpers\StringHelper;
 use craft\models\AssetTransform;
 use craft\volumes\Local;
-
+use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
+use nystudio107\seomatic\Seomatic;
 use yii\base\InvalidConfigException;
 
 /**
@@ -89,10 +88,10 @@ class ImageTransform
      * Transform the $asset for social media sites in $transformName and
      * optional $siteId
      *
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string URL to the transformed image
      */
@@ -101,7 +100,8 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -111,7 +111,7 @@ class ImageTransform
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }
-        $asset = self::assetFromAssetOrId($asset, $siteId);
+        $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
             // Make sure the format is an allowed format, otherwise explicitly change it
             $mimeType = $asset->getMimeType();
@@ -165,10 +165,10 @@ class ImageTransform
     }
 
     /**
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string width of the transformed image
      */
@@ -177,14 +177,15 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         $width = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }
-        $asset = self::assetFromAssetOrId($asset, $siteId);
+        $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
             $width = (string)$asset->getWidth($transform);
             if ($width === null) {
@@ -196,10 +197,10 @@ class ImageTransform
     }
 
     /**
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param string    $transformName the name of the transform to apply
-     * @param int|null  $siteId
-     * @param string    $transformMode
+     * @param int|Asset $asset the Asset or Asset ID
+     * @param string $transformName the name of the transform to apply
+     * @param int|null $siteId
+     * @param string $transformMode
      *
      * @return string width of the transformed image
      */
@@ -208,14 +209,15 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string {
+    ): string
+    {
         $height = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }
-        $asset = self::assetFromAssetOrId($asset, $siteId);
+        $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
             $height = (string)$asset->getHeight($transform);
             if ($height === null) {
@@ -230,7 +232,7 @@ class ImageTransform
      * Return an array of Asset elements from an array of element IDs
      *
      * @param array|string $assetIds
-     * @param int|null     $siteId
+     * @param int|null $siteId
      *
      * @return array
      */
@@ -262,19 +264,27 @@ class ImageTransform
     /**
      * Return an asset from either an id or an asset
      *
-     * @param int|Asset $asset         the Asset or Asset ID
-     * @param int|null  $siteId
+     * @param int|array|Asset|ElementQuery $asset the Asset or Asset ID or ElementQuery
+     * @param int|null $siteId
      *
      * @return Asset|null
      */
-    protected static function assetFromAssetOrId($asset, $siteId = null)
+    protected static function assetFromAssetOrIdOrQuery($asset, $siteId = null)
     {
         if (empty($asset)) {
             return null;
         }
-
+        // If it's an array (eager loaded Element query), return the first element
+        if (is_array($asset)) {
+            return reset($asset);
+        }
+        // If it's an asset already, just return it
         if ($asset instanceof Asset) {
             return $asset;
+        }
+        // If it is an ElementQuery, resolve that to an asset
+        if ($asset instanceof ElementQuery) {
+            return $asset->one();
         }
 
         $resolvedAssetId = (int)$asset;
@@ -292,7 +302,7 @@ class ImageTransform
     /**
      * Create a transform from the passed in $transformName
      *
-     * @param string    $transformName the name of the transform to apply
+     * @param string $transformName the name of the transform to apply
      *
      * @return AssetTransform|null
      */
