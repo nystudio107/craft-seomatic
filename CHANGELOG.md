@@ -8,6 +8,7 @@
 
 ### Fixed
 * Fixed an issue that could case Craft to log deprecation errors; you may need to re-save your Content SEO settings for it to take effect ([#1185](https://github.com/nystudio107/craft-seomatic/issues/1185))
+* Display a more accurate environment message if they are manually setting the SEOmatic Environment ([#1186](https://github.com/nystudio107/craft-seomatic/issues/1186))
 
 ## 3.4.36 - 2022.06.30
 ### Changed
