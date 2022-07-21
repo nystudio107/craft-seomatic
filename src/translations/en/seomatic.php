@@ -501,5 +501,17 @@ return [
     'Whether the `security.txt` template should be rendered' => 'Whether the `security.txt` template should be rendered',
     'Security.txt Template' => 'Security.txt Template',
     'Security.txt Enabled' => 'Security.txt Enabled',
-    'Security' => 'Security'
+    'Security' => 'Security',
+    'SEO [best practices](https://www.searchenginejournal.com/google-dont-mix-noindex-relcanonical/262607) are to have `canonical` links not appear on pages that are not intended to be indexed. SEOmatic does this for you by default, but you can override that behavior with this setting' => 'SEO [best practices](https://www.searchenginejournal.com/google-dont-mix-noindex-relcanonical/262607) are to have `canonical` links not appear on pages that are not intended to be indexed. SEOmatic does this for you by default, but you can override that behavior with this setting',
+    'If off, SEOmatic will automatically attempt to determine the current environment. If `devMode` is on, SEOmatic will default to `local` Development. Turn this on to manually set the environment.' => 'If off, SEOmatic will automatically attempt to determine the current environment. If `devMode` is on, SEOmatic will default to `local` Development. Turn this on to manually set the environment.',
+    'This is set manually by the "Manually Set SEOmatic Environment" plugin setting' => 'This is set manually by the "Manually Set SEOmatic Environment" plugin setting',
+    'The server environment, either `live`, `staging`, or `local`.' => 'The server environment, either `live`, `staging`, or `local`.',
+    'Script Tag Attributes' => 'Script Tag Attributes',
+    'File format not allowed.' => 'File format not allowed.',
+    'Additional attributes to add to the `<script>` tag' => 'Additional attributes to add to the `<script>` tag',
+    'Attribute Name' => 'Attribute Name',
+    'XView robots.txt' => 'XView robots.txt',
+    'This is set manually by the ' => 'This is set manually by the ',
+    'Attribute Value' => 'Attribute Value',
+    'Always include `canonical` links regardless of environment' => 'Always include `canonical` links regardless of environment'
 ];
