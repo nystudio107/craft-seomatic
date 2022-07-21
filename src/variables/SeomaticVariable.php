@@ -178,6 +178,12 @@ class SeomaticVariable extends ServiceLocator
                 []
             );
         }
+        // If they have manually set the environment, just return it
+        if (Seomatic::$settings->manuallySetEnvironment) {
+            return Craft::t('seomatic', 'This is set manually by the "Manually Set SEOmatic Environment" plugin setting',
+                []
+            );
+        }
         // If devMode is on, always force the environment to be 'local'
         if (Seomatic::$devMode) {
             return Craft::t('seomatic', 'The `{settingsEnv}` [SEOmatic Environment]({settingsUrl}) setting has been overriden to `{env}`, because the `devMode` config setting is enabled. Tracking scripts are disabled, and the `robots` tag is set to `none` to prevent search engine indexing.',
