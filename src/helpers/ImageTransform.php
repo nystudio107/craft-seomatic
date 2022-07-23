@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\helpers;
 
 use Craft;
 use craft\elements\Asset;
+use craft\elements\db\ElementQuery;
 use craft\fs\Local;
 use craft\helpers\StringHelper;
 use craft\models\ImageTransform as ImageTransformModel;
@@ -113,7 +114,7 @@ class ImageTransform
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }
-        $asset = self::assetFromAssetOrId($asset, $siteId);
+        $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
             // Make sure the format is an allowed format, otherwise explicitly change it
             $mimeType = $asset->getMimeType();
@@ -187,7 +188,7 @@ class ImageTransform
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }
-        $asset = self::assetFromAssetOrId($asset, $siteId);
+        $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
             $width = (string)$asset->getWidth($transform);
             if ($width === null) {
@@ -219,7 +220,7 @@ class ImageTransform
         if ($transform !== null) {
             $transform->mode = $transformMode ?? $transform->mode;
         }
-        $asset = self::assetFromAssetOrId($asset, $siteId);
+        $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
             $height = (string)$asset->getHeight($transform);
             if ($height === null) {
@@ -266,19 +267,27 @@ class ImageTransform
     /**
      * Return an asset from either an id or an asset
      *
-     * @param int|Asset $asset the Asset or Asset ID
+     * @param int|array|Asset|ElementQuery $asset the Asset or Asset ID or ElementQuery
      * @param int|null $siteId
      *
      * @return Asset|null
      */
-    protected static function assetFromAssetOrId($asset, $siteId = null)
+    protected static function assetFromAssetOrIdOrQuery($asset, $siteId = null)
     {
         if (empty($asset)) {
             return null;
         }
-
+        // If it's an array (eager loaded Element query), return the first element
+        if (is_array($asset)) {
+            return reset($asset);
+        }
+        // If it's an asset already, just return it
         if ($asset instanceof Asset) {
             return $asset;
+        }
+        // If it is an ElementQuery, resolve that to an asset
+        if ($asset instanceof ElementQuery) {
+            return $asset->one();
         }
 
         $resolvedAssetId = (int)$asset;

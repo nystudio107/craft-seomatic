@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 4.0.7 - 2022.08.23
+### Changed
+* Add `allow-plugins` to `composer.json` to allow CI tests to work
+* Handle passed in `array`s and `ElementQuery`s in `assetFromAssetOrIdOrQuery()`
+* Bumped the `bundleVersion` to ensure that meta bundles are updated with the new settings
+
+### Fixed
+* Display a more accurate environment message if they are manually setting the SEOmatic Environment ([#1186](https://github.com/nystudio107/craft-seomatic/issues/1186))
+
 ## 4.0.6 - 2022.06.30
 ### Changed
 * Require `nystudio107/craft-twigfield` version `^1.0.9`
