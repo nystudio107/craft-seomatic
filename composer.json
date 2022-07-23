@@ -37,7 +37,7 @@
     "php": "^8.0.2",
     "craftcms/cms": "^4.0.0",
     "nystudio107/craft-plugin-manifest": "^4.0.0",
-    "nystudio107/craft-twigfield": "^1.0.9",
+    "nystudio107/craft-twigfield": "^1.0.10",
     "php-science/textrank": "^1.0.3",
     "davechild/textstatistics": "^1.0.3",
     "sunra/php-simple-html-dom-parser": "^1.5.2"
