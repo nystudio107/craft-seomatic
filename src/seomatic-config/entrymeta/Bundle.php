@@ -19,29 +19,29 @@ use nystudio107\seomatic\seoelements\SeoEntry;
  */
 
 return [
-    'bundleVersion'              => '1.0.29',
-    'sourceBundleType'           => SeoEntry::getMetaBundleType(),
-    'sourceId'                   => null,
-    'sourceName'                 => null,
-    'sourceHandle'               => null,
-    'sourceType'                 => 'section',
-    'typeId'                     => null,
-    'sourceTemplate'             => '',
-    'sourceSiteId'               => null,
-    'sourceAltSiteSettings'      => [
+    'bundleVersion' => '1.0.30',
+    'sourceBundleType' => SeoEntry::getMetaBundleType(),
+    'sourceId' => null,
+    'sourceName' => null,
+    'sourceHandle' => null,
+    'sourceType' => 'section',
+    'typeId' => null,
+    'sourceTemplate' => '',
+    'sourceSiteId' => null,
+    'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated'          => new \DateTime(),
-    'metaGlobalVars'             => Config::getConfigFromFile('entrymeta/GlobalVars'),
-    'metaSiteVars'               => Config::getConfigFromFile('entrymeta/SiteVars'),
-    'metaSitemapVars'            => Config::getConfigFromFile('entrymeta/SitemapVars'),
-    'metaBundleSettings'         => Config::getConfigFromFile('entrymeta/BundleSettings'),
-    'metaContainers'             => Config::getMergedConfigFromFiles([
+    'sourceDateUpdated' => new \DateTime(),
+    'metaGlobalVars' => Config::getConfigFromFile('entrymeta/GlobalVars'),
+    'metaSiteVars' => Config::getConfigFromFile('entrymeta/SiteVars'),
+    'metaSitemapVars' => Config::getConfigFromFile('entrymeta/SitemapVars'),
+    'metaBundleSettings' => Config::getConfigFromFile('entrymeta/BundleSettings'),
+    'metaContainers' => Config::getMergedConfigFromFiles([
         'entrymeta/TagContainer',
         'entrymeta/LinkContainer',
         'entrymeta/ScriptContainer',
         'entrymeta/JsonLdContainer',
         'entrymeta/TitleContainer',
     ]),
-    'redirectsContainer'         => Config::getConfigFromFile('entrymeta/RedirectsContainer'),
+    'redirectsContainer' => Config::getConfigFromFile('entrymeta/RedirectsContainer'),
     'frontendTemplatesContainer' => Config::getConfigFromFile('entrymeta/FrontendTemplatesContainer'),
 ];

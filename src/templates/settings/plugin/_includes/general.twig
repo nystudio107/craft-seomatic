@@ -36,7 +36,7 @@
 
         {{ forms.lightswitchField({
             label: "Manually Set SEOmatic Environment"|t("seomatic"),
-            instructions: "If off, SEOmatic will automatically attempt to determine the current environment. Turn this on to manually set the environment."|t("seomatic"),
+            instructions: "If off, SEOmatic will automatically attempt to determine the current environment. If `devMode` is on, SEOmatic will default to `local` Development. Turn this on to manually set the environment."|t("seomatic"),
             id: "manuallySetEnvironment",
             name: "manuallySetEnvironment",
             on: settings.manuallySetEnvironment,
@@ -49,7 +49,7 @@
             {% if seomatic.helper.craft31 %}
                 {{ forms.autosuggestField({
                     label: "Environment"|t("seomatic"),
-                    instructions: "The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to `local` Development."|t("seomatic"),
+                    instructions: "The server environment, either `live`, `staging`, or `local`."|t("seomatic"),
                     suggestions: [{
                         label: "SEOmatic Environment",
                         data: [

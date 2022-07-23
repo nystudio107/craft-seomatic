@@ -11,8 +11,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use Craft;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -67,19 +65,19 @@ class PullField
         }
         foreach (self::PULL_TEXT_FIELDS as $fields) {
             $fieldName = $fields['fieldName'];
-            $source = $bundleSettings[$fieldName.'Source'] ?? '';
-            $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
+            $source = $bundleSettings[$fieldName . 'Source'] ?? '';
+            $sourceField = $bundleSettings[$fieldName . 'Field'] ?? '';
             if (!empty($source)) {
                 $seoField = $fields['seoField'];
                 switch ($source) {
                     case 'sameAsSeo':
                         $globalsSettings[$fieldName] =
-                            '{{ seomatic.meta.'.$seoField.' }}';
+                            '{{ seomatic.meta.' . $seoField . ' }}';
                         break;
 
                     case 'sameAsSiteTwitter':
                         $globalsSettings[$fieldName] =
-                            '{{ seomatic.site.'.$seoField.' }}';
+                            '{{ seomatic.site.' . $seoField . ' }}';
                         break;
 
                     case 'sameAsGlobal':
@@ -90,29 +88,29 @@ class PullField
                     case 'fromField':
                         $globalsSettings[$fieldName] =
                             '{{ seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.$sourceField
-                            .') }}';
+                            . $objectPrefix . $elementName . $sourceField
+                            . ') }}';
                         break;
 
                     case 'fromUserField':
                         $globalsSettings[$fieldName] =
                             '{{ seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.'author.'.$sourceField
-                            .') }}';
+                            . $objectPrefix . $elementName . 'author.' . $sourceField
+                            . ') }}';
                         break;
 
                     case 'summaryFromField':
                         $globalsSettings[$fieldName] =
                             '{{ seomatic.helper.extractSummary(seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.$sourceField
-                            .')) }}';
+                            . $objectPrefix . $elementName . $sourceField
+                            . ')) }}';
                         break;
 
                     case 'keywordsFromField':
                         $globalsSettings[$fieldName] =
                             '{{ seomatic.helper.extractKeywords(seomatic.helper.extractTextFromField('
-                            .$objectPrefix.$elementName.$sourceField
-                            .')) }}';
+                            . $objectPrefix . $elementName . $sourceField
+                            . ')) }}';
                         break;
 
                     case 'fromCustom':
@@ -142,25 +140,25 @@ class PullField
         }
         foreach (self::PULL_ASSET_FIELDS as $fields) {
             $fieldName = $fields['fieldName'];
-            $fieldNameWidth = $fields['fieldName'].'Width';
-            $fieldNameHeight = $fields['fieldName'].'Height';
-            $source = $bundleSettings[$fieldName.'Source'] ?? '';
-            $ids = $bundleSettings[$fieldName.'Ids'] ?? [];
-            $sourceField = $bundleSettings[$fieldName.'Field'] ?? '';
+            $fieldNameWidth = $fields['fieldName'] . 'Width';
+            $fieldNameHeight = $fields['fieldName'] . 'Height';
+            $source = $bundleSettings[$fieldName . 'Source'] ?? '';
+            $ids = $bundleSettings[$fieldName . 'Ids'] ?? [];
+            $sourceField = $bundleSettings[$fieldName . 'Field'] ?? '';
             if (!empty($source)) {
-                $transformImage = $bundleSettings[$fieldName.'Transform'] ?? true;
+                $transformImage = $bundleSettings[$fieldName . 'Transform'] ?? true;
                 $seoField = $fields['seoField'];
                 $tranformModeField = $fields['transformModeField'];
                 $transformMode = $bundleSettings[$tranformModeField] ?? 'crop';
                 if (empty($transformMode)) {
-                    $transformMode =  'crop';
+                    $transformMode = 'crop';
                 }
-                $seoFieldWidth = $fields['seoField'].'Width';
-                $seoFieldHeight = $fields['seoField'].'Height';
+                $seoFieldWidth = $fields['seoField'] . 'Width';
+                $seoFieldHeight = $fields['seoField'] . 'Height';
                 $transformName = $fields['transformName'] ?? 'base';
                 // Quote all the things here for clarity
-                $transformName = '"'.$transformName.'"';
-                $transformMode = '"'.$transformMode.'"';
+                $transformName = '"' . $transformName . '"';
+                $transformMode = '"' . $transformMode . '"';
                 // Special-case Twitter transforms
                 if ($fieldName === 'twitterImage') {
                     $transformName = 'seomatic.helper.twitterTransform()';
@@ -175,59 +173,59 @@ class PullField
                 if ($transformImage) {
                     switch ($source) {
                         case 'sameAsSeo':
-                            $seoSource = $bundleSettings[$seoField.'Source'] ?? '';
-                            $seoIds = $bundleSettings[$seoField.'Ids'] ?? [];
-                            $seoSourceField = $bundleSettings[$seoField.'Field'] ?? '';
+                            $seoSource = $bundleSettings[$seoField . 'Source'] ?? '';
+                            $seoIds = $bundleSettings[$seoField . 'Ids'] ?? [];
+                            $seoSourceField = $bundleSettings[$seoField . 'Field'] ?? '';
                             if (!empty($seoSource)) {
                                 switch ($seoSource) {
                                     case 'fromField':
                                         if (!empty($seoSourceField)) {
                                             $globalsSettings[$fieldName] = '{{ seomatic.helper.socialTransform('
-                                                .$objectPrefix.$elementName.$seoSourceField.'[0]'
-                                                .', '.$transformName
-                                                .', '.$siteId
-                                                .', '.$transformMode
-                                                .') }}';
+                                                . $objectPrefix . $elementName . $seoSourceField
+                                                . ', ' . $transformName
+                                                . ', ' . $siteId
+                                                . ', ' . $transformMode
+                                                . ') }}';
                                             $globalsSettings[$fieldNameWidth] = '{{ seomatic.helper.socialTransformWidth('
-                                                .$objectPrefix.$elementName.$seoSourceField.'[0]'
-                                                .', '.$transformName
-                                                .', '.$siteId
-                                                .', '.$transformMode
-                                                .') }}';
+                                                . $objectPrefix . $elementName . $seoSourceField
+                                                . ', ' . $transformName
+                                                . ', ' . $siteId
+                                                . ', ' . $transformMode
+                                                . ') }}';
                                             $globalsSettings[$fieldNameHeight] = '{{ seomatic.helper.socialTransformHeight('
-                                                .$objectPrefix.$elementName.$seoSourceField.'[0]'
-                                                .', '.$transformName
-                                                .', '.$siteId
-                                                .', '.$transformMode
-                                                .') }}';
+                                                . $objectPrefix . $elementName . $seoSourceField
+                                                . ', ' . $transformName
+                                                . ', ' . $siteId
+                                                . ', ' . $transformMode
+                                                . ') }}';
                                         }
                                         break;
                                     case 'fromAsset':
                                         if (!empty($seoIds)) {
                                             $globalsSettings[$fieldName] = '{{ seomatic.helper.socialTransform('
-                                                .$seoIds[0]
-                                                .', '.$transformName
-                                                .', '.$siteId
-                                                .', '.$transformMode
-                                                .') }}';
+                                                . $seoIds[0]
+                                                . ', ' . $transformName
+                                                . ', ' . $siteId
+                                                . ', ' . $transformMode
+                                                . ') }}';
                                             $globalsSettings[$fieldNameWidth] = '{{ seomatic.helper.socialTransformWidth('
-                                                .$seoIds[0]
-                                                .', '.$transformName
-                                                .', '.$siteId
-                                                .', '.$transformMode
-                                                .') }}';
+                                                . $seoIds[0]
+                                                . ', ' . $transformName
+                                                . ', ' . $siteId
+                                                . ', ' . $transformMode
+                                                . ') }}';
                                             $globalsSettings[$fieldNameHeight] = '{{ seomatic.helper.socialTransformHeight('
-                                                .$seoIds[0]
-                                                .', '.$transformName
-                                                .', '.$siteId
-                                                .', '.$transformMode
-                                                .') }}';
+                                                . $seoIds[0]
+                                                . ', ' . $transformName
+                                                . ', ' . $siteId
+                                                . ', ' . $transformMode
+                                                . ') }}';
                                         }
                                         break;
                                     default:
-                                        $globalsSettings[$fieldName] = '{{ seomatic.meta.'.$seoField.' }}';
-                                        $globalsSettings[$fieldNameWidth] = '{{ seomatic.meta.'.$seoFieldWidth.' }}';
-                                        $globalsSettings[$fieldNameHeight] = '{{ seomatic.meta.'.$seoFieldHeight.' }}';
+                                        $globalsSettings[$fieldName] = '{{ seomatic.meta.' . $seoField . ' }}';
+                                        $globalsSettings[$fieldNameWidth] = '{{ seomatic.meta.' . $seoFieldWidth . ' }}';
+                                        $globalsSettings[$fieldNameHeight] = '{{ seomatic.meta.' . $seoFieldHeight . ' }}';
                                         break;
                                 }
                             }
@@ -235,79 +233,79 @@ class PullField
                         case 'fromField':
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{{ seomatic.helper.socialTransform('
-                                    .$objectPrefix.$elementName.$sourceField.'[0]'
-                                    .', '.$transformName
-                                    .', '.$siteId
-                                    .', '.$transformMode
-                                    .') }}';
+                                    . $objectPrefix . $elementName . $sourceField
+                                    . ', ' . $transformName
+                                    . ', ' . $siteId
+                                    . ', ' . $transformMode
+                                    . ') }}';
                                 $globalsSettings[$fieldNameWidth] = '{{ seomatic.helper.socialTransformWidth('
-                                    .$objectPrefix.$elementName.$sourceField.'[0]'
-                                    .', '.$transformName
-                                    .', '.$siteId
-                                    .', '.$transformMode
-                                    .') }}';
+                                    . $objectPrefix . $elementName . $sourceField
+                                    . ', ' . $transformName
+                                    . ', ' . $siteId
+                                    . ', ' . $transformMode
+                                    . ') }}';
                                 $globalsSettings[$fieldNameHeight] = '{{ seomatic.helper.socialTransformHeight('
-                                    .$objectPrefix.$elementName.$sourceField.'[0]'
-                                    .', '.$transformName
-                                    .', '.$siteId
-                                    .', '.$transformMode
-                                    .') }}';
+                                    . $objectPrefix . $elementName . $sourceField
+                                    . ', ' . $transformName
+                                    . ', ' . $siteId
+                                    . ', ' . $transformMode
+                                    . ') }}';
                             }
                             break;
                         case 'fromAsset':
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{{ seomatic.helper.socialTransform('
-                                    .$ids[0]
-                                    .', '.$transformName
-                                    .', '.$siteId
-                                    .', '.$transformMode
-                                    .') }}';
+                                    . $ids[0]
+                                    . ', ' . $transformName
+                                    . ', ' . $siteId
+                                    . ', ' . $transformMode
+                                    . ') }}';
                                 $globalsSettings[$fieldNameWidth] = '{{ seomatic.helper.socialTransformWidth('
-                                    .$ids[0]
-                                    .', '.$transformName
-                                    .', '.$siteId
-                                    .', '.$transformMode
-                                    .') }}';
+                                    . $ids[0]
+                                    . ', ' . $transformName
+                                    . ', ' . $siteId
+                                    . ', ' . $transformMode
+                                    . ') }}';
                                 $globalsSettings[$fieldNameHeight] = '{{ seomatic.helper.socialTransformHeight('
-                                    .$ids[0]
-                                    .', '.$transformName
-                                    .', '.$siteId
-                                    .', '.$transformMode
-                                    .') }}';
+                                    . $ids[0]
+                                    . ', ' . $transformName
+                                    . ', ' . $siteId
+                                    . ', ' . $transformMode
+                                    . ') }}';
                             }
                             break;
                     }
                 } else {
                     switch ($source) {
                         case 'sameAsSeo':
-                            $globalsSettings[$fieldName] = '{{ seomatic.meta.'.$seoField.' }}';
-                            $globalsSettings[$fieldNameWidth] = '{{ seomatic.meta.'.$seoFieldWidth.' }}';
-                            $globalsSettings[$fieldNameHeight] = '{{ seomatic.meta.'.$seoFieldHeight.' }}';
+                            $globalsSettings[$fieldName] = '{{ seomatic.meta.' . $seoField . ' }}';
+                            $globalsSettings[$fieldNameWidth] = '{{ seomatic.meta.' . $seoFieldWidth . ' }}';
+                            $globalsSettings[$fieldNameHeight] = '{{ seomatic.meta.' . $seoFieldHeight . ' }}';
                             break;
                         case 'fromField':
                             if (!empty($sourceField)) {
                                 $globalsSettings[$fieldName] = '{{ '
-                                    .$elementName.$sourceField.'[0].url'
-                                    .' }}';
+                                    . $elementName . $sourceField . '[0].url'
+                                    . ' }}';
                                 $globalsSettings[$fieldNameWidth] = '{{ '
-                                    .$elementName.$sourceField.'[0].width'
-                                    .' }}';
+                                    . $elementName . $sourceField . '[0].width'
+                                    . ' }}';
                                 $globalsSettings[$fieldNameHeight] = '{{ '
-                                    .$elementName.$sourceField.'[0].height'
-                                    .' }}';
+                                    . $elementName . $sourceField . '[0].height'
+                                    . ' }}';
                             }
                             break;
                         case 'fromAsset':
                             if (!empty($ids)) {
                                 $globalsSettings[$fieldName] = '{{ craft.app.assets.assetById('
-                                    .$ids[0]
-                                    .', '.$siteId.').url }}';
+                                    . $ids[0]
+                                    . ', ' . $siteId . ').url }}';
                                 $globalsSettings[$fieldNameWidth] = '{{ craft.app.assets.assetById('
-                                    .$ids[0]
-                                    .', '.$siteId.').width }}';
+                                    . $ids[0]
+                                    . ', ' . $siteId . ').width }}';
                                 $globalsSettings[$fieldNameHeight] = '{{ craft.app.assets.assetById('
-                                    .$ids[0]
-                                    .', '.$siteId.').height }}';
+                                    . $ids[0]
+                                    . ', ' . $siteId . ').height }}';
                             }
                             break;
                     }

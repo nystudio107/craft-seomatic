@@ -11,38 +11,35 @@
 
 namespace nystudio107\seomatic\variables;
 
+use Craft;
 use craft\helpers\UrlHelper;
-use nystudio107\seomatic\Seomatic;
+use nystudio107\pluginmanifest\variables\ManifestVariable as Manifest;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\models\MetaGlobalVars;
-use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
+use nystudio107\seomatic\models\MetaSiteVars;
 use nystudio107\seomatic\models\Settings;
+use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\Helper;
 use nystudio107\seomatic\services\JsonLd;
 use nystudio107\seomatic\services\Link;
+use nystudio107\seomatic\services\MetaBundles;
+use nystudio107\seomatic\services\MetaContainers;
 use nystudio107\seomatic\services\Script;
 use nystudio107\seomatic\services\Tag;
 use nystudio107\seomatic\services\Title;
-use nystudio107\seomatic\services\MetaContainers;
-use nystudio107\seomatic\services\MetaBundles;
-
-use nystudio107\pluginmanifest\variables\ManifestVariable as Manifest;
-
-use Craft;
-
 use yii\di\ServiceLocator;
 
 /**
  * Seomatic defines the `seomatic` global template variable.
  *
- * @property Helper     helper
- * @property JsonLd     jsonLd
- * @property Link       link
- * @property Script     script
- * @property Tag        tag
- * @property Title      title
- * @property Manifest   manifest
+ * @property Helper helper
+ * @property JsonLd jsonLd
+ * @property Link link
+ * @property Script script
+ * @property Tag tag
+ * @property Title title
+ * @property Manifest manifest
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -180,6 +177,12 @@ class SeomaticVariable extends ServiceLocator
         // If they've manually overridden the environment, just return it
         if (EnvironmentHelper::environmentOverriddenByConfig()) {
             return Craft::t('seomatic', 'This is overridden by the `config/seomatic.php` config setting',
+                []
+            );
+        }
+        // If they have manually set the environment, just return it
+        if (Seomatic::$settings->manuallySetEnvironment) {
+            return Craft::t('seomatic', 'This is set manually by the "Manually Set SEOmatic Environment" plugin setting',
                 []
             );
         }
