@@ -631,6 +631,19 @@ To entirely replace the existing **BreadcrumbList** on a page:
 }) %}
 ```
 
+If you need to create a schema element and propagate it, then use "key".
+Propagate **SiteNavigationElement**:
+```twig
+        {% for nav in navigationMenu %}
+            {% do seomatic.jsonLd.create({
+                'key': 'navItem' ~ nav.title,
+                'type': 'SiteNavigationElement',
+                'name': nav.title,
+                'url': nav.url
+            }) %}
+        {% endfor %}
+```
+
 Get the existing **Identity** as set in the Site Settings Control Panel section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
