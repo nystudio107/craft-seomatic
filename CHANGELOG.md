@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.8 - UNRELEASED
+### Changed
+* Check both `ENVIRONMENT` and `CRAFT_ENVIRONMENT` when attempt to auto-determine the current environment
+
 ## 4.0.7 - 2022.08.23
 ### Changed
 * Add `allow-plugins` to `composer.json` to allow CI tests to work
