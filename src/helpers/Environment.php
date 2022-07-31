@@ -74,6 +74,7 @@ class Environment
         }
         // Try to also check the `ENVIRONMENT` env var
         $environment = getenv('ENVIRONMENT');
+        $environment = $environment ?: getenv('CRAFT_ENVIRONMENT');
         if (Seomatic::$settings->manuallySetEnvironment) {
             return $env;
         }
