@@ -9,6 +9,8 @@
 
 namespace nystudio107\seomatic\console\controllers;
 
+use nystudio107\seomatic\events\SitemapGeneratedEvent;
+use nystudio107\seomatic\helpers\Sitemap;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
@@ -16,6 +18,7 @@ use nystudio107\seomatic\Seomatic;
 use Craft;
 use craft\helpers\App;
 
+use yii\base\Event;
 use yii\console\Controller;
 
 /**
