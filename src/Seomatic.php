@@ -34,6 +34,7 @@ use craft\feedme\events\RegisterFeedMeFieldsEvent;
 use craft\feedme\Plugin as FeedMe;
 use craft\feedme\services\Fields as FeedMeFields;
 use craft\gql\TypeManager;
+use craft\helpers\ArrayHelper;
 use craft\helpers\StringHelper;
 use craft\helpers\UrlHelper;
 use craft\services\Elements;
@@ -216,26 +217,30 @@ class Seomatic extends Plugin
      */
     public function __construct($id, $parent = null, array $config = [])
     {
-        $config['components'] = [
-            'frontendTemplates' => FrontendTemplatesService::class,
-            'helper' => HelperService::class,
-            'jsonLd' => JsonLdService::class,
-            'link' => LinkService::class,
-            'metaBundles' => MetaBundlesService::class,
-            'metaContainers' => MetaContainersService::class,
-            'script' => ScriptService::class,
-            'seoElements' => SeoElementsService::class,
-            'sitemaps' => SitemapsService::class,
-            'tag' => TagService::class,
-            'title' => TitleService::class,
-            // Register the manifest service
-            'manifest' => [
-                'class' => ManifestService::class,
-                'assetClass' => SeomaticAsset::class,
-                'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
-                'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
-            ],
-        ];
+        // Merge in the passed config, so it our config can be overridden by Plugins::pluginConfigs['vite']
+        // ref: https://github.com/craftcms/cms/issues/1989
+        $config = ArrayHelper::merge([
+            'components' => [
+                'frontendTemplates' => FrontendTemplatesService::class,
+                'helper' => HelperService::class,
+                'jsonLd' => JsonLdService::class,
+                'link' => LinkService::class,
+                'metaBundles' => MetaBundlesService::class,
+                'metaContainers' => MetaContainersService::class,
+                'script' => ScriptService::class,
+                'seoElements' => SeoElementsService::class,
+                'sitemaps' => SitemapsService::class,
+                'tag' => TagService::class,
+                'title' => TitleService::class,
+                // Register the manifest service
+                'manifest' => [
+                    'class' => ManifestService::class,
+                    'assetClass' => SeomaticAsset::class,
+                    'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
+                    'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
+                ],
+            ]
+        ], $config);
 
         parent::__construct($id, $parent, $config);
     }
