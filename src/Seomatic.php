@@ -34,7 +34,6 @@ use craft\feedme\events\RegisterFeedMeFieldsEvent;
 use craft\feedme\Plugin as FeedMe;
 use craft\feedme\services\Fields as FeedMeFields;
 use craft\gql\TypeManager;
-use craft\helpers\ArrayHelper;
 use craft\helpers\StringHelper;
 use craft\helpers\UrlHelper;
 use craft\services\Elements;
@@ -215,11 +214,9 @@ class Seomatic extends Plugin
     /**
      * @inheritdoc
      */
-    public function __construct($id, $parent = null, array $config = [])
+    public static function config(): array
     {
-        // Merge in the passed config, so it our config can be overridden by Plugins::pluginConfigs['vite']
-        // ref: https://github.com/craftcms/cms/issues/1989
-        $config = ArrayHelper::merge([
+        return [
             'components' => [
                 'frontendTemplates' => FrontendTemplatesService::class,
                 'helper' => HelperService::class,
@@ -240,9 +237,7 @@ class Seomatic extends Plugin
                     'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
                 ],
             ]
-        ], $config);
-
-        parent::__construct($id, $parent, $config);
+        ];
     }
 
     /**
