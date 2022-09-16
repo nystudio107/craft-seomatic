@@ -231,8 +231,6 @@ class Seomatic extends Plugin
      */
     public static $craft37 = false;
 
-    // Static Methods
-    // =========================================================================
     /**
      * @var string
      */
@@ -244,10 +242,34 @@ class Seomatic extends Plugin
 
     // Public Properties
     // =========================================================================
+
     /**
      * @var bool
      */
     public $hasCpSettings = true;
+
+    // Static Methods
+    // =========================================================================
+
+    /**
+     * Set the matched element
+     *
+     * @param $element null|ElementInterface
+     */
+    public static function setMatchedElement($element)
+    {
+        self::$matchedElement = $element;
+        /** @var  $element Element */
+        if ($element) {
+            self::$language = MetaValueHelper::getSiteLanguage($element->siteId);
+        } else {
+            self::$language = MetaValueHelper::getSiteLanguage(null);
+        }
+        MetaValueHelper::cache();
+    }
+
+    // Public Methods
+    // =========================================================================
 
     /**
      * @inheritdoc
@@ -281,26 +303,6 @@ class Seomatic extends Plugin
 
         parent::__construct($id, $parent, $config);
     }
-
-    /**
-     * Set the matched element
-     *
-     * @param $element null|ElementInterface
-     */
-    public static function setMatchedElement($element)
-    {
-        self::$matchedElement = $element;
-        /** @var  $element Element */
-        if ($element) {
-            self::$language = MetaValueHelper::getSiteLanguage($element->siteId);
-        } else {
-            self::$language = MetaValueHelper::getSiteLanguage(null);
-        }
-        MetaValueHelper::cache();
-    }
-
-    // Public Methods
-    // =========================================================================
 
     /**
      * @inheritdoc
