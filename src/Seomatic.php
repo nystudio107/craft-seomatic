@@ -211,6 +211,9 @@ class Seomatic extends Plugin
      */
     public bool $hasCpSettings = true;
 
+    // Static Methods
+    // =========================================================================
+
     /**
      * @inheritdoc
      */
