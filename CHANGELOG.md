@@ -3,6 +3,7 @@
 ## 4.0.8 - UNRELEASED
 ### Changed
 * Check both `ENVIRONMENT` and `CRAFT_ENVIRONMENT` when attempt to auto-determine the current environment
+* Move to using `ServicesTrait` and add getter methods for services
 
 ### Fixed
 * Fixed an improper docblock typing for the `genericImage` property on the `Entity` model ([#1193](https://github.com/nystudio107/craft-seomatic/issues/1193))
