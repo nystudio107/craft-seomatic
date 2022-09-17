@@ -11,9 +11,8 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -77,6 +76,7 @@ class Environment
         }
         // Try to also check the `ENVIRONMENT` env var
         $environment = getenv('ENVIRONMENT');
+        $environment = $environment ?: getenv('CRAFT_ENVIRONMENT');
         if (Seomatic::$settings->manuallySetEnvironment) {
             return $env;
         }

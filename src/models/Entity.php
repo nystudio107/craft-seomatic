@@ -65,7 +65,7 @@ class Entity extends VarsModel
     public $genericUrl;
 
     /**
-     * @var array URL for the entity image
+     * @var string URL for the entity image
      */
     public $genericImage;
 

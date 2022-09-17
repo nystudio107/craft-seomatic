@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.4.38 - 2022.09.17
+### Changed
+* Check both `ENVIRONMENT` and `CRAFT_ENVIRONMENT` when attempt to auto-determine the current environment
+* Move to using `ServicesTrait` and add getter methods for services
+
+### Fixed
+* Fixed an improper docblock typing for the `genericImage` property on the `Entity` model ([#1193](https://github.com/nystudio107/craft-seomatic/issues/1193))
+
 ## 3.4.37 - 2022.08.23
 ### Changed
 * Add `allow-plugins` to `composer.json` to allow CI tests to work
