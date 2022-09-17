@@ -46,8 +46,6 @@ use craft\utilities\ClearCaches;
 use craft\web\UrlManager;
 use craft\web\View;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
-use nystudio107\pluginmanifest\services\ManifestService;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
@@ -63,17 +61,7 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\integrations\feedme\SeoSettings as SeoSettingsFeedMe;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
-use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
-use nystudio107\seomatic\services\Helper as HelperService;
-use nystudio107\seomatic\services\JsonLd as JsonLdService;
-use nystudio107\seomatic\services\Link as LinkService;
-use nystudio107\seomatic\services\MetaBundles as MetaBundlesService;
-use nystudio107\seomatic\services\MetaContainers as MetaContainersService;
-use nystudio107\seomatic\services\Script as ScriptService;
-use nystudio107\seomatic\services\SeoElements as SeoElementsService;
-use nystudio107\seomatic\services\Sitemaps as SitemapsService;
-use nystudio107\seomatic\services\Tag as TagService;
-use nystudio107\seomatic\services\Title as TitleService;
+use nystudio107\seomatic\services\ServicesTrait;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 use nystudio107\twigfield\autocompletes\EnvironmentVariableAutocomplete;
@@ -93,22 +81,14 @@ use yii\web\View as YiiView;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
- *
- * @property FrontendTemplatesService $frontendTemplates
- * @property HelperService $helper
- * @property JsonLdService $jsonLd
- * @property LinkService $link
- * @property MetaBundlesService $metaBundles
- * @property MetaContainersService $metaContainers
- * @property ScriptService $script
- * @property SeoElementsService $seoElements
- * @property SitemapsService $sitemaps
- * @property TagService $tag
- * @property TitleService $title
- * @property ManifestService $manifest
  */
 class Seomatic extends Plugin
 {
+    // Traits
+    // =========================================================================
+
+    use ServicesTrait;
+
     // Constants
     // =========================================================================
 
@@ -210,38 +190,6 @@ class Seomatic extends Plugin
      * @var bool
      */
     public bool $hasCpSettings = true;
-
-    // Static Methods
-    // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
-    public static function config(): array
-    {
-        return [
-            'components' => [
-                'frontendTemplates' => FrontendTemplatesService::class,
-                'helper' => HelperService::class,
-                'jsonLd' => JsonLdService::class,
-                'link' => LinkService::class,
-                'metaBundles' => MetaBundlesService::class,
-                'metaContainers' => MetaContainersService::class,
-                'script' => ScriptService::class,
-                'seoElements' => SeoElementsService::class,
-                'sitemaps' => SitemapsService::class,
-                'tag' => TagService::class,
-                'title' => TitleService::class,
-                // Register the manifest service
-                'manifest' => [
-                    'class' => ManifestService::class,
-                    'assetClass' => SeomaticAsset::class,
-                    'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
-                    'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
-                ],
-            ]
-        ];
-    }
 
     /**
      * Set the matched element
