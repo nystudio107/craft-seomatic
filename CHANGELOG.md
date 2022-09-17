@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.8 - UNRELEASED
+## 4.0.8 - 2022.09.17
 ### Changed
 * Check both `ENVIRONMENT` and `CRAFT_ENVIRONMENT` when attempt to auto-determine the current environment
 * Move to using `ServicesTrait` and add getter methods for services
