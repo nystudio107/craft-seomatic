@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\variables;
 
 use Craft;
+use craft\helpers\App;
 use craft\helpers\UrlHelper;
 use nystudio107\pluginmanifest\variables\ManifestVariable as Manifest;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
@@ -190,10 +191,12 @@ class SeomaticVariable extends ServiceLocator
                 ['env' => $env, 'settingsEnv' => $settingsEnv, 'settingsUrl' => $settingsUrl]
             );
         }
-        // Try to also check the `ENVIRONMENT` env var
-        $envVar = getenv('ENVIRONMENT');
         if (Seomatic::$settings->manuallySetEnvironment) {
             $envVar = $settingsEnv;
+        } else {
+            // Try to also check the `ENVIRONMENT` env var
+            $envVar = App::env('ENVIRONMENT');
+            $envVar = $envVar ?: App::env('CRAFT_ENVIRONMENT');
         }
         if (!empty($envVar)) {
             $env = EnvironmentHelper::determineEnvironment();
