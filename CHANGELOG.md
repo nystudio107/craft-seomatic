@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.39 - UNRELEASED
+### Changed
+* Don't bother invalidating sitemaps via the console command, as it causes them to be regenerated twice
+
 ## 3.4.38 - 2022.09.17
 ### Changed
 * Check both `ENVIRONMENT` and `CRAFT_ENVIRONMENT` when attempt to auto-determine the current environment
