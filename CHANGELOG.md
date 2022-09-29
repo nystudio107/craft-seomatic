@@ -3,6 +3,7 @@
 ## 3.4.39 - UNRELEASED
 ### Changed
 * Don't bother invalidating sitemaps via the console command, as it causes them to be regenerated twice
+* Use a stale-while-revalidate pattern for sitemap generation, so the old cached sitemap will be served until the new one as been regenerated due to an invalidation (content editing) ([#1213](https://github.com/nystudio107/craft-seomatic/issues/1213))
 
 ## 3.4.38 - 2022.09.17
 ### Changed
