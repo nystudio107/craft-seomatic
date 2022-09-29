@@ -501,16 +501,19 @@ class Sitemaps extends Component implements SitemapInterface
      * @param string $handle
      * @param int $siteId
      * @param string $type
+     * @param bool $invalidateCache
      */
-    public function invalidateSitemapCache(string $handle, int $siteId, string $type)
+    public function invalidateSitemapCache(string $handle, int $siteId, string $type, bool $invalidateCache = true)
     {
-        $cache = Craft::$app->getCache();
-        // If the queue should be run automatically, do it now
-        TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId);
-        Craft::info(
-            'Sitemap cache cleared: ' . $handle,
-            __METHOD__
-        );
+        // Since we want a stale-while-revalidate pattern, only invalidate the cache if we're asked to
+        if ($invalidateCache) {
+            $cache = Craft::$app->getCache();
+            TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId);
+            Craft::info(
+                'Sitemap cache cleared: ' . $handle,
+                __METHOD__
+            );
+        }
         $sites = Craft::$app->getSites();
         if ($siteId === null) {
             $siteId = $sites->currentSite->id ?? 1;
