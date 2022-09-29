@@ -153,7 +153,9 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $queueJobCacheKey = self::QUEUE_JOB_CACHE_KEY . $uniqueKey;
         $result = $cache->get($cacheKey);
         // If the sitemap isn't cached, start a job to create it
-        if ($result === false) {
+        // Even if it is cached, if $throwException === false we should regenerate it, as it is part of
+        // an invalidation
+        if ($result === false || $throwException === false) {
             $queue = Craft::$app->getQueue();
             // If there's an existing queue job, release it so queue jobs don't stack
             $existingJobId = $cache->get($queueJobCacheKey);
