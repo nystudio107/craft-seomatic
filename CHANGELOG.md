@@ -5,6 +5,9 @@
 * Use `App::env()` to check environment ([#1210]https://github.com/nystudio107/craft-seomatic/pull/1210)
 * Added `CRAFT_ENVIRONMENT` check to `SeomaticVariable` ([#1210]https://github.com/nystudio107/craft-seomatic/pull/1210)
 
+### Fixed
+* Fixed an issue where the announcement migration would fail due to using closures (changed for the Craft 4.0.0 release)
+
 ## 4.0.8 - 2022.09.17
 ### Changed
 * Check both `ENVIRONMENT` and `CRAFT_ENVIRONMENT` when attempt to auto-determine the current environment
