@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\helpers;
 
 use Craft;
+use craft\helpers\App;
 use nystudio107\seomatic\Seomatic;
 
 /**
@@ -72,12 +73,12 @@ class Environment
         if (self::environmentOverriddenByConfig()) {
             return $env;
         }
-        // Try to also check the `ENVIRONMENT` env var
-        $environment = getenv('ENVIRONMENT');
-        $environment = $environment ?: getenv('CRAFT_ENVIRONMENT');
         if (Seomatic::$settings->manuallySetEnvironment) {
             return $env;
         }
+        // Try to also check the `ENVIRONMENT` env var
+        $environment = App::env('ENVIRONMENT');
+        $environment = $environment ?: App::env('CRAFT_ENVIRONMENT');
         if (!empty($environment)) {
             $environment = strtolower($environment);
             // See if the environment matches a development environment

@@ -9,13 +9,11 @@
 
 namespace nystudio107\seomatic\console\controllers;
 
+use Craft;
+use craft\helpers\App;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
-
-use Craft;
-use craft\helpers\App;
-
 use yii\console\Controller;
 
 /**
@@ -76,7 +74,7 @@ class SitemapController extends Controller
      */
     public function actionGenerate()
     {
-        echo 'Generating sitemap'.PHP_EOL;
+        echo 'Generating sitemap' . PHP_EOL;
         if ($this->siteId !== null) {
             $siteIds[] = $this->siteId;
         } else {
@@ -99,18 +97,12 @@ class SitemapController extends Controller
                 }
                 if ($metaBundle->metaSitemapVars->sitemapUrls && $process) {
                     echo 'Generating sitemap for '
-                        .$metaBundle->sourceType
-                        .' '
-                        .$metaBundle->sourceName
-                        .', siteId '
-                        .$siteId
-                        .PHP_EOL
-                    ;
-                    Seomatic::$plugin->sitemaps->invalidateSitemapCache(
-                        $metaBundle->sourceHandle,
-                        $siteId,
-                        $metaBundle->sourceBundleType
-                    );
+                        . $metaBundle->sourceType
+                        . ' '
+                        . $metaBundle->sourceName
+                        . ', siteId '
+                        . $siteId
+                        . PHP_EOL;
                     // Generate the sitemap so it is in the cache
                     $site = Craft::$app->getSites()->getSiteById($metaBundle->sourceSiteId);
                     if ($site) {
@@ -124,7 +116,7 @@ class SitemapController extends Controller
                         ]);
                     }
 
-                    echo '---'.PHP_EOL;
+                    echo '---' . PHP_EOL;
                 }
             }
         }

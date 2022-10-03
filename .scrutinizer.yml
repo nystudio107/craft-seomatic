@@ -3,7 +3,7 @@ build:
     node:
       version: v16
     php:
-      version: 7.4
+      version: 8
     mysql:
       version: 5.7
     hosts:

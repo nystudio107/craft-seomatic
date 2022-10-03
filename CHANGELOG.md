@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 4.0.9 - 2022.10.03
+### Changed
+* Use `App::env()` to check environment ([#1210](https://github.com/nystudio107/craft-seomatic/pull/1210))
+* Added `CRAFT_ENVIRONMENT` check to `SeomaticVariable` ([#1210](https://github.com/nystudio107/craft-seomatic/pull/1210))
+* Don't bother invalidating sitemaps via the console command, as it causes them to be regenerated twice
+* Use a stale-while-revalidate pattern for sitemap generation, so the old cached sitemap will be served until the new one as been regenerated due to an invalidation (content editing) ([#1213](https://github.com/nystudio107/craft-seomatic/issues/1213))
+
+### Fixed
+* Fixed an issue where the announcement migration would fail due to using closures (changed for the Craft 4.0.0 release)
+* Ensure that `$driver` is nullable in the install migration
+
 ## 4.0.8 - 2022.09.17
 ### Changed
 * Check both `ENVIRONMENT` and `CRAFT_ENVIRONMENT` when attempt to auto-determine the current environment
