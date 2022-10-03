@@ -11,12 +11,11 @@
 
 namespace nystudio107\seomatic\migrations;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
-
 use Craft;
 use craft\config\DbConfig;
 use craft\db\Migration;
+use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -29,9 +28,9 @@ class Install extends Migration
     // =========================================================================
 
     /**
-     * @var string The database driver to use
+     * @var ?string The database driver to use
      */
-    public $driver;
+    public ?string $driver = null;
 
     // Public Methods
     // =========================================================================
@@ -82,29 +81,29 @@ class Install extends Migration
             $this->createTable(
                 '{{%seomatic_metabundles}}',
                 [
-                    'id'          => $this->primaryKey(),
+                    'id' => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
-                    'uid'         => $this->uid(),
+                    'uid' => $this->uid(),
 
-                    'bundleVersion'              => $this->string()->notNull()->defaultValue(''),
-                    'sourceBundleType'           => $this->string()->notNull()->defaultValue(''),
-                    'sourceId'                   => $this->integer()->null(),
-                    'sourceName'                 => $this->string()->notNull()->defaultValue(''),
-                    'sourceHandle'               => $this->string()->notNull()->defaultValue(''),
-                    'sourceType'                 => $this->string(64)->notNull()->defaultValue(''),
-                    'typeId'                     => $this->integer()->null(),
-                    'sourceTemplate'             => $this->string(500)->defaultValue(''),
-                    'sourceSiteId'               => $this->integer()->null(),
-                    'sourceAltSiteSettings'      => $this->text(),
-                    'sourceDateUpdated'          => $this->dateTime()->notNull(),
-                    'metaGlobalVars'             => $this->text(),
-                    'metaSiteVars'               => $this->text(),
-                    'metaSitemapVars'            => $this->text(),
-                    'metaContainers'             => $this->text(),
-                    'redirectsContainer'         => $this->text(),
+                    'bundleVersion' => $this->string()->notNull()->defaultValue(''),
+                    'sourceBundleType' => $this->string()->notNull()->defaultValue(''),
+                    'sourceId' => $this->integer()->null(),
+                    'sourceName' => $this->string()->notNull()->defaultValue(''),
+                    'sourceHandle' => $this->string()->notNull()->defaultValue(''),
+                    'sourceType' => $this->string(64)->notNull()->defaultValue(''),
+                    'typeId' => $this->integer()->null(),
+                    'sourceTemplate' => $this->string(500)->defaultValue(''),
+                    'sourceSiteId' => $this->integer()->null(),
+                    'sourceAltSiteSettings' => $this->text(),
+                    'sourceDateUpdated' => $this->dateTime()->notNull(),
+                    'metaGlobalVars' => $this->text(),
+                    'metaSiteVars' => $this->text(),
+                    'metaSitemapVars' => $this->text(),
+                    'metaContainers' => $this->text(),
+                    'redirectsContainer' => $this->text(),
                     'frontendTemplatesContainer' => $this->text(),
-                    'metaBundleSettings'         => $this->text(),
+                    'metaBundleSettings' => $this->text(),
                 ]
             );
         }
