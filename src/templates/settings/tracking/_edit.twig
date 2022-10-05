@@ -126,7 +126,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("templateString"),
-                            }, "SeomaticTrackingField", "monaco-editor-background-frame") }}
+                            }, "SeomaticTrackingField", "monaco-editor-background-frame", {}, twigfieldOptions) }}
                             {{ forms.selectField({
                                 label: "Script Render Location"|t("seomatic"),
                                 instructions: "Determines where in the HTML document the script renders."|t("seomatic"),
@@ -141,7 +141,6 @@
                                 errors: scriptData.getErrors("position"),
                             }) }}
                         {% endif %}
-
                         {% if scriptData.bodyTemplatePath is defined and scriptData.bodyTemplatePath | length %}
                             {{ twigfield.textAreaField({
                                 label: "Body Script Template"|t("seomatic"),
@@ -152,7 +151,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("bodyTemplateString"),
-                            }, "SeomaticTrackingField", "monaco-editor-background-frame") }}
+                            }, "SeomaticTrackingField", "monaco-editor-background-frame", {}, twigfieldOptions) }}
 
                             {{ forms.selectField({
                                 label: "Body Script Render Location"|t("seomatic"),
