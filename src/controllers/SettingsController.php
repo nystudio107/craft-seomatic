@@ -17,7 +17,6 @@ use craft\models\Site;
 use craft\web\Controller;
 use DateTime;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
@@ -916,8 +915,9 @@ class SettingsController extends Controller
         }
         // Add in the variables to the autocomplete cache so they can be accessed across requests
         $subSectionSettings = $variables['scripts'][$subSection];
-        $cache = Craft::$app->getCache();
-        $cache->set(TrackingVarsAutocomplete::TRACKING_VARS_CACHE_KEY, $subSectionSettings->vars, TrackingVarsAutocomplete::TRACKING_VARS_CACHE_DURATION);
+        $variables['twigfieldOptions'] = [
+            'completeItems' => $subSectionSettings->vars
+        ];
         // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
