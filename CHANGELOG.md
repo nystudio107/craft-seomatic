@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.40 - UNRELEASED
+### Changed
+* Refactored `TrackingVarsAutocomplete` to use Twigfield `^1.0.12`'s ability to pass down data via `twigfieldOptions` rather than relying on the data cache
+
 ## 3.4.39 - 2022.10.03
 ### Changed
 * Don't bother invalidating sitemaps via the console command, as it causes them to be regenerated twice
