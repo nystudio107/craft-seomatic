@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.40 - UNRELEASED
+### Fixed
+* Allow SEOmatic to work (again) with Commerce 2, which doesn't have the assumed GraphQL interfaces available
+
 ### Changed
 * Refactored `TrackingVarsAutocomplete` to use Twigfield `^1.0.12`'s ability to pass down data via `twigfieldOptions` rather than relying on the data cache
 
