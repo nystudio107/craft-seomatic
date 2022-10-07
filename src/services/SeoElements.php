@@ -160,6 +160,6 @@ class SeoElements extends Component
             }
         }
 
-        return $interfaceNames;
+        return array_filter($interfaceNames);
     }
 }
