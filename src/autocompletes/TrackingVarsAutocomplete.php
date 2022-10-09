@@ -22,6 +22,11 @@ use nystudio107\twigfield\types\CompleteItemKind;
  */
 class TrackingVarsAutocomplete extends Autocomplete
 {
+    // Constants
+    // =========================================================================
+
+    const OPTIONS_DATA_KEY = 'TrackingVarsAutocomplete';
+
     // Public Properties
     // =========================================================================
 
@@ -53,7 +58,7 @@ class TrackingVarsAutocomplete extends Autocomplete
      */
     public function init(): void
     {
-        $this->vars = $this->twigfieldOptions['completeItems'] ?? [];
+        $this->vars = $this->twigfieldOptions[self::OPTIONS_DATA_KEY] ?? [];
     }
 
     /**
