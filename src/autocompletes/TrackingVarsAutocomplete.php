@@ -25,7 +25,7 @@ class TrackingVarsAutocomplete extends Autocomplete
     // Constants
     // =========================================================================
 
-    public const OPTIONS_DATA_KEY = 'TrackingVarsAutocomplete';
+    public const OPTIONS_DATA_KEY = 'SeomaticTrackingVars';
 
     // Public Properties
     // =========================================================================
