@@ -4,7 +4,9 @@ build:
       version: v16
     php:
       version: 8
-    hosts:
+      ini:
+        xdebug.mode: coverage
+      hosts:
       testcraft.test: '127.0.0.1'
     variables:
       DB_DSN: 'mysql:host=localhost;port=3306;dbname=testcraft'
