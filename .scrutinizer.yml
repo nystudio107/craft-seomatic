@@ -32,8 +32,6 @@ build:
       tests:
         override:
           - php-scrutinizer-run
-          - command: 'phpcs-run ./src'
-            use_website_config: false
           - js-scrutinizer-run
   tests:
     override:
