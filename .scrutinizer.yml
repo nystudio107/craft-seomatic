@@ -27,18 +27,16 @@ build:
       project_setup:
         override:
           - true
+      services:
+        mysql: 5.7
       tests:
         override:
           - php-scrutinizer-run
           - js-scrutinizer-run
-  tests:
-    services:
-      mysql: 5.7
-    override:
-      - command: 'php vendor/bin/codecept run unit --coverage-xml'
-        coverage:
-          file: tests/_output/coverage.xml
-          format: clover
+          - command: 'php vendor/bin/codecept run unit --coverage-xml'
+            coverage:
+              file: tests/_output/coverage.xml
+              format: clover
 checks:
   php: true
   javascript: true
