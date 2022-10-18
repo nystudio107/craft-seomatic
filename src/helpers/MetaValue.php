@@ -233,7 +233,24 @@ class MetaValue
 
     // Protected Methods
     // =========================================================================
-
+    
+    /**
+     * `str_contains` polyfill for PHP < 8.0
+     *
+     * @param string $haystack
+     * @param string $needle
+     *
+     * @return bool
+     */
+    protected static function internalStrContains($haystack, $needle)
+    {
+        if (function_exists('str_contains')) {
+            return str_contains($haystack, $needle);
+        } else {
+            return StringHelper::contains($haystack, $needle);
+        }
+    }
+    
     /**
      * @param string|Asset $metaValue
      * @param bool $resolveAliases Whether @ aliases should be resolved
