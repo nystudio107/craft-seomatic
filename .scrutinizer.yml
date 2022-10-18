@@ -4,8 +4,6 @@ build:
       version: v16
     php:
       version: 8
-    mysql:
-      version: 5.7
     hosts:
       testcraft.test: '127.0.0.1'
     variables:
@@ -34,6 +32,8 @@ build:
           - php-scrutinizer-run
           - js-scrutinizer-run
   tests:
+    services:
+      mysql: 5.7
     override:
       - command: 'php vendor/bin/codecept run unit --coverage-xml'
         coverage:
