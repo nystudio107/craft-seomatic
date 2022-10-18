@@ -21,11 +21,10 @@ build:
       - node_modules/
       - vendor/
       - ~/.composer/cache/
-  dependencies:
-    before:
-      - mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE testcraft'
   nodes:
     analysis:
+      before:
+        - mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE testcraft'
       project_setup:
         override:
           - true
