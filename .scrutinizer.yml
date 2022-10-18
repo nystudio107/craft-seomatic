@@ -32,8 +32,6 @@ build:
       tests:
         override:
           - php-scrutinizer-run
-          - command: 'phpcs-run ./src'
-            use_website_config: false
           - js-scrutinizer-run
   tests:
     override:
@@ -45,8 +43,7 @@ checks:
   php: true
   javascript: true
 coding_style:
-  php:
-    file_comment: false
+  php: { }
 filter:
   excluded_paths:
     - '*/dist/*'
