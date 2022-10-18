@@ -45,7 +45,7 @@ checks:
   php: true
   javascript: true
 coding_style:
-  php: { }
+  php: false
 filter:
   excluded_paths:
     - '*/dist/*'
