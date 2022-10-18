@@ -6,7 +6,7 @@ build:
       version: 8
       ini:
         xdebug.mode: coverage
-      hosts:
+    hosts:
       testcraft.test: '127.0.0.1'
     variables:
       DB_DSN: 'mysql:host=localhost;port=3306;dbname=testcraft'
