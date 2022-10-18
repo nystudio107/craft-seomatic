@@ -23,13 +23,14 @@ build:
       - ~/.composer/cache/
   nodes:
     analysis:
-      before:
-        - mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE testcraft'
       project_setup:
         override:
           - true
       services:
         mysql: 5.7
+      dependencies:
+        before:
+          - mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE testcraft'
       tests:
         override:
           - php-scrutinizer-run
