@@ -1,9 +1,10 @@
 # SEOmatic Changelog
 
-## 3.4.40 - UNRELEASED
+## 3.4.40 - 2022.10.19
 ### Fixed
 * Allow SEOmatic to work (again) with Commerce 2, which doesn't have the assumed GraphQL interfaces available
 * Fixed a regression that used `str_contains()`, which is unavailable on PHP < 8.0 and would throw an error on PHP 7.x ([#1221](https://github.com/nystudio107/craft-seomatic/issues/1221))
+* Fix `phpcs` coding style CI tests
 
 ### Changed
 * Refactored `TrackingVarsAutocomplete` to use Twigfield `^1.0.12`'s ability to pass down data via `twigfieldOptions` rather than relying on the data cache
