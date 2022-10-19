@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.10 - UNRELEASED
+## 4.0.10 - 2022.10.19
 ### Fixed
 * Fix `phpcs` coding style CI tests
 
