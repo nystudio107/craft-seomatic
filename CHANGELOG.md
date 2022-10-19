@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 4.0.10 - 2022.10.19
+### Fixed
+* Fix `phpcs` coding style CI tests
+
+### Changed
+* Refactored `TrackingVarsAutocomplete` to use Twigfield `^1.0.12`'s ability to pass down data via `twigfieldOptions` rather than relying on the data cache
+
 ## 4.0.9 - 2022.10.03
 ### Changed
 * Use `App::env()` to check environment ([#1210](https://github.com/nystudio107/craft-seomatic/pull/1210))

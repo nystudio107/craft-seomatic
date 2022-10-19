@@ -4,12 +4,12 @@ build:
       version: v16
     php:
       version: 8
-    mysql:
-      version: 5.7
+      ini:
+        xdebug.mode: coverage
     hosts:
       testcraft.test: '127.0.0.1'
     variables:
-      DB_DSN: 'mysql:host=localhost;port=3306;dbname=testcraft'
+      DB_DSN: 'mysql:host=127.0.0.1;port=3306;dbname=testcraft'
       DB_USER: 'root'
       DB_PASSWORD: ''
       DB_SCHEMA: ''
@@ -21,26 +21,24 @@ build:
       - node_modules/
       - vendor/
       - ~/.composer/cache/
-  dependencies:
-    before:
-      - mysql -uroot -e 'CREATE DATABASE testcraft'
   nodes:
     analysis:
       project_setup:
         override:
           - true
+      services:
+        mysql: 5.7
+      dependencies:
+        before:
+          - mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE testcraft'
       tests:
         override:
           - php-scrutinizer-run
-          - command: 'phpcs-run ./src'
-            use_website_config: false
           - js-scrutinizer-run
-  tests:
-    override:
-      - command: 'php vendor/bin/codecept run unit --coverage-xml'
-        coverage:
-          file: tests/_output/coverage.xml
-          format: clover
+          - command: 'php vendor/bin/codecept run unit --coverage-xml'
+            coverage:
+              file: tests/_output/coverage.xml
+              format: clover
 checks:
   php: true
   javascript: true

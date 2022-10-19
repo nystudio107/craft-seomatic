@@ -916,8 +916,9 @@ class SettingsController extends Controller
         }
         // Add in the variables to the autocomplete cache so they can be accessed across requests
         $subSectionSettings = $variables['scripts'][$subSection];
-        $cache = Craft::$app->getCache();
-        $cache->set(TrackingVarsAutocomplete::TRACKING_VARS_CACHE_KEY, $subSectionSettings->vars, TrackingVarsAutocomplete::TRACKING_VARS_CACHE_DURATION);
+        $variables['twigfieldOptions'] = [
+            TrackingVarsAutocomplete::OPTIONS_DATA_KEY => $subSectionSettings->vars
+        ];
         // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Tracking Scripts');
