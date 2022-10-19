@@ -10,7 +10,6 @@
 
 namespace nystudio107\seomatic\autocompletes;
 
-use Craft;
 use nystudio107\twigfield\base\Autocomplete;
 use nystudio107\twigfield\models\CompleteItem;
 use nystudio107\twigfield\types\AutocompleteTypes;
@@ -26,9 +25,7 @@ class TrackingVarsAutocomplete extends Autocomplete
     // Constants
     // =========================================================================
 
-    const TRACKING_VARS_CACHE_DURATION = 600;
-
-    const TRACKING_VARS_CACHE_KEY = 'SEOmaticTrackingVars';
+    const OPTIONS_DATA_KEY = 'SeomaticTrackingVars';
 
     // Public Properties
     // =========================================================================
@@ -61,11 +58,7 @@ class TrackingVarsAutocomplete extends Autocomplete
      */
     public function init(): void
     {
-        $cache = Craft::$app->getCache();
-        $vars = $cache->get(self::TRACKING_VARS_CACHE_KEY);
-        if ($vars !== false && is_array($vars)) {
-            $this->vars = $vars;
-        }
+        $this->vars = $this->twigfieldOptions[self::OPTIONS_DATA_KEY] ?? [];
     }
 
     /**

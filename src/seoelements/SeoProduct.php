@@ -11,28 +11,25 @@
 
 namespace nystudio107\seomatic\seoelements;
 
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use craft\base\ElementInterface;
+use craft\base\Model;
+use craft\commerce\elements\Product;
+use craft\commerce\events\ProductTypeEvent;
+use craft\commerce\gql\interfaces\elements\Product as ProductInterface;
+use craft\commerce\models\ProductType;
+use craft\commerce\Plugin as CommercePlugin;
+use craft\commerce\services\ProductTypes;
+use craft\elements\db\ElementQueryInterface;
+use craft\models\Site;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
-
-use Craft;
-use craft\base\ElementInterface;
-use craft\base\Model;
-use craft\elements\db\ElementQueryInterface;
-use craft\models\Site;
-
-use craft\commerce\Plugin as CommercePlugin;
-use craft\commerce\elements\Product;
-use craft\commerce\events\ProductTypeEvent;
-use craft\commerce\gql\interfaces\elements\Product as ProductInterface;
-use craft\commerce\models\ProductType;
-use craft\commerce\services\ProductTypes;
-
+use nystudio107\seomatic\Seomatic;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 
@@ -107,7 +104,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             ProductTypes::class,
             ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-            function(ProductTypeEvent $event) {
+            function (ProductTypeEvent $event) {
                 Craft::debug(
                     'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                     __METHOD__
@@ -214,8 +211,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         $query = Product::find()
             ->type($metaBundle->sourceHandle)
             ->siteId($metaBundle->sourceSiteId)
-            ->limit($metaBundle->metaSitemapVars->sitemapLimit)
-        ;
+            ->limit($metaBundle->metaSitemapVars->sitemapLimit);
 
         return $query;
     }
@@ -225,30 +221,30 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
      * and Element ID
      *
      * @param MetaBundle $metaBundle
-     * @param int        $elementId
-     * @param int        $siteId
+     * @param int $elementId
+     * @param int $siteId
      *
      * @return null|ElementInterface
      */
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
-        int $elementId,
-        int $siteId
-    ) {
+        int        $elementId,
+        int        $siteId
+    )
+    {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)
             ->limit(1)
-            ->one()
-            ;
+            ->one();
     }
 
     /**
      * Return a preview URI for a given $sourceHandle and $siteId
      * This just returns the first element
      *
-     * @param string    $sourceHandle
-     * @param int|null  $siteId
+     * @param string $sourceHandle
+     * @param int|null $siteId
      *
      * @return string|null
      */
@@ -258,8 +254,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         $element = Product::find()
             ->type($sourceHandle)
             ->siteId($siteId)
-            ->one()
-        ;
+            ->one();
         if ($element) {
             $uri = $element->uri;
         }
@@ -348,7 +343,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
      * Return the most recently updated Element from a given source model
      *
      * @param Model $sourceModel
-     * @param int   $sourceSiteId
+     * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
@@ -360,8 +355,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
-            ->one()
-            ;
+            ->one();
     }
 
     /**
@@ -476,6 +470,10 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function getGqlInterfaceTypeName()
     {
-        return ProductInterface::getName();
+        if (class_exists(ProductInterface::class)) {
+            return ProductInterface::getName();
+        }
+
+        return '';
     }
 }
