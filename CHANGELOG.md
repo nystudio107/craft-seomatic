@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.11 - UNRELEASED
+### Fixed
+* Fixed an issue with Twigfield was errantly loaded in SEO Settings fields ([#1229](https://github.com/nystudio107/craft-seomatic/issues/1229))
+
 ## 4.0.10 - 2022.10.19
 ### Fixed
 * Fix `phpcs` coding style CI tests
