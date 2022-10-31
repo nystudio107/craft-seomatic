@@ -13,7 +13,7 @@
     {% macro entireTwitterImageField(twitterImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
+                {{ _self.twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
                 {{ _self.twitterImageTransformField(field, metaBundleSettings, suffix) }}
