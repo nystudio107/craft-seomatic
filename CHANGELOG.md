@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.41 - UNRELEASED
+### Fixed
+* Fixed an issue with Twigfield was errantly loaded in SEO Settings fields ([#1229](https://github.com/nystudio107/craft-seomatic/issues/1229))
+
 ## 3.4.40 - 2022.10.19
 ### Fixed
 * Allow SEOmatic to work (again) with Commerce 2, which doesn't have the assumed GraphQL interfaces available
