@@ -13,7 +13,7 @@
     {% macro entireOgImageField(ogImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
+                {{ _self.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
                 {{ _self.ogImageTransformField(field, metaBundleSettings, suffix) }}
