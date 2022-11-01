@@ -1,6 +1,6 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
-{% import "twigfield/twigfield" as twigfield %}
+{% import 'codeeditor/codeEditor' as codeEditor %}
 
 <fieldset>
     <div class="flex">
@@ -20,7 +20,7 @@
             errors: securityTemplate.getErrors("include"),
         }) }}
 
-        {{ twigfield.textAreaField({
+        {{ codeEditor.textAreaField({
             label: "Security.txt Template"|t("seomatic"),
             instructions: "[security.txt](https://securitytxt.org/) defines a standard to help organizations define the process for security researchers to disclose security vulnerabilities securely"|t("seomatic") |raw,
             id: "templateString",
@@ -29,6 +29,6 @@
             class: "seomatic-javascript-editor selectize-text hidden",
             warning: false,
             errors: securityTemplate.getErrors("templateString"),
-        }, "Twigfield", "monaco-editor-background-frame") }}
+        }, "Twigfield", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
     {% endnamespace %}
 </fieldset>

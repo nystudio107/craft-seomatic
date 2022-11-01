@@ -13,7 +13,7 @@
     {% macro entireOgImageField(ogImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix) }}
+                {{ _self.ogImageField(ogImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
                 {{ _self.ogImageTransformField(field, metaBundleSettings, suffix) }}
@@ -119,7 +119,7 @@
         </div>
 
         {% import "_includes/forms" as forms %}
-        {% import "twigfield/twigfield" as twigfield %}
+        {% import 'codeeditor/codeEditor' as codeEditor %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -173,13 +173,13 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-imageSourceFromUrl">
                 {% if pageContext != "field" %}
-                    {{ twigfield.textField({
+                    {{ codeEditor.textField({
                         id: "ogImage" ~ suffix,
                         name: "ogImage",
                         value: metaGlobalVars.ogImage,
                         warning: false,
                         errors: metaGlobalVars.getErrors("ogImage"),
-                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                    }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.text({
                         id: "ogImage" ~ suffix,

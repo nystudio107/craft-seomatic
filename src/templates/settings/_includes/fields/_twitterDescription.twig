@@ -16,7 +16,7 @@
         </div>
 
         {% import "_includes/forms" as forms %}
-        {% import "twigfield/twigfield" as twigfield %}
+        {% import 'codeeditor/codeEditor' as codeEditor %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -50,13 +50,13 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
                 {% if pageContext != "field" %}
-                    {{ twigfield.textField({
+                    {{ codeEditor.textField({
                         id: "twitterDescription" ~ suffix,
                         name: "twitterDescription",
                         value: metaGlobalVars.twitterDescription,
                         warning: false,
                         errors: metaGlobalVars.getErrors("twitterDescription"),
-                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                    }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.textArea({
                         id: "twitterDescription" ~ suffix,

@@ -18,17 +18,17 @@
         </div>
 
         {% import "_includes/forms" as forms %}
-        {% import "twigfield/twigfield" as twigfield %}
+        {% import 'codeeditor/codeEditor' as codeEditor %}
 
         {% namespace "metaGlobalVars" %}
             {% if pageContext != "field" %}
-                {{ twigfield.textField({
+                {{ codeEditor.textField({
                     id: "canonicalUrl" ~ suffix,
                     name: "canonicalUrl",
                     value: metaGlobalVars.canonicalUrl,
                     warning: false,
                     errors: metaGlobalVars.getErrors("canonicalUrl"),
-                }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
             {% else %}
                 {% if seomatic.helper.craft31 and not disabled %}
                     {{ forms.autosuggestField({

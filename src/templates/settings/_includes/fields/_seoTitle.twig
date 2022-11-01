@@ -14,9 +14,9 @@
         <div class="instructions">
             <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
         </div>
-        
+
         {% import "_includes/forms" as forms %}
-        {% import "twigfield/twigfield" as twigfield %}
+        {% import 'codeeditor/codeEditor' as codeEditor %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -50,13 +50,13 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-textSourceFromUrl">
                 {% if pageContext != "field" %}
-                    {{ twigfield.textField({
+                    {{ codeEditor.textField({
                         id: "seoTitle" ~ suffix,
                         name: "seoTitle",
                         value: metaGlobalVars.seoTitle,
                         warning: false,
                         errors: metaGlobalVars.getErrors("seoTitle"),
-                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                    }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.text({
                         id: "seoTitle" ~ suffix,

@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 3.4.41 - 2022.11.01
+### Changed
+* Switch from Twigfield to Code Editor
+
+### Fixed
+* Fixed an issue with Twigfield was errantly loaded in SEO Settings fields ([#1229](https://github.com/nystudio107/craft-seomatic/issues/1229))
+* Fixed an issue where **Include Images & Videos in Sitemap** appeared in the SEO Settings field, despite being disabled in the field settings ([#1163](https://github.com/nystudio107/craft-seomatic/issues/1163))
+
 ## 3.4.40 - 2022.10.19
 ### Fixed
 * Allow SEOmatic to work (again) with Commerce 2, which doesn't have the assumed GraphQL interfaces available
