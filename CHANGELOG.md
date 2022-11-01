@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.11 - UNRELEASED
+## 4.0.11 - 2022.11.01
 ### Changed
 * Switch from Twigfield to Code Editor
 
