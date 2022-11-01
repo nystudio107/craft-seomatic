@@ -45,6 +45,11 @@ use craft\services\UserPermissions;
 use craft\utilities\ClearCaches;
 use craft\web\UrlManager;
 use craft\web\View;
+use nystudio107\codeeditor\autocompletes\EnvironmentVariableAutocomplete;
+use nystudio107\codeeditor\events\RegisterCodeEditorAutocompletesEvent;
+use nystudio107\codeeditor\events\RegisterTwigValidatorVariablesEvent;
+use nystudio107\codeeditor\services\AutocompleteService;
+use nystudio107\codeeditor\validators\TwigTemplateValidator;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
@@ -64,11 +69,6 @@ use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\ServicesTrait;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
-use nystudio107\twigfield\autocompletes\EnvironmentVariableAutocomplete;
-use nystudio107\twigfield\events\RegisterTwigfieldAutocompletesEvent;
-use nystudio107\twigfield\events\RegisterTwigValidatorVariablesEvent;
-use nystudio107\twigfield\services\AutocompleteService;
-use nystudio107\twigfield\validators\TwigTemplateValidator;
 use yii\base\Event;
 use yii\base\View as BaseView;
 use yii\web\View as YiiView;
@@ -850,9 +850,9 @@ class Seomatic extends Plugin
                 ];
             }
         );
-        // Handler: AutocompleteService::EVENT_REGISTER_TWIGFIELD_AUTOCOMPLETES
-        Event::on(AutocompleteService::class, AutocompleteService::EVENT_REGISTER_TWIGFIELD_AUTOCOMPLETES,
-            function (RegisterTwigfieldAutocompletesEvent $event) {
+        // Handler: AutocompleteService::EVENT_REGISTER_CODEEDITOR_AUTOCOMPLETES
+        Event::on(AutocompleteService::class, AutocompleteService::EVENT_REGISTER_CODEEDITOR_AUTOCOMPLETES,
+            function (RegisterCodeEditorAutocompletesEvent $event) {
                 if ($event->fieldType === self::SEOMATIC_EXPRESSION_FIELD_TYPE) {
                     $event->types[] = EnvironmentVariableAutocomplete::class;
                 }

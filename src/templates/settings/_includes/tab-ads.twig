@@ -1,6 +1,6 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
-{% import "twigfield/twigfield" as twigfield %}
+{% import 'codeeditor/codeEditor' as codeEditor %}
 
 <fieldset>
     <div class="flex">
@@ -20,7 +20,7 @@
             errors: adsTemplate.getErrors("include"),
         }) }}
 
-        {{ twigfield.textAreaField({
+        {{ codeEditor.textAreaField({
             label: "Ads.txt Template"|t("seomatic"),
             instructions: "The [ads.txt](https://iabtechlab.com/ads-txt/) project is simple: Increase transparency in the programmatic advertising ecosystem. ads.txt stands for Authorized Digital Sellers and is a simple, flexible and secure method that publishers and distributors can use to publicly declare the companies they authorize to sell their digital inventory."|t("seomatic") |raw,
             id: "templateString",
@@ -29,6 +29,6 @@
             class: "seomatic-javascript-editor selectize-text hidden",
             warning: false,
             errors: adsTemplate.getErrors("templateString"),
-        }, "Twigfield", "monaco-editor-background-frame") }}
+        }, "Twigfield", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
     {% endnamespace %}
 </fieldset>

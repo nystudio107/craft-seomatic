@@ -4,7 +4,7 @@
 
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
-{% import "twigfield/twigfield" as twigfield %}
+{% import 'codeeditor/codeEditor' as codeEditor %}
 
 {% block header %}
     {{ block('pageTitle') }}
@@ -109,7 +109,7 @@
                                 errors: scriptData.getErrors("tagAttrs"),
                             }) }}
 
-                            {{ twigfield.textAreaField({
+                            {{ codeEditor.textAreaField({
                                 label: "Script Template"|t("seomatic"),
                                 instructions: "The script that will render on the page. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
                                 id: "templateString",
@@ -118,7 +118,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("templateString"),
-                            }, "SeomaticTrackingField", "monaco-editor-background-frame", {}, twigfieldOptions) }}
+                            }, "SeomaticTrackingField", {}, codeEditorOptions | merge({wrapperClass: "monaco-editor-background-frame"})) }}
                             {{ forms.selectField({
                                 label: "Script Render Location"|t("seomatic"),
                                 instructions: "Determines where in the HTML document the script renders."|t("seomatic"),
@@ -135,7 +135,7 @@
                         {% endif %}
 
                         {% if scriptData.bodyTemplatePath is defined and scriptData.bodyTemplatePath | length %}
-                            {{ twigfield.textAreaField({
+                            {{ codeEditor.textAreaField({
                                 label: "Body Script Template"|t("seomatic"),
                                 instructions: "The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments."|t("seomatic"),
                                 id: "bodyTemplateString",
@@ -144,7 +144,7 @@
                                 class: "seomatic-javascript-editor selectize-text hidden",
                                 warning: false,
                                 errors: scriptData.getErrors("bodyTemplateString"),
-                            }, "SeomaticTrackingField", "monaco-editor-background-frame", {}, twigfieldOptions) }}
+                            }, "SeomaticTrackingField", {}, codeEditorOptions | merge({wrapperClass: "monaco-editor-background-frame"})) }}
 
                             {{ forms.selectField({
                                 label: "Body Script Render Location"|t("seomatic"),

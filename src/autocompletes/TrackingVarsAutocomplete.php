@@ -10,10 +10,10 @@
 
 namespace nystudio107\seomatic\autocompletes;
 
-use nystudio107\twigfield\base\Autocomplete;
-use nystudio107\twigfield\models\CompleteItem;
-use nystudio107\twigfield\types\AutocompleteTypes;
-use nystudio107\twigfield\types\CompleteItemKind;
+use nystudio107\codeeditor\base\Autocomplete;
+use nystudio107\codeeditor\models\CompleteItem;
+use nystudio107\codeeditor\types\AutocompleteTypes;
+use nystudio107\codeeditor\types\CompleteItemKind;
 
 /**
  * @author    nystudio107
@@ -58,7 +58,7 @@ class TrackingVarsAutocomplete extends Autocomplete
      */
     public function init(): void
     {
-        $this->vars = $this->twigfieldOptions[self::OPTIONS_DATA_KEY] ?? [];
+        $this->vars = $this->codeEditorOptions[self::OPTIONS_DATA_KEY] ?? [];
     }
 
     /**
