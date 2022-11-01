@@ -121,7 +121,7 @@
         </div>
 
         {% import "_includes/forms" as forms %}
-        {% import "twigfield/twigfield" as twigfield %}
+        {% import 'codeeditor/codeEditor' as codeEditor %}
 
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -176,13 +176,13 @@
         {% namespace "metaGlobalVars" %}
             <div class="input ltr seomatic-imageSourceFromUrl">
                 {% if pageContext != "field" %}
-                    {{ twigfield.textField({
+                    {{ codeEditor.textField({
                         id: "twitterImage" ~ suffix,
                         name: "twitterImage",
                         value: metaGlobalVars.twitterImage,
                         warning: false,
                         errors: metaGlobalVars.getErrors("twitterImage"),
-                    }, "SeomaticExpressionField", "monaco-editor-background-frame") }}
+                    }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.text({
                         id: "twitterImage" ~ suffix,
