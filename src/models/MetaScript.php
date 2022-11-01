@@ -12,9 +12,9 @@
 namespace nystudio107\seomatic\models;
 
 use Craft;
+use nystudio107\codeeditor\validators\TwigTemplateValidator;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
-use nystudio107\twigfield\validators\TwigTemplateValidator;
 use yii\web\View;
 use function is_string;
 

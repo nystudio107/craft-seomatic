@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 4.0.11 - 2022.11.01
+### Changed
+* Switch from Twigfield to Code Editor
+
+### Fixed
+* Fixed an issue with Twigfield was errantly loaded in SEO Settings fields ([#1229](https://github.com/nystudio107/craft-seomatic/issues/1229))
+* Fixed an issue where **Include Images & Videos in Sitemap** appeared in the SEO Settings field, despite being disabled in the field settings ([#1163](https://github.com/nystudio107/craft-seomatic/issues/1163))
+
 ## 4.0.10 - 2022.10.19
 ### Fixed
 * Fix `phpcs` coding style CI tests

@@ -916,7 +916,7 @@ class SettingsController extends Controller
         }
         // Add in the variables to the autocomplete cache so they can be accessed across requests
         $subSectionSettings = $variables['scripts'][$subSection];
-        $variables['twigfieldOptions'] = [
+        $variables['codeEditorOptions'] = [
             TrackingVarsAutocomplete::OPTIONS_DATA_KEY => $subSectionSettings->vars
         ];
         // Plugin and section settings

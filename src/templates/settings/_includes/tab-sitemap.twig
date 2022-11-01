@@ -25,7 +25,7 @@
 
     {# ############## Sitemap Assets ############## #}
 
-    {% if field is not defined or 'sitemapUrls' in field.sitemapEnabledFields %}
+    {% if field is not defined or 'sitemapAssets' in field.sitemapEnabledFields %}
         {% include "seomatic/settings/_includes/fields/_sitemapAssets.twig" %}
     {% endif %}
 

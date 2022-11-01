@@ -1,6 +1,6 @@
 {% from "seomatic/settings/_includes/macros.twig" import configWarning %}
 {% import "_includes/forms" as forms %}
-{% import "twigfield/twigfield" as twigfield %}
+{% import 'codeeditor/codeEditor' as codeEditor %}
 
 <fieldset>
     <div class="flex">
@@ -20,7 +20,7 @@
             errors: robotsTemplate.getErrors("include"),
         }) }}
 
-        {{ twigfield.textAreaField({
+        {{ codeEditor.textAreaField({
             label: "Robots.txt Template"|t("seomatic"),
             instructions: "A `robots.txt` file is a file at the root of your site that indicates those parts of your site you don’t want accessed by search engine crawlers. The file uses the [Robots Exclusion Standard](http://www.robotstxt.org/robotstxt.html), which is a protocol with a small set of commands that can be used to indicate access to your site by section and by specific kinds of web crawlers (such as mobile crawlers vs desktop crawlers)."|t("seomatic"),
             id: "templateString",
@@ -29,6 +29,6 @@
             class: "seomatic-javascript-editor selectize-text hidden",
             warning: false,
             errors: robotsTemplate.getErrors("templateString"),
-        }, "Twigfield", "monaco-editor-background-frame") }}
+        }, "Twigfield", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
     {% endnamespace %}
 </fieldset>
