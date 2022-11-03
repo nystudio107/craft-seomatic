@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 4.0.12 - 2022.11.03
+### Changed
+* Fixed an exception that could be thrown if you are using an SEO Settings field, by adding an explicit cast to `(array)` for checkbox field values that should be saved as an empty array `[]` but instead are saved as an empty string `''`. Believed to be a regression in Craft 4.3 ([#1233](https://github.com/nystudio107/craft-seomatic/issues/1233)) ([#1231](https://github.com/nystudio107/craft-seomatic/issues/1231))
+* Handle the case where an asset's `dateModified` is null ([#1234](https://github.com/nystudio107/craft-seomatic/issues/1234))
+
 ## 4.0.11 - 2022.11.01
 ### Changed
 * Switch from Twigfield to Code Editor

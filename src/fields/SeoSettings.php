@@ -231,7 +231,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             }
             // Handle the mainEntityOfPage
             $mainEntity = '';
-            if (in_array('mainEntityOfPage', $this->generalEnabledFields, false) &&
+            if (in_array('mainEntityOfPage', (array)$this->generalEnabledFields, false) &&
                 !empty($config['metaBundleSettings'])) {
                 $mainEntity = SchemaHelper::getSpecificEntityType($config['metaBundleSettings'], true);
             }

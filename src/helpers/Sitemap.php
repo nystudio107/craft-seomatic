@@ -1,14 +1,6 @@
 <?php
-namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\fastcgicachebust\FastcgiCacheBust;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\fields\SeoSettings;
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\jobs\GenerateSitemap;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\models\SitemapTemplate;
+namespace nystudio107\seomatic\helpers;
 
 use Craft;
 use craft\base\Element;
@@ -19,7 +11,14 @@ use craft\elements\Asset;
 use craft\elements\MatrixBlock;
 use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
-
+use nystudio107\fastcgicachebust\FastcgiCacheBust;
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+use nystudio107\seomatic\jobs\GenerateSitemap;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\models\SitemapTemplate;
+use nystudio107\seomatic\Seomatic;
 use yii\base\Exception;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -80,7 +79,7 @@ class Sitemap
 
         // Output some info if this is a console app
         if ($job && Craft::$app instanceof ConsoleApplication) {
-            echo $job->description.PHP_EOL;
+            echo $job->description . PHP_EOL;
         }
 
         $lines = [];
@@ -118,7 +117,7 @@ class Sitemap
                     $metaBundle->metaSitemapVars->sitemapLimit = null;
                 }
                 $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
-                if  ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
+                if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
                     $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
                 }
             }
@@ -153,7 +152,7 @@ class Sitemap
                     }
                     // Output some info if this is a console app
                     if (Craft::$app instanceof ConsoleApplication) {
-                        echo "Processing element {$currentElement}/{$totalElements} - {$element->title}".PHP_EOL;
+                        echo "Processing element {$currentElement}/{$totalElements} - {$element->title}" . PHP_EOL;
                     }
 
                     $metaBundle->metaSitemapVars->setAttributes($stashedSitemapAttrs, false);
@@ -241,14 +240,14 @@ class Sitemap
                                                 // If this is the primary site, add it as x-default, too
                                                 if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
                                                     $lines[] = '<xhtml:link rel="alternate"'
-                                                        .' hreflang="x-default"'
-                                                        .' href="'.Html::encode($altUrl).'"'
-                                                        .' />';
+                                                        . ' hreflang="x-default"'
+                                                        . ' href="' . Html::encode($altUrl) . '"'
+                                                        . ' />';
                                                 }
                                                 $lines[] = '<xhtml:link rel="alternate"'
-                                                    .' hreflang="'.$altSiteSettings['language'].'"'
-                                                    .' href="'.Html::encode($altUrl).'"'
-                                                    .' />';
+                                                    . ' hreflang="' . $altSiteSettings['language'] . '"'
+                                                    . ' href="' . Html::encode($altUrl) . '"'
+                                                    . ' />';
                                             }
                                         }
                                     }
@@ -347,11 +346,11 @@ class Sitemap
         }
 
         $cache = Craft::$app->getCache();
-        $cacheKey = SitemapTemplate::CACHE_KEY.$groupId.$type.$handle.$siteId;
+        $cacheKey = SitemapTemplate::CACHE_KEY . $groupId . $type . $handle . $siteId;
         $dependency = new TagDependency([
             'tags' => [
                 SitemapTemplate::GLOBAL_SITEMAP_CACHE_TAG,
-                SitemapTemplate::SITEMAP_CACHE_TAG.$handle.$siteId,
+                SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId,
             ],
         ]);
         $lines = implode('', $lines);
@@ -364,10 +363,10 @@ class Sitemap
         $result = $cache->set($cacheKey, $lines, $cacheDuration, $dependency);
         // Remove the queue job id from the cache too
         $cache->delete($queueJobCacheKey);
-        Craft::debug('Sitemap cache result: '.print_r($result, true).' for cache key: '.$cacheKey, __METHOD__);
+        Craft::debug('Sitemap cache result: ' . print_r($result, true) . ' for cache key: ' . $cacheKey, __METHOD__);
         // Output some info if this is a console app
         if (Craft::$app instanceof ConsoleApplication) {
-            echo 'Sitemap cache result: '.print_r($result, true).' for cache key: '.$cacheKey.PHP_EOL;
+            echo 'Sitemap cache result: ' . print_r($result, true) . ' for cache key: ' . $cacheKey . PHP_EOL;
         }
         // If the FastCGI Cache Bust plugin is installed, clear its caches too
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
@@ -421,7 +420,7 @@ class Sitemap
      * Combine any SEO Settings field settings from $element with the passed in
      * $metaBundle
      *
-     * @param Element    $element
+     * @param Element $element
      * @param MetaBundle $metaBundle
      */
     protected static function combineFieldSettings(Element $element, MetaBundle $metaBundle)
@@ -447,7 +446,7 @@ class Sitemap
 
                         $attributes = \array_intersect_key(
                             $attributes,
-                            array_flip($seoSettingsField->sitemapEnabledFields)
+                            array_flip((array)$seoSettingsField->sitemapEnabledFields)
                         );
                         $attributes = array_filter(
                             $attributes,
@@ -473,9 +472,9 @@ class Sitemap
     }
 
     /**
-     * @param Asset      $asset
+     * @param Asset $asset
      * @param MetaBundle $metaBundle
-     * @param array      $lines
+     * @param array $lines
      */
     protected static function assetSitemapItem(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
@@ -491,9 +490,9 @@ class Sitemap
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
                         if (!empty($asset[$fieldName]) && !empty($propName)) {
-                            $lines[] = '<image:'.$propName.'>';
+                            $lines[] = '<image:' . $propName . '>';
                             $lines[] = Html::encode($asset[$fieldName]);
-                            $lines[] = '</image:'.$propName.'>';
+                            $lines[] = '</image:' . $propName . '>';
                         }
                     }
                     $lines[] = '</image:image>';
@@ -509,9 +508,9 @@ class Sitemap
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
                         if (!empty($asset[$fieldName]) && !empty($propName)) {
-                            $lines[] = '<video:'.$propName.'>';
+                            $lines[] = '<video:' . $propName . '>';
                             $lines[] = Html::encode($asset[$fieldName]);
-                            $lines[] = '</video:'.$propName.'>';
+                            $lines[] = '</video:' . $propName . '>';
                         }
                     }
                     $lines[] = '</video:video>';
@@ -521,9 +520,9 @@ class Sitemap
     }
 
     /**
-     * @param Asset      $asset
+     * @param Asset $asset
      * @param MetaBundle $metaBundle
-     * @param array      $lines
+     * @param array $lines
      */
     protected static function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
