@@ -798,10 +798,10 @@ class MetaBundles extends Component
         $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
         if ($seoSettingsField) {
             $seoSettingsEnabledFields = array_flip(array_merge(
-                $seoSettingsField->generalEnabledFields,
-                $seoSettingsField->twitterEnabledFields,
-                $seoSettingsField->facebookEnabledFields,
-                $seoSettingsField->sitemapEnabledFields
+                (array)$seoSettingsField->generalEnabledFields,
+                (array)$seoSettingsField->twitterEnabledFields,
+                (array)$seoSettingsField->facebookEnabledFields,
+                (array)$seoSettingsField->sitemapEnabledFields
             ));
             // Always include some fields, as they are calculated even if not explicitly included
             $seoSettingsEnabledFields = array_merge(
