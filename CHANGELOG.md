@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.42 - UNRELEASED
+### Fixed
+* Handle the case where an asset's `dateModified` is null ([#1234](https://github.com/nystudio107/craft-seomatic/issues/1234))
+
 ## 3.4.41 - 2022.11.01
 ### Changed
 * Switch from Twigfield to Code Editor
