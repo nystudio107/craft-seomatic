@@ -151,8 +151,9 @@ class ImageTransform
             }
             // If we have a url, add an `mtime` param to cache bust
             if (!empty($url) && empty(parse_url($url, PHP_URL_QUERY))) {
+                $now = new \DateTime();
                 $url = UrlHelper::url($url, [
-                    'mtime' => $asset->dateModified->getTimestamp(),
+                    'mtime' => $asset->dateModified->getTimestamp() ?? $now->getTimestamp(),
                 ]);
             }
         }
