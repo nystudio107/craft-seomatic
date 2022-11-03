@@ -576,7 +576,7 @@ class DynamicMeta
                             $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
                             if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
                                 // If sitemaps are off for this entry, don't include the URL
-                                if (in_array('sitemapUrls', $seoSettingsField->sitemapEnabledFields, false)
+                                if (in_array('sitemapUrls', (array)$seoSettingsField->sitemapEnabledFields, false)
                                     && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
                                     && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaSitemapVars, 'sitemapUrls')
                                 ) {

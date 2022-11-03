@@ -829,7 +829,7 @@ class MetaBundles extends Component
 
 
             // Handle the mainEntityOfPage
-            if (!in_array('mainEntityOfPage', $seoSettingsField->generalEnabledFields, false)) {
+            if (!in_array('mainEntityOfPage', (array)$seoSettingsField->generalEnabledFields, false)) {
                 $metaBundle->metaGlobalVars->mainEntityOfPage = '';
             }
             // metaSiteVars
