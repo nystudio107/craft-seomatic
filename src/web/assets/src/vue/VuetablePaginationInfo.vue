@@ -1,7 +1,8 @@
 <template>
-  <div :class="['vuetable-pagination-info', css.infoClass]"
-    v-html="paginationInfo">
-  </div>
+  <div
+    :class="['vuetable-pagination-info', css.infoClass]"
+    v-html="paginationInfo"
+  />
 </template>
 
 <script>

@@ -1,13 +1,24 @@
 <template>
-    <div class="filter-bar">
-        <div class="ui form">
-            <div class="inline field">
-                <label class="text-gray-600">Search for:</label>
-                <input type="text" v-model="filterText" class="text nicetext" @keyup="doFilter" placeholder="">
-                <button class="btn delete icon" @click="resetFilter">Reset</button>
-            </div>
-        </div>
+  <div class="filter-bar">
+    <div class="ui form">
+      <div class="inline field">
+        <label class="text-gray-600">Search for:</label>
+        <input
+          v-model="filterText"
+          type="text"
+          class="text nicetext"
+          placeholder=""
+          @keyup="doFilter"
+        >
+        <button
+          class="btn delete icon"
+          @click="resetFilter"
+        >
+          Reset
+        </button>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

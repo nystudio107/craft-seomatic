@@ -12,8 +12,8 @@ const vm = new Vue({
     },
     data: {
     },
-    methods: {
-    },
     mounted() {
+    },
+    methods: {
     },
 });

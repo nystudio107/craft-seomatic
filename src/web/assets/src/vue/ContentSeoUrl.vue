@@ -1,8 +1,16 @@
 <template>
-    <div>
-        <span class="status" :style="{ backgroundColor: rowData.setup['color'] }" :title="'Setup Grade: ' + rowData.setup['name']"></span>
-        <a :href="rowData.contentSeoUrl" class="go" :title="linkTitle">{{ rowData.sourceName }}</a>
-    </div>
+  <div>
+    <span
+      class="status"
+      :style="{ backgroundColor: rowData.setup['color'] }"
+      :title="'Setup Grade: ' + rowData.setup['name']"
+    />
+    <a
+      :href="rowData.contentSeoUrl"
+      class="go"
+      :title="linkTitle"
+    >{{ rowData.sourceName }}</a>
+  </div>
 </template>
 
 <script>

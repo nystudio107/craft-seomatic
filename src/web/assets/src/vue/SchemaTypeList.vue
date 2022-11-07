@@ -1,26 +1,33 @@
 <!-- Vue SFC -->
 <template>
-    <div class="field">
-        <div class="py-3">
-            <treeselect
-                    v-model="value"
-                    ref="treeselect"
-                    :multiple="false"
-                    :flat="false"
-                    :default-expand-level="0"
-                    :options="options"
-                    :disabled="disabled"
-            />
-        </div>
-        <div v-if="schemaName !== null" class="heading">
-            <div class="instructions">
-                <p>
-                    <a :href="'http://schema.org/' + schemaName" rel="noopener" target="_blank">{{ schemaName }} info: </a>
-                    {{ schemaDescription }}
-                </p>
-            </div>
-        </div>
+  <div class="field">
+    <div class="py-3">
+      <treeselect
+        ref="treeselect"
+        v-model="value"
+        :multiple="false"
+        :flat="false"
+        :default-expand-level="0"
+        :options="options"
+        :disabled="disabled"
+      />
     </div>
+    <div
+      v-if="schemaName !== null"
+      class="heading"
+    >
+      <div class="instructions">
+        <p>
+          <a
+            :href="'http://schema.org/' + schemaName"
+            rel="noopener"
+            target="_blank"
+          >{{ schemaName }} info: </a>
+          {{ schemaDescription }}
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -37,6 +44,16 @@
         props: {
           entity: {type: String, default: null},
           disabled: {type: Boolean, default: false}
+        },
+        data() {
+            return {
+                schemaName: null,
+                schemaDescription: null,
+                // define the default value
+                value: null,
+                // define options
+                options: [],
+            }
         },
         watch: {
             schemaName: function(value) {
@@ -69,16 +86,6 @@
                 }
                 $(document).trigger('schema-value-changed', value);
             });
-        },
-        data() {
-            return {
-                schemaName: null,
-                schemaDescription: null,
-                // define the default value
-                value: null,
-                // define options
-                options: [],
-            }
         },
     }
 </script>

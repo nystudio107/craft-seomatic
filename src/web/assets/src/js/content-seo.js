@@ -24,13 +24,13 @@ const vm = new Vue({
     'content-seo-table': ContentSeoTable,
   },
   data: {},
+  mounted() {
+    this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
+  },
   methods: {
     onTableRefresh(vuetable) {
       Vue.nextTick(() => vuetable.refresh());
     }
-  },
-  mounted() {
-    this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
   },
 });
 

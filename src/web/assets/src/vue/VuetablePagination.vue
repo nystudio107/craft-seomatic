@@ -1,39 +1,64 @@
 <template>
-  <div v-show="tablePagination && tablePagination.last_page > 1" :class="css.wrapperClass">
-    <a @click="loadPage(1)"
-      :class="['btn-nav', css.linkClass, isOnFirstPage ? css.disabledClass : '']">
-        <i v-if="css.icons.first != ''" :class="[css.icons.first]"></i>
-        <span v-else>&laquo;</span>
+  <div
+    v-show="tablePagination && tablePagination.last_page > 1"
+    :class="css.wrapperClass"
+  >
+    <a
+      :class="['btn-nav', css.linkClass, isOnFirstPage ? css.disabledClass : '']"
+      @click="loadPage(1)"
+    >
+      <i
+        v-if="css.icons.first != ''"
+        :class="[css.icons.first]"
+      />
+      <span v-else>&laquo;</span>
     </a>
-    <a @click="loadPage('prev')"
-      :class="['btn-nav', css.linkClass, isOnFirstPage ? css.disabledClass : '']">
-        <i v-if="css.icons.next != ''" :class="[css.icons.prev]"></i>
-        <span v-else>&nbsp;&lsaquo;</span>
+    <a
+      :class="['btn-nav', css.linkClass, isOnFirstPage ? css.disabledClass : '']"
+      @click="loadPage('prev')"
+    >
+      <i
+        v-if="css.icons.next != ''"
+        :class="[css.icons.prev]"
+      />
+      <span v-else>&nbsp;&lsaquo;</span>
     </a>
     <template v-if="notEnoughPages">
       <template v-for="n in totalPage">
-        <a @click="loadPage(n)"
+        <a
           :class="[css.pageClass, isCurrentPage(n) ? css.activeClass : '']"
-          v-html="n">
-        </a>
+          @click="loadPage(n)"
+          v-html="n"
+        />
       </template>
     </template>
     <template v-else>
       <template v-for="n in windowSize">
-        <a @click="loadPage(windowStart+n-1)"
+        <a
           :class="[css.pageClass, isCurrentPage(windowStart+n-1) ? css.activeClass : '']"
-          v-html="windowStart+n-1">
-        </a>
+          @click="loadPage(windowStart+n-1)"
+          v-html="windowStart+n-1"
+        />
       </template>
     </template>
-    <a @click="loadPage('next')"
-      :class="['btn-nav', css.linkClass, isOnLastPage ? css.disabledClass : '']">
-      <i v-if="css.icons.next != ''" :class="[css.icons.next]"></i>
+    <a
+      :class="['btn-nav', css.linkClass, isOnLastPage ? css.disabledClass : '']"
+      @click="loadPage('next')"
+    >
+      <i
+        v-if="css.icons.next != ''"
+        :class="[css.icons.next]"
+      />
       <span v-else>&rsaquo;&nbsp;</span>
     </a>
-    <a @click="loadPage(totalPage)"
-      :class="['btn-nav', css.linkClass, isOnLastPage ? css.disabledClass : '']">
-      <i v-if="css.icons.last != ''" :class="[css.icons.last]"></i>
+    <a
+      :class="['btn-nav', css.linkClass, isOnLastPage ? css.disabledClass : '']"
+      @click="loadPage(totalPage)"
+    >
+      <i
+        v-if="css.icons.last != ''"
+        :class="[css.icons.last]"
+      />
       <span v-else>&raquo;</span>
     </a>
   </div>

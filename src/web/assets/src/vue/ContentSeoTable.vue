@@ -1,30 +1,31 @@
 <template>
-    <div class="py-4">
-        <vuetable-filter-bar></vuetable-filter-bar>
-        <div class="vuetable-pagination clearafter">
-            <vuetable-pagination-info ref="paginationInfoTop"
-            ></vuetable-pagination-info>
-            <vuetable-pagination ref="paginationTop"
-                                 @vuetable-pagination:change-page="onChangePage"
-            ></vuetable-pagination>
-        </div>
-        <vuetable ref="vuetable"
-                  :api-url=apiUrl
-                  :per-page="20"
-                  :fields="fields"
-                  :css="css"
-                  :sort-order="sortOrder"
-                  :append-params="moreParams"
-                  @vuetable:pagination-data="onPaginationData"
-        ></vuetable>
-        <div class="vuetable-pagination clearafter">
-            <vuetable-pagination-info ref="paginationInfo"
-            ></vuetable-pagination-info>
-            <vuetable-pagination ref="pagination"
-                                 @vuetable-pagination:change-page="onChangePage"
-            ></vuetable-pagination>
-        </div>
+  <div class="py-4">
+    <vuetable-filter-bar />
+    <div class="vuetable-pagination clearafter">
+      <vuetable-pagination-info ref="paginationInfoTop" />
+      <vuetable-pagination
+        ref="paginationTop"
+        @vuetable-pagination:change-page="onChangePage"
+      />
     </div>
+    <vuetable
+      ref="vuetable"
+      :api-url="apiUrl"
+      :per-page="20"
+      :fields="fields"
+      :css="css"
+      :sort-order="sortOrder"
+      :append-params="moreParams"
+      @vuetable:pagination-data="onPaginationData"
+    />
+    <div class="vuetable-pagination clearafter">
+      <vuetable-pagination-info ref="paginationInfo" />
+      <vuetable-pagination
+        ref="pagination"
+        @vuetable-pagination:change-page="onChangePage"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,7 +36,7 @@
     import VueTablePaginationInfo from '@/vue/VuetablePaginationInfo.vue';
     import VueTableFilterBar from '@/vue/VuetableFilterBar.vue';
 
-    Vue.component('content-seo-url', ContentSeoUrl);
+    Vue.component('ContentSeoUrl', ContentSeoUrl);
     // Our component exports
     export default {
         components: {

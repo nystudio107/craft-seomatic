@@ -1,5 +1,12 @@
 <template>
-    <apexcharts class="cursor-pointer" width="100%" height="310px" type="radialBar" :options="chartOptions" :series="series"></apexcharts>
+  <apexcharts
+    class="cursor-pointer"
+    width="100%"
+    height="310px"
+    type="radialBar"
+    :options="chartOptions"
+    :series="series"
+  />
 </template>
 
 <script>
@@ -16,10 +23,6 @@
             series: Array,
             showLabels: {type: Boolean, default: false},
             url: {type: String, default: ''},
-        },
-        methods: {
-        },
-        created: function() {
         },
         data: function() {
             return {
@@ -72,6 +75,10 @@
                     labels: this.labels,
                 },
             }
+        },
+        created: function() {
+        },
+        methods: {
         },
     }
 </script>

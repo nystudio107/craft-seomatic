@@ -28,9 +28,9 @@ if (window.schemaSelectClass !== undefined) {
         'schema-type-list': SchemaTypeList,
       },
       data: {},
-      methods: {},
       mounted() {
       },
+      methods: {},
     });
   }
 }
