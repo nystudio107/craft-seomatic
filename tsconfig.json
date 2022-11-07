@@ -2,7 +2,6 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "buildchain/node_modules",
     "declaration": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -25,9 +24,6 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "target": "esnext",
-    "typeRoots": [
-      "buildchain/node_modules/@types"
-    ]
   },
   "include": [
     "./src/web/assets/src/**/*.js",
