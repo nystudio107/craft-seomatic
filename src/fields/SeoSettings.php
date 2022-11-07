@@ -279,8 +279,8 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            Seomatic::$plugin->vite->register('seomatic.js', false, $tagOptions, $tagOptions);
-            Seomatic::$plugin->vite->register('seomatic-meta.js', false, $tagOptions, $tagOptions);
+            Seomatic::$plugin->vite->register('src/js/seomatic.js', false, $tagOptions, $tagOptions);
+            Seomatic::$plugin->vite->register('src/js/seomatic-meta.js', false, $tagOptions, $tagOptions);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
@@ -313,8 +313,8 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            Seomatic::$plugin->vite->register('seomatic.js', false, $tagOptions, $tagOptions);
-            Seomatic::$plugin->vite->register('seomatic-meta.js', false, $tagOptions, $tagOptions);
+            Seomatic::$plugin->vite->register('src/js/seomatic.js', false, $tagOptions, $tagOptions);
+            Seomatic::$plugin->vite->register('src/js/seomatic-meta.js', false, $tagOptions, $tagOptions);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
