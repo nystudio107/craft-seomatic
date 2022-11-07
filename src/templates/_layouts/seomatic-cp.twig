@@ -2,18 +2,10 @@
 
 {% block head %}
     {{ parent() }}
-    {{ seomatic.manifest.registerCssModules([
-        'vendors.css',
-        'styles.css',
-    ]) }}
-{% endblock %}
-
-{% block foot %}
-    {{ parent() }}
-    {{ seomatic.manifest.registerJsModules([
-        'runtime.js',
-        'vendors.js',
-        'commons.js',
-        'seomatic.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset'
+        ],
+    } %}
+    {{ seomatic.vite.register('src/js/seomatic.js', false, tagOptions, tagOptions) }}
 {% endblock %}
