@@ -28,8 +28,6 @@ if (window.schemaSelectClass !== undefined) {
         'schema-type-list': SchemaTypeList,
       },
       data: {},
-      mounted() {
-      },
       methods: {},
     });
   }
@@ -76,7 +74,7 @@ function initFieldSettings() {
   // Show/hide the script settings containers
   var selector = $('.seomatic-script-lightswitch').find('.lightswitch');
   $(selector).each(function (index, value) {
-    var value = $(this).find('input').first().val();
+    value = $(this).find('input').first().val();
     if (value) {
       $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').show();
     } else {

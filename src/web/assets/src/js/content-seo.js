@@ -13,6 +13,7 @@
  * @package   SEOmatic
  * @since     3.0.0
  */
+import Vue from 'vue';
 import VueEvents from 'vue-events';
 import ContentSeoTable from '@/vue/ContentSeoTable.vue';
 
