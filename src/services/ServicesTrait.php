@@ -11,7 +11,7 @@
 
 namespace nystudio107\seomatic\services;
 
-use nystudio107\pluginmanifest\services\ManifestService;
+use nystudio107\pluginvite\services\VitePluginService;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\services\FrontendTemplates as FrontendTemplatesService;
 use nystudio107\seomatic\services\Helper as HelperService;
@@ -42,7 +42,7 @@ use yii\base\InvalidConfigException;
  * @property SitemapsService $sitemaps
  * @property TagService $tag
  * @property TitleService $title
- * @property ManifestService $manifest
+ * @property VitePluginService $vite
  */
 trait ServicesTrait
 {
@@ -67,12 +67,16 @@ trait ServicesTrait
                 'sitemaps' => SitemapsService::class,
                 'tag' => TagService::class,
                 'title' => TitleService::class,
-                // Register the manifest service
-                'manifest' => [
-                    'class' => ManifestService::class,
+                // Register the vite service
+                'vite' => [
+                    'class' => VitePluginService::class,
                     'assetClass' => SeomaticAsset::class,
-                    'devServerManifestPath' => 'http://craft-seomatic-buildchain:8080/',
-                    'devServerPublicPath' => 'http://craft-seomatic-buildchain:8080/',
+                    'useDevServer' => true,
+                    'devServerPublic' => 'http://localhost:3001',
+                    'serverPublic' => 'http://localhost:8000',
+                    'errorEntry' => 'src/js/seomatic.js',
+                    'devServerInternal' => 'http://craft-seomatic-buildchain:3001',
+                    'checkDevServer' => true,
                 ],
             ]
         ];
@@ -203,13 +207,13 @@ trait ServicesTrait
     }
 
     /**
-     * Returns the manifest service
+     * Returns the vite service
      *
-     * @return ManifestService The manifest service
+     * @return VitePluginService The vite service
      * @throws InvalidConfigException
      */
-    public function getManifest(): ManifestService
+    public function getVite(): VitePluginService
     {
-        return $this->get('manifest');
+        return $this->get('vite');
     }
 }

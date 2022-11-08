@@ -1,5 +1,5 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
-{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/web/assets/dist', true) %}
 
 {{ seomatic.manifest.registerCssModules([
     'vendors.css',
@@ -21,6 +21,7 @@
         overflow: hidden;
         display: inline-block;
     }
+
     div.displaypreview {
         padding: 0;
         margin: 0;
