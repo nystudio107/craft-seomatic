@@ -7,11 +7,14 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
 {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/web/assets/dist', true) %}
 
-{% block foot %}
+{% block head %}
     {{ parent() }}
-    {{ seomatic.manifest.registerJsModules([
-        'dashboard.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset'
+        ],
+    } %}
+    {{ seomatic.vite.register('src/js/dashboard.js', false, tagOptions, tagOptions) }}
 {% endblock %}
 
 {% block contextMenu %}
