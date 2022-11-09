@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.13 - UNRELEASED
+### Changed
+* Switch from Webpack to Vite for the plugin asset build system
+
 ### Fixed
 * Fix query level structureDepth 'Invalid numeric value: 1<=' ([#1238](https://github.com/nystudio107/craft-seomatic/pull/1238))
 
