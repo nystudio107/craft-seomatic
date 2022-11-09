@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.42 - UNRELEASED
+### Changed
+* Switch from Webpack to Vite for the plugin asset build system
+
 ### Fixed
 * Handle the case where an asset's `dateModified` is null ([#1234](https://github.com/nystudio107/craft-seomatic/issues/1234))
 
