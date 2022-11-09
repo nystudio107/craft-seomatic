@@ -227,7 +227,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
             ->limit($metaBundle->metaSitemapVars->sitemapLimit);
         if ($metaBundle->sourceType === 'structure'
             && !empty($metaBundle->metaSitemapVars->structureDepth)) {
-            $query->level($metaBundle->metaSitemapVars->structureDepth . '<=');
+            $query->level('<=' . $metaBundle->metaSitemapVars->structureDepth);
         }
 
         return $query;
