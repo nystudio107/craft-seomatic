@@ -1,0 +1,58 @@
+/**
+ * components/tables.css
+ *
+ * Project Tables.
+ *
+ */
+
+table.vuetable {
+  width: 100%;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
+.seomatic-menubtn-asc::after {
+  content: "downangle";
+}
+
+.seomatic-menubtn-desc::after {
+  content: "upangle";
+}
+
+/**
+ * Content SEO table
+ */
+
+table.seomatic-content-seo th.vuetable-th-component-id {
+  width: 25% !important;
+}
+
+table.seomatic-content-seo th.vuetable-th-entries {
+  width: 6% !important;
+}
+
+table.seomatic-content-seo th.vuetable-th-sourcetype {
+  width: 10% !important;
+}
+
+table.seomatic-content-seo th.sortable {
+  cursor: pointer;
+}
+
+/**
+ * Column alignment
+ */
+th.text-center,
+td.text-center {
+  text-align: center !important;
+}
+
+th.text-right,
+td.text-right {
+  text-align: right !important;
+}
+
+th.text-left,
+td.text-left {
+  text-align: left !important;
+}

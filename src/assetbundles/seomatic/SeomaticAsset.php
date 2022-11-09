@@ -30,7 +30,7 @@ class SeomaticAsset extends AssetBundle
      */
     public function init()
     {
-        $this->sourcePath = '@nystudio107/seomatic/assetbundles/seomatic/dist';
+        $this->sourcePath = '@nystudio107/seomatic/web/assets/dist';
 
         $this->depends = [
             CpAsset::class,
