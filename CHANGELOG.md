@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.13 - UNRELEASED
+### Fixed
+* Fix query level structureDepth 'Invalid numeric value: 1<=' ([#1238](https://github.com/nystudio107/craft-seomatic/pull/1238))
+
 ## 4.0.12 - 2022.11.03
 ### Changed
 * Fixed an exception that could be thrown if you are using an SEO Settings field, by adding an explicit cast to `(array)` for checkbox field values that should be saved as an empty array `[]` but instead are saved as an empty string `''`. Believed to be a regression in Craft 4.3 ([#1233](https://github.com/nystudio107/craft-seomatic/issues/1233)) ([#1231](https://github.com/nystudio107/craft-seomatic/issues/1231))
