@@ -25,6 +25,7 @@
             noarchive: "No Archive - Do not archive a cached version of this page"|t("seomatic"),
             noimageindex : "No Image Index - Do not index images on this page"|t("seomatic"),
         } %}
+        {% set disableRobotsSelect = disableRobotsSelect|default(false) %}
 
         {% namespace "metaGlobalVars" %}
             {{ forms.selectField({
@@ -34,6 +35,17 @@
                 value: metaGlobalVars.robots,
                 errors: metaGlobalVars.getErrors("robots"),
             }) }}
+            <script>
+              window.robotsSelectClass = '{{ "robotsselect-wrapper" }}';
+            </script>
+            {% js %}
+              window.robotsSelectClass = '{{ "robotsselect-wrapper" }}';
+            {% endjs %}
+            <div class="robotsselect-wrapper" tabindex="0">
+                <robots-select>
+                    {% if disableRobotsSelect %}disabled="true"{% endif %}
+                </robots-select>
+            </div>
         {% endnamespace %}
     {% endmacro %}
 

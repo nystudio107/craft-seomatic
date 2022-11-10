@@ -3,17 +3,16 @@
   <div class="field">
     <div class="py-3">
       <treeselect
-        ref="treeselect"
+        ref="robotsselect"
         v-model="value"
-        :multiple="false"
+        :multiple=true
         :flat="true"
-        :default-expand-level="0"
+        :default-expand-level=0
         :options="options"
         :disabled="disabled"
       />
     </div>
     <div
-      v-if="schemaName !== null"
       class="heading"
     >
       <div class="instructions">
@@ -41,11 +40,20 @@ export default {
       // define the default value
       value: null,
       // define options
-      options: [],
+      options: [
+        {id: 'all', label: 'all'},
+        {id: 'noindex', label: 'noindex'},
+        {id: 'nofollow', label: 'nofollow'},
+        {id: 'none', label: 'none'},
+        {id: 'noarchive', label: 'noarchive'},
+        {id: 'nositelinkssearchbox', label: 'nositelinkssearchbox'},
+        {id: 'nosnippet', label: 'nosnippet'},
+        {id: 'indexifembedded', label: 'indexifembedded'},
+      ],
     }
   },
   mounted() {
-    this.$refs.treeselect.$on('input', (value, instance) => {
+    this.$refs.robotsselect.$on('input', (value, instance) => {
       console.log(value);
     });
   },
