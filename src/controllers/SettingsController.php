@@ -409,6 +409,7 @@ class SettingsController extends Controller
             }
 
             if ($hasErrors) {
+                Craft::error(print_r($metaBundle->metaGlobalVars->getErrors(), true), __METHOD__);
                 Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save settings due to a Twig error."));
                 // Send the redirect back to the template
                 Craft::$app->getUrlManager()->setRouteParams([
