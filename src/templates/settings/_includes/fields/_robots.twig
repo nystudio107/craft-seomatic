@@ -7,41 +7,65 @@
     'settingName': 'robots'
 } %}
 
+{% do view.registerTranslations('seomatic', [
+    "There are no restrictions for indexing or serving. (default)",
+    "Do not show this page, media, or resource in search results.",
+    "Do not follow the links on this page.",
+    "Equivalent to noindex, nofollow.",
+    "Do not show a cached link in search results.",
+    "Do not show a sitelinks search box in the search results for this page.",
+    "Do not show a text snippet or video preview in the search results for this page.",
+    "Google is allowed to index the content of a page if it's embedded in another page through iframes or similar HTML tags, in spite of a noindex directive.",
+    "No snippet is to be shown. Equivalent to nosnippet.",
+    "Google will choose the snippet length that it believes is most effective. (default)",
+    "No image preview is to be shown.",
+    "A default image preview may be shown. (default)",
+    "A larger image preview, up to the width of the viewport, may be shown.",
+    "At most, a static image may be used, in accordance to the max-image-preview setting.",
+    "There is no limit. (default)",
+    "Don't offer translation of this page in search results.",
+    "Do not index images on this page.",
+]) %}
+
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro robotsField(metaGlobalVars, pageContex, suffix) %}
+    {% macro robotsField(metaGlobalVars, pageContex, suffix, disableRobotsSelect) %}
         <div class="instructions">
-            <p>{{ "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results."|t("seomatic") }}</p>
+            {{ "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results. [Learn More](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)"|t("seomatic") | md | raw }}
         </div>
 
         {% import "_includes/forms" as forms %}
 
-        {% set robotOptions = {
-            "": "",
-            all: "All - Index this page and follow links (default)"|t("seomatic"),
-            none: "None - Do not index or follow links on this page"|t("seomatic"),
-            noindex: "No Index - Do not index this page"|t("seomatic"),
-            nofollow: "No Follow - Do not follow links on this page"|t("seomatic"),
-            nosnippet: "No Snippet - Do not show rich snippets from this page"|t("seomatic"),
-            noarchive: "No Archive - Do not archive a cached version of this page"|t("seomatic"),
-            noimageindex : "No Image Index - Do not index images on this page"|t("seomatic"),
-        } %}
+        {% set disableRobotsSelect = disableRobotsSelect|default(false) %}
 
         {% namespace "metaGlobalVars" %}
-            {{ forms.selectField({
+            {{ forms.hidden({
                 id: "robots" ~ suffix,
                 name: "robots",
-                options: robotOptions,
                 value: metaGlobalVars.robots,
                 errors: metaGlobalVars.getErrors("robots"),
             }) }}
+            <script>
+              window.robotsSelectClass = '{{ "robotsselect-wrapper" }}';
+            </script>
+            {% js %}
+            window.robotsSelectClass = '{{ "robotsselect-wrapper" }}';
+            {% endjs %}
+            <div class="robotsselect-wrapper" tabindex="0">
+                <robots-select
+                    value="{{ metaGlobalVars.robots }}"
+                    input-id="{{ ("robots" ~ suffix) | namespaceInputId }}"
+                    {% if disableRobotsSelect %}disabled="true"{% endif %}
+                >
+                </robots-select>
+            </div>
         {% endnamespace %}
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.robotsField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext, "-inherited") }}
+        {{ _self.robotsField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext, "-inherited", true) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.robotsField(metaGlobalVars, pageContext, "") }}
+        {{ _self.robotsField(metaGlobalVars, pageContext, "", false) }}
     {% endblock %}
 {% endembed %}

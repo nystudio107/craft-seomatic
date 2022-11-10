@@ -5,9 +5,12 @@
  *
  */
 
-.ace_editor {
-    line-height: unset !important;
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+div.vue-treeselect:focus-within {
+    box-shadow: var(--focus-ring);
+}
+
+.reduce-focus-visibility .vue-treeselect__input-container > input:focus-visible {
+    box-shadow: none !important;
 }
 
 div.seomatic-field {

@@ -9,6 +9,7 @@
  */
 
 import SchemaTypeList from "@/vue/SchemaTypeList.vue";
+import RobotsSelect from "@/vue/RobotsSelect.vue";
 
 /**
  * @author    nystudio107
@@ -26,6 +27,23 @@ if (window.schemaSelectClass !== undefined) {
       el: '#' + elementId,
       components: {
         'schema-type-list': SchemaTypeList,
+      },
+      data: {},
+      methods: {},
+    });
+  }
+}
+
+if (window.robotsSelectClass !== undefined) {
+  // Create our vue instance(s)
+  for (const el of document.querySelectorAll('.' + window.robotsSelectClass)) {
+    let elementId = 'vue-robots-select' + Math.round(Math.random() * 1000);
+    el.setAttribute('id', elementId);
+
+    new Vue({
+      el: '#' + elementId,
+      components: {
+        'robots-select': RobotsSelect,
       },
       data: {},
       methods: {},
