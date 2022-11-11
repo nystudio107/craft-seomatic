@@ -5,14 +5,19 @@
       <treeselect
         ref="robotsselect"
         v-model="componentValue"
-        :multiple=true
-        :flat=true
-        :disable-branch-nodes=true
-        :default-expand-level=0
+        :multiple="true"
+        :flat="true"
+        :disable-branch-nodes="true"
+        :default-expand-level="0"
         :options="options"
         :disabled="disabled"
       >
-        <div slot="value-label" slot-scope="{ node }">{{ node.raw.customLabel }}</div>
+        <div
+          slot="value-label"
+          slot-scope="{ node }"
+        >
+          {{ node.raw.customLabel }}
+        </div>
       </treeselect>
     </div>
   </div>
@@ -49,18 +54,6 @@ export default {
     inputId: {type: String, default: null},
     disabled: {type: Boolean, default: false}
   },
-  computed: {
-    stringValue() {
-      return this.jsonValue.join(',');
-    },
-    jsonValue() {
-      let val = this.value;
-      if (typeof val === 'undefined' || val === '') {
-        val = 'all';
-      }
-      return val.split(',');
-    },
-  },
   data() {
     return {
       // define the default value
@@ -72,6 +65,18 @@ export default {
         customLabel: value,
       })),
     }
+  },
+  computed: {
+    stringValue() {
+      return this.jsonValue.join(',');
+    },
+    jsonValue() {
+      let val = this.value;
+      if (typeof val === 'undefined' || val === '') {
+        val = 'all';
+      }
+      return val.split(',');
+    },
   },
   mounted() {
     this.componentValue = this.jsonValue;
