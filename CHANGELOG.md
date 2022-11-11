@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.13 - UNRELEASED
+### Added
+* Greatly improved the Robots field, allowing you to pick multiple values, and additional values added by Google ([#1237](https://github.com/nystudio107/craft-seomatic/issues/1237))
+
 ### Changed
 * Switch from Webpack to Vite for the plugin asset build system
 
