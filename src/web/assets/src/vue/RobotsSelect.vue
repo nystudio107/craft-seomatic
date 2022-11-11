@@ -55,7 +55,7 @@ export default {
     },
     jsonValue() {
       let val = this.value;
-      if (typeof val === undefined || val === '') {
+      if (typeof val === 'undefined' || val === '') {
         val = 'all';
       }
       return val.split(',');
@@ -76,7 +76,7 @@ export default {
   mounted() {
     this.componentValue = this.jsonValue;
     this.$refs.robotsselect.$on('input', (value, instance) => {
-      if (typeof value === undefined || value.length === 0) {
+      if (typeof value === 'undefined' || value.length === 0) {
         value = ['all'];
       }
       document.getElementById(this.inputId).value = value.join(',');
