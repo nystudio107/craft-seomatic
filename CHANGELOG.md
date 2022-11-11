@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.4.42 - 2022.11.11
+### Added
+* Greatly improved the Robots field, allowing you to pick multiple values, and additional values added by Google ([#1237](https://github.com/nystudio107/craft-seomatic/issues/1237))
+
+### Changed
+* Switch from Webpack to Vite for the plugin asset build system
+
+### Fixed
+* Handle the case where an asset's `dateModified` is null ([#1234](https://github.com/nystudio107/craft-seomatic/issues/1234))
+
 ## 3.4.41 - 2022.11.01
 ### Changed
 * Switch from Twigfield to Code Editor

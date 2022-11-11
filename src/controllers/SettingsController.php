@@ -117,7 +117,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Enabled sites
@@ -320,7 +320,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Basic variables
@@ -508,6 +508,7 @@ class SettingsController extends Controller
             }
 
             if ($hasErrors) {
+                Craft::error(print_r($metaBundle->metaGlobalVars->getErrors(), true), __METHOD__);
                 Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save settings due to a Twig error."));
                 // Send the redirect back to the template
                 Craft::$app->getUrlManager()->setRouteParams([
@@ -551,7 +552,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Basic variables
@@ -633,7 +634,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Enabled sites
@@ -911,7 +912,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Basic variables
@@ -1078,7 +1079,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Basic variables
@@ -1160,7 +1161,7 @@ class SettingsController extends Controller
             Craft::error($e->getMessage(), __METHOD__);
         }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Basic variables
