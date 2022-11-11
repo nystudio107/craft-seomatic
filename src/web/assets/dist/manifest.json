@@ -27,7 +27,7 @@
     "src": "../src/web/assets/src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic.e85cca5f.css"
+      "assets/seomatic.015767dd.css"
     ]
   },
   "../src/web/assets/src/js/seomatic-meta.js": {
@@ -53,7 +53,7 @@
     "src": "../src/web/assets/src/js/seomatic-meta.css"
   },
   "../src/web/assets/src/js/seomatic.css": {
-    "file": "assets/seomatic.e85cca5f.css",
+    "file": "assets/seomatic.015767dd.css",
     "src": "../src/web/assets/src/js/seomatic.css"
   }
 }
