@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.13 - UNRELEASED
+## 4.0.13 - 2022.11.11
 ### Added
 * Greatly improved the Robots field, allowing you to pick multiple values, and additional values added by Google ([#1237](https://github.com/nystudio107/craft-seomatic/issues/1237))
 
