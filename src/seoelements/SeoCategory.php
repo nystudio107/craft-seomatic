@@ -224,7 +224,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             ->siteId($metaBundle->sourceSiteId)
             ->limit($metaBundle->metaSitemapVars->sitemapLimit);
         if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
-            $query->level($metaBundle->metaSitemapVars->structureDepth . '<=');
+            $query->level('<=' . $metaBundle->metaSitemapVars->structureDepth);
         }
 
         return $query;

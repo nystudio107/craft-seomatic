@@ -1,14 +1,12 @@
 {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
-{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+{% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/web/assets/dist', true) %}
 
-{{ seomatic.manifest.registerCssModules([
-    'vendors.css',
-    'styles.css',
-]) }}
-
-{{ seomatic.manifest.registerJsModules([
-    'seomatic.js',
-]) }}
+{% set tagOptions = {
+    'depends': [
+        'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset'
+    ],
+} %}
+{{ seomatic.vite.register('src/js/seomatic.js', false, tagOptions, tagOptions) }}
 
 {% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
 
@@ -21,6 +19,7 @@
         overflow: hidden;
         display: inline-block;
     }
+
     div.displaypreview {
         padding: 0;
         margin: 0;

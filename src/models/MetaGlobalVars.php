@@ -257,21 +257,6 @@ class MetaGlobalVars extends InheritableSettingsModel
                 'player',
             ],
             ],
-            [
-                'robots', 'in', 'range' => [
-                'all',
-                'index',
-                'noindex',
-                'follow',
-                'nofollow',
-                'none',
-                'noodp',
-                'noarchive',
-                'nosnippet',
-                'noimageindex',
-                'nocache',
-            ],
-            ],
         ];
     }
 }

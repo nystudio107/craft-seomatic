@@ -278,31 +278,22 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     public function getSettingsHtml(): ?string
     {
         $variables = [];
+        $tagOptions = [
+            'depends' => [
+                'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset',
+            ]
+        ];
         // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            Seomatic::$plugin->manifest->registerCssModules([
-                'styles.css',
-                'vendors.css',
-            ]);
-            Seomatic::$plugin->manifest->registerJsModules([
-                'runtime.js',
-                'vendors.js',
-                'commons.js',
-                'seomatic.js',
-                'seomatic-meta.js',
-            ]);
+            Seomatic::$plugin->vite->register('src/js/seomatic.js', false, $tagOptions, $tagOptions);
+            Seomatic::$plugin->vite->register('src/js/seomatic-meta.js', false, $tagOptions, $tagOptions);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
         // Asset bundle
-        try {
-            Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-        } catch (InvalidConfigException $e) {
-            Craft::error($e->getMessage(), __METHOD__);
-        }
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         $variables['field'] = $this;
@@ -321,25 +312,22 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     {
         $variables = [];
         // JS/CSS modules
+        $tagOptions = [
+            'depends' => [
+                'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset',
+            ]
+        ];
+        // JS/CSS modules
         try {
             Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-            Seomatic::$plugin->manifest->registerCssModules([
-                'styles.css',
-                'vendors.css',
-            ]);
-            Seomatic::$plugin->manifest->registerJsModules([
-                'runtime.js',
-                'vendors.js',
-                'commons.js',
-                'seomatic.js',
-                'seomatic-meta.js',
-            ]);
+            Seomatic::$plugin->vite->register('src/js/seomatic.js', false, $tagOptions, $tagOptions);
+            Seomatic::$plugin->vite->register('src/js/seomatic-meta.js', false, $tagOptions, $tagOptions);
         } catch (InvalidConfigException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
         // Asset bundle
         $variables['baseAssetsUrl'] = Craft::$app->assetManager->getPublishedUrl(
-            '@nystudio107/seomatic/assetbundles/seomatic/dist',
+            '@nystudio107/seomatic/web/assets/dist',
             true
         );
         // Basic variables

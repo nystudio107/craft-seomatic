@@ -12,23 +12,22 @@
 
 {% block head %}
     {{ parent() }}
-{% endblock %}
-
-{% block foot %}
-    {{ parent() }}
-    {{ seomatic.manifest.registerJsModules([
-        'content-seo.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset'
+        ],
+    } %}
+    {{ seomatic.vite.register('src/js/content-seo.js', false, tagOptions, tagOptions) }}
 {% endblock %}
 
 {% set content %}
-<div class="readable">
-    <div id="cp-nav-content">
-        <content-seo-table
+    <div class="readable">
+        <div id="cp-nav-content">
+            <content-seo-table
                 :site-id="{{ currentSiteId }}"
                 :api-url="'{{ actionUrl('seomatic/content-seo/meta-bundles') }}'"
-        >
-        </content-seo-table>
+            >
+            </content-seo-table>
+        </div>
     </div>
-</div>
 {% endset %}

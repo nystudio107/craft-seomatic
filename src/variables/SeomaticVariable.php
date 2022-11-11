@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\variables;
 use Craft;
 use craft\helpers\App;
 use craft\helpers\UrlHelper;
-use nystudio107\pluginmanifest\variables\ManifestVariable as Manifest;
+use nystudio107\pluginvite\services\VitePluginService;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\models\MetaGlobalVars;
 use nystudio107\seomatic\models\MetaSitemapVars;
@@ -40,7 +40,7 @@ use yii\di\ServiceLocator;
  * @property Script script
  * @property Tag tag
  * @property Title title
- * @property Manifest manifest
+ * @property VitePluginService vite
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -97,10 +97,8 @@ class SeomaticVariable extends ServiceLocator
             'script' => Script::class,
             'tag' => Tag::class,
             'title' => Title::class,
-            'manifest' => [
-                'class' => Manifest::class,
-                'manifestService' => Seomatic::$plugin->manifest,
-            ]
+            // Register the vite service
+            'vite' => Seomatic::$plugin->getVite(),
         ];
 
         $config['components'] = $components;

@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
-        {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist', true) %}
+<head>
+    {% do view.registerAssetBundle("nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset") %}
+    {% set baseAssetsUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/web/assets/dist', true) %}
 
-        {% set vendorsCssUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist/css/vendors.css', true) %}
-        {% set stylesCssUrl = view.getAssetManager().getPublishedUrl('@nystudio107/seomatic/assetbundles/seomatic/dist/css/styles.css', true) %}
-        <link rel="stylesheet" href="{{ vendorsCssUrl }}" />
-        <link rel="stylesheet" href="{{ stylesCssUrl }}" />
-    </head>
-    <body style="background-color: rgb(241, 245, 248);">
+    {{ seomatic.vite.script('src/js/seomatic.js', false) | raw }}
+</head>
+<body style="background-color: rgb(241, 245, 248);">
 
-        {% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
-        {% set previewTypes = previewTypes ?? seomatic.config.sidebarDisplayPreviewTypes ?? ['google', 'twitter', 'facebook'] %}
-        <style>
-            div.displaypreview {
-                padding: 0;
-            }
-        </style>
-        <div class="meta">
-            <div style="font-family: sans-serif; padding: 0 1em;">
-                {% if 'google' in previewTypes %}
-                    {% include "seomatic/_includes/googlePreview.twig" %}
-                {% endif %}
+{% set displayPreviewInlineStyles = "border: none; padding-left: 0;" %}
+{% set previewTypes = previewTypes ?? seomatic.config.sidebarDisplayPreviewTypes ?? ['google', 'twitter', 'facebook'] %}
+<style>
+    div.displaypreview {
+        padding: 0;
+    }
+</style>
+<div class="meta">
+    <div style="font-family: sans-serif; padding: 0 1em;">
+        {% if 'google' in previewTypes %}
+            {% include "seomatic/_includes/googlePreview.twig" %}
+        {% endif %}
 
-                {% if 'twitter' in previewTypes %}
-                    {% include "seomatic/_includes/twitterPreview.twig" %}
-                {% endif %}
+        {% if 'twitter' in previewTypes %}
+            {% include "seomatic/_includes/twitterPreview.twig" %}
+        {% endif %}
 
-                {% if 'facebook' in previewTypes %}
-                    {% include "seomatic/_includes/facebookPreview.twig" %}
-                {% endif %}
+        {% if 'facebook' in previewTypes %}
+            {% include "seomatic/_includes/facebookPreview.twig" %}
+        {% endif %}
 
-                {% if 'linkedin' in previewTypes %}
-                    {% include "seomatic/_includes/linkedinPreview.twig" %}
-                {% endif %}
+        {% if 'linkedin' in previewTypes %}
+            {% include "seomatic/_includes/linkedinPreview.twig" %}
+        {% endif %}
 
-                {% if 'pinterest' in previewTypes %}
-                    {% include "seomatic/_includes/pinterestPreview.twig" %}
-                {% endif %}
+        {% if 'pinterest' in previewTypes %}
+            {% include "seomatic/_includes/pinterestPreview.twig" %}
+        {% endif %}
 
-                {% if 'slack' in previewTypes %}
-                    {% include "seomatic/_includes/slackPreview.twig" %}
-                {% endif %}
+        {% if 'slack' in previewTypes %}
+            {% include "seomatic/_includes/slackPreview.twig" %}
+        {% endif %}
 
-                {% if 'discord' in previewTypes %}
-                    {% include "seomatic/_includes/discordPreview.twig" %}
-                {% endif %}
+        {% if 'discord' in previewTypes %}
+            {% include "seomatic/_includes/discordPreview.twig" %}
+        {% endif %}
 
-            </div>
-        </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

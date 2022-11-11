@@ -1,0 +1,59 @@
+{
+  "../src/web/assets/src/img/Seomatic-icon.svg": {
+    "file": "assets/Seomatic-icon.c671f9a1.svg",
+    "src": "../src/web/assets/src/img/Seomatic-icon.svg"
+  },
+  "../src/web/assets/src/js/dashboard.js": {
+    "file": "assets/dashboard.44b92ea0.js",
+    "src": "../src/web/assets/src/js/dashboard.js",
+    "isEntry": true,
+    "imports": [
+      "_vueComponentNormalizer.5c2c5e6e.js"
+    ]
+  },
+  "../src/web/assets/src/js/content-seo.js": {
+    "file": "assets/content-seo.f03d0b40.js",
+    "src": "../src/web/assets/src/js/content-seo.js",
+    "isEntry": true,
+    "imports": [
+      "_vueComponentNormalizer.5c2c5e6e.js"
+    ],
+    "css": [
+      "assets/content-seo.5c36e73b.css"
+    ]
+  },
+  "../src/web/assets/src/js/seomatic.js": {
+    "file": "assets/seomatic.5c40acba.js",
+    "src": "../src/web/assets/src/js/seomatic.js",
+    "isEntry": true,
+    "css": [
+      "assets/seomatic.015767dd.css"
+    ]
+  },
+  "../src/web/assets/src/js/seomatic-meta.js": {
+    "file": "assets/seomatic-meta.bc6a7d57.js",
+    "src": "../src/web/assets/src/js/seomatic-meta.js",
+    "isEntry": true,
+    "imports": [
+      "_vueComponentNormalizer.5c2c5e6e.js"
+    ],
+    "css": [
+      "assets/seomatic-meta.3fbed9de.css"
+    ]
+  },
+  "_vueComponentNormalizer.5c2c5e6e.js": {
+    "file": "assets/vueComponentNormalizer.5c2c5e6e.js"
+  },
+  "../src/web/assets/src/js/content-seo.css": {
+    "file": "assets/content-seo.5c36e73b.css",
+    "src": "../src/web/assets/src/js/content-seo.css"
+  },
+  "../src/web/assets/src/js/seomatic-meta.css": {
+    "file": "assets/seomatic-meta.3fbed9de.css",
+    "src": "../src/web/assets/src/js/seomatic-meta.css"
+  },
+  "../src/web/assets/src/js/seomatic.css": {
+    "file": "assets/seomatic.015767dd.css",
+    "src": "../src/web/assets/src/js/seomatic.css"
+  }
+}

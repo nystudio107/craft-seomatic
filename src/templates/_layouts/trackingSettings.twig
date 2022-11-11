@@ -1,10 +1,13 @@
 {% extends "seomatic/_layouts/seomatic-cp.twig" %}
 
-{% block foot %}
+{% block head %}
     {{ parent() }}
-    {{ seomatic.manifest.registerJsModules([
-        'seomatic-meta.js',
-    ]) }}
+    {% set tagOptions = {
+        'depends': [
+            'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset'
+        ],
+    } %}
+    {{ seomatic.vite.register('src/js/seomatic-meta.js', false, tagOptions, tagOptions) }}
 {% endblock %}
 
 {% set navItems = {
