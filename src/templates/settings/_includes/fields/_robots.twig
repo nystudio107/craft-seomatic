@@ -50,7 +50,7 @@
             {% js %}
             window.robotsSelectClass = '{{ "robotsselect-wrapper" }}';
             {% endjs %}
-            <div class="robotsselect-wrapper" tabindex="0">
+            <div class="robotsselect-wrapper">
                 <robots-select
                     value="{{ metaGlobalVars.robots }}"
                     input-id="{{ ("robots" ~ suffix) | namespaceInputId }}"
