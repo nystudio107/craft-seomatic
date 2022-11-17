@@ -237,7 +237,7 @@ class Text
             // Find any text fields inside of the matrix block
             if ($neoBlockTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fields = $neoBlockTypeModel->getFields();
+                $fields = $neoBlockTypeModel->getCustomFields();
 
                 foreach ($fields as $field) {
                     /** @var array $fieldClasses */
