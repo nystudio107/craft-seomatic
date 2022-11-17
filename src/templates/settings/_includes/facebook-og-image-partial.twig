@@ -65,18 +65,18 @@
     {# ############## OpenGraph Image Macros ############## #}
 
     {% macro ogImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
-        <div class="heading">
-            <label for="metaBundleSettings-ogImageTransformMode{{ suffix }}">
-                {{ "Facebook OpenGraph Image Transform Mode"|t("seomatic") }}
-            </label>
-        </div>
-        <div class="instructions">
-            <p>{{ "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic") }}</p>
-        </div>
         {% import "_includes/forms" as forms %}
 
         <div class="field"
              {% if field is not null and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
+            <div class="heading">
+                <label for="metaBundleSettings-ogImageTransformMode{{ suffix }}">
+                    {{ "Facebook OpenGraph Image Transform Mode"|t("seomatic") }}
+                </label>
+            </div>
+            <div class="instructions">
+                <p>{{ "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic") }}</p>
+            </div>
             {% namespace "metaBundleSettings" %}
                 {{ forms.selectField({
                     id: "ogImageTransformMode" ~ suffix,
