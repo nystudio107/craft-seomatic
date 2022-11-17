@@ -4,6 +4,9 @@
 ### Changed
 * Better styling for the Robots focus ring
 
+### Fixed
+* Fixed an issue where the Facebook Opengraph Image Transform Mode would appear in an SEO Settings field, even if it was disabled ([#1240](https://github.com/nystudio107/craft-seomatic/issues/1240))
+
 ## 3.4.42 - 2022.11.11
 ### Added
 * Greatly improved the Robots field, allowing you to pick multiple values, and additional values added by Google ([#1237](https://github.com/nystudio107/craft-seomatic/issues/1237))
