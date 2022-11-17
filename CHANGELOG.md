@@ -6,6 +6,7 @@
 
 ### Fixed
 * Fixed an issue where the Facebook Opengraph Image Transform Mode would appear in an SEO Settings field, even if it was disabled ([#1240](https://github.com/nystudio107/craft-seomatic/issues/1240))
+* Fixed an issue where `extractTextFromField()` would throw an exception for Neo fields ([#1242](https://github.com/nystudio107/craft-seomatic/issues/1242))
 
 ## 4.0.13 - 2022.11.11
 ### Added
