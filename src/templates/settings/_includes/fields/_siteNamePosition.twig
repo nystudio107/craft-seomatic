@@ -13,6 +13,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro siteNamePositionField(metaBundleSettings, metaGlobalVars, pageContext, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         {% import "_includes/forms" as forms %}
 
         {% set textOptions = {
@@ -45,6 +46,7 @@
                         value: metaBundleSettings.siteNamePositionSource,
                         class: "seomatic-textSourceSelect",
                         errors: metaBundleSettings.getErrors("siteNamePositionSource"),
+                        disabled: disabled,
                     }) }}
                 </div>
             </div>
@@ -59,6 +61,7 @@
                     value: metaGlobalVars.siteNamePosition,
                     warning: false,
                     errors: metaGlobalVars.getErrors("siteNamePosition"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}

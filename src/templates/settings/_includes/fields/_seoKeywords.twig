@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro seoKeywordsField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "Google ignores SEO Keywords tag; though other search engines do look at it. Utilize it carefully, as improper or spammy use most likely will hurt you, or even have your site marked as spam."|t("seomatic") }}</p>
         </div>
@@ -27,6 +28,7 @@
                     value: metaBundleSettings.seoKeywordsSource,
                     class: "seomatic-textSourceSelect",
                     errors: metaBundleSettings.getErrors("seoKeywordsSource"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -42,6 +44,7 @@
                         options: textFieldSources,
                         value: metaBundleSettings.seoKeywordsField,
                         errors: metaBundleSettings.getErrors("seoKeywordsField"),
+                        disabled: disabled,
                     }) }}
                 </div>
             {% endnamespace %}
@@ -56,6 +59,7 @@
                         value: metaGlobalVars.seoKeywords,
                         warning: false,
                         errors: metaGlobalVars.getErrors("seoKeywords"),
+                        disabled: disabled,
                     }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.textField({
@@ -67,6 +71,7 @@
                         showCharsLeft: true,
                         warning: false,
                         errors: metaGlobalVars.getErrors("seoKeywords"),
+                        disabled: disabled,
                     }) }}
                 {% endif %}
             </div>
