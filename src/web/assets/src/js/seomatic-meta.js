@@ -74,11 +74,6 @@ window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
 function initFieldSettings() {
-
-  const disableInputs = ($obj) => $obj.find('input, select, button, textarea').prop('disabled', true);
-  disableInputs($('.inheritable-field .inherited'));
-
-  $('.inheritable-field .override .lightswitch:not(.on) input').val(0);
   $('.inheritable-field .override .lightswitch').on('change', function (ev) {
     if ($(this).hasClass('on')) {
       $(this).parents('.inheritable-field').addClass('defined-settings').removeClass('inherited-settings');

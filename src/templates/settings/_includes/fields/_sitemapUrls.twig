@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro sitemapUrlsField(currentSourceBundleType, metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>
                 {{ "Whether URLs in this #{currentSourceBundleType} should be included in the sitemap"|t("seomatic") }}
@@ -25,6 +26,7 @@
                 on: metaSitemapVars.sitemapUrls,
                 warning: false,
                 errors: metaSitemapVars.getErrors("sitemapUrls"),
+                disabled: disabled,
             }) }}
 
         {% endnamespace %}

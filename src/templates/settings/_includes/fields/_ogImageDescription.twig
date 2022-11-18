@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro ogImageDescriptionField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "A text description of the image conveying the essential nature of an image to users who are visually impaired."|t("seomatic") }}</p>
         </div>
@@ -27,6 +28,7 @@
                     value: metaBundleSettings.ogImageDescriptionSource,
                     class: "seomatic-textSourceSelect",
                     errors: metaBundleSettings.getErrors("ogImageDescriptionSource"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -42,6 +44,7 @@
                         options: textFieldSources,
                         value: metaBundleSettings.ogImageDescriptionField,
                         errors: metaBundleSettings.getErrors("ogImageDescriptionField"),
+                        disabled: disabled,
                     }) }}
                 </div>
             {% endnamespace %}
@@ -56,6 +59,7 @@
                         value: metaGlobalVars.ogImageDescription,
                         warning: false,
                         errors: metaGlobalVars.getErrors("ogImageDescription"),
+                        disabled: disabled,
                     }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.textArea({
@@ -67,6 +71,7 @@
                         showCharsLeft: true,
                         warning: false,
                         errors: metaGlobalVars.getErrors("ogImageDescription"),
+                        disabled: disabled,
                     }) }}
                 {% endif %}
             </div>
