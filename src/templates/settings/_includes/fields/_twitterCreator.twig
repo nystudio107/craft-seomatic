@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "Twitter username for the content creator / author, without the preceding @."|t("seomatic") }}</p>
         </div>
@@ -24,6 +25,7 @@
                     value: metaBundleSettings.twitterCreatorSource,
                     class: "seomatic-textSourceSelect",
                     errors: metaBundleSettings.getErrors("twitterCreatorSource"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -38,6 +40,7 @@
                         options: userFieldSources,
                         value: metaBundleSettings.twitterCreatorField,
                         errors: metaBundleSettings.getErrors("twitterCreatorField"),
+                        disabled: disabled,
                     }) }}
                 </div>
             {% endnamespace %}
@@ -52,6 +55,7 @@
                     class: "nicetext",
                     warning: false,
                     errors: metaGlobalVars.getErrors("twitterCreator"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}

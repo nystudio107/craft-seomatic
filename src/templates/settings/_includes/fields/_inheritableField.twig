@@ -17,7 +17,8 @@
                     onLabel: "Override"|t("seomatic"),
                     offLabel: fieldLabel,
                     warning: false,
-                    name: 'override-' ~ settingName|default('')
+                    name: 'override-' ~ settingName|default(''),
+                    value: isInherited ? 0 : 1,
                 }) }}
             {% endnamespace %}
         </div>

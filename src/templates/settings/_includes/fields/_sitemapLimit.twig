@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro sitemapLimitField(sitemapLimitOptions, metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>
                 {{ "Controls a limit to how many entries will be in this sitemap. The sitemap entries will be sorted by modification date."|t("seomatic") }}
@@ -25,6 +26,7 @@
                 options: sitemapLimitOptions,
                 value: metaSitemapVars.sitemapLimit,
                 errors: metaSitemapVars.getErrors("sitemapLimit"),
+                disabled: disabled,
             }) }}
 
         {% endnamespace %}
