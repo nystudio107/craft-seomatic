@@ -7,7 +7,7 @@
       rel="noopener"
     >
       <img
-        src="/resources/img/nys-logo.svg"
+        src="/img/nys-logo.svg"
         aria-label="nystudio107 logo"
       />
     </a>

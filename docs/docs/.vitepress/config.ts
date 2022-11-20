@@ -16,7 +16,7 @@ export default defineConfig({
       {icon: 'github', link: 'https://github.com/nystudio107'},
       {icon: 'twitter', link: 'https://twitter.com/nystudio107'},
     ],
-    logo: '/resources/img/plugin-logo.svg',
+    logo: '/img/plugin-logo.svg',
     editLink: {
       pattern: 'https://github.com/nystudio107/craft-seomatic/edit/develop/docs/docs/:path',
       text: 'Edit this page on GitHub'
@@ -42,6 +42,12 @@ export default defineConfig({
           {text: 'Advanced Usage', link: '/advanced.html'},
         ],
       }
+    ],
+    nav: [
+      {text: 'Home', link: 'https://nystudio107.com/plugins/seomatic'},
+      {text: 'Store', link: 'https://plugins.craftcms.com/seomatic'},
+      {text: 'Changelog', link: 'https://nystudio107.com/plugins/seomatic/changelog'},
+      {text: 'Issues', link: 'https://github.com/nystudio107/craft-seomatic/issues'},
     ],
   },
 });
