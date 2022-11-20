@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro ogTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "The Facebook OpenGraph Title is displayed in bold at the top of your Facebook card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
         </div>
@@ -27,6 +28,7 @@
                     value: metaBundleSettings.ogTitleSource,
                     class: "seomatic-textSourceSelect",
                     errors: metaBundleSettings.getErrors("ogTitleSource"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -42,6 +44,7 @@
                         options: textFieldSources,
                         value: metaBundleSettings.ogTitleField,
                         errors: metaBundleSettings.getErrors("ogTitleField"),
+                        disabled: disabled,
                     }) }}
                 </div>
             {% endnamespace %}
@@ -56,6 +59,7 @@
                         value: metaGlobalVars.ogTitle,
                         warning: false,
                         errors: metaGlobalVars.getErrors("ogTitle"),
+                        disabled: disabled,
                     }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.text({
@@ -67,6 +71,7 @@
                         showCharsLeft: true,
                         warning: false,
                         errors: metaGlobalVars.getErrors("ogTitle"),
+                        disabled: disabled,
                     }) }}
                 {% endif %}
             </div>

@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro seoTitleField(textOptions, textFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "Make sure your title tag is explicit and contains your most important keywords. Be sure that each page has a unique title tag."|t("seomatic") }}</p>
         </div>
@@ -27,6 +28,7 @@
                     value: metaBundleSettings.seoTitleSource,
                     class: "seomatic-textSourceSelect",
                     errors: metaBundleSettings.getErrors("seoTitleSource"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -42,6 +44,7 @@
                         options: textFieldSources,
                         value: metaBundleSettings.seoTitleField,
                         errors: metaBundleSettings.getErrors("seoTitleField"),
+                        disabled: disabled,
                     }) }}
                 </div>
             {% endnamespace %}
@@ -56,6 +59,7 @@
                         value: metaGlobalVars.seoTitle,
                         warning: false,
                         errors: metaGlobalVars.getErrors("seoTitle"),
+                        disabled: disabled,
                     }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.text({
@@ -67,6 +71,7 @@
                         showCharsLeft: true,
                         warning: false,
                         errors: metaGlobalVars.getErrors("seoTitle"),
+                        disabled: disabled,
                     }) }}
                 {% endif %}
             </div>

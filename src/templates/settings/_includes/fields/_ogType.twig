@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro seoTitleField(facebookOpenGraphTypes, metaGlobalVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "Adding OpenGraph tags to your website influences the performance of your links on social media by allowing you to control what appears when a user posts a link to your content on Facebook."|t("seomatic") }}</p>
         </div>
@@ -23,6 +24,7 @@
                 options: facebookOpenGraphTypes,
                 value: metaGlobalVars.ogType,
                 errors: metaGlobalVars.getErrors("ogType"),
+                disabled: disabled,
             }) }}
         {% endnamespace %}
     {% endmacro %}
