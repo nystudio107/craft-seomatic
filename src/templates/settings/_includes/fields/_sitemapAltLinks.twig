@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro sitemapAltLinksField(metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>
                 {{ "Whether URLs to alternate translations should be included in the sitemap"|t("seomatic") }}
@@ -26,6 +27,7 @@
                 on: metaSitemapVars.sitemapAltLinks,
                 warning: false,
                 errors: metaSitemapVars.getErrors("sitemapAltLinks"),
+                disabled: disabled,
             }) }}
 
         {% endnamespace %}

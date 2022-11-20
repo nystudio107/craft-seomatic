@@ -28,14 +28,13 @@
 ]) %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro robotsField(metaGlobalVars, pageContex, suffix, disableRobotsSelect) %}
+    {% macro robotsField(metaGlobalVars, pageContex, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             {{ "The robots meta tag lets you utilize a granular, page-specific approach to controlling how an individual page should be indexed and served to users in search results. [Learn More](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)"|t("seomatic") | md | raw }}
         </div>
 
         {% import "_includes/forms" as forms %}
-
-        {% set disableRobotsSelect = disableRobotsSelect|default(false) %}
 
         {% namespace "metaGlobalVars" %}
             {{ forms.hidden({
@@ -43,6 +42,7 @@
                 name: "robots",
                 value: metaGlobalVars.robots,
                 errors: metaGlobalVars.getErrors("robots"),
+                disabled: disabled,
             }) }}
             <script>
               window.robotsSelectClass = '{{ "robotsselect-wrapper" }}';
@@ -54,7 +54,7 @@
                 <robots-select
                     value="{{ metaGlobalVars.robots }}"
                     input-id="{{ ("robots" ~ suffix) | namespaceInputId }}"
-                    {% if disableRobotsSelect %}disabled="true"{% endif %}
+                    {% if disabled %}disabled="true"{% endif %}
                 >
                 </robots-select>
             </div>
@@ -62,10 +62,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.robotsField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext, "-inherited", true) }}
+        {{ _self.robotsField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, pageContext, "-inherited") }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.robotsField(metaGlobalVars, pageContext, "", false) }}
+        {{ _self.robotsField(metaGlobalVars, pageContext, "") }}
     {% endblock %}
 {% endembed %}
