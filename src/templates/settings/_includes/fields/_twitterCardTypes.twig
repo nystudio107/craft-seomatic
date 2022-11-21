@@ -10,6 +10,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro twitterCardTypeField(twitterCardTypes, metaGlobalVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic") }}</p>
         </div>
@@ -21,6 +22,7 @@
                 options: twitterCardTypes,
                 value: metaGlobalVars.twitterCard,
                 errors: metaGlobalVars.getErrors("twitterCard"),
+                disabled: disabled,
             }) }}
         {% endnamespace %}
     {% endmacro %}

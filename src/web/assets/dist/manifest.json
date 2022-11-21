@@ -27,11 +27,11 @@
     "src": "../src/web/assets/src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic.015767dd.css"
+      "assets/seomatic.f5293e3a.css"
     ]
   },
   "../src/web/assets/src/js/seomatic-meta.js": {
-    "file": "assets/seomatic-meta.bc6a7d57.js",
+    "file": "assets/seomatic-meta.790be0f6.js",
     "src": "../src/web/assets/src/js/seomatic-meta.js",
     "isEntry": true,
     "imports": [
@@ -48,12 +48,12 @@
     "file": "assets/content-seo.5c36e73b.css",
     "src": "../src/web/assets/src/js/content-seo.css"
   },
+  "../src/web/assets/src/js/seomatic.css": {
+    "file": "assets/seomatic.f5293e3a.css",
+    "src": "../src/web/assets/src/js/seomatic.css"
+  },
   "../src/web/assets/src/js/seomatic-meta.css": {
     "file": "assets/seomatic-meta.3fbed9de.css",
     "src": "../src/web/assets/src/js/seomatic-meta.css"
-  },
-  "../src/web/assets/src/js/seomatic.css": {
-    "file": "assets/seomatic.015767dd.css",
-    "src": "../src/web/assets/src/js/seomatic.css"
   }
 }
