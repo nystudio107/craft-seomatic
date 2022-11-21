@@ -8,7 +8,8 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro canonicalUrlField(metaGlobalVars, disabled, suffix, pageContext) %}
+    {% macro canonicalUrlField(metaGlobalVars, suffix, pageContext) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>
                 {{ "The search engine friendly URL that you want the search engines to treat as authoritative."|t("seomatic") }}
@@ -48,6 +49,7 @@
                         value: metaGlobalVars.canonicalUrl,
                         class: "nicetext",
                         warning: false,
+                        disabled: true,
                         errors: metaGlobalVars.getErrors("canonicalUrl"),
                     }) }}
                 {% endif %}
@@ -56,10 +58,10 @@
     {% endmacro %}
 
     {% block inheritedValues %}
-        {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, true, "-inherited", pageContext) }}
+        {{ _self.canonicalUrlField(inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.canonicalUrlField(metaGlobalVars, false, "", pageContext) }}
+        {{ _self.canonicalUrlField(metaGlobalVars, "", pageContext) }}
     {% endblock %}
 {% endembed %}

@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro sitemapFilesField(metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>
                 {{ "Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap"|t("seomatic") }}
@@ -26,6 +27,7 @@
                 on: metaSitemapVars.sitemapFiles,
                 warning: false,
                 errors: metaSitemapVars.getErrors("sitemapFiles"),
+                disabled: disabled,
             }) }}
 
         {% endnamespace %}

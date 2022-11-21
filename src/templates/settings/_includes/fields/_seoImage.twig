@@ -11,6 +11,7 @@
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
     {% macro seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
         </div>
@@ -27,6 +28,7 @@
                     value: metaBundleSettings.seoImageSource,
                     class: "seomatic-imageSourceSelect",
                     errors: metaBundleSettings.getErrors("seoImageSource"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -42,6 +44,7 @@
                         options: assetFieldSources,
                         value: metaBundleSettings.seoImageField,
                         errors: metaBundleSettings.getErrors("seoImageField"),
+                        disabled: disabled,
                     }) }}
                 </div>
             {% endnamespace %}
@@ -64,6 +67,7 @@
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("seoImageIds"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -77,6 +81,7 @@
                         value: metaGlobalVars.seoImage,
                         warning: false,
                         errors: metaGlobalVars.getErrors("seoImage"),
+                        disabled: disabled,
                     }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.text({
@@ -86,6 +91,7 @@
                         class: "nicetext",
                         warning: false,
                         errors: metaBundleSettings.getErrors("seoImage"),
+                        disabled: disabled,
                     }) }}
                 {% endif %}
             </div>
