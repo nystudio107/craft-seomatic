@@ -3,8 +3,10 @@
 ## 4.0.14 - UNRELEASED
 ### Changed
 * Better styling for the Robots focus ring
+* Refactor the docs to use the latest version of VitePress (`^1.0.0-alpha.29`)
 
 ### Fixed
+* Fixed a regression that caused entries with SEO Settings fields in them to think the entry had changed, when it hadn't ([#1239](https://github.com/nystudio107/craft-seomatic/issues/1239))
 * Fixed an issue where the Facebook Opengraph Image Transform Mode would appear in an SEO Settings field, even if it was disabled ([#1240](https://github.com/nystudio107/craft-seomatic/issues/1240))
 * Fixed an issue where `extractTextFromField()` would throw an exception for Neo fields ([#1242](https://github.com/nystudio107/craft-seomatic/issues/1242))
 
