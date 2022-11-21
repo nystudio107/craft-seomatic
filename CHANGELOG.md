@@ -1,9 +1,9 @@
 # SEOmatic Changelog
 
-## 4.0.14 - UNRELEASED
+## 4.0.14 - 2022.11.20
 ### Changed
 * Better styling for the Robots focus ring
-* Refactor the docs to use the latest version of VitePress (`^1.0.0-alpha.29`)
+* Refactored the docs to use the latest version of VitePress (`^1.0.0-alpha.29`)
 
 ### Fixed
 * Fixed a regression that caused entries with SEO Settings fields in them to think the entry had changed, when it hadn't ([#1239](https://github.com/nystudio107/craft-seomatic/issues/1239))
