@@ -10,24 +10,24 @@
 <div class="inheritable-field {{ isInherited ? 'inherited-settings' : 'defined-settings' }}">
     <div class="field {{ wrapperClass|default('') }}" style="margin-top: 18px!important;">
         {% if pageContext == "field" %}
-        <div class="override">
-            {% namespace overrideNamespace|default("metaGlobalVars") %}
-                {{ forms.lightswitchField({
-                    on: not isInherited,
-                    onLabel: "Override"|t("seomatic"),
-                    offLabel: fieldLabel,
-                    warning: false,
-                    name: 'override-' ~ settingName|default(''),
-                    value: isInherited ? 0 : 1,
-                }) }}
-            {% endnamespace %}
-        </div>
+            <div class="override">
+                {% namespace overrideNamespace|default("metaGlobalVars") %}
+                    {{ forms.lightswitchField({
+                        on: not isInherited,
+                        onLabel: "Override"|t("seomatic"),
+                        offLabel: fieldLabel,
+                        warning: false,
+                        name: 'override-' ~ settingName|default(''),
+                        value: isInherited ? false : '1',
+                    }) }}
+                {% endnamespace %}
+            </div>
 
-        <div class="inherited value-wrapper">
-            {% block inheritedValues %}
+            <div class="inherited value-wrapper">
+                {% block inheritedValues %}
 
-            {% endblock %}
-        </div>
+                {% endblock %}
+            </div>
         {% else %}
             <div></div>
             <div class="field width-100 mt-1 mb-0">

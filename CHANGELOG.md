@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.15 - 2022.11.22
+### Fixed
+* Fixed a regression in the SEO Settings field where the **Override** state for a field would not save ([#1239](https://github.com/nystudio107/craft-seomatic/issues/1239))
+
 ## 4.0.14 - 2022.11.20
 ### Changed
 * Better styling for the Robots focus ring
