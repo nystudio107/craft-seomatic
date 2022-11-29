@@ -1,5 +1,8 @@
 # SEOmatic Changelog
 
+## 4.0.16 - UNRELEASED
+### Changed
+
 ## 4.0.15 - 2022.11.22
 ### Fixed
 * Fixed a regression in the SEO Settings field where the **Override** state for a field would not save ([#1239](https://github.com/nystudio107/craft-seomatic/issues/1239))
