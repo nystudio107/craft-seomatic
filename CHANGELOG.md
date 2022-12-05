@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.16 - UNRELEASED
+### Fixed
+* Ensure that `parsedValue()` always returns a string
+
 ### Changed
 * Fixed the disabled state of SEO Settings Override fields so they look consistent
 * Remove the odd Craft `modifiedAttributes` styling when a field value is changed ([#12403](https://github.com/craftcms/cms/issues/12403))
