@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.16 - UNRELEASED
+## 4.0.16 - 2022.12.07
 ### Fixed
 * Ensure that `parsedValue()` always returns a string
 
@@ -8,6 +8,7 @@
 * Fixed the disabled state of SEO Settings Override fields so they look consistent
 * Remove the odd Craft `modifiedAttributes` styling when a field value is changed ([#12403](https://github.com/craftcms/cms/issues/12403))
 * Removed the `field` class from the SEO Settings field wrapper so an additional `status-badge` isn't injected by Craft
+* Fix the styling of the SEO Image, Twitter Image, and FaceBook OpenGraph image in the SEO Settings field when they are not overridden
 
 ## 4.0.15 - 2022.11.22
 ### Fixed
