@@ -66,6 +66,7 @@
     {# ############## Twitter Image Macros ############## #}
 
     {% macro twitterImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
+        {% set disabled = suffix|length > 0 %}
 
         <div class="field"
              {% if field is not null and 'twitterImageTransformMode' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
@@ -87,6 +88,7 @@
                     value: metaBundleSettings.twitterImageTransformMode,
                     warning: false,
                     errors: metaBundleSettings.getErrors("twitterImageTransformMode"),
+                    disabled: disabled,
                 }) }}
             {% endnamespace %}
         </div>
@@ -94,6 +96,7 @@
 
     {% macro twitterImageTransformField(field, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
+        {% set disabled = suffix|length > 0 %}
 
         <div class="field"
              {% if field is not null and 'transformTwitterImage' not in field.twitterEnabledFields %}style="display: none;"{% endif %}>
@@ -110,12 +113,14 @@
                     on: metaBundleSettings.twitterImageTransform,
                     warning: false,
                     errors: metaBundleSettings.getErrors("twitterImageTransform"),
+                    disabled: disabled,
                 }) }}
             {% endnamespace %}
         </div>
     {% endmacro %}
 
     {% macro twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+        {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as Twitter Cards on tweets that link to the web page."|t("seomatic") }}</p>
         </div>
@@ -132,6 +137,7 @@
                     value: metaBundleSettings.twitterImageSource,
                     class: "seomatic-imageSourceSelect",
                     errors: metaBundleSettings.getErrors("twitterImageSource"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -147,6 +153,7 @@
                         options: assetFieldSources,
                         value: metaBundleSettings.twitterImageField,
                         errors: metaBundleSettings.getErrors("twitterImageField"),
+                        disabled: disabled,
                     }) }}
                 </div>
             {% endnamespace %}
@@ -169,6 +176,7 @@
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("twitterImageIds"),
+                    disabled: disabled,
                 }) }}
             </div>
         {% endnamespace %}
@@ -182,6 +190,7 @@
                         value: metaGlobalVars.twitterImage,
                         warning: false,
                         errors: metaGlobalVars.getErrors("twitterImage"),
+                        disabled: disabled,
                     }, "SeomaticExpressionField", {}, {wrapperClass: "monaco-editor-background-frame"}) }}
                 {% else %}
                     {{ forms.text({
@@ -191,6 +200,7 @@
                         class: "nicetext",
                         warning: false,
                         errors: metaGlobalVars.getErrors("twitterImage"),
+                        disabled: disabled,
                     }) }}
                 {% endif %}
             </div>
