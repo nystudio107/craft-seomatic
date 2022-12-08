@@ -54,7 +54,7 @@ abstract class VarsModel extends FluentModel
             $result = MetaValueHelper::parseString($this->$property);
         }
 
-        return $result;
+        return (string)$result;
     }
 
     /**

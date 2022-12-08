@@ -27,7 +27,7 @@
     "src": "../src/web/assets/src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic.4aa8ba24.css"
+      "assets/seomatic.ddc38ef4.css"
     ]
   },
   "../src/web/assets/src/js/seomatic-meta.js": {
@@ -48,12 +48,12 @@
     "file": "assets/content-seo.5c36e73b.css",
     "src": "../src/web/assets/src/js/content-seo.css"
   },
-  "../src/web/assets/src/js/seomatic.css": {
-    "file": "assets/seomatic.4aa8ba24.css",
-    "src": "../src/web/assets/src/js/seomatic.css"
-  },
   "../src/web/assets/src/js/seomatic-meta.css": {
     "file": "assets/seomatic-meta.3fbed9de.css",
     "src": "../src/web/assets/src/js/seomatic-meta.css"
+  },
+  "../src/web/assets/src/js/seomatic.css": {
+    "file": "assets/seomatic.ddc38ef4.css",
+    "src": "../src/web/assets/src/js/seomatic.css"
   }
 }
