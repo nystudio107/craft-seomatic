@@ -773,7 +773,7 @@ You can have multiple OpenGraph tags of the same time, for example `og:image`:
 ```html
 <meta content="http://example.com/image2.jpg" property="og:image">
 <meta content="http://example.com/image1.jpg" property="og:image">
- ```
+```
 
 ## Title Meta Object Functions `seomatic.title`
 
