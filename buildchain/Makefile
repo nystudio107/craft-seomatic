@@ -37,7 +37,7 @@ clean:
 # Run the passed in npm command
 npm: docker
 	${DOCKERRUN} \
-		$(filter-out $@,$(MAKECMDGOALS))
+		$(filter-out $@,$(MAKECMDGOALS)) $(MAKEFLAGS)
 %:
 	@:
 # ref: https://stackoverflow.com/questions/6273608/how-to-pass-argument-to-makefile-from-command-line
