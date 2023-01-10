@@ -1,5 +1,5 @@
 import {defineConfig} from 'vite';
-import {createVuePlugin} from 'vite-plugin-vue2'
+import createVuePlugin from '@vitejs/plugin-vue2'
 import ViteRestart from 'vite-plugin-restart';
 import {viteExternalsPlugin} from 'vite-plugin-externals'
 import viteCompression from 'vite-plugin-compression';
