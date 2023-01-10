@@ -20,11 +20,8 @@ use nystudio107\seomatic\Seomatic;
 use ReflectionClass;
 use ReflectionException;
 use Throwable;
-use Twig\Error\LoaderError;
-use Twig\Error\SyntaxError;
 use Twig\Markup;
 use yii\base\Exception;
-use yii\base\ExitException;
 use function in_array;
 use function is_object;
 use function is_string;
@@ -274,7 +271,7 @@ class MetaValue
                 }
                 // Render the template out
                 $metaValue = trim(html_entity_decode(
-                    self::internalRenderObjectTemplate($metaValue, self::$templatePreviewVars),
+                    self::$view->renderObjectTemplate($metaValue, self::$templatePreviewVars),
                     ENT_NOQUOTES,
                     'UTF-8'
                 ));
@@ -314,34 +311,5 @@ class MetaValue
         }
 
         return $metaValue;
-    }
-
-    /**
-     * Replacement for self::$view->renderObjectTemplate that just handles changing { woof } into {{ woof }}
-     *
-     * @param string $template
-     * @param array $variables
-     * @return string
-     * @throws LoaderError
-     * @throws SyntaxError
-     * @throws ExitException
-     */
-    protected static function internalRenderObjectTemplate(string $template, array $variables = []): string
-    {
-        $twig = self::$view->getTwig();
-        // Temporarily disable strict variables if it's enabled
-        $strictVariables = $twig->isStrictVariables();
-        if ($strictVariables) {
-            $twig->disableStrictVariables();
-        }
-        // Swap out the remaining {xyz} tags with {{xyz}}
-        $template = Seomatic::$view->normalizeObjectTemplate($template);
-        $result = self::$view->renderString($template, $variables);
-        // Re-enable strict variables
-        if ($strictVariables) {
-            $twig->enableStrictVariables();
-        }
-
-        return $result;
     }
 }
