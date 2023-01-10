@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.46 - UNRELEASED
+## 3.4.46 - 2023.01.09
 ### Changed
 * Update to use Vite `^4.0.0` for the buildchain
 
