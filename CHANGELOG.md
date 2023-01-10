@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 4.0.17 - 2023.01.09
+### Changed
+* Update to use Vite `^4.0.0` for the buildchain
+
+### Fixed
+* Solspace calendar integration error would throw an exception if you deleted a Calendar ([#1259](https://github.com/nystudio107/craft-seomatic/pull/1259))
+
 ## 4.0.16 - 2022.12.07
 ### Fixed
 * Ensure that `parsedValue()` always returns a string
