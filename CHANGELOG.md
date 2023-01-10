@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.47 - UNRELEASED
+## 3.4.47 - 2023.01.10
 ### Fix
 * Fixed an issue where meta tags would not render on a very specific version of PHP (`8.1.13`) ([#1257](https://github.com/nystudio107/craft-seomatic/issues/1257))
 
