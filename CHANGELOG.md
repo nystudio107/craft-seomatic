@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.18 - UNRELEASED
+### Fix
+* Fixed an issue where meta tags would not render on a very specific version of PHP (`8.1.13`) ([#1257](https://github.com/nystudio107/craft-seomatic/issues/1257))
+
 ## 4.0.17 - 2023.01.09
 ### Changed
 * Update to use Vite `^4.0.0` for the buildchain
