@@ -271,7 +271,7 @@ class MetaValue
                 }
                 // Render the template out
                 $metaValue = trim(html_entity_decode(
-                    self::$view->renderObjectTemplate($metaValue, self::$templatePreviewVars),
+                    self::$view->renderObjectTemplate($metaValue, self::$templateObjectVars, self::$templatePreviewVars),
                     ENT_NOQUOTES,
                     'UTF-8'
                 ));
