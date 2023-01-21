@@ -1,7 +1,7 @@
 MAJOR_VERSION?=3
 TAG?=18-alpine
 CONTAINER?=$(shell basename $(dir $(CURDIR)))-v${MAJOR_VERSION}-buildchain
-DEV_PORT=300${MAJOR_VERSION}
+DEV_PORT?=300${MAJOR_VERSION}
 IMAGE_INFO=$(shell docker image inspect $(CONTAINER):$(TAG))
 IMAGE_NAME=${CONTAINER}:${TAG}
 DOCKER_RUN=docker container run --rm -it --network plugindev_default -v "${CURDIR}"/../:/app
