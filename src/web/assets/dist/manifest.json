@@ -12,18 +12,18 @@
     "src": "../src/web/assets/src/js/seomatic-meta.css"
   },
   "../src/web/assets/src/js/seomatic.css": {
-    "file": "assets/seomatic-ddc38ef4.css",
+    "file": "assets/seomatic-19aedf70.css",
     "src": "../src/web/assets/src/js/seomatic.css"
   },
   "__plugin-vue2_normalizer-fe1301b8.js": {
     "file": "assets/_plugin-vue2_normalizer-fe1301b8.js"
   },
   "../src/web/assets/src/js/seomatic.js": {
-    "file": "assets/seomatic-da9b930a.js",
+    "file": "assets/seomatic-3c36b7a2.js",
     "src": "../src/web/assets/src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic-ddc38ef4.css"
+      "assets/seomatic-19aedf70.css"
     ]
   },
   "../src/web/assets/src/js/content-seo.js": {
