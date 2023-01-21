@@ -46,6 +46,11 @@ use yii\base\InvalidConfigException;
  */
 trait ServicesTrait
 {
+    // Static Properties
+    // =========================================================================
+
+    public static ?string $majorVersion = '';
+
     // Static Methods
     // =========================================================================
 
@@ -54,6 +59,12 @@ trait ServicesTrait
      */
     public static function config(): array
     {
+        // Constants aren't allowed in traits until PHP >= 8.2, and config() is called before __construct(),
+        // so we can't extract it from the passed in $config
+        $majorVersion = '4';
+        // Dev server container name & port are based on the major version of this plugin
+        $devPort = 3000 + (int)$majorVersion;
+        $versionName = 'v' . $majorVersion;
         return [
             'components' => [
                 'frontendTemplates' => FrontendTemplatesService::class,
@@ -72,10 +83,9 @@ trait ServicesTrait
                     'class' => VitePluginService::class,
                     'assetClass' => SeomaticAsset::class,
                     'useDevServer' => true,
-                    'devServerPublic' => 'http://localhost:3001',
-                    'serverPublic' => 'http://localhost:8000',
+                    'devServerPublic' => 'http://localhost:' . $devPort,
                     'errorEntry' => 'src/js/seomatic.js',
-                    'devServerInternal' => 'http://craft-seomatic-buildchain-dev:3001',
+                    'devServerInternal' => 'http://craft-seomatic-' . $versionName . '-buildchain-dev:' . $devPort,
                     'checkDevServer' => true,
                 ],
             ]
