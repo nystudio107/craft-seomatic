@@ -75,7 +75,7 @@ trait ServicesTrait
                     'devServerPublic' => 'http://localhost:3001',
                     'serverPublic' => 'http://localhost:8000',
                     'errorEntry' => 'src/js/seomatic.js',
-                    'devServerInternal' => 'http://craft-seomatic-buildchain:3001',
+                    'devServerInternal' => 'http://craft-seomatic-buildchain-dev:3001',
                     'checkDevServer' => true,
                 ],
             ]
