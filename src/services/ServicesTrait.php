@@ -55,8 +55,9 @@ trait ServicesTrait
      */
     public function __construct($id, $parent = null, array $config = [])
     {
-        // Dev server container name & port are based on the major version of this plugin
+        // Constants aren't allowed in traits until PHP >= 8.2
         $majorVersion = '3';
+        // Dev server container name & port are based on the major version of this plugin
         $devPort = 3000 + (int)$majorVersion;
         $versionName = 'v' . $majorVersion;
         // Merge in the passed config, so it our config can be overridden by Plugins::pluginConfigs['vite']
