@@ -1,5 +1,7 @@
+MAJOR_VERSION?=3
 TAG?=18-alpine
-CONTAINER?=$(shell basename $(dir $(CURDIR)))-buildchain
+CONTAINER?=$(shell basename $(dir $(CURDIR)))-v${MAJOR_VERSION}-buildchain
+DEV_PORT=300${MAJOR_VERSION}
 IMAGE_INFO=$(shell docker image inspect $(CONTAINER):$(TAG))
 IMAGE_NAME=${CONTAINER}:${TAG}
 DOCKER_RUN=docker container run --rm -it --network plugindev_default -v "${CURDIR}"/../:/app
@@ -15,7 +17,7 @@ clean:
 	rm -f package-lock.json
 # Run the development server via npm run dev
 dev: image-check
-	${DOCKER_RUN} --name ${CONTAINER}-$@ -p 3001:3001 ${IMAGE_NAME} run dev
+	${DOCKER_RUN} --name ${CONTAINER}-$@ -e DEV_PORT="${DEV_PORT}" -p ${DEV_PORT}:${DEV_PORT} ${IMAGE_NAME} run dev
 # Build the Docker image & run npm install
 image-build:
 	docker build . -t ${IMAGE_NAME} --build-arg TAG=${TAG} --no-cache

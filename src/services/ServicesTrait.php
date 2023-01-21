@@ -55,6 +55,10 @@ trait ServicesTrait
      */
     public function __construct($id, $parent = null, array $config = [])
     {
+        // Dev server container name & port are based on the major version of this plugin
+        $majorVersion = '3';
+        $devPort = 3000 + (int)$majorVersion;
+        $versionName = 'v' . $majorVersion;
         // Merge in the passed config, so it our config can be overridden by Plugins::pluginConfigs['vite']
         // ref: https://github.com/craftcms/cms/issues/1989
         $config = ArrayHelper::merge([
@@ -75,10 +79,9 @@ trait ServicesTrait
                     'class' => VitePluginService::class,
                     'assetClass' => SeomaticAsset::class,
                     'useDevServer' => true,
-                    'devServerPublic' => 'http://localhost:3001',
-                    'serverPublic' => 'http://localhost:8000',
+                    'devServerPublic' => 'http://localhost:' . $devPort,
                     'errorEntry' => 'src/js/seomatic.js',
-                    'devServerInternal' => 'http://craft-seomatic-buildchain-dev:3001',
+                    'devServerInternal' => 'http://craft-seomatic-' . $versionName . '-buildchain-dev:' . $devPort,
                     'checkDevServer' => true,
                 ],
             ]
