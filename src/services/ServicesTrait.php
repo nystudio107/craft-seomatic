@@ -80,13 +80,13 @@ trait ServicesTrait
                 'title' => TitleService::class,
                 // Register the vite service
                 'vite' => [
-                    'class' => VitePluginService::class,
                     'assetClass' => SeomaticAsset::class,
-                    'useDevServer' => true,
+                    'checkDevServer' => true,
+                    'class' => VitePluginService::class,
+                    'devServerInternal' => 'http://craft-seomatic-' . $versionName . '-buildchain-dev:' . $devPort,
                     'devServerPublic' => 'http://localhost:' . $devPort,
                     'errorEntry' => 'src/js/seomatic.js',
-                    'devServerInternal' => 'http://craft-seomatic-' . $versionName . '-buildchain-dev:' . $devPort,
-                    'checkDevServer' => true,
+                    'useDevServer' => true,
                 ],
             ]
         ];
