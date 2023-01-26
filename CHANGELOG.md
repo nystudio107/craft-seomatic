@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.4.49 - UNRELEASED
+### Changed
+* Use dynamic docker container name & port for the `buildchain`
+* Update the `buildchain` to use Vite `^4.0.0`
+
 ## 3.4.48 - 2023.01.11
 ### Fix
 * Fixed a regression that would cause `entry.` to not resolve in meta values
