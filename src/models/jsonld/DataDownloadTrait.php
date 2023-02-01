@@ -1,28 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for DataDownload.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/DataDownload
  */
-
 trait DataDownloadTrait
 {
-    
     /**
      * A technique or technology used in a [[Dataset]] (or [[DataDownload]],
      * [[DataCatalog]]), corresponding to the method used for measuring the
@@ -37,10 +35,9 @@ trait DataDownloadTrait
      * could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory".  If there
      * are several [[variableMeasured]] properties recorded for some given data
      * object, use a [[PropertyValue]] for each [[variableMeasured]] and attach
-     * the corresponding [[measurementTechnique]].       
+     * the corresponding [[measurementTechnique]].
      *
-     * @var string|Text|URL
+     * @var string|URL|Text
      */
     public $measurementTechnique;
-
 }

@@ -1,34 +1,41 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for SuperficialAnatomy.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/SuperficialAnatomy
  */
-
 trait SuperficialAnatomyTrait
 {
-    
     /**
-     * A medical therapy related to this anatomy.
+     * Anatomical systems or structures that relate to the superficial anatomy.
      *
-     * @var MedicalTherapy
+     * @var AnatomicalSystem|AnatomicalStructure
      */
-    public $relatedTherapy;
+    public $relatedAnatomy;
+
+    /**
+     * If applicable, a description of the pathophysiology associated with the
+     * anatomical system, including potential abnormal changes in the mechanical,
+     * physical, and biochemical functions of the system.
+     *
+     * @var string|Text
+     */
+    public $associatedPathophysiology;
 
     /**
      * The significance associated with the superficial anatomy; as an example,
@@ -40,11 +47,11 @@ trait SuperficialAnatomyTrait
     public $significance;
 
     /**
-     * Anatomical systems or structures that relate to the superficial anatomy.
+     * A medical therapy related to this anatomy.
      *
-     * @var AnatomicalSystem|AnatomicalStructure
+     * @var MedicalTherapy
      */
-    public $relatedAnatomy;
+    public $relatedTherapy;
 
     /**
      * A medical condition associated with this anatomy.
@@ -52,14 +59,4 @@ trait SuperficialAnatomyTrait
      * @var MedicalCondition
      */
     public $relatedCondition;
-
-    /**
-     * If applicable, a description of the pathophysiology associated with the
-     * anatomical system, including potential abnormal changes in the mechanical,
-     * physical, and biochemical functions of the system.
-     *
-     * @var string|Text
-     */
-    public $associatedPathophysiology;
-
 }

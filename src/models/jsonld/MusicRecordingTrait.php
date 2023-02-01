@@ -1,34 +1,39 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for MusicRecording.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/MusicRecording
  */
-
 trait MusicRecordingTrait
 {
-    
     /**
-     * The International Standard Recording Code for the recording.
+     * The composition this track is a recording of.
      *
-     * @var string|Text
+     * @var MusicComposition
      */
-    public $isrcCode;
+    public $recordingOf;
+
+    /**
+     * The artist that performed this album or recording.
+     *
+     * @var MusicGroup|Person
+     */
+    public $byArtist;
 
     /**
      * The playlist to which this recording belongs.
@@ -36,20 +41,6 @@ trait MusicRecordingTrait
      * @var MusicPlaylist
      */
     public $inPlaylist;
-
-    /**
-     * The album to which this recording belongs.
-     *
-     * @var MusicAlbum
-     */
-    public $inAlbum;
-
-    /**
-     * The composition this track is a recording of.
-     *
-     * @var MusicComposition
-     */
-    public $recordingOf;
 
     /**
      * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
@@ -60,10 +51,16 @@ trait MusicRecordingTrait
     public $duration;
 
     /**
-     * The artist that performed this album or recording.
+     * The International Standard Recording Code for the recording.
      *
-     * @var Person|MusicGroup
+     * @var string|Text
      */
-    public $byArtist;
+    public $isrcCode;
 
+    /**
+     * The album to which this recording belongs.
+     *
+     * @var MusicAlbum
+     */
+    public $inAlbum;
 }

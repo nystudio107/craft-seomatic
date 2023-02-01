@@ -1,28 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for DoseSchedule.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/DoseSchedule
  */
-
 trait DoseScheduleTrait
 {
-    
     /**
      * Characteristics of the population for which this is intended, or which
      * typically uses it, e.g. 'adults'.
@@ -32,11 +30,11 @@ trait DoseScheduleTrait
     public $targetPopulation;
 
     /**
-     * How often the dose is taken, e.g. 'daily'.
+     * The value of the dose, e.g. 500.
      *
-     * @var string|Text
+     * @var float|Number|QualitativeValue
      */
-    public $frequency;
+    public $doseValue;
 
     /**
      * The unit of the dose, e.g. 'mg'.
@@ -46,10 +44,9 @@ trait DoseScheduleTrait
     public $doseUnit;
 
     /**
-     * The value of the dose, e.g. 500.
+     * How often the dose is taken, e.g. 'daily'.
      *
-     * @var float|Number|QualitativeValue
+     * @var string|Text
      */
-    public $doseValue;
-
+    public $frequency;
 }

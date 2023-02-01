@@ -1,28 +1,41 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for MenuItem.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/MenuItem
  */
-
 trait MenuItemTrait
 {
-    
+    /**
+     * Nutrition information about the recipe or menu item.
+     *
+     * @var NutritionInformation
+     */
+    public $nutrition;
+
+    /**
+     * Indicates a dietary restriction or guideline for which this recipe or menu
+     * item is suitable, e.g. diabetic, halal etc.
+     *
+     * @var RestrictedDiet
+     */
+    public $suitableForDiet;
+
     /**
      * Additional menu item(s) such as a side dish of salad or side order of fries
      * that can be added to this menu item. Additionally it can be a menu section
@@ -40,25 +53,9 @@ trait MenuItemTrait
      * a [[Demand]]. While this property is listed as expected on a number of
      * common types, it can be used in others. In that case, using a second type,
      * such as Product or a subtype of Product, can clarify the nature of the
-     * offer.       
+     * offer.
      *
-     * @var Offer|Demand
+     * @var Demand|Offer
      */
     public $offers;
-
-    /**
-     * Indicates a dietary restriction or guideline for which this recipe or menu
-     * item is suitable, e.g. diabetic, halal etc.
-     *
-     * @var RestrictedDiet
-     */
-    public $suitableForDiet;
-
-    /**
-     * Nutrition information about the recipe or menu item.
-     *
-     * @var NutritionInformation
-     */
-    public $nutrition;
-
 }

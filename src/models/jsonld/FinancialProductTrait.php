@@ -1,28 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for FinancialProduct.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/FinancialProduct
  */
-
 trait FinancialProductTrait
 {
-    
     /**
      * The annual rate that is charged for borrowing (or made by investing),
      * expressed as a single percentage number that represents the actual yearly
@@ -34,14 +32,6 @@ trait FinancialProductTrait
     public $annualPercentageRate;
 
     /**
-     * Description of fees, commissions, and other terms applied either to a class
-     * of financial product, or by a financial service organization.
-     *
-     * @var string|URL|Text
-     */
-    public $feesAndCommissionsSpecification;
-
-    /**
      * The interest rate, charged or paid, applicable to the financial product.
      * Note: This is different from the calculated annualPercentageRate.
      *
@@ -49,4 +39,11 @@ trait FinancialProductTrait
      */
     public $interestRate;
 
+    /**
+     * Description of fees, commissions, and other terms applied either to a class
+     * of financial product, or by a financial service organization.
+     *
+     * @var string|URL|Text
+     */
+    public $feesAndCommissionsSpecification;
 }

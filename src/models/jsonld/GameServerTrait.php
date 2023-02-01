@@ -1,34 +1,32 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for GameServer.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/GameServer
  */
-
 trait GameServerTrait
 {
-    
     /**
-     * Status of a game server.
+     * Number of players on the server.
      *
-     * @var GameServerStatus
+     * @var int|Integer
      */
-    public $serverStatus;
+    public $playersOnline;
 
     /**
      * Video game which is played on this server.
@@ -38,10 +36,9 @@ trait GameServerTrait
     public $game;
 
     /**
-     * Number of players on the server.
+     * Status of a game server.
      *
-     * @var int|Integer
+     * @var GameServerStatus
      */
-    public $playersOnline;
-
+    public $serverStatus;
 }
