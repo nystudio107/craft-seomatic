@@ -6,14 +6,15 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "lib": ["ESNext", "DOM"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
     "noImplicitAny": true,
-    "outDir": "./src/web/assets/dist/",
+    "outDir": "../src/web/assets/dist/",
     "paths": {
       "@/*": [
-        "./src/web/assets/src/*"
+        "./src/*"
       ]
     },
     "resolveJsonModule": true,
@@ -24,13 +25,14 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "target": "esnext",
+    "types": ["vite/client"]
   },
   "include": [
-    "./src/web/assets/src/**/*.js",
-    "./src/web/assets/src/**/*.ts",
-    "./src/web/assets/src/**/*.vue"
+    "./src/**/*.js",
+    "./src/**/*.ts",
+    "./src/**/*.vue"
   ],
   "exclude": [
-    "./buildchain/node_modules"
+    "./node_modules"
   ]
 }
