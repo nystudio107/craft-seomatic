@@ -1,52 +1,43 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for LearningResource.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/LearningResource
  */
-
 trait LearningResourceTrait
 {
-    
-    /**
-     * The item being described is intended to help a person learn the competency
-     * or learning outcome defined by the referenced term.
-     *
-     * @var string|DefinedTerm|Text
-     */
-    public $teaches;
-
     /**
      * The level in terms of progression through an educational or training
      * context. Examples of educational levels include 'beginner', 'intermediate'
      * or 'advanced', and formal sets of level indicators.
      *
-     * @var string|URL|DefinedTerm|Text
+     * @var string|Text|URL|DefinedTerm
      */
     public $educationalLevel;
 
     /**
-     * The item being described is intended to assess the competency or learning
-     * outcome defined by the referenced term.
+     * Knowledge, skill, ability or personal attribute that must be demonstrated
+     * by a person or other entity in order to do something such as earn an
+     * Educational Occupational Credential or understand a LearningResource.
      *
-     * @var string|Text|DefinedTerm
+     * @var string|Text|URL|DefinedTerm
      */
-    public $assesses;
+    public $competencyRequired;
 
     /**
      * The purpose of a work in the context of education; for example,
@@ -67,13 +58,12 @@ trait LearningResourceTrait
     public $educationalAlignment;
 
     /**
-     * Knowledge, skill, ability or personal attribute that must be demonstrated
-     * by a person or other entity in order to do something such as earn an
-     * Educational Occupational Credential or understand a LearningResource.
+     * The item being described is intended to assess the competency or learning
+     * outcome defined by the referenced term.
      *
-     * @var string|Text|DefinedTerm|URL
+     * @var string|DefinedTerm|Text
      */
-    public $competencyRequired;
+    public $assesses;
 
     /**
      * The predominant type or kind characterizing the learning resource. For
@@ -83,4 +73,11 @@ trait LearningResourceTrait
      */
     public $learningResourceType;
 
+    /**
+     * The item being described is intended to help a person learn the competency
+     * or learning outcome defined by the referenced term.
+     *
+     * @var string|DefinedTerm|Text
+     */
+    public $teaches;
 }

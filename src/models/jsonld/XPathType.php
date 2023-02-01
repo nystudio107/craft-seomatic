@@ -1,12 +1,12 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * XPathType - Text representing an XPath (typically but not necessarily version 1.0).
  *
  * @author    nystudio107
@@ -23,101 +23,99 @@ use nystudio107\seomatic\models\MetaJsonLd;
  */
 class XPathType extends MetaJsonLd implements XPathTypeInterface, TextInterface
 {
-    // Static Public Properties
-    // =========================================================================
+	use XPathTypeTrait;
+	use TextTrait;
 
-    /**
-     * The Schema.org Type Name
-     *
-     * @var string
-     */
-    static public string $schemaTypeName = 'XPathType';
+	/**
+	 * The Schema.org Type Name
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeName = 'XPathType';
 
-    /**
-     * The Schema.org Type Scope
-     *
-     * @var string
-     */
-    static public string $schemaTypeScope = 'https://schema.org/XPathType';
+	/**
+	 * The Schema.org Type Scope
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeScope = 'https://schema.org/XPathType';
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public string $schemaTypeExtends = 'Text';
+	/**
+	 * The Schema.org Type Extends
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeExtends = 'Text';
 
-    /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public string $schemaTypeDescription = <<<SCHEMADESC
-Text representing an XPath (typically but not necessarily version 1.0).
-SCHEMADESC;
+	/**
+	 * The Schema.org Type Description
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeDescription = 'Text representing an XPath (typically but not necessarily version 1.0).';
 
-    use XPathTypeTrait;
-    use TextTrait;
 
-    // Public methods
-    // =========================================================================
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyNames(): array
+	{
+		return array_keys($this->getSchemaPropertyExpectedTypes());
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyNames(): array
-    {
-        return array_keys($this->getSchemaPropertyExpectedTypes());
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyExpectedTypes(): array
-    {
-        return [
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyExpectedTypes(): array
+	{
+		return [
 
-        ];
-    }
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyDescriptions(): array
-    {
-        return [
 
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyDescriptions(): array
+	{
+		return [
 
-    /**
-     * @inheritdoc
-     */
-    public function getGoogleRequiredSchema(): array
-    {
-        return [];
-    }
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getGoogleRecommendedSchema(): array
-    {
-        return [];
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-        $rules = array_merge($rules, [
-            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
-            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
-        ]);
+	/**
+	 * @inheritdoc
+	 */
+	public function getGoogleRequiredSchema(): array
+	{
+		return [];
+	}
 
-        return $rules;
-    }
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getGoogleRecommendedSchema(): array
+	{
+		return [];
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function defineRules(): array
+	{
+		$rules = parent::defineRules();
+		    $rules = array_merge($rules, [
+		        [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+		        [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+		        [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+		    ]);
+
+		    return $rules;
+	}
 }

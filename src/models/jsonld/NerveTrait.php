@@ -1,35 +1,32 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for Nerve.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/Nerve
  */
-
 trait NerveTrait
 {
-    
     /**
-     * The neurological pathway extension that inputs and sends information to the
-     * brain or spinal cord.
+     * The neurological pathway extension that involves muscle control.
      *
-     * @var SuperficialAnatomy|AnatomicalStructure
+     * @var Muscle
      */
-    public $sensoryUnit;
+    public $nerveMotor;
 
     /**
      * The branches that delineate from the nerve bundle. Not to be confused with
@@ -47,10 +44,10 @@ trait NerveTrait
     public $sourcedFrom;
 
     /**
-     * The neurological pathway extension that involves muscle control.
+     * The neurological pathway extension that inputs and sends information to the
+     * brain or spinal cord.
      *
-     * @var Muscle
+     * @var AnatomicalStructure|SuperficialAnatomy
      */
-    public $nerveMotor;
-
+    public $sensoryUnit;
 }

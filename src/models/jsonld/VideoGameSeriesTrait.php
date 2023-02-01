@@ -1,34 +1,33 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for VideoGameSeries.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/VideoGameSeries
  */
-
 trait VideoGameSeriesTrait
 {
-    
     /**
-     * A season in a media series.
+     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
+     * associated with individual items or with a series, episode, clip.
      *
-     * @var URL|CreativeWorkSeason
+     * @var Person
      */
-    public $season;
+    public $actors;
 
     /**
      * A season that is part of the media series.
@@ -36,38 +35,6 @@ trait VideoGameSeriesTrait
      * @var CreativeWorkSeason
      */
     public $containsSeason;
-
-    /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip.
-     *
-     * @var Person
-     */
-    public $director;
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
-     *
-     * @var Person
-     */
-    public $actor;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject
-     */
-    public $trailer;
-
-    /**
-     * An episode of a TV/radio series or season.
-     *
-     * @var Episode
-     */
-    public $episodes;
 
     /**
      * A piece of data that represents a particular aspect of a fictional
@@ -78,18 +45,20 @@ trait VideoGameSeriesTrait
     public $characterAttribute;
 
     /**
-     * The number of episodes in this season or series.
+     * The number of seasons in this series.
      *
      * @var int|Integer
      */
-    public $numberOfEpisodes;
+    public $numberOfSeasons;
 
     /**
-     * A season in a media series.
+     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip.
      *
-     * @var CreativeWorkSeason
+     * @var Person
      */
-    public $seasons;
+    public $actor;
 
     /**
      * Cheat codes to the game.
@@ -97,6 +66,65 @@ trait VideoGameSeriesTrait
      * @var CreativeWork
      */
     public $cheatCode;
+
+    /**
+     * A season in a media series.
+     *
+     * @var URL|CreativeWorkSeason
+     */
+    public $season;
+
+    /**
+     * Real or fictional location of the game (or part of game).
+     *
+     * @var PostalAddress|URL|Place
+     */
+    public $gameLocation;
+
+    /**
+     * The trailer of a movie or TV/radio series, season, episode, etc.
+     *
+     * @var VideoObject
+     */
+    public $trailer;
+
+    /**
+     * The production company or studio responsible for the item, e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization
+     */
+    public $productionCompany;
+
+    /**
+     * An episode of a TV/radio series or season.
+     *
+     * @var Episode
+     */
+    public $episodes;
+
+    /**
+     * The electronic systems used to play <a
+     * href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video
+     * games</a>.
+     *
+     * @var string|Thing|URL|Text
+     */
+    public $gamePlatform;
+
+    /**
+     * Indicate how many people can play this game (minimum, maximum, or range).
+     *
+     * @var QuantitativeValue
+     */
+    public $numberOfPlayers;
+
+    /**
+     * A season in a media series.
+     *
+     * @var CreativeWorkSeason
+     */
+    public $seasons;
 
     /**
      * An item is an object within the game world that can be collected by a
@@ -107,59 +135,35 @@ trait VideoGameSeriesTrait
     public $gameItem;
 
     /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
+     * An episode of a TV, radio or game media within a series or season.
      *
-     * @var Organization
+     * @var Episode
      */
-    public $productionCompany;
+    public $episode;
 
     /**
-     * An actor, e.g. in tv, radio, movie, video games etc. Actors can be
-     * associated with individual items or with a series, episode, clip.
+     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip.
      *
      * @var Person
      */
-    public $actors;
+    public $director;
 
     /**
-     * Indicates whether this game is multi-player, co-op or single-player.  The
-     * game can be marked as multi-player, co-op and single-player at the same
-     * time.
-     *
-     * @var GamePlayMode
-     */
-    public $playMode;
-
-    /**
-     * The electronic systems used to play <a
-     * href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video
-     * games</a>.
-     *
-     * @var string|Text|URL|Thing
-     */
-    public $gamePlatform;
-
-    /**
-     * The number of seasons in this series.
+     * The number of episodes in this season or series.
      *
      * @var int|Integer
      */
-    public $numberOfSeasons;
+    public $numberOfEpisodes;
 
     /**
-     * The composer of the soundtrack.
+     * A director of e.g. TV, radio, movie, video games etc. content. Directors
+     * can be associated with individual items or with a series, episode, clip.
      *
-     * @var Person|MusicGroup
+     * @var Person
      */
-    public $musicBy;
-
-    /**
-     * Indicate how many people can play this game (minimum, maximum, or range).
-     *
-     * @var QuantitativeValue
-     */
-    public $numberOfPlayers;
+    public $directors;
 
     /**
      * The task that a player-controlled character, or group of characters may
@@ -170,25 +174,18 @@ trait VideoGameSeriesTrait
     public $quest;
 
     /**
-     * Real or fictional location of the game (or part of game).
+     * The composer of the soundtrack.
      *
-     * @var Place|URL|PostalAddress
+     * @var MusicGroup|Person
      */
-    public $gameLocation;
+    public $musicBy;
 
     /**
-     * An episode of a tv, radio or game media within a series or season.
+     * Indicates whether this game is multi-player, co-op or single-player.  The
+     * game can be marked as multi-player, co-op and single-player at the same
+     * time.
      *
-     * @var Episode
+     * @var GamePlayMode
      */
-    public $episode;
-
-    /**
-     * A director of e.g. tv, radio, movie, video games etc. content. Directors
-     * can be associated with individual items or with a series, episode, clip.
-     *
-     * @var Person
-     */
-    public $directors;
-
+    public $playMode;
 }

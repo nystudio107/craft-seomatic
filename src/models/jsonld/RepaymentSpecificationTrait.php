@@ -1,36 +1,32 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for RepaymentSpecification.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/RepaymentSpecification
  */
-
 trait RepaymentSpecificationTrait
 {
-    
     /**
-     * The number of payments contractually required at origination to repay the
-     * loan. For monthly paying loans this is the number of months from the
-     * contractual first payment date to the maturity date.
+     * The amount of money to pay in a single payment.
      *
-     * @var float|Number
+     * @var MonetaryAmount
      */
-    public $numberOfLoanPayments;
+    public $loanPaymentAmount;
 
     /**
      * The amount to be paid as a penalty in the event of early payment of the
@@ -41,11 +37,13 @@ trait RepaymentSpecificationTrait
     public $earlyPrepaymentPenalty;
 
     /**
-     * The amount of money to pay in a single payment.
+     * The number of payments contractually required at origination to repay the
+     * loan. For monthly paying loans this is the number of months from the
+     * contractual first payment date to the maturity date.
      *
-     * @var MonetaryAmount
+     * @var float|Number
      */
-    public $loanPaymentAmount;
+    public $numberOfLoanPayments;
 
     /**
      * Frequency of payments due, i.e. number of months between payments. This is
@@ -63,5 +61,4 @@ trait RepaymentSpecificationTrait
      * @var float|Number|MonetaryAmount
      */
     public $downPayment;
-
 }

@@ -1,36 +1,26 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for CourseInstance.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/CourseInstance
  */
-
 trait CourseInstanceTrait
 {
-    
-    /**
-     * A person assigned to instruct or provide instructional assistance for the
-     * [[CourseInstance]].
-     *
-     * @var Person
-     */
-    public $instructor;
-
     /**
      * The amount of work expected of students taking the course, often provided
      * as a figure per week or per month, and may be broken down by type. For
@@ -46,10 +36,17 @@ trait CourseInstanceTrait
      * study, either as a text label (e.g. "online", "onsite" or "blended";
      * "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL
      * reference to a term from a controlled vocabulary (e.g.
-     * https://ceds.ed.gov/element/001311#Asynchronous ).
+     * https://ceds.ed.gov/element/001311#Asynchronous).
      *
-     * @var string|URL|Text
+     * @var string|Text|URL
      */
     public $courseMode;
 
+    /**
+     * A person assigned to instruct or provide instructional assistance for the
+     * [[CourseInstance]].
+     *
+     * @var Person
+     */
+    public $instructor;
 }

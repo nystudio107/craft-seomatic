@@ -1,30 +1,35 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for TVSeason.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/TVSeason
  */
-
 trait TVSeasonTrait
 {
-    
     /**
-     * The country of origin of something, including products as well as creative 
+     * The TV series to which this episode or season belongs.
+     *
+     * @var TVSeries
+     */
+    public $partOfTVSeries;
+
+    /**
+     * The country of origin of something, including products as well as creative
      * works such as movie and TV content.  In the case of TV and movie, this
      * would be the country of the principle offices of the production company or
      * individual responsible for the movie. For other kinds of [[CreativeWork]]
@@ -37,12 +42,4 @@ trait TVSeasonTrait
      * @var Country
      */
     public $countryOfOrigin;
-
-    /**
-     * The TV series to which this episode or season belongs.
-     *
-     * @var TVSeries
-     */
-    public $partOfTVSeries;
-
 }

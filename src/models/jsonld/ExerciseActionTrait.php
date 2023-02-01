@@ -1,35 +1,33 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for ExerciseAction.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/ExerciseAction
  */
-
 trait ExerciseActionTrait
 {
-    
     /**
-     * A sub property of participant. The sports team that participated on this
-     * action.
+     * A sub property of location. The final location of the object or the agent
+     * after the action.
      *
-     * @var SportsTeam
+     * @var Place
      */
-    public $sportsTeam;
+    public $toLocation;
 
     /**
      * A sub property of location. The course where this action was taken.
@@ -51,29 +49,29 @@ trait ExerciseActionTrait
      *
      * @var Diet
      */
-    public $diet;
+    public $exerciseRelatedDiet;
 
     /**
-     * A sub property of location. The sports activity location where this action
-     * occurred.
+     * A sub property of location. The course where this action was taken.
      *
-     * @var SportsActivityLocation
+     * @var Place
      */
-    public $sportsActivityLocation;
+    public $exerciseCourse;
 
     /**
-     * The distance travelled, e.g. exercising or travelling.
+     * A sub property of participant. The opponent on this action.
      *
-     * @var Distance
+     * @var Person
      */
-    public $distance;
+    public $opponent;
 
     /**
-     * A sub property of instrument. The exercise plan used on this action.
+     * A sub property of participant. The sports team that participated on this
+     * action.
      *
-     * @var ExercisePlan
+     * @var SportsTeam
      */
-    public $exercisePlan;
+    public $sportsTeam;
 
     /**
      * A sub property of location. The sports event where this action occurred.
@@ -87,29 +85,14 @@ trait ExerciseActionTrait
      *
      * @var Diet
      */
-    public $exerciseRelatedDiet;
+    public $diet;
 
     /**
-     * A sub property of participant. The opponent on this action.
+     * A sub property of instrument. The exercise plan used on this action.
      *
-     * @var Person
+     * @var ExercisePlan
      */
-    public $opponent;
-
-    /**
-     * A sub property of location. The course where this action was taken.
-     *
-     * @var Place
-     */
-    public $exerciseCourse;
-
-    /**
-     * A sub property of location. The final location of the object or the agent
-     * after the action.
-     *
-     * @var Place
-     */
-    public $toLocation;
+    public $exercisePlan;
 
     /**
      * Type(s) of exercise or activity, such as strength training, flexibility
@@ -119,4 +102,18 @@ trait ExerciseActionTrait
      */
     public $exerciseType;
 
+    /**
+     * The distance travelled, e.g. exercising or travelling.
+     *
+     * @var Distance
+     */
+    public $distance;
+
+    /**
+     * A sub property of location. The sports activity location where this action
+     * occurred.
+     *
+     * @var SportsActivityLocation
+     */
+    public $sportsActivityLocation;
 }

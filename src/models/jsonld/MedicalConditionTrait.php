@@ -1,44 +1,33 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for MedicalCondition.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/MedicalCondition
  */
-
 trait MedicalConditionTrait
 {
-    
     /**
-     * A possible unexpected and unfavorable evolution of a medical condition.
-     * Complications may include worsening of the signs or symptoms of the
-     * disease, extension of the condition to other organ systems, etc.
+     * A modifiable or non-modifiable factor that increases the risk of a patient
+     * contracting this condition, e.g. age,  coexisting condition.
      *
-     * @var string|Text
+     * @var MedicalRiskFactor
      */
-    public $possibleComplication;
-
-    /**
-     * The expected progression of the condition if it is not treated and allowed
-     * to progress naturally.
-     *
-     * @var string|Text
-     */
-    public $naturalProgression;
+    public $riskFactor;
 
     /**
      * A preventative therapy used to prevent an initial occurrence of the medical
@@ -49,11 +38,19 @@ trait MedicalConditionTrait
     public $primaryPrevention;
 
     /**
-     * The status of the study (enumerated).
+     * The likely outcome in either the short term or long term of the medical
+     * condition.
      *
-     * @var string|Text|EventStatusType|MedicalStudyStatus
+     * @var string|Text
      */
-    public $status;
+    public $expectedPrognosis;
+
+    /**
+     * A medical test typically performed given this condition.
+     *
+     * @var MedicalTest
+     */
+    public $typicalTest;
 
     /**
      * One of a set of differential diagnoses for the condition. Specifically, a
@@ -68,19 +65,27 @@ trait MedicalConditionTrait
     public $differentialDiagnosis;
 
     /**
-     * The stage of the condition, if applicable.
-     *
-     * @var MedicalConditionStage
-     */
-    public $stage;
-
-    /**
      * Changes in the normal mechanical, physical, and biochemical functions that
      * are associated with this activity or condition.
      *
      * @var string|Text
      */
     public $pathophysiology;
+
+    /**
+     * The status of the study (enumerated).
+     *
+     * @var string|MedicalStudyStatus|Text|EventStatusType
+     */
+    public $status;
+
+    /**
+     * The expected progression of the condition if it is not treated and allowed
+     * to progress naturally.
+     *
+     * @var string|Text
+     */
+    public $naturalProgression;
 
     /**
      * Specifying a drug or medicine used in a medication procedure.
@@ -98,14 +103,6 @@ trait MedicalConditionTrait
     public $secondaryPrevention;
 
     /**
-     * The anatomy of the underlying organ system or structures associated with
-     * this entity.
-     *
-     * @var AnatomicalStructure|AnatomicalSystem|SuperficialAnatomy
-     */
-    public $associatedAnatomy;
-
-    /**
      * A sign or symptom of this condition. Signs are objective or physically
      * observable manifestations of the medical condition while symptoms are the
      * subjective experience of the medical condition.
@@ -115,11 +112,11 @@ trait MedicalConditionTrait
     public $signOrSymptom;
 
     /**
-     * A medical test typically performed given this condition.
+     * A possible treatment to address this condition, sign or symptom.
      *
-     * @var MedicalTest
+     * @var MedicalTherapy
      */
-    public $typicalTest;
+    public $possibleTreatment;
 
     /**
      * The characteristics of associated patients, such as age, gender, race etc.
@@ -129,26 +126,26 @@ trait MedicalConditionTrait
     public $epidemiology;
 
     /**
-     * A modifiable or non-modifiable factor that increases the risk of a patient
-     * contracting this condition, e.g. age,  coexisting condition.
+     * The anatomy of the underlying organ system or structures associated with
+     * this entity.
      *
-     * @var MedicalRiskFactor
+     * @var SuperficialAnatomy|AnatomicalSystem|AnatomicalStructure
      */
-    public $riskFactor;
+    public $associatedAnatomy;
 
     /**
-     * The likely outcome in either the short term or long term of the medical
-     * condition.
+     * A possible unexpected and unfavorable evolution of a medical condition.
+     * Complications may include worsening of the signs or symptoms of the
+     * disease, extension of the condition to other organ systems, etc.
      *
      * @var string|Text
      */
-    public $expectedPrognosis;
+    public $possibleComplication;
 
     /**
-     * A possible treatment to address this condition, sign or symptom.
+     * The stage of the condition, if applicable.
      *
-     * @var MedicalTherapy
+     * @var MedicalConditionStage
      */
-    public $possibleTreatment;
-
+    public $stage;
 }

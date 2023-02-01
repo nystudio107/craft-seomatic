@@ -1,28 +1,33 @@
 <?php
+
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for EntryPoint.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/EntryPoint
  */
-
 trait EntryPointTrait
 {
-    
+    /**
+     * The supported encoding type(s) for an EntryPoint request.
+     *
+     * @var string|Text
+     */
+    public $encodingType;
+
     /**
      * An application that can complete the request.
      *
@@ -31,20 +36,27 @@ trait EntryPointTrait
     public $actionApplication;
 
     /**
+     * The high level platform(s) where the Action can be performed for the given
+     * URL. To specify a specific application or operating system instance, use
+     * actionApplication.
+     *
+     * @var string|URL|DigitalPlatformEnumeration|Text
+     */
+    public $actionPlatform;
+
+    /**
+     * The supported content type(s) for an EntryPoint response.
+     *
+     * @var string|Text
+     */
+    public $contentType;
+
+    /**
      * An application that can complete the request.
      *
      * @var SoftwareApplication
      */
     public $application;
-
-    /**
-     * The high level platform(s) where the Action can be performed for the given
-     * URL. To specify a specific application or operating system instance, use
-     * actionApplication.
-     *
-     * @var string|Text|URL|DigitalPlatformEnumeration
-     */
-    public $actionPlatform;
 
     /**
      * An HTTP method that specifies the appropriate HTTP method for a request to
@@ -61,19 +73,4 @@ trait EntryPointTrait
      * @var string|Text
      */
     public $urlTemplate;
-
-    /**
-     * The supported encoding type(s) for an EntryPoint request.
-     *
-     * @var string|Text
-     */
-    public $encodingType;
-
-    /**
-     * The supported content type(s) for an EntryPoint response.
-     *
-     * @var string|Text
-     */
-    public $contentType;
-
 }
