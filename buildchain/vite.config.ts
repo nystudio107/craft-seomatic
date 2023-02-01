@@ -30,7 +30,7 @@ export default defineConfig(({command}) => ({
   plugins: [
     viteRestartPlugin({
       reload: [
-        './src/templates/**/*',
+        '../src/templates/**/*',
       ],
     }),
     createVuePlugin(),
