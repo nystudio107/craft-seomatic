@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.49 - UNRELEASED
+### Added
+* Updated to schema.org [v15.0](https://schema.org/docs/releases.html), fixes ([#1277](https://github.com/nystudio107/craft-seomatic/issues/1277))
+
 ### Changed
 * Use dynamic docker container name & port for the `buildchain`
 * Update the `buildchain` to use Vite `^4.0.0`
