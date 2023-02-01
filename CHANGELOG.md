@@ -4,6 +4,7 @@
 ### Changed
 * Use dynamic docker container name & port for the `buildchain`
 * Update the `buildchain` to use Vite `^4.0.0`
+* Refactored the docs buildchain to use a dynamic docker container setup
 
 ## 4.0.19 - 2023.01.11
 ### Fix
