@@ -685,6 +685,7 @@ class MetaBundles extends Component
     {
         $metaBundleInvalidated = false;
         $invalidateMetaBundle = true;
+        $sitemapInvalidated = false;
         if (Seomatic::$craft32) {
             if ($element->getIsDraft() || $element->getIsRevision()) {
                 $invalidateMetaBundle = false;
@@ -724,8 +725,10 @@ class MetaBundles extends Component
                     // Update the meta bundle data
                     $this->updateMetaBundle($metaBundle, $sourceSiteId);
                     if ($metaBundle
+                        && $metaBundle->metaSitemapVars->sitemapUrls
                         && $element->scenario !== Element::SCENARIO_ESSENTIALS
                         && Seomatic::$settings->regenerateSitemapsAutomatically) {
+                        $sitemapInvalidated = true;
                         Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                             $metaBundle->sourceHandle,
                             $metaBundle->sourceSiteId,
@@ -736,7 +739,9 @@ class MetaBundles extends Component
                 }
             }
             // If we've invalidated a meta bundle, we need to invalidate the sitemap index, too
-            if ($metaBundleInvalidated && $element->scenario !== Element::SCENARIO_ESSENTIALS) {
+            if ($metaBundleInvalidated
+                && $sitemapInvalidated
+                && $element->scenario !== Element::SCENARIO_ESSENTIALS) {
                 Seomatic::$plugin->sitemaps->invalidateSitemapIndexCache();
             }
         }
