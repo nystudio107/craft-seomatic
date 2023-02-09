@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -38,28 +38,28 @@ class DeliveryTimeSettings extends MetaJsonLd implements DeliveryTimeSettingsInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DeliveryTimeSettings';
+	public static string $schemaTypeName = 'DeliveryTimeSettings';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DeliveryTimeSettings';
+	public static string $schemaTypeScope = 'https://schema.org/DeliveryTimeSettings';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A DeliveryTimeSettings represents re-usable pieces of shipping information, relating to timing. It is designed for publication on an URL that may be referenced via the [[shippingSettingsLink]] property of an [[OfferShippingDetails]]. Several occurrences can be published, distinguished (and identified/referenced) by their different values for [[transitTimeLabel]].';
+	public static string $schemaTypeDescription = 'A DeliveryTimeSettings represents re-usable pieces of shipping information, relating to timing. It is designed for publication on an URL that may be referenced via the [[shippingSettingsLink]] property of an [[OfferShippingDetails]]. Several occurrences can be published, distinguished (and identified/referenced) by their different values for [[transitTimeLabel]].';
 
 
 	/**

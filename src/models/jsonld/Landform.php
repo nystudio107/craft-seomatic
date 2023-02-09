@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Landform extends MetaJsonLd implements LandformInterface, PlaceInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Landform';
+	public static string $schemaTypeName = 'Landform';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Landform';
+	public static string $schemaTypeScope = 'https://schema.org/Landform';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Place';
+	public static string $schemaTypeExtends = 'Place';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A landform or physical feature.  Landform elements include mountains, plains, lakes, rivers, seascape and oceanic waterbody interface features such as bays, peninsulas, seas and so forth, including sub-aqueous terrain features such as submersed mountain ranges, volcanoes, and the great ocean basins.';
+	public static string $schemaTypeDescription = 'A landform or physical feature.  Landform elements include mountains, plains, lakes, rivers, seascape and oceanic waterbody interface features such as bays, peninsulas, seas and so forth, including sub-aqueous terrain features such as submersed mountain ranges, volcanoes, and the great ocean basins.';
 
 
 	/**

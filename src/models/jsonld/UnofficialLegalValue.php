@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class UnofficialLegalValue extends MetaJsonLd implements UnofficialLegalValueInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UnofficialLegalValue';
+	public static string $schemaTypeName = 'UnofficialLegalValue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UnofficialLegalValue';
+	public static string $schemaTypeScope = 'https://schema.org/UnofficialLegalValue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LegalValueLevel';
+	public static string $schemaTypeExtends = 'LegalValueLevel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that a document has no particular or special standing (e.g. a republication of a law by a private publisher).';
+	public static string $schemaTypeDescription = 'Indicates that a document has no particular or special standing (e.g. a republication of a law by a private publisher).';
 
 
 	/**

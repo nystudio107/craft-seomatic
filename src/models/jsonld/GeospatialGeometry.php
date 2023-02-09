@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class GeospatialGeometry extends MetaJsonLd implements GeospatialGeometryInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GeospatialGeometry';
+	public static string $schemaTypeName = 'GeospatialGeometry';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GeospatialGeometry';
+	public static string $schemaTypeScope = 'https://schema.org/GeospatialGeometry';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = '(Eventually to be defined as) a supertype of GeoShape designed to accommodate definitions from Geo-Spatial best practices.';
+	public static string $schemaTypeDescription = '(Eventually to be defined as) a supertype of GeoShape designed to accommodate definitions from Geo-Spatial best practices.';
 
 
 	/**

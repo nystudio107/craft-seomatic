@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Mass extends MetaJsonLd implements MassInterface, QuantityInterface, Intan
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Mass';
+	public static string $schemaTypeName = 'Mass';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Mass';
+	public static string $schemaTypeScope = 'https://schema.org/Mass';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Quantity';
+	public static string $schemaTypeExtends = 'Quantity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Properties that take Mass as values are of the form \'<Number> <Mass unit of measure>\'. E.g., \'7 kg\'.';
+	public static string $schemaTypeDescription = 'Properties that take Mass as values are of the form \'<Number> <Mass unit of measure>\'. E.g., \'7 kg\'.';
 
 
 	/**

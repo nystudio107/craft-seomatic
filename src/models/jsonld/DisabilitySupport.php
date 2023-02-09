@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DisabilitySupport extends MetaJsonLd implements DisabilitySupportInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DisabilitySupport';
+	public static string $schemaTypeName = 'DisabilitySupport';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DisabilitySupport';
+	public static string $schemaTypeScope = 'https://schema.org/DisabilitySupport';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBenefitsType';
+	public static string $schemaTypeExtends = 'GovernmentBenefitsType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'DisabilitySupport: this is a benefit for disability support.';
+	public static string $schemaTypeDescription = 'DisabilitySupport: this is a benefit for disability support.';
 
 
 	/**

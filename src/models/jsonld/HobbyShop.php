@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class HobbyShop extends MetaJsonLd implements HobbyShopInterface, StoreInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HobbyShop';
+	public static string $schemaTypeName = 'HobbyShop';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HobbyShop';
+	public static string $schemaTypeScope = 'https://schema.org/HobbyShop';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A store that sells materials useful or necessary for various hobbies.';
+	public static string $schemaTypeDescription = 'A store that sells materials useful or necessary for various hobbies.';
 
 
 	/**

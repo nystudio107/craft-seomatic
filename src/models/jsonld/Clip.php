@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Clip extends MetaJsonLd implements ClipInterface, CreativeWorkInterface, T
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Clip';
+	public static string $schemaTypeName = 'Clip';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Clip';
+	public static string $schemaTypeScope = 'https://schema.org/Clip';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A short TV or radio program or a segment/part of a program.';
+	public static string $schemaTypeDescription = 'A short TV or radio program or a segment/part of a program.';
 
 
 	/**

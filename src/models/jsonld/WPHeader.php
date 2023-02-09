@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class WPHeader extends MetaJsonLd implements WPHeaderInterface, WebPageElementIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WPHeader';
+	public static string $schemaTypeName = 'WPHeader';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WPHeader';
+	public static string $schemaTypeScope = 'https://schema.org/WPHeader';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPageElement';
+	public static string $schemaTypeExtends = 'WebPageElement';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The header section of the page.';
+	public static string $schemaTypeDescription = 'The header section of the page.';
 
 
 	/**

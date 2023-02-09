@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class HousePainter extends MetaJsonLd implements HousePainterInterface, HomeAndC
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HousePainter';
+	public static string $schemaTypeName = 'HousePainter';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HousePainter';
+	public static string $schemaTypeScope = 'https://schema.org/HousePainter';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HomeAndConstructionBusiness';
+	public static string $schemaTypeExtends = 'HomeAndConstructionBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A house painting service.';
+	public static string $schemaTypeDescription = 'A house painting service.';
 
 
 	/**

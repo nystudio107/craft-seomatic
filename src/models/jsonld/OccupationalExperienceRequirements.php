@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class OccupationalExperienceRequirements extends MetaJsonLd implements Occupatio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OccupationalExperienceRequirements';
+	public static string $schemaTypeName = 'OccupationalExperienceRequirements';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OccupationalExperienceRequirements';
+	public static string $schemaTypeScope = 'https://schema.org/OccupationalExperienceRequirements';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates employment-related experience requirements, e.g. [[monthsOfExperience]].';
+	public static string $schemaTypeDescription = 'Indicates employment-related experience requirements, e.g. [[monthsOfExperience]].';
 
 
 	/**

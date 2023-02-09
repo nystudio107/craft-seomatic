@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class GovernmentBuilding extends MetaJsonLd implements GovernmentBuildingInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GovernmentBuilding';
+	public static string $schemaTypeName = 'GovernmentBuilding';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GovernmentBuilding';
+	public static string $schemaTypeScope = 'https://schema.org/GovernmentBuilding';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A government building.';
+	public static string $schemaTypeDescription = 'A government building.';
 
 
 	/**

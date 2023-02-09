@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Seat extends MetaJsonLd implements SeatInterface, IntangibleInterface, Thi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Seat';
+	public static string $schemaTypeName = 'Seat';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Seat';
+	public static string $schemaTypeScope = 'https://schema.org/Seat';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Used to describe a seat, such as a reserved seat in an event reservation.';
+	public static string $schemaTypeDescription = 'Used to describe a seat, such as a reserved seat in an event reservation.';
 
 
 	/**

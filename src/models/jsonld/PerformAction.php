@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class PerformAction extends MetaJsonLd implements PerformActionInterface, PlayAc
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PerformAction';
+	public static string $schemaTypeName = 'PerformAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PerformAction';
+	public static string $schemaTypeScope = 'https://schema.org/PerformAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PlayAction';
+	public static string $schemaTypeExtends = 'PlayAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of participating in performance arts.';
+	public static string $schemaTypeDescription = 'The act of participating in performance arts.';
 
 
 	/**

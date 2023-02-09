@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RsvpResponseYes extends MetaJsonLd implements RsvpResponseYesInterface, Rs
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RsvpResponseYes';
+	public static string $schemaTypeName = 'RsvpResponseYes';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RsvpResponseYes';
+	public static string $schemaTypeScope = 'https://schema.org/RsvpResponseYes';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RsvpResponseType';
+	public static string $schemaTypeExtends = 'RsvpResponseType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The invitee will attend.';
+	public static string $schemaTypeDescription = 'The invitee will attend.';
 
 
 	/**

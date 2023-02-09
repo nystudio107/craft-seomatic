@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class UnitPriceSpecification extends MetaJsonLd implements UnitPriceSpecificatio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UnitPriceSpecification';
+	public static string $schemaTypeName = 'UnitPriceSpecification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UnitPriceSpecification';
+	public static string $schemaTypeScope = 'https://schema.org/UnitPriceSpecification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceSpecification';
+	public static string $schemaTypeExtends = 'PriceSpecification';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The price asked for a given offer by the respective organization or person.';
+	public static string $schemaTypeDescription = 'The price asked for a given offer by the respective organization or person.';
 
 
 	/**

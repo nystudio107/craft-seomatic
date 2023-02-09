@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class CrossSectional extends MetaJsonLd implements CrossSectionalInterface, Medi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CrossSectional';
+	public static string $schemaTypeName = 'CrossSectional';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CrossSectional';
+	public static string $schemaTypeScope = 'https://schema.org/CrossSectional';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalObservationalStudyDesign';
+	public static string $schemaTypeExtends = 'MedicalObservationalStudyDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Studies carried out on pre-existing data (usually from \'snapshot\' surveys), such as that collected by the Census Bureau. Sometimes called Prevalence Studies.';
+	public static string $schemaTypeDescription = 'Studies carried out on pre-existing data (usually from \'snapshot\' surveys), such as that collected by the Census Bureau. Sometimes called Prevalence Studies.';
 
 
 	/**

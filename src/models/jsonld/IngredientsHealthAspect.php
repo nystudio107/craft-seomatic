@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class IngredientsHealthAspect extends MetaJsonLd implements IngredientsHealthAsp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'IngredientsHealthAspect';
+	public static string $schemaTypeName = 'IngredientsHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/IngredientsHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/IngredientsHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Content discussing ingredients-related aspects of a health topic.';
+	public static string $schemaTypeDescription = 'Content discussing ingredients-related aspects of a health topic.';
 
 
 	/**

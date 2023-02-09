@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class TaxiStand extends MetaJsonLd implements TaxiStandInterface, CivicStructure
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TaxiStand';
+	public static string $schemaTypeName = 'TaxiStand';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TaxiStand';
+	public static string $schemaTypeScope = 'https://schema.org/TaxiStand';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A taxi stand.';
+	public static string $schemaTypeDescription = 'A taxi stand.';
 
 
 	/**

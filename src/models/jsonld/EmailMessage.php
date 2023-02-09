@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class EmailMessage extends MetaJsonLd implements EmailMessageInterface, MessageI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EmailMessage';
+	public static string $schemaTypeName = 'EmailMessage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EmailMessage';
+	public static string $schemaTypeScope = 'https://schema.org/EmailMessage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Message';
+	public static string $schemaTypeExtends = 'Message';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An email message.';
+	public static string $schemaTypeDescription = 'An email message.';
 
 
 	/**

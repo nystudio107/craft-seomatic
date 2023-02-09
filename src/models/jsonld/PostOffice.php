@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PostOffice extends MetaJsonLd implements PostOfficeInterface, GovernmentOf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PostOffice';
+	public static string $schemaTypeName = 'PostOffice';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PostOffice';
+	public static string $schemaTypeScope = 'https://schema.org/PostOffice';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentOffice';
+	public static string $schemaTypeExtends = 'GovernmentOffice';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A post office.';
+	public static string $schemaTypeDescription = 'A post office.';
 
 
 	/**

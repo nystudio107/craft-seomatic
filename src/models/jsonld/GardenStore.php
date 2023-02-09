@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class GardenStore extends MetaJsonLd implements GardenStoreInterface, StoreInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GardenStore';
+	public static string $schemaTypeName = 'GardenStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GardenStore';
+	public static string $schemaTypeScope = 'https://schema.org/GardenStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A garden store.';
+	public static string $schemaTypeDescription = 'A garden store.';
 
 
 	/**

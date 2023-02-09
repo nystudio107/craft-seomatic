@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class MedicalTrial extends MetaJsonLd implements MedicalTrialInterface, MedicalS
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalTrial';
+	public static string $schemaTypeName = 'MedicalTrial';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalTrial';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalTrial';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalStudy';
+	public static string $schemaTypeExtends = 'MedicalStudy';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A medical trial is a type of medical study that uses a scientific process to compare the safety and efficacy of medical therapies or medical procedures. In general, medical trials are controlled and subjects are allocated at random to the different treatment and/or control groups.';
+	public static string $schemaTypeDescription = 'A medical trial is a type of medical study that uses a scientific process to compare the safety and efficacy of medical therapies or medical procedures. In general, medical trials are controlled and subjects are allocated at random to the different treatment and/or control groups.';
 
 
 	/**

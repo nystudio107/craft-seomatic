@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class AuthorizeAction extends MetaJsonLd implements AuthorizeActionInterface, Al
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AuthorizeAction';
+	public static string $schemaTypeName = 'AuthorizeAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AuthorizeAction';
+	public static string $schemaTypeScope = 'https://schema.org/AuthorizeAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AllocateAction';
+	public static string $schemaTypeExtends = 'AllocateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of granting permission to an object.';
+	public static string $schemaTypeDescription = 'The act of granting permission to an object.';
 
 
 	/**

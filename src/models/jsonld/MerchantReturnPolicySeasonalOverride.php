@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class MerchantReturnPolicySeasonalOverride extends MetaJsonLd implements Merchan
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MerchantReturnPolicySeasonalOverride';
+	public static string $schemaTypeName = 'MerchantReturnPolicySeasonalOverride';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MerchantReturnPolicySeasonalOverride';
+	public static string $schemaTypeScope = 'https://schema.org/MerchantReturnPolicySeasonalOverride';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A seasonal override of a return policy, for example used for holidays.';
+	public static string $schemaTypeDescription = 'A seasonal override of a return policy, for example used for holidays.';
 
 
 	/**

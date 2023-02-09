@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Osteopathic extends MetaJsonLd implements OsteopathicInterface, MedicineSy
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Osteopathic';
+	public static string $schemaTypeName = 'Osteopathic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Osteopathic';
+	public static string $schemaTypeScope = 'https://schema.org/Osteopathic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicineSystem';
+	public static string $schemaTypeExtends = 'MedicineSystem';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A system of medicine focused on promoting the body\'s innate ability to heal itself.';
+	public static string $schemaTypeDescription = 'A system of medicine focused on promoting the body\'s innate ability to heal itself.';
 
 
 	/**

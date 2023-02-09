@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class FailedActionStatus extends MetaJsonLd implements FailedActionStatusInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FailedActionStatus';
+	public static string $schemaTypeName = 'FailedActionStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FailedActionStatus';
+	public static string $schemaTypeScope = 'https://schema.org/FailedActionStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ActionStatusType';
+	public static string $schemaTypeExtends = 'ActionStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An action that failed to complete. The action\'s error property and the HTTP return code contain more information about the failure.';
+	public static string $schemaTypeDescription = 'An action that failed to complete. The action\'s error property and the HTTP return code contain more information about the failure.';
 
 
 	/**

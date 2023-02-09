@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Taxon extends MetaJsonLd implements TaxonInterface, ThingInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Taxon';
+	public static string $schemaTypeName = 'Taxon';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Taxon';
+	public static string $schemaTypeScope = 'https://schema.org/Taxon';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A set of organisms asserted to represent a natural cohesive biological unit.';
+	public static string $schemaTypeDescription = 'A set of organisms asserted to represent a natural cohesive biological unit.';
 
 
 	/**

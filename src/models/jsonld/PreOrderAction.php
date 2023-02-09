@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PreOrderAction extends MetaJsonLd implements PreOrderActionInterface, Trad
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PreOrderAction';
+	public static string $schemaTypeName = 'PreOrderAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PreOrderAction';
+	public static string $schemaTypeScope = 'https://schema.org/PreOrderAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TradeAction';
+	public static string $schemaTypeExtends = 'TradeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An agent orders a (not yet released) object/product/service to be delivered/sent.';
+	public static string $schemaTypeDescription = 'An agent orders a (not yet released) object/product/service to be delivered/sent.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Vessel extends MetaJsonLd implements VesselInterface, AnatomicalStructureI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Vessel';
+	public static string $schemaTypeName = 'Vessel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Vessel';
+	public static string $schemaTypeScope = 'https://schema.org/Vessel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AnatomicalStructure';
+	public static string $schemaTypeExtends = 'AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A component of the human body circulatory system comprised of an intricate network of hollow tubes that transport blood throughout the entire body.';
+	public static string $schemaTypeDescription = 'A component of the human body circulatory system comprised of an intricate network of hollow tubes that transport blood throughout the entire body.';
 
 
 	/**

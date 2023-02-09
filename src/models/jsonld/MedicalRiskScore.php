@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalRiskScore extends MetaJsonLd implements MedicalRiskScoreInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalRiskScore';
+	public static string $schemaTypeName = 'MedicalRiskScore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalRiskScore';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalRiskScore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalRiskEstimator';
+	public static string $schemaTypeExtends = 'MedicalRiskEstimator';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A simple system that adds up the number of risk factors to yield a score that is associated with prognosis, e.g. CHAD score, TIMI risk score.';
+	public static string $schemaTypeDescription = 'A simple system that adds up the number of risk factors to yield a score that is associated with prognosis, e.g. CHAD score, TIMI risk score.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -30,28 +30,28 @@ class Text extends MetaJsonLd implements TextInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Text';
+	public static string $schemaTypeName = 'Text';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Text';
+	public static string $schemaTypeScope = 'https://schema.org/Text';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Data type: Text.';
+	public static string $schemaTypeDescription = 'Data type: Text.';
 
 
 	/**

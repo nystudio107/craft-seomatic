@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MisconceptionsHealthAspect extends MetaJsonLd implements MisconceptionsHea
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MisconceptionsHealthAspect';
+	public static string $schemaTypeName = 'MisconceptionsHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MisconceptionsHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/MisconceptionsHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Content about common misconceptions and myths that are related to a topic.';
+	public static string $schemaTypeDescription = 'Content about common misconceptions and myths that are related to a topic.';
 
 
 	/**

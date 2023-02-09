@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class LocationFeatureSpecification extends MetaJsonLd implements LocationFeature
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LocationFeatureSpecification';
+	public static string $schemaTypeName = 'LocationFeatureSpecification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LocationFeatureSpecification';
+	public static string $schemaTypeScope = 'https://schema.org/LocationFeatureSpecification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PropertyValue';
+	public static string $schemaTypeExtends = 'PropertyValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies a location feature by providing a structured value representing a feature of an accommodation as a property-value pair of varying degrees of formality.';
+	public static string $schemaTypeDescription = 'Specifies a location feature by providing a structured value representing a feature of an accommodation as a property-value pair of varying degrees of formality.';
 
 
 	/**

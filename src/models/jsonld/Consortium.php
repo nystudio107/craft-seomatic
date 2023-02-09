@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Consortium extends MetaJsonLd implements ConsortiumInterface, Organization
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Consortium';
+	public static string $schemaTypeName = 'Consortium';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Consortium';
+	public static string $schemaTypeScope = 'https://schema.org/Consortium';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Organization';
+	public static string $schemaTypeExtends = 'Organization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A Consortium is a membership [[Organization]] whose members are typically Organizations.';
+	public static string $schemaTypeDescription = 'A Consortium is a membership [[Organization]] whose members are typically Organizations.';
 
 
 	/**

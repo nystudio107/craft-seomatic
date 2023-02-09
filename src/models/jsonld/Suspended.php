@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Suspended extends MetaJsonLd implements SuspendedInterface, MedicalStudySt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Suspended';
+	public static string $schemaTypeName = 'Suspended';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Suspended';
+	public static string $schemaTypeScope = 'https://schema.org/Suspended';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalStudyStatus';
+	public static string $schemaTypeExtends = 'MedicalStudyStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Suspended.';
+	public static string $schemaTypeDescription = 'Suspended.';
 
 
 	/**

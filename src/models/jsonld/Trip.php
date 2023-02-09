@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Trip extends MetaJsonLd implements TripInterface, IntangibleInterface, Thi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Trip';
+	public static string $schemaTypeName = 'Trip';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Trip';
+	public static string $schemaTypeScope = 'https://schema.org/Trip';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A trip or journey. An itinerary of visits to one or more places.';
+	public static string $schemaTypeDescription = 'A trip or journey. An itinerary of visits to one or more places.';
 
 
 	/**

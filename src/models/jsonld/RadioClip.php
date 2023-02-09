@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class RadioClip extends MetaJsonLd implements RadioClipInterface, ClipInterface,
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RadioClip';
+	public static string $schemaTypeName = 'RadioClip';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RadioClip';
+	public static string $schemaTypeScope = 'https://schema.org/RadioClip';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Clip';
+	public static string $schemaTypeExtends = 'Clip';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A short radio program or a segment/part of a radio program.';
+	public static string $schemaTypeDescription = 'A short radio program or a segment/part of a radio program.';
 
 
 	/**

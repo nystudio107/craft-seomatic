@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class LoanOrCredit extends MetaJsonLd implements LoanOrCreditInterface, Financia
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LoanOrCredit';
+	public static string $schemaTypeName = 'LoanOrCredit';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LoanOrCredit';
+	public static string $schemaTypeScope = 'https://schema.org/LoanOrCredit';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FinancialProduct';
+	public static string $schemaTypeExtends = 'FinancialProduct';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A financial product for the loaning of an amount of money, or line of credit, under agreed terms and charges.';
+	public static string $schemaTypeDescription = 'A financial product for the loaning of an amount of money, or line of credit, under agreed terms and charges.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ItemListOrderType extends MetaJsonLd implements ItemListOrderTypeInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ItemListOrderType';
+	public static string $schemaTypeName = 'ItemListOrderType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ItemListOrderType';
+	public static string $schemaTypeScope = 'https://schema.org/ItemListOrderType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerated for values for itemListOrder for indicating how an ordered ItemList is organized.';
+	public static string $schemaTypeDescription = 'Enumerated for values for itemListOrder for indicating how an ordered ItemList is organized.';
 
 
 	/**

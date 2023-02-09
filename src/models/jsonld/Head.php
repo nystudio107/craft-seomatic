@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Head extends MetaJsonLd implements HeadInterface, PhysicalExamInterface, M
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Head';
+	public static string $schemaTypeName = 'Head';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Head';
+	public static string $schemaTypeScope = 'https://schema.org/Head';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalExam';
+	public static string $schemaTypeExtends = 'PhysicalExam';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Head assessment with clinical examination.';
+	public static string $schemaTypeDescription = 'Head assessment with clinical examination.';
 
 
 	/**

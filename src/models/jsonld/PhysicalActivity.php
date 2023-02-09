@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class PhysicalActivity extends MetaJsonLd implements PhysicalActivityInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PhysicalActivity';
+	public static string $schemaTypeName = 'PhysicalActivity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PhysicalActivity';
+	public static string $schemaTypeScope = 'https://schema.org/PhysicalActivity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LifestyleModification';
+	public static string $schemaTypeExtends = 'LifestyleModification';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any bodily activity that enhances or maintains physical fitness and overall health and wellness. Includes activity that is part of daily living and routine, structured exercise, and exercise prescribed as part of a medical treatment or recovery plan.';
+	public static string $schemaTypeDescription = 'Any bodily activity that enhances or maintains physical fitness and overall health and wellness. Includes activity that is part of daily living and routine, structured exercise, and exercise prescribed as part of a medical treatment or recovery plan.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class RadioSeason extends MetaJsonLd implements RadioSeasonInterface, CreativeWo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RadioSeason';
+	public static string $schemaTypeName = 'RadioSeason';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RadioSeason';
+	public static string $schemaTypeScope = 'https://schema.org/RadioSeason';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWorkSeason';
+	public static string $schemaTypeExtends = 'CreativeWorkSeason';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Season dedicated to radio broadcast and associated online delivery.';
+	public static string $schemaTypeDescription = 'Season dedicated to radio broadcast and associated online delivery.';
 
 
 	/**

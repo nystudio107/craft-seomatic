@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class LegalForceStatus extends MetaJsonLd implements LegalForceStatusInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LegalForceStatus';
+	public static string $schemaTypeName = 'LegalForceStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LegalForceStatus';
+	public static string $schemaTypeScope = 'https://schema.org/LegalForceStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StatusEnumeration';
+	public static string $schemaTypeExtends = 'StatusEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A list of possible statuses for the legal force of a legislation.';
+	public static string $schemaTypeDescription = 'A list of possible statuses for the legal force of a legislation.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MedicalOrganization extends MetaJsonLd implements MedicalOrganizationInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalOrganization';
+	public static string $schemaTypeName = 'MedicalOrganization';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalOrganization';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalOrganization';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Organization';
+	public static string $schemaTypeExtends = 'Organization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A medical organization (physical or not), such as hospital, institution or clinic.';
+	public static string $schemaTypeDescription = 'A medical organization (physical or not), such as hospital, institution or clinic.';
 
 
 	/**

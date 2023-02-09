@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -30,28 +30,28 @@ class Boolean extends MetaJsonLd implements BooleanInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Boolean';
+	public static string $schemaTypeName = 'Boolean';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Boolean';
+	public static string $schemaTypeScope = 'https://schema.org/Boolean';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Boolean: True or False.';
+	public static string $schemaTypeDescription = 'Boolean: True or False.';
 
 
 	/**

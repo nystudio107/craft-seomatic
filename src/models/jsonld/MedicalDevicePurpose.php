@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MedicalDevicePurpose extends MetaJsonLd implements MedicalDevicePurposeInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalDevicePurpose';
+	public static string $schemaTypeName = 'MedicalDevicePurpose';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalDevicePurpose';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalDevicePurpose';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Categories of medical devices, organized by the purpose or intended use of the device.';
+	public static string $schemaTypeDescription = 'Categories of medical devices, organized by the purpose or intended use of the device.';
 
 
 	/**

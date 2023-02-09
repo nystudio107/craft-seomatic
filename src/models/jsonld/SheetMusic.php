@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class SheetMusic extends MetaJsonLd implements SheetMusicInterface, CreativeWork
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SheetMusic';
+	public static string $schemaTypeName = 'SheetMusic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SheetMusic';
+	public static string $schemaTypeScope = 'https://schema.org/SheetMusic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Printed music, as opposed to performed or recorded music.';
+	public static string $schemaTypeDescription = 'Printed music, as opposed to performed or recorded music.';
 
 
 	/**

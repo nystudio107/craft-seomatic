@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class AutoBodyShop extends MetaJsonLd implements AutoBodyShopInterface, Automoti
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AutoBodyShop';
+	public static string $schemaTypeName = 'AutoBodyShop';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AutoBodyShop';
+	public static string $schemaTypeScope = 'https://schema.org/AutoBodyShop';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AutomotiveBusiness';
+	public static string $schemaTypeExtends = 'AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Auto body shop.';
+	public static string $schemaTypeDescription = 'Auto body shop.';
 
 
 	/**

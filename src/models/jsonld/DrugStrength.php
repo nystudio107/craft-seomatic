@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DrugStrength extends MetaJsonLd implements DrugStrengthInterface, MedicalI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrugStrength';
+	public static string $schemaTypeName = 'DrugStrength';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrugStrength';
+	public static string $schemaTypeScope = 'https://schema.org/DrugStrength';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalIntangible';
+	public static string $schemaTypeExtends = 'MedicalIntangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific strength in which a medical drug is available in a specific country.';
+	public static string $schemaTypeDescription = 'A specific strength in which a medical drug is available in a specific country.';
 
 
 	/**

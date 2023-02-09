@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class DDxElement extends MetaJsonLd implements DDxElementInterface, MedicalIntan
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DDxElement';
+	public static string $schemaTypeName = 'DDxElement';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DDxElement';
+	public static string $schemaTypeScope = 'https://schema.org/DDxElement';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalIntangible';
+	public static string $schemaTypeExtends = 'MedicalIntangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An alternative, closely-related condition typically considered later in the differential diagnosis process along with the signs that are used to distinguish it.';
+	public static string $schemaTypeDescription = 'An alternative, closely-related condition typically considered later in the differential diagnosis process along with the signs that are used to distinguish it.';
 
 
 	/**

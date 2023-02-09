@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class BusStop extends MetaJsonLd implements BusStopInterface, CivicStructureInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BusStop';
+	public static string $schemaTypeName = 'BusStop';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BusStop';
+	public static string $schemaTypeScope = 'https://schema.org/BusStop';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A bus stop.';
+	public static string $schemaTypeDescription = 'A bus stop.';
 
 
 	/**

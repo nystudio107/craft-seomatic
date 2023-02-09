@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class HealthPlanCostSharingSpecification extends MetaJsonLd implements HealthPla
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HealthPlanCostSharingSpecification';
+	public static string $schemaTypeName = 'HealthPlanCostSharingSpecification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HealthPlanCostSharingSpecification';
+	public static string $schemaTypeScope = 'https://schema.org/HealthPlanCostSharingSpecification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A description of costs to the patient under a given network or formulary.';
+	public static string $schemaTypeDescription = 'A description of costs to the patient under a given network or formulary.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class URL extends MetaJsonLd implements URLInterface, TextInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'URL';
+	public static string $schemaTypeName = 'URL';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/URL';
+	public static string $schemaTypeScope = 'https://schema.org/URL';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Text';
+	public static string $schemaTypeExtends = 'Text';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Data type: URL.';
+	public static string $schemaTypeDescription = 'Data type: URL.';
 
 
 	/**

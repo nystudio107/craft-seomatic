@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BodyMeasurementWeight extends MetaJsonLd implements BodyMeasurementWeightI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementWeight';
+	public static string $schemaTypeName = 'BodyMeasurementWeight';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementWeight';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementWeight';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Body weight. Used, for example, to measure pantyhose.';
+	public static string $schemaTypeDescription = 'Body weight. Used, for example, to measure pantyhose.';
 
 
 	/**

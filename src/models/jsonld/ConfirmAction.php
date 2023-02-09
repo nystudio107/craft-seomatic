@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class ConfirmAction extends MetaJsonLd implements ConfirmActionInterface, Inform
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ConfirmAction';
+	public static string $schemaTypeName = 'ConfirmAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ConfirmAction';
+	public static string $schemaTypeScope = 'https://schema.org/ConfirmAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InformAction';
+	public static string $schemaTypeExtends = 'InformAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of notifying someone that a future event/action is going to happen as expected.\n\nRelated actions:\n\n* [[CancelAction]]: The antonym of ConfirmAction.';
+	public static string $schemaTypeDescription = 'The act of notifying someone that a future event/action is going to happen as expected.\n\nRelated actions:\n\n* [[CancelAction]]: The antonym of ConfirmAction.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ChemicalSubstance extends MetaJsonLd implements ChemicalSubstanceInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ChemicalSubstance';
+	public static string $schemaTypeName = 'ChemicalSubstance';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ChemicalSubstance';
+	public static string $schemaTypeScope = 'https://schema.org/ChemicalSubstance';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BioChemEntity';
+	public static string $schemaTypeExtends = 'BioChemEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A chemical substance is \'a portion of matter of constant composition, composed of molecular entities of the same type or of different types\' (source: [ChEBI:59999](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=59999)).';
+	public static string $schemaTypeDescription = 'A chemical substance is \'a portion of matter of constant composition, composed of molecular entities of the same type or of different types\' (source: [ChEBI:59999](https://www.ebi.ac.uk/chebi/searchId.do?chebiId=59999)).';
 
 
 	/**

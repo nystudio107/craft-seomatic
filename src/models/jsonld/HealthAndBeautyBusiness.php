@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class HealthAndBeautyBusiness extends MetaJsonLd implements HealthAndBeautyBusin
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HealthAndBeautyBusiness';
+	public static string $schemaTypeName = 'HealthAndBeautyBusiness';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HealthAndBeautyBusiness';
+	public static string $schemaTypeScope = 'https://schema.org/HealthAndBeautyBusiness';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Health and beauty.';
+	public static string $schemaTypeDescription = 'Health and beauty.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class FreeReturn extends MetaJsonLd implements FreeReturnInterface, ReturnFeesEn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FreeReturn';
+	public static string $schemaTypeName = 'FreeReturn';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FreeReturn';
+	public static string $schemaTypeScope = 'https://schema.org/FreeReturn';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnFeesEnumeration';
+	public static string $schemaTypeExtends = 'ReturnFeesEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that product returns are free of charge for the customer.';
+	public static string $schemaTypeDescription = 'Specifies that product returns are free of charge for the customer.';
 
 
 	/**

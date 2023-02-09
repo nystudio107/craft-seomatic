@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class FinancialService extends MetaJsonLd implements FinancialServiceInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FinancialService';
+	public static string $schemaTypeName = 'FinancialService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FinancialService';
+	public static string $schemaTypeScope = 'https://schema.org/FinancialService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Financial services business.';
+	public static string $schemaTypeDescription = 'Financial services business.';
 
 
 	/**

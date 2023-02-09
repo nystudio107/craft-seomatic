@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class LowLactoseDiet extends MetaJsonLd implements LowLactoseDietInterface, Rest
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LowLactoseDiet';
+	public static string $schemaTypeName = 'LowLactoseDiet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LowLactoseDiet';
+	public static string $schemaTypeScope = 'https://schema.org/LowLactoseDiet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RestrictedDiet';
+	public static string $schemaTypeExtends = 'RestrictedDiet';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A diet appropriate for people with lactose intolerance.';
+	public static string $schemaTypeDescription = 'A diet appropriate for people with lactose intolerance.';
 
 
 	/**

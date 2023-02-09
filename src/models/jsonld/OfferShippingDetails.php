@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -40,28 +40,28 @@ class OfferShippingDetails extends MetaJsonLd implements OfferShippingDetailsInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OfferShippingDetails';
+	public static string $schemaTypeName = 'OfferShippingDetails';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OfferShippingDetails';
+	public static string $schemaTypeScope = 'https://schema.org/OfferShippingDetails';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = "OfferShippingDetails represents information about shipping destinations.\n\nMultiple of these entities can be used to represent different shipping rates for different destinations:\n\nOne entity for Alaska/Hawaii. A different one for continental US. A different one for all France.\n\nMultiple of these entities can be used to represent different shipping costs and delivery times.\n\nTwo entities that are identical but differ in rate and time:\n\nE.g. Cheaper and slower: \$5 in 5-7 days\nor Fast and expensive: \$15 in 1-2 days.";
+	public static string $schemaTypeDescription = "OfferShippingDetails represents information about shipping destinations.\n\nMultiple of these entities can be used to represent different shipping rates for different destinations:\n\nOne entity for Alaska/Hawaii. A different one for continental US. A different one for all France.\n\nMultiple of these entities can be used to represent different shipping costs and delivery times.\n\nTwo entities that are identical but differ in rate and time:\n\nE.g. Cheaper and slower: \$5 in 5-7 days\nor Fast and expensive: \$15 in 1-2 days.";
 
 
 	/**

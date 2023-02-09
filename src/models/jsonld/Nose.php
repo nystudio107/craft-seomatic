@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Nose extends MetaJsonLd implements NoseInterface, PhysicalExamInterface, M
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Nose';
+	public static string $schemaTypeName = 'Nose';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Nose';
+	public static string $schemaTypeScope = 'https://schema.org/Nose';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalExam';
+	public static string $schemaTypeExtends = 'PhysicalExam';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Nose function assessment with clinical examination.';
+	public static string $schemaTypeDescription = 'Nose function assessment with clinical examination.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class Integer extends MetaJsonLd implements IntegerInterface, NumberInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Integer';
+	public static string $schemaTypeName = 'Integer';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Integer';
+	public static string $schemaTypeScope = 'https://schema.org/Integer';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Number';
+	public static string $schemaTypeExtends = 'Number';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Data type: Integer.';
+	public static string $schemaTypeDescription = 'Data type: Integer.';
 
 
 	/**

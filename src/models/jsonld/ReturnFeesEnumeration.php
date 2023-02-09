@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ReturnFeesEnumeration extends MetaJsonLd implements ReturnFeesEnumerationI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReturnFeesEnumeration';
+	public static string $schemaTypeName = 'ReturnFeesEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReturnFeesEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/ReturnFeesEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerates several kinds of policies for product return fees.';
+	public static string $schemaTypeDescription = 'Enumerates several kinds of policies for product return fees.';
 
 
 	/**

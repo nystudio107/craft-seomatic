@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Atlas extends MetaJsonLd implements AtlasInterface, CreativeWorkInterface,
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Atlas';
+	public static string $schemaTypeName = 'Atlas';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Atlas';
+	public static string $schemaTypeScope = 'https://schema.org/Atlas';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A collection or bound volume of maps, charts, plates or tables, physical or in media form illustrating any subject.';
+	public static string $schemaTypeDescription = 'A collection or bound volume of maps, charts, plates or tables, physical or in media form illustrating any subject.';
 
 
 	/**

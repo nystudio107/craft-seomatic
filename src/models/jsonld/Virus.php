@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Virus extends MetaJsonLd implements VirusInterface, InfectiousAgentClassIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Virus';
+	public static string $schemaTypeName = 'Virus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Virus';
+	public static string $schemaTypeScope = 'https://schema.org/Virus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InfectiousAgentClass';
+	public static string $schemaTypeExtends = 'InfectiousAgentClass';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Pathogenic virus that causes viral infection.';
+	public static string $schemaTypeDescription = 'Pathogenic virus that causes viral infection.';
 
 
 	/**

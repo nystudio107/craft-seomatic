@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class CookAction extends MetaJsonLd implements CookActionInterface, CreateAction
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CookAction';
+	public static string $schemaTypeName = 'CookAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CookAction';
+	public static string $schemaTypeScope = 'https://schema.org/CookAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreateAction';
+	public static string $schemaTypeExtends = 'CreateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of producing/preparing food.';
+	public static string $schemaTypeDescription = 'The act of producing/preparing food.';
 
 
 	/**

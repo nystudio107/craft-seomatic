@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SingleFamilyResidence extends MetaJsonLd implements SingleFamilyResidenceI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SingleFamilyResidence';
+	public static string $schemaTypeName = 'SingleFamilyResidence';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SingleFamilyResidence';
+	public static string $schemaTypeScope = 'https://schema.org/SingleFamilyResidence';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'House';
+	public static string $schemaTypeExtends = 'House';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Residence type: Single-family home.';
+	public static string $schemaTypeDescription = 'Residence type: Single-family home.';
 
 
 	/**

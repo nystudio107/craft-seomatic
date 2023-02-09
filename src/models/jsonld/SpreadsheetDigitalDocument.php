@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class SpreadsheetDigitalDocument extends MetaJsonLd implements SpreadsheetDigita
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SpreadsheetDigitalDocument';
+	public static string $schemaTypeName = 'SpreadsheetDigitalDocument';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SpreadsheetDigitalDocument';
+	public static string $schemaTypeScope = 'https://schema.org/SpreadsheetDigitalDocument';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DigitalDocument';
+	public static string $schemaTypeExtends = 'DigitalDocument';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A spreadsheet file.';
+	public static string $schemaTypeDescription = 'A spreadsheet file.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BodyMeasurementHead extends MetaJsonLd implements BodyMeasurementHeadInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementHead';
+	public static string $schemaTypeName = 'BodyMeasurementHead';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementHead';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementHead';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Maximum girth of head above the ears. Used, for example, to fit hats.';
+	public static string $schemaTypeDescription = 'Maximum girth of head above the ears. Used, for example, to fit hats.';
 
 
 	/**

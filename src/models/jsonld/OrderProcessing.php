@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class OrderProcessing extends MetaJsonLd implements OrderProcessingInterface, Or
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OrderProcessing';
+	public static string $schemaTypeName = 'OrderProcessing';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OrderProcessing';
+	public static string $schemaTypeScope = 'https://schema.org/OrderProcessing';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrderStatus';
+	public static string $schemaTypeExtends = 'OrderStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'OrderStatus representing that an order is being processed.';
+	public static string $schemaTypeDescription = 'OrderStatus representing that an order is being processed.';
 
 
 	/**

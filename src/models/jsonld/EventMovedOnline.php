@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class EventMovedOnline extends MetaJsonLd implements EventMovedOnlineInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EventMovedOnline';
+	public static string $schemaTypeName = 'EventMovedOnline';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EventMovedOnline';
+	public static string $schemaTypeScope = 'https://schema.org/EventMovedOnline';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EventStatusType';
+	public static string $schemaTypeExtends = 'EventStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the event was changed to allow online participation. See [[eventAttendanceMode]] for specifics of whether it is now fully or partially online.';
+	public static string $schemaTypeDescription = 'Indicates that the event was changed to allow online participation. See [[eventAttendanceMode]] for specifics of whether it is now fully or partially online.';
 
 
 	/**

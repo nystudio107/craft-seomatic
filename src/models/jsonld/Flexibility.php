@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Flexibility extends MetaJsonLd implements FlexibilityInterface, PhysicalAc
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Flexibility';
+	public static string $schemaTypeName = 'Flexibility';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Flexibility';
+	public static string $schemaTypeScope = 'https://schema.org/Flexibility';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalActivityCategory';
+	public static string $schemaTypeExtends = 'PhysicalActivityCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Physical activity that is engaged in to improve joint and muscle flexibility.';
+	public static string $schemaTypeDescription = 'Physical activity that is engaged in to improve joint and muscle flexibility.';
 
 
 	/**

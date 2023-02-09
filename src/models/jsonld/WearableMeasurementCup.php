@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableMeasurementCup extends MetaJsonLd implements WearableMeasurementCu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableMeasurementCup';
+	public static string $schemaTypeName = 'WearableMeasurementCup';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableMeasurementCup';
+	public static string $schemaTypeScope = 'https://schema.org/WearableMeasurementCup';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Measurement of the cup, for example of a bra';
+	public static string $schemaTypeDescription = 'Measurement of the cup, for example of a bra';
 
 
 	/**

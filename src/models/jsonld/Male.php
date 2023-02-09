@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Male extends MetaJsonLd implements MaleInterface, GenderTypeInterface, Enu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Male';
+	public static string $schemaTypeName = 'Male';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Male';
+	public static string $schemaTypeScope = 'https://schema.org/Male';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GenderType';
+	public static string $schemaTypeExtends = 'GenderType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The male gender.';
+	public static string $schemaTypeDescription = 'The male gender.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class NGO extends MetaJsonLd implements NGOInterface, OrganizationInterface, Thi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'NGO';
+	public static string $schemaTypeName = 'NGO';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/NGO';
+	public static string $schemaTypeScope = 'https://schema.org/NGO';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Organization';
+	public static string $schemaTypeExtends = 'Organization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Organization: Non-governmental Organization.';
+	public static string $schemaTypeDescription = 'Organization: Non-governmental Organization.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RVPark extends MetaJsonLd implements RVParkInterface, CivicStructureInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RVPark';
+	public static string $schemaTypeName = 'RVPark';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RVPark';
+	public static string $schemaTypeScope = 'https://schema.org/RVPark';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A place offering space for "Recreational Vehicles", Caravans, mobile homes and the like.';
+	public static string $schemaTypeDescription = 'A place offering space for "Recreational Vehicles", Caravans, mobile homes and the like.';
 
 
 	/**

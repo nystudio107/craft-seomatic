@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Playground extends MetaJsonLd implements PlaygroundInterface, CivicStructu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Playground';
+	public static string $schemaTypeName = 'Playground';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Playground';
+	public static string $schemaTypeScope = 'https://schema.org/Playground';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A playground.';
+	public static string $schemaTypeDescription = 'A playground.';
 
 
 	/**

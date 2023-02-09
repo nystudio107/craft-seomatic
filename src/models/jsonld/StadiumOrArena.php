@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class StadiumOrArena extends MetaJsonLd implements StadiumOrArenaInterface, Spor
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'StadiumOrArena';
+	public static string $schemaTypeName = 'StadiumOrArena';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/StadiumOrArena';
+	public static string $schemaTypeScope = 'https://schema.org/StadiumOrArena';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SportsActivityLocation';
+	public static string $schemaTypeExtends = 'SportsActivityLocation';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A stadium.';
+	public static string $schemaTypeDescription = 'A stadium.';
 
 
 	/**

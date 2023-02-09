@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class GeneralContractor extends MetaJsonLd implements GeneralContractorInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GeneralContractor';
+	public static string $schemaTypeName = 'GeneralContractor';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GeneralContractor';
+	public static string $schemaTypeScope = 'https://schema.org/GeneralContractor';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HomeAndConstructionBusiness';
+	public static string $schemaTypeExtends = 'HomeAndConstructionBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A general contractor.';
+	public static string $schemaTypeDescription = 'A general contractor.';
 
 
 	/**

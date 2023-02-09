@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ReportedDoseSchedule extends MetaJsonLd implements ReportedDoseScheduleInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReportedDoseSchedule';
+	public static string $schemaTypeName = 'ReportedDoseSchedule';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReportedDoseSchedule';
+	public static string $schemaTypeScope = 'https://schema.org/ReportedDoseSchedule';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DoseSchedule';
+	public static string $schemaTypeExtends = 'DoseSchedule';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A patient-reported or observed dosing schedule for a drug or supplement.';
+	public static string $schemaTypeDescription = 'A patient-reported or observed dosing schedule for a drug or supplement.';
 
 
 	/**

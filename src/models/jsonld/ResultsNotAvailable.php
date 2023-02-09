@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ResultsNotAvailable extends MetaJsonLd implements ResultsNotAvailableInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ResultsNotAvailable';
+	public static string $schemaTypeName = 'ResultsNotAvailable';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ResultsNotAvailable';
+	public static string $schemaTypeScope = 'https://schema.org/ResultsNotAvailable';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalStudyStatus';
+	public static string $schemaTypeExtends = 'MedicalStudyStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Results are not available.';
+	public static string $schemaTypeDescription = 'Results are not available.';
 
 
 	/**

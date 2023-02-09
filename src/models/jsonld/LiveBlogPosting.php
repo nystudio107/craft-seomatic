@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class LiveBlogPosting extends MetaJsonLd implements LiveBlogPostingInterface, Bl
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LiveBlogPosting';
+	public static string $schemaTypeName = 'LiveBlogPosting';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LiveBlogPosting';
+	public static string $schemaTypeScope = 'https://schema.org/LiveBlogPosting';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BlogPosting';
+	public static string $schemaTypeExtends = 'BlogPosting';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A [[LiveBlogPosting]] is a [[BlogPosting]] intended to provide a rolling textual coverage of an ongoing event through continuous updates.';
+	public static string $schemaTypeDescription = 'A [[LiveBlogPosting]] is a [[BlogPosting]] intended to provide a rolling textual coverage of an ongoing event through continuous updates.';
 
 
 	/**

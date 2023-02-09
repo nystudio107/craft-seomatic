@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SizeSystemImperial extends MetaJsonLd implements SizeSystemImperialInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SizeSystemImperial';
+	public static string $schemaTypeName = 'SizeSystemImperial';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SizeSystemImperial';
+	public static string $schemaTypeScope = 'https://schema.org/SizeSystemImperial';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SizeSystemEnumeration';
+	public static string $schemaTypeExtends = 'SizeSystemEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Imperial size system.';
+	public static string $schemaTypeDescription = 'Imperial size system.';
 
 
 	/**

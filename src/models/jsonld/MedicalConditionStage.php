@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MedicalConditionStage extends MetaJsonLd implements MedicalConditionStageI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalConditionStage';
+	public static string $schemaTypeName = 'MedicalConditionStage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalConditionStage';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalConditionStage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalIntangible';
+	public static string $schemaTypeExtends = 'MedicalIntangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A stage of a medical condition, such as \'Stage IIIa\'.';
+	public static string $schemaTypeDescription = 'A stage of a medical condition, such as \'Stage IIIa\'.';
 
 
 	/**

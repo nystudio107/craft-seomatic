@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class InviteAction extends MetaJsonLd implements InviteActionInterface, Communic
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InviteAction';
+	public static string $schemaTypeName = 'InviteAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InviteAction';
+	public static string $schemaTypeScope = 'https://schema.org/InviteAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CommunicateAction';
+	public static string $schemaTypeExtends = 'CommunicateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of asking someone to attend an event. Reciprocal of RsvpAction.';
+	public static string $schemaTypeDescription = 'The act of asking someone to attend an event. Reciprocal of RsvpAction.';
 
 
 	/**

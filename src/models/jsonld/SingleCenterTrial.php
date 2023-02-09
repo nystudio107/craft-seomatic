@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class SingleCenterTrial extends MetaJsonLd implements SingleCenterTrialInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SingleCenterTrial';
+	public static string $schemaTypeName = 'SingleCenterTrial';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SingleCenterTrial';
+	public static string $schemaTypeScope = 'https://schema.org/SingleCenterTrial';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTrialDesign';
+	public static string $schemaTypeExtends = 'MedicalTrialDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A trial that takes place at a single center.';
+	public static string $schemaTypeDescription = 'A trial that takes place at a single center.';
 
 
 	/**

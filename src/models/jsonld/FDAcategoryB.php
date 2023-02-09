@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class FDAcategoryB extends MetaJsonLd implements FDAcategoryBInterface, DrugPreg
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FDAcategoryB';
+	public static string $schemaTypeName = 'FDAcategoryB';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FDAcategoryB';
+	public static string $schemaTypeScope = 'https://schema.org/FDAcategoryB';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DrugPregnancyCategory';
+	public static string $schemaTypeExtends = 'DrugPregnancyCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A designation by the US FDA signifying that animal reproduction studies have failed to demonstrate a risk to the fetus and there are no adequate and well-controlled studies in pregnant women.';
+	public static string $schemaTypeDescription = 'A designation by the US FDA signifying that animal reproduction studies have failed to demonstrate a risk to the fetus and there are no adequate and well-controlled studies in pregnant women.';
 
 
 	/**

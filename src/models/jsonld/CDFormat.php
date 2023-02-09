@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class CDFormat extends MetaJsonLd implements CDFormatInterface, MusicReleaseForm
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CDFormat';
+	public static string $schemaTypeName = 'CDFormat';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CDFormat';
+	public static string $schemaTypeScope = 'https://schema.org/CDFormat';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicReleaseFormatType';
+	public static string $schemaTypeExtends = 'MusicReleaseFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'CDFormat.';
+	public static string $schemaTypeDescription = 'CDFormat.';
 
 
 	/**

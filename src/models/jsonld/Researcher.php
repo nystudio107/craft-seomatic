@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Researcher extends MetaJsonLd implements ResearcherInterface, AudienceInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Researcher';
+	public static string $schemaTypeName = 'Researcher';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Researcher';
+	public static string $schemaTypeScope = 'https://schema.org/Researcher';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Audience';
+	public static string $schemaTypeExtends = 'Audience';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Researchers.';
+	public static string $schemaTypeDescription = 'Researchers.';
 
 
 	/**

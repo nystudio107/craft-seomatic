@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableSizeGroupPetite extends MetaJsonLd implements WearableSizeGroupPet
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableSizeGroupPetite';
+	public static string $schemaTypeName = 'WearableSizeGroupPetite';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableSizeGroupPetite';
+	public static string $schemaTypeScope = 'https://schema.org/WearableSizeGroupPetite';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableSizeGroupEnumeration';
+	public static string $schemaTypeExtends = 'WearableSizeGroupEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Size group "Petite" for wearables.';
+	public static string $schemaTypeDescription = 'Size group "Petite" for wearables.';
 
 
 	/**

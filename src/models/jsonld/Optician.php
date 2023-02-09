@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Optician extends MetaJsonLd implements OpticianInterface, MedicalBusinessI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Optician';
+	public static string $schemaTypeName = 'Optician';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Optician';
+	public static string $schemaTypeScope = 'https://schema.org/Optician';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A store that sells reading glasses and similar devices for improving vision.';
+	public static string $schemaTypeDescription = 'A store that sells reading glasses and similar devices for improving vision.';
 
 
 	/**

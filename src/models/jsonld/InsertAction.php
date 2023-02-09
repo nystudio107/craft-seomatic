@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class InsertAction extends MetaJsonLd implements InsertActionInterface, AddActio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InsertAction';
+	public static string $schemaTypeName = 'InsertAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InsertAction';
+	public static string $schemaTypeScope = 'https://schema.org/InsertAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AddAction';
+	public static string $schemaTypeExtends = 'AddAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of adding at a specific location in an ordered collection.';
+	public static string $schemaTypeDescription = 'The act of adding at a specific location in an ordered collection.';
 
 
 	/**

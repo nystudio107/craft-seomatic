@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableSizeSystemEN13402 extends MetaJsonLd implements WearableSizeSystem
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableSizeSystemEN13402';
+	public static string $schemaTypeName = 'WearableSizeSystemEN13402';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableSizeSystemEN13402';
+	public static string $schemaTypeScope = 'https://schema.org/WearableSizeSystemEN13402';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableSizeSystemEnumeration';
+	public static string $schemaTypeExtends = 'WearableSizeSystemEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'EN 13402 (joint European standard for size labelling of clothes).';
+	public static string $schemaTypeDescription = 'EN 13402 (joint European standard for size labelling of clothes).';
 
 
 	/**

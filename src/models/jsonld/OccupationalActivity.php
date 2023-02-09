@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class OccupationalActivity extends MetaJsonLd implements OccupationalActivityInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OccupationalActivity';
+	public static string $schemaTypeName = 'OccupationalActivity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OccupationalActivity';
+	public static string $schemaTypeScope = 'https://schema.org/OccupationalActivity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalActivityCategory';
+	public static string $schemaTypeExtends = 'PhysicalActivityCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any physical activity engaged in for job-related purposes. Examples may include waiting tables, maid service, carrying a mailbag, picking fruits or vegetables, construction work, etc.';
+	public static string $schemaTypeDescription = 'Any physical activity engaged in for job-related purposes. Examples may include waiting tables, maid service, carrying a mailbag, picking fruits or vegetables, construction work, etc.';
 
 
 	/**

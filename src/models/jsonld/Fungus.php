@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Fungus extends MetaJsonLd implements FungusInterface, InfectiousAgentClass
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Fungus';
+	public static string $schemaTypeName = 'Fungus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Fungus';
+	public static string $schemaTypeScope = 'https://schema.org/Fungus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InfectiousAgentClass';
+	public static string $schemaTypeExtends = 'InfectiousAgentClass';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Pathogenic fungus.';
+	public static string $schemaTypeDescription = 'Pathogenic fungus.';
 
 
 	/**

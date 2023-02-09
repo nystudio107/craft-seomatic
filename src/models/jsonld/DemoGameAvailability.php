@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class DemoGameAvailability extends MetaJsonLd implements DemoGameAvailabilityInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DemoGameAvailability';
+	public static string $schemaTypeName = 'DemoGameAvailability';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DemoGameAvailability';
+	public static string $schemaTypeScope = 'https://schema.org/DemoGameAvailability';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GameAvailabilityEnumeration';
+	public static string $schemaTypeExtends = 'GameAvailabilityEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates demo game availability, i.e. a somehow limited demonstration of the full game.';
+	public static string $schemaTypeDescription = 'Indicates demo game availability, i.e. a somehow limited demonstration of the full game.';
 
 
 	/**

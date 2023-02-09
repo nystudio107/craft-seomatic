@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ListPrice extends MetaJsonLd implements ListPriceInterface, PriceTypeEnume
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ListPrice';
+	public static string $schemaTypeName = 'ListPrice';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ListPrice';
+	public static string $schemaTypeScope = 'https://schema.org/ListPrice';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceTypeEnumeration';
+	public static string $schemaTypeExtends = 'PriceTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents the list price (the price a product is actually advertised for) of an offered product.';
+	public static string $schemaTypeDescription = 'Represents the list price (the price a product is actually advertised for) of an offered product.';
 
 
 	/**

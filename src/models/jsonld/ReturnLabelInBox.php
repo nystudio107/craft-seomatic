@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ReturnLabelInBox extends MetaJsonLd implements ReturnLabelInBoxInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReturnLabelInBox';
+	public static string $schemaTypeName = 'ReturnLabelInBox';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReturnLabelInBox';
+	public static string $schemaTypeScope = 'https://schema.org/ReturnLabelInBox';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
+	public static string $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that a return label will be provided by the seller in the shipping box.';
+	public static string $schemaTypeDescription = 'Specifies that a return label will be provided by the seller in the shipping box.';
 
 
 	/**

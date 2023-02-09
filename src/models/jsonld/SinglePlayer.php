@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SinglePlayer extends MetaJsonLd implements SinglePlayerInterface, GamePlay
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SinglePlayer';
+	public static string $schemaTypeName = 'SinglePlayer';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SinglePlayer';
+	public static string $schemaTypeScope = 'https://schema.org/SinglePlayer';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GamePlayMode';
+	public static string $schemaTypeExtends = 'GamePlayMode';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Play mode: SinglePlayer. Which is played by a lone player.';
+	public static string $schemaTypeDescription = 'Play mode: SinglePlayer. Which is played by a lone player.';
 
 
 	/**

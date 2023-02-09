@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class QuantitativeValue extends MetaJsonLd implements QuantitativeValueInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'QuantitativeValue';
+	public static string $schemaTypeName = 'QuantitativeValue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/QuantitativeValue';
+	public static string $schemaTypeScope = 'https://schema.org/QuantitativeValue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = ' A point value or interval for product characteristics and other purposes.';
+	public static string $schemaTypeDescription = ' A point value or interval for product characteristics and other purposes.';
 
 
 	/**

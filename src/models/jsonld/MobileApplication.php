@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MobileApplication extends MetaJsonLd implements MobileApplicationInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MobileApplication';
+	public static string $schemaTypeName = 'MobileApplication';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MobileApplication';
+	public static string $schemaTypeScope = 'https://schema.org/MobileApplication';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SoftwareApplication';
+	public static string $schemaTypeExtends = 'SoftwareApplication';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A software application designed specifically to work well on a mobile device such as a telephone.';
+	public static string $schemaTypeDescription = 'A software application designed specifically to work well on a mobile device such as a telephone.';
 
 
 	/**

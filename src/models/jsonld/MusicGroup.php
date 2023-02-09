@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MusicGroup extends MetaJsonLd implements MusicGroupInterface, PerformingGr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MusicGroup';
+	public static string $schemaTypeName = 'MusicGroup';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MusicGroup';
+	public static string $schemaTypeScope = 'https://schema.org/MusicGroup';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PerformingGroup';
+	public static string $schemaTypeExtends = 'PerformingGroup';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A musical group, such as a band, an orchestra, or a choir. Can also be a solo musician.';
+	public static string $schemaTypeDescription = 'A musical group, such as a band, an orchestra, or a choir. Can also be a solo musician.';
 
 
 	/**

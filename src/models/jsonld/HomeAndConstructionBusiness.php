@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class HomeAndConstructionBusiness extends MetaJsonLd implements HomeAndConstruct
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HomeAndConstructionBusiness';
+	public static string $schemaTypeName = 'HomeAndConstructionBusiness';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HomeAndConstructionBusiness';
+	public static string $schemaTypeScope = 'https://schema.org/HomeAndConstructionBusiness';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A construction business.\n\nA HomeAndConstructionBusiness is a [[LocalBusiness]] that provides services around homes and buildings.\n\nAs a [[LocalBusiness]] it can be described as a [[provider]] of one or more [[Service]]\(s).';
+	public static string $schemaTypeDescription = 'A construction business.\n\nA HomeAndConstructionBusiness is a [[LocalBusiness]] that provides services around homes and buildings.\n\nAs a [[LocalBusiness]] it can be described as a [[provider]] of one or more [[Service]]\(s).';
 
 
 	/**

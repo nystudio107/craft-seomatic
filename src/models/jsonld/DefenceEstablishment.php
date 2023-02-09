@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DefenceEstablishment extends MetaJsonLd implements DefenceEstablishmentInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DefenceEstablishment';
+	public static string $schemaTypeName = 'DefenceEstablishment';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DefenceEstablishment';
+	public static string $schemaTypeScope = 'https://schema.org/DefenceEstablishment';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBuilding';
+	public static string $schemaTypeExtends = 'GovernmentBuilding';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A defence establishment, such as an army or navy base.';
+	public static string $schemaTypeDescription = 'A defence establishment, such as an army or navy base.';
 
 
 	/**

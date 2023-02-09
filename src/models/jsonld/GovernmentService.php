@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class GovernmentService extends MetaJsonLd implements GovernmentServiceInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GovernmentService';
+	public static string $schemaTypeName = 'GovernmentService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GovernmentService';
+	public static string $schemaTypeScope = 'https://schema.org/GovernmentService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Service';
+	public static string $schemaTypeExtends = 'Service';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A service provided by a government organization, e.g. food stamps, veterans benefits, etc.';
+	public static string $schemaTypeDescription = 'A service provided by a government organization, e.g. food stamps, veterans benefits, etc.';
 
 
 	/**

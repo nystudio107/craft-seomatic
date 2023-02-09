@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class LegislativeBuilding extends MetaJsonLd implements LegislativeBuildingInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LegislativeBuilding';
+	public static string $schemaTypeName = 'LegislativeBuilding';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LegislativeBuilding';
+	public static string $schemaTypeScope = 'https://schema.org/LegislativeBuilding';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBuilding';
+	public static string $schemaTypeExtends = 'GovernmentBuilding';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A legislative building—for example, the state capitol.';
+	public static string $schemaTypeDescription = 'A legislative building—for example, the state capitol.';
 
 
 	/**

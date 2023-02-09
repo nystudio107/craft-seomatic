@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ReservationStatusType extends MetaJsonLd implements ReservationStatusTypeI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReservationStatusType';
+	public static string $schemaTypeName = 'ReservationStatusType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReservationStatusType';
+	public static string $schemaTypeScope = 'https://schema.org/ReservationStatusType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StatusEnumeration';
+	public static string $schemaTypeExtends = 'StatusEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerated status values for Reservation.';
+	public static string $schemaTypeDescription = 'Enumerated status values for Reservation.';
 
 
 	/**

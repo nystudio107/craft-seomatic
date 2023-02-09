@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ProductCollection extends MetaJsonLd implements ProductCollectionInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ProductCollection';
+	public static string $schemaTypeName = 'ProductCollection';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ProductCollection';
+	public static string $schemaTypeScope = 'https://schema.org/ProductCollection';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Collection';
+	public static string $schemaTypeExtends = 'Collection';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A set of products (either [[ProductGroup]]s or specific variants) that are listed together e.g. in an [[Offer]].';
+	public static string $schemaTypeDescription = 'A set of products (either [[ProductGroup]]s or specific variants) that are listed together e.g. in an [[Offer]].';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ProductModel extends MetaJsonLd implements ProductModelInterface, ProductI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ProductModel';
+	public static string $schemaTypeName = 'ProductModel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ProductModel';
+	public static string $schemaTypeScope = 'https://schema.org/ProductModel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Product';
+	public static string $schemaTypeExtends = 'Product';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A datasheet or vendor specification of a product (in the sense of a prototypical description).';
+	public static string $schemaTypeDescription = 'A datasheet or vendor specification of a product (in the sense of a prototypical description).';
 
 
 	/**

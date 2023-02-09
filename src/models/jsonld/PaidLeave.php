@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PaidLeave extends MetaJsonLd implements PaidLeaveInterface, GovernmentBene
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PaidLeave';
+	public static string $schemaTypeName = 'PaidLeave';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PaidLeave';
+	public static string $schemaTypeScope = 'https://schema.org/PaidLeave';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBenefitsType';
+	public static string $schemaTypeExtends = 'GovernmentBenefitsType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'PaidLeave: this is a benefit for paid leave.';
+	public static string $schemaTypeDescription = 'PaidLeave: this is a benefit for paid leave.';
 
 
 	/**

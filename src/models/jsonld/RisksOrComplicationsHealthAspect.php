@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class RisksOrComplicationsHealthAspect extends MetaJsonLd implements RisksOrComp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RisksOrComplicationsHealthAspect';
+	public static string $schemaTypeName = 'RisksOrComplicationsHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RisksOrComplicationsHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/RisksOrComplicationsHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Information about the risk factors and possible complications that may follow a topic.';
+	public static string $schemaTypeDescription = 'Information about the risk factors and possible complications that may follow a topic.';
 
 
 	/**

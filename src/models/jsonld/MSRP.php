@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MSRP extends MetaJsonLd implements MSRPInterface, PriceTypeEnumerationInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MSRP';
+	public static string $schemaTypeName = 'MSRP';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MSRP';
+	public static string $schemaTypeScope = 'https://schema.org/MSRP';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceTypeEnumeration';
+	public static string $schemaTypeExtends = 'PriceTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents the manufacturer suggested retail price ("MSRP") of an offered product.';
+	public static string $schemaTypeDescription = 'Represents the manufacturer suggested retail price ("MSRP") of an offered product.';
 
 
 	/**

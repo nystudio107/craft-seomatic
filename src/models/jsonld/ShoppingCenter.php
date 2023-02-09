@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ShoppingCenter extends MetaJsonLd implements ShoppingCenterInterface, Loca
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ShoppingCenter';
+	public static string $schemaTypeName = 'ShoppingCenter';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ShoppingCenter';
+	public static string $schemaTypeScope = 'https://schema.org/ShoppingCenter';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A shopping center or mall.';
+	public static string $schemaTypeDescription = 'A shopping center or mall.';
 
 
 	/**

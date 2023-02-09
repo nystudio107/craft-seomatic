@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SteeringPositionValue extends MetaJsonLd implements SteeringPositionValueI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SteeringPositionValue';
+	public static string $schemaTypeName = 'SteeringPositionValue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SteeringPositionValue';
+	public static string $schemaTypeScope = 'https://schema.org/SteeringPositionValue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'QualitativeValue';
+	public static string $schemaTypeExtends = 'QualitativeValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A value indicating a steering position.';
+	public static string $schemaTypeDescription = 'A value indicating a steering position.';
 
 
 	/**

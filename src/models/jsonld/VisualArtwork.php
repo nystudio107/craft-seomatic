@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class VisualArtwork extends MetaJsonLd implements VisualArtworkInterface, Creati
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VisualArtwork';
+	public static string $schemaTypeName = 'VisualArtwork';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VisualArtwork';
+	public static string $schemaTypeScope = 'https://schema.org/VisualArtwork';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A work of art that is primarily visual in character.';
+	public static string $schemaTypeDescription = 'A work of art that is primarily visual in character.';
 
 
 	/**

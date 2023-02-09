@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class OfferCatalog extends MetaJsonLd implements OfferCatalogInterface, ItemList
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OfferCatalog';
+	public static string $schemaTypeName = 'OfferCatalog';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OfferCatalog';
+	public static string $schemaTypeScope = 'https://schema.org/OfferCatalog';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemList';
+	public static string $schemaTypeExtends = 'ItemList';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An OfferCatalog is an ItemList that contains related Offers and/or further OfferCatalogs that are offeredBy the same provider.';
+	public static string $schemaTypeDescription = 'An OfferCatalog is an ItemList that contains related Offers and/or further OfferCatalogs that are offeredBy the same provider.';
 
 
 	/**

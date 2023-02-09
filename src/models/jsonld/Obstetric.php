@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -41,28 +41,28 @@ class Obstetric extends MetaJsonLd implements ObstetricInterface, MedicalBusines
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Obstetric';
+	public static string $schemaTypeName = 'Obstetric';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Obstetric';
+	public static string $schemaTypeScope = 'https://schema.org/Obstetric';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that specializes in the care of women during the prenatal and postnatal care and with the delivery of the child.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that specializes in the care of women during the prenatal and postnatal care and with the delivery of the child.';
 
 
 	/**

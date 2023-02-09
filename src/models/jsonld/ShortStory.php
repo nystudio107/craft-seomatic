@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ShortStory extends MetaJsonLd implements ShortStoryInterface, CreativeWork
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ShortStory';
+	public static string $schemaTypeName = 'ShortStory';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ShortStory';
+	public static string $schemaTypeScope = 'https://schema.org/ShortStory';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Short story or tale. A brief work of literature, usually written in narrative prose.';
+	public static string $schemaTypeDescription = 'Short story or tale. A brief work of literature, usually written in narrative prose.';
 
 
 	/**

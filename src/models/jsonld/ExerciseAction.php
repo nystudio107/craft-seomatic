@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ExerciseAction';
+	public static string $schemaTypeName = 'ExerciseAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ExerciseAction';
+	public static string $schemaTypeScope = 'https://schema.org/ExerciseAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PlayAction';
+	public static string $schemaTypeExtends = 'PlayAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of participating in exertive activity for the purposes of improving health and fitness.';
+	public static string $schemaTypeDescription = 'The act of participating in exertive activity for the purposes of improving health and fitness.';
 
 
 	/**

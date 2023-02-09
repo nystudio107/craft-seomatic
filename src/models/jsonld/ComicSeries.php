@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class ComicSeries extends MetaJsonLd implements ComicSeriesInterface, Periodical
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ComicSeries';
+	public static string $schemaTypeName = 'ComicSeries';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ComicSeries';
+	public static string $schemaTypeScope = 'https://schema.org/ComicSeries';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Periodical';
+	public static string $schemaTypeExtends = 'Periodical';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = "A sequential publication of comic stories under a\n    \tunifying title, for example \"The Amazing Spider-Man\" or \"Groo the\n    \tWanderer\".";
+	public static string $schemaTypeDescription = "A sequential publication of comic stories under a\n    \tunifying title, for example \"The Amazing Spider-Man\" or \"Groo the\n    \tWanderer\".";
 
 
 	/**

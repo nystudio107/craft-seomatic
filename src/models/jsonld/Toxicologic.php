@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Toxicologic extends MetaJsonLd implements ToxicologicInterface, MedicalSpe
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Toxicologic';
+	public static string $schemaTypeName = 'Toxicologic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Toxicologic';
+	public static string $schemaTypeScope = 'https://schema.org/Toxicologic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that is concerned with poisons, their nature, effects and detection and involved in the treatment of poisoning.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that is concerned with poisons, their nature, effects and detection and involved in the treatment of poisoning.';
 
 
 	/**

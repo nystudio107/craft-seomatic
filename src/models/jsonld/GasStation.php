@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class GasStation extends MetaJsonLd implements GasStationInterface, AutomotiveBu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GasStation';
+	public static string $schemaTypeName = 'GasStation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GasStation';
+	public static string $schemaTypeScope = 'https://schema.org/GasStation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AutomotiveBusiness';
+	public static string $schemaTypeExtends = 'AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A gas station.';
+	public static string $schemaTypeDescription = 'A gas station.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class PreventionIndication extends MetaJsonLd implements PreventionIndicationInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PreventionIndication';
+	public static string $schemaTypeName = 'PreventionIndication';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PreventionIndication';
+	public static string $schemaTypeScope = 'https://schema.org/PreventionIndication';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalIndication';
+	public static string $schemaTypeExtends = 'MedicalIndication';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An indication for preventing an underlying condition, symptom, etc.';
+	public static string $schemaTypeDescription = 'An indication for preventing an underlying condition, symptom, etc.';
 
 
 	/**

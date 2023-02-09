@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PostalAddress extends MetaJsonLd implements PostalAddressInterface, Contac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PostalAddress';
+	public static string $schemaTypeName = 'PostalAddress';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PostalAddress';
+	public static string $schemaTypeScope = 'https://schema.org/PostalAddress';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ContactPoint';
+	public static string $schemaTypeExtends = 'ContactPoint';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The mailing address.';
+	public static string $schemaTypeDescription = 'The mailing address.';
 
 
 	/**

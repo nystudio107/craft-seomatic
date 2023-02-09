@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class FireStation extends MetaJsonLd implements FireStationInterface, EmergencyS
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FireStation';
+	public static string $schemaTypeName = 'FireStation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FireStation';
+	public static string $schemaTypeScope = 'https://schema.org/FireStation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EmergencyService';
+	public static string $schemaTypeExtends = 'EmergencyService';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A fire station. With firemen.';
+	public static string $schemaTypeDescription = 'A fire station. With firemen.';
 
 
 	/**

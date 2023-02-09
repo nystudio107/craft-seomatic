@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class DrugPregnancyCategory extends MetaJsonLd implements DrugPregnancyCategoryI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrugPregnancyCategory';
+	public static string $schemaTypeName = 'DrugPregnancyCategory';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrugPregnancyCategory';
+	public static string $schemaTypeScope = 'https://schema.org/DrugPregnancyCategory';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Categories that represent an assessment of the risk of fetal injury due to a drug or pharmaceutical used as directed by the mother during pregnancy.';
+	public static string $schemaTypeDescription = 'Categories that represent an assessment of the risk of fetal injury due to a drug or pharmaceutical used as directed by the mother during pregnancy.';
 
 
 	/**

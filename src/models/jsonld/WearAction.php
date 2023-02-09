@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class WearAction extends MetaJsonLd implements WearActionInterface, UseActionInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearAction';
+	public static string $schemaTypeName = 'WearAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearAction';
+	public static string $schemaTypeScope = 'https://schema.org/WearAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'UseAction';
+	public static string $schemaTypeExtends = 'UseAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of dressing oneself in clothing.';
+	public static string $schemaTypeDescription = 'The act of dressing oneself in clothing.';
 
 
 	/**

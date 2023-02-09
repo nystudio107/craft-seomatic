@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class GolfCourse extends MetaJsonLd implements GolfCourseInterface, SportsActivi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GolfCourse';
+	public static string $schemaTypeName = 'GolfCourse';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GolfCourse';
+	public static string $schemaTypeScope = 'https://schema.org/GolfCourse';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SportsActivityLocation';
+	public static string $schemaTypeExtends = 'SportsActivityLocation';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A golf course.';
+	public static string $schemaTypeDescription = 'A golf course.';
 
 
 	/**

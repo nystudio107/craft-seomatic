@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PeopleAudience extends MetaJsonLd implements PeopleAudienceInterface, Audi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PeopleAudience';
+	public static string $schemaTypeName = 'PeopleAudience';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PeopleAudience';
+	public static string $schemaTypeScope = 'https://schema.org/PeopleAudience';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Audience';
+	public static string $schemaTypeExtends = 'Audience';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A set of characteristics belonging to people, e.g. who compose an item\'s target audience.';
+	public static string $schemaTypeDescription = 'A set of characteristics belonging to people, e.g. who compose an item\'s target audience.';
 
 
 	/**

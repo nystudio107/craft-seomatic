@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PaintAction extends MetaJsonLd implements PaintActionInterface, CreateActi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PaintAction';
+	public static string $schemaTypeName = 'PaintAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PaintAction';
+	public static string $schemaTypeScope = 'https://schema.org/PaintAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreateAction';
+	public static string $schemaTypeExtends = 'CreateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of producing a painting, typically with paint and canvas as instruments.';
+	public static string $schemaTypeDescription = 'The act of producing a painting, typically with paint and canvas as instruments.';
 
 
 	/**

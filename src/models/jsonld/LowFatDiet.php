@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class LowFatDiet extends MetaJsonLd implements LowFatDietInterface, RestrictedDi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LowFatDiet';
+	public static string $schemaTypeName = 'LowFatDiet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LowFatDiet';
+	public static string $schemaTypeScope = 'https://schema.org/LowFatDiet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RestrictedDiet';
+	public static string $schemaTypeExtends = 'RestrictedDiet';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A diet focused on reduced fat and cholesterol intake.';
+	public static string $schemaTypeDescription = 'A diet focused on reduced fat and cholesterol intake.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class OrderDelivered extends MetaJsonLd implements OrderDeliveredInterface, Orde
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OrderDelivered';
+	public static string $schemaTypeName = 'OrderDelivered';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OrderDelivered';
+	public static string $schemaTypeScope = 'https://schema.org/OrderDelivered';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrderStatus';
+	public static string $schemaTypeExtends = 'OrderStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'OrderStatus representing successful delivery of an order.';
+	public static string $schemaTypeDescription = 'OrderStatus representing successful delivery of an order.';
 
 
 	/**

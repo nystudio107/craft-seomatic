@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class EUEnergyEfficiencyEnumeration extends MetaJsonLd implements EUEnergyEffici
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EUEnergyEfficiencyEnumeration';
+	public static string $schemaTypeName = 'EUEnergyEfficiencyEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EUEnergyEfficiencyEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/EUEnergyEfficiencyEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EnergyEfficiencyEnumeration';
+	public static string $schemaTypeExtends = 'EnergyEfficiencyEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerates the EU energy efficiency classes A-G as well as A+, A++, and A+++ as defined in EU directive 2017/1369.';
+	public static string $schemaTypeDescription = 'Enumerates the EU energy efficiency classes A-G as well as A+, A++, and A+++ as defined in EU directive 2017/1369.';
 
 
 	/**

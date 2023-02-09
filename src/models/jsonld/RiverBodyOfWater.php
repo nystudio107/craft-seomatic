@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RiverBodyOfWater extends MetaJsonLd implements RiverBodyOfWaterInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RiverBodyOfWater';
+	public static string $schemaTypeName = 'RiverBodyOfWater';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RiverBodyOfWater';
+	public static string $schemaTypeScope = 'https://schema.org/RiverBodyOfWater';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyOfWater';
+	public static string $schemaTypeExtends = 'BodyOfWater';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A river (for example, the broad majestic Shannon).';
+	public static string $schemaTypeDescription = 'A river (for example, the broad majestic Shannon).';
 
 
 	/**

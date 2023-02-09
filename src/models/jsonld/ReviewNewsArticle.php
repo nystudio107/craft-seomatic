@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -38,28 +38,28 @@ class ReviewNewsArticle extends MetaJsonLd implements ReviewNewsArticleInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReviewNewsArticle';
+	public static string $schemaTypeName = 'ReviewNewsArticle';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReviewNewsArticle';
+	public static string $schemaTypeScope = 'https://schema.org/ReviewNewsArticle';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'NewsArticle';
+	public static string $schemaTypeExtends = 'NewsArticle';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A [[NewsArticle]] and [[CriticReview]] providing a professional critic\'s assessment of a service, product, performance, or artistic or literary work.';
+	public static string $schemaTypeDescription = 'A [[NewsArticle]] and [[CriticReview]] providing a professional critic\'s assessment of a service, product, performance, or artistic or literary work.';
 
 
 	/**

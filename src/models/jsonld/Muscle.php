@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Muscle extends MetaJsonLd implements MuscleInterface, AnatomicalStructureI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Muscle';
+	public static string $schemaTypeName = 'Muscle';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Muscle';
+	public static string $schemaTypeScope = 'https://schema.org/Muscle';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AnatomicalStructure';
+	public static string $schemaTypeExtends = 'AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A muscle is an anatomical structure consisting of a contractile form of tissue that animals use to effect movement.';
+	public static string $schemaTypeDescription = 'A muscle is an anatomical structure consisting of a contractile form of tissue that animals use to effect movement.';
 
 
 	/**

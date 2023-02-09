@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class ConsumeAction extends MetaJsonLd implements ConsumeActionInterface, Action
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ConsumeAction';
+	public static string $schemaTypeName = 'ConsumeAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ConsumeAction';
+	public static string $schemaTypeScope = 'https://schema.org/ConsumeAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Action';
+	public static string $schemaTypeExtends = 'Action';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of ingesting information/resources/food.';
+	public static string $schemaTypeDescription = 'The act of ingesting information/resources/food.';
 
 
 	/**

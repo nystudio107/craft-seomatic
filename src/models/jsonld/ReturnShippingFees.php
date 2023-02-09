@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ReturnShippingFees extends MetaJsonLd implements ReturnShippingFeesInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReturnShippingFees';
+	public static string $schemaTypeName = 'ReturnShippingFees';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReturnShippingFees';
+	public static string $schemaTypeScope = 'https://schema.org/ReturnShippingFees';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnFeesEnumeration';
+	public static string $schemaTypeExtends = 'ReturnFeesEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that the customer must pay the return shipping costs when returning a product.';
+	public static string $schemaTypeDescription = 'Specifies that the customer must pay the return shipping costs when returning a product.';
 
 
 	/**

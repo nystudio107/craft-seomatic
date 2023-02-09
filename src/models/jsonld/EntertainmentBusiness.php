@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EntertainmentBusiness extends MetaJsonLd implements EntertainmentBusinessI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EntertainmentBusiness';
+	public static string $schemaTypeName = 'EntertainmentBusiness';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EntertainmentBusiness';
+	public static string $schemaTypeScope = 'https://schema.org/EntertainmentBusiness';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A business providing entertainment.';
+	public static string $schemaTypeDescription = 'A business providing entertainment.';
 
 
 	/**

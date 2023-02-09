@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class InsuranceAgency extends MetaJsonLd implements InsuranceAgencyInterface, Fi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InsuranceAgency';
+	public static string $schemaTypeName = 'InsuranceAgency';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InsuranceAgency';
+	public static string $schemaTypeScope = 'https://schema.org/InsuranceAgency';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FinancialService';
+	public static string $schemaTypeExtends = 'FinancialService';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An Insurance agency.';
+	public static string $schemaTypeDescription = 'An Insurance agency.';
 
 
 	/**

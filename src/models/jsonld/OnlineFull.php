@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class OnlineFull extends MetaJsonLd implements OnlineFullInterface, GameServerSt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OnlineFull';
+	public static string $schemaTypeName = 'OnlineFull';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OnlineFull';
+	public static string $schemaTypeScope = 'https://schema.org/OnlineFull';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GameServerStatus';
+	public static string $schemaTypeExtends = 'GameServerStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Game server status: OnlineFull. Server is online but unavailable. The maximum number of players has reached.';
+	public static string $schemaTypeDescription = 'Game server status: OnlineFull. Server is online but unavailable. The maximum number of players has reached.';
 
 
 	/**

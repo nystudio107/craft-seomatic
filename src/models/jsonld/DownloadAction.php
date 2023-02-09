@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DownloadAction extends MetaJsonLd implements DownloadActionInterface, Tran
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DownloadAction';
+	public static string $schemaTypeName = 'DownloadAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DownloadAction';
+	public static string $schemaTypeScope = 'https://schema.org/DownloadAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TransferAction';
+	public static string $schemaTypeExtends = 'TransferAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of downloading an object.';
+	public static string $schemaTypeDescription = 'The act of downloading an object.';
 
 
 	/**

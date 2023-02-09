@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -42,28 +42,28 @@ class Midwifery extends MetaJsonLd implements MidwiferyInterface, MedicalBusines
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Midwifery';
+	public static string $schemaTypeName = 'Midwifery';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Midwifery';
+	public static string $schemaTypeScope = 'https://schema.org/Midwifery';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A nurse-like health profession that deals with pregnancy, childbirth, and the postpartum period (including care of the newborn), besides sexual and reproductive health of women throughout their lives.';
+	public static string $schemaTypeDescription = 'A nurse-like health profession that deals with pregnancy, childbirth, and the postpartum period (including care of the newborn), besides sexual and reproductive health of women throughout their lives.';
 
 
 	/**

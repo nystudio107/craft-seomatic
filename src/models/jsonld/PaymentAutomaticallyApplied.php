@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PaymentAutomaticallyApplied extends MetaJsonLd implements PaymentAutomatic
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PaymentAutomaticallyApplied';
+	public static string $schemaTypeName = 'PaymentAutomaticallyApplied';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PaymentAutomaticallyApplied';
+	public static string $schemaTypeScope = 'https://schema.org/PaymentAutomaticallyApplied';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PaymentStatusType';
+	public static string $schemaTypeExtends = 'PaymentStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An automatic payment system is in place and will be used.';
+	public static string $schemaTypeDescription = 'An automatic payment system is in place and will be used.';
 
 
 	/**

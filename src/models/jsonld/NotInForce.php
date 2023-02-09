@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class NotInForce extends MetaJsonLd implements NotInForceInterface, LegalForceSt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'NotInForce';
+	public static string $schemaTypeName = 'NotInForce';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/NotInForce';
+	public static string $schemaTypeScope = 'https://schema.org/NotInForce';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LegalForceStatus';
+	public static string $schemaTypeExtends = 'LegalForceStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that a legislation is currently not in force.';
+	public static string $schemaTypeDescription = 'Indicates that a legislation is currently not in force.';
 
 
 	/**

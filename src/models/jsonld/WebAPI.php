@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class WebAPI extends MetaJsonLd implements WebAPIInterface, ServiceInterface, In
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WebAPI';
+	public static string $schemaTypeName = 'WebAPI';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WebAPI';
+	public static string $schemaTypeScope = 'https://schema.org/WebAPI';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Service';
+	public static string $schemaTypeExtends = 'Service';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An application programming interface accessible over Web/Internet technologies.';
+	public static string $schemaTypeDescription = 'An application programming interface accessible over Web/Internet technologies.';
 
 
 	/**

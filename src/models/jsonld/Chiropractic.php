@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Chiropractic extends MetaJsonLd implements ChiropracticInterface, Medicine
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Chiropractic';
+	public static string $schemaTypeName = 'Chiropractic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Chiropractic';
+	public static string $schemaTypeScope = 'https://schema.org/Chiropractic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicineSystem';
+	public static string $schemaTypeExtends = 'MedicineSystem';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A system of medicine focused on the relationship between the body\'s structure, mainly the spine, and its functioning.';
+	public static string $schemaTypeDescription = 'A system of medicine focused on the relationship between the body\'s structure, mainly the spine, and its functioning.';
 
 
 	/**

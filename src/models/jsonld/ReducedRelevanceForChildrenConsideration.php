@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ReducedRelevanceForChildrenConsideration extends MetaJsonLd implements Red
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReducedRelevanceForChildrenConsideration';
+	public static string $schemaTypeName = 'ReducedRelevanceForChildrenConsideration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReducedRelevanceForChildrenConsideration';
+	public static string $schemaTypeScope = 'https://schema.org/ReducedRelevanceForChildrenConsideration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdultOrientedEnumeration';
+	public static string $schemaTypeExtends = 'AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A general code for cases where relevance to children is reduced, e.g. adult education, mortgages, retirement-related products, etc.';
+	public static string $schemaTypeDescription = 'A general code for cases where relevance to children is reduced, e.g. adult education, mortgages, retirement-related products, etc.';
 
 
 	/**

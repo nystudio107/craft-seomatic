@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class VideoGallery extends MetaJsonLd implements VideoGalleryInterface, MediaGal
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VideoGallery';
+	public static string $schemaTypeName = 'VideoGallery';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VideoGallery';
+	public static string $schemaTypeScope = 'https://schema.org/VideoGallery';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MediaGallery';
+	public static string $schemaTypeExtends = 'MediaGallery';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Web page type: Video gallery page.';
+	public static string $schemaTypeDescription = 'Web page type: Video gallery page.';
 
 
 	/**

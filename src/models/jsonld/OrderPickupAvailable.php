@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class OrderPickupAvailable extends MetaJsonLd implements OrderPickupAvailableInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OrderPickupAvailable';
+	public static string $schemaTypeName = 'OrderPickupAvailable';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OrderPickupAvailable';
+	public static string $schemaTypeScope = 'https://schema.org/OrderPickupAvailable';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrderStatus';
+	public static string $schemaTypeExtends = 'OrderStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'OrderStatus representing availability of an order for pickup.';
+	public static string $schemaTypeDescription = 'OrderStatus representing availability of an order for pickup.';
 
 
 	/**

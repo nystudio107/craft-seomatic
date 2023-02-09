@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ReactAction extends MetaJsonLd implements ReactActionInterface, AssessActi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReactAction';
+	public static string $schemaTypeName = 'ReactAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReactAction';
+	public static string $schemaTypeScope = 'https://schema.org/ReactAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AssessAction';
+	public static string $schemaTypeExtends = 'AssessAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of responding instinctively and emotionally to an object, expressing a sentiment.';
+	public static string $schemaTypeDescription = 'The act of responding instinctively and emotionally to an object, expressing a sentiment.';
 
 
 	/**

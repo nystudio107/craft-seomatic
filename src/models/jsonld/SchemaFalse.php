@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class SchemaFalse extends MetaJsonLd implements SchemaFalseInterface, BooleanInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'False';
+	public static string $schemaTypeName = 'False';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/False';
+	public static string $schemaTypeScope = 'https://schema.org/False';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Boolean';
+	public static string $schemaTypeExtends = 'Boolean';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The boolean value false.';
+	public static string $schemaTypeDescription = 'The boolean value false.';
 
 
 	/**

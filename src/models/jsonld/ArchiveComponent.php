@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ArchiveComponent extends MetaJsonLd implements ArchiveComponentInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ArchiveComponent';
+	public static string $schemaTypeName = 'ArchiveComponent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ArchiveComponent';
+	public static string $schemaTypeScope = 'https://schema.org/ArchiveComponent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An intangible type to be applied to any archive content, carrying with it a set of properties required to describe archival items and collections.';
+	public static string $schemaTypeDescription = 'An intangible type to be applied to any archive content, carrying with it a set of properties required to describe archival items and collections.';
 
 
 	/**

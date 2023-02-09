@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class MusicRecording extends MetaJsonLd implements MusicRecordingInterface, Crea
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MusicRecording';
+	public static string $schemaTypeName = 'MusicRecording';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MusicRecording';
+	public static string $schemaTypeScope = 'https://schema.org/MusicRecording';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A music recording (track), usually a single song.';
+	public static string $schemaTypeDescription = 'A music recording (track), usually a single song.';
 
 
 	/**

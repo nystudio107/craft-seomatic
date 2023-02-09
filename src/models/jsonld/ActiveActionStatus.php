@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class ActiveActionStatus extends MetaJsonLd implements ActiveActionStatusInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ActiveActionStatus';
+	public static string $schemaTypeName = 'ActiveActionStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ActiveActionStatus';
+	public static string $schemaTypeScope = 'https://schema.org/ActiveActionStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ActionStatusType';
+	public static string $schemaTypeExtends = 'ActionStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An in-progress action (e.g., while watching the movie, or driving to a location).';
+	public static string $schemaTypeDescription = 'An in-progress action (e.g., while watching the movie, or driving to a location).';
 
 
 	/**

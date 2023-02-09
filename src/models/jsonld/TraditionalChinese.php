@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -38,28 +38,28 @@ class TraditionalChinese extends MetaJsonLd implements TraditionalChineseInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TraditionalChinese';
+	public static string $schemaTypeName = 'TraditionalChinese';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TraditionalChinese';
+	public static string $schemaTypeScope = 'https://schema.org/TraditionalChinese';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicineSystem';
+	public static string $schemaTypeExtends = 'MedicineSystem';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A system of medicine based on common theoretical concepts that originated in China and evolved over thousands of years, that uses herbs, acupuncture, exercise, massage, dietary therapy, and other methods to treat a wide range of conditions.';
+	public static string $schemaTypeDescription = 'A system of medicine based on common theoretical concepts that originated in China and evolved over thousands of years, that uses herbs, acupuncture, exercise, massage, dietary therapy, and other methods to treat a wide range of conditions.';
 
 
 	/**

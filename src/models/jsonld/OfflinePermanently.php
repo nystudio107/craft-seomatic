@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class OfflinePermanently extends MetaJsonLd implements OfflinePermanentlyInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OfflinePermanently';
+	public static string $schemaTypeName = 'OfflinePermanently';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OfflinePermanently';
+	public static string $schemaTypeScope = 'https://schema.org/OfflinePermanently';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GameServerStatus';
+	public static string $schemaTypeExtends = 'GameServerStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Game server status: OfflinePermanently. Server is offline and not available.';
+	public static string $schemaTypeDescription = 'Game server status: OfflinePermanently. Server is offline and not available.';
 
 
 	/**

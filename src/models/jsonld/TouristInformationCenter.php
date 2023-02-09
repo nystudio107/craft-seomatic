@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class TouristInformationCenter extends MetaJsonLd implements TouristInformationC
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TouristInformationCenter';
+	public static string $schemaTypeName = 'TouristInformationCenter';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TouristInformationCenter';
+	public static string $schemaTypeScope = 'https://schema.org/TouristInformationCenter';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A tourist information center.';
+	public static string $schemaTypeDescription = 'A tourist information center.';
 
 
 	/**

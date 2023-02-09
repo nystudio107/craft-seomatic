@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class TollFree extends MetaJsonLd implements TollFreeInterface, ContactPointOpti
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TollFree';
+	public static string $schemaTypeName = 'TollFree';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TollFree';
+	public static string $schemaTypeScope = 'https://schema.org/TollFree';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ContactPointOption';
+	public static string $schemaTypeExtends = 'ContactPointOption';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The associated telephone number is toll free.';
+	public static string $schemaTypeDescription = 'The associated telephone number is toll free.';
 
 
 	/**

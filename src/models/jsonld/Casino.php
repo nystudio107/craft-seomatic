@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Casino extends MetaJsonLd implements CasinoInterface, EntertainmentBusines
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Casino';
+	public static string $schemaTypeName = 'Casino';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Casino';
+	public static string $schemaTypeScope = 'https://schema.org/Casino';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EntertainmentBusiness';
+	public static string $schemaTypeExtends = 'EntertainmentBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A casino.';
+	public static string $schemaTypeDescription = 'A casino.';
 
 
 	/**

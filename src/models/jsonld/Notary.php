@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Notary extends MetaJsonLd implements NotaryInterface, LegalServiceInterfac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Notary';
+	public static string $schemaTypeName = 'Notary';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Notary';
+	public static string $schemaTypeScope = 'https://schema.org/Notary';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LegalService';
+	public static string $schemaTypeExtends = 'LegalService';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A notary.';
+	public static string $schemaTypeDescription = 'A notary.';
 
 
 	/**

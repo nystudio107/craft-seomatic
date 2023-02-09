@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class FoodEvent extends MetaJsonLd implements FoodEventInterface, EventInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FoodEvent';
+	public static string $schemaTypeName = 'FoodEvent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FoodEvent';
+	public static string $schemaTypeScope = 'https://schema.org/FoodEvent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Event';
+	public static string $schemaTypeExtends = 'Event';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Event type: Food event.';
+	public static string $schemaTypeDescription = 'Event type: Food event.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class FMRadioChannel extends MetaJsonLd implements FMRadioChannelInterface, Radi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FMRadioChannel';
+	public static string $schemaTypeName = 'FMRadioChannel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FMRadioChannel';
+	public static string $schemaTypeScope = 'https://schema.org/FMRadioChannel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RadioChannel';
+	public static string $schemaTypeExtends = 'RadioChannel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A radio channel that uses FM.';
+	public static string $schemaTypeDescription = 'A radio channel that uses FM.';
 
 
 	/**

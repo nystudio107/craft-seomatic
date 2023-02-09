@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class SchemaFloat extends MetaJsonLd implements SchemaFloatInterface, NumberInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Float';
+	public static string $schemaTypeName = 'Float';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Float';
+	public static string $schemaTypeScope = 'https://schema.org/Float';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Number';
+	public static string $schemaTypeExtends = 'Number';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Data type: Floating number.';
+	public static string $schemaTypeDescription = 'Data type: Floating number.';
 
 
 	/**

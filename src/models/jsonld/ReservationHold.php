@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class ReservationHold extends MetaJsonLd implements ReservationHoldInterface, Re
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReservationHold';
+	public static string $schemaTypeName = 'ReservationHold';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReservationHold';
+	public static string $schemaTypeScope = 'https://schema.org/ReservationHold';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReservationStatusType';
+	public static string $schemaTypeExtends = 'ReservationStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The status of a reservation on hold pending an update like credit card number or flight changes.';
+	public static string $schemaTypeDescription = 'The status of a reservation on hold pending an update like credit card number or flight changes.';
 
 
 	/**

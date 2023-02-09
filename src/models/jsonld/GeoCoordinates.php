@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class GeoCoordinates extends MetaJsonLd implements GeoCoordinatesInterface, Stru
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GeoCoordinates';
+	public static string $schemaTypeName = 'GeoCoordinates';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GeoCoordinates';
+	public static string $schemaTypeScope = 'https://schema.org/GeoCoordinates';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The geographic coordinates of a place or event.';
+	public static string $schemaTypeDescription = 'The geographic coordinates of a place or event.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MedicalRiskEstimator extends MetaJsonLd implements MedicalRiskEstimatorInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalRiskEstimator';
+	public static string $schemaTypeName = 'MedicalRiskEstimator';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalRiskEstimator';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalRiskEstimator';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any rule set or interactive tool for estimating the risk of developing a complication or condition.';
+	public static string $schemaTypeDescription = 'Any rule set or interactive tool for estimating the risk of developing a complication or condition.';
 
 
 	/**

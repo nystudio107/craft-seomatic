@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class CharitableIncorporatedOrganization extends MetaJsonLd implements Charitabl
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CharitableIncorporatedOrganization';
+	public static string $schemaTypeName = 'CharitableIncorporatedOrganization';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CharitableIncorporatedOrganization';
+	public static string $schemaTypeScope = 'https://schema.org/CharitableIncorporatedOrganization';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'UKNonprofitType';
+	public static string $schemaTypeExtends = 'UKNonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'CharitableIncorporatedOrganization: Non-profit type referring to a Charitable Incorporated Organization (UK).';
+	public static string $schemaTypeDescription = 'CharitableIncorporatedOrganization: Non-profit type referring to a Charitable Incorporated Organization (UK).';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class VideoGameSeries extends MetaJsonLd implements VideoGameSeriesInterface, Cr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VideoGameSeries';
+	public static string $schemaTypeName = 'VideoGameSeries';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VideoGameSeries';
+	public static string $schemaTypeScope = 'https://schema.org/VideoGameSeries';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWorkSeries';
+	public static string $schemaTypeExtends = 'CreativeWorkSeries';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A video game series.';
+	public static string $schemaTypeDescription = 'A video game series.';
 
 
 	/**

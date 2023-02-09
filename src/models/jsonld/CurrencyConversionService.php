@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class CurrencyConversionService extends MetaJsonLd implements CurrencyConversion
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CurrencyConversionService';
+	public static string $schemaTypeName = 'CurrencyConversionService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CurrencyConversionService';
+	public static string $schemaTypeScope = 'https://schema.org/CurrencyConversionService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FinancialProduct';
+	public static string $schemaTypeExtends = 'FinancialProduct';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A service to convert funds from one currency to another currency.';
+	public static string $schemaTypeDescription = 'A service to convert funds from one currency to another currency.';
 
 
 	/**

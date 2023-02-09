@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PsychologicalTreatment extends MetaJsonLd implements PsychologicalTreatmen
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PsychologicalTreatment';
+	public static string $schemaTypeName = 'PsychologicalTreatment';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PsychologicalTreatment';
+	public static string $schemaTypeScope = 'https://schema.org/PsychologicalTreatment';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TherapeuticProcedure';
+	public static string $schemaTypeExtends = 'TherapeuticProcedure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A process of care relying upon counseling, dialogue and communication  aimed at improving a mental health condition without use of drugs.';
+	public static string $schemaTypeDescription = 'A process of care relying upon counseling, dialogue and communication  aimed at improving a mental health condition without use of drugs.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Genitourinary extends MetaJsonLd implements GenitourinaryInterface, Physic
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Genitourinary';
+	public static string $schemaTypeName = 'Genitourinary';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Genitourinary';
+	public static string $schemaTypeScope = 'https://schema.org/Genitourinary';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalExam';
+	public static string $schemaTypeExtends = 'PhysicalExam';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Genitourinary system function assessment with clinical examination.';
+	public static string $schemaTypeDescription = 'Genitourinary system function assessment with clinical examination.';
 
 
 	/**

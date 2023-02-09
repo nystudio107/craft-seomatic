@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class OrganizeAction extends MetaJsonLd implements OrganizeActionInterface, Acti
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OrganizeAction';
+	public static string $schemaTypeName = 'OrganizeAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OrganizeAction';
+	public static string $schemaTypeScope = 'https://schema.org/OrganizeAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Action';
+	public static string $schemaTypeExtends = 'Action';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of manipulating/administering/supervising/controlling one or more objects.';
+	public static string $schemaTypeDescription = 'The act of manipulating/administering/supervising/controlling one or more objects.';
 
 
 	/**

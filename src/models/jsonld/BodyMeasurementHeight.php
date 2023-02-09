@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BodyMeasurementHeight extends MetaJsonLd implements BodyMeasurementHeightI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementHeight';
+	public static string $schemaTypeName = 'BodyMeasurementHeight';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementHeight';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementHeight';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Body height (measured between crown of head and soles of feet). Used, for example, to fit jackets.';
+	public static string $schemaTypeDescription = 'Body height (measured between crown of head and soles of feet). Used, for example, to fit jackets.';
 
 
 	/**

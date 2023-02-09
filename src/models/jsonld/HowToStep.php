@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class HowToStep extends MetaJsonLd implements HowToStepInterface, ItemListInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HowToStep';
+	public static string $schemaTypeName = 'HowToStep';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HowToStep';
+	public static string $schemaTypeScope = 'https://schema.org/HowToStep';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemList';
+	public static string $schemaTypeExtends = 'ItemList';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A step in the instructions for how to achieve a result. It is an ordered list with HowToDirection and/or HowToTip items.';
+	public static string $schemaTypeDescription = 'A step in the instructions for how to achieve a result. It is an ordered list with HowToDirection and/or HowToTip items.';
 
 
 	/**

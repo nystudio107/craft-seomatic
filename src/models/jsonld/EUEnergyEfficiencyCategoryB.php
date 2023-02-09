@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class EUEnergyEfficiencyCategoryB extends MetaJsonLd implements EUEnergyEfficien
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EUEnergyEfficiencyCategoryB';
+	public static string $schemaTypeName = 'EUEnergyEfficiencyCategoryB';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EUEnergyEfficiencyCategoryB';
+	public static string $schemaTypeScope = 'https://schema.org/EUEnergyEfficiencyCategoryB';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EUEnergyEfficiencyEnumeration';
+	public static string $schemaTypeExtends = 'EUEnergyEfficiencyEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents EU Energy Efficiency Class B as defined in EU energy labeling regulations.';
+	public static string $schemaTypeDescription = 'Represents EU Energy Efficiency Class B as defined in EU energy labeling regulations.';
 
 
 	/**

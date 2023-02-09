@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class InForce extends MetaJsonLd implements InForceInterface, LegalForceStatusIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InForce';
+	public static string $schemaTypeName = 'InForce';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InForce';
+	public static string $schemaTypeScope = 'https://schema.org/InForce';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LegalForceStatus';
+	public static string $schemaTypeExtends = 'LegalForceStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that a legislation is in force.';
+	public static string $schemaTypeDescription = 'Indicates that a legislation is in force.';
 
 
 	/**

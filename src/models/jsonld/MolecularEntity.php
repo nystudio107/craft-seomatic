@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MolecularEntity extends MetaJsonLd implements MolecularEntityInterface, Bi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MolecularEntity';
+	public static string $schemaTypeName = 'MolecularEntity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MolecularEntity';
+	public static string $schemaTypeScope = 'https://schema.org/MolecularEntity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BioChemEntity';
+	public static string $schemaTypeExtends = 'BioChemEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity.';
+	public static string $schemaTypeDescription = 'Any constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity.';
 
 
 	/**

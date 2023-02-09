@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class AskPublicNewsArticle extends MetaJsonLd implements AskPublicNewsArticleInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AskPublicNewsArticle';
+	public static string $schemaTypeName = 'AskPublicNewsArticle';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AskPublicNewsArticle';
+	public static string $schemaTypeScope = 'https://schema.org/AskPublicNewsArticle';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'NewsArticle';
+	public static string $schemaTypeExtends = 'NewsArticle';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A [[NewsArticle]] expressing an open call by a [[NewsMediaOrganization]] asking the public for input, insights, clarifications, anecdotes, documentation, etc., on an issue, for reporting purposes.';
+	public static string $schemaTypeDescription = 'A [[NewsArticle]] expressing an open call by a [[NewsMediaOrganization]] asking the public for input, insights, clarifications, anecdotes, documentation, etc., on an issue, for reporting purposes.';
 
 
 	/**

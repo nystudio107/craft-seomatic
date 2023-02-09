@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class RoofingContractor extends MetaJsonLd implements RoofingContractorInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RoofingContractor';
+	public static string $schemaTypeName = 'RoofingContractor';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RoofingContractor';
+	public static string $schemaTypeScope = 'https://schema.org/RoofingContractor';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HomeAndConstructionBusiness';
+	public static string $schemaTypeExtends = 'HomeAndConstructionBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A roofing contractor.';
+	public static string $schemaTypeDescription = 'A roofing contractor.';
 
 
 	/**

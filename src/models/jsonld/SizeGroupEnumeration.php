@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class SizeGroupEnumeration extends MetaJsonLd implements SizeGroupEnumerationInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SizeGroupEnumeration';
+	public static string $schemaTypeName = 'SizeGroupEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SizeGroupEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/SizeGroupEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerates common size groups for various product categories.';
+	public static string $schemaTypeDescription = 'Enumerates common size groups for various product categories.';
 
 
 	/**

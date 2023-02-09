@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ProfilePage extends MetaJsonLd implements ProfilePageInterface, WebPageInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ProfilePage';
+	public static string $schemaTypeName = 'ProfilePage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ProfilePage';
+	public static string $schemaTypeScope = 'https://schema.org/ProfilePage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPage';
+	public static string $schemaTypeExtends = 'WebPage';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Web page type: Profile page.';
+	public static string $schemaTypeDescription = 'Web page type: Profile page.';
 
 
 	/**

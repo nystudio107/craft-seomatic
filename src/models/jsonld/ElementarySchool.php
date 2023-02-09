@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ElementarySchool extends MetaJsonLd implements ElementarySchoolInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ElementarySchool';
+	public static string $schemaTypeName = 'ElementarySchool';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ElementarySchool';
+	public static string $schemaTypeScope = 'https://schema.org/ElementarySchool';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EducationalOrganization';
+	public static string $schemaTypeExtends = 'EducationalOrganization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An elementary school.';
+	public static string $schemaTypeDescription = 'An elementary school.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class SeeDoctorHealthAspect extends MetaJsonLd implements SeeDoctorHealthAspectI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SeeDoctorHealthAspect';
+	public static string $schemaTypeName = 'SeeDoctorHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SeeDoctorHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/SeeDoctorHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Information about questions that may be asked, when to see a professional, measures before seeing a doctor or content about the first consultation.';
+	public static string $schemaTypeDescription = 'Information about questions that may be asked, when to see a professional, measures before seeing a doctor or content about the first consultation.';
 
 
 	/**

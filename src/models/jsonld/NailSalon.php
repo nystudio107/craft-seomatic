@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class NailSalon extends MetaJsonLd implements NailSalonInterface, HealthAndBeaut
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'NailSalon';
+	public static string $schemaTypeName = 'NailSalon';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/NailSalon';
+	public static string $schemaTypeScope = 'https://schema.org/NailSalon';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAndBeautyBusiness';
+	public static string $schemaTypeExtends = 'HealthAndBeautyBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A nail salon.';
+	public static string $schemaTypeDescription = 'A nail salon.';
 
 
 	/**

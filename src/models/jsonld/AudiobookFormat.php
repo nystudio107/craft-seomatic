@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class AudiobookFormat extends MetaJsonLd implements AudiobookFormatInterface, Bo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AudiobookFormat';
+	public static string $schemaTypeName = 'AudiobookFormat';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AudiobookFormat';
+	public static string $schemaTypeScope = 'https://schema.org/AudiobookFormat';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BookFormatType';
+	public static string $schemaTypeExtends = 'BookFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Book format: Audiobook. This is an enumerated value for use with the bookFormat property. There is also a type \'Audiobook\' in the bib extension which includes Audiobook specific properties.';
+	public static string $schemaTypeDescription = 'Book format: Audiobook. This is an enumerated value for use with the bookFormat property. There is also a type \'Audiobook\' in the bib extension which includes Audiobook specific properties.';
 
 
 	/**

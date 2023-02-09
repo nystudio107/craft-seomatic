@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ImagingTest extends MetaJsonLd implements ImagingTestInterface, MedicalTes
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ImagingTest';
+	public static string $schemaTypeName = 'ImagingTest';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ImagingTest';
+	public static string $schemaTypeScope = 'https://schema.org/ImagingTest';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTest';
+	public static string $schemaTypeExtends = 'MedicalTest';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any medical imaging modality typically used for diagnostic purposes.';
+	public static string $schemaTypeDescription = 'Any medical imaging modality typically used for diagnostic purposes.';
 
 
 	/**

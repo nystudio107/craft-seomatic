@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class EventScheduled extends MetaJsonLd implements EventScheduledInterface, Even
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EventScheduled';
+	public static string $schemaTypeName = 'EventScheduled';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EventScheduled';
+	public static string $schemaTypeScope = 'https://schema.org/EventScheduled';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EventStatusType';
+	public static string $schemaTypeExtends = 'EventStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The event is taking place or has taken place on the startDate as scheduled. Use of this value is optional, as it is assumed by default.';
+	public static string $schemaTypeDescription = 'The event is taking place or has taken place on the startDate as scheduled. Use of this value is optional, as it is assumed by default.';
 
 
 	/**

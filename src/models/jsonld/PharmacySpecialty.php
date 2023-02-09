@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class PharmacySpecialty extends MetaJsonLd implements PharmacySpecialtyInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PharmacySpecialty';
+	public static string $schemaTypeName = 'PharmacySpecialty';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PharmacySpecialty';
+	public static string $schemaTypeScope = 'https://schema.org/PharmacySpecialty';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The practice or art and science of preparing and dispensing drugs and medicines.';
+	public static string $schemaTypeDescription = 'The practice or art and science of preparing and dispensing drugs and medicines.';
 
 
 	/**

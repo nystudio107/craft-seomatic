@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ReturnLabelCustomerResponsibility extends MetaJsonLd implements ReturnLabe
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReturnLabelCustomerResponsibility';
+	public static string $schemaTypeName = 'ReturnLabelCustomerResponsibility';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReturnLabelCustomerResponsibility';
+	public static string $schemaTypeScope = 'https://schema.org/ReturnLabelCustomerResponsibility';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
+	public static string $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicated that creating a return label is the responsibility of the customer.';
+	public static string $schemaTypeDescription = 'Indicated that creating a return label is the responsibility of the customer.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Synagogue extends MetaJsonLd implements SynagogueInterface, PlaceOfWorship
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Synagogue';
+	public static string $schemaTypeName = 'Synagogue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Synagogue';
+	public static string $schemaTypeScope = 'https://schema.org/Synagogue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PlaceOfWorship';
+	public static string $schemaTypeExtends = 'PlaceOfWorship';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A synagogue.';
+	public static string $schemaTypeDescription = 'A synagogue.';
 
 
 	/**

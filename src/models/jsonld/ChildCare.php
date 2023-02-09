@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ChildCare extends MetaJsonLd implements ChildCareInterface, LocalBusinessI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ChildCare';
+	public static string $schemaTypeName = 'ChildCare';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ChildCare';
+	public static string $schemaTypeScope = 'https://schema.org/ChildCare';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A Childcare center.';
+	public static string $schemaTypeDescription = 'A Childcare center.';
 
 
 	/**

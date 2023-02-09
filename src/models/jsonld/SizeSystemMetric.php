@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SizeSystemMetric extends MetaJsonLd implements SizeSystemMetricInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SizeSystemMetric';
+	public static string $schemaTypeName = 'SizeSystemMetric';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SizeSystemMetric';
+	public static string $schemaTypeScope = 'https://schema.org/SizeSystemMetric';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SizeSystemEnumeration';
+	public static string $schemaTypeExtends = 'SizeSystemEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Metric size system.';
+	public static string $schemaTypeDescription = 'Metric size system.';
 
 
 	/**

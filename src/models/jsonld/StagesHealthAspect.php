@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class StagesHealthAspect extends MetaJsonLd implements StagesHealthAspectInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'StagesHealthAspect';
+	public static string $schemaTypeName = 'StagesHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/StagesHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/StagesHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Stages that can be observed from a topic.';
+	public static string $schemaTypeDescription = 'Stages that can be observed from a topic.';
 
 
 	/**

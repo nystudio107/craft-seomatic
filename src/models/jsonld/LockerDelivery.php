@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class LockerDelivery extends MetaJsonLd implements LockerDeliveryInterface, Deli
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LockerDelivery';
+	public static string $schemaTypeName = 'LockerDelivery';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LockerDelivery';
+	public static string $schemaTypeScope = 'https://schema.org/LockerDelivery';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DeliveryMethod';
+	public static string $schemaTypeExtends = 'DeliveryMethod';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A DeliveryMethod in which an item is made available via locker.';
+	public static string $schemaTypeDescription = 'A DeliveryMethod in which an item is made available via locker.';
 
 
 	/**

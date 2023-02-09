@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SocialMediaPosting extends MetaJsonLd implements SocialMediaPostingInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SocialMediaPosting';
+	public static string $schemaTypeName = 'SocialMediaPosting';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SocialMediaPosting';
+	public static string $schemaTypeScope = 'https://schema.org/SocialMediaPosting';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Article';
+	public static string $schemaTypeExtends = 'Article';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A post to a social media platform, including blog posts, tweets, Facebook posts, etc.';
+	public static string $schemaTypeDescription = 'A post to a social media platform, including blog posts, tweets, Facebook posts, etc.';
 
 
 	/**

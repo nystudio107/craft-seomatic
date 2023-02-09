@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class ListItem extends MetaJsonLd implements ListItemInterface, IntangibleInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ListItem';
+	public static string $schemaTypeName = 'ListItem';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ListItem';
+	public static string $schemaTypeScope = 'https://schema.org/ListItem';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An list item, e.g. a step in a checklist or how-to description.';
+	public static string $schemaTypeDescription = 'An list item, e.g. a step in a checklist or how-to description.';
 
 
 	/**

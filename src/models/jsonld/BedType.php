@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BedType extends MetaJsonLd implements BedTypeInterface, QualitativeValueIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BedType';
+	public static string $schemaTypeName = 'BedType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BedType';
+	public static string $schemaTypeScope = 'https://schema.org/BedType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'QualitativeValue';
+	public static string $schemaTypeExtends = 'QualitativeValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of bed. This is used for indicating the bed or beds available in an accommodation.';
+	public static string $schemaTypeDescription = 'A type of bed. This is used for indicating the bed or beds available in an accommodation.';
 
 
 	/**

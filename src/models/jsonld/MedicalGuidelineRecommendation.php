@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalGuidelineRecommendation extends MetaJsonLd implements MedicalGuidel
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalGuidelineRecommendation';
+	public static string $schemaTypeName = 'MedicalGuidelineRecommendation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalGuidelineRecommendation';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalGuidelineRecommendation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalGuideline';
+	public static string $schemaTypeExtends = 'MedicalGuideline';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A guideline recommendation that is regarded as efficacious and where quality of the data supporting the recommendation is sound.';
+	public static string $schemaTypeDescription = 'A guideline recommendation that is regarded as efficacious and where quality of the data supporting the recommendation is sound.';
 
 
 	/**

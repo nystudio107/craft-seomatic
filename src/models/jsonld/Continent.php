@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Continent extends MetaJsonLd implements ContinentInterface, LandformInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Continent';
+	public static string $schemaTypeName = 'Continent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Continent';
+	public static string $schemaTypeScope = 'https://schema.org/Continent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Landform';
+	public static string $schemaTypeExtends = 'Landform';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'One of the continents (for example, Europe or Africa).';
+	public static string $schemaTypeDescription = 'One of the continents (for example, Europe or Africa).';
 
 
 	/**

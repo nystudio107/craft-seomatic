@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MedicalResearcher extends MetaJsonLd implements MedicalResearcherInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalResearcher';
+	public static string $schemaTypeName = 'MedicalResearcher';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalResearcher';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalResearcher';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalAudienceType';
+	public static string $schemaTypeExtends = 'MedicalAudienceType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Medical researchers.';
+	public static string $schemaTypeDescription = 'Medical researchers.';
 
 
 	/**

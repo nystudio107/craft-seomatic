@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PreSale extends MetaJsonLd implements PreSaleInterface, ItemAvailabilityIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PreSale';
+	public static string $schemaTypeName = 'PreSale';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PreSale';
+	public static string $schemaTypeScope = 'https://schema.org/PreSale';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemAvailability';
+	public static string $schemaTypeExtends = 'ItemAvailability';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item is available for ordering and delivery before general availability.';
+	public static string $schemaTypeDescription = 'Indicates that the item is available for ordering and delivery before general availability.';
 
 
 	/**

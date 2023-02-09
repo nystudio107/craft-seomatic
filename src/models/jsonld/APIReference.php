@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class APIReference extends MetaJsonLd implements APIReferenceInterface, TechArti
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'APIReference';
+	public static string $schemaTypeName = 'APIReference';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/APIReference';
+	public static string $schemaTypeScope = 'https://schema.org/APIReference';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TechArticle';
+	public static string $schemaTypeExtends = 'TechArticle';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Reference documentation for application programming interfaces (APIs).';
+	public static string $schemaTypeDescription = 'Reference documentation for application programming interfaces (APIs).';
 
 
 	/**

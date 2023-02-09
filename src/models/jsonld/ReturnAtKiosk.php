@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ReturnAtKiosk extends MetaJsonLd implements ReturnAtKioskInterface, Return
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReturnAtKiosk';
+	public static string $schemaTypeName = 'ReturnAtKiosk';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReturnAtKiosk';
+	public static string $schemaTypeScope = 'https://schema.org/ReturnAtKiosk';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnMethodEnumeration';
+	public static string $schemaTypeExtends = 'ReturnMethodEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that product returns must be made at a kiosk.';
+	public static string $schemaTypeDescription = 'Specifies that product returns must be made at a kiosk.';
 
 
 	/**

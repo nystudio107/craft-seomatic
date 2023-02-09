@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class OrderStatus extends MetaJsonLd implements OrderStatusInterface, StatusEnum
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OrderStatus';
+	public static string $schemaTypeName = 'OrderStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OrderStatus';
+	public static string $schemaTypeScope = 'https://schema.org/OrderStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StatusEnumeration';
+	public static string $schemaTypeExtends = 'StatusEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerated status values for Order.';
+	public static string $schemaTypeDescription = 'Enumerated status values for Order.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RemixAlbum extends MetaJsonLd implements RemixAlbumInterface, MusicAlbumPr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RemixAlbum';
+	public static string $schemaTypeName = 'RemixAlbum';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RemixAlbum';
+	public static string $schemaTypeScope = 'https://schema.org/RemixAlbum';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumProductionType';
+	public static string $schemaTypeExtends = 'MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'RemixAlbum.';
+	public static string $schemaTypeDescription = 'RemixAlbum.';
 
 
 	/**

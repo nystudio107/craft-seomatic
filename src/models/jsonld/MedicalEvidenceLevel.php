@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalEvidenceLevel extends MetaJsonLd implements MedicalEvidenceLevelInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalEvidenceLevel';
+	public static string $schemaTypeName = 'MedicalEvidenceLevel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalEvidenceLevel';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalEvidenceLevel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Level of evidence for a medical guideline. Enumerated type.';
+	public static string $schemaTypeDescription = 'Level of evidence for a medical guideline. Enumerated type.';
 
 
 	/**

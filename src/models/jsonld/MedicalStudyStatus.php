@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalStudyStatus extends MetaJsonLd implements MedicalStudyStatusInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalStudyStatus';
+	public static string $schemaTypeName = 'MedicalStudyStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalStudyStatus';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalStudyStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The status of a medical study. Enumerated type.';
+	public static string $schemaTypeDescription = 'The status of a medical study. Enumerated type.';
 
 
 	/**

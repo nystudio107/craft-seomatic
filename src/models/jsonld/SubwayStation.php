@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class SubwayStation extends MetaJsonLd implements SubwayStationInterface, CivicS
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SubwayStation';
+	public static string $schemaTypeName = 'SubwayStation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SubwayStation';
+	public static string $schemaTypeScope = 'https://schema.org/SubwayStation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A subway station.';
+	public static string $schemaTypeDescription = 'A subway station.';
 
 
 	/**

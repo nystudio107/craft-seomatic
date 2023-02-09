@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class OnSitePickup extends MetaJsonLd implements OnSitePickupInterface, Delivery
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OnSitePickup';
+	public static string $schemaTypeName = 'OnSitePickup';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OnSitePickup';
+	public static string $schemaTypeScope = 'https://schema.org/OnSitePickup';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DeliveryMethod';
+	public static string $schemaTypeExtends = 'DeliveryMethod';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A DeliveryMethod in which an item is collected on site, e.g. in a store or at a box office.';
+	public static string $schemaTypeDescription = 'A DeliveryMethod in which an item is collected on site, e.g. in a store or at a box office.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class RepaymentSpecification extends MetaJsonLd implements RepaymentSpecificatio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RepaymentSpecification';
+	public static string $schemaTypeName = 'RepaymentSpecification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RepaymentSpecification';
+	public static string $schemaTypeScope = 'https://schema.org/RepaymentSpecification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A structured value representing repayment.';
+	public static string $schemaTypeDescription = 'A structured value representing repayment.';
 
 
 	/**

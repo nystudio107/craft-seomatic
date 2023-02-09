@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BodyMeasurementTypeEnumeration extends MetaJsonLd implements BodyMeasureme
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeName = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'MeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerates types (or dimensions) of a person\'s body measurements, for example for fitting of clothes.';
+	public static string $schemaTypeDescription = 'Enumerates types (or dimensions) of a person\'s body measurements, for example for fitting of clothes.';
 
 
 	/**

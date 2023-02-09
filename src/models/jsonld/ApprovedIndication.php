@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ApprovedIndication extends MetaJsonLd implements ApprovedIndicationInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ApprovedIndication';
+	public static string $schemaTypeName = 'ApprovedIndication';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ApprovedIndication';
+	public static string $schemaTypeScope = 'https://schema.org/ApprovedIndication';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalIndication';
+	public static string $schemaTypeExtends = 'MedicalIndication';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An indication for a medical therapy that has been formally specified or approved by a regulatory body that regulates use of the therapy; for example, the US FDA approves indications for most drugs in the US.';
+	public static string $schemaTypeDescription = 'An indication for a medical therapy that has been formally specified or approved by a regulatory body that regulates use of the therapy; for example, the US FDA approves indications for most drugs in the US.';
 
 
 	/**

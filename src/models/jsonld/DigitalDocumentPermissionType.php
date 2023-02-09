@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DigitalDocumentPermissionType extends MetaJsonLd implements DigitalDocumen
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DigitalDocumentPermissionType';
+	public static string $schemaTypeName = 'DigitalDocumentPermissionType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DigitalDocumentPermissionType';
+	public static string $schemaTypeScope = 'https://schema.org/DigitalDocumentPermissionType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of permission which can be granted for accessing a digital document.';
+	public static string $schemaTypeDescription = 'A type of permission which can be granted for accessing a digital document.';
 
 
 	/**

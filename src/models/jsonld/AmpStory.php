@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class AmpStory extends MetaJsonLd implements AmpStoryInterface, MediaObjectInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AmpStory';
+	public static string $schemaTypeName = 'AmpStory';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AmpStory';
+	public static string $schemaTypeScope = 'https://schema.org/AmpStory';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MediaObject';
+	public static string $schemaTypeExtends = 'MediaObject';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A creative work with a visual storytelling format intended to be viewed online, particularly on mobile devices.';
+	public static string $schemaTypeDescription = 'A creative work with a visual storytelling format intended to be viewed online, particularly on mobile devices.';
 
 
 	/**

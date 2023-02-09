@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Drawing extends MetaJsonLd implements DrawingInterface, CreativeWorkInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Drawing';
+	public static string $schemaTypeName = 'Drawing';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Drawing';
+	public static string $schemaTypeScope = 'https://schema.org/Drawing';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A picture or diagram made with a pencil, pen, or crayon rather than paint.';
+	public static string $schemaTypeDescription = 'A picture or diagram made with a pencil, pen, or crayon rather than paint.';
 
 
 	/**

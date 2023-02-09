@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class SportsOrganization extends MetaJsonLd implements SportsOrganizationInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SportsOrganization';
+	public static string $schemaTypeName = 'SportsOrganization';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SportsOrganization';
+	public static string $schemaTypeScope = 'https://schema.org/SportsOrganization';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Organization';
+	public static string $schemaTypeExtends = 'Organization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents the collection of all sports organizations, including sports teams, governing bodies, and sports associations.';
+	public static string $schemaTypeDescription = 'Represents the collection of all sports organizations, including sports teams, governing bodies, and sports associations.';
 
 
 	/**

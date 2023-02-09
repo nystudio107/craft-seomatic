@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DrugCostCategory extends MetaJsonLd implements DrugCostCategoryInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrugCostCategory';
+	public static string $schemaTypeName = 'DrugCostCategory';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrugCostCategory';
+	public static string $schemaTypeScope = 'https://schema.org/DrugCostCategory';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerated categories of medical drug costs.';
+	public static string $schemaTypeDescription = 'Enumerated categories of medical drug costs.';
 
 
 	/**

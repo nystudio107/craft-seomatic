@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class CompilationAlbum extends MetaJsonLd implements CompilationAlbumInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CompilationAlbum';
+	public static string $schemaTypeName = 'CompilationAlbum';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CompilationAlbum';
+	public static string $schemaTypeScope = 'https://schema.org/CompilationAlbum';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumProductionType';
+	public static string $schemaTypeExtends = 'MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'CompilationAlbum.';
+	public static string $schemaTypeDescription = 'CompilationAlbum.';
 
 
 	/**

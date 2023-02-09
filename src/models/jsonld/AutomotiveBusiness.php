@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class AutomotiveBusiness extends MetaJsonLd implements AutomotiveBusinessInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AutomotiveBusiness';
+	public static string $schemaTypeName = 'AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AutomotiveBusiness';
+	public static string $schemaTypeScope = 'https://schema.org/AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Car repair, sales, or parts.';
+	public static string $schemaTypeDescription = 'Car repair, sales, or parts.';
 
 
 	/**

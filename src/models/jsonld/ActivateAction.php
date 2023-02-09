@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ActivateAction extends MetaJsonLd implements ActivateActionInterface, Cont
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ActivateAction';
+	public static string $schemaTypeName = 'ActivateAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ActivateAction';
+	public static string $schemaTypeScope = 'https://schema.org/ActivateAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ControlAction';
+	public static string $schemaTypeExtends = 'ControlAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of starting or activating a device or application (e.g. starting a timer or turning on a flashlight).';
+	public static string $schemaTypeDescription = 'The act of starting or activating a device or application (e.g. starting a timer or turning on a flashlight).';
 
 
 	/**

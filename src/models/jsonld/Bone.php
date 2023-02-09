@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Bone extends MetaJsonLd implements BoneInterface, AnatomicalStructureInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Bone';
+	public static string $schemaTypeName = 'Bone';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Bone';
+	public static string $schemaTypeScope = 'https://schema.org/Bone';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AnatomicalStructure';
+	public static string $schemaTypeExtends = 'AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Rigid connective tissue that comprises up the skeletal structure of the human body.';
+	public static string $schemaTypeDescription = 'Rigid connective tissue that comprises up the skeletal structure of the human body.';
 
 
 	/**

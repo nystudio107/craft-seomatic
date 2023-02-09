@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class IceCreamShop extends MetaJsonLd implements IceCreamShopInterface, FoodEsta
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'IceCreamShop';
+	public static string $schemaTypeName = 'IceCreamShop';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/IceCreamShop';
+	public static string $schemaTypeScope = 'https://schema.org/IceCreamShop';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FoodEstablishment';
+	public static string $schemaTypeExtends = 'FoodEstablishment';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An ice cream shop.';
+	public static string $schemaTypeDescription = 'An ice cream shop.';
 
 
 	/**

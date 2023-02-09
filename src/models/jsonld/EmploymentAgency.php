@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EmploymentAgency extends MetaJsonLd implements EmploymentAgencyInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EmploymentAgency';
+	public static string $schemaTypeName = 'EmploymentAgency';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EmploymentAgency';
+	public static string $schemaTypeScope = 'https://schema.org/EmploymentAgency';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An employment agency.';
+	public static string $schemaTypeDescription = 'An employment agency.';
 
 
 	/**

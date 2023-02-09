@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ReadAction extends MetaJsonLd implements ReadActionInterface, ConsumeActio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReadAction';
+	public static string $schemaTypeName = 'ReadAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReadAction';
+	public static string $schemaTypeScope = 'https://schema.org/ReadAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ConsumeAction';
+	public static string $schemaTypeExtends = 'ConsumeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of consuming written content.';
+	public static string $schemaTypeDescription = 'The act of consuming written content.';
 
 
 	/**

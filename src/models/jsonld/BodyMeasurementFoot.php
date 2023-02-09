@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BodyMeasurementFoot extends MetaJsonLd implements BodyMeasurementFootInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementFoot';
+	public static string $schemaTypeName = 'BodyMeasurementFoot';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementFoot';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementFoot';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Foot length (measured between end of the most prominent toe and the most prominent part of the heel). Used, for example, to measure socks.';
+	public static string $schemaTypeDescription = 'Foot length (measured between end of the most prominent toe and the most prominent part of the heel). Used, for example, to measure socks.';
 
 
 	/**

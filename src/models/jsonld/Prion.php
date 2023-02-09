@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Prion extends MetaJsonLd implements PrionInterface, InfectiousAgentClassIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Prion';
+	public static string $schemaTypeName = 'Prion';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Prion';
+	public static string $schemaTypeScope = 'https://schema.org/Prion';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InfectiousAgentClass';
+	public static string $schemaTypeExtends = 'InfectiousAgentClass';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A prion is an infectious agent composed of protein in a misfolded form.';
+	public static string $schemaTypeDescription = 'A prion is an infectious agent composed of protein in a misfolded form.';
 
 
 	/**

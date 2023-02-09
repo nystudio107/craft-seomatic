@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class HowOrWhereHealthAspect extends MetaJsonLd implements HowOrWhereHealthAspec
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HowOrWhereHealthAspect';
+	public static string $schemaTypeName = 'HowOrWhereHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HowOrWhereHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/HowOrWhereHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Information about how or where to find a topic. Also may contain location data that can be used for where to look for help if the topic is observed.';
+	public static string $schemaTypeDescription = 'Information about how or where to find a topic. Also may contain location data that can be used for where to look for help if the topic is observed.';
 
 
 	/**

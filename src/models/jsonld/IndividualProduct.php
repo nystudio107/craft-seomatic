@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class IndividualProduct extends MetaJsonLd implements IndividualProductInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'IndividualProduct';
+	public static string $schemaTypeName = 'IndividualProduct';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/IndividualProduct';
+	public static string $schemaTypeScope = 'https://schema.org/IndividualProduct';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Product';
+	public static string $schemaTypeExtends = 'Product';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A single, identifiable product instance (e.g. a laptop with a particular serial number).';
+	public static string $schemaTypeDescription = 'A single, identifiable product instance (e.g. a laptop with a particular serial number).';
 
 
 	/**

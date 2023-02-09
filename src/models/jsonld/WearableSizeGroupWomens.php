@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableSizeGroupWomens extends MetaJsonLd implements WearableSizeGroupWom
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableSizeGroupWomens';
+	public static string $schemaTypeName = 'WearableSizeGroupWomens';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableSizeGroupWomens';
+	public static string $schemaTypeScope = 'https://schema.org/WearableSizeGroupWomens';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableSizeGroupEnumeration';
+	public static string $schemaTypeExtends = 'WearableSizeGroupEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Size group "Womens" for wearables.';
+	public static string $schemaTypeDescription = 'Size group "Womens" for wearables.';
 
 
 	/**

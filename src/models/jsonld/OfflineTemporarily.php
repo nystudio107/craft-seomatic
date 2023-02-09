@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class OfflineTemporarily extends MetaJsonLd implements OfflineTemporarilyInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OfflineTemporarily';
+	public static string $schemaTypeName = 'OfflineTemporarily';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OfflineTemporarily';
+	public static string $schemaTypeScope = 'https://schema.org/OfflineTemporarily';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GameServerStatus';
+	public static string $schemaTypeExtends = 'GameServerStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Game server status: OfflineTemporarily. Server is offline now but it can be online soon.';
+	public static string $schemaTypeDescription = 'Game server status: OfflineTemporarily. Server is offline now but it can be online soon.';
 
 
 	/**

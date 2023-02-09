@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EffectivenessHealthAspect extends MetaJsonLd implements EffectivenessHealt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EffectivenessHealthAspect';
+	public static string $schemaTypeName = 'EffectivenessHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EffectivenessHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/EffectivenessHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Content about the effectiveness-related aspects of a health topic.';
+	public static string $schemaTypeDescription = 'Content about the effectiveness-related aspects of a health topic.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Residence extends MetaJsonLd implements ResidenceInterface, PlaceInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Residence';
+	public static string $schemaTypeName = 'Residence';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Residence';
+	public static string $schemaTypeScope = 'https://schema.org/Residence';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Place';
+	public static string $schemaTypeExtends = 'Place';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The place where a person lives.';
+	public static string $schemaTypeDescription = 'The place where a person lives.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -38,28 +38,28 @@ class MedicalSpecialty extends MetaJsonLd implements MedicalSpecialtyInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalSpecialty';
+	public static string $schemaTypeName = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalSpecialty';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Specialty';
+	public static string $schemaTypeExtends = 'Specialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any specific branch of medical science or practice. Medical specialities include clinical specialties that pertain to particular organ systems and their respective disease states, as well as allied health specialties. Enumerated type.';
+	public static string $schemaTypeDescription = 'Any specific branch of medical science or practice. Medical specialities include clinical specialties that pertain to particular organ systems and their respective disease states, as well as allied health specialties. Enumerated type.';
 
 
 	/**

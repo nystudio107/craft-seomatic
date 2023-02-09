@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class LivingWithHealthAspect extends MetaJsonLd implements LivingWithHealthAspec
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LivingWithHealthAspect';
+	public static string $schemaTypeName = 'LivingWithHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LivingWithHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/LivingWithHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Information about coping or life related to the topic.';
+	public static string $schemaTypeDescription = 'Information about coping or life related to the topic.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Flight extends MetaJsonLd implements FlightInterface, TripInterface, Intan
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Flight';
+	public static string $schemaTypeName = 'Flight';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Flight';
+	public static string $schemaTypeScope = 'https://schema.org/Flight';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Trip';
+	public static string $schemaTypeExtends = 'Trip';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An airline flight.';
+	public static string $schemaTypeDescription = 'An airline flight.';
 
 
 	/**

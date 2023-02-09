@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class MovieTheater extends MetaJsonLd implements MovieTheaterInterface, CivicStr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MovieTheater';
+	public static string $schemaTypeName = 'MovieTheater';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MovieTheater';
+	public static string $schemaTypeScope = 'https://schema.org/MovieTheater';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A movie theater.';
+	public static string $schemaTypeDescription = 'A movie theater.';
 
 
 	/**

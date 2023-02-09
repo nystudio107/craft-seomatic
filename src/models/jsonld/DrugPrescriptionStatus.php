@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class DrugPrescriptionStatus extends MetaJsonLd implements DrugPrescriptionStatu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrugPrescriptionStatus';
+	public static string $schemaTypeName = 'DrugPrescriptionStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrugPrescriptionStatus';
+	public static string $schemaTypeScope = 'https://schema.org/DrugPrescriptionStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates whether this drug is available by prescription or over-the-counter.';
+	public static string $schemaTypeDescription = 'Indicates whether this drug is available by prescription or over-the-counter.';
 
 
 	/**

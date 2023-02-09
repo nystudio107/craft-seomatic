@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RadioStation extends MetaJsonLd implements RadioStationInterface, LocalBus
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RadioStation';
+	public static string $schemaTypeName = 'RadioStation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RadioStation';
+	public static string $schemaTypeScope = 'https://schema.org/RadioStation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A radio station.';
+	public static string $schemaTypeDescription = 'A radio station.';
 
 
 	/**

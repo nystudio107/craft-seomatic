@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class AggregateRating extends MetaJsonLd implements AggregateRatingInterface, Ra
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AggregateRating';
+	public static string $schemaTypeName = 'AggregateRating';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AggregateRating';
+	public static string $schemaTypeScope = 'https://schema.org/AggregateRating';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Rating';
+	public static string $schemaTypeExtends = 'Rating';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The average rating based on multiple ratings or reviews.';
+	public static string $schemaTypeDescription = 'The average rating based on multiple ratings or reviews.';
 
 
 	/**

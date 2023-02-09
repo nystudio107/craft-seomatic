@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class UKNonprofitType extends MetaJsonLd implements UKNonprofitTypeInterface, No
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UKNonprofitType';
+	public static string $schemaTypeName = 'UKNonprofitType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UKNonprofitType';
+	public static string $schemaTypeScope = 'https://schema.org/UKNonprofitType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'NonprofitType';
+	public static string $schemaTypeExtends = 'NonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'UKNonprofitType: Non-profit organization type originating from the United Kingdom.';
+	public static string $schemaTypeDescription = 'UKNonprofitType: Non-profit organization type originating from the United Kingdom.';
 
 
 	/**

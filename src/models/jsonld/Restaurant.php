@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Restaurant extends MetaJsonLd implements RestaurantInterface, FoodEstablis
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Restaurant';
+	public static string $schemaTypeName = 'Restaurant';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Restaurant';
+	public static string $schemaTypeScope = 'https://schema.org/Restaurant';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FoodEstablishment';
+	public static string $schemaTypeExtends = 'FoodEstablishment';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A restaurant.';
+	public static string $schemaTypeDescription = 'A restaurant.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Hematologic extends MetaJsonLd implements HematologicInterface, MedicalSpe
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Hematologic';
+	public static string $schemaTypeName = 'Hematologic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Hematologic';
+	public static string $schemaTypeScope = 'https://schema.org/Hematologic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that pertains to diagnosis and treatment of disorders of blood and blood producing organs.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that pertains to diagnosis and treatment of disorders of blood and blood producing organs.';
 
 
 	/**

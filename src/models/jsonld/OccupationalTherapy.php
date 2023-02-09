@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class OccupationalTherapy extends MetaJsonLd implements OccupationalTherapyInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OccupationalTherapy';
+	public static string $schemaTypeName = 'OccupationalTherapy';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OccupationalTherapy';
+	public static string $schemaTypeScope = 'https://schema.org/OccupationalTherapy';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTherapy';
+	public static string $schemaTypeExtends = 'MedicalTherapy';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.';
+	public static string $schemaTypeDescription = 'A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems.';
 
 
 	/**

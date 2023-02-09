@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ExhibitionEvent extends MetaJsonLd implements ExhibitionEventInterface, Ev
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ExhibitionEvent';
+	public static string $schemaTypeName = 'ExhibitionEvent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ExhibitionEvent';
+	public static string $schemaTypeScope = 'https://schema.org/ExhibitionEvent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Event';
+	public static string $schemaTypeExtends = 'Event';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Event type: Exhibition event, e.g. at a museum, library, archive, tradeshow, ...';
+	public static string $schemaTypeDescription = 'Event type: Exhibition event, e.g. at a museum, library, archive, tradeshow, ...';
 
 
 	/**

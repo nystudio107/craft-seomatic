@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BrainStructure extends MetaJsonLd implements BrainStructureInterface, Anat
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BrainStructure';
+	public static string $schemaTypeName = 'BrainStructure';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BrainStructure';
+	public static string $schemaTypeScope = 'https://schema.org/BrainStructure';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AnatomicalStructure';
+	public static string $schemaTypeExtends = 'AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any anatomical structure which pertains to the soft nervous tissue functioning as the coordinating center of sensation and intellectual and nervous activity.';
+	public static string $schemaTypeDescription = 'Any anatomical structure which pertains to the soft nervous tissue functioning as the coordinating center of sensation and intellectual and nervous activity.';
 
 
 	/**

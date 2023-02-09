@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableMeasurementCollar extends MetaJsonLd implements WearableMeasuremen
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableMeasurementCollar';
+	public static string $schemaTypeName = 'WearableMeasurementCollar';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableMeasurementCollar';
+	public static string $schemaTypeScope = 'https://schema.org/WearableMeasurementCollar';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'WearableMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Measurement of the collar, for example of a shirt';
+	public static string $schemaTypeDescription = 'Measurement of the collar, for example of a shirt';
 
 
 	/**

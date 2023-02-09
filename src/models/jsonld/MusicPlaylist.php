@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class MusicPlaylist extends MetaJsonLd implements MusicPlaylistInterface, Creati
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MusicPlaylist';
+	public static string $schemaTypeName = 'MusicPlaylist';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MusicPlaylist';
+	public static string $schemaTypeScope = 'https://schema.org/MusicPlaylist';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A collection of music tracks in playlist form.';
+	public static string $schemaTypeDescription = 'A collection of music tracks in playlist form.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DeactivateAction extends MetaJsonLd implements DeactivateActionInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DeactivateAction';
+	public static string $schemaTypeName = 'DeactivateAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DeactivateAction';
+	public static string $schemaTypeScope = 'https://schema.org/DeactivateAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ControlAction';
+	public static string $schemaTypeExtends = 'ControlAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of stopping or deactivating a device or application (e.g. stopping a timer or turning off a flashlight).';
+	public static string $schemaTypeDescription = 'The act of stopping or deactivating a device or application (e.g. stopping a timer or turning off a flashlight).';
 
 
 	/**

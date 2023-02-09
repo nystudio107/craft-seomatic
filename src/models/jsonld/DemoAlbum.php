@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DemoAlbum extends MetaJsonLd implements DemoAlbumInterface, MusicAlbumProd
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DemoAlbum';
+	public static string $schemaTypeName = 'DemoAlbum';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DemoAlbum';
+	public static string $schemaTypeScope = 'https://schema.org/DemoAlbum';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumProductionType';
+	public static string $schemaTypeExtends = 'MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'DemoAlbum.';
+	public static string $schemaTypeDescription = 'DemoAlbum.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MedicalTestPanel extends MetaJsonLd implements MedicalTestPanelInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalTestPanel';
+	public static string $schemaTypeName = 'MedicalTestPanel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalTestPanel';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalTestPanel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTest';
+	public static string $schemaTypeExtends = 'MedicalTest';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any collection of tests commonly ordered together.';
+	public static string $schemaTypeDescription = 'Any collection of tests commonly ordered together.';
 
 
 	/**

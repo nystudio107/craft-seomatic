@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class Date extends MetaJsonLd implements DateInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Date';
+	public static string $schemaTypeName = 'Date';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Date';
+	public static string $schemaTypeScope = 'https://schema.org/Date';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A date value in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).';
+	public static string $schemaTypeDescription = 'A date value in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).';
 
 
 	/**

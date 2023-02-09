@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EmployerAggregateRating extends MetaJsonLd implements EmployerAggregateRat
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EmployerAggregateRating';
+	public static string $schemaTypeName = 'EmployerAggregateRating';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EmployerAggregateRating';
+	public static string $schemaTypeScope = 'https://schema.org/EmployerAggregateRating';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AggregateRating';
+	public static string $schemaTypeExtends = 'AggregateRating';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An aggregate rating of an Organization related to its role as an employer.';
+	public static string $schemaTypeDescription = 'An aggregate rating of an Organization related to its role as an employer.';
 
 
 	/**

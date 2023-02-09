@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class OrderAction extends MetaJsonLd implements OrderActionInterface, TradeActio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OrderAction';
+	public static string $schemaTypeName = 'OrderAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OrderAction';
+	public static string $schemaTypeScope = 'https://schema.org/OrderAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TradeAction';
+	public static string $schemaTypeExtends = 'TradeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An agent orders an object/product/service to be delivered/sent.';
+	public static string $schemaTypeDescription = 'An agent orders an object/product/service to be delivered/sent.';
 
 
 	/**

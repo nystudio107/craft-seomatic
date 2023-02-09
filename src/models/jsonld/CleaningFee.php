@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class CleaningFee extends MetaJsonLd implements CleaningFeeInterface, PriceCompo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CleaningFee';
+	public static string $schemaTypeName = 'CleaningFee';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CleaningFee';
+	public static string $schemaTypeScope = 'https://schema.org/CleaningFee';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+	public static string $schemaTypeExtends = 'PriceComponentTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents the cleaning fee part of the total price for an offered product, for example a vacation rental.';
+	public static string $schemaTypeDescription = 'Represents the cleaning fee part of the total price for an offered product, for example a vacation rental.';
 
 
 	/**

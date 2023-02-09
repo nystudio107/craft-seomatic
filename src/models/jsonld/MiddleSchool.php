@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class MiddleSchool extends MetaJsonLd implements MiddleSchoolInterface, Educatio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MiddleSchool';
+	public static string $schemaTypeName = 'MiddleSchool';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MiddleSchool';
+	public static string $schemaTypeScope = 'https://schema.org/MiddleSchool';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EducationalOrganization';
+	public static string $schemaTypeExtends = 'EducationalOrganization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A middle school (typically for children aged around 11-14, although this varies somewhat).';
+	public static string $schemaTypeDescription = 'A middle school (typically for children aged around 11-14, although this varies somewhat).';
 
 
 	/**

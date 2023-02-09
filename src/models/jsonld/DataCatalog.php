@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class DataCatalog extends MetaJsonLd implements DataCatalogInterface, CreativeWo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DataCatalog';
+	public static string $schemaTypeName = 'DataCatalog';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DataCatalog';
+	public static string $schemaTypeScope = 'https://schema.org/DataCatalog';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A collection of datasets.';
+	public static string $schemaTypeDescription = 'A collection of datasets.';
 
 
 	/**

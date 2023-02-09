@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MixedEventAttendanceMode extends MetaJsonLd implements MixedEventAttendanc
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MixedEventAttendanceMode';
+	public static string $schemaTypeName = 'MixedEventAttendanceMode';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MixedEventAttendanceMode';
+	public static string $schemaTypeScope = 'https://schema.org/MixedEventAttendanceMode';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EventAttendanceModeEnumeration';
+	public static string $schemaTypeExtends = 'EventAttendanceModeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'MixedEventAttendanceMode - an event that is conducted as a combination of both offline and online modes.';
+	public static string $schemaTypeDescription = 'MixedEventAttendanceMode - an event that is conducted as a combination of both offline and online modes.';
 
 
 	/**

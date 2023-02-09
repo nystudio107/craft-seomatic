@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class CivicStructure extends MetaJsonLd implements CivicStructureInterface, Plac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CivicStructure';
+	public static string $schemaTypeName = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CivicStructure';
+	public static string $schemaTypeScope = 'https://schema.org/CivicStructure';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Place';
+	public static string $schemaTypeExtends = 'Place';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A public structure, such as a town hall or concert hall.';
+	public static string $schemaTypeDescription = 'A public structure, such as a town hall or concert hall.';
 
 
 	/**

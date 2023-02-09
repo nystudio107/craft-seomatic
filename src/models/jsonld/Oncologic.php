@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -42,28 +42,28 @@ class Oncologic extends MetaJsonLd implements OncologicInterface, MedicalBusines
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Oncologic';
+	public static string $schemaTypeName = 'Oncologic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Oncologic';
+	public static string $schemaTypeScope = 'https://schema.org/Oncologic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that deals with benign and malignant tumors, including the study of their development, diagnosis, treatment and prevention.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that deals with benign and malignant tumors, including the study of their development, diagnosis, treatment and prevention.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MobilePhoneStore extends MetaJsonLd implements MobilePhoneStoreInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MobilePhoneStore';
+	public static string $schemaTypeName = 'MobilePhoneStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MobilePhoneStore';
+	public static string $schemaTypeScope = 'https://schema.org/MobilePhoneStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A store that sells mobile phones and related accessories.';
+	public static string $schemaTypeDescription = 'A store that sells mobile phones and related accessories.';
 
 
 	/**

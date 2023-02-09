@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class ResearchOrganization extends MetaJsonLd implements ResearchOrganizationInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ResearchOrganization';
+	public static string $schemaTypeName = 'ResearchOrganization';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ResearchOrganization';
+	public static string $schemaTypeScope = 'https://schema.org/ResearchOrganization';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Organization';
+	public static string $schemaTypeExtends = 'Organization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A Research Organization (e.g. scientific institute, research company).';
+	public static string $schemaTypeDescription = 'A Research Organization (e.g. scientific institute, research company).';
 
 
 	/**

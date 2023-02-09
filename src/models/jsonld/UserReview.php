@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class UserReview extends MetaJsonLd implements UserReviewInterface, ReviewInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UserReview';
+	public static string $schemaTypeName = 'UserReview';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UserReview';
+	public static string $schemaTypeScope = 'https://schema.org/UserReview';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Review';
+	public static string $schemaTypeExtends = 'Review';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A review created by an end-user (e.g. consumer, purchaser, attendee etc.), in contrast with [[CriticReview]].';
+	public static string $schemaTypeDescription = 'A review created by an end-user (e.g. consumer, purchaser, attendee etc.), in contrast with [[CriticReview]].';
 
 
 	/**

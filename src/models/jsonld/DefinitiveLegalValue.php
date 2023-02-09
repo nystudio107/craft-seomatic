@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class DefinitiveLegalValue extends MetaJsonLd implements DefinitiveLegalValueInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DefinitiveLegalValue';
+	public static string $schemaTypeName = 'DefinitiveLegalValue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DefinitiveLegalValue';
+	public static string $schemaTypeScope = 'https://schema.org/DefinitiveLegalValue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LegalValueLevel';
+	public static string $schemaTypeExtends = 'LegalValueLevel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = "Indicates a document for which the text is conclusively what the law says and is legally binding. (E.g. the digitally signed version of an Official Journal.)\n  Something \"Definitive\" is considered to be also [[AuthoritativeLegalValue]].";
+	public static string $schemaTypeDescription = "Indicates a document for which the text is conclusively what the law says and is legally binding. (E.g. the digitally signed version of an Official Journal.)\n  Something \"Definitive\" is considered to be also [[AuthoritativeLegalValue]].";
 
 
 	/**

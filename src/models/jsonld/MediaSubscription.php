@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MediaSubscription extends MetaJsonLd implements MediaSubscriptionInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MediaSubscription';
+	public static string $schemaTypeName = 'MediaSubscription';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MediaSubscription';
+	public static string $schemaTypeScope = 'https://schema.org/MediaSubscription';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A subscription which allows a user to access media including audio, video, books, etc.';
+	public static string $schemaTypeDescription = 'A subscription which allows a user to access media including audio, video, books, etc.';
 
 
 	/**

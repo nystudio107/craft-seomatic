@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MusicReleaseFormatType extends MetaJsonLd implements MusicReleaseFormatTyp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MusicReleaseFormatType';
+	public static string $schemaTypeName = 'MusicReleaseFormatType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MusicReleaseFormatType';
+	public static string $schemaTypeScope = 'https://schema.org/MusicReleaseFormatType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Format of this release (the type of recording media used, i.e. compact disc, digital media, LP, etc.).';
+	public static string $schemaTypeDescription = 'Format of this release (the type of recording media used, i.e. compact disc, digital media, LP, etc.).';
 
 
 	/**

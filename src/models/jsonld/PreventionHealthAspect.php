@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PreventionHealthAspect extends MetaJsonLd implements PreventionHealthAspec
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PreventionHealthAspect';
+	public static string $schemaTypeName = 'PreventionHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PreventionHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/PreventionHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Information about actions or measures that can be taken to avoid getting the topic or reaching a critical situation related to the topic.';
+	public static string $schemaTypeDescription = 'Information about actions or measures that can be taken to avoid getting the topic or reaching a critical situation related to the topic.';
 
 
 	/**

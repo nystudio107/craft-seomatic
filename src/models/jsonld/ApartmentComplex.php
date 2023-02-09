@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ApartmentComplex extends MetaJsonLd implements ApartmentComplexInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ApartmentComplex';
+	public static string $schemaTypeName = 'ApartmentComplex';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ApartmentComplex';
+	public static string $schemaTypeScope = 'https://schema.org/ApartmentComplex';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Residence';
+	public static string $schemaTypeExtends = 'Residence';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Residence type: Apartment complex.';
+	public static string $schemaTypeDescription = 'Residence type: Apartment complex.';
 
 
 	/**

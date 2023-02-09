@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class VideoGame extends MetaJsonLd implements VideoGameInterface, SoftwareApplic
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VideoGame';
+	public static string $schemaTypeName = 'VideoGame';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VideoGame';
+	public static string $schemaTypeScope = 'https://schema.org/VideoGame';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SoftwareApplication';
+	public static string $schemaTypeExtends = 'SoftwareApplication';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device.';
+	public static string $schemaTypeDescription = 'A video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device.';
 
 
 	/**

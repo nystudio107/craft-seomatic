@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Rheumatologic extends MetaJsonLd implements RheumatologicInterface, Medica
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Rheumatologic';
+	public static string $schemaTypeName = 'Rheumatologic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Rheumatologic';
+	public static string $schemaTypeScope = 'https://schema.org/Rheumatologic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that deals with the study and treatment of rheumatic, autoimmune or joint diseases.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that deals with the study and treatment of rheumatic, autoimmune or joint diseases.';
 
 
 	/**

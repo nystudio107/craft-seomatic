@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class BackOrder extends MetaJsonLd implements BackOrderInterface, ItemAvailabili
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BackOrder';
+	public static string $schemaTypeName = 'BackOrder';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BackOrder';
+	public static string $schemaTypeScope = 'https://schema.org/BackOrder';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemAvailability';
+	public static string $schemaTypeExtends = 'ItemAvailability';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item is available on back order.';
+	public static string $schemaTypeDescription = 'Indicates that the item is available on back order.';
 
 
 	/**

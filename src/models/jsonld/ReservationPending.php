@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class ReservationPending extends MetaJsonLd implements ReservationPendingInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReservationPending';
+	public static string $schemaTypeName = 'ReservationPending';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReservationPending';
+	public static string $schemaTypeScope = 'https://schema.org/ReservationPending';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReservationStatusType';
+	public static string $schemaTypeExtends = 'ReservationStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The status of a reservation when a request has been sent, but not confirmed.';
+	public static string $schemaTypeDescription = 'The status of a reservation when a request has been sent, but not confirmed.';
 
 
 	/**

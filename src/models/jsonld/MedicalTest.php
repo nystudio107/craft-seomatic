@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class MedicalTest extends MetaJsonLd implements MedicalTestInterface, MedicalEnt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalTest';
+	public static string $schemaTypeName = 'MedicalTest';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalTest';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalTest';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any medical test, typically performed for diagnostic purposes.';
+	public static string $schemaTypeDescription = 'Any medical test, typically performed for diagnostic purposes.';
 
 
 	/**

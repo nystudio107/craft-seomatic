@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PriceTypeEnumeration extends MetaJsonLd implements PriceTypeEnumerationInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PriceTypeEnumeration';
+	public static string $schemaTypeName = 'PriceTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PriceTypeEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/PriceTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerates different price types, for example list price, invoice price, and sale price.';
+	public static string $schemaTypeDescription = 'Enumerates different price types, for example list price, invoice price, and sale price.';
 
 
 	/**

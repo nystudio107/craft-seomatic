@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Chapter extends MetaJsonLd implements ChapterInterface, CreativeWorkInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Chapter';
+	public static string $schemaTypeName = 'Chapter';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Chapter';
+	public static string $schemaTypeScope = 'https://schema.org/Chapter';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'One of the sections into which a book is divided. A chapter usually has a section number or a name.';
+	public static string $schemaTypeDescription = 'One of the sections into which a book is divided. A chapter usually has a section number or a name.';
 
 
 	/**

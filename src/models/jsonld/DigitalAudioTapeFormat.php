@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DigitalAudioTapeFormat extends MetaJsonLd implements DigitalAudioTapeForma
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DigitalAudioTapeFormat';
+	public static string $schemaTypeName = 'DigitalAudioTapeFormat';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DigitalAudioTapeFormat';
+	public static string $schemaTypeScope = 'https://schema.org/DigitalAudioTapeFormat';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicReleaseFormatType';
+	public static string $schemaTypeExtends = 'MusicReleaseFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'DigitalAudioTapeFormat.';
+	public static string $schemaTypeDescription = 'DigitalAudioTapeFormat.';
 
 
 	/**

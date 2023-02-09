@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DanceGroup extends MetaJsonLd implements DanceGroupInterface, PerformingGr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DanceGroup';
+	public static string $schemaTypeName = 'DanceGroup';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DanceGroup';
+	public static string $schemaTypeScope = 'https://schema.org/DanceGroup';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PerformingGroup';
+	public static string $schemaTypeExtends = 'PerformingGroup';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A dance group—for example, the Alvin Ailey Dance Theater or Riverdance.';
+	public static string $schemaTypeDescription = 'A dance group—for example, the Alvin Ailey Dance Theater or Riverdance.';
 
 
 	/**

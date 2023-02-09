@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class WantAction extends MetaJsonLd implements WantActionInterface, ReactActionI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WantAction';
+	public static string $schemaTypeName = 'WantAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WantAction';
+	public static string $schemaTypeScope = 'https://schema.org/WantAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReactAction';
+	public static string $schemaTypeExtends = 'ReactAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of expressing a desire about the object. An agent wants an object.';
+	public static string $schemaTypeDescription = 'The act of expressing a desire about the object. An agent wants an object.';
 
 
 	/**

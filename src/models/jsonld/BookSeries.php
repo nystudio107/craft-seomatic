@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BookSeries extends MetaJsonLd implements BookSeriesInterface, CreativeWork
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BookSeries';
+	public static string $schemaTypeName = 'BookSeries';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BookSeries';
+	public static string $schemaTypeScope = 'https://schema.org/BookSeries';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWorkSeries';
+	public static string $schemaTypeExtends = 'CreativeWorkSeries';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A series of books. Included books can be indicated with the hasPart property.';
+	public static string $schemaTypeDescription = 'A series of books. Included books can be indicated with the hasPart property.';
 
 
 	/**

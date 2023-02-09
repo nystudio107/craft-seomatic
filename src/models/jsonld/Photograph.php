@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Photograph extends MetaJsonLd implements PhotographInterface, CreativeWork
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Photograph';
+	public static string $schemaTypeName = 'Photograph';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Photograph';
+	public static string $schemaTypeScope = 'https://schema.org/Photograph';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A photograph.';
+	public static string $schemaTypeDescription = 'A photograph.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class RandomizedTrial extends MetaJsonLd implements RandomizedTrialInterface, Me
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RandomizedTrial';
+	public static string $schemaTypeName = 'RandomizedTrial';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RandomizedTrial';
+	public static string $schemaTypeScope = 'https://schema.org/RandomizedTrial';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTrialDesign';
+	public static string $schemaTypeExtends = 'MedicalTrialDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A randomized trial design.';
+	public static string $schemaTypeDescription = 'A randomized trial design.';
 
 
 	/**

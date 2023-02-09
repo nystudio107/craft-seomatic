@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class AutoRepair extends MetaJsonLd implements AutoRepairInterface, AutomotiveBu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AutoRepair';
+	public static string $schemaTypeName = 'AutoRepair';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AutoRepair';
+	public static string $schemaTypeScope = 'https://schema.org/AutoRepair';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AutomotiveBusiness';
+	public static string $schemaTypeExtends = 'AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Car repair business.';
+	public static string $schemaTypeDescription = 'Car repair business.';
 
 
 	/**

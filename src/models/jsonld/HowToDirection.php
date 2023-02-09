@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class HowToDirection extends MetaJsonLd implements HowToDirectionInterface, Crea
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HowToDirection';
+	public static string $schemaTypeName = 'HowToDirection';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HowToDirection';
+	public static string $schemaTypeScope = 'https://schema.org/HowToDirection';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A direction indicating a single action to do in the instructions for how to achieve a result.';
+	public static string $schemaTypeDescription = 'A direction indicating a single action to do in the instructions for how to achieve a result.';
 
 
 	/**

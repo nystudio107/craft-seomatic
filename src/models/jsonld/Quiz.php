@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Quiz extends MetaJsonLd implements QuizInterface, LearningResourceInterfac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Quiz';
+	public static string $schemaTypeName = 'Quiz';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Quiz';
+	public static string $schemaTypeScope = 'https://schema.org/Quiz';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LearningResource';
+	public static string $schemaTypeExtends = 'LearningResource';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Quiz: A test of knowledge, skills and abilities.';
+	public static string $schemaTypeDescription = 'Quiz: A test of knowledge, skills and abilities.';
 
 
 	/**

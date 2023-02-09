@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BodyMeasurementArm extends MetaJsonLd implements BodyMeasurementArmInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementArm';
+	public static string $schemaTypeName = 'BodyMeasurementArm';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementArm';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementArm';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Arm length (measured between arms/shoulder line intersection and the prominent wrist bone). Used, for example, to fit shirts.';
+	public static string $schemaTypeDescription = 'Arm length (measured between arms/shoulder line intersection and the prominent wrist bone). Used, for example, to fit shirts.';
 
 
 	/**

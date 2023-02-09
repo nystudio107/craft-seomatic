@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Homeopathic extends MetaJsonLd implements HomeopathicInterface, MedicineSy
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Homeopathic';
+	public static string $schemaTypeName = 'Homeopathic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Homeopathic';
+	public static string $schemaTypeScope = 'https://schema.org/Homeopathic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicineSystem';
+	public static string $schemaTypeExtends = 'MedicineSystem';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A system of medicine based on the principle that a disease can be cured by a substance that produces similar symptoms in healthy people.';
+	public static string $schemaTypeDescription = 'A system of medicine based on the principle that a disease can be cured by a substance that produces similar symptoms in healthy people.';
 
 
 	/**

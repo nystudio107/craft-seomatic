@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MusicVenue extends MetaJsonLd implements MusicVenueInterface, CivicStructu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MusicVenue';
+	public static string $schemaTypeName = 'MusicVenue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MusicVenue';
+	public static string $schemaTypeScope = 'https://schema.org/MusicVenue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A music venue.';
+	public static string $schemaTypeDescription = 'A music venue.';
 
 
 	/**

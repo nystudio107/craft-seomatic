@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ReviewAction extends MetaJsonLd implements ReviewActionInterface, AssessAc
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReviewAction';
+	public static string $schemaTypeName = 'ReviewAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReviewAction';
+	public static string $schemaTypeScope = 'https://schema.org/ReviewAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AssessAction';
+	public static string $schemaTypeExtends = 'AssessAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of producing a balanced opinion about the object for an audience. An agent reviews an object with participants resulting in a review.';
+	public static string $schemaTypeDescription = 'The act of producing a balanced opinion about the object for an audience. An agent reviews an object with participants resulting in a review.';
 
 
 	/**

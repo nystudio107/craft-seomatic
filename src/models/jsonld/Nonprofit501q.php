@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Nonprofit501q extends MetaJsonLd implements Nonprofit501qInterface, USNonp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Nonprofit501q';
+	public static string $schemaTypeName = 'Nonprofit501q';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Nonprofit501q';
+	public static string $schemaTypeScope = 'https://schema.org/Nonprofit501q';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'USNonprofitType';
+	public static string $schemaTypeExtends = 'USNonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Nonprofit501q: Non-profit type referring to Credit Counseling Organizations.';
+	public static string $schemaTypeDescription = 'Nonprofit501q: Non-profit type referring to Credit Counseling Organizations.';
 
 
 	/**

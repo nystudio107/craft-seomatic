@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Table extends MetaJsonLd implements TableInterface, WebPageElementInterfac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Table';
+	public static string $schemaTypeName = 'Table';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Table';
+	public static string $schemaTypeScope = 'https://schema.org/Table';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPageElement';
+	public static string $schemaTypeExtends = 'WebPageElement';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A table on a Web page.';
+	public static string $schemaTypeDescription = 'A table on a Web page.';
 
 
 	/**

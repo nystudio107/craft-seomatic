@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalObservationalStudyDesign extends MetaJsonLd implements MedicalObser
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalObservationalStudyDesign';
+	public static string $schemaTypeName = 'MedicalObservationalStudyDesign';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalObservationalStudyDesign';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalObservationalStudyDesign';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Design models for observational medical studies. Enumerated type.';
+	public static string $schemaTypeDescription = 'Design models for observational medical studies. Enumerated type.';
 
 
 	/**

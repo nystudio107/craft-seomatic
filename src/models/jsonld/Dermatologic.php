@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Dermatologic extends MetaJsonLd implements DermatologicInterface, MedicalS
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Dermatologic';
+	public static string $schemaTypeName = 'Dermatologic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Dermatologic';
+	public static string $schemaTypeScope = 'https://schema.org/Dermatologic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Something relating to or practicing dermatology.';
+	public static string $schemaTypeDescription = 'Something relating to or practicing dermatology.';
 
 
 	/**

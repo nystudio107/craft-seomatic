@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class State extends MetaJsonLd implements StateInterface, AdministrativeAreaInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'State';
+	public static string $schemaTypeName = 'State';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/State';
+	public static string $schemaTypeScope = 'https://schema.org/State';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdministrativeArea';
+	public static string $schemaTypeExtends = 'AdministrativeArea';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A state or province of a country.';
+	public static string $schemaTypeDescription = 'A state or province of a country.';
 
 
 	/**

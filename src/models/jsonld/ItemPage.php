@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ItemPage extends MetaJsonLd implements ItemPageInterface, WebPageInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ItemPage';
+	public static string $schemaTypeName = 'ItemPage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ItemPage';
+	public static string $schemaTypeScope = 'https://schema.org/ItemPage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPage';
+	public static string $schemaTypeExtends = 'WebPage';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A page devoted to a single item, such as a particular product or hotel.';
+	public static string $schemaTypeDescription = 'A page devoted to a single item, such as a particular product or hotel.';
 
 
 	/**

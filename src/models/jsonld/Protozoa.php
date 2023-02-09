@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Protozoa extends MetaJsonLd implements ProtozoaInterface, InfectiousAgentC
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Protozoa';
+	public static string $schemaTypeName = 'Protozoa';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Protozoa';
+	public static string $schemaTypeScope = 'https://schema.org/Protozoa';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InfectiousAgentClass';
+	public static string $schemaTypeExtends = 'InfectiousAgentClass';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Single-celled organism that causes an infection.';
+	public static string $schemaTypeDescription = 'Single-celled organism that causes an infection.';
 
 
 	/**

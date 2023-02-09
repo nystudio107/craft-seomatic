@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BankAccount extends MetaJsonLd implements BankAccountInterface, FinancialP
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BankAccount';
+	public static string $schemaTypeName = 'BankAccount';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BankAccount';
+	public static string $schemaTypeScope = 'https://schema.org/BankAccount';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FinancialProduct';
+	public static string $schemaTypeExtends = 'FinancialProduct';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.';
+	public static string $schemaTypeDescription = 'A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.';
 
 
 	/**

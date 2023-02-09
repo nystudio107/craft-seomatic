@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class LeisureTimeActivity extends MetaJsonLd implements LeisureTimeActivityInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LeisureTimeActivity';
+	public static string $schemaTypeName = 'LeisureTimeActivity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LeisureTimeActivity';
+	public static string $schemaTypeScope = 'https://schema.org/LeisureTimeActivity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalActivityCategory';
+	public static string $schemaTypeExtends = 'PhysicalActivityCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any physical activity engaged in for recreational purposes. Examples may include ballroom dancing, roller skating, canoeing, fishing, etc.';
+	public static string $schemaTypeDescription = 'Any physical activity engaged in for recreational purposes. Examples may include ballroom dancing, roller skating, canoeing, fishing, etc.';
 
 
 	/**

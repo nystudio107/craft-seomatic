@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class QuantitativeValueDistribution extends MetaJsonLd implements QuantitativeVa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'QuantitativeValueDistribution';
+	public static string $schemaTypeName = 'QuantitativeValueDistribution';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/QuantitativeValueDistribution';
+	public static string $schemaTypeScope = 'https://schema.org/QuantitativeValueDistribution';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A statistical distribution of values.';
+	public static string $schemaTypeDescription = 'A statistical distribution of values.';
 
 
 	/**

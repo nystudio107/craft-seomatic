@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class PawnShop extends MetaJsonLd implements PawnShopInterface, StoreInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PawnShop';
+	public static string $schemaTypeName = 'PawnShop';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PawnShop';
+	public static string $schemaTypeScope = 'https://schema.org/PawnShop';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A shop that will buy, or lend money against the security of, personal possessions.';
+	public static string $schemaTypeDescription = 'A shop that will buy, or lend money against the security of, personal possessions.';
 
 
 	/**

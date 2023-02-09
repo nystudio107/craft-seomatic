@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DepartAction extends MetaJsonLd implements DepartActionInterface, MoveActi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DepartAction';
+	public static string $schemaTypeName = 'DepartAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DepartAction';
+	public static string $schemaTypeScope = 'https://schema.org/DepartAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MoveAction';
+	public static string $schemaTypeExtends = 'MoveAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of  departing from a place. An agent departs from a fromLocation for a destination, optionally with participants.';
+	public static string $schemaTypeDescription = 'The act of  departing from a place. An agent departs from a fromLocation for a destination, optionally with participants.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Mountain extends MetaJsonLd implements MountainInterface, LandformInterfac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Mountain';
+	public static string $schemaTypeName = 'Mountain';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Mountain';
+	public static string $schemaTypeScope = 'https://schema.org/Mountain';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Landform';
+	public static string $schemaTypeExtends = 'Landform';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A mountain, like Mount Whitney or Mount Everest.';
+	public static string $schemaTypeDescription = 'A mountain, like Mount Whitney or Mount Everest.';
 
 
 	/**

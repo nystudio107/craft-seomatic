@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class WesternConventional extends MetaJsonLd implements WesternConventionalInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WesternConventional';
+	public static string $schemaTypeName = 'WesternConventional';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WesternConventional';
+	public static string $schemaTypeScope = 'https://schema.org/WesternConventional';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicineSystem';
+	public static string $schemaTypeExtends = 'MedicineSystem';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The conventional Western system of medicine, that aims to apply the best available evidence gained from the scientific method to clinical decision making. Also known as conventional or Western medicine.';
+	public static string $schemaTypeDescription = 'The conventional Western system of medicine, that aims to apply the best available evidence gained from the scientific method to clinical decision making. Also known as conventional or Western medicine.';
 
 
 	/**

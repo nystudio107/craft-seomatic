@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class CheckAction extends MetaJsonLd implements CheckActionInterface, FindAction
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CheckAction';
+	public static string $schemaTypeName = 'CheckAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CheckAction';
+	public static string $schemaTypeScope = 'https://schema.org/CheckAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FindAction';
+	public static string $schemaTypeExtends = 'FindAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An agent inspects, determines, investigates, inquires, or examines an object\'s accuracy, quality, condition, or state.';
+	public static string $schemaTypeDescription = 'An agent inspects, determines, investigates, inquires, or examines an object\'s accuracy, quality, condition, or state.';
 
 
 	/**

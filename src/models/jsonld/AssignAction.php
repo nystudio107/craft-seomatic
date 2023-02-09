@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class AssignAction extends MetaJsonLd implements AssignActionInterface, Allocate
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AssignAction';
+	public static string $schemaTypeName = 'AssignAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AssignAction';
+	public static string $schemaTypeScope = 'https://schema.org/AssignAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AllocateAction';
+	public static string $schemaTypeExtends = 'AllocateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of allocating an action/event/task to some destination (someone or something).';
+	public static string $schemaTypeDescription = 'The act of allocating an action/event/task to some destination (someone or something).';
 
 
 	/**

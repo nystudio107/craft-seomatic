@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class FoodEstablishmentReservation extends MetaJsonLd implements FoodEstablishme
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FoodEstablishmentReservation';
+	public static string $schemaTypeName = 'FoodEstablishmentReservation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FoodEstablishmentReservation';
+	public static string $schemaTypeScope = 'https://schema.org/FoodEstablishmentReservation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Reservation';
+	public static string $schemaTypeExtends = 'Reservation';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A reservation to dine at a food-related business.\n\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.';
+	public static string $schemaTypeDescription = 'A reservation to dine at a food-related business.\n\nNote: This type is for information about actual reservations, e.g. in confirmation emails or HTML pages with individual confirmations of reservations.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class RecommendedDoseSchedule extends MetaJsonLd implements RecommendedDoseSched
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RecommendedDoseSchedule';
+	public static string $schemaTypeName = 'RecommendedDoseSchedule';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RecommendedDoseSchedule';
+	public static string $schemaTypeScope = 'https://schema.org/RecommendedDoseSchedule';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DoseSchedule';
+	public static string $schemaTypeExtends = 'DoseSchedule';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A recommended dosing schedule for a drug or supplement as prescribed or recommended by an authority or by the drug/supplement\'s manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity.';
+	public static string $schemaTypeDescription = 'A recommended dosing schedule for a drug or supplement as prescribed or recommended by an authority or by the drug/supplement\'s manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity.';
 
 
 	/**

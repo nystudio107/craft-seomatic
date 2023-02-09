@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DrinkAction extends MetaJsonLd implements DrinkActionInterface, ConsumeAct
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrinkAction';
+	public static string $schemaTypeName = 'DrinkAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrinkAction';
+	public static string $schemaTypeScope = 'https://schema.org/DrinkAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ConsumeAction';
+	public static string $schemaTypeExtends = 'ConsumeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of swallowing liquids.';
+	public static string $schemaTypeDescription = 'The act of swallowing liquids.';
 
 
 	/**

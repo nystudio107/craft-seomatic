@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class LaboratoryScience extends MetaJsonLd implements LaboratoryScienceInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LaboratoryScience';
+	public static string $schemaTypeName = 'LaboratoryScience';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LaboratoryScience';
+	public static string $schemaTypeScope = 'https://schema.org/LaboratoryScience';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A medical science pertaining to chemical, hematological, immunologic, microscopic, or bacteriological diagnostic analyses or research.';
+	public static string $schemaTypeDescription = 'A medical science pertaining to chemical, hematological, immunologic, microscopic, or bacteriological diagnostic analyses or research.';
 
 
 	/**

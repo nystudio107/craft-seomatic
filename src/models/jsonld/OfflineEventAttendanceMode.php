@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class OfflineEventAttendanceMode extends MetaJsonLd implements OfflineEventAtten
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OfflineEventAttendanceMode';
+	public static string $schemaTypeName = 'OfflineEventAttendanceMode';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OfflineEventAttendanceMode';
+	public static string $schemaTypeScope = 'https://schema.org/OfflineEventAttendanceMode';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EventAttendanceModeEnumeration';
+	public static string $schemaTypeExtends = 'EventAttendanceModeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'OfflineEventAttendanceMode - an event that is primarily conducted offline. ';
+	public static string $schemaTypeDescription = 'OfflineEventAttendanceMode - an event that is primarily conducted offline. ';
 
 
 	/**

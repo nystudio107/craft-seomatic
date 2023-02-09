@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class HealthInsurancePlan extends MetaJsonLd implements HealthInsurancePlanInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HealthInsurancePlan';
+	public static string $schemaTypeName = 'HealthInsurancePlan';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HealthInsurancePlan';
+	public static string $schemaTypeScope = 'https://schema.org/HealthInsurancePlan';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A US-style health insurance plan, including PPOs, EPOs, and HMOs. ';
+	public static string $schemaTypeDescription = 'A US-style health insurance plan, including PPOs, EPOs, and HMOs. ';
 
 
 	/**

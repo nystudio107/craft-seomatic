@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ArtGallery extends MetaJsonLd implements ArtGalleryInterface, Entertainmen
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ArtGallery';
+	public static string $schemaTypeName = 'ArtGallery';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ArtGallery';
+	public static string $schemaTypeScope = 'https://schema.org/ArtGallery';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EntertainmentBusiness';
+	public static string $schemaTypeExtends = 'EntertainmentBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An art gallery.';
+	public static string $schemaTypeDescription = 'An art gallery.';
 
 
 	/**

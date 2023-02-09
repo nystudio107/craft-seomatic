@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MonetaryAmountDistribution extends MetaJsonLd implements MonetaryAmountDis
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MonetaryAmountDistribution';
+	public static string $schemaTypeName = 'MonetaryAmountDistribution';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MonetaryAmountDistribution';
+	public static string $schemaTypeScope = 'https://schema.org/MonetaryAmountDistribution';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'QuantitativeValueDistribution';
+	public static string $schemaTypeExtends = 'QuantitativeValueDistribution';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A statistical distribution of monetary amounts.';
+	public static string $schemaTypeDescription = 'A statistical distribution of monetary amounts.';
 
 
 	/**

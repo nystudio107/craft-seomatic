@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ClaimReview extends MetaJsonLd implements ClaimReviewInterface, ReviewInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ClaimReview';
+	public static string $schemaTypeName = 'ClaimReview';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ClaimReview';
+	public static string $schemaTypeScope = 'https://schema.org/ClaimReview';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Review';
+	public static string $schemaTypeExtends = 'Review';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A fact-checking review of claims made (or reported) in some creative work (referenced via itemReviewed).';
+	public static string $schemaTypeDescription = 'A fact-checking review of claims made (or reported) in some creative work (referenced via itemReviewed).';
 
 
 	/**

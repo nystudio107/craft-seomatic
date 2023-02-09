@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WeaponConsideration extends MetaJsonLd implements WeaponConsiderationInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WeaponConsideration';
+	public static string $schemaTypeName = 'WeaponConsideration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WeaponConsideration';
+	public static string $schemaTypeScope = 'https://schema.org/WeaponConsideration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdultOrientedEnumeration';
+	public static string $schemaTypeExtends = 'AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The item is intended to induce bodily harm, for example guns, mace, combat knives, brass knuckles, nail or other bombs, and spears.';
+	public static string $schemaTypeDescription = 'The item is intended to induce bodily harm, for example guns, mace, combat knives, brass knuckles, nail or other bombs, and spears.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class TrainTrip extends MetaJsonLd implements TrainTripInterface, TripInterface,
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TrainTrip';
+	public static string $schemaTypeName = 'TrainTrip';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TrainTrip';
+	public static string $schemaTypeScope = 'https://schema.org/TrainTrip';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Trip';
+	public static string $schemaTypeExtends = 'Trip';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A trip on a commercial train line.';
+	public static string $schemaTypeDescription = 'A trip on a commercial train line.';
 
 
 	/**

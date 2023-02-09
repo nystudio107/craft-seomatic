@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DataFeed extends MetaJsonLd implements DataFeedInterface, DatasetInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DataFeed';
+	public static string $schemaTypeName = 'DataFeed';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DataFeed';
+	public static string $schemaTypeScope = 'https://schema.org/DataFeed';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Dataset';
+	public static string $schemaTypeExtends = 'Dataset';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A single feed providing structured information about one or more entities or topics.';
+	public static string $schemaTypeDescription = 'A single feed providing structured information about one or more entities or topics.';
 
 
 	/**

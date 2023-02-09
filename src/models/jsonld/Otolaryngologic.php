@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -41,28 +41,28 @@ class Otolaryngologic extends MetaJsonLd implements OtolaryngologicInterface, Me
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Otolaryngologic';
+	public static string $schemaTypeName = 'Otolaryngologic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Otolaryngologic';
+	public static string $schemaTypeScope = 'https://schema.org/Otolaryngologic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that is concerned with the ear, nose and throat and their respective disease states.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that is concerned with the ear, nose and throat and their respective disease states.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class Person extends MetaJsonLd implements PersonInterface, ThingInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Person';
+	public static string $schemaTypeName = 'Person';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Person';
+	public static string $schemaTypeScope = 'https://schema.org/Person';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A person (alive, dead, undead, or fictional).';
+	public static string $schemaTypeDescription = 'A person (alive, dead, undead, or fictional).';
 
 
 	/**

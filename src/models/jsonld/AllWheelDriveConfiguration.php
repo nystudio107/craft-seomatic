@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class AllWheelDriveConfiguration extends MetaJsonLd implements AllWheelDriveConf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AllWheelDriveConfiguration';
+	public static string $schemaTypeName = 'AllWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AllWheelDriveConfiguration';
+	public static string $schemaTypeScope = 'https://schema.org/AllWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DriveWheelConfigurationValue';
+	public static string $schemaTypeExtends = 'DriveWheelConfigurationValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'All-wheel Drive is a transmission layout where the engine drives all four wheels.';
+	public static string $schemaTypeDescription = 'All-wheel Drive is a transmission layout where the engine drives all four wheels.';
 
 
 	/**

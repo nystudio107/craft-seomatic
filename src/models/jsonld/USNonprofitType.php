@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class USNonprofitType extends MetaJsonLd implements USNonprofitTypeInterface, No
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'USNonprofitType';
+	public static string $schemaTypeName = 'USNonprofitType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/USNonprofitType';
+	public static string $schemaTypeScope = 'https://schema.org/USNonprofitType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'NonprofitType';
+	public static string $schemaTypeExtends = 'NonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'USNonprofitType: Non-profit organization type originating from the United States.';
+	public static string $schemaTypeDescription = 'USNonprofitType: Non-profit organization type originating from the United States.';
 
 
 	/**

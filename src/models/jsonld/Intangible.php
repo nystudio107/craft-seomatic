@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Intangible extends MetaJsonLd implements IntangibleInterface, ThingInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Intangible';
+	public static string $schemaTypeName = 'Intangible';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Intangible';
+	public static string $schemaTypeScope = 'https://schema.org/Intangible';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A utility class that serves as the umbrella for a number of \'intangible\' things such as quantities, structured values, etc.';
+	public static string $schemaTypeDescription = 'A utility class that serves as the umbrella for a number of \'intangible\' things such as quantities, structured values, etc.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SportsActivityLocation extends MetaJsonLd implements SportsActivityLocatio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SportsActivityLocation';
+	public static string $schemaTypeName = 'SportsActivityLocation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SportsActivityLocation';
+	public static string $schemaTypeScope = 'https://schema.org/SportsActivityLocation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A sports location, such as a playing field.';
+	public static string $schemaTypeDescription = 'A sports location, such as a playing field.';
 
 
 	/**

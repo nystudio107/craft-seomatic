@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Hardcover extends MetaJsonLd implements HardcoverInterface, BookFormatType
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Hardcover';
+	public static string $schemaTypeName = 'Hardcover';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Hardcover';
+	public static string $schemaTypeScope = 'https://schema.org/Hardcover';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BookFormatType';
+	public static string $schemaTypeExtends = 'BookFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Book format: Hardcover.';
+	public static string $schemaTypeDescription = 'Book format: Hardcover.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PodcastSeason extends MetaJsonLd implements PodcastSeasonInterface, Creati
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PodcastSeason';
+	public static string $schemaTypeName = 'PodcastSeason';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PodcastSeason';
+	public static string $schemaTypeScope = 'https://schema.org/PodcastSeason';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWorkSeason';
+	public static string $schemaTypeExtends = 'CreativeWorkSeason';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A single season of a podcast. Many podcasts do not break down into separate seasons. In that case, PodcastSeries should be used.';
+	public static string $schemaTypeDescription = 'A single season of a podcast. Many podcasts do not break down into separate seasons. In that case, PodcastSeries should be used.';
 
 
 	/**

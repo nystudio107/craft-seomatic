@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Legislation extends MetaJsonLd implements LegislationInterface, CreativeWo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Legislation';
+	public static string $schemaTypeName = 'Legislation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Legislation';
+	public static string $schemaTypeScope = 'https://schema.org/Legislation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A legal document such as an act, decree, bill, etc. (enforceable or not) or a component of a legal act (like an article).';
+	public static string $schemaTypeDescription = 'A legal document such as an act, decree, bill, etc. (enforceable or not) or a component of a legal act (like an article).';
 
 
 	/**

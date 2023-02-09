@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PaymentChargeSpecification extends MetaJsonLd implements PaymentChargeSpec
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PaymentChargeSpecification';
+	public static string $schemaTypeName = 'PaymentChargeSpecification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PaymentChargeSpecification';
+	public static string $schemaTypeScope = 'https://schema.org/PaymentChargeSpecification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceSpecification';
+	public static string $schemaTypeExtends = 'PriceSpecification';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The costs of settling the payment using a particular payment method.';
+	public static string $schemaTypeDescription = 'The costs of settling the payment using a particular payment method.';
 
 
 	/**

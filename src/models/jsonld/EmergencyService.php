@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EmergencyService extends MetaJsonLd implements EmergencyServiceInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EmergencyService';
+	public static string $schemaTypeName = 'EmergencyService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EmergencyService';
+	public static string $schemaTypeScope = 'https://schema.org/EmergencyService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An emergency service, such as a fire station or ER.';
+	public static string $schemaTypeDescription = 'An emergency service, such as a fire station or ER.';
 
 
 	/**

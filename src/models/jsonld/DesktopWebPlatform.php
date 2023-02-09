@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DesktopWebPlatform extends MetaJsonLd implements DesktopWebPlatformInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DesktopWebPlatform';
+	public static string $schemaTypeName = 'DesktopWebPlatform';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DesktopWebPlatform';
+	public static string $schemaTypeScope = 'https://schema.org/DesktopWebPlatform';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DigitalPlatformEnumeration';
+	public static string $schemaTypeExtends = 'DigitalPlatformEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents the broad notion of \'desktop\' browsers as a Web Platform.';
+	public static string $schemaTypeDescription = 'Represents the broad notion of \'desktop\' browsers as a Web Platform.';
 
 
 	/**

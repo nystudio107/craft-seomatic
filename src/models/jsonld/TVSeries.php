@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class TVSeries extends MetaJsonLd implements TVSeriesInterface, CreativeWorkInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TVSeries';
+	public static string $schemaTypeName = 'TVSeries';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TVSeries';
+	public static string $schemaTypeScope = 'https://schema.org/TVSeries';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'CreativeWorkSeries dedicated to TV broadcast and associated online delivery.';
+	public static string $schemaTypeDescription = 'CreativeWorkSeries dedicated to TV broadcast and associated online delivery.';
 
 
 	/**

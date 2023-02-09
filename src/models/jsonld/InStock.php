@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class InStock extends MetaJsonLd implements InStockInterface, ItemAvailabilityIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InStock';
+	public static string $schemaTypeName = 'InStock';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InStock';
+	public static string $schemaTypeScope = 'https://schema.org/InStock';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemAvailability';
+	public static string $schemaTypeExtends = 'ItemAvailability';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item is in stock.';
+	public static string $schemaTypeDescription = 'Indicates that the item is in stock.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class LibrarySystem extends MetaJsonLd implements LibrarySystemInterface, Organi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LibrarySystem';
+	public static string $schemaTypeName = 'LibrarySystem';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LibrarySystem';
+	public static string $schemaTypeScope = 'https://schema.org/LibrarySystem';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Organization';
+	public static string $schemaTypeExtends = 'Organization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A [[LibrarySystem]] is a collaborative system amongst several libraries.';
+	public static string $schemaTypeDescription = 'A [[LibrarySystem]] is a collaborative system amongst several libraries.';
 
 
 	/**

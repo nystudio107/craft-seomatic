@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class LifestyleModification extends MetaJsonLd implements LifestyleModificationI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LifestyleModification';
+	public static string $schemaTypeName = 'LifestyleModification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LifestyleModification';
+	public static string $schemaTypeScope = 'https://schema.org/LifestyleModification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A process of care involving exercise, changes to diet, fitness routines, and other lifestyle changes aimed at improving a health condition.';
+	public static string $schemaTypeDescription = 'A process of care involving exercise, changes to diet, fitness routines, and other lifestyle changes aimed at improving a health condition.';
 
 
 	/**

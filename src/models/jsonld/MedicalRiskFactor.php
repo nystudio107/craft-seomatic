@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MedicalRiskFactor extends MetaJsonLd implements MedicalRiskFactorInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalRiskFactor';
+	public static string $schemaTypeName = 'MedicalRiskFactor';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalRiskFactor';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalRiskFactor';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A risk factor is anything that increases a person\'s likelihood of developing or contracting a disease, medical condition, or complication.';
+	public static string $schemaTypeDescription = 'A risk factor is anything that increases a person\'s likelihood of developing or contracting a disease, medical condition, or complication.';
 
 
 	/**

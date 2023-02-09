@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class HinduDiet extends MetaJsonLd implements HinduDietInterface, RestrictedDiet
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HinduDiet';
+	public static string $schemaTypeName = 'HinduDiet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HinduDiet';
+	public static string $schemaTypeScope = 'https://schema.org/HinduDiet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RestrictedDiet';
+	public static string $schemaTypeExtends = 'RestrictedDiet';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A diet conforming to Hindu dietary practices, in particular, beef-free.';
+	public static string $schemaTypeDescription = 'A diet conforming to Hindu dietary practices, in particular, beef-free.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Nerve extends MetaJsonLd implements NerveInterface, AnatomicalStructureInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Nerve';
+	public static string $schemaTypeName = 'Nerve';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Nerve';
+	public static string $schemaTypeScope = 'https://schema.org/Nerve';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AnatomicalStructure';
+	public static string $schemaTypeExtends = 'AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A common pathway for the electrochemical nerve impulses that are transmitted along each of the axons.';
+	public static string $schemaTypeDescription = 'A common pathway for the electrochemical nerve impulses that are transmitted along each of the axons.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ArriveAction extends MetaJsonLd implements ArriveActionInterface, MoveActi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ArriveAction';
+	public static string $schemaTypeName = 'ArriveAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ArriveAction';
+	public static string $schemaTypeScope = 'https://schema.org/ArriveAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MoveAction';
+	public static string $schemaTypeExtends = 'MoveAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of arriving at a place. An agent arrives at a destination from a fromLocation, optionally with participants.';
+	public static string $schemaTypeDescription = 'The act of arriving at a place. An agent arrives at a destination from a fromLocation, optionally with participants.';
 
 
 	/**

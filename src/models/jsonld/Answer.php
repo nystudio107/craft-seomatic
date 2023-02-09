@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Answer extends MetaJsonLd implements AnswerInterface, CommentInterface, Cr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Answer';
+	public static string $schemaTypeName = 'Answer';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Answer';
+	public static string $schemaTypeScope = 'https://schema.org/Answer';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Comment';
+	public static string $schemaTypeExtends = 'Comment';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An answer offered to a question; perhaps correct, perhaps opinionated or wrong.';
+	public static string $schemaTypeDescription = 'An answer offered to a question; perhaps correct, perhaps opinionated or wrong.';
 
 
 	/**

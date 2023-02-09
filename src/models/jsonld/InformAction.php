@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class InformAction extends MetaJsonLd implements InformActionInterface, Communic
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InformAction';
+	public static string $schemaTypeName = 'InformAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InformAction';
+	public static string $schemaTypeScope = 'https://schema.org/InformAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CommunicateAction';
+	public static string $schemaTypeExtends = 'CommunicateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of notifying someone of information pertinent to them, with no expectation of a response.';
+	public static string $schemaTypeDescription = 'The act of notifying someone of information pertinent to them, with no expectation of a response.';
 
 
 	/**

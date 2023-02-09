@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class HalalDiet extends MetaJsonLd implements HalalDietInterface, RestrictedDiet
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HalalDiet';
+	public static string $schemaTypeName = 'HalalDiet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HalalDiet';
+	public static string $schemaTypeScope = 'https://schema.org/HalalDiet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RestrictedDiet';
+	public static string $schemaTypeExtends = 'RestrictedDiet';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A diet conforming to Islamic dietary practices.';
+	public static string $schemaTypeDescription = 'A diet conforming to Islamic dietary practices.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class CarUsageType extends MetaJsonLd implements CarUsageTypeInterface, Enumerat
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CarUsageType';
+	public static string $schemaTypeName = 'CarUsageType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CarUsageType';
+	public static string $schemaTypeScope = 'https://schema.org/CarUsageType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A value indicating a special usage of a car, e.g. commercial rental, driving school, or as a taxi.';
+	public static string $schemaTypeDescription = 'A value indicating a special usage of a car, e.g. commercial rental, driving school, or as a taxi.';
 
 
 	/**

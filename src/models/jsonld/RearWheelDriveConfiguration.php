@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class RearWheelDriveConfiguration extends MetaJsonLd implements RearWheelDriveCo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RearWheelDriveConfiguration';
+	public static string $schemaTypeName = 'RearWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RearWheelDriveConfiguration';
+	public static string $schemaTypeScope = 'https://schema.org/RearWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DriveWheelConfigurationValue';
+	public static string $schemaTypeExtends = 'DriveWheelConfigurationValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Real-wheel drive is a transmission layout where the engine drives the rear wheels.';
+	public static string $schemaTypeDescription = 'Real-wheel drive is a transmission layout where the engine drives the rear wheels.';
 
 
 	/**

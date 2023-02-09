@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class AutoRental extends MetaJsonLd implements AutoRentalInterface, AutomotiveBu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AutoRental';
+	public static string $schemaTypeName = 'AutoRental';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AutoRental';
+	public static string $schemaTypeScope = 'https://schema.org/AutoRental';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AutomotiveBusiness';
+	public static string $schemaTypeExtends = 'AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A car rental business.';
+	public static string $schemaTypeDescription = 'A car rental business.';
 
 
 	/**

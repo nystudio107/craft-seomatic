@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Dentistry extends MetaJsonLd implements DentistryInterface, MedicalSpecial
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Dentistry';
+	public static string $schemaTypeName = 'Dentistry';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Dentistry';
+	public static string $schemaTypeScope = 'https://schema.org/Dentistry';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A branch of medicine that is involved in the dental care.';
+	public static string $schemaTypeDescription = 'A branch of medicine that is involved in the dental care.';
 
 
 	/**

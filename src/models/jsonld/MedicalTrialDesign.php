@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalTrialDesign extends MetaJsonLd implements MedicalTrialDesignInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalTrialDesign';
+	public static string $schemaTypeName = 'MedicalTrialDesign';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalTrialDesign';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalTrialDesign';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Design models for medical trials. Enumerated type.';
+	public static string $schemaTypeDescription = 'Design models for medical trials. Enumerated type.';
 
 
 	/**

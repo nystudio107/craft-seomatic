@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class BioChemEntity extends MetaJsonLd implements BioChemEntityInterface, ThingI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BioChemEntity';
+	public static string $schemaTypeName = 'BioChemEntity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BioChemEntity';
+	public static string $schemaTypeScope = 'https://schema.org/BioChemEntity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical.';
+	public static string $schemaTypeDescription = 'Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical.';
 
 
 	/**

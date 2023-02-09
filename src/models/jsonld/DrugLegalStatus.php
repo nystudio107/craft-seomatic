@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DrugLegalStatus extends MetaJsonLd implements DrugLegalStatusInterface, Me
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrugLegalStatus';
+	public static string $schemaTypeName = 'DrugLegalStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrugLegalStatus';
+	public static string $schemaTypeScope = 'https://schema.org/DrugLegalStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalIntangible';
+	public static string $schemaTypeExtends = 'MedicalIntangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The legal availability status of a medical drug.';
+	public static string $schemaTypeDescription = 'The legal availability status of a medical drug.';
 
 
 	/**

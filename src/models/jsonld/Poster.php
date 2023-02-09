@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Poster extends MetaJsonLd implements PosterInterface, CreativeWorkInterfac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Poster';
+	public static string $schemaTypeName = 'Poster';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Poster';
+	public static string $schemaTypeScope = 'https://schema.org/Poster';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A large, usually printed placard, bill, or announcement, often illustrated, that is posted to advertise or publicize something.';
+	public static string $schemaTypeDescription = 'A large, usually printed placard, bill, or announcement, often illustrated, that is posted to advertise or publicize something.';
 
 
 	/**

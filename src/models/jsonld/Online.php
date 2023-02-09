@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Online extends MetaJsonLd implements OnlineInterface, GameServerStatusInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Online';
+	public static string $schemaTypeName = 'Online';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Online';
+	public static string $schemaTypeScope = 'https://schema.org/Online';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GameServerStatus';
+	public static string $schemaTypeExtends = 'GameServerStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Game server status: Online. Server is available.';
+	public static string $schemaTypeDescription = 'Game server status: Online. Server is available.';
 
 
 	/**

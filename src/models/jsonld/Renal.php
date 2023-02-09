@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Renal extends MetaJsonLd implements RenalInterface, MedicalSpecialtyInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Renal';
+	public static string $schemaTypeName = 'Renal';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Renal';
+	public static string $schemaTypeScope = 'https://schema.org/Renal';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that pertains to the study of the kidneys and its respective disease states.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that pertains to the study of the kidneys and its respective disease states.';
 
 
 	/**

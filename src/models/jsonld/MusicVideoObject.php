@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MusicVideoObject extends MetaJsonLd implements MusicVideoObjectInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MusicVideoObject';
+	public static string $schemaTypeName = 'MusicVideoObject';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MusicVideoObject';
+	public static string $schemaTypeScope = 'https://schema.org/MusicVideoObject';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MediaObject';
+	public static string $schemaTypeExtends = 'MediaObject';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A music video file.';
+	public static string $schemaTypeDescription = 'A music video file.';
 
 
 	/**

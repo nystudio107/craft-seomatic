@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -41,28 +41,28 @@ class Optometric extends MetaJsonLd implements OptometricInterface, MedicalBusin
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Optometric';
+	public static string $schemaTypeName = 'Optometric';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Optometric';
+	public static string $schemaTypeScope = 'https://schema.org/Optometric';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The science or practice of testing visual acuity and prescribing corrective lenses.';
+	public static string $schemaTypeDescription = 'The science or practice of testing visual acuity and prescribing corrective lenses.';
 
 
 	/**

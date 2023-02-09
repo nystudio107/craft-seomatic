@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Electrician extends MetaJsonLd implements ElectricianInterface, HomeAndCon
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Electrician';
+	public static string $schemaTypeName = 'Electrician';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Electrician';
+	public static string $schemaTypeScope = 'https://schema.org/Electrician';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HomeAndConstructionBusiness';
+	public static string $schemaTypeExtends = 'HomeAndConstructionBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An electrician.';
+	public static string $schemaTypeDescription = 'An electrician.';
 
 
 	/**

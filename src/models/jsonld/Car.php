@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Car extends MetaJsonLd implements CarInterface, VehicleInterface, ProductI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Car';
+	public static string $schemaTypeName = 'Car';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Car';
+	public static string $schemaTypeScope = 'https://schema.org/Car';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Vehicle';
+	public static string $schemaTypeExtends = 'Vehicle';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A car is a wheeled, self-powered motor vehicle used for transportation.';
+	public static string $schemaTypeDescription = 'A car is a wheeled, self-powered motor vehicle used for transportation.';
 
 
 	/**

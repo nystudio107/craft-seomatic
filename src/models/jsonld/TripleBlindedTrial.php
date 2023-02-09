@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class TripleBlindedTrial extends MetaJsonLd implements TripleBlindedTrialInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TripleBlindedTrial';
+	public static string $schemaTypeName = 'TripleBlindedTrial';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TripleBlindedTrial';
+	public static string $schemaTypeScope = 'https://schema.org/TripleBlindedTrial';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTrialDesign';
+	public static string $schemaTypeExtends = 'MedicalTrialDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A trial design in which neither the researcher, the person administering the therapy nor the patient knows the details of the treatment the patient was randomly assigned to.';
+	public static string $schemaTypeDescription = 'A trial design in which neither the researcher, the person administering the therapy nor the patient knows the details of the treatment the patient was randomly assigned to.';
 
 
 	/**

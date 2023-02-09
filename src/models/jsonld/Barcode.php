@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Barcode extends MetaJsonLd implements BarcodeInterface, ImageObjectInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Barcode';
+	public static string $schemaTypeName = 'Barcode';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Barcode';
+	public static string $schemaTypeScope = 'https://schema.org/Barcode';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ImageObject';
+	public static string $schemaTypeExtends = 'ImageObject';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An image of a visual machine-readable code such as a barcode or QR code.';
+	public static string $schemaTypeDescription = 'An image of a visual machine-readable code such as a barcode or QR code.';
 
 
 	/**

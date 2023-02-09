@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class FourWheelDriveConfiguration extends MetaJsonLd implements FourWheelDriveCo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FourWheelDriveConfiguration';
+	public static string $schemaTypeName = 'FourWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FourWheelDriveConfiguration';
+	public static string $schemaTypeScope = 'https://schema.org/FourWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DriveWheelConfigurationValue';
+	public static string $schemaTypeExtends = 'DriveWheelConfigurationValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Four-wheel drive is a transmission layout where the engine primarily drives two wheels with a part-time four-wheel drive capability.';
+	public static string $schemaTypeDescription = 'Four-wheel drive is a transmission layout where the engine primarily drives two wheels with a part-time four-wheel drive capability.';
 
 
 	/**

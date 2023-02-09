@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class StructuredValue extends MetaJsonLd implements StructuredValueInterface, In
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'StructuredValue';
+	public static string $schemaTypeName = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/StructuredValue';
+	public static string $schemaTypeScope = 'https://schema.org/StructuredValue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.';
+	public static string $schemaTypeDescription = 'Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.';
 
 
 	/**

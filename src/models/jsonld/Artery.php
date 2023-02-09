@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Artery extends MetaJsonLd implements ArteryInterface, VesselInterface, Ana
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Artery';
+	public static string $schemaTypeName = 'Artery';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Artery';
+	public static string $schemaTypeScope = 'https://schema.org/Artery';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Vessel';
+	public static string $schemaTypeExtends = 'Vessel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of blood vessel that specifically carries blood away from the heart.';
+	public static string $schemaTypeDescription = 'A type of blood vessel that specifically carries blood away from the heart.';
 
 
 	/**

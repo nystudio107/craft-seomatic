@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class BoardingPolicyType extends MetaJsonLd implements BoardingPolicyTypeInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BoardingPolicyType';
+	public static string $schemaTypeName = 'BoardingPolicyType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BoardingPolicyType';
+	public static string $schemaTypeScope = 'https://schema.org/BoardingPolicyType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of boarding policy used by an airline.';
+	public static string $schemaTypeDescription = 'A type of boarding policy used by an airline.';
 
 
 	/**

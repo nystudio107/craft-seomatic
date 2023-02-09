@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ClothingStore extends MetaJsonLd implements ClothingStoreInterface, StoreI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ClothingStore';
+	public static string $schemaTypeName = 'ClothingStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ClothingStore';
+	public static string $schemaTypeScope = 'https://schema.org/ClothingStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A clothing store.';
+	public static string $schemaTypeDescription = 'A clothing store.';
 
 
 	/**

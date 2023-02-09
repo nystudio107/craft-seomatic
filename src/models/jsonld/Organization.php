@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class Organization extends MetaJsonLd implements OrganizationInterface, ThingInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Organization';
+	public static string $schemaTypeName = 'Organization';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Organization';
+	public static string $schemaTypeScope = 'https://schema.org/Organization';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An organization such as a school, NGO, corporation, club, etc.';
+	public static string $schemaTypeDescription = 'An organization such as a school, NGO, corporation, club, etc.';
 
 
 	/**

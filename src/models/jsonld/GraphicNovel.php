@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class GraphicNovel extends MetaJsonLd implements GraphicNovelInterface, BookForm
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GraphicNovel';
+	public static string $schemaTypeName = 'GraphicNovel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GraphicNovel';
+	public static string $schemaTypeScope = 'https://schema.org/GraphicNovel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BookFormatType';
+	public static string $schemaTypeExtends = 'BookFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Book format: GraphicNovel. May represent a bound collection of ComicIssue instances.';
+	public static string $schemaTypeDescription = 'Book format: GraphicNovel. May represent a bound collection of ComicIssue instances.';
 
 
 	/**

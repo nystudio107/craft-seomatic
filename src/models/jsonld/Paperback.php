@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Paperback extends MetaJsonLd implements PaperbackInterface, BookFormatType
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Paperback';
+	public static string $schemaTypeName = 'Paperback';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Paperback';
+	public static string $schemaTypeScope = 'https://schema.org/Paperback';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BookFormatType';
+	public static string $schemaTypeExtends = 'BookFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Book format: Paperback.';
+	public static string $schemaTypeDescription = 'Book format: Paperback.';
 
 
 	/**

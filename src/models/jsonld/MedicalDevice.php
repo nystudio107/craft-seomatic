@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MedicalDevice extends MetaJsonLd implements MedicalDeviceInterface, Medica
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalDevice';
+	public static string $schemaTypeName = 'MedicalDevice';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalDevice';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalDevice';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any object used in a medical capacity, such as to diagnose or treat a patient.';
+	public static string $schemaTypeDescription = 'Any object used in a medical capacity, such as to diagnose or treat a patient.';
 
 
 	/**

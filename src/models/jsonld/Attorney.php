@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Attorney extends MetaJsonLd implements AttorneyInterface, LegalServiceInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Attorney';
+	public static string $schemaTypeName = 'Attorney';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Attorney';
+	public static string $schemaTypeScope = 'https://schema.org/Attorney';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LegalService';
+	public static string $schemaTypeExtends = 'LegalService';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Professional service: Attorney. \n\nThis type is deprecated - [[LegalService]] is more inclusive and less ambiguous.';
+	public static string $schemaTypeDescription = 'Professional service: Attorney. \n\nThis type is deprecated - [[LegalService]] is more inclusive and less ambiguous.';
 
 
 	/**

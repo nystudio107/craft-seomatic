@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalGuidelineContraindication extends MetaJsonLd implements MedicalGuid
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalGuidelineContraindication';
+	public static string $schemaTypeName = 'MedicalGuidelineContraindication';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalGuidelineContraindication';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalGuidelineContraindication';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalGuideline';
+	public static string $schemaTypeExtends = 'MedicalGuideline';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A guideline contraindication that designates a process as harmful and where quality of the data supporting the contraindication is sound.';
+	public static string $schemaTypeDescription = 'A guideline contraindication that designates a process as harmful and where quality of the data supporting the contraindication is sound.';
 
 
 	/**

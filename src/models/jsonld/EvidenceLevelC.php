@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class EvidenceLevelC extends MetaJsonLd implements EvidenceLevelCInterface, Medi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EvidenceLevelC';
+	public static string $schemaTypeName = 'EvidenceLevelC';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EvidenceLevelC';
+	public static string $schemaTypeScope = 'https://schema.org/EvidenceLevelC';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEvidenceLevel';
+	public static string $schemaTypeExtends = 'MedicalEvidenceLevel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Only consensus opinion of experts, case studies, or standard-of-care.';
+	public static string $schemaTypeDescription = 'Only consensus opinion of experts, case studies, or standard-of-care.';
 
 
 	/**

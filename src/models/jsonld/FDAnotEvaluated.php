@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class FDAnotEvaluated extends MetaJsonLd implements FDAnotEvaluatedInterface, Dr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FDAnotEvaluated';
+	public static string $schemaTypeName = 'FDAnotEvaluated';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FDAnotEvaluated';
+	public static string $schemaTypeScope = 'https://schema.org/FDAnotEvaluated';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DrugPregnancyCategory';
+	public static string $schemaTypeExtends = 'DrugPregnancyCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A designation that the drug in question has not been assigned a pregnancy category designation by the US FDA.';
+	public static string $schemaTypeDescription = 'A designation that the drug in question has not been assigned a pregnancy category designation by the US FDA.';
 
 
 	/**

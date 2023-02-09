@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class OfferItemCondition extends MetaJsonLd implements OfferItemConditionInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OfferItemCondition';
+	public static string $schemaTypeName = 'OfferItemCondition';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OfferItemCondition';
+	public static string $schemaTypeScope = 'https://schema.org/OfferItemCondition';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A list of possible conditions for the item.';
+	public static string $schemaTypeDescription = 'A list of possible conditions for the item.';
 
 
 	/**

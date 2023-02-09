@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class InvestmentFund extends MetaJsonLd implements InvestmentFundInterface, Inve
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InvestmentFund';
+	public static string $schemaTypeName = 'InvestmentFund';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InvestmentFund';
+	public static string $schemaTypeScope = 'https://schema.org/InvestmentFund';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InvestmentOrDeposit';
+	public static string $schemaTypeExtends = 'InvestmentOrDeposit';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A company or fund that gathers capital from a number of investors to create a pool of money that is then re-invested into stocks, bonds and other assets.';
+	public static string $schemaTypeDescription = 'A company or fund that gathers capital from a number of investors to create a pool of money that is then re-invested into stocks, bonds and other assets.';
 
 
 	/**

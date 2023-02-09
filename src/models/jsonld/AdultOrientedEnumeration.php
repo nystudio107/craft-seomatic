@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class AdultOrientedEnumeration extends MetaJsonLd implements AdultOrientedEnumer
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AdultOrientedEnumeration';
+	public static string $schemaTypeName = 'AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AdultOrientedEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumeration of considerations that make a product relevant or potentially restricted for adults only.';
+	public static string $schemaTypeDescription = 'Enumeration of considerations that make a product relevant or potentially restricted for adults only.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class BodyOfWater extends MetaJsonLd implements BodyOfWaterInterface, LandformIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyOfWater';
+	public static string $schemaTypeName = 'BodyOfWater';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyOfWater';
+	public static string $schemaTypeScope = 'https://schema.org/BodyOfWater';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Landform';
+	public static string $schemaTypeExtends = 'Landform';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A body of water, such as a sea, ocean, or lake.';
+	public static string $schemaTypeDescription = 'A body of water, such as a sea, ocean, or lake.';
 
 
 	/**

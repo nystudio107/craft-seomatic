@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class AlcoholConsideration extends MetaJsonLd implements AlcoholConsiderationInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AlcoholConsideration';
+	public static string $schemaTypeName = 'AlcoholConsideration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AlcoholConsideration';
+	public static string $schemaTypeScope = 'https://schema.org/AlcoholConsideration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdultOrientedEnumeration';
+	public static string $schemaTypeExtends = 'AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Item contains alcohol or promotes alcohol consumption.';
+	public static string $schemaTypeDescription = 'Item contains alcohol or promotes alcohol consumption.';
 
 
 	/**

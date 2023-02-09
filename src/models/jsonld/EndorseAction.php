@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EndorseAction extends MetaJsonLd implements EndorseActionInterface, ReactA
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EndorseAction';
+	public static string $schemaTypeName = 'EndorseAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EndorseAction';
+	public static string $schemaTypeScope = 'https://schema.org/EndorseAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReactAction';
+	public static string $schemaTypeExtends = 'ReactAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An agent approves/certifies/likes/supports/sanctions an object.';
+	public static string $schemaTypeDescription = 'An agent approves/certifies/likes/supports/sanctions an object.';
 
 
 	/**

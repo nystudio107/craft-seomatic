@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SoldOut extends MetaJsonLd implements SoldOutInterface, ItemAvailabilityIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SoldOut';
+	public static string $schemaTypeName = 'SoldOut';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SoldOut';
+	public static string $schemaTypeScope = 'https://schema.org/SoldOut';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemAvailability';
+	public static string $schemaTypeExtends = 'ItemAvailability';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item has sold out.';
+	public static string $schemaTypeDescription = 'Indicates that the item has sold out.';
 
 
 	/**

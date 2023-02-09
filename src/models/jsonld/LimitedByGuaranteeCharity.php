@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class LimitedByGuaranteeCharity extends MetaJsonLd implements LimitedByGuarantee
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LimitedByGuaranteeCharity';
+	public static string $schemaTypeName = 'LimitedByGuaranteeCharity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LimitedByGuaranteeCharity';
+	public static string $schemaTypeScope = 'https://schema.org/LimitedByGuaranteeCharity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'UKNonprofitType';
+	public static string $schemaTypeExtends = 'UKNonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'LimitedByGuaranteeCharity: Non-profit type referring to a charitable company that is limited by guarantee (UK).';
+	public static string $schemaTypeDescription = 'LimitedByGuaranteeCharity: Non-profit type referring to a charitable company that is limited by guarantee (UK).';
 
 
 	/**

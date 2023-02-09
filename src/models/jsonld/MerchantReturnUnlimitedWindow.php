@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MerchantReturnUnlimitedWindow extends MetaJsonLd implements MerchantReturn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MerchantReturnUnlimitedWindow';
+	public static string $schemaTypeName = 'MerchantReturnUnlimitedWindow';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MerchantReturnUnlimitedWindow';
+	public static string $schemaTypeScope = 'https://schema.org/MerchantReturnUnlimitedWindow';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MerchantReturnEnumeration';
+	public static string $schemaTypeExtends = 'MerchantReturnEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that there is an unlimited window for product returns.';
+	public static string $schemaTypeDescription = 'Specifies that there is an unlimited window for product returns.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class PayAction extends MetaJsonLd implements PayActionInterface, TradeActionInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PayAction';
+	public static string $schemaTypeName = 'PayAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PayAction';
+	public static string $schemaTypeScope = 'https://schema.org/PayAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TradeAction';
+	public static string $schemaTypeExtends = 'TradeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An agent pays a price to a participant.';
+	public static string $schemaTypeDescription = 'An agent pays a price to a participant.';
 
 
 	/**

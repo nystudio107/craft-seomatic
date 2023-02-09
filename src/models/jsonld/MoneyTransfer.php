@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MoneyTransfer extends MetaJsonLd implements MoneyTransferInterface, Transf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MoneyTransfer';
+	public static string $schemaTypeName = 'MoneyTransfer';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MoneyTransfer';
+	public static string $schemaTypeScope = 'https://schema.org/MoneyTransfer';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TransferAction';
+	public static string $schemaTypeExtends = 'TransferAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of transferring money from one place to another place. This may occur electronically or physically.';
+	public static string $schemaTypeDescription = 'The act of transferring money from one place to another place. This may occur electronically or physically.';
 
 
 	/**

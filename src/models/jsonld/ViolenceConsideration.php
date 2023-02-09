@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ViolenceConsideration extends MetaJsonLd implements ViolenceConsiderationI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ViolenceConsideration';
+	public static string $schemaTypeName = 'ViolenceConsideration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ViolenceConsideration';
+	public static string $schemaTypeScope = 'https://schema.org/ViolenceConsideration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdultOrientedEnumeration';
+	public static string $schemaTypeExtends = 'AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Item shows or promotes violence.';
+	public static string $schemaTypeDescription = 'Item shows or promotes violence.';
 
 
 	/**

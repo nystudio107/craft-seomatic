@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class AerobicActivity extends MetaJsonLd implements AerobicActivityInterface, Ph
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AerobicActivity';
+	public static string $schemaTypeName = 'AerobicActivity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AerobicActivity';
+	public static string $schemaTypeScope = 'https://schema.org/AerobicActivity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalActivityCategory';
+	public static string $schemaTypeExtends = 'PhysicalActivityCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Physical activity of relatively low intensity that depends primarily on the aerobic energy-generating process; during activity, the aerobic metabolism uses oxygen to adequately meet energy demands during exercise.';
+	public static string $schemaTypeDescription = 'Physical activity of relatively low intensity that depends primarily on the aerobic energy-generating process; during activity, the aerobic metabolism uses oxygen to adequately meet energy demands during exercise.';
 
 
 	/**

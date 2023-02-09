@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BodyMeasurementHips extends MetaJsonLd implements BodyMeasurementHipsInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementHips';
+	public static string $schemaTypeName = 'BodyMeasurementHips';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementHips';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementHips';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Girth of hips (measured around the buttocks). Used, for example, to fit skirts.';
+	public static string $schemaTypeDescription = 'Girth of hips (measured around the buttocks). Used, for example, to fit skirts.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class PodcastEpisode extends MetaJsonLd implements PodcastEpisodeInterface, Epis
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PodcastEpisode';
+	public static string $schemaTypeName = 'PodcastEpisode';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PodcastEpisode';
+	public static string $schemaTypeScope = 'https://schema.org/PodcastEpisode';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Episode';
+	public static string $schemaTypeExtends = 'Episode';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A single episode of a podcast series.';
+	public static string $schemaTypeDescription = 'A single episode of a podcast series.';
 
 
 	/**

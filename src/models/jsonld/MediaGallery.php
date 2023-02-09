@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MediaGallery extends MetaJsonLd implements MediaGalleryInterface, Collecti
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MediaGallery';
+	public static string $schemaTypeName = 'MediaGallery';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MediaGallery';
+	public static string $schemaTypeScope = 'https://schema.org/MediaGallery';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CollectionPage';
+	public static string $schemaTypeExtends = 'CollectionPage';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Web page type: Media gallery page. A mixed-media page that can contain media such as images, videos, and other multimedia.';
+	public static string $schemaTypeDescription = 'Web page type: Media gallery page. A mixed-media page that can contain media such as images, videos, and other multimedia.';
 
 
 	/**

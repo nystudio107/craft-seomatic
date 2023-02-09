@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EBook extends MetaJsonLd implements EBookInterface, BookFormatTypeInterfac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EBook';
+	public static string $schemaTypeName = 'EBook';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EBook';
+	public static string $schemaTypeScope = 'https://schema.org/EBook';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BookFormatType';
+	public static string $schemaTypeExtends = 'BookFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Book format: Ebook.';
+	public static string $schemaTypeDescription = 'Book format: Ebook.';
 
 
 	/**

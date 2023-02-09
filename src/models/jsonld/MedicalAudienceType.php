@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalAudienceType extends MetaJsonLd implements MedicalAudienceTypeInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalAudienceType';
+	public static string $schemaTypeName = 'MedicalAudienceType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalAudienceType';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalAudienceType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Target audiences types for medical web pages. Enumerated type.';
+	public static string $schemaTypeDescription = 'Target audiences types for medical web pages. Enumerated type.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Brand extends MetaJsonLd implements BrandInterface, IntangibleInterface, T
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Brand';
+	public static string $schemaTypeName = 'Brand';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Brand';
+	public static string $schemaTypeScope = 'https://schema.org/Brand';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A brand is a name used by an organization or business person for labeling a product, product group, or similar.';
+	public static string $schemaTypeDescription = 'A brand is a name used by an organization or business person for labeling a product, product group, or similar.';
 
 
 	/**

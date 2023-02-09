@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class DistanceFee extends MetaJsonLd implements DistanceFeeInterface, PriceCompo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DistanceFee';
+	public static string $schemaTypeName = 'DistanceFee';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DistanceFee';
+	public static string $schemaTypeScope = 'https://schema.org/DistanceFee';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+	public static string $schemaTypeExtends = 'PriceComponentTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents the distance fee (e.g., price per km or mile) part of the total price for an offered product, for example a car rental.';
+	public static string $schemaTypeDescription = 'Represents the distance fee (e.g., price per km or mile) part of the total price for an offered product, for example a car rental.';
 
 
 	/**

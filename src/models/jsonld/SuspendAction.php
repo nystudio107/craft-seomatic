@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SuspendAction extends MetaJsonLd implements SuspendActionInterface, Contro
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SuspendAction';
+	public static string $schemaTypeName = 'SuspendAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SuspendAction';
+	public static string $schemaTypeScope = 'https://schema.org/SuspendAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ControlAction';
+	public static string $schemaTypeExtends = 'ControlAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of momentarily pausing a device or application (e.g. pause music playback or pause a timer).';
+	public static string $schemaTypeDescription = 'The act of momentarily pausing a device or application (e.g. pause music playback or pause a timer).';
 
 
 	/**

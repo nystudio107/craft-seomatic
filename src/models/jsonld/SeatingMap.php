@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SeatingMap extends MetaJsonLd implements SeatingMapInterface, MapCategoryT
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SeatingMap';
+	public static string $schemaTypeName = 'SeatingMap';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SeatingMap';
+	public static string $schemaTypeScope = 'https://schema.org/SeatingMap';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MapCategoryType';
+	public static string $schemaTypeExtends = 'MapCategoryType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A seating map.';
+	public static string $schemaTypeDescription = 'A seating map.';
 
 
 	/**

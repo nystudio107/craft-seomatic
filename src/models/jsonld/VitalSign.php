@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class VitalSign extends MetaJsonLd implements VitalSignInterface, MedicalSignInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VitalSign';
+	public static string $schemaTypeName = 'VitalSign';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VitalSign';
+	public static string $schemaTypeScope = 'https://schema.org/VitalSign';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSign';
+	public static string $schemaTypeExtends = 'MedicalSign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Vital signs are measures of various physiological functions in order to assess the most basic body functions.';
+	public static string $schemaTypeDescription = 'Vital signs are measures of various physiological functions in order to assess the most basic body functions.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Audience extends MetaJsonLd implements AudienceInterface, IntangibleInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Audience';
+	public static string $schemaTypeName = 'Audience';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Audience';
+	public static string $schemaTypeScope = 'https://schema.org/Audience';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Intended audience for an item, i.e. the group for whom the item was created.';
+	public static string $schemaTypeDescription = 'Intended audience for an item, i.e. the group for whom the item was created.';
 
 
 	/**

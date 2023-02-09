@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class RadioBroadcastService extends MetaJsonLd implements RadioBroadcastServiceI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RadioBroadcastService';
+	public static string $schemaTypeName = 'RadioBroadcastService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RadioBroadcastService';
+	public static string $schemaTypeScope = 'https://schema.org/RadioBroadcastService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BroadcastService';
+	public static string $schemaTypeExtends = 'BroadcastService';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A delivery service through which radio content is provided via broadcast over the air or online.';
+	public static string $schemaTypeDescription = 'A delivery service through which radio content is provided via broadcast over the air or online.';
 
 
 	/**

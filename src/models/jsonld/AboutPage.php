@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class AboutPage extends MetaJsonLd implements AboutPageInterface, WebPageInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AboutPage';
+	public static string $schemaTypeName = 'AboutPage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AboutPage';
+	public static string $schemaTypeScope = 'https://schema.org/AboutPage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPage';
+	public static string $schemaTypeExtends = 'WebPage';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Web page type: About page.';
+	public static string $schemaTypeDescription = 'Web page type: About page.';
 
 
 	/**

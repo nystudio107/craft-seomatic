@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class TextDigitalDocument extends MetaJsonLd implements TextDigitalDocumentInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TextDigitalDocument';
+	public static string $schemaTypeName = 'TextDigitalDocument';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TextDigitalDocument';
+	public static string $schemaTypeScope = 'https://schema.org/TextDigitalDocument';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DigitalDocument';
+	public static string $schemaTypeExtends = 'DigitalDocument';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A file composed primarily of text.';
+	public static string $schemaTypeDescription = 'A file composed primarily of text.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SingleRelease extends MetaJsonLd implements SingleReleaseInterface, MusicA
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SingleRelease';
+	public static string $schemaTypeName = 'SingleRelease';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SingleRelease';
+	public static string $schemaTypeScope = 'https://schema.org/SingleRelease';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumReleaseType';
+	public static string $schemaTypeExtends = 'MusicAlbumReleaseType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'SingleRelease.';
+	public static string $schemaTypeDescription = 'SingleRelease.';
 
 
 	/**

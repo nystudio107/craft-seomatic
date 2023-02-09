@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MRI extends MetaJsonLd implements MRIInterface, MedicalImagingTechniqueInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MRI';
+	public static string $schemaTypeName = 'MRI';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MRI';
+	public static string $schemaTypeScope = 'https://schema.org/MRI';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalImagingTechnique';
+	public static string $schemaTypeExtends = 'MedicalImagingTechnique';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Magnetic resonance imaging.';
+	public static string $schemaTypeDescription = 'Magnetic resonance imaging.';
 
 
 	/**

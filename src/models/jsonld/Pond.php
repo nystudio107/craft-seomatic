@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Pond extends MetaJsonLd implements PondInterface, BodyOfWaterInterface, La
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Pond';
+	public static string $schemaTypeName = 'Pond';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Pond';
+	public static string $schemaTypeScope = 'https://schema.org/Pond';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyOfWater';
+	public static string $schemaTypeExtends = 'BodyOfWater';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A pond.';
+	public static string $schemaTypeDescription = 'A pond.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DoseSchedule extends MetaJsonLd implements DoseScheduleInterface, MedicalI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DoseSchedule';
+	public static string $schemaTypeName = 'DoseSchedule';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DoseSchedule';
+	public static string $schemaTypeScope = 'https://schema.org/DoseSchedule';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalIntangible';
+	public static string $schemaTypeExtends = 'MedicalIntangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific dosing schedule for a drug or supplement.';
+	public static string $schemaTypeDescription = 'A specific dosing schedule for a drug or supplement.';
 
 
 	/**

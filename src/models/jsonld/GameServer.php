@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class GameServer extends MetaJsonLd implements GameServerInterface, IntangibleIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GameServer';
+	public static string $schemaTypeName = 'GameServer';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GameServer';
+	public static string $schemaTypeScope = 'https://schema.org/GameServer';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Server that provides game interaction in a multiplayer game.';
+	public static string $schemaTypeDescription = 'Server that provides game interaction in a multiplayer game.';
 
 
 	/**

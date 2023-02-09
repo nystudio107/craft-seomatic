@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EnergyStarEnergyEfficiencyEnumeration extends MetaJsonLd implements Energy
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EnergyStarEnergyEfficiencyEnumeration';
+	public static string $schemaTypeName = 'EnergyStarEnergyEfficiencyEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EnergyStarEnergyEfficiencyEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/EnergyStarEnergyEfficiencyEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EnergyEfficiencyEnumeration';
+	public static string $schemaTypeExtends = 'EnergyEfficiencyEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Used to indicate whether a product is EnergyStar certified.';
+	public static string $schemaTypeDescription = 'Used to indicate whether a product is EnergyStar certified.';
 
 
 	/**

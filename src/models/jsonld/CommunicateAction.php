@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class CommunicateAction extends MetaJsonLd implements CommunicateActionInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CommunicateAction';
+	public static string $schemaTypeName = 'CommunicateAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CommunicateAction';
+	public static string $schemaTypeScope = 'https://schema.org/CommunicateAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InteractAction';
+	public static string $schemaTypeExtends = 'InteractAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.';
+	public static string $schemaTypeDescription = 'The act of conveying information to another person via a communication medium (instrument) such as speech, email, or telephone conversation.';
 
 
 	/**

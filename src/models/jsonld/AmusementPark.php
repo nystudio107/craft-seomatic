@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class AmusementPark extends MetaJsonLd implements AmusementParkInterface, Entert
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AmusementPark';
+	public static string $schemaTypeName = 'AmusementPark';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AmusementPark';
+	public static string $schemaTypeScope = 'https://schema.org/AmusementPark';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EntertainmentBusiness';
+	public static string $schemaTypeExtends = 'EntertainmentBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An amusement park.';
+	public static string $schemaTypeDescription = 'An amusement park.';
 
 
 	/**

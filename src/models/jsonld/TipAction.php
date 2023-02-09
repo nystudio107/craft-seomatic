@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class TipAction extends MetaJsonLd implements TipActionInterface, TradeActionInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TipAction';
+	public static string $schemaTypeName = 'TipAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TipAction';
+	public static string $schemaTypeScope = 'https://schema.org/TipAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TradeAction';
+	public static string $schemaTypeExtends = 'TradeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of giving money voluntarily to a beneficiary in recognition of services rendered.';
+	public static string $schemaTypeDescription = 'The act of giving money voluntarily to a beneficiary in recognition of services rendered.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class BroadcastFrequencySpecification extends MetaJsonLd implements BroadcastFre
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BroadcastFrequencySpecification';
+	public static string $schemaTypeName = 'BroadcastFrequencySpecification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BroadcastFrequencySpecification';
+	public static string $schemaTypeScope = 'https://schema.org/BroadcastFrequencySpecification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The frequency in MHz and the modulation used for a particular BroadcastService.';
+	public static string $schemaTypeDescription = 'The frequency in MHz and the modulation used for a particular BroadcastService.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class CompletedActionStatus extends MetaJsonLd implements CompletedActionStatusI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CompletedActionStatus';
+	public static string $schemaTypeName = 'CompletedActionStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CompletedActionStatus';
+	public static string $schemaTypeScope = 'https://schema.org/CompletedActionStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ActionStatusType';
+	public static string $schemaTypeExtends = 'ActionStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An action that has already taken place.';
+	public static string $schemaTypeDescription = 'An action that has already taken place.';
 
 
 	/**

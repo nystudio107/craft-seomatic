@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class SkiResort extends MetaJsonLd implements SkiResortInterface, SportsActivity
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SkiResort';
+	public static string $schemaTypeName = 'SkiResort';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SkiResort';
+	public static string $schemaTypeScope = 'https://schema.org/SkiResort';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SportsActivityLocation';
+	public static string $schemaTypeExtends = 'SportsActivityLocation';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A ski resort.';
+	public static string $schemaTypeDescription = 'A ski resort.';
 
 
 	/**

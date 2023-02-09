@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class AlbumRelease extends MetaJsonLd implements AlbumReleaseInterface, MusicAlb
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AlbumRelease';
+	public static string $schemaTypeName = 'AlbumRelease';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AlbumRelease';
+	public static string $schemaTypeScope = 'https://schema.org/AlbumRelease';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumReleaseType';
+	public static string $schemaTypeExtends = 'MusicAlbumReleaseType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'AlbumRelease.';
+	public static string $schemaTypeDescription = 'AlbumRelease.';
 
 
 	/**

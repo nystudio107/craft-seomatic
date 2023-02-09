@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BodyMeasurementUnderbust extends MetaJsonLd implements BodyMeasurementUnde
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementUnderbust';
+	public static string $schemaTypeName = 'BodyMeasurementUnderbust';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementUnderbust';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementUnderbust';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Girth of body just below the bust. Used, for example, to fit women\'s swimwear.';
+	public static string $schemaTypeDescription = 'Girth of body just below the bust. Used, for example, to fit women\'s swimwear.';
 
 
 	/**

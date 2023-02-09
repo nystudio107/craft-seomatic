@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PetStore extends MetaJsonLd implements PetStoreInterface, StoreInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PetStore';
+	public static string $schemaTypeName = 'PetStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PetStore';
+	public static string $schemaTypeScope = 'https://schema.org/PetStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A pet store.';
+	public static string $schemaTypeDescription = 'A pet store.';
 
 
 	/**

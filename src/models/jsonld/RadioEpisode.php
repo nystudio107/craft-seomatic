@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class RadioEpisode extends MetaJsonLd implements RadioEpisodeInterface, EpisodeI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RadioEpisode';
+	public static string $schemaTypeName = 'RadioEpisode';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RadioEpisode';
+	public static string $schemaTypeScope = 'https://schema.org/RadioEpisode';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Episode';
+	public static string $schemaTypeExtends = 'Episode';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A radio episode which can be part of a series or season.';
+	public static string $schemaTypeDescription = 'A radio episode which can be part of a series or season.';
 
 
 	/**

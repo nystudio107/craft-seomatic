@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class CssSelectorType extends MetaJsonLd implements CssSelectorTypeInterface, Te
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CssSelectorType';
+	public static string $schemaTypeName = 'CssSelectorType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CssSelectorType';
+	public static string $schemaTypeScope = 'https://schema.org/CssSelectorType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Text';
+	public static string $schemaTypeExtends = 'Text';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Text representing a CSS selector.';
+	public static string $schemaTypeDescription = 'Text representing a CSS selector.';
 
 
 	/**

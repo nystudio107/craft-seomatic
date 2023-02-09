@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class UnclassifiedAdultConsideration extends MetaJsonLd implements UnclassifiedA
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UnclassifiedAdultConsideration';
+	public static string $schemaTypeName = 'UnclassifiedAdultConsideration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UnclassifiedAdultConsideration';
+	public static string $schemaTypeScope = 'https://schema.org/UnclassifiedAdultConsideration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdultOrientedEnumeration';
+	public static string $schemaTypeExtends = 'AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The item is suitable only for adults, without indicating why. Due to widespread use of "adult" as a euphemism for "sexual", many such items are likely suited also for the SexualContentConsideration code.';
+	public static string $schemaTypeDescription = 'The item is suitable only for adults, without indicating why. Due to widespread use of "adult" as a euphemism for "sexual", many such items are likely suited also for the SexualContentConsideration code.';
 
 
 	/**

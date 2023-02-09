@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BodyMeasurementChest extends MetaJsonLd implements BodyMeasurementChestInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementChest';
+	public static string $schemaTypeName = 'BodyMeasurementChest';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementChest';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementChest';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Maximum girth of chest. Used, for example, to fit men\'s suits.';
+	public static string $schemaTypeDescription = 'Maximum girth of chest. Used, for example, to fit men\'s suits.';
 
 
 	/**

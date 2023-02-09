@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Energy extends MetaJsonLd implements EnergyInterface, QuantityInterface, I
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Energy';
+	public static string $schemaTypeName = 'Energy';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Energy';
+	public static string $schemaTypeScope = 'https://schema.org/Energy';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Quantity';
+	public static string $schemaTypeExtends = 'Quantity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Properties that take Energy as values are of the form \'<Number> <Energy unit of measure>\'.';
+	public static string $schemaTypeDescription = 'Properties that take Energy as values are of the form \'<Number> <Energy unit of measure>\'.';
 
 
 	/**

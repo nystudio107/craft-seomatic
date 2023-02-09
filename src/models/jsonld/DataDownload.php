@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DataDownload extends MetaJsonLd implements DataDownloadInterface, MediaObj
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DataDownload';
+	public static string $schemaTypeName = 'DataDownload';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DataDownload';
+	public static string $schemaTypeScope = 'https://schema.org/DataDownload';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MediaObject';
+	public static string $schemaTypeExtends = 'MediaObject';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'All or part of a [[Dataset]] in downloadable form. ';
+	public static string $schemaTypeDescription = 'All or part of a [[Dataset]] in downloadable form. ';
 
 
 	/**

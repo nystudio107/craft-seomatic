@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class LoseAction extends MetaJsonLd implements LoseActionInterface, AchieveActio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LoseAction';
+	public static string $schemaTypeName = 'LoseAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LoseAction';
+	public static string $schemaTypeScope = 'https://schema.org/LoseAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AchieveAction';
+	public static string $schemaTypeExtends = 'AchieveAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of being defeated in a competitive activity.';
+	public static string $schemaTypeDescription = 'The act of being defeated in a competitive activity.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DiscussionForumPosting extends MetaJsonLd implements DiscussionForumPostin
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DiscussionForumPosting';
+	public static string $schemaTypeName = 'DiscussionForumPosting';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DiscussionForumPosting';
+	public static string $schemaTypeScope = 'https://schema.org/DiscussionForumPosting';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SocialMediaPosting';
+	public static string $schemaTypeExtends = 'SocialMediaPosting';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A posting to a discussion forum.';
+	public static string $schemaTypeDescription = 'A posting to a discussion forum.';
 
 
 	/**

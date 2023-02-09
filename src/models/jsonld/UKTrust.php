@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class UKTrust extends MetaJsonLd implements UKTrustInterface, UKNonprofitTypeInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UKTrust';
+	public static string $schemaTypeName = 'UKTrust';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UKTrust';
+	public static string $schemaTypeScope = 'https://schema.org/UKTrust';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'UKNonprofitType';
+	public static string $schemaTypeExtends = 'UKNonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'UKTrust: Non-profit type referring to a UK trust.';
+	public static string $schemaTypeDescription = 'UKTrust: Non-profit type referring to a UK trust.';
 
 
 	/**

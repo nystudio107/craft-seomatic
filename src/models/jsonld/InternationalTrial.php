@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class InternationalTrial extends MetaJsonLd implements InternationalTrialInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InternationalTrial';
+	public static string $schemaTypeName = 'InternationalTrial';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InternationalTrial';
+	public static string $schemaTypeScope = 'https://schema.org/InternationalTrial';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTrialDesign';
+	public static string $schemaTypeExtends = 'MedicalTrialDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An international trial.';
+	public static string $schemaTypeDescription = 'An international trial.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class DeliveryEvent extends MetaJsonLd implements DeliveryEventInterface, EventI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DeliveryEvent';
+	public static string $schemaTypeName = 'DeliveryEvent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DeliveryEvent';
+	public static string $schemaTypeScope = 'https://schema.org/DeliveryEvent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Event';
+	public static string $schemaTypeExtends = 'Event';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An event involving the delivery of an item.';
+	public static string $schemaTypeDescription = 'An event involving the delivery of an item.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DriveWheelConfigurationValue extends MetaJsonLd implements DriveWheelConfi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DriveWheelConfigurationValue';
+	public static string $schemaTypeName = 'DriveWheelConfigurationValue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DriveWheelConfigurationValue';
+	public static string $schemaTypeScope = 'https://schema.org/DriveWheelConfigurationValue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'QualitativeValue';
+	public static string $schemaTypeExtends = 'QualitativeValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A value indicating which roadwheels will receive torque.';
+	public static string $schemaTypeDescription = 'A value indicating which roadwheels will receive torque.';
 
 
 	/**

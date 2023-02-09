@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class TreatmentsHealthAspect extends MetaJsonLd implements TreatmentsHealthAspec
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TreatmentsHealthAspect';
+	public static string $schemaTypeName = 'TreatmentsHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TreatmentsHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/TreatmentsHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Treatments or related therapies for a Topic.';
+	public static string $schemaTypeDescription = 'Treatments or related therapies for a Topic.';
 
 
 	/**

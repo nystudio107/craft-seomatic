@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DiscoverAction extends MetaJsonLd implements DiscoverActionInterface, Find
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DiscoverAction';
+	public static string $schemaTypeName = 'DiscoverAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DiscoverAction';
+	public static string $schemaTypeScope = 'https://schema.org/DiscoverAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FindAction';
+	public static string $schemaTypeExtends = 'FindAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of discovering/finding an object.';
+	public static string $schemaTypeDescription = 'The act of discovering/finding an object.';
 
 
 	/**

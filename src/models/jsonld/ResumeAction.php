@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ResumeAction extends MetaJsonLd implements ResumeActionInterface, ControlA
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ResumeAction';
+	public static string $schemaTypeName = 'ResumeAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ResumeAction';
+	public static string $schemaTypeScope = 'https://schema.org/ResumeAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ControlAction';
+	public static string $schemaTypeExtends = 'ControlAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of resuming a device or application which was formerly paused (e.g. resume music playback or resume a timer).';
+	public static string $schemaTypeDescription = 'The act of resuming a device or application which was formerly paused (e.g. resume music playback or resume a timer).';
 
 
 	/**

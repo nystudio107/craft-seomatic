@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class TVSeason extends MetaJsonLd implements TVSeasonInterface, CreativeWorkSeas
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TVSeason';
+	public static string $schemaTypeName = 'TVSeason';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TVSeason';
+	public static string $schemaTypeScope = 'https://schema.org/TVSeason';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWorkSeason';
+	public static string $schemaTypeExtends = 'CreativeWorkSeason';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Season dedicated to TV broadcast and associated online delivery.';
+	public static string $schemaTypeDescription = 'Season dedicated to TV broadcast and associated online delivery.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MotorizedBicycle extends MetaJsonLd implements MotorizedBicycleInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MotorizedBicycle';
+	public static string $schemaTypeName = 'MotorizedBicycle';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MotorizedBicycle';
+	public static string $schemaTypeScope = 'https://schema.org/MotorizedBicycle';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Vehicle';
+	public static string $schemaTypeExtends = 'Vehicle';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A motorized bicycle is a bicycle with an attached motor used to power the vehicle, or to assist with pedaling.';
+	public static string $schemaTypeDescription = 'A motorized bicycle is a bicycle with an attached motor used to power the vehicle, or to assist with pedaling.';
 
 
 	/**

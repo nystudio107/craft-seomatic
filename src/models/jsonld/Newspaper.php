@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -38,28 +38,28 @@ class Newspaper extends MetaJsonLd implements NewspaperInterface, PeriodicalInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Newspaper';
+	public static string $schemaTypeName = 'Newspaper';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Newspaper';
+	public static string $schemaTypeScope = 'https://schema.org/Newspaper';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Periodical';
+	public static string $schemaTypeExtends = 'Periodical';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A publication containing information about varied topics that are pertinent to general information, a geographic area, or a specific subject matter (i.e. business, culture, education). Often published daily.';
+	public static string $schemaTypeDescription = 'A publication containing information about varied topics that are pertinent to general information, a geographic area, or a specific subject matter (i.e. business, culture, education). Often published daily.';
 
 
 	/**

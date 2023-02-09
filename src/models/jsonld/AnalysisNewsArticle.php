@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class AnalysisNewsArticle extends MetaJsonLd implements AnalysisNewsArticleInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AnalysisNewsArticle';
+	public static string $schemaTypeName = 'AnalysisNewsArticle';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AnalysisNewsArticle';
+	public static string $schemaTypeScope = 'https://schema.org/AnalysisNewsArticle';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'NewsArticle';
+	public static string $schemaTypeExtends = 'NewsArticle';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An AnalysisNewsArticle is a [[NewsArticle]] that, while based on factual reporting, incorporates the expertise of the author/producer, offering interpretations and conclusions.';
+	public static string $schemaTypeDescription = 'An AnalysisNewsArticle is a [[NewsArticle]] that, while based on factual reporting, incorporates the expertise of the author/producer, offering interpretations and conclusions.';
 
 
 	/**

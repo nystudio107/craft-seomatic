@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class GameServerStatus extends MetaJsonLd implements GameServerStatusInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GameServerStatus';
+	public static string $schemaTypeName = 'GameServerStatus';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GameServerStatus';
+	public static string $schemaTypeScope = 'https://schema.org/GameServerStatus';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StatusEnumeration';
+	public static string $schemaTypeExtends = 'StatusEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Status of a game server.';
+	public static string $schemaTypeDescription = 'Status of a game server.';
 
 
 	/**

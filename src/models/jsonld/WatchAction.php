@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class WatchAction extends MetaJsonLd implements WatchActionInterface, ConsumeAct
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WatchAction';
+	public static string $schemaTypeName = 'WatchAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WatchAction';
+	public static string $schemaTypeScope = 'https://schema.org/WatchAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ConsumeAction';
+	public static string $schemaTypeExtends = 'ConsumeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of consuming dynamic/moving visual content.';
+	public static string $schemaTypeDescription = 'The act of consuming dynamic/moving visual content.';
 
 
 	/**

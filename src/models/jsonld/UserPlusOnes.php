@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class UserPlusOnes extends MetaJsonLd implements UserPlusOnesInterface, UserInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UserPlusOnes';
+	public static string $schemaTypeName = 'UserPlusOnes';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UserPlusOnes';
+	public static string $schemaTypeScope = 'https://schema.org/UserPlusOnes';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'UserInteraction';
+	public static string $schemaTypeExtends = 'UserInteraction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].';
+	public static string $schemaTypeDescription = 'UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use [[Action]]-based vocabulary, alongside types such as [[Comment]].';
 
 
 	/**

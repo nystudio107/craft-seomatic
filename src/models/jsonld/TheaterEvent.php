@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class TheaterEvent extends MetaJsonLd implements TheaterEventInterface, EventInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TheaterEvent';
+	public static string $schemaTypeName = 'TheaterEvent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TheaterEvent';
+	public static string $schemaTypeScope = 'https://schema.org/TheaterEvent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Event';
+	public static string $schemaTypeExtends = 'Event';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Event type: Theater performance.';
+	public static string $schemaTypeDescription = 'Event type: Theater performance.';
 
 
 	/**

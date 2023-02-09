@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class RestockingFees extends MetaJsonLd implements RestockingFeesInterface, Retu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RestockingFees';
+	public static string $schemaTypeName = 'RestockingFees';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RestockingFees';
+	public static string $schemaTypeScope = 'https://schema.org/RestockingFees';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnFeesEnumeration';
+	public static string $schemaTypeExtends = 'ReturnFeesEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that the customer must pay a restocking fee when returning a product.';
+	public static string $schemaTypeDescription = 'Specifies that the customer must pay a restocking fee when returning a product.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class EventPostponed extends MetaJsonLd implements EventPostponedInterface, Even
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EventPostponed';
+	public static string $schemaTypeName = 'EventPostponed';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EventPostponed';
+	public static string $schemaTypeScope = 'https://schema.org/EventPostponed';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EventStatusType';
+	public static string $schemaTypeExtends = 'EventStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The event has been postponed and no new date has been set. The event\'s previousStartDate should be set.';
+	public static string $schemaTypeDescription = 'The event has been postponed and no new date has been set. The event\'s previousStartDate should be set.';
 
 
 	/**

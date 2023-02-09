@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ZoneBoardingPolicy extends MetaJsonLd implements ZoneBoardingPolicyInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ZoneBoardingPolicy';
+	public static string $schemaTypeName = 'ZoneBoardingPolicy';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ZoneBoardingPolicy';
+	public static string $schemaTypeScope = 'https://schema.org/ZoneBoardingPolicy';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BoardingPolicyType';
+	public static string $schemaTypeExtends = 'BoardingPolicyType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The airline boards by zones of the plane.';
+	public static string $schemaTypeDescription = 'The airline boards by zones of the plane.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ShippingDeliveryTime extends MetaJsonLd implements ShippingDeliveryTimeInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ShippingDeliveryTime';
+	public static string $schemaTypeName = 'ShippingDeliveryTime';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ShippingDeliveryTime';
+	public static string $schemaTypeScope = 'https://schema.org/ShippingDeliveryTime';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'ShippingDeliveryTime provides various pieces of information about delivery times for shipping.';
+	public static string $schemaTypeDescription = 'ShippingDeliveryTime provides various pieces of information about delivery times for shipping.';
 
 
 	/**

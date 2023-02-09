@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class SaleEvent extends MetaJsonLd implements SaleEventInterface, EventInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SaleEvent';
+	public static string $schemaTypeName = 'SaleEvent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SaleEvent';
+	public static string $schemaTypeScope = 'https://schema.org/SaleEvent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Event';
+	public static string $schemaTypeExtends = 'Event';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Event type: Sales event.';
+	public static string $schemaTypeDescription = 'Event type: Sales event.';
 
 
 	/**

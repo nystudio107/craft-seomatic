@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Property extends MetaJsonLd implements PropertyInterface, IntangibleInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Property';
+	public static string $schemaTypeName = 'Property';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Property';
+	public static string $schemaTypeScope = 'https://schema.org/Property';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A property, used to indicate attributes and relationships of some Thing; equivalent to rdf:Property.';
+	public static string $schemaTypeDescription = 'A property, used to indicate attributes and relationships of some Thing; equivalent to rdf:Property.';
 
 
 	/**

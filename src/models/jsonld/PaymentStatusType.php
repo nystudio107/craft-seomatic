@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PaymentStatusType extends MetaJsonLd implements PaymentStatusTypeInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PaymentStatusType';
+	public static string $schemaTypeName = 'PaymentStatusType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PaymentStatusType';
+	public static string $schemaTypeScope = 'https://schema.org/PaymentStatusType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StatusEnumeration';
+	public static string $schemaTypeExtends = 'StatusEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific payment status. For example, PaymentDue, PaymentComplete, etc.';
+	public static string $schemaTypeDescription = 'A specific payment status. For example, PaymentDue, PaymentComplete, etc.';
 
 
 	/**

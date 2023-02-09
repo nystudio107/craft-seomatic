@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MusicAlbumProductionType extends MetaJsonLd implements MusicAlbumProductio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MusicAlbumProductionType';
+	public static string $schemaTypeName = 'MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MusicAlbumProductionType';
+	public static string $schemaTypeScope = 'https://schema.org/MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Classification of the album by its type of content: soundtrack, live album, studio album, etc.';
+	public static string $schemaTypeDescription = 'Classification of the album by its type of content: soundtrack, live album, studio album, etc.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ExchangeRefund extends MetaJsonLd implements ExchangeRefundInterface, Refu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ExchangeRefund';
+	public static string $schemaTypeName = 'ExchangeRefund';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ExchangeRefund';
+	public static string $schemaTypeScope = 'https://schema.org/ExchangeRefund';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RefundTypeEnumeration';
+	public static string $schemaTypeExtends = 'RefundTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that a refund can be done as an exchange for the same product.';
+	public static string $schemaTypeDescription = 'Specifies that a refund can be done as an exchange for the same product.';
 
 
 	/**

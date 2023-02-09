@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class RsvpAction extends MetaJsonLd implements RsvpActionInterface, InformAction
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RsvpAction';
+	public static string $schemaTypeName = 'RsvpAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RsvpAction';
+	public static string $schemaTypeScope = 'https://schema.org/RsvpAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InformAction';
+	public static string $schemaTypeExtends = 'InformAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of notifying an event organizer as to whether you expect to attend the event.';
+	public static string $schemaTypeDescription = 'The act of notifying an event organizer as to whether you expect to attend the event.';
 
 
 	/**

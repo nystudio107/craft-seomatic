@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ContactPointOption extends MetaJsonLd implements ContactPointOptionInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ContactPointOption';
+	public static string $schemaTypeName = 'ContactPointOption';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ContactPointOption';
+	public static string $schemaTypeScope = 'https://schema.org/ContactPointOption';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerated options related to a ContactPoint.';
+	public static string $schemaTypeDescription = 'Enumerated options related to a ContactPoint.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableSizeSystemAU extends MetaJsonLd implements WearableSizeSystemAUInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableSizeSystemAU';
+	public static string $schemaTypeName = 'WearableSizeSystemAU';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableSizeSystemAU';
+	public static string $schemaTypeScope = 'https://schema.org/WearableSizeSystemAU';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableSizeSystemEnumeration';
+	public static string $schemaTypeExtends = 'WearableSizeSystemEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Australian size system for wearables.';
+	public static string $schemaTypeDescription = 'Australian size system for wearables.';
 
 
 	/**

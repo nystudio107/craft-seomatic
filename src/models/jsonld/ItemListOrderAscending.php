@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ItemListOrderAscending extends MetaJsonLd implements ItemListOrderAscendin
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ItemListOrderAscending';
+	public static string $schemaTypeName = 'ItemListOrderAscending';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ItemListOrderAscending';
+	public static string $schemaTypeScope = 'https://schema.org/ItemListOrderAscending';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemListOrderType';
+	public static string $schemaTypeExtends = 'ItemListOrderType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An ItemList ordered with lower values listed first.';
+	public static string $schemaTypeDescription = 'An ItemList ordered with lower values listed first.';
 
 
 	/**

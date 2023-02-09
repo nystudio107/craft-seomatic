@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Substance extends MetaJsonLd implements SubstanceInterface, MedicalEntityI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Substance';
+	public static string $schemaTypeName = 'Substance';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Substance';
+	public static string $schemaTypeScope = 'https://schema.org/Substance';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical.';
+	public static string $schemaTypeDescription = 'Any matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical.';
 
 
 	/**

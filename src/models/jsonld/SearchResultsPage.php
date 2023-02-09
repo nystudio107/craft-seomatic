@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class SearchResultsPage extends MetaJsonLd implements SearchResultsPageInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SearchResultsPage';
+	public static string $schemaTypeName = 'SearchResultsPage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SearchResultsPage';
+	public static string $schemaTypeScope = 'https://schema.org/SearchResultsPage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPage';
+	public static string $schemaTypeExtends = 'WebPage';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Web page type: Search results page.';
+	public static string $schemaTypeDescription = 'Web page type: Search results page.';
 
 
 	/**

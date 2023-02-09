@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class AMRadioChannel extends MetaJsonLd implements AMRadioChannelInterface, Radi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AMRadioChannel';
+	public static string $schemaTypeName = 'AMRadioChannel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AMRadioChannel';
+	public static string $schemaTypeScope = 'https://schema.org/AMRadioChannel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RadioChannel';
+	public static string $schemaTypeExtends = 'RadioChannel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A radio channel that uses AM.';
+	public static string $schemaTypeDescription = 'A radio channel that uses AM.';
 
 
 	/**

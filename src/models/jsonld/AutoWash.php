@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class AutoWash extends MetaJsonLd implements AutoWashInterface, AutomotiveBusine
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AutoWash';
+	public static string $schemaTypeName = 'AutoWash';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AutoWash';
+	public static string $schemaTypeScope = 'https://schema.org/AutoWash';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AutomotiveBusiness';
+	public static string $schemaTypeExtends = 'AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A car wash business.';
+	public static string $schemaTypeDescription = 'A car wash business.';
 
 
 	/**

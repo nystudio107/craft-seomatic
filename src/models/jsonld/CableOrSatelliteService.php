@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class CableOrSatelliteService extends MetaJsonLd implements CableOrSatelliteServ
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CableOrSatelliteService';
+	public static string $schemaTypeName = 'CableOrSatelliteService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CableOrSatelliteService';
+	public static string $schemaTypeScope = 'https://schema.org/CableOrSatelliteService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Service';
+	public static string $schemaTypeExtends = 'Service';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A service which provides access to media programming like TV or radio. Access may be via cable or satellite.';
+	public static string $schemaTypeDescription = 'A service which provides access to media programming like TV or radio. Access may be via cable or satellite.';
 
 
 	/**

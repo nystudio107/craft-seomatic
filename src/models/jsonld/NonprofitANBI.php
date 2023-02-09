@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class NonprofitANBI extends MetaJsonLd implements NonprofitANBIInterface, NLNonp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'NonprofitANBI';
+	public static string $schemaTypeName = 'NonprofitANBI';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/NonprofitANBI';
+	public static string $schemaTypeScope = 'https://schema.org/NonprofitANBI';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'NLNonprofitType';
+	public static string $schemaTypeExtends = 'NLNonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'NonprofitANBI: Non-profit type referring to a Public Benefit Organization (NL).';
+	public static string $schemaTypeDescription = 'NonprofitANBI: Non-profit type referring to a Public Benefit Organization (NL).';
 
 
 	/**

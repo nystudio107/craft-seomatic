@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class LymphaticVessel extends MetaJsonLd implements LymphaticVesselInterface, Ve
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LymphaticVessel';
+	public static string $schemaTypeName = 'LymphaticVessel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LymphaticVessel';
+	public static string $schemaTypeScope = 'https://schema.org/LymphaticVessel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Vessel';
+	public static string $schemaTypeExtends = 'Vessel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of blood vessel that specifically carries lymph fluid unidirectionally toward the heart.';
+	public static string $schemaTypeDescription = 'A type of blood vessel that specifically carries lymph fluid unidirectionally toward the heart.';
 
 
 	/**

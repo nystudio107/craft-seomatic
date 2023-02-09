@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Museum extends MetaJsonLd implements MuseumInterface, CivicStructureInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Museum';
+	public static string $schemaTypeName = 'Museum';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Museum';
+	public static string $schemaTypeScope = 'https://schema.org/Museum';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A museum.';
+	public static string $schemaTypeDescription = 'A museum.';
 
 
 	/**

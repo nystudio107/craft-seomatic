@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class InteractAction extends MetaJsonLd implements InteractActionInterface, Acti
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InteractAction';
+	public static string $schemaTypeName = 'InteractAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InteractAction';
+	public static string $schemaTypeScope = 'https://schema.org/InteractAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Action';
+	public static string $schemaTypeExtends = 'Action';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of interacting with another person or organization.';
+	public static string $schemaTypeDescription = 'The act of interacting with another person or organization.';
 
 
 	/**

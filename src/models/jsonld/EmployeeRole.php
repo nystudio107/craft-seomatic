@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class EmployeeRole extends MetaJsonLd implements EmployeeRoleInterface, Organiza
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EmployeeRole';
+	public static string $schemaTypeName = 'EmployeeRole';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EmployeeRole';
+	public static string $schemaTypeScope = 'https://schema.org/EmployeeRole';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrganizationRole';
+	public static string $schemaTypeExtends = 'OrganizationRole';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A subclass of OrganizationRole used to describe employee relationships.';
+	public static string $schemaTypeDescription = 'A subclass of OrganizationRole used to describe employee relationships.';
 
 
 	/**

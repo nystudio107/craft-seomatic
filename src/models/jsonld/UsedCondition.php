@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class UsedCondition extends MetaJsonLd implements UsedConditionInterface, OfferI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UsedCondition';
+	public static string $schemaTypeName = 'UsedCondition';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UsedCondition';
+	public static string $schemaTypeScope = 'https://schema.org/UsedCondition';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OfferItemCondition';
+	public static string $schemaTypeExtends = 'OfferItemCondition';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item is used.';
+	public static string $schemaTypeDescription = 'Indicates that the item is used.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class DisagreeAction extends MetaJsonLd implements DisagreeActionInterface, Reac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DisagreeAction';
+	public static string $schemaTypeName = 'DisagreeAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DisagreeAction';
+	public static string $schemaTypeScope = 'https://schema.org/DisagreeAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReactAction';
+	public static string $schemaTypeExtends = 'ReactAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of expressing a difference of opinion with the object. An agent disagrees to/about an object (a proposition, topic or theme) with participants.';
+	public static string $schemaTypeDescription = 'The act of expressing a difference of opinion with the object. An agent disagrees to/about an object (a proposition, topic or theme) with participants.';
 
 
 	/**

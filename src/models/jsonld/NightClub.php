@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class NightClub extends MetaJsonLd implements NightClubInterface, EntertainmentB
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'NightClub';
+	public static string $schemaTypeName = 'NightClub';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/NightClub';
+	public static string $schemaTypeScope = 'https://schema.org/NightClub';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EntertainmentBusiness';
+	public static string $schemaTypeExtends = 'EntertainmentBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A nightclub or discotheque.';
+	public static string $schemaTypeDescription = 'A nightclub or discotheque.';
 
 
 	/**

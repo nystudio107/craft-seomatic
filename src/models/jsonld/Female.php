@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Female extends MetaJsonLd implements FemaleInterface, GenderTypeInterface,
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Female';
+	public static string $schemaTypeName = 'Female';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Female';
+	public static string $schemaTypeScope = 'https://schema.org/Female';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GenderType';
+	public static string $schemaTypeExtends = 'GenderType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The female gender.';
+	public static string $schemaTypeDescription = 'The female gender.';
 
 
 	/**

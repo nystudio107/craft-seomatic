@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Sculpture extends MetaJsonLd implements SculptureInterface, CreativeWorkIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Sculpture';
+	public static string $schemaTypeName = 'Sculpture';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Sculpture';
+	public static string $schemaTypeScope = 'https://schema.org/Sculpture';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A piece of sculpture.';
+	public static string $schemaTypeDescription = 'A piece of sculpture.';
 
 
 	/**

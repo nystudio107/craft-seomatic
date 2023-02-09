@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class AllocateAction extends MetaJsonLd implements AllocateActionInterface, Orga
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AllocateAction';
+	public static string $schemaTypeName = 'AllocateAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AllocateAction';
+	public static string $schemaTypeScope = 'https://schema.org/AllocateAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrganizeAction';
+	public static string $schemaTypeExtends = 'OrganizeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of organizing tasks/objects/events by associating resources to it.';
+	public static string $schemaTypeDescription = 'The act of organizing tasks/objects/events by associating resources to it.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Recruiting extends MetaJsonLd implements RecruitingInterface, MedicalStudy
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Recruiting';
+	public static string $schemaTypeName = 'Recruiting';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Recruiting';
+	public static string $schemaTypeScope = 'https://schema.org/Recruiting';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalStudyStatus';
+	public static string $schemaTypeExtends = 'MedicalStudyStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Recruiting participants.';
+	public static string $schemaTypeDescription = 'Recruiting participants.';
 
 
 	/**

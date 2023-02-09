@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class TaxiService extends MetaJsonLd implements TaxiServiceInterface, ServiceInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TaxiService';
+	public static string $schemaTypeName = 'TaxiService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TaxiService';
+	public static string $schemaTypeScope = 'https://schema.org/TaxiService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Service';
+	public static string $schemaTypeExtends = 'Service';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A service for a vehicle for hire with a driver for local travel. Fares are usually calculated based on distance traveled.';
+	public static string $schemaTypeDescription = 'A service for a vehicle for hire with a driver for local travel. Fares are usually calculated based on distance traveled.';
 
 
 	/**

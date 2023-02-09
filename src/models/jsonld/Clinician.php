@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Clinician extends MetaJsonLd implements ClinicianInterface, MedicalAudienc
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Clinician';
+	public static string $schemaTypeName = 'Clinician';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Clinician';
+	public static string $schemaTypeScope = 'https://schema.org/Clinician';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalAudienceType';
+	public static string $schemaTypeExtends = 'MedicalAudienceType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Medical clinicians, including practicing physicians and other medical professionals involved in clinical practice.';
+	public static string $schemaTypeDescription = 'Medical clinicians, including practicing physicians and other medical professionals involved in clinical practice.';
 
 
 	/**

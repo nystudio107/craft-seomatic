@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class TennisComplex extends MetaJsonLd implements TennisComplexInterface, Sports
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TennisComplex';
+	public static string $schemaTypeName = 'TennisComplex';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TennisComplex';
+	public static string $schemaTypeScope = 'https://schema.org/TennisComplex';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SportsActivityLocation';
+	public static string $schemaTypeExtends = 'SportsActivityLocation';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A tennis complex.';
+	public static string $schemaTypeDescription = 'A tennis complex.';
 
 
 	/**

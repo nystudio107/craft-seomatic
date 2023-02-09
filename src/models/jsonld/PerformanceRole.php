@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PerformanceRole extends MetaJsonLd implements PerformanceRoleInterface, Ro
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PerformanceRole';
+	public static string $schemaTypeName = 'PerformanceRole';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PerformanceRole';
+	public static string $schemaTypeScope = 'https://schema.org/PerformanceRole';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Role';
+	public static string $schemaTypeExtends = 'Role';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A PerformanceRole is a Role that some entity places with regard to a theatrical performance, e.g. in a Movie, TVSeries etc.';
+	public static string $schemaTypeDescription = 'A PerformanceRole is a Role that some entity places with regard to a theatrical performance, e.g. in a Movie, TVSeries etc.';
 
 
 	/**

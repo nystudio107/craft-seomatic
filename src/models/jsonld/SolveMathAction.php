@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class SolveMathAction extends MetaJsonLd implements SolveMathActionInterface, Ac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SolveMathAction';
+	public static string $schemaTypeName = 'SolveMathAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SolveMathAction';
+	public static string $schemaTypeScope = 'https://schema.org/SolveMathAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Action';
+	public static string $schemaTypeExtends = 'Action';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The action that takes in a math expression and directs users to a page potentially capable of solving/simplifying that expression.';
+	public static string $schemaTypeDescription = 'The action that takes in a math expression and directs users to a page potentially capable of solving/simplifying that expression.';
 
 
 	/**

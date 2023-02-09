@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DiagnosticLab extends MetaJsonLd implements DiagnosticLabInterface, Medica
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DiagnosticLab';
+	public static string $schemaTypeName = 'DiagnosticLab';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DiagnosticLab';
+	public static string $schemaTypeScope = 'https://schema.org/DiagnosticLab';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalOrganization';
+	public static string $schemaTypeExtends = 'MedicalOrganization';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A medical laboratory that offers on-site or off-site diagnostic services.';
+	public static string $schemaTypeDescription = 'A medical laboratory that offers on-site or off-site diagnostic services.';
 
 
 	/**

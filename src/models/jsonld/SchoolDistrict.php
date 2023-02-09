@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SchoolDistrict extends MetaJsonLd implements SchoolDistrictInterface, Admi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SchoolDistrict';
+	public static string $schemaTypeName = 'SchoolDistrict';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SchoolDistrict';
+	public static string $schemaTypeScope = 'https://schema.org/SchoolDistrict';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdministrativeArea';
+	public static string $schemaTypeExtends = 'AdministrativeArea';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A School District is an administrative area for the administration of schools.';
+	public static string $schemaTypeDescription = 'A School District is an administrative area for the administration of schools.';
 
 
 	/**

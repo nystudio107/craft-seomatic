@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class MaximumDoseSchedule extends MetaJsonLd implements MaximumDoseScheduleInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MaximumDoseSchedule';
+	public static string $schemaTypeName = 'MaximumDoseSchedule';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MaximumDoseSchedule';
+	public static string $schemaTypeScope = 'https://schema.org/MaximumDoseSchedule';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DoseSchedule';
+	public static string $schemaTypeExtends = 'DoseSchedule';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The maximum dosing schedule considered safe for a drug or supplement as recommended by an authority or by the drug/supplement\'s manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity.';
+	public static string $schemaTypeDescription = 'The maximum dosing schedule considered safe for a drug or supplement as recommended by an authority or by the drug/supplement\'s manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity.';
 
 
 	/**

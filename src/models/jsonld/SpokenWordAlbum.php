@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SpokenWordAlbum extends MetaJsonLd implements SpokenWordAlbumInterface, Mu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SpokenWordAlbum';
+	public static string $schemaTypeName = 'SpokenWordAlbum';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SpokenWordAlbum';
+	public static string $schemaTypeScope = 'https://schema.org/SpokenWordAlbum';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumProductionType';
+	public static string $schemaTypeExtends = 'MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'SpokenWordAlbum.';
+	public static string $schemaTypeDescription = 'SpokenWordAlbum.';
 
 
 	/**

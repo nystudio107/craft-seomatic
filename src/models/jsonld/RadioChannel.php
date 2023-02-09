@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RadioChannel extends MetaJsonLd implements RadioChannelInterface, Broadcas
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RadioChannel';
+	public static string $schemaTypeName = 'RadioChannel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RadioChannel';
+	public static string $schemaTypeScope = 'https://schema.org/RadioChannel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BroadcastChannel';
+	public static string $schemaTypeExtends = 'BroadcastChannel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A unique instance of a radio BroadcastService on a CableOrSatelliteService lineup.';
+	public static string $schemaTypeDescription = 'A unique instance of a radio BroadcastService on a CableOrSatelliteService lineup.';
 
 
 	/**

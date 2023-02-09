@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class VenueMap extends MetaJsonLd implements VenueMapInterface, MapCategoryTypeI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VenueMap';
+	public static string $schemaTypeName = 'VenueMap';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VenueMap';
+	public static string $schemaTypeScope = 'https://schema.org/VenueMap';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MapCategoryType';
+	public static string $schemaTypeExtends = 'MapCategoryType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A venue map (e.g. for malls, auditoriums, museums, etc.).';
+	public static string $schemaTypeDescription = 'A venue map (e.g. for malls, auditoriums, museums, etc.).';
 
 
 	/**

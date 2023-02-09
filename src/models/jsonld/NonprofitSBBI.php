@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class NonprofitSBBI extends MetaJsonLd implements NonprofitSBBIInterface, NLNonp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'NonprofitSBBI';
+	public static string $schemaTypeName = 'NonprofitSBBI';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/NonprofitSBBI';
+	public static string $schemaTypeScope = 'https://schema.org/NonprofitSBBI';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'NLNonprofitType';
+	public static string $schemaTypeExtends = 'NLNonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'NonprofitSBBI: Non-profit type referring to a Social Interest Promoting Institution (NL).';
+	public static string $schemaTypeDescription = 'NonprofitSBBI: Non-profit type referring to a Social Interest Promoting Institution (NL).';
 
 
 	/**

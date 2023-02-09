@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class WorkBasedProgram extends MetaJsonLd implements WorkBasedProgramInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WorkBasedProgram';
+	public static string $schemaTypeName = 'WorkBasedProgram';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WorkBasedProgram';
+	public static string $schemaTypeScope = 'https://schema.org/WorkBasedProgram';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EducationalOccupationalProgram';
+	public static string $schemaTypeExtends = 'EducationalOccupationalProgram';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A program with both an educational and employment component. Typically based at a workplace and structured around work-based learning, with the aim of instilling competencies related to an occupation. WorkBasedProgram is used to distinguish programs such as apprenticeships from school, college or other classroom based educational programs.';
+	public static string $schemaTypeDescription = 'A program with both an educational and employment component. Typically based at a workplace and structured around work-based learning, with the aim of instilling competencies related to an occupation. WorkBasedProgram is used to distinguish programs such as apprenticeships from school, college or other classroom based educational programs.';
 
 
 	/**

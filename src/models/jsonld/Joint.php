@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Joint extends MetaJsonLd implements JointInterface, AnatomicalStructureInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Joint';
+	public static string $schemaTypeName = 'Joint';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Joint';
+	public static string $schemaTypeScope = 'https://schema.org/Joint';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AnatomicalStructure';
+	public static string $schemaTypeExtends = 'AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The anatomical location at which two or more bones make contact.';
+	public static string $schemaTypeDescription = 'The anatomical location at which two or more bones make contact.';
 
 
 	/**

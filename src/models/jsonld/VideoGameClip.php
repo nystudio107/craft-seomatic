@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class VideoGameClip extends MetaJsonLd implements VideoGameClipInterface, ClipIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VideoGameClip';
+	public static string $schemaTypeName = 'VideoGameClip';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VideoGameClip';
+	public static string $schemaTypeScope = 'https://schema.org/VideoGameClip';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Clip';
+	public static string $schemaTypeExtends = 'Clip';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A short segment/part of a video game.';
+	public static string $schemaTypeDescription = 'A short segment/part of a video game.';
 
 
 	/**

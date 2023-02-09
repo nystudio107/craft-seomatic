@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -41,28 +41,28 @@ class Dermatology extends MetaJsonLd implements DermatologyInterface, MedicalBus
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Dermatology';
+	public static string $schemaTypeName = 'Dermatology';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Dermatology';
+	public static string $schemaTypeScope = 'https://schema.org/Dermatology';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that pertains to diagnosis and treatment of disorders of skin.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that pertains to diagnosis and treatment of disorders of skin.';
 
 
 	/**

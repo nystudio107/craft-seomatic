@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalProcedureType extends MetaJsonLd implements MedicalProcedureTypeInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalProcedureType';
+	public static string $schemaTypeName = 'MedicalProcedureType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalProcedureType';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalProcedureType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEnumeration';
+	public static string $schemaTypeExtends = 'MedicalEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An enumeration that describes different types of medical procedures.';
+	public static string $schemaTypeDescription = 'An enumeration that describes different types of medical procedures.';
 
 
 	/**

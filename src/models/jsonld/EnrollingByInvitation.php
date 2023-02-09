@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class EnrollingByInvitation extends MetaJsonLd implements EnrollingByInvitationI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EnrollingByInvitation';
+	public static string $schemaTypeName = 'EnrollingByInvitation';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EnrollingByInvitation';
+	public static string $schemaTypeScope = 'https://schema.org/EnrollingByInvitation';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalStudyStatus';
+	public static string $schemaTypeExtends = 'MedicalStudyStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enrolling participants by invitation only.';
+	public static string $schemaTypeDescription = 'Enrolling participants by invitation only.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class FastFoodRestaurant extends MetaJsonLd implements FastFoodRestaurantInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FastFoodRestaurant';
+	public static string $schemaTypeName = 'FastFoodRestaurant';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FastFoodRestaurant';
+	public static string $schemaTypeScope = 'https://schema.org/FastFoodRestaurant';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FoodEstablishment';
+	public static string $schemaTypeExtends = 'FoodEstablishment';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A fast-food restaurant.';
+	public static string $schemaTypeDescription = 'A fast-food restaurant.';
 
 
 	/**

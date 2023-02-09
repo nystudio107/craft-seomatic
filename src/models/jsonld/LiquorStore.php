@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class LiquorStore extends MetaJsonLd implements LiquorStoreInterface, StoreInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LiquorStore';
+	public static string $schemaTypeName = 'LiquorStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LiquorStore';
+	public static string $schemaTypeScope = 'https://schema.org/LiquorStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A shop that sells alcoholic drinks such as wine, beer, whisky and other spirits.';
+	public static string $schemaTypeDescription = 'A shop that sells alcoholic drinks such as wine, beer, whisky and other spirits.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Nonprofit501c27 extends MetaJsonLd implements Nonprofit501c27Interface, US
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Nonprofit501c27';
+	public static string $schemaTypeName = 'Nonprofit501c27';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Nonprofit501c27';
+	public static string $schemaTypeScope = 'https://schema.org/Nonprofit501c27';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'USNonprofitType';
+	public static string $schemaTypeExtends = 'USNonprofitType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Nonprofit501c27: Non-profit type referring to State-Sponsored Workers\' Compensation Reinsurance Organizations.';
+	public static string $schemaTypeDescription = 'Nonprofit501c27: Non-profit type referring to State-Sponsored Workers\' Compensation Reinsurance Organizations.';
 
 
 	/**

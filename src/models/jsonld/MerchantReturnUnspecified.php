@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MerchantReturnUnspecified extends MetaJsonLd implements MerchantReturnUnsp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MerchantReturnUnspecified';
+	public static string $schemaTypeName = 'MerchantReturnUnspecified';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MerchantReturnUnspecified';
+	public static string $schemaTypeScope = 'https://schema.org/MerchantReturnUnspecified';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MerchantReturnEnumeration';
+	public static string $schemaTypeExtends = 'MerchantReturnEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that a product return policy is not provided.';
+	public static string $schemaTypeDescription = 'Specifies that a product return policy is not provided.';
 
 
 	/**

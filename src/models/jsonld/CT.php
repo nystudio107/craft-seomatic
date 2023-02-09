@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class CT extends MetaJsonLd implements CTInterface, MedicalImagingTechniqueInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CT';
+	public static string $schemaTypeName = 'CT';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CT';
+	public static string $schemaTypeScope = 'https://schema.org/CT';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalImagingTechnique';
+	public static string $schemaTypeExtends = 'MedicalImagingTechnique';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'X-ray computed tomography imaging.';
+	public static string $schemaTypeDescription = 'X-ray computed tomography imaging.';
 
 
 	/**

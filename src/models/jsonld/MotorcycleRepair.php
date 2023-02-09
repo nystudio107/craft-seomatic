@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class MotorcycleRepair extends MetaJsonLd implements MotorcycleRepairInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MotorcycleRepair';
+	public static string $schemaTypeName = 'MotorcycleRepair';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MotorcycleRepair';
+	public static string $schemaTypeScope = 'https://schema.org/MotorcycleRepair';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AutomotiveBusiness';
+	public static string $schemaTypeExtends = 'AutomotiveBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A motorcycle repair shop.';
+	public static string $schemaTypeDescription = 'A motorcycle repair shop.';
 
 
 	/**

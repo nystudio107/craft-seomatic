@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class WearableMeasurementTypeEnumeration extends MetaJsonLd implements WearableM
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableMeasurementTypeEnumeration';
+	public static string $schemaTypeName = 'WearableMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableMeasurementTypeEnumeration';
+	public static string $schemaTypeScope = 'https://schema.org/WearableMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'MeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Enumerates common types of measurement for wearables products.';
+	public static string $schemaTypeDescription = 'Enumerates common types of measurement for wearables products.';
 
 
 	/**

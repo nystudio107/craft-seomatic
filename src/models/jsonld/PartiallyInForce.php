@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PartiallyInForce extends MetaJsonLd implements PartiallyInForceInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PartiallyInForce';
+	public static string $schemaTypeName = 'PartiallyInForce';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PartiallyInForce';
+	public static string $schemaTypeScope = 'https://schema.org/PartiallyInForce';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LegalForceStatus';
+	public static string $schemaTypeExtends = 'LegalForceStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that parts of the legislation are in force, and parts are not.';
+	public static string $schemaTypeDescription = 'Indicates that parts of the legislation are in force, and parts are not.';
 
 
 	/**

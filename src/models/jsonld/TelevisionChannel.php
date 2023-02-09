@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class TelevisionChannel extends MetaJsonLd implements TelevisionChannelInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TelevisionChannel';
+	public static string $schemaTypeName = 'TelevisionChannel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TelevisionChannel';
+	public static string $schemaTypeScope = 'https://schema.org/TelevisionChannel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BroadcastChannel';
+	public static string $schemaTypeExtends = 'BroadcastChannel';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A unique instance of a television BroadcastService on a CableOrSatelliteService lineup.';
+	public static string $schemaTypeDescription = 'A unique instance of a television BroadcastService on a CableOrSatelliteService lineup.';
 
 
 	/**

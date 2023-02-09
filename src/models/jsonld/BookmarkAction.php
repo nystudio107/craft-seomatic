@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class BookmarkAction extends MetaJsonLd implements BookmarkActionInterface, Orga
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BookmarkAction';
+	public static string $schemaTypeName = 'BookmarkAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BookmarkAction';
+	public static string $schemaTypeScope = 'https://schema.org/BookmarkAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrganizeAction';
+	public static string $schemaTypeExtends = 'OrganizeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An agent bookmarks/flags/labels/tags/marks an object.';
+	public static string $schemaTypeDescription = 'An agent bookmarks/flags/labels/tags/marks an object.';
 
 
 	/**

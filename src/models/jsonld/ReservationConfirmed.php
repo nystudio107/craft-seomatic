@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ReservationConfirmed extends MetaJsonLd implements ReservationConfirmedInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReservationConfirmed';
+	public static string $schemaTypeName = 'ReservationConfirmed';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReservationConfirmed';
+	public static string $schemaTypeScope = 'https://schema.org/ReservationConfirmed';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReservationStatusType';
+	public static string $schemaTypeExtends = 'ReservationStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The status of a confirmed reservation.';
+	public static string $schemaTypeDescription = 'The status of a confirmed reservation.';
 
 
 	/**

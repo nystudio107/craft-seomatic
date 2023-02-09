@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RelatedTopicsHealthAspect extends MetaJsonLd implements RelatedTopicsHealt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RelatedTopicsHealthAspect';
+	public static string $schemaTypeName = 'RelatedTopicsHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RelatedTopicsHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/RelatedTopicsHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Other prominent or relevant topics tied to the main topic.';
+	public static string $schemaTypeDescription = 'Other prominent or relevant topics tied to the main topic.';
 
 
 	/**

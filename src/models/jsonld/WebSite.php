@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class WebSite extends MetaJsonLd implements WebSiteInterface, CreativeWorkInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WebSite';
+	public static string $schemaTypeName = 'WebSite';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WebSite';
+	public static string $schemaTypeScope = 'https://schema.org/WebSite';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs.';
+	public static string $schemaTypeDescription = 'A WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs.';
 
 
 	/**

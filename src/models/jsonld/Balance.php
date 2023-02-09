@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Balance extends MetaJsonLd implements BalanceInterface, PhysicalActivityCa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Balance';
+	public static string $schemaTypeName = 'Balance';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Balance';
+	public static string $schemaTypeScope = 'https://schema.org/Balance';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalActivityCategory';
+	public static string $schemaTypeExtends = 'PhysicalActivityCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Physical activity that is engaged to help maintain posture and balance.';
+	public static string $schemaTypeDescription = 'Physical activity that is engaged to help maintain posture and balance.';
 
 
 	/**

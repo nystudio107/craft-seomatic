@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class VeganDiet extends MetaJsonLd implements VeganDietInterface, RestrictedDiet
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VeganDiet';
+	public static string $schemaTypeName = 'VeganDiet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VeganDiet';
+	public static string $schemaTypeScope = 'https://schema.org/VeganDiet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RestrictedDiet';
+	public static string $schemaTypeExtends = 'RestrictedDiet';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A diet exclusive of all animal products.';
+	public static string $schemaTypeDescription = 'A diet exclusive of all animal products.';
 
 
 	/**

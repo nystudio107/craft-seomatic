@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class OnlineOnly extends MetaJsonLd implements OnlineOnlyInterface, ItemAvailabi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OnlineOnly';
+	public static string $schemaTypeName = 'OnlineOnly';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OnlineOnly';
+	public static string $schemaTypeScope = 'https://schema.org/OnlineOnly';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemAvailability';
+	public static string $schemaTypeExtends = 'ItemAvailability';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item is available only online.';
+	public static string $schemaTypeDescription = 'Indicates that the item is available only online.';
 
 
 	/**

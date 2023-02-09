@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class OwnershipInfo extends MetaJsonLd implements OwnershipInfoInterface, Struct
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OwnershipInfo';
+	public static string $schemaTypeName = 'OwnershipInfo';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OwnershipInfo';
+	public static string $schemaTypeScope = 'https://schema.org/OwnershipInfo';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A structured value providing information about when a certain organization or person owned a certain product.';
+	public static string $schemaTypeDescription = 'A structured value providing information about when a certain organization or person owned a certain product.';
 
 
 	/**

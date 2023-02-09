@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ShareAction extends MetaJsonLd implements ShareActionInterface, Communicat
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ShareAction';
+	public static string $schemaTypeName = 'ShareAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ShareAction';
+	public static string $schemaTypeScope = 'https://schema.org/ShareAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CommunicateAction';
+	public static string $schemaTypeExtends = 'CommunicateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of distributing content to people for their amusement or edification.';
+	public static string $schemaTypeDescription = 'The act of distributing content to people for their amusement or edification.';
 
 
 	/**

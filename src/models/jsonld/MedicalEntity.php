@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class MedicalEntity extends MetaJsonLd implements MedicalEntityInterface, ThingI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalEntity';
+	public static string $schemaTypeName = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalEntity';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalEntity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The most generic type of entity related to health and the practice of medicine.';
+	public static string $schemaTypeDescription = 'The most generic type of entity related to health and the practice of medicine.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class LandmarksOrHistoricalBuildings extends MetaJsonLd implements LandmarksOrHi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LandmarksOrHistoricalBuildings';
+	public static string $schemaTypeName = 'LandmarksOrHistoricalBuildings';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LandmarksOrHistoricalBuildings';
+	public static string $schemaTypeScope = 'https://schema.org/LandmarksOrHistoricalBuildings';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Place';
+	public static string $schemaTypeExtends = 'Place';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An historical landmark or building.';
+	public static string $schemaTypeDescription = 'An historical landmark or building.';
 
 
 	/**

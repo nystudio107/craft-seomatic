@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Discontinued extends MetaJsonLd implements DiscontinuedInterface, ItemAvai
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Discontinued';
+	public static string $schemaTypeName = 'Discontinued';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Discontinued';
+	public static string $schemaTypeScope = 'https://schema.org/Discontinued';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemAvailability';
+	public static string $schemaTypeExtends = 'ItemAvailability';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item has been discontinued.';
+	public static string $schemaTypeDescription = 'Indicates that the item has been discontinued.';
 
 
 	/**

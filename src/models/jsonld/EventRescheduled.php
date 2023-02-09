@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -38,28 +38,28 @@ class EventRescheduled extends MetaJsonLd implements EventRescheduledInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EventRescheduled';
+	public static string $schemaTypeName = 'EventRescheduled';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EventRescheduled';
+	public static string $schemaTypeScope = 'https://schema.org/EventRescheduled';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EventStatusType';
+	public static string $schemaTypeExtends = 'EventStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The event has been rescheduled. The event\'s previousStartDate should be set to the old date and the startDate should be set to the event\'s new date. (If the event has been rescheduled multiple times, the previousStartDate property may be repeated.)';
+	public static string $schemaTypeDescription = 'The event has been rescheduled. The event\'s previousStartDate should be set to the old date and the startDate should be set to the event\'s new date. (If the event has been rescheduled multiple times, the previousStartDate property may be repeated.)';
 
 
 	/**

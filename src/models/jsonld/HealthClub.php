@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class HealthClub extends MetaJsonLd implements HealthClubInterface, HealthAndBea
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HealthClub';
+	public static string $schemaTypeName = 'HealthClub';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HealthClub';
+	public static string $schemaTypeScope = 'https://schema.org/HealthClub';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAndBeautyBusiness';
+	public static string $schemaTypeExtends = 'HealthAndBeautyBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A health club.';
+	public static string $schemaTypeDescription = 'A health club.';
 
 
 	/**

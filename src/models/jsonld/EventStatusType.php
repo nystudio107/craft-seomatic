@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class EventStatusType extends MetaJsonLd implements EventStatusTypeInterface, St
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EventStatusType';
+	public static string $schemaTypeName = 'EventStatusType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EventStatusType';
+	public static string $schemaTypeScope = 'https://schema.org/EventStatusType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StatusEnumeration';
+	public static string $schemaTypeExtends = 'StatusEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'EventStatusType is an enumeration type whose instances represent several states that an Event may be in.';
+	public static string $schemaTypeDescription = 'EventStatusType is an enumeration type whose instances represent several states that an Event may be in.';
 
 
 	/**

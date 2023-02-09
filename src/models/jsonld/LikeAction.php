@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class LikeAction extends MetaJsonLd implements LikeActionInterface, ReactActionI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LikeAction';
+	public static string $schemaTypeName = 'LikeAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LikeAction';
+	public static string $schemaTypeScope = 'https://schema.org/LikeAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReactAction';
+	public static string $schemaTypeExtends = 'ReactAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of expressing a positive sentiment about the object. An agent likes an object (a proposition, topic or theme) with participants.';
+	public static string $schemaTypeDescription = 'The act of expressing a positive sentiment about the object. An agent likes an object (a proposition, topic or theme) with participants.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -42,28 +42,28 @@ class CommunityHealth extends MetaJsonLd implements CommunityHealthInterface, Me
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CommunityHealth';
+	public static string $schemaTypeName = 'CommunityHealth';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CommunityHealth';
+	public static string $schemaTypeScope = 'https://schema.org/CommunityHealth';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A field of public health focusing on improving health characteristics of a defined population in relation with their geographical or environment areas.';
+	public static string $schemaTypeDescription = 'A field of public health focusing on improving health characteristics of a defined population in relation with their geographical or environment areas.';
 
 
 	/**

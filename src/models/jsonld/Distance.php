@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Distance extends MetaJsonLd implements DistanceInterface, QuantityInterfac
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Distance';
+	public static string $schemaTypeName = 'Distance';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Distance';
+	public static string $schemaTypeScope = 'https://schema.org/Distance';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Quantity';
+	public static string $schemaTypeExtends = 'Quantity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Properties that take Distances as values are of the form \'<Number> <Length unit of measure>\'. E.g., \'7 ft\'.';
+	public static string $schemaTypeDescription = 'Properties that take Distances as values are of the form \'<Number> <Length unit of measure>\'. E.g., \'7 ft\'.';
 
 
 	/**

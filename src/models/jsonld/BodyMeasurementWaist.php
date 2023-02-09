@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BodyMeasurementWaist extends MetaJsonLd implements BodyMeasurementWaistInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementWaist';
+	public static string $schemaTypeName = 'BodyMeasurementWaist';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementWaist';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementWaist';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Girth of natural waistline (between hip bones and lower ribs). Used, for example, to fit pants.';
+	public static string $schemaTypeDescription = 'Girth of natural waistline (between hip bones and lower ribs). Used, for example, to fit pants.';
 
 
 	/**

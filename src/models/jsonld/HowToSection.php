@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class HowToSection extends MetaJsonLd implements HowToSectionInterface, ItemList
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HowToSection';
+	public static string $schemaTypeName = 'HowToSection';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HowToSection';
+	public static string $schemaTypeScope = 'https://schema.org/HowToSection';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ItemList';
+	public static string $schemaTypeExtends = 'ItemList';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A sub-grouping of steps in the instructions for how to achieve a result (e.g. steps for making a pie crust within a pie recipe).';
+	public static string $schemaTypeDescription = 'A sub-grouping of steps in the instructions for how to achieve a result (e.g. steps for making a pie crust within a pie recipe).';
 
 
 	/**

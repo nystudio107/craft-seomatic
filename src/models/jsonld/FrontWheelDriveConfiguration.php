@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class FrontWheelDriveConfiguration extends MetaJsonLd implements FrontWheelDrive
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FrontWheelDriveConfiguration';
+	public static string $schemaTypeName = 'FrontWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FrontWheelDriveConfiguration';
+	public static string $schemaTypeScope = 'https://schema.org/FrontWheelDriveConfiguration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DriveWheelConfigurationValue';
+	public static string $schemaTypeExtends = 'DriveWheelConfigurationValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Front-wheel drive is a transmission layout where the engine drives the front wheels.';
+	public static string $schemaTypeDescription = 'Front-wheel drive is a transmission layout where the engine drives the front wheels.';
 
 
 	/**

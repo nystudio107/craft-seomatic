@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Ultrasound extends MetaJsonLd implements UltrasoundInterface, MedicalImagi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Ultrasound';
+	public static string $schemaTypeName = 'Ultrasound';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Ultrasound';
+	public static string $schemaTypeScope = 'https://schema.org/Ultrasound';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalImagingTechnique';
+	public static string $schemaTypeExtends = 'MedicalImagingTechnique';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Ultrasound imaging.';
+	public static string $schemaTypeDescription = 'Ultrasound imaging.';
 
 
 	/**

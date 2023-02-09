@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BusOrCoach extends MetaJsonLd implements BusOrCoachInterface, VehicleInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BusOrCoach';
+	public static string $schemaTypeName = 'BusOrCoach';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BusOrCoach';
+	public static string $schemaTypeScope = 'https://schema.org/BusOrCoach';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Vehicle';
+	public static string $schemaTypeExtends = 'Vehicle';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A bus (also omnibus or autobus) is a road vehicle designed to carry passengers. Coaches are luxury busses, usually in service for long distance travel.';
+	public static string $schemaTypeDescription = 'A bus (also omnibus or autobus) is a road vehicle designed to carry passengers. Coaches are luxury busses, usually in service for long distance travel.';
 
 
 	/**

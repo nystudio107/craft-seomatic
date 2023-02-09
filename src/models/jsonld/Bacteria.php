@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Bacteria extends MetaJsonLd implements BacteriaInterface, InfectiousAgentC
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Bacteria';
+	public static string $schemaTypeName = 'Bacteria';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Bacteria';
+	public static string $schemaTypeScope = 'https://schema.org/Bacteria';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InfectiousAgentClass';
+	public static string $schemaTypeExtends = 'InfectiousAgentClass';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Pathogenic bacteria that cause bacterial infection.';
+	public static string $schemaTypeDescription = 'Pathogenic bacteria that cause bacterial infection.';
 
 
 	/**

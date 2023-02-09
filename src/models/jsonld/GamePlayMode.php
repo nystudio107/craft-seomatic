@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class GamePlayMode extends MetaJsonLd implements GamePlayModeInterface, Enumerat
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GamePlayMode';
+	public static string $schemaTypeName = 'GamePlayMode';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GamePlayMode';
+	public static string $schemaTypeScope = 'https://schema.org/GamePlayMode';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates whether this game is multi-player, co-op or single-player.';
+	public static string $schemaTypeDescription = 'Indicates whether this game is multi-player, co-op or single-player.';
 
 
 	/**

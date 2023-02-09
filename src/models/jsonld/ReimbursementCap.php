@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class ReimbursementCap extends MetaJsonLd implements ReimbursementCapInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReimbursementCap';
+	public static string $schemaTypeName = 'ReimbursementCap';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReimbursementCap';
+	public static string $schemaTypeScope = 'https://schema.org/ReimbursementCap';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DrugCostCategory';
+	public static string $schemaTypeExtends = 'DrugCostCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The drug\'s cost represents the maximum reimbursement paid by an insurer for the drug.';
+	public static string $schemaTypeDescription = 'The drug\'s cost represents the maximum reimbursement paid by an insurer for the drug.';
 
 
 	/**

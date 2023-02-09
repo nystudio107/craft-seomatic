@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SelfStorage extends MetaJsonLd implements SelfStorageInterface, LocalBusin
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SelfStorage';
+	public static string $schemaTypeName = 'SelfStorage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SelfStorage';
+	public static string $schemaTypeScope = 'https://schema.org/SelfStorage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'LocalBusiness';
+	public static string $schemaTypeExtends = 'LocalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A self-storage facility.';
+	public static string $schemaTypeDescription = 'A self-storage facility.';
 
 
 	/**

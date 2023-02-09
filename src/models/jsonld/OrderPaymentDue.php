@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class OrderPaymentDue extends MetaJsonLd implements OrderPaymentDueInterface, Or
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OrderPaymentDue';
+	public static string $schemaTypeName = 'OrderPaymentDue';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OrderPaymentDue';
+	public static string $schemaTypeScope = 'https://schema.org/OrderPaymentDue';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrderStatus';
+	public static string $schemaTypeExtends = 'OrderStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'OrderStatus representing that payment is due on an order.';
+	public static string $schemaTypeDescription = 'OrderStatus representing that payment is due on an order.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ParentAudience extends MetaJsonLd implements ParentAudienceInterface, Peop
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ParentAudience';
+	public static string $schemaTypeName = 'ParentAudience';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ParentAudience';
+	public static string $schemaTypeScope = 'https://schema.org/ParentAudience';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PeopleAudience';
+	public static string $schemaTypeExtends = 'PeopleAudience';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A set of characteristics describing parents, who can be interested in viewing some content.';
+	public static string $schemaTypeDescription = 'A set of characteristics describing parents, who can be interested in viewing some content.';
 
 
 	/**

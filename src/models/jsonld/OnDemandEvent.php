@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class OnDemandEvent extends MetaJsonLd implements OnDemandEventInterface, Public
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OnDemandEvent';
+	public static string $schemaTypeName = 'OnDemandEvent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OnDemandEvent';
+	public static string $schemaTypeScope = 'https://schema.org/OnDemandEvent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PublicationEvent';
+	public static string $schemaTypeExtends = 'PublicationEvent';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A publication event, e.g. catch-up TV or radio podcast, during which a program is available on-demand.';
+	public static string $schemaTypeDescription = 'A publication event, e.g. catch-up TV or radio podcast, during which a program is available on-demand.';
 
 
 	/**

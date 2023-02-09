@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class NoninvasiveProcedure extends MetaJsonLd implements NoninvasiveProcedureInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'NoninvasiveProcedure';
+	public static string $schemaTypeName = 'NoninvasiveProcedure';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/NoninvasiveProcedure';
+	public static string $schemaTypeScope = 'https://schema.org/NoninvasiveProcedure';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalProcedureType';
+	public static string $schemaTypeExtends = 'MedicalProcedureType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of medical procedure that involves noninvasive techniques.';
+	public static string $schemaTypeDescription = 'A type of medical procedure that involves noninvasive techniques.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class RadioSeries extends MetaJsonLd implements RadioSeriesInterface, CreativeWo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RadioSeries';
+	public static string $schemaTypeName = 'RadioSeries';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RadioSeries';
+	public static string $schemaTypeScope = 'https://schema.org/RadioSeries';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWorkSeries';
+	public static string $schemaTypeExtends = 'CreativeWorkSeries';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'CreativeWorkSeries dedicated to radio broadcast and associated online delivery.';
+	public static string $schemaTypeDescription = 'CreativeWorkSeries dedicated to radio broadcast and associated online delivery.';
 
 
 	/**

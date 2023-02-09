@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Saturday extends MetaJsonLd implements SaturdayInterface, DayOfWeekInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Saturday';
+	public static string $schemaTypeName = 'Saturday';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Saturday';
+	public static string $schemaTypeScope = 'https://schema.org/Saturday';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DayOfWeek';
+	public static string $schemaTypeExtends = 'DayOfWeek';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The day of the week between Friday and Sunday.';
+	public static string $schemaTypeDescription = 'The day of the week between Friday and Sunday.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Registry extends MetaJsonLd implements RegistryInterface, MedicalObservati
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Registry';
+	public static string $schemaTypeName = 'Registry';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Registry';
+	public static string $schemaTypeScope = 'https://schema.org/Registry';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalObservationalStudyDesign';
+	public static string $schemaTypeExtends = 'MedicalObservationalStudyDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A registry-based study design.';
+	public static string $schemaTypeDescription = 'A registry-based study design.';
 
 
 	/**

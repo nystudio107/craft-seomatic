@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -41,28 +41,28 @@ class Podiatric extends MetaJsonLd implements PodiatricInterface, MedicalBusines
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Podiatric';
+	public static string $schemaTypeName = 'Podiatric';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Podiatric';
+	public static string $schemaTypeScope = 'https://schema.org/Podiatric';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Podiatry is the care of the human foot, especially the diagnosis and treatment of foot disorders.';
+	public static string $schemaTypeDescription = 'Podiatry is the care of the human foot, especially the diagnosis and treatment of foot disorders.';
 
 
 	/**

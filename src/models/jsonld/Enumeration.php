@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Enumeration extends MetaJsonLd implements EnumerationInterface, Intangible
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Enumeration';
+	public static string $schemaTypeName = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Enumeration';
+	public static string $schemaTypeScope = 'https://schema.org/Enumeration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Lists or enumerations—for example, a list of cuisines or music genres, etc.';
+	public static string $schemaTypeDescription = 'Lists or enumerations—for example, a list of cuisines or music genres, etc.';
 
 
 	/**

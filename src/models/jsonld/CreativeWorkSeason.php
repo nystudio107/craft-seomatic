@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class CreativeWorkSeason extends MetaJsonLd implements CreativeWorkSeasonInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CreativeWorkSeason';
+	public static string $schemaTypeName = 'CreativeWorkSeason';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CreativeWorkSeason';
+	public static string $schemaTypeScope = 'https://schema.org/CreativeWorkSeason';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A media season, e.g. TV, radio, video game etc.';
+	public static string $schemaTypeDescription = 'A media season, e.g. TV, radio, video game etc.';
 
 
 	/**

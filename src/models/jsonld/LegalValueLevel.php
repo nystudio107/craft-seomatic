@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class LegalValueLevel extends MetaJsonLd implements LegalValueLevelInterface, En
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LegalValueLevel';
+	public static string $schemaTypeName = 'LegalValueLevel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LegalValueLevel';
+	public static string $schemaTypeScope = 'https://schema.org/LegalValueLevel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A list of possible levels for the legal validity of a legislation.';
+	public static string $schemaTypeDescription = 'A list of possible levels for the legal validity of a legislation.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableSizeSystemCN extends MetaJsonLd implements WearableSizeSystemCNInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableSizeSystemCN';
+	public static string $schemaTypeName = 'WearableSizeSystemCN';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableSizeSystemCN';
+	public static string $schemaTypeScope = 'https://schema.org/WearableSizeSystemCN';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableSizeSystemEnumeration';
+	public static string $schemaTypeExtends = 'WearableSizeSystemEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Chinese size system for wearables.';
+	public static string $schemaTypeDescription = 'Chinese size system for wearables.';
 
 
 	/**

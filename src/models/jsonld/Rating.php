@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -32,28 +32,28 @@ class Rating extends MetaJsonLd implements RatingInterface, IntangibleInterface,
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Rating';
+	public static string $schemaTypeName = 'Rating';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Rating';
+	public static string $schemaTypeScope = 'https://schema.org/Rating';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A rating is an evaluation on a numeric scale, such as 1 to 5 stars.';
+	public static string $schemaTypeDescription = 'A rating is an evaluation on a numeric scale, such as 1 to 5 stars.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class PrescriptionOnly extends MetaJsonLd implements PrescriptionOnlyInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PrescriptionOnly';
+	public static string $schemaTypeName = 'PrescriptionOnly';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PrescriptionOnly';
+	public static string $schemaTypeScope = 'https://schema.org/PrescriptionOnly';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DrugPrescriptionStatus';
+	public static string $schemaTypeExtends = 'DrugPrescriptionStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Available by prescription only.';
+	public static string $schemaTypeDescription = 'Available by prescription only.';
 
 
 	/**

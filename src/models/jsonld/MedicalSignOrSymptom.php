@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MedicalSignOrSymptom extends MetaJsonLd implements MedicalSignOrSymptomInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalSignOrSymptom';
+	public static string $schemaTypeName = 'MedicalSignOrSymptom';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalSignOrSymptom';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalSignOrSymptom';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalCondition';
+	public static string $schemaTypeExtends = 'MedicalCondition';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any feature associated or not with a medical condition. In medicine a symptom is generally subjective while a sign is objective.';
+	public static string $schemaTypeDescription = 'Any feature associated or not with a medical condition. In medicine a symptom is generally subjective while a sign is objective.';
 
 
 	/**

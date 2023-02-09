@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ContactPoint extends MetaJsonLd implements ContactPointInterface, Structur
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ContactPoint';
+	public static string $schemaTypeName = 'ContactPoint';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ContactPoint';
+	public static string $schemaTypeScope = 'https://schema.org/ContactPoint';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'StructuredValue';
+	public static string $schemaTypeExtends = 'StructuredValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A contact point—for example, a Customer Complaints department.';
+	public static string $schemaTypeDescription = 'A contact point—for example, a Customer Complaints department.';
 
 
 	/**

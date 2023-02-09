@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PrognosisHealthAspect extends MetaJsonLd implements PrognosisHealthAspectI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PrognosisHealthAspect';
+	public static string $schemaTypeName = 'PrognosisHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PrognosisHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/PrognosisHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Typical progression and happenings of life course of the topic.';
+	public static string $schemaTypeDescription = 'Typical progression and happenings of life course of the topic.';
 
 
 	/**

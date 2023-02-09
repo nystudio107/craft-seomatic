@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Bridge extends MetaJsonLd implements BridgeInterface, CivicStructureInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Bridge';
+	public static string $schemaTypeName = 'Bridge';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Bridge';
+	public static string $schemaTypeScope = 'https://schema.org/Bridge';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A bridge.';
+	public static string $schemaTypeDescription = 'A bridge.';
 
 
 	/**

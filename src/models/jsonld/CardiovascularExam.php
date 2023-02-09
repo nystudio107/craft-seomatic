@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class CardiovascularExam extends MetaJsonLd implements CardiovascularExamInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CardiovascularExam';
+	public static string $schemaTypeName = 'CardiovascularExam';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CardiovascularExam';
+	public static string $schemaTypeScope = 'https://schema.org/CardiovascularExam';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalExam';
+	public static string $schemaTypeExtends = 'PhysicalExam';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Cardiovascular system assessment with clinical examination.';
+	public static string $schemaTypeDescription = 'Cardiovascular system assessment with clinical examination.';
 
 
 	/**

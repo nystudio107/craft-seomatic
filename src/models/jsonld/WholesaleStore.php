@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WholesaleStore extends MetaJsonLd implements WholesaleStoreInterface, Stor
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WholesaleStore';
+	public static string $schemaTypeName = 'WholesaleStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WholesaleStore';
+	public static string $schemaTypeScope = 'https://schema.org/WholesaleStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A wholesale store.';
+	public static string $schemaTypeDescription = 'A wholesale store.';
 
 
 	/**

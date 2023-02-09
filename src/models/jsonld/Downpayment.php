@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Downpayment extends MetaJsonLd implements DownpaymentInterface, PriceCompo
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Downpayment';
+	public static string $schemaTypeName = 'Downpayment';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Downpayment';
+	public static string $schemaTypeScope = 'https://schema.org/Downpayment';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceComponentTypeEnumeration';
+	public static string $schemaTypeExtends = 'PriceComponentTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Represents the downpayment (up-front payment) price component of the total price for an offered product that has additional installment payments.';
+	public static string $schemaTypeDescription = 'Represents the downpayment (up-front payment) price component of the total price for an offered product that has additional installment payments.';
 
 
 	/**

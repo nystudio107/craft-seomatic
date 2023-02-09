@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MonetaryGrant extends MetaJsonLd implements MonetaryGrantInterface, GrantI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MonetaryGrant';
+	public static string $schemaTypeName = 'MonetaryGrant';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MonetaryGrant';
+	public static string $schemaTypeScope = 'https://schema.org/MonetaryGrant';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Grant';
+	public static string $schemaTypeExtends = 'Grant';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A monetary grant.';
+	public static string $schemaTypeDescription = 'A monetary grant.';
 
 
 	/**

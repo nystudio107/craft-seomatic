@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Reservoir extends MetaJsonLd implements ReservoirInterface, BodyOfWaterInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Reservoir';
+	public static string $schemaTypeName = 'Reservoir';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Reservoir';
+	public static string $schemaTypeScope = 'https://schema.org/Reservoir';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyOfWater';
+	public static string $schemaTypeExtends = 'BodyOfWater';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A reservoir of water, typically an artificially created lake, like the Lake Kariba reservoir.';
+	public static string $schemaTypeDescription = 'A reservoir of water, typically an artificially created lake, like the Lake Kariba reservoir.';
 
 
 	/**

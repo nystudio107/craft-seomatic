@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class DefinedTermSet extends MetaJsonLd implements DefinedTermSetInterface, Crea
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DefinedTermSet';
+	public static string $schemaTypeName = 'DefinedTermSet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DefinedTermSet';
+	public static string $schemaTypeScope = 'https://schema.org/DefinedTermSet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A set of defined terms, for example a set of categories or a classification scheme, a glossary, dictionary or enumeration.';
+	public static string $schemaTypeDescription = 'A set of defined terms, for example a set of categories or a classification scheme, a glossary, dictionary or enumeration.';
 
 
 	/**

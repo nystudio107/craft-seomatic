@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class OneTimePayments extends MetaJsonLd implements OneTimePaymentsInterface, Go
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OneTimePayments';
+	public static string $schemaTypeName = 'OneTimePayments';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OneTimePayments';
+	public static string $schemaTypeScope = 'https://schema.org/OneTimePayments';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBenefitsType';
+	public static string $schemaTypeExtends = 'GovernmentBenefitsType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'OneTimePayments: this is a benefit for one-time payments for individuals.';
+	public static string $schemaTypeDescription = 'OneTimePayments: this is a benefit for one-time payments for individuals.';
 
 
 	/**

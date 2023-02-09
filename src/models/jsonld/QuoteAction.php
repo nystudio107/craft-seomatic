@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class QuoteAction extends MetaJsonLd implements QuoteActionInterface, TradeActio
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'QuoteAction';
+	public static string $schemaTypeName = 'QuoteAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/QuoteAction';
+	public static string $schemaTypeScope = 'https://schema.org/QuoteAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'TradeAction';
+	public static string $schemaTypeExtends = 'TradeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An agent quotes/estimates/appraises an object/product/service with a price at a location/store.';
+	public static string $schemaTypeDescription = 'An agent quotes/estimates/appraises an object/product/service with a price at a location/store.';
 
 
 	/**

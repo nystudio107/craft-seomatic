@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class PalliativeProcedure extends MetaJsonLd implements PalliativeProcedureInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PalliativeProcedure';
+	public static string $schemaTypeName = 'PalliativeProcedure';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PalliativeProcedure';
+	public static string $schemaTypeScope = 'https://schema.org/PalliativeProcedure';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalProcedure';
+	public static string $schemaTypeExtends = 'MedicalProcedure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.';
+	public static string $schemaTypeDescription = 'A medical procedure intended primarily for palliative purposes, aimed at relieving the symptoms of an underlying health condition.';
 
 
 	/**

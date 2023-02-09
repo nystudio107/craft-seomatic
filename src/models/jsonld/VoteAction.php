@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class VoteAction extends MetaJsonLd implements VoteActionInterface, ChooseAction
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'VoteAction';
+	public static string $schemaTypeName = 'VoteAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/VoteAction';
+	public static string $schemaTypeScope = 'https://schema.org/VoteAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ChooseAction';
+	public static string $schemaTypeExtends = 'ChooseAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of expressing a preference from a fixed/finite/structured set of choices/options.';
+	public static string $schemaTypeDescription = 'The act of expressing a preference from a fixed/finite/structured set of choices/options.';
 
 
 	/**

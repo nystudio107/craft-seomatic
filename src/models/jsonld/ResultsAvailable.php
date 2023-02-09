@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ResultsAvailable extends MetaJsonLd implements ResultsAvailableInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ResultsAvailable';
+	public static string $schemaTypeName = 'ResultsAvailable';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ResultsAvailable';
+	public static string $schemaTypeScope = 'https://schema.org/ResultsAvailable';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalStudyStatus';
+	public static string $schemaTypeExtends = 'MedicalStudyStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Results are available.';
+	public static string $schemaTypeDescription = 'Results are available.';
 
 
 	/**

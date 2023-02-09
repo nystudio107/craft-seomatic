@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class HealthcareConsideration extends MetaJsonLd implements HealthcareConsiderat
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HealthcareConsideration';
+	public static string $schemaTypeName = 'HealthcareConsideration';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HealthcareConsideration';
+	public static string $schemaTypeScope = 'https://schema.org/HealthcareConsideration';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AdultOrientedEnumeration';
+	public static string $schemaTypeExtends = 'AdultOrientedEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Item is a pharmaceutical (e.g., a prescription or OTC drug) or a restricted medical device.';
+	public static string $schemaTypeDescription = 'Item is a pharmaceutical (e.g., a prescription or OTC drug) or a restricted medical device.';
 
 
 	/**

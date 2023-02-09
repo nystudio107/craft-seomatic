@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class LaserDiscFormat extends MetaJsonLd implements LaserDiscFormatInterface, Mu
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LaserDiscFormat';
+	public static string $schemaTypeName = 'LaserDiscFormat';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LaserDiscFormat';
+	public static string $schemaTypeScope = 'https://schema.org/LaserDiscFormat';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicReleaseFormatType';
+	public static string $schemaTypeExtends = 'MusicReleaseFormatType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'LaserDiscFormat.';
+	public static string $schemaTypeDescription = 'LaserDiscFormat.';
 
 
 	/**

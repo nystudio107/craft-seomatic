@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Mosque extends MetaJsonLd implements MosqueInterface, PlaceOfWorshipInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Mosque';
+	public static string $schemaTypeName = 'Mosque';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Mosque';
+	public static string $schemaTypeScope = 'https://schema.org/Mosque';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PlaceOfWorship';
+	public static string $schemaTypeExtends = 'PlaceOfWorship';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A mosque.';
+	public static string $schemaTypeDescription = 'A mosque.';
 
 
 	/**

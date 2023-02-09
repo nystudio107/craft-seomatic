@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class BenefitsHealthAspect extends MetaJsonLd implements BenefitsHealthAspectInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BenefitsHealthAspect';
+	public static string $schemaTypeName = 'BenefitsHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BenefitsHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/BenefitsHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Content about the benefits and advantages of usage or utilization of topic.';
+	public static string $schemaTypeDescription = 'Content about the benefits and advantages of usage or utilization of topic.';
 
 
 	/**

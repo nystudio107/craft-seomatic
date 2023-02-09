@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class RsvpResponseType extends MetaJsonLd implements RsvpResponseTypeInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RsvpResponseType';
+	public static string $schemaTypeName = 'RsvpResponseType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RsvpResponseType';
+	public static string $schemaTypeScope = 'https://schema.org/RsvpResponseType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'RsvpResponseType is an enumeration type whose instances represent responding to an RSVP request.';
+	public static string $schemaTypeDescription = 'RsvpResponseType is an enumeration type whose instances represent responding to an RSVP request.';
 
 
 	/**

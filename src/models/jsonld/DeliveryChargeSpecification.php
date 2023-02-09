@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DeliveryChargeSpecification extends MetaJsonLd implements DeliveryChargeSp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DeliveryChargeSpecification';
+	public static string $schemaTypeName = 'DeliveryChargeSpecification';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DeliveryChargeSpecification';
+	public static string $schemaTypeScope = 'https://schema.org/DeliveryChargeSpecification';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PriceSpecification';
+	public static string $schemaTypeExtends = 'PriceSpecification';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The price for the delivery of an offer using a particular delivery method.';
+	public static string $schemaTypeDescription = 'The price for the delivery of an offer using a particular delivery method.';
 
 
 	/**

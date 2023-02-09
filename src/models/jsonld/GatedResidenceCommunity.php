@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class GatedResidenceCommunity extends MetaJsonLd implements GatedResidenceCommun
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'GatedResidenceCommunity';
+	public static string $schemaTypeName = 'GatedResidenceCommunity';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/GatedResidenceCommunity';
+	public static string $schemaTypeScope = 'https://schema.org/GatedResidenceCommunity';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Residence';
+	public static string $schemaTypeExtends = 'Residence';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Residence type: Gated community.';
+	public static string $schemaTypeDescription = 'Residence type: Gated community.';
 
 
 	/**

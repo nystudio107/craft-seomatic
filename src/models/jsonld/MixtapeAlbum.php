@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class MixtapeAlbum extends MetaJsonLd implements MixtapeAlbumInterface, MusicAlb
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MixtapeAlbum';
+	public static string $schemaTypeName = 'MixtapeAlbum';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MixtapeAlbum';
+	public static string $schemaTypeScope = 'https://schema.org/MixtapeAlbum';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumProductionType';
+	public static string $schemaTypeExtends = 'MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'MixtapeAlbum.';
+	public static string $schemaTypeDescription = 'MixtapeAlbum.';
 
 
 	/**

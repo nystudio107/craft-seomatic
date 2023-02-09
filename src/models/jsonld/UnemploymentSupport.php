@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class UnemploymentSupport extends MetaJsonLd implements UnemploymentSupportInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'UnemploymentSupport';
+	public static string $schemaTypeName = 'UnemploymentSupport';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/UnemploymentSupport';
+	public static string $schemaTypeScope = 'https://schema.org/UnemploymentSupport';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBenefitsType';
+	public static string $schemaTypeExtends = 'GovernmentBenefitsType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'UnemploymentSupport: this is a benefit for unemployment support.';
+	public static string $schemaTypeDescription = 'UnemploymentSupport: this is a benefit for unemployment support.';
 
 
 	/**

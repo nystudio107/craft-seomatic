@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -42,28 +42,28 @@ class StagedContent extends MetaJsonLd implements StagedContentInterface, MediaM
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'StagedContent';
+	public static string $schemaTypeName = 'StagedContent';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/StagedContent';
+	public static string $schemaTypeScope = 'https://schema.org/StagedContent';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MediaManipulationRatingEnumeration';
+	public static string $schemaTypeExtends = 'MediaManipulationRatingEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = "Content coded 'staged content' in a [[MediaReview]], considered in the context of how it was published or shared.\n\nFor a [[VideoObject]] to be 'staged content': A video that has been created using actors or similarly contrived.\n\nFor an [[ImageObject]] to be 'staged content': An image that was created using actors or similarly contrived, such as a screenshot of a fake tweet.\n\nFor an [[ImageObject]] with embedded text to be 'staged content': An image that was created using actors or similarly contrived, such as a screenshot of a fake tweet.\n\nFor an [[AudioObject]] to be 'staged content': Audio that has been created using actors or similarly contrived.";
+	public static string $schemaTypeDescription = "Content coded 'staged content' in a [[MediaReview]], considered in the context of how it was published or shared.\n\nFor a [[VideoObject]] to be 'staged content': A video that has been created using actors or similarly contrived.\n\nFor an [[ImageObject]] to be 'staged content': An image that was created using actors or similarly contrived, such as a screenshot of a fake tweet.\n\nFor an [[ImageObject]] with embedded text to be 'staged content': An image that was created using actors or similarly contrived, such as a screenshot of a fake tweet.\n\nFor an [[AudioObject]] to be 'staged content': Audio that has been created using actors or similarly contrived.";
 
 
 	/**

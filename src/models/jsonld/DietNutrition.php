@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -40,28 +40,28 @@ class DietNutrition extends MetaJsonLd implements DietNutritionInterface, Medica
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DietNutrition';
+	public static string $schemaTypeName = 'DietNutrition';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DietNutrition';
+	public static string $schemaTypeScope = 'https://schema.org/DietNutrition';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Dietetics and nutrition as a medical specialty.';
+	public static string $schemaTypeDescription = 'Dietetics and nutrition as a medical specialty.';
 
 
 	/**

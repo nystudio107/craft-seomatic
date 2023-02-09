@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DrawAction extends MetaJsonLd implements DrawActionInterface, CreateAction
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrawAction';
+	public static string $schemaTypeName = 'DrawAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrawAction';
+	public static string $schemaTypeScope = 'https://schema.org/DrawAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreateAction';
+	public static string $schemaTypeExtends = 'CreateAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of producing a visual/graphical representation of an object, typically with a pen/pencil and paper as instruments.';
+	public static string $schemaTypeDescription = 'The act of producing a visual/graphical representation of an object, typically with a pen/pencil and paper as instruments.';
 
 
 	/**

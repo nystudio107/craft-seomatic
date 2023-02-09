@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class OTC extends MetaJsonLd implements OTCInterface, DrugPrescriptionStatusInte
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OTC';
+	public static string $schemaTypeName = 'OTC';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OTC';
+	public static string $schemaTypeScope = 'https://schema.org/OTC';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DrugPrescriptionStatus';
+	public static string $schemaTypeExtends = 'DrugPrescriptionStatus';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The character of a medical substance, typically a medicine, of being available over the counter or not.';
+	public static string $schemaTypeDescription = 'The character of a medical substance, typically a medicine, of being available over the counter or not.';
 
 
 	/**

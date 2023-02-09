@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MapCategoryType extends MetaJsonLd implements MapCategoryTypeInterface, En
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MapCategoryType';
+	public static string $schemaTypeName = 'MapCategoryType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MapCategoryType';
+	public static string $schemaTypeScope = 'https://schema.org/MapCategoryType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Enumeration';
+	public static string $schemaTypeExtends = 'Enumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An enumeration of several kinds of Map.';
+	public static string $schemaTypeDescription = 'An enumeration of several kinds of Map.';
 
 
 	/**

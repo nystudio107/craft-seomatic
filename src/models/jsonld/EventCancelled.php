@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class EventCancelled extends MetaJsonLd implements EventCancelledInterface, Even
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'EventCancelled';
+	public static string $schemaTypeName = 'EventCancelled';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/EventCancelled';
+	public static string $schemaTypeScope = 'https://schema.org/EventCancelled';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EventStatusType';
+	public static string $schemaTypeExtends = 'EventStatusType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The event has been cancelled. If the event has multiple startDate values, all are assumed to be cancelled. Either startDate or previousStartDate may be used to specify the event\'s cancelled date(s).';
+	public static string $schemaTypeDescription = 'The event has been cancelled. If the event has multiple startDate values, all are assumed to be cancelled. Either startDate or previousStartDate may be used to specify the event\'s cancelled date(s).';
 
 
 	/**

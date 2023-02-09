@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ChooseAction extends MetaJsonLd implements ChooseActionInterface, AssessAc
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ChooseAction';
+	public static string $schemaTypeName = 'ChooseAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ChooseAction';
+	public static string $schemaTypeScope = 'https://schema.org/ChooseAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AssessAction';
+	public static string $schemaTypeExtends = 'AssessAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of expressing a preference from a set of options or a large or unbounded set of choices/options.';
+	public static string $schemaTypeDescription = 'The act of expressing a preference from a set of options or a large or unbounded set of choices/options.';
 
 
 	/**

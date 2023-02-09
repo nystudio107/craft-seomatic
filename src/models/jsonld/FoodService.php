@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class FoodService extends MetaJsonLd implements FoodServiceInterface, ServiceInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'FoodService';
+	public static string $schemaTypeName = 'FoodService';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/FoodService';
+	public static string $schemaTypeScope = 'https://schema.org/FoodService';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Service';
+	public static string $schemaTypeExtends = 'Service';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A food service, like breakfast, lunch, or dinner.';
+	public static string $schemaTypeDescription = 'A food service, like breakfast, lunch, or dinner.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ComputerStore extends MetaJsonLd implements ComputerStoreInterface, StoreI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ComputerStore';
+	public static string $schemaTypeName = 'ComputerStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ComputerStore';
+	public static string $schemaTypeScope = 'https://schema.org/ComputerStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A computer store.';
+	public static string $schemaTypeDescription = 'A computer store.';
 
 
 	/**

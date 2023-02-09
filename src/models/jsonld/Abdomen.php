@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Abdomen extends MetaJsonLd implements AbdomenInterface, PhysicalExamInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Abdomen';
+	public static string $schemaTypeName = 'Abdomen';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Abdomen';
+	public static string $schemaTypeScope = 'https://schema.org/Abdomen';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalExam';
+	public static string $schemaTypeExtends = 'PhysicalExam';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Abdomen clinical examination.';
+	public static string $schemaTypeDescription = 'Abdomen clinical examination.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ContactPage extends MetaJsonLd implements ContactPageInterface, WebPageInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ContactPage';
+	public static string $schemaTypeName = 'ContactPage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ContactPage';
+	public static string $schemaTypeScope = 'https://schema.org/ContactPage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPage';
+	public static string $schemaTypeExtends = 'WebPage';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Web page type: Contact page.';
+	public static string $schemaTypeDescription = 'Web page type: Contact page.';
 
 
 	/**

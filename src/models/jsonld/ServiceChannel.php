@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ServiceChannel extends MetaJsonLd implements ServiceChannelInterface, Inta
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ServiceChannel';
+	public static string $schemaTypeName = 'ServiceChannel';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ServiceChannel';
+	public static string $schemaTypeScope = 'https://schema.org/ServiceChannel';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Intangible';
+	public static string $schemaTypeExtends = 'Intangible';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A means for accessing a service, e.g. a government office location, web site, or phone number.';
+	public static string $schemaTypeDescription = 'A means for accessing a service, e.g. a government office location, web site, or phone number.';
 
 
 	/**

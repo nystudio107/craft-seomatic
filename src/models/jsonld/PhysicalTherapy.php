@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class PhysicalTherapy extends MetaJsonLd implements PhysicalTherapyInterface, Me
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PhysicalTherapy';
+	public static string $schemaTypeName = 'PhysicalTherapy';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PhysicalTherapy';
+	public static string $schemaTypeScope = 'https://schema.org/PhysicalTherapy';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTherapy';
+	public static string $schemaTypeExtends = 'MedicalTherapy';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A process of progressive physical care and rehabilitation aimed at improving a health condition.';
+	public static string $schemaTypeDescription = 'A process of progressive physical care and rehabilitation aimed at improving a health condition.';
 
 
 	/**

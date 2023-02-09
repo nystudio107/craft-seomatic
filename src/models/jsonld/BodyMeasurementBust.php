@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class BodyMeasurementBust extends MetaJsonLd implements BodyMeasurementBustInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementBust';
+	public static string $schemaTypeName = 'BodyMeasurementBust';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementBust';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementBust';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Maximum girth of bust. Used, for example, to fit women\'s suits.';
+	public static string $schemaTypeDescription = 'Maximum girth of bust. Used, for example, to fit women\'s suits.';
 
 
 	/**

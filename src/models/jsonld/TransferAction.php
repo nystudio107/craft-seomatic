@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class TransferAction extends MetaJsonLd implements TransferActionInterface, Acti
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TransferAction';
+	public static string $schemaTypeName = 'TransferAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TransferAction';
+	public static string $schemaTypeScope = 'https://schema.org/TransferAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Action';
+	public static string $schemaTypeExtends = 'Action';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of transferring/moving (abstract or concrete) animate or inanimate objects from one place to another.';
+	public static string $schemaTypeDescription = 'The act of transferring/moving (abstract or concrete) animate or inanimate objects from one place to another.';
 
 
 	/**

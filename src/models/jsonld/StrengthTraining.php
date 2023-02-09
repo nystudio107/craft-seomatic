@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class StrengthTraining extends MetaJsonLd implements StrengthTrainingInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'StrengthTraining';
+	public static string $schemaTypeName = 'StrengthTraining';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/StrengthTraining';
+	public static string $schemaTypeScope = 'https://schema.org/StrengthTraining';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PhysicalActivityCategory';
+	public static string $schemaTypeExtends = 'PhysicalActivityCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Physical activity that is engaged in to improve muscle and bone strength. Also referred to as resistance training.';
+	public static string $schemaTypeDescription = 'Physical activity that is engaged in to improve muscle and bone strength. Also referred to as resistance training.';
 
 
 	/**

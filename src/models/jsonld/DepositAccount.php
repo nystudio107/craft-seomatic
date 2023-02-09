@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class DepositAccount extends MetaJsonLd implements DepositAccountInterface, Bank
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DepositAccount';
+	public static string $schemaTypeName = 'DepositAccount';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DepositAccount';
+	public static string $schemaTypeScope = 'https://schema.org/DepositAccount';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BankAccount';
+	public static string $schemaTypeExtends = 'BankAccount';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of Bank Account with a main purpose of depositing funds to gain interest or other benefits.';
+	public static string $schemaTypeDescription = 'A type of Bank Account with a main purpose of depositing funds to gain interest or other benefits.';
 
 
 	/**

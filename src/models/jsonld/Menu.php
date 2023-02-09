@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Menu extends MetaJsonLd implements MenuInterface, CreativeWorkInterface, T
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Menu';
+	public static string $schemaTypeName = 'Menu';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Menu';
+	public static string $schemaTypeScope = 'https://schema.org/Menu';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A structured representation of food or drink items available from a FoodEstablishment.';
+	public static string $schemaTypeDescription = 'A structured representation of food or drink items available from a FoodEstablishment.';
 
 
 	/**

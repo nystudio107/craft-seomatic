@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PlanAction extends MetaJsonLd implements PlanActionInterface, OrganizeActi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PlanAction';
+	public static string $schemaTypeName = 'PlanAction';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PlanAction';
+	public static string $schemaTypeScope = 'https://schema.org/PlanAction';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OrganizeAction';
+	public static string $schemaTypeExtends = 'OrganizeAction';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The act of planning the execution of an event/task/action/reservation/plan to a future date.';
+	public static string $schemaTypeDescription = 'The act of planning the execution of an event/task/action/reservation/plan to a future date.';
 
 
 	/**

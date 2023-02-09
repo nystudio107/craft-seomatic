@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BodyMeasurementInsideLeg extends MetaJsonLd implements BodyMeasurementInsi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BodyMeasurementInsideLeg';
+	public static string $schemaTypeName = 'BodyMeasurementInsideLeg';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BodyMeasurementInsideLeg';
+	public static string $schemaTypeScope = 'https://schema.org/BodyMeasurementInsideLeg';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
+	public static string $schemaTypeExtends = 'BodyMeasurementTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Inside leg (measured between crotch and soles of feet). Used, for example, to fit pants.';
+	public static string $schemaTypeDescription = 'Inside leg (measured between crotch and soles of feet). Used, for example, to fit pants.';
 
 
 	/**

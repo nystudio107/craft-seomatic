@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class AdultEntertainment extends MetaJsonLd implements AdultEntertainmentInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AdultEntertainment';
+	public static string $schemaTypeName = 'AdultEntertainment';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AdultEntertainment';
+	public static string $schemaTypeScope = 'https://schema.org/AdultEntertainment';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'EntertainmentBusiness';
+	public static string $schemaTypeExtends = 'EntertainmentBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An adult entertainment establishment.';
+	public static string $schemaTypeDescription = 'An adult entertainment establishment.';
 
 
 	/**

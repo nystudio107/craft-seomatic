@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ReturnLabelDownloadAndPrint extends MetaJsonLd implements ReturnLabelDownl
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReturnLabelDownloadAndPrint';
+	public static string $schemaTypeName = 'ReturnLabelDownloadAndPrint';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReturnLabelDownloadAndPrint';
+	public static string $schemaTypeScope = 'https://schema.org/ReturnLabelDownloadAndPrint';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
+	public static string $schemaTypeExtends = 'ReturnLabelSourceEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicated that a return label must be downloaded and printed by the customer.';
+	public static string $schemaTypeDescription = 'Indicated that a return label must be downloaded and printed by the customer.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class StoreCreditRefund extends MetaJsonLd implements StoreCreditRefundInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'StoreCreditRefund';
+	public static string $schemaTypeName = 'StoreCreditRefund';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/StoreCreditRefund';
+	public static string $schemaTypeScope = 'https://schema.org/StoreCreditRefund';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RefundTypeEnumeration';
+	public static string $schemaTypeExtends = 'RefundTypeEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that the customer receives a store credit as refund when returning a product.';
+	public static string $schemaTypeDescription = 'Specifies that the customer receives a store credit as refund when returning a product.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -31,28 +31,28 @@ class PronounceableText extends MetaJsonLd implements PronounceableTextInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PronounceableText';
+	public static string $schemaTypeName = 'PronounceableText';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PronounceableText';
+	public static string $schemaTypeScope = 'https://schema.org/PronounceableText';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Text';
+	public static string $schemaTypeExtends = 'Text';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Data type: PronounceableText.';
+	public static string $schemaTypeDescription = 'Data type: PronounceableText.';
 
 
 	/**

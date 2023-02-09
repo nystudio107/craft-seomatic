@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class KosherDiet extends MetaJsonLd implements KosherDietInterface, RestrictedDi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'KosherDiet';
+	public static string $schemaTypeName = 'KosherDiet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/KosherDiet';
+	public static string $schemaTypeScope = 'https://schema.org/KosherDiet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'RestrictedDiet';
+	public static string $schemaTypeExtends = 'RestrictedDiet';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A diet conforming to Jewish dietary practices.';
+	public static string $schemaTypeDescription = 'A diet conforming to Jewish dietary practices.';
 
 
 	/**

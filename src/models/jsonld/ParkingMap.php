@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ParkingMap extends MetaJsonLd implements ParkingMapInterface, MapCategoryT
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ParkingMap';
+	public static string $schemaTypeName = 'ParkingMap';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ParkingMap';
+	public static string $schemaTypeScope = 'https://schema.org/ParkingMap';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MapCategoryType';
+	public static string $schemaTypeExtends = 'MapCategoryType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A parking map.';
+	public static string $schemaTypeDescription = 'A parking map.';
 
 
 	/**

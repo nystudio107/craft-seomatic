@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class AutoPartsStore extends MetaJsonLd implements AutoPartsStoreInterface, Stor
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AutoPartsStore';
+	public static string $schemaTypeName = 'AutoPartsStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AutoPartsStore';
+	public static string $schemaTypeScope = 'https://schema.org/AutoPartsStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An auto parts store.';
+	public static string $schemaTypeDescription = 'An auto parts store.';
 
 
 	/**

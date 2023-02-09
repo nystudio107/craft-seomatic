@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class ResearchProject extends MetaJsonLd implements ResearchProjectInterface, Pr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ResearchProject';
+	public static string $schemaTypeName = 'ResearchProject';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ResearchProject';
+	public static string $schemaTypeScope = 'https://schema.org/ResearchProject';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Project';
+	public static string $schemaTypeExtends = 'Project';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A Research project.';
+	public static string $schemaTypeDescription = 'A Research project.';
 
 
 	/**

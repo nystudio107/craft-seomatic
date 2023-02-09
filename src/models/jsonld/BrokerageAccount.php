@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class BrokerageAccount extends MetaJsonLd implements BrokerageAccountInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BrokerageAccount';
+	public static string $schemaTypeName = 'BrokerageAccount';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BrokerageAccount';
+	public static string $schemaTypeScope = 'https://schema.org/BrokerageAccount';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'InvestmentOrDeposit';
+	public static string $schemaTypeExtends = 'InvestmentOrDeposit';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An account that allows an investor to deposit funds and place investment orders with a licensed broker or brokerage firm.';
+	public static string $schemaTypeDescription = 'An account that allows an investor to deposit funds and place investment orders with a licensed broker or brokerage firm.';
 
 
 	/**

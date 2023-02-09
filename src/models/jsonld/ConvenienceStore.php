@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ConvenienceStore extends MetaJsonLd implements ConvenienceStoreInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ConvenienceStore';
+	public static string $schemaTypeName = 'ConvenienceStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ConvenienceStore';
+	public static string $schemaTypeScope = 'https://schema.org/ConvenienceStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Store';
+	public static string $schemaTypeExtends = 'Store';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A convenience store.';
+	public static string $schemaTypeDescription = 'A convenience store.';
 
 
 	/**

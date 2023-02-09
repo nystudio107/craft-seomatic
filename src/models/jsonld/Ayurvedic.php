@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class Ayurvedic extends MetaJsonLd implements AyurvedicInterface, MedicineSystem
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Ayurvedic';
+	public static string $schemaTypeName = 'Ayurvedic';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Ayurvedic';
+	public static string $schemaTypeScope = 'https://schema.org/Ayurvedic';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicineSystem';
+	public static string $schemaTypeExtends = 'MedicineSystem';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A system of medicine that originated in India over thousands of years and that focuses on integrating and balancing the body, mind, and spirit.';
+	public static string $schemaTypeDescription = 'A system of medicine that originated in India over thousands of years and that focuses on integrating and balancing the body, mind, and spirit.';
 
 
 	/**

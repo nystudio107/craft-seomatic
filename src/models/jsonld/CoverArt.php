@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class CoverArt extends MetaJsonLd implements CoverArtInterface, VisualArtworkInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CoverArt';
+	public static string $schemaTypeName = 'CoverArt';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CoverArt';
+	public static string $schemaTypeScope = 'https://schema.org/CoverArt';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'VisualArtwork';
+	public static string $schemaTypeExtends = 'VisualArtwork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The artwork on the outer surface of a CreativeWork.';
+	public static string $schemaTypeDescription = 'The artwork on the outer surface of a CreativeWork.';
 
 
 	/**

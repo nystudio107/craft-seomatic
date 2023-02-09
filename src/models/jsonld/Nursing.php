@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -41,28 +41,28 @@ class Nursing extends MetaJsonLd implements NursingInterface, MedicalBusinessInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Nursing';
+	public static string $schemaTypeName = 'Nursing';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Nursing';
+	public static string $schemaTypeScope = 'https://schema.org/Nursing';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalBusiness';
+	public static string $schemaTypeExtends = 'MedicalBusiness';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A health profession of a person formally educated and trained in the care of the sick or infirm person.';
+	public static string $schemaTypeDescription = 'A health profession of a person formally educated and trained in the care of the sick or infirm person.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Wholesale extends MetaJsonLd implements WholesaleInterface, DrugCostCatego
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Wholesale';
+	public static string $schemaTypeName = 'Wholesale';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Wholesale';
+	public static string $schemaTypeScope = 'https://schema.org/Wholesale';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DrugCostCategory';
+	public static string $schemaTypeExtends = 'DrugCostCategory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The drug\'s cost represents the wholesale acquisition cost of the drug.';
+	public static string $schemaTypeDescription = 'The drug\'s cost represents the wholesale acquisition cost of the drug.';
 
 
 	/**

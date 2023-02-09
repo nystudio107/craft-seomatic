@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ReturnInStore extends MetaJsonLd implements ReturnInStoreInterface, Return
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReturnInStore';
+	public static string $schemaTypeName = 'ReturnInStore';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReturnInStore';
+	public static string $schemaTypeScope = 'https://schema.org/ReturnInStore';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ReturnMethodEnumeration';
+	public static string $schemaTypeExtends = 'ReturnMethodEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Specifies that product returns must be made in a store.';
+	public static string $schemaTypeDescription = 'Specifies that product returns must be made in a store.';
 
 
 	/**

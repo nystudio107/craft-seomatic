@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Observational extends MetaJsonLd implements ObservationalInterface, Medica
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Observational';
+	public static string $schemaTypeName = 'Observational';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Observational';
+	public static string $schemaTypeScope = 'https://schema.org/Observational';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalObservationalStudyDesign';
+	public static string $schemaTypeExtends = 'MedicalObservationalStudyDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An observational study design.';
+	public static string $schemaTypeDescription = 'An observational study design.';
 
 
 	/**

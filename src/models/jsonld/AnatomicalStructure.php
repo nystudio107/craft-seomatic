@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class AnatomicalStructure extends MetaJsonLd implements AnatomicalStructureInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'AnatomicalStructure';
+	public static string $schemaTypeName = 'AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/AnatomicalStructure';
+	public static string $schemaTypeScope = 'https://schema.org/AnatomicalStructure';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Any part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures.';
+	public static string $schemaTypeDescription = 'Any part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures.';
 
 
 	/**

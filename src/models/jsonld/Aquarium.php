@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class Aquarium extends MetaJsonLd implements AquariumInterface, CivicStructureIn
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Aquarium';
+	public static string $schemaTypeName = 'Aquarium';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Aquarium';
+	public static string $schemaTypeScope = 'https://schema.org/Aquarium';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Aquarium.';
+	public static string $schemaTypeDescription = 'Aquarium.';
 
 
 	/**

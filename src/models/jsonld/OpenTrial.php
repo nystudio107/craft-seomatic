@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class OpenTrial extends MetaJsonLd implements OpenTrialInterface, MedicalTrialDe
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'OpenTrial';
+	public static string $schemaTypeName = 'OpenTrial';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/OpenTrial';
+	public static string $schemaTypeScope = 'https://schema.org/OpenTrial';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTrialDesign';
+	public static string $schemaTypeExtends = 'MedicalTrialDesign';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A trial design in which the researcher knows the full details of the treatment, and so does the patient.';
+	public static string $schemaTypeDescription = 'A trial design in which the researcher knows the full details of the treatment, and so does the patient.';
 
 
 	/**

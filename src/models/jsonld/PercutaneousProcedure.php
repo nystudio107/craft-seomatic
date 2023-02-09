@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class PercutaneousProcedure extends MetaJsonLd implements PercutaneousProcedureI
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PercutaneousProcedure';
+	public static string $schemaTypeName = 'PercutaneousProcedure';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PercutaneousProcedure';
+	public static string $schemaTypeScope = 'https://schema.org/PercutaneousProcedure';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalProcedureType';
+	public static string $schemaTypeExtends = 'MedicalProcedureType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of medical procedure that involves percutaneous techniques, where access to organs or tissue is achieved via needle-puncture of the skin. For example, catheter-based procedures like stent delivery.';
+	public static string $schemaTypeDescription = 'A type of medical procedure that involves percutaneous techniques, where access to organs or tissue is achieved via needle-puncture of the skin. For example, catheter-based procedures like stent delivery.';
 
 
 	/**

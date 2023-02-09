@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ReservationPackage extends MetaJsonLd implements ReservationPackageInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ReservationPackage';
+	public static string $schemaTypeName = 'ReservationPackage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ReservationPackage';
+	public static string $schemaTypeScope = 'https://schema.org/ReservationPackage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Reservation';
+	public static string $schemaTypeExtends = 'Reservation';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A group of multiple reservations with common values for all sub-reservations.';
+	public static string $schemaTypeDescription = 'A group of multiple reservations with common values for all sub-reservations.';
 
 
 	/**

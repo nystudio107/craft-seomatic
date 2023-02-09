@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DrivingSchoolVehicleUsage extends MetaJsonLd implements DrivingSchoolVehic
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DrivingSchoolVehicleUsage';
+	public static string $schemaTypeName = 'DrivingSchoolVehicleUsage';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DrivingSchoolVehicleUsage';
+	public static string $schemaTypeScope = 'https://schema.org/DrivingSchoolVehicleUsage';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CarUsageType';
+	public static string $schemaTypeExtends = 'CarUsageType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates the usage of the vehicle for driving school.';
+	public static string $schemaTypeDescription = 'Indicates the usage of the vehicle for driving school.';
 
 
 	/**

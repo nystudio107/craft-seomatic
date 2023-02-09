@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class InvestmentOrDeposit extends MetaJsonLd implements InvestmentOrDepositInter
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'InvestmentOrDeposit';
+	public static string $schemaTypeName = 'InvestmentOrDeposit';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/InvestmentOrDeposit';
+	public static string $schemaTypeScope = 'https://schema.org/InvestmentOrDeposit';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'FinancialProduct';
+	public static string $schemaTypeExtends = 'FinancialProduct';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of financial product that typically requires the client to transfer funds to a financial service in return for potential beneficial financial return.';
+	public static string $schemaTypeDescription = 'A type of financial product that typically requires the client to transfer funds to a financial service in return for potential beneficial financial return.';
 
 
 	/**

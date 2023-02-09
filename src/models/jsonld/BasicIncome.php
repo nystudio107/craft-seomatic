@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class BasicIncome extends MetaJsonLd implements BasicIncomeInterface, Government
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BasicIncome';
+	public static string $schemaTypeName = 'BasicIncome';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BasicIncome';
+	public static string $schemaTypeScope = 'https://schema.org/BasicIncome';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBenefitsType';
+	public static string $schemaTypeExtends = 'GovernmentBenefitsType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'BasicIncome: this is a benefit for basic income.';
+	public static string $schemaTypeDescription = 'BasicIncome: this is a benefit for basic income.';
 
 
 	/**

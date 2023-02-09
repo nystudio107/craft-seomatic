@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class ParentalSupport extends MetaJsonLd implements ParentalSupportInterface, Go
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ParentalSupport';
+	public static string $schemaTypeName = 'ParentalSupport';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ParentalSupport';
+	public static string $schemaTypeScope = 'https://schema.org/ParentalSupport';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBenefitsType';
+	public static string $schemaTypeExtends = 'GovernmentBenefitsType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'ParentalSupport: this is a benefit for parental support.';
+	public static string $schemaTypeDescription = 'ParentalSupport: this is a benefit for parental support.';
 
 
 	/**

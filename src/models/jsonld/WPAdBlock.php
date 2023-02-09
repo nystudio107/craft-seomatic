@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class WPAdBlock extends MetaJsonLd implements WPAdBlockInterface, WebPageElement
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WPAdBlock';
+	public static string $schemaTypeName = 'WPAdBlock';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WPAdBlock';
+	public static string $schemaTypeScope = 'https://schema.org/WPAdBlock';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WebPageElement';
+	public static string $schemaTypeExtends = 'WebPageElement';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An advertising section of the page.';
+	public static string $schemaTypeDescription = 'An advertising section of the page.';
 
 
 	/**

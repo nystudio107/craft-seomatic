@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class Church extends MetaJsonLd implements ChurchInterface, PlaceOfWorshipInterf
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Church';
+	public static string $schemaTypeName = 'Church';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Church';
+	public static string $schemaTypeScope = 'https://schema.org/Church';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'PlaceOfWorship';
+	public static string $schemaTypeExtends = 'PlaceOfWorship';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A church.';
+	public static string $schemaTypeDescription = 'A church.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class Audiobook extends MetaJsonLd implements AudiobookInterface, AudioObjectInt
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Audiobook';
+	public static string $schemaTypeName = 'Audiobook';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Audiobook';
+	public static string $schemaTypeScope = 'https://schema.org/Audiobook';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'AudioObject';
+	public static string $schemaTypeExtends = 'AudioObject';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'An audiobook.';
+	public static string $schemaTypeDescription = 'An audiobook.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class PlaceOfWorship extends MetaJsonLd implements PlaceOfWorshipInterface, Civi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PlaceOfWorship';
+	public static string $schemaTypeName = 'PlaceOfWorship';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PlaceOfWorship';
+	public static string $schemaTypeScope = 'https://schema.org/PlaceOfWorship';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CivicStructure';
+	public static string $schemaTypeExtends = 'CivicStructure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Place of worship, such as a church, synagogue, or mosque.';
+	public static string $schemaTypeDescription = 'Place of worship, such as a church, synagogue, or mosque.';
 
 
 	/**

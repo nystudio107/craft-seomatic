@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class PathologyTest extends MetaJsonLd implements PathologyTestInterface, Medica
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PathologyTest';
+	public static string $schemaTypeName = 'PathologyTest';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PathologyTest';
+	public static string $schemaTypeScope = 'https://schema.org/PathologyTest';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTest';
+	public static string $schemaTypeExtends = 'MedicalTest';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A medical test performed by a laboratory that typically involves examination of a tissue sample by a pathologist.';
+	public static string $schemaTypeDescription = 'A medical test performed by a laboratory that typically involves examination of a tissue sample by a pathologist.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class WearableSizeSystemEurope extends MetaJsonLd implements WearableSizeSystemE
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'WearableSizeSystemEurope';
+	public static string $schemaTypeName = 'WearableSizeSystemEurope';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/WearableSizeSystemEurope';
+	public static string $schemaTypeScope = 'https://schema.org/WearableSizeSystemEurope';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'WearableSizeSystemEnumeration';
+	public static string $schemaTypeExtends = 'WearableSizeSystemEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'European size system for wearables.';
+	public static string $schemaTypeDescription = 'European size system for wearables.';
 
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class PhysicalExam extends MetaJsonLd implements PhysicalExamInterface, MedicalP
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PhysicalExam';
+	public static string $schemaTypeName = 'PhysicalExam';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PhysicalExam';
+	public static string $schemaTypeScope = 'https://schema.org/PhysicalExam';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalProcedure';
+	public static string $schemaTypeExtends = 'MedicalProcedure';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A type of physical examination of a patient performed by a physician. ';
+	public static string $schemaTypeDescription = 'A type of physical examination of a patient performed by a physician. ';
 
 
 	/**

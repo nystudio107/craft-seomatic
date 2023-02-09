@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class TVEpisode extends MetaJsonLd implements TVEpisodeInterface, EpisodeInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'TVEpisode';
+	public static string $schemaTypeName = 'TVEpisode';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/TVEpisode';
+	public static string $schemaTypeScope = 'https://schema.org/TVEpisode';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Episode';
+	public static string $schemaTypeExtends = 'Episode';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A TV episode which can be part of a series or season.';
+	public static string $schemaTypeDescription = 'A TV episode which can be part of a series or season.';
 
 
 	/**

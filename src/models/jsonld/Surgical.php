@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -37,28 +37,28 @@ class Surgical extends MetaJsonLd implements SurgicalInterface, MedicalSpecialty
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'Surgical';
+	public static string $schemaTypeName = 'Surgical';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/Surgical';
+	public static string $schemaTypeScope = 'https://schema.org/Surgical';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalSpecialty';
+	public static string $schemaTypeExtends = 'MedicalSpecialty';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A specific branch of medical science that pertains to treating diseases, injuries and deformities by manual and instrumental means.';
+	public static string $schemaTypeDescription = 'A specific branch of medical science that pertains to treating diseases, injuries and deformities by manual and instrumental means.';
 
 
 	/**

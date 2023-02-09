@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DamagedCondition extends MetaJsonLd implements DamagedConditionInterface, 
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DamagedCondition';
+	public static string $schemaTypeName = 'DamagedCondition';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DamagedCondition';
+	public static string $schemaTypeScope = 'https://schema.org/DamagedCondition';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'OfferItemCondition';
+	public static string $schemaTypeExtends = 'OfferItemCondition';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Indicates that the item is damaged.';
+	public static string $schemaTypeDescription = 'Indicates that the item is damaged.';
 
 
 	/**

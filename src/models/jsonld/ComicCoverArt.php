@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -35,28 +35,28 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, ComicS
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'ComicCoverArt';
+	public static string $schemaTypeName = 'ComicCoverArt';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/ComicCoverArt';
+	public static string $schemaTypeScope = 'https://schema.org/ComicCoverArt';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'ComicStory';
+	public static string $schemaTypeExtends = 'ComicStory';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The artwork on the cover of a comic.';
+	public static string $schemaTypeDescription = 'The artwork on the cover of a comic.';
 
 
 	/**

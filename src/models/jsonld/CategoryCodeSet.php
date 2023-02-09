@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class CategoryCodeSet extends MetaJsonLd implements CategoryCodeSetInterface, De
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'CategoryCodeSet';
+	public static string $schemaTypeName = 'CategoryCodeSet';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/CategoryCodeSet';
+	public static string $schemaTypeScope = 'https://schema.org/CategoryCodeSet';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DefinedTermSet';
+	public static string $schemaTypeExtends = 'DefinedTermSet';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A set of Category Code values.';
+	public static string $schemaTypeDescription = 'A set of Category Code values.';
 
 
 	/**

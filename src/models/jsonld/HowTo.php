@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class HowTo extends MetaJsonLd implements HowToInterface, CreativeWorkInterface,
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'HowTo';
+	public static string $schemaTypeName = 'HowTo';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/HowTo';
+	public static string $schemaTypeScope = 'https://schema.org/HowTo';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'CreativeWork';
+	public static string $schemaTypeExtends = 'CreativeWork';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Instructions that explain how to achieve a result by performing a sequence of steps.';
+	public static string $schemaTypeDescription = 'Instructions that explain how to achieve a result by performing a sequence of steps.';
 
 
 	/**

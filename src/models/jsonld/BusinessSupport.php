@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class BusinessSupport extends MetaJsonLd implements BusinessSupportInterface, Go
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'BusinessSupport';
+	public static string $schemaTypeName = 'BusinessSupport';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/BusinessSupport';
+	public static string $schemaTypeScope = 'https://schema.org/BusinessSupport';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'GovernmentBenefitsType';
+	public static string $schemaTypeExtends = 'GovernmentBenefitsType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'BusinessSupport: this is a benefit for supporting businesses.';
+	public static string $schemaTypeDescription = 'BusinessSupport: this is a benefit for supporting businesses.';
 
 
 	/**

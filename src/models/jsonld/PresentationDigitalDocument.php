@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class PresentationDigitalDocument extends MetaJsonLd implements PresentationDigi
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'PresentationDigitalDocument';
+	public static string $schemaTypeName = 'PresentationDigitalDocument';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/PresentationDigitalDocument';
+	public static string $schemaTypeScope = 'https://schema.org/PresentationDigitalDocument';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'DigitalDocument';
+	public static string $schemaTypeExtends = 'DigitalDocument';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A file containing slides or used for a presentation.';
+	public static string $schemaTypeDescription = 'A file containing slides or used for a presentation.';
 
 
 	/**

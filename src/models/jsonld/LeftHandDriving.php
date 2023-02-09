@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -36,28 +36,28 @@ class LeftHandDriving extends MetaJsonLd implements LeftHandDrivingInterface, St
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'LeftHandDriving';
+	public static string $schemaTypeName = 'LeftHandDriving';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/LeftHandDriving';
+	public static string $schemaTypeScope = 'https://schema.org/LeftHandDriving';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'SteeringPositionValue';
+	public static string $schemaTypeExtends = 'SteeringPositionValue';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The steering position is on the left side of the vehicle (viewed from the main direction of driving).';
+	public static string $schemaTypeDescription = 'The steering position is on the left side of the vehicle (viewed from the main direction of driving).';
 
 
 	/**

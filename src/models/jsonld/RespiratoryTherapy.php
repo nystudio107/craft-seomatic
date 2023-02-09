@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -41,28 +41,28 @@ class RespiratoryTherapy extends MetaJsonLd implements RespiratoryTherapyInterfa
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'RespiratoryTherapy';
+	public static string $schemaTypeName = 'RespiratoryTherapy';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/RespiratoryTherapy';
+	public static string $schemaTypeScope = 'https://schema.org/RespiratoryTherapy';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalTherapy';
+	public static string $schemaTypeExtends = 'MedicalTherapy';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The therapy that is concerned with the maintenance or improvement of respiratory function (as in patients with pulmonary disease).';
+	public static string $schemaTypeDescription = 'The therapy that is concerned with the maintenance or improvement of respiratory function (as in patients with pulmonary disease).';
 
 
 	/**

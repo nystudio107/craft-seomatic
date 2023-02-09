@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class SideEffectsHealthAspect extends MetaJsonLd implements SideEffectsHealthAsp
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'SideEffectsHealthAspect';
+	public static string $schemaTypeName = 'SideEffectsHealthAspect';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/SideEffectsHealthAspect';
+	public static string $schemaTypeScope = 'https://schema.org/SideEffectsHealthAspect';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'HealthAspectEnumeration';
+	public static string $schemaTypeExtends = 'HealthAspectEnumeration';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'Side effects that can be observed from the usage of the topic.';
+	public static string $schemaTypeDescription = 'Side effects that can be observed from the usage of the topic.';
 
 
 	/**

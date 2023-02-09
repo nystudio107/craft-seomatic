@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -33,28 +33,28 @@ class MedicalIntangible extends MetaJsonLd implements MedicalIntangibleInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'MedicalIntangible';
+	public static string $schemaTypeName = 'MedicalIntangible';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/MedicalIntangible';
+	public static string $schemaTypeScope = 'https://schema.org/MedicalIntangible';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MedicalEntity';
+	public static string $schemaTypeExtends = 'MedicalEntity';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'A utility class that serves as the umbrella for a number of \'intangible\' things in the medical space.';
+	public static string $schemaTypeDescription = 'A utility class that serves as the umbrella for a number of \'intangible\' things in the medical space.';
 
 
 	/**

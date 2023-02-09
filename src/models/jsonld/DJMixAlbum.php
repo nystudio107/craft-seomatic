@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -34,28 +34,28 @@ class DJMixAlbum extends MetaJsonLd implements DJMixAlbumInterface, MusicAlbumPr
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DJMixAlbum';
+	public static string $schemaTypeName = 'DJMixAlbum';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DJMixAlbum';
+	public static string $schemaTypeScope = 'https://schema.org/DJMixAlbum';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'MusicAlbumProductionType';
+	public static string $schemaTypeExtends = 'MusicAlbumProductionType';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'DJMixAlbum.';
+	public static string $schemaTypeDescription = 'DJMixAlbum.';
 
 
 	/**

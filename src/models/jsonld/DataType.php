@@ -1,7 +1,7 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS 4
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
@@ -30,28 +30,28 @@ class DataType extends MetaJsonLd implements DataTypeInterface
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeName = 'DataType';
+	public static string $schemaTypeName = 'DataType';
 
 	/**
 	 * The Schema.org Type Scope
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeScope = 'https://schema.org/DataType';
+	public static string $schemaTypeScope = 'https://schema.org/DataType';
 
 	/**
 	 * The Schema.org Type Extends
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeExtends = 'Thing';
+	public static string $schemaTypeExtends = 'Thing';
 
 	/**
 	 * The Schema.org Type Description
 	 *
 	 * @var string
 	 */
-	public static $schemaTypeDescription = 'The basic data types such as Integers, Strings, etc.';
+	public static string $schemaTypeDescription = 'The basic data types such as Integers, Strings, etc.';
 
 
 	/**
