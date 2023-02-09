@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\models\MetaJsonLd;
-
 use Craft;
 use craft\helpers\Json as JsonHelper;
+use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
  * @author    nystudio107
@@ -81,7 +80,7 @@ class Schema
             // Go from most specific type to least specific type
             foreach (self::SCHEMA_TYPES as $schemaType) {
                 if (!empty($settings[$schemaType]) && ($settings[$schemaType] !== 'none')) {
-                    $result = $settings[$schemaType].self::SCHEMA_PATH_DELIMITER.$result;
+                    $result = $settings[$schemaType] . self::SCHEMA_PATH_DELIMITER . $result;
                 }
             }
         }
@@ -127,7 +126,7 @@ class Schema
     {
         $result = [];
         while ($schemaType) {
-            $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
+            $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $schemaType;
             if (class_exists($className)) {
                 try {
                     $classRef = new \ReflectionClass($className);
@@ -380,36 +379,42 @@ class Schema
     {
         $result = [];
 
-        if (isset($typesArray['layer']) && \is_string($typesArray['layer'])) {
-            if ($typesArray['layer'] === 'core' || $typesArray['layer'] === 'pending') {
-                if (isset($typesArray['name']) && \is_string($typesArray['name'])) {
-                    $children = [];
-                    $name = $typesArray['name'];
-                    // Construct a path-based $id, excluding the top-level `Thing` schema
-                    $id = $name === 'Thing' ? '' : $path.self::SCHEMA_PATH_DELIMITER.$name;
-                    $id = ltrim($id, self::SCHEMA_PATH_DELIMITER);
-                    // Make sure we have at most 3 specifiers in the schema path
-                    $parts = explode(self::SCHEMA_PATH_DELIMITER, $id);
-                    if (count($parts) > 3) {
-                        $id = implode(self::SCHEMA_PATH_DELIMITER, [
-                            $parts[0],
-                            $parts[1],
-                            end($parts)
-                        ]);
+        // Don't include any "pending" schemas
+        if (isset($typesArray['pending']) && $typesArray['pending']) {
+            return [];
+        }
+        // Don't include any "attic" (deprecated) schemas
+        if (isset($typesArray['attic']) && $typesArray['attic']) {
+            return [];
+        }
+        if (isset($typesArray['name']) && \is_string($typesArray['name'])) {
+            $children = [];
+            $name = $typesArray['name'];
+            // Construct a path-based $id, excluding the top-level `Thing` schema
+            $id = $name === 'Thing' ? '' : $path . self::SCHEMA_PATH_DELIMITER . $name;
+            $id = ltrim($id, self::SCHEMA_PATH_DELIMITER);
+            // Make sure we have at most 3 specifiers in the schema path
+            $parts = explode(self::SCHEMA_PATH_DELIMITER, $id);
+            if (count($parts) > 3) {
+                $id = implode(self::SCHEMA_PATH_DELIMITER, [
+                    $parts[0],
+                    $parts[1],
+                    end($parts)
+                ]);
+            }
+            if (!empty($typesArray['children'])) {
+                foreach ($typesArray['children'] as $child) {
+                    $childResult = self::pruneSchemaTree($child, $id);
+                    if (!empty($childResult)) {
+                        $children[] = $childResult;
                     }
-                    if (!empty($typesArray['children'])) {
-                        foreach ($typesArray['children'] as $child) {
-                            $childResult = self::pruneSchemaTree($child, $id);
-                            if (!empty($childResult)) {
-                                $children[] = $childResult;
-                            }
-                        }
-                        $result['children'] = $children;
-                    }
-                    $result['label'] = $name;
-                    $result['id'] = $id;
+                }
+                if (!empty($children)) {
+                    $result['children'] = $children;
                 }
             }
+            $result['label'] = $name;
+            $result['id'] = $id;
         }
 
         return $result;
