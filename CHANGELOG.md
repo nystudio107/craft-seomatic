@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.49 - UNRELEASED
+## 3.4.49 - 2023.02.09
 ### Added
 * Updated to schema.org [v15.0](https://schema.org/docs/releases.html), fixes ([#1277](https://github.com/nystudio107/craft-seomatic/issues/1277))
 
