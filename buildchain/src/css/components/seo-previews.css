@@ -271,7 +271,7 @@ h4.metadata-title-separator span {
   border-collapse: separate;
   color: #606770;
   direction: ltr;
-  display: box;
+  display: flex;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
   height: 18px;
@@ -466,8 +466,7 @@ h4.metadata-title-separator span {
 
 @media only screen and (min-width: 770px) {
   .card-seo-twitter__description {
-    display: block;
-    display: box;
+    display: flex;
   }
 }
 
@@ -559,7 +558,7 @@ h4.metadata-title-separator span {
   border-collapse: separate;
   color: #606770;
   direction: ltr;
-  display: box;
+  display: flex;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
   height: 18px;

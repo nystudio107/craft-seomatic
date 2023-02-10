@@ -1,34 +1,32 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for ParcelDelivery.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/ParcelDelivery
  */
-
 trait ParcelDeliveryTrait
 {
-    
     /**
-     * Shipper's address.
+     * Item(s) being shipped.
      *
-     * @var PostalAddress
+     * @var Product
      */
-    public $originAddress;
+    public $itemShipped;
 
     /**
      * Shipper tracking number.
@@ -38,11 +36,11 @@ trait ParcelDeliveryTrait
     public $trackingNumber;
 
     /**
-     * Item(s) being shipped.
+     * The latest date the package may arrive.
      *
-     * @var Product
+     * @var DateTime|Date
      */
-    public $itemShipped;
+    public $expectedArrivalUntil;
 
     /**
      * The service provider, service operator, or service performer; the goods
@@ -54,33 +52,11 @@ trait ParcelDeliveryTrait
     public $provider;
 
     /**
-     * Tracking url for the parcel delivery.
-     *
-     * @var URL
-     */
-    public $trackingUrl;
-
-    /**
      * Destination address.
      *
      * @var PostalAddress
      */
     public $deliveryAddress;
-
-    /**
-     * The latest date the package may arrive.
-     *
-     * @var Date|DateTime
-     */
-    public $expectedArrivalUntil;
-
-    /**
-     * New entry added as the package passes through each leg of its journey (from
-     * shipment to final delivery).
-     *
-     * @var DeliveryEvent
-     */
-    public $deliveryStatus;
 
     /**
      * The earliest date the package may arrive.
@@ -98,11 +74,26 @@ trait ParcelDeliveryTrait
     public $carrier;
 
     /**
-     * Method used for delivery or shipping.
+     * Shipper's address.
      *
-     * @var DeliveryMethod
+     * @var PostalAddress
      */
-    public $hasDeliveryMethod;
+    public $originAddress;
+
+    /**
+     * New entry added as the package passes through each leg of its journey (from
+     * shipment to final delivery).
+     *
+     * @var DeliveryEvent
+     */
+    public $deliveryStatus;
+
+    /**
+     * Tracking url for the parcel delivery.
+     *
+     * @var URL
+     */
+    public $trackingUrl;
 
     /**
      * The overall order the items in this delivery were included in.
@@ -111,4 +102,10 @@ trait ParcelDeliveryTrait
      */
     public $partOfOrder;
 
+    /**
+     * Method used for delivery or shipping.
+     *
+     * @var DeliveryMethod
+     */
+    public $hasDeliveryMethod;
 }

@@ -1,39 +1,30 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for PublicationVolume.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/PublicationVolume
  */
-
 trait PublicationVolumeTrait
 {
-    
-    /**
-     * The page on which the work starts; for example "135" or "xiii".
-     *
-     * @var string|int|Text|Integer
-     */
-    public $pageStart;
-
     /**
      * The page on which the work ends; for example "138" or "xvi".
      *
-     * @var string|int|Text|Integer
+     * @var int|string|Integer|Text
      */
     public $pageEnd;
 
@@ -41,7 +32,7 @@ trait PublicationVolumeTrait
      * Identifies the volume of publication or multi-part work; for example, "iii"
      * or "2".
      *
-     * @var int|string|Integer|Text
+     * @var string|int|Text|Integer
      */
     public $volumeNumber;
 
@@ -53,4 +44,10 @@ trait PublicationVolumeTrait
      */
     public $pagination;
 
+    /**
+     * The page on which the work starts; for example "135" or "xiii".
+     *
+     * @var int|string|Integer|Text
+     */
+    public $pageStart;
 }

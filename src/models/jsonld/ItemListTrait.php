@@ -1,28 +1,33 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for ItemList.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/ItemList
  */
-
 trait ItemListTrait
 {
-    
+    /**
+     * Type of ordering (e.g. Ascending, Descending, Unordered).
+     *
+     * @var string|ItemListOrderType|Text
+     */
+    public $itemListOrder;
+
     /**
      * The number of items in an ItemList. Note that some descriptions might not
      * fully describe all items in a list (e.g., multi-page pagination); in such
@@ -43,15 +48,7 @@ trait ItemListTrait
      * sufficient for indicating the order or elements.  Use ListItem with a
      * 'position' property in such cases.
      *
-     * @var string|Thing|ListItem|Text
+     * @var string|ListItem|Text|Thing
      */
     public $itemListElement;
-
-    /**
-     * Type of ordering (e.g. Ascending, Descending, Unordered).
-     *
-     * @var string|Text|ItemListOrderType
-     */
-    public $itemListOrder;
-
 }

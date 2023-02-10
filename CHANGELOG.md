@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 4.0.20 - 2023.02.09
+### Added
+* Updated to schema.org [v15.0](https://schema.org/docs/releases.html), fixes ([#1277](https://github.com/nystudio107/craft-seomatic/issues/1277))
+
+### Changed
+* Use dynamic docker container name & port for the `buildchain`
+* Update the `buildchain` to use Vite `^4.0.0`
+* Refactored the docs buildchain to use a dynamic docker container setup
+
+### Fixed
+* Fixed an issue where sitemaps would be regenerated even if URLs were disabled for a particular section, in certain circumstances ([#1212](https://github.com/nystudio107/craft-seomatic/issues/1212))
+* Removed the check for the now-deprecated `layer` property in the `tree.jsonld` schema from schema.org, so that it can be parsed properly
+
 ## 4.0.19 - 2023.01.11
 ### Fix
 * Fixed a regression that would cause `entry.` to not resolve in meta values

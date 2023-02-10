@@ -1,28 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for MusicRelease.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/MusicRelease
  */
-
 trait MusicReleaseTrait
 {
-    
     /**
      * The album this is a release of.
      *
@@ -31,8 +29,8 @@ trait MusicReleaseTrait
     public $releaseOf;
 
     /**
-     * Format of this release (the type of recording media used, ie. compact disc,
-     * digital media, LP, etc.).
+     * Format of this release (the type of recording media used, i.e. compact
+     * disc, digital media, LP, etc.).
      *
      * @var MusicReleaseFormatType
      */
@@ -45,15 +43,6 @@ trait MusicReleaseTrait
      * @var Duration
      */
     public $duration;
-
-    /**
-     * The group the release is credited to if different than the byArtist. For
-     * example, Red and Blue is credited to "Stefani Germanotta Band", but by Lady
-     * Gaga.
-     *
-     * @var Person|Organization
-     */
-    public $creditedTo;
 
     /**
      * The label that issued the release.
@@ -69,4 +58,12 @@ trait MusicReleaseTrait
      */
     public $catalogNumber;
 
+    /**
+     * The group the release is credited to if different than the byArtist. For
+     * example, Red and Blue is credited to "Stefani Germanotta Band", but by Lady
+     * Gaga.
+     *
+     * @var Person|Organization
+     */
+    public $creditedTo;
 }

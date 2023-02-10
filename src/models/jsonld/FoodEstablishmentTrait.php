@@ -1,28 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for FoodEstablishment.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/FoodEstablishment
  */
-
 trait FoodEstablishmentTrait
 {
-    
     /**
      * An official rating for a lodging business or food establishment, e.g. from
      * national associations or standards bodies. Use the author property to
@@ -45,9 +43,17 @@ trait FoodEstablishmentTrait
      * Boolean, an URL at which reservations can be made or (for backwards
      * compatibility) the strings ```Yes``` or ```No```.
      *
-     * @var string|bool|Text|Boolean|URL
+     * @var string|bool|URL|Text|Boolean
      */
     public $acceptsReservations;
+
+    /**
+     * Either the actual menu as a structured representation, as text, or a URL of
+     * the menu.
+     *
+     * @var string|Menu|Text|URL
+     */
+    public $menu;
 
     /**
      * Either the actual menu as a structured representation, as text, or a URL of
@@ -56,13 +62,4 @@ trait FoodEstablishmentTrait
      * @var string|URL|Text|Menu
      */
     public $hasMenu;
-
-    /**
-     * Either the actual menu as a structured representation, as text, or a URL of
-     * the menu.
-     *
-     * @var string|URL|Menu|Text
-     */
-    public $menu;
-
 }

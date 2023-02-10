@@ -31,6 +31,6 @@
     "./src/web/assets/src/**/*.vue"
   ],
   "exclude": [
-    "./node_modules"
+    "./buildchain/node_modules"
   ]
 }

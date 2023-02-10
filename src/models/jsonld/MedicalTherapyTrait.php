@@ -1,35 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for MedicalTherapy.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/MedicalTherapy
  */
-
 trait MedicalTherapyTrait
 {
-    
-    /**
-     * A therapy that duplicates or overlaps this one.
-     *
-     * @var MedicalTherapy
-     */
-    public $duplicateTherapy;
-
     /**
      * A possible serious complication and/or serious side effect of this therapy.
      * Serious adverse outcomes include those that are life-threatening; result in
@@ -43,10 +34,16 @@ trait MedicalTherapyTrait
     public $seriousAdverseOutcome;
 
     /**
+     * A therapy that duplicates or overlaps this one.
+     *
+     * @var MedicalTherapy
+     */
+    public $duplicateTherapy;
+
+    /**
      * A contraindication for this therapy.
      *
      * @var string|Text|MedicalContraindication
      */
     public $contraindication;
-
 }

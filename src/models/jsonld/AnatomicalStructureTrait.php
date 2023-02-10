@@ -1,35 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for AnatomicalStructure.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/AnatomicalStructure
  */
-
 trait AnatomicalStructureTrait
 {
-    
-    /**
-     * Location in the body of the anatomical structure.
-     *
-     * @var string|Text
-     */
-    public $bodyLocation;
-
     /**
      * Other anatomical structures to which this structure is connected.
      *
@@ -45,26 +36,27 @@ trait AnatomicalStructureTrait
     public $partOfSystem;
 
     /**
+     * If applicable, a description of the pathophysiology associated with the
+     * anatomical system, including potential abnormal changes in the mechanical,
+     * physical, and biochemical functions of the system.
+     *
+     * @var string|Text
+     */
+    public $associatedPathophysiology;
+
+    /**
+     * Location in the body of the anatomical structure.
+     *
+     * @var string|Text
+     */
+    public $bodyLocation;
+
+    /**
      * A medical therapy related to this anatomy.
      *
      * @var MedicalTherapy
      */
     public $relatedTherapy;
-
-    /**
-     * An image containing a diagram that illustrates the structure and/or its
-     * component substructures and/or connections with other structures.
-     *
-     * @var ImageObject
-     */
-    public $diagram;
-
-    /**
-     * A medical condition associated with this anatomy.
-     *
-     * @var MedicalCondition
-     */
-    public $relatedCondition;
 
     /**
      * Component (sub-)structure(s) that comprise this anatomical structure.
@@ -74,12 +66,17 @@ trait AnatomicalStructureTrait
     public $subStructure;
 
     /**
-     * If applicable, a description of the pathophysiology associated with the
-     * anatomical system, including potential abnormal changes in the mechanical,
-     * physical, and biochemical functions of the system.
+     * A medical condition associated with this anatomy.
      *
-     * @var string|Text
+     * @var MedicalCondition
      */
-    public $associatedPathophysiology;
+    public $relatedCondition;
 
+    /**
+     * An image containing a diagram that illustrates the structure and/or its
+     * component substructures and/or connections with other structures.
+     *
+     * @var ImageObject
+     */
+    public $diagram;
 }

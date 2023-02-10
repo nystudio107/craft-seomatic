@@ -1,34 +1,33 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 4
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for TVSeries.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/TVSeries
  */
-
 trait TVSeriesTrait
 {
-    
     /**
-     * A season in a media series.
+     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
+     * associated with individual items or with a series, episode, clip.
      *
-     * @var URL|CreativeWorkSeason
+     * @var Person
      */
-    public $season;
+    public $actors;
 
     /**
      * A season that is part of the media series.
@@ -38,7 +37,45 @@ trait TVSeriesTrait
     public $containsSeason;
 
     /**
-     * The country of origin of something, including products as well as creative 
+     * The number of seasons in this series.
+     *
+     * @var int|Integer
+     */
+    public $numberOfSeasons;
+
+    /**
+     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip.
+     *
+     * @var Person
+     */
+    public $actor;
+
+    /**
+     * A season in a media series.
+     *
+     * @var URL|CreativeWorkSeason
+     */
+    public $season;
+
+    /**
+     * The trailer of a movie or TV/radio series, season, episode, etc.
+     *
+     * @var VideoObject
+     */
+    public $trailer;
+
+    /**
+     * The production company or studio responsible for the item, e.g. series,
+     * video game, episode etc.
+     *
+     * @var Organization
+     */
+    public $productionCompany;
+
+    /**
+     * The country of origin of something, including products as well as creative
      * works such as movie and TV content.  In the case of TV and movie, this
      * would be the country of the principle offices of the production company or
      * individual responsible for the movie. For other kinds of [[CreativeWork]]
@@ -53,43 +90,11 @@ trait TVSeriesTrait
     public $countryOfOrigin;
 
     /**
-     * A director of e.g. tv, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip.
-     *
-     * @var Person
-     */
-    public $director;
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
-     *
-     * @var Person
-     */
-    public $actor;
-
-    /**
-     * The trailer of a movie or tv/radio series, season, episode, etc.
-     *
-     * @var VideoObject
-     */
-    public $trailer;
-
-    /**
      * An episode of a TV/radio series or season.
      *
      * @var Episode
      */
     public $episodes;
-
-    /**
-     * The number of episodes in this season or series.
-     *
-     * @var int|Integer
-     */
-    public $numberOfEpisodes;
 
     /**
      * A season in a media series.
@@ -99,48 +104,40 @@ trait TVSeriesTrait
     public $seasons;
 
     /**
-     * The production company or studio responsible for the item e.g. series,
-     * video game, episode etc.
-     *
-     * @var Organization
-     */
-    public $productionCompany;
-
-    /**
-     * An actor, e.g. in tv, radio, movie, video games etc. Actors can be
-     * associated with individual items or with a series, episode, clip.
-     *
-     * @var Person
-     */
-    public $actors;
-
-    /**
-     * The number of seasons in this series.
-     *
-     * @var int|Integer
-     */
-    public $numberOfSeasons;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var Person|MusicGroup
-     */
-    public $musicBy;
-
-    /**
-     * An episode of a tv, radio or game media within a series or season.
+     * An episode of a TV, radio or game media within a series or season.
      *
      * @var Episode
      */
     public $episode;
 
     /**
-     * A director of e.g. tv, radio, movie, video games etc. content. Directors
+     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip.
+     *
+     * @var Person
+     */
+    public $director;
+
+    /**
+     * The number of episodes in this season or series.
+     *
+     * @var int|Integer
+     */
+    public $numberOfEpisodes;
+
+    /**
+     * A director of e.g. TV, radio, movie, video games etc. content. Directors
      * can be associated with individual items or with a series, episode, clip.
      *
      * @var Person
      */
     public $directors;
 
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var MusicGroup|Person
+     */
+    public $musicBy;
 }
