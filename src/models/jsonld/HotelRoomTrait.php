@@ -1,36 +1,34 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for HotelRoom.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/HotelRoom
  */
-
 trait HotelRoomTrait
 {
-    
     /**
      * The type of bed or beds included in the accommodation. For the single case
-     * of just one bed of a certain type, you use bed directly with a text.      
+     * of just one bed of a certain type, you use bed directly with a text.
      * If you want to indicate the quantity of a certain kind of bed, use an
      * instance of BedDetails. For more detailed information, use the
      * amenityFeature property.
      *
-     * @var string|BedDetails|Text|BedType
+     * @var string|Text|BedDetails|BedType
      */
     public $bed;
 
@@ -44,5 +42,4 @@ trait HotelRoomTrait
      * @var QuantitativeValue
      */
     public $occupancy;
-
 }

@@ -1,28 +1,26 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for Legislation.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/Legislation
  */
-
 trait LegislationTrait
 {
-    
     /**
      * Indicates that this legislation (or part of legislation) fulfills the
      * objectives set by another legislation, by passing appropriate
@@ -35,12 +33,44 @@ trait LegislationTrait
     public $legislationTransposes;
 
     /**
-     * Whether the legislation is currently in force, not in force, or partially
-     * in force.
+     * The person or organization that originally passed or made the law:
+     * typically parliament (for primary legislation) or government (for secondary
+     * legislation). This indicates the "legal author" of the law, as opposed to
+     * its physical author.
      *
-     * @var LegalForceStatus
+     * @var Organization|Person
      */
-    public $legislationLegalForce;
+    public $legislationPassedBy;
+
+    /**
+     * The date of adoption or signature of the legislation. This is the date at
+     * which the text is officially aknowledged to be a legislation, even though
+     * it might not even be published or in force.
+     *
+     * @var Date
+     */
+    public $legislationDate;
+
+    /**
+     * Indicates another legislation taken into account in this consolidated
+     * legislation (which is usually the product of an editorial process that
+     * revises the legislation). This property should be used multiple times to
+     * refer to both the original version or the previous consolidated version,
+     * and to the legislations making the change.
+     *
+     * @var Legislation
+     */
+    public $legislationConsolidates;
+
+    /**
+     * An identifier for the legislation. This can be either a string-based
+     * identifier, like the CELEX at EU level or the NOR in France, or a
+     * web-based, URL/URI identifier, like an ELI (European Legislation
+     * Identifier) or an URN-Lex.
+     *
+     * @var string|URL|Text
+     */
+    public $legislationIdentifier;
 
     /**
      * The type of the legislation. Examples of values are "law", "act",
@@ -50,24 +80,6 @@ trait LegislationTrait
      * @var string|CategoryCode|Text
      */
     public $legislationType;
-
-    /**
-     * Indicates a legal jurisdiction, e.g. of some legislation, or where some
-     * government service is based.
-     *
-     * @var string|Text|AdministrativeArea
-     */
-    public $jurisdiction;
-
-    /**
-     * An identifier for the legislation. This can be either a string-based
-     * identifier, like the CELEX at EU level or the NOR in France, or a
-     * web-based, URL/URI identifier, like an ELI (European Legislation
-     * Identifier) or an URN-Lex.
-     *
-     * @var string|Text|URL
-     */
-    public $legislationIdentifier;
 
     /**
      * Another legislation that this legislation changes. This encompasses the
@@ -82,6 +94,46 @@ trait LegislationTrait
      * @var Legislation
      */
     public $legislationChanges;
+
+    /**
+     * Indicates that this legislation (or part of a legislation) somehow
+     * transfers another legislation in a different legislative context. This is
+     * an informative link, and it has no legal value. For legally-binding links
+     * of transposition, use the <a
+     * href="/legislationTransposes">legislationTransposes</a> property. For
+     * example an informative consolidated law of a European Union's member state
+     * "applies" the consolidated version of the European Directive implemented in
+     * it.
+     *
+     * @var Legislation
+     */
+    public $legislationApplies;
+
+    /**
+     * Indicates a legal jurisdiction, e.g. of some legislation, or where some
+     * government service is based.
+     *
+     * @var string|AdministrativeArea|Text
+     */
+    public $jurisdiction;
+
+    /**
+     * The point-in-time at which the provided description of the legislation is
+     * valid (e.g.: when looking at the law on the 2016-04-07 (= dateVersion), I
+     * get the consolidation of 2015-04-12 of the "National Insurance
+     * Contributions Act 2015")
+     *
+     * @var Date
+     */
+    public $legislationDateVersion;
+
+    /**
+     * Whether the legislation is currently in force, not in force, or partially
+     * in force.
+     *
+     * @var LegalForceStatus
+     */
+    public $legislationLegalForce;
 
     /**
      * An individual or organization that has some kind of responsibility for the
@@ -99,59 +151,4 @@ trait LegislationTrait
      * @var string|AdministrativeArea|Text
      */
     public $legislationJurisdiction;
-
-    /**
-     * The date of adoption or signature of the legislation. This is the date at
-     * which the text is officially aknowledged to be a legislation, even though
-     * it might not even be published or in force.
-     *
-     * @var Date
-     */
-    public $legislationDate;
-
-    /**
-     * The person or organization that originally passed or made the law :
-     * typically parliament (for primary legislation) or government (for secondary
-     * legislation). This indicates the "legal author" of the law, as opposed to
-     * its physical author.
-     *
-     * @var Person|Organization
-     */
-    public $legislationPassedBy;
-
-    /**
-     * Indicates another legislation taken into account in this consolidated
-     * legislation (which is usually the product of an editorial process that
-     * revises the legislation). This property should be used multiple times to
-     * refer to both the original version or the previous consolidated version,
-     * and to the legislations making the change.
-     *
-     * @var Legislation
-     */
-    public $legislationConsolidates;
-
-    /**
-     * Indicates that this legislation (or part of a legislation) somehow
-     * transfers another legislation in a different legislative context. This is
-     * an informative link, and it has no legal value. For legally-binding links
-     * of transposition, use the <a
-     * href="/legislationTransposes">legislationTransposes</a> property. For
-     * example an informative consolidated law of a European Union's member state
-     * "applies" the consolidated version of the European Directive implemented in
-     * it.
-     *
-     * @var Legislation
-     */
-    public $legislationApplies;
-
-    /**
-     * The point-in-time at which the provided description of the legislation is
-     * valid (e.g. : when looking at the law on the 2016-04-07 (= dateVersion), I
-     * get the consolidation of 2015-04-12 of the "National Insurance
-     * Contributions Act 2015")
-     *
-     * @var Date
-     */
-    public $legislationDateVersion;
-
 }

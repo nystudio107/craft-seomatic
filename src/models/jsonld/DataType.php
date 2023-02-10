@@ -1,12 +1,12 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * DataType - The basic data types such as Integers, Strings, etc.
  *
  * @author    nystudio107
@@ -23,100 +23,98 @@ use nystudio107\seomatic\models\MetaJsonLd;
  */
 class DataType extends MetaJsonLd implements DataTypeInterface
 {
-    // Static Public Properties
-    // =========================================================================
+	use DataTypeTrait;
 
-    /**
-     * The Schema.org Type Name
-     *
-     * @var string
-     */
-    static public $schemaTypeName = 'DataType';
+	/**
+	 * The Schema.org Type Name
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeName = 'DataType';
 
-    /**
-     * The Schema.org Type Scope
-     *
-     * @var string
-     */
-    static public $schemaTypeScope = 'https://schema.org/DataType';
+	/**
+	 * The Schema.org Type Scope
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeScope = 'https://schema.org/DataType';
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    static public $schemaTypeExtends = 'Thing';
+	/**
+	 * The Schema.org Type Extends
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeExtends = 'Thing';
 
-    /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    static public $schemaTypeDescription = <<<SCHEMADESC
-The basic data types such as Integers, Strings, etc.
-SCHEMADESC;
+	/**
+	 * The Schema.org Type Description
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeDescription = 'The basic data types such as Integers, Strings, etc.';
 
-    use DataTypeTrait;
 
-    // Public methods
-    // =========================================================================
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyNames(): array
+	{
+		return array_keys($this->getSchemaPropertyExpectedTypes());
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyNames(): array
-    {
-        return array_keys($this->getSchemaPropertyExpectedTypes());
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyExpectedTypes(): array
-    {
-        return [
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyExpectedTypes(): array
+	{
+		return [
 
-        ];
-    }
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyDescriptions(): array
-    {
-        return [
 
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyDescriptions(): array
+	{
+		return [
 
-    /**
-     * @inheritdoc
-     */
-    public function getGoogleRequiredSchema(): array
-    {
-        return [];
-    }
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getGoogleRecommendedSchema(): array
-    {
-        return [];
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-        $rules = array_merge($rules, [
-            [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
-            [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-            [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
-        ]);
+	/**
+	 * @inheritdoc
+	 */
+	public function getGoogleRequiredSchema(): array
+	{
+		return [];
+	}
 
-        return $rules;
-    }
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getGoogleRecommendedSchema(): array
+	{
+		return [];
+	}
+
+
+	/**
+	 * @inheritdoc
+	 */
+	public function defineRules(): array
+	{
+		$rules = parent::defineRules();
+		    $rules = array_merge($rules, [
+		        [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+		        [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+		        [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+		    ]);
+
+		    return $rules;
+	}
 }

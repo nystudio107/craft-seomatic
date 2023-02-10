@@ -1,42 +1,32 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for TVEpisode.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/TVEpisode
  */
-
 trait TVEpisodeTrait
 {
-    
     /**
-     * The country of origin of something, including products as well as creative 
-     * works such as movie and TV content.  In the case of TV and movie, this
-     * would be the country of the principle offices of the production company or
-     * individual responsible for the movie. For other kinds of [[CreativeWork]]
-     * it is difficult to provide fully general guidance, and properties such as
-     * [[contentLocation]] and [[locationCreated]] may be more applicable.  In the
-     * case of products, the country of origin of the product. The exact
-     * interpretation of this may vary by context and product type, and cannot be
-     * fully enumerated here.
+     * The TV series to which this episode or season belongs.
      *
-     * @var Country
+     * @var TVSeries
      */
-    public $countryOfOrigin;
+    public $partOfTVSeries;
 
     /**
      * An [EIDR](https://eidr.org/) (Entertainment Identifier Registry)
@@ -47,7 +37,7 @@ trait TVEpisodeTrait
      * See [[editEIDR]].  Since schema.org types like [[Movie]] and [[TVEpisode]]
      * can be used for both works and their multiple expressions, it is possible
      * to use [[titleEIDR]] alone (for a general description), or alongside
-     * [[editEIDR]] for a more edit-specific description. 
+     * [[editEIDR]] for a more edit-specific description.
      *
      * @var string|URL|Text
      */
@@ -62,10 +52,17 @@ trait TVEpisodeTrait
     public $subtitleLanguage;
 
     /**
-     * The TV series to which this episode or season belongs.
+     * The country of origin of something, including products as well as creative
+     * works such as movie and TV content.  In the case of TV and movie, this
+     * would be the country of the principle offices of the production company or
+     * individual responsible for the movie. For other kinds of [[CreativeWork]]
+     * it is difficult to provide fully general guidance, and properties such as
+     * [[contentLocation]] and [[locationCreated]] may be more applicable.  In the
+     * case of products, the country of origin of the product. The exact
+     * interpretation of this may vary by context and product type, and cannot be
+     * fully enumerated here.
      *
-     * @var TVSeries
+     * @var Country
      */
-    public $partOfTVSeries;
-
+    public $countryOfOrigin;
 }

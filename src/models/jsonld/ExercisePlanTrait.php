@@ -1,28 +1,43 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for ExercisePlan.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/ExercisePlan
  */
-
 trait ExercisePlanTrait
 {
-    
+    /**
+     * Any additional component of the exercise prescription that may need to be
+     * articulated to the patient. This may include the order of exercises, the
+     * number of repetitions of movement, quantitative distance, progressions over
+     * time, etc.
+     *
+     * @var string|Text
+     */
+    public $additionalVariable;
+
+    /**
+     * How often one should engage in the activity.
+     *
+     * @var string|QuantitativeValue|Text
+     */
+    public $activityFrequency;
+
     /**
      * Number of times one should repeat the activity.
      *
@@ -40,43 +55,11 @@ trait ExercisePlanTrait
     public $intensity;
 
     /**
-     * Quantitative measure of the physiologic output of the exercise; also
-     * referred to as energy expenditure.
-     *
-     * @var QuantitativeValue|Energy
-     */
-    public $workload;
-
-    /**
      * Length of time to engage in the activity.
      *
-     * @var Duration|QuantitativeValue
+     * @var QuantitativeValue|Duration
      */
     public $activityDuration;
-
-    /**
-     * How often one should break from the activity.
-     *
-     * @var string|Text|QuantitativeValue
-     */
-    public $restPeriods;
-
-    /**
-     * How often one should engage in the activity.
-     *
-     * @var string|Text|QuantitativeValue
-     */
-    public $activityFrequency;
-
-    /**
-     * Any additional component of the exercise prescription that may need to be
-     * articulated to the patient. This may include the order of exercises, the
-     * number of repetitions of movement, quantitative distance, progressions over
-     * time, etc.
-     *
-     * @var string|Text
-     */
-    public $additionalVariable;
 
     /**
      * Type(s) of exercise or activity, such as strength training, flexibility
@@ -86,4 +69,18 @@ trait ExercisePlanTrait
      */
     public $exerciseType;
 
+    /**
+     * Quantitative measure of the physiologic output of the exercise; also
+     * referred to as energy expenditure.
+     *
+     * @var Energy|QuantitativeValue
+     */
+    public $workload;
+
+    /**
+     * How often one should break from the activity.
+     *
+     * @var string|QuantitativeValue|Text
+     */
+    public $restPeriods;
 }

@@ -1,34 +1,32 @@
 <?php
+
 /**
  * SEOmatic plugin for Craft CMS 3
  *
- * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
- * and flexible
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2022 nystudio107
+ * @copyright Copyright (c) 2023 nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v14.0-release
+ * schema.org version: v15.0-release
  * Trait for Permit.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/Permit
  */
-
 trait PermitTrait
 {
-    
     /**
-     * The duration of validity of a permit or similar thing.
+     * The target audience for this permit.
      *
-     * @var Duration
+     * @var Audience
      */
-    public $validFor;
+    public $permitAudience;
 
     /**
      * The organization issuing the ticket or permit.
@@ -45,18 +43,11 @@ trait PermitTrait
     public $validUntil;
 
     /**
-     * The date when the item becomes valid.
+     * The duration of validity of a permit or similar thing.
      *
-     * @var DateTime|Date
+     * @var Duration
      */
-    public $validFrom;
-
-    /**
-     * The service through with the permit was granted.
-     *
-     * @var Service
-     */
-    public $issuedThrough;
+    public $validFor;
 
     /**
      * The geographic area where a permit or similar thing is valid.
@@ -66,10 +57,16 @@ trait PermitTrait
     public $validIn;
 
     /**
-     * The target audience for this permit.
+     * The date when the item becomes valid.
      *
-     * @var Audience
+     * @var Date|DateTime
      */
-    public $permitAudience;
+    public $validFrom;
 
+    /**
+     * The service through which the permit was granted.
+     *
+     * @var Service
+     */
+    public $issuedThrough;
 }
