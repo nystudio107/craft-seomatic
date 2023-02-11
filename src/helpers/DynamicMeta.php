@@ -566,21 +566,20 @@ class DynamicMeta
                     );
                     foreach ($fieldHandles as $fieldHandle) {
                         if (!empty($element->$fieldHandle)) {
-                            /** @var MetaBundle $metaBundle */
+                            /** @var MetaBundle $fieldMetaBundle */
                             $fieldMetaBundle = $element->$fieldHandle;
                             /** @var SeoSettings $seoSettingsField */
                             $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
-                            if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
-                                // If sitemaps are off for this entry, don't include the URL
-                                if (in_array('sitemapUrls', (array)$seoSettingsField->sitemapEnabledFields, false)
-                                    && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
-                                    && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaSitemapVars, 'sitemapUrls')
-                                ) {
-                                    $includeUrl = false;
-                                }
+                            if ($seoSettingsField !== null) {
                                 // If robots is set to 'none' don't include the URL
-                                if ($fieldMetaBundle->metaGlobalVars->robots === 'none' || $fieldMetaBundle->metaGlobalVars->robots === 'noindex') {
-                                    $includeUrl = false;
+                                if ($seoSettingsField->generalTabEnabled
+                                    && in_array('robots', $seoSettingsField->generalEnabledFields, false)
+                                    && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaGlobalVars, 'robots')
+                                ) {
+                                    // If robots is set to 'none' don't include the URL
+                                    if ($fieldMetaBundle->metaGlobalVars->robots === 'none' || $fieldMetaBundle->metaGlobalVars->robots === 'noindex') {
+                                        $includeUrl = false;
+                                    }
                                 }
                             }
                         }
