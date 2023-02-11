@@ -554,10 +554,6 @@ class DynamicMeta
                         $sourceSiteId
                     );
                     if ($metaBundle !== null) {
-                        // If sitemaps are off for this entry, don't include the URL
-                        if (!$metaBundle->metaSitemapVars->sitemapUrls) {
-                            $includeUrl = false;
-                        }
                         // If robots is set tp 'none' don't include the URL
                         if ($metaBundle->metaGlobalVars->robots === 'none' || $metaBundle->metaGlobalVars->robots === 'noindex') {
                             $includeUrl = false;
