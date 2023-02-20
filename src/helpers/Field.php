@@ -30,6 +30,7 @@ use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
 
+use verbb\doxter\fields\Doxter as DoxterField;
 use verbb\supertable\fields\SuperTableField;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 
@@ -66,6 +67,7 @@ class Field
             NeoField::class,
             SuperTableField::class,
             PreparseFieldType::class,
+            DoxterField::class,
         ],
         self::ASSET_FIELD_CLASS_KEY => [
             AssetsField::class,
