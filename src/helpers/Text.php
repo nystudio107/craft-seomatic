@@ -23,6 +23,7 @@ use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
 use Stringy\Stringy;
+use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
 use verbb\supertable\elements\db\SuperTableBlockQuery;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
