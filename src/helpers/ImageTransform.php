@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 use craft\elements\Asset;
 use craft\elements\db\ElementQuery;
+use craft\elements\ElementCollection;
 use craft\fs\Local;
 use craft\helpers\StringHelper;
 use craft\models\ImageTransform as ImageTransformModel;
@@ -268,7 +269,7 @@ class ImageTransform
     /**
      * Return an asset from either an id or an asset
      *
-     * @param int|array|Asset|ElementQuery $asset the Asset or Asset ID or ElementQuery
+     * @param int|array|ElementCollection|Asset|ElementQuery $asset the Asset or Asset ID or ElementQuery
      * @param int|null $siteId
      *
      * @return Asset|null
@@ -285,6 +286,10 @@ class ImageTransform
         // If it's an asset already, just return it
         if ($asset instanceof Asset) {
             return $asset;
+        }
+        // If it is a Collection, resolve that to an asset
+        if ($asset instanceof ElementCollection) {
+            return $asset->first();
         }
         // If it is an ElementQuery, resolve that to an asset
         if ($asset instanceof ElementQuery) {
