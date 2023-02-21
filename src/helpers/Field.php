@@ -31,6 +31,7 @@ use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\MetaBundles;
+use verbb\doxter\fields\Doxter as DoxterField;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use verbb\supertable\fields\SuperTableField;
 use yii\base\InvalidConfigException;
@@ -61,6 +62,7 @@ class Field
             NeoField::class,
             SuperTableField::class,
             PreparseFieldType::class,
+            DoxterField::class,
         ],
         self::ASSET_FIELD_CLASS_KEY => [
             AssetsField::class,
