@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.21 - UNRELEASED
+### Added
+* Added support for Doxster field types as pull sources ([#1279](https://github.com/nystudio107/craft-seomatic/pull/1279))
+
 ### Changed
 * Don't disable `hreflang` tags based on whether the section is included in the sitemap or not ([#1285](https://github.com/nystudio107/craft-seomatic/issues/1285))
 * Ensure that the state of the General tab and the override switch is taken into account when determining if `robots` is disabled in an SEO Settings field for `hreflang` URLs
