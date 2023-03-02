@@ -653,7 +653,7 @@ class DynamicMeta
         if ($stripQueryString) {
             $url = UrlHelper::stripQueryString($url);
         }
-        $url = TextHelper::sanitizeUserInput($url);
+        $url = UrlHelper::encodeUrlQueryParams(TextHelper::sanitizeUserInput($url));
 
         // If this is a >= 400 status code, set the canonical URL to nothing
         if ($checkStatus && !Craft::$app->getRequest()->getIsConsoleRequest() && Craft::$app->getResponse()->statusCode >= 400) {
