@@ -11,12 +11,10 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper as CraftUrlHelper;
-
+use nystudio107\seomatic\Seomatic;
 use yii\base\Exception;
 
 /**
@@ -42,8 +40,8 @@ class UrlHelper extends CraftUrlHelper
             $siteUrl = MetaValue::parseString($siteUrl);
             // Extract out just the path part
             $parts = self::decomposeUrl($path);
-            $path = $parts['path'].$parts['suffix'];
-            $url = rtrim($siteUrl, '/').'/'.ltrim($path, '/');
+            $path = $parts['path'] . $parts['suffix'];
+            $url = rtrim($siteUrl, '/') . '/' . ltrim($path, '/');
             // Handle trailing slashes properly for generated URLs
             $generalConfig = Craft::$app->getConfig()->getGeneral();
             if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
@@ -131,6 +129,44 @@ class UrlHelper extends CraftUrlHelper
         }
 
         return DynamicMeta::sanitizeUrl($url, false, false);
+    }
+
+    /**
+     * urlencode() just the query parameters in the URL
+     *
+     * @param string $url
+     * @return string
+     */
+    public static function encodeUrlQueryParams(string $url): string
+    {
+        $urlParts = parse_url($url);
+        $encodedUrl = "";
+        if (isset($urlParts['scheme'])) {
+            $encodedUrl .= $urlParts['scheme'] . '://';
+        }
+        if (isset($urlParts['host'])) {
+            $encodedUrl .= $urlParts['host'];
+        }
+        if (isset($urlParts['path'])) {
+            $encodedUrl .= $urlParts['path'];
+        }
+        if (isset($urlParts['query'])) {
+            $query = explode('&', $urlParts['query']);
+            foreach ($query as $j => $value) {
+                $value = explode('=', $value, 2);
+                if (count($value) === 2) {
+                    $query[$j] = urlencode($value[0]) . '=' . urlencode($value[1]);
+                } else {
+                    $query[$j] = urlencode($value[0]);
+                }
+            }
+            $encodedUrl .= '?' . implode('&', $query);
+        }
+        if (isset($urlParts['fragment'])) {
+            $encodedUrl .= '#' . $urlParts['fragment'];
+        }
+
+        return $encodedUrl;
     }
 
     /**
