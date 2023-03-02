@@ -11,6 +11,7 @@
 
 ### Fixed
 * Fixed an issue where an error would be logged if a source Asset field was selected as an SEO Image, and it was eager loaded ([#1291](https://github.com/nystudio107/craft-seomatic/issues/1291))
+* Ensure that URL query parameters are properly encoded after being sanitized ([#1075](https://github.com/nystudio107/craft-seomatic/issues/1075))
 
 ## 4.0.20 - 2023.02.09
 ### Added
