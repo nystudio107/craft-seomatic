@@ -9,6 +9,9 @@
 * Ensure that the state of the General tab and the override switch is taken into account when determining if `robots` is disabled in an SEO Settings field for `hreflang` URLs
 * Changed the sitemap submission timeout to be `5` seconds, to avoid lengthy delays if Google cannot be reached for some reason ([#1288](https://github.com/nystudio107/craft-seomatic/issues/1288))
 
+### Fixed
+* Ensure that URL query parameters are properly encoded after being sanitized ([#1075](https://github.com/nystudio107/craft-seomatic/issues/1075))
+
 ## 3.4.49 - 2023.02.09
 ### Added
 * Updated to schema.org [v15.0](https://schema.org/docs/releases.html), fixes ([#1277](https://github.com/nystudio107/craft-seomatic/issues/1277))
