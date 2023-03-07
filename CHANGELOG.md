@@ -8,6 +8,7 @@
 * Don't disable `hreflang` tags based on whether the section is included in the sitemap or not ([#1285](https://github.com/nystudio107/craft-seomatic/issues/1285))
 * Ensure that the state of the General tab and the override switch is taken into account when determining if `robots` is disabled in an SEO Settings field for `hreflang` URLs
 * Changed the sitemap submission timeout to be `5` seconds, to avoid lengthy delays if Google cannot be reached for some reason ([#1288](https://github.com/nystudio107/craft-seomatic/issues/1288))
+* Add versioning to the docs
 
 ### Fixed
 * Fixed an issue where an error would be logged if a source Asset field was selected as an SEO Image, and it was eager loaded ([#1291](https://github.com/nystudio107/craft-seomatic/issues/1291))
