@@ -379,10 +379,6 @@ class Schema
     {
         $result = [];
 
-        // Don't include any "pending" schemas
-        if (isset($typesArray['pending']) && $typesArray['pending']) {
-            return [];
-        }
         // Don't include any "attic" (deprecated) schemas
         if (isset($typesArray['attic']) && $typesArray['attic']) {
             return [];
@@ -412,6 +408,10 @@ class Schema
                 if (!empty($children)) {
                     $result['children'] = $children;
                 }
+            }
+            // Mark it as pending, if applicable
+            if (isset($typesArray['pending']) && $typesArray['pending']) {
+                $name .= ' (pending)';
             }
             $result['label'] = $name;
             $result['id'] = $id;
