@@ -23,6 +23,8 @@ use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
 use Stringy\Stringy;
+use verbb\doxter\Doxter;
+use verbb\doxter\fields\data\DoxterData;
 use verbb\supertable\elements\db\SuperTableBlockQuery;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use yii\base\InvalidConfigException;
@@ -125,6 +127,8 @@ class Text
         } elseif ($field instanceof TagQuery
             || (is_array($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
+        } elseif ($field instanceof DoxterData) {
+            $result = self::smartStripTags(Doxter::$plugin->getService()->parseMarkdown($field->getRaw()));
         } else {
             if (is_array($field)) {
                 $result = self::smartStripTags((string)$field[0]);

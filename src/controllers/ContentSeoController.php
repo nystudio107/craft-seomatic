@@ -9,14 +9,12 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
-
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\Seomatic;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
 
@@ -55,10 +53,10 @@ class ContentSeoController extends Controller
     /**
      * Handle requests for the dashboard statistics table
      *
-     * @param string   $sort
-     * @param int      $page
-     * @param int      $per_page
-     * @param string   $filter
+     * @param string $sort
+     * @param int $page
+     * @param int $per_page
+     * @param string $filter
      * @param null|int $siteId
      *
      * @return Response
@@ -66,11 +64,12 @@ class ContentSeoController extends Controller
      */
     public function actionMetaBundles(
         string $sort = 'sourceName|asc',
-        int $page = 1,
-        int $per_page = 20,
-        $filter = '',
-        $siteId = 0
-    ): Response {
+        int    $page = 1,
+        int    $per_page = 20,
+               $filter = '',
+               $siteId = 0
+    ): Response
+    {
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';
@@ -149,6 +148,8 @@ class ContentSeoController extends Controller
                     $dataItem['description'] = $metaBundle->metaGlobalVars->seoDescription !== '' ? 'enabled' : 'disabled';
                     $dataItem['image'] = $metaBundle->metaGlobalVars->seoImage !== '' ? 'enabled' : 'disabled';
                     $dataItem['sitemap'] = $metaBundle->metaSitemapVars->sitemapUrls ? 'enabled' : 'disabled';
+                    $dataItem['sitemapPriority'] = $metaBundle->metaSitemapVars->sitemapPriority;
+                    $dataItem['sitemapFrequency'] = $metaBundle->metaSitemapVars->sitemapChangeFreq;
                     $dataItem['robots'] = $metaBundle->metaGlobalVars->robots;
                     // Calculate the setup stat
                     $stat = 0;

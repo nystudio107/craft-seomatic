@@ -238,7 +238,7 @@ class Sitemaps extends Component implements SitemapInterface
                         if (!empty($sitemapIndexUrl)) {
                             $submissionUrl = $url . urlencode($sitemapIndexUrl);
                             // create new guzzle client
-                            $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                            $guzzleClient = Craft::createGuzzleClient(['timeout' => 5, 'connect_timeout' => 5]);
                             // Submit the sitemap index to each search engine
                             try {
                                 $guzzleClient->post($submissionUrl);
@@ -310,7 +310,7 @@ class Sitemaps extends Component implements SitemapInterface
                 if (!empty($sitemapUrl)) {
                     $submissionUrl = $url . urlencode($sitemapUrl);
                     // create new guzzle client
-                    $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                    $guzzleClient = Craft::createGuzzleClient(['timeout' => 5, 'connect_timeout' => 5]);
                     // Submit the sitemap index to each search engine
                     try {
                         $guzzleClient->post($submissionUrl);
@@ -388,7 +388,7 @@ class Sitemaps extends Component implements SitemapInterface
                 if (!empty($sitemapUrl)) {
                     $submissionUrl = $url . urlencode($sitemapUrl);
                     // create new guzzle client
-                    $guzzleClient = Craft::createGuzzleClient(['timeout' => 120, 'connect_timeout' => 120]);
+                    $guzzleClient = Craft::createGuzzleClient(['timeout' => 5, 'connect_timeout' => 5]);
                     // Submit the sitemap index to each search engine
                     try {
                         $guzzleClient->post($submissionUrl);

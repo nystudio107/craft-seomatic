@@ -1,11 +1,10 @@
 build:
+  image: default-bionic
   environment:
     node:
       version: v16
     php:
-      version: 8
-      ini:
-        xdebug.mode: coverage
+      version: 8.1
     hosts:
       testcraft.test: '127.0.0.1'
     variables:
@@ -16,25 +15,34 @@ build:
       DB_TABLE_PREFIX: ''
       SECURITY_KEY: 'abcde12345'
       DEFAULT_SITE_URL: 'http://testcraft.test/'
+      XDEBUG_MODE: 'coverage'
   cache:
     directories:
       - node_modules/
       - vendor/
       - ~/.composer/cache/
+  dependencies:
+    before:
+      - mysql -uroot -h 127.0.0.1 -e 'CREATE DATABASE testcraft'
   nodes:
     analysis:
+      services:
+        mysql: 5.7
       project_setup:
         override:
           - true
-      services:
-        mysql: 5.7
-      dependencies:
-        before:
-          - mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE testcraft'
       tests:
         override:
           - php-scrutinizer-run
           - js-scrutinizer-run
+    tests:
+      services:
+        mysql: 5.7
+      project_setup:
+        override:
+          - true
+      tests:
+        override:
           - command: 'php vendor/bin/codecept run unit --coverage-xml'
             coverage:
               file: tests/_output/coverage.xml
