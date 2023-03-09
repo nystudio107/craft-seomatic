@@ -6,7 +6,7 @@
         <input
           v-model="filterText"
           type="text"
-          class="text nicetext"
+          class="text nicetext mx-2"
           placeholder=""
           @keyup="doFilter"
         >
@@ -22,20 +22,20 @@
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-                filterText: '',
-            }
-        },
-        methods: {
-            doFilter () {
-                this.$events.fire('filter-set', this.filterText);
-            },
-            resetFilter () {
-                this.filterText = '';
-                this.$events.fire('filter-reset');
-            }
-        }
+export default {
+  data() {
+    return {
+      filterText: '',
     }
+  },
+  methods: {
+    doFilter() {
+      this.$events.fire('filter-set', this.filterText);
+    },
+    resetFilter() {
+      this.filterText = '';
+      this.$events.fire('filter-reset');
+    }
+  }
+}
 </script>
