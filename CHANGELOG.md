@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.21 - UNRELEASED
+## 4.0.21 - 2023.03.09
 ### Added
 * Added support for Doxster field types as pull sources ([#1279](https://github.com/nystudio107/craft-seomatic/pull/1279))
 * Added Sitemap Frequency and Priority to Content SEO overview ([#1294]https://github.com/nystudio107/craft-seomatic/issues/1294)
