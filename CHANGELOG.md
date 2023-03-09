@@ -3,6 +3,7 @@
 ## 3.4.50 - UNRELEASED
 ### Added
 * Added support for Doxster field types as pull sources ([#1289](https://github.com/nystudio107/craft-seomatic/pull/1289))
+* Added Sitemap Frequency and Priority to Content SEO overview ([#1294]https://github.com/nystudio107/craft-seomatic/issues/1294)
 
 ### Changed
 * Don't disable `hreflang` tags based on whether the section is included in the sitemap or not ([#1285](https://github.com/nystudio107/craft-seomatic/issues/1285))
