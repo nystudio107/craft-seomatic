@@ -1,15 +1,14 @@
 build:
+  image: default-bionic
   environment:
     node:
       version: v16
     php:
       version: 7.4
-    mysql:
-      version: 5.7
     hosts:
       testcraft.test: '127.0.0.1'
     variables:
-      DB_DSN: 'mysql:host=localhost;port=3306;dbname=testcraft'
+      DB_DSN: 'mysql:host=127.0.0.1;port=3306;dbname=testcraft'
       DB_USER: 'root'
       DB_PASSWORD: ''
       DB_SCHEMA: ''
@@ -23,9 +22,11 @@ build:
       - ~/.composer/cache/
   dependencies:
     before:
-      - mysql -uroot -e 'CREATE DATABASE testcraft'
+      - mysql -uroot -h 127.0.0.1 -e 'CREATE DATABASE testcraft'
   nodes:
     analysis:
+      services:
+        mysql: 5.7
       project_setup:
         override:
           - true
@@ -33,12 +34,18 @@ build:
         override:
           - php-scrutinizer-run
           - js-scrutinizer-run
-  tests:
-    override:
-      - command: 'php vendor/bin/codecept run unit --coverage-xml'
-        coverage:
-          file: tests/_output/coverage.xml
-          format: clover
+    tests:
+      services:
+        mysql: 5.7
+      project_setup:
+        override:
+          - true
+      tests:
+        override:
+          - command: 'php vendor/bin/codecept run unit --coverage-xml'
+            coverage:
+              file: tests/_output/coverage.xml
+              format: clover
 checks:
   php: true
   javascript: true

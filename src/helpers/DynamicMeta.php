@@ -554,10 +554,6 @@ class DynamicMeta
                         $sourceSiteId
                     );
                     if ($metaBundle !== null) {
-                        // If sitemaps are off for this entry, don't include the URL
-                        if (!$metaBundle->metaSitemapVars->sitemapUrls) {
-                            $includeUrl = false;
-                        }
                         // If robots is set tp 'none' don't include the URL
                         if ($metaBundle->metaGlobalVars->robots === 'none' || $metaBundle->metaGlobalVars->robots === 'noindex') {
                             $includeUrl = false;
@@ -570,21 +566,20 @@ class DynamicMeta
                     );
                     foreach ($fieldHandles as $fieldHandle) {
                         if (!empty($element->$fieldHandle)) {
-                            /** @var MetaBundle $metaBundle */
+                            /** @var MetaBundle $fieldMetaBundle */
                             $fieldMetaBundle = $element->$fieldHandle;
                             /** @var SeoSettings $seoSettingsField */
                             $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
-                            if ($fieldMetaBundle !== null && $seoSettingsField !== null && $seoSettingsField->sitemapTabEnabled) {
-                                // If sitemaps are off for this entry, don't include the URL
-                                if (in_array('sitemapUrls', $seoSettingsField->sitemapEnabledFields, false)
-                                    && !$fieldMetaBundle->metaSitemapVars->sitemapUrls
-                                    && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaSitemapVars, 'sitemapUrls')
-                                ) {
-                                    $includeUrl = false;
-                                }
+                            if ($seoSettingsField !== null) {
                                 // If robots is set to 'none' don't include the URL
-                                if ($fieldMetaBundle->metaGlobalVars->robots === 'none' || $fieldMetaBundle->metaGlobalVars->robots === 'noindex') {
-                                    $includeUrl = false;
+                                if ($seoSettingsField->generalTabEnabled
+                                    && in_array('robots', $seoSettingsField->generalEnabledFields, false)
+                                    && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaGlobalVars, 'robots')
+                                ) {
+                                    // If robots is set to 'none' don't include the URL
+                                    if ($fieldMetaBundle->metaGlobalVars->robots === 'none' || $fieldMetaBundle->metaGlobalVars->robots === 'noindex') {
+                                        $includeUrl = false;
+                                    }
                                 }
                             }
                         }
@@ -658,7 +653,7 @@ class DynamicMeta
         if ($stripQueryString) {
             $url = UrlHelper::stripQueryString($url);
         }
-        $url = TextHelper::sanitizeUserInput($url);
+        $url = UrlHelper::encodeUrlQueryParams(TextHelper::sanitizeUserInput($url));
 
         // If this is a >= 400 status code, set the canonical URL to nothing
         if ($checkStatus && !Craft::$app->getRequest()->getIsConsoleRequest() && Craft::$app->getResponse()->statusCode >= 400) {
