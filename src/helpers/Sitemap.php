@@ -240,7 +240,7 @@ class Sitemap
                                                 try {
                                                     $altUrl = UrlHelper::siteUrl($altElement->url, null, null, $altSourceId);
                                                 } catch (Exception $e) {
-                                                    $altUrl = '';
+                                                    $altUrl = $altElement->url;
                                                 }
                                                 $altUrl = UrlHelper::absoluteUrlWithProtocol($altUrl);
                                                 // If this is the primary site, add it as x-default, too
