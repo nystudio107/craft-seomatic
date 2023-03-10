@@ -41,6 +41,8 @@ class Schema
 
     protected static $schemaTree = [];
 
+    protected static $googleRichSnippetTypes = [];
+
     // Static Methods
     // =========================================================================
 
@@ -412,6 +414,21 @@ class Schema
             // Mark it as pending, if applicable
             if (isset($typesArray['pending']) && $typesArray['pending']) {
                 $name .= ' (pending)';
+            } else {
+                // Check to see if this is a Google Rich Snippet schema
+                if (empty(self::$googleRichSnippetTypes)) {
+                    $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/google-rich-snippets.json');
+                    self::$googleRichSnippetTypes = JsonHelper::decode(@file_get_contents($filePath));
+                    if (empty(self::$googleRichSnippetTypes)) {
+                        throw new \Exception(Craft::t('seomatic', 'Google rich snippets file not found'));
+                    }
+                }
+                $schemaPath = explode(self::SCHEMA_PATH_DELIMITER, $id);
+                // Use only the specific (last) type for now, rather than the complete path of types
+                $schemaPath = [end($schemaPath)];
+                if ((bool)array_intersect($schemaPath, array_keys(self::$googleRichSnippetTypes))) {
+                    $name .= ' (rich snippet)';
+                }
             }
             $result['label'] = $name;
             $result['id'] = $id;
