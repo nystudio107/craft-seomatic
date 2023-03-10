@@ -236,13 +236,13 @@ class Sitemap
                                         if ($altMetaBundle) {
                                             // Make sure this entry isn't disabled
                                             self::combineFieldSettings($altElement, $altMetaBundle);
-                                            try {
-                                                $altUrl = UrlHelper::siteUrl($altElement->url, null, null, $altSourceId);
-                                            } catch (Exception $e) {
-                                                $altUrl = '';
-                                            }
-                                            $altUrl = UrlHelper::absoluteUrlWithProtocol($altUrl);
                                             if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
+                                                try {
+                                                    $altUrl = UrlHelper::siteUrl($altElement->url, null, null, $altSourceId);
+                                                } catch (Exception $e) {
+                                                    $altUrl = '';
+                                                }
+                                                $altUrl = UrlHelper::absoluteUrlWithProtocol($altUrl);
                                                 // If this is the primary site, add it as x-default, too
                                                 if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
                                                     $lines[] = '<xhtml:link rel="alternate"'
