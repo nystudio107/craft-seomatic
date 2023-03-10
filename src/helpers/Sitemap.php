@@ -236,7 +236,12 @@ class Sitemap
                                         if ($altMetaBundle) {
                                             // Make sure this entry isn't disabled
                                             self::combineFieldSettings($altElement, $altMetaBundle);
-                                            $altUrl = UrlHelper::absoluteUrlWithProtocol($altElement->url);
+                                            try {
+                                                $altUrl = UrlHelper::siteUrl($altElement->url, null, null, $altSourceId);
+                                            } catch (Exception $e) {
+                                                $altUrl = '';
+                                            }
+                                            $altUrl = UrlHelper::absoluteUrlWithProtocol($altUrl);
                                             if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
                                                 // If this is the primary site, add it as x-default, too
                                                 if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
