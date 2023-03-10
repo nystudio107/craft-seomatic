@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.51 - UNRELEASED
+### Added
+* Added `(rich snippet)` in the Main Entity of Page dropdown, for Schema.org types that Google uses for Rich Snippet results
+
 ## 3.4.50 - 2023.03.09
 ### Added
 * Added support for Doxster field types as pull sources ([#1289](https://github.com/nystudio107/craft-seomatic/pull/1289))
