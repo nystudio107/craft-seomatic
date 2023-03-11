@@ -2,7 +2,8 @@
 
 ## 4.0.22 - UNRELEASED
 ### Added
-* Added `(rich snippet)` in the Main Entity of Page dropdown, for Schema.org types that Google uses for Rich Snippet results
+* Added `(Google rich result)` in the Main Entity of Page dropdown, for Schema.org types that Google uses for Rich Results
+* Add descriptions & links for `(pending)` and `(Google rich result)` schemas in the Main Entity of Page dropdown
 * Added a caching layer to the Schema helper
 
 ## 4.0.21 - 2023.03.09
