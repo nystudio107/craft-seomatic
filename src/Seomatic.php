@@ -65,6 +65,7 @@ use nystudio107\seomatic\helpers\Environment;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
 use nystudio107\seomatic\integrations\feedme\SeoSettings as SeoSettingsFeedMe;
 use nystudio107\seomatic\listeners\GetCraftQLSchema;
 use nystudio107\seomatic\models\MetaScriptContainer;
@@ -1014,6 +1015,7 @@ class Seomatic extends Plugin
         self::$plugin->frontendTemplates->invalidateCaches();
         self::$plugin->metaContainers->invalidateCaches();
         self::$plugin->sitemaps->invalidateCaches();
+        SchemaHelper::invalidateCaches();
         // If they are using Craft 3.3 or later, clear the GraphQL caches too
         if (self::$craft33) {
             $gql = Craft::$app->getGql();
@@ -1053,6 +1055,12 @@ class Seomatic extends Plugin
                 'key' => 'seomatic-sitemap-caches',
                 'label' => Craft::t('seomatic', 'SEOmatic sitemap caches'),
                 'action' => [self::$plugin->sitemaps, 'invalidateCaches'],
+            ],
+            // Schema caches
+            [
+                'key' => 'seomatic-schema-caches',
+                'label' => Craft::t('seomatic', 'SEOmatic schema caches'),
+                'action' => [SchemaHelper::class, 'invalidateCaches'],
             ],
         ];
     }
