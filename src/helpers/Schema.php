@@ -14,6 +14,8 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 use craft\helpers\Json as JsonHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\Seomatic;
+use yii\caching\TagDependency;
 
 /**
  * @author    nystudio107
@@ -34,17 +36,26 @@ class Schema
         'siteType',
     ];
 
-    // Static Properties
-    // =========================================================================
+    const GLOBAL_SCHEMA_CACHE_TAG = 'seomatic_schema';
+    const SCHEMA_CACHE_TAG = 'seomatic_schema_';
 
-    protected static $schemaTypes = [];
-
-    protected static $schemaTree = [];
-
-    protected static $googleRichSnippetTypes = [];
+    const CACHE_KEY = 'seomatic_schema_';
 
     // Static Methods
     // =========================================================================
+
+    /**
+     * Invalidate all of the schema caches
+     */
+    public static function invalidateCaches(): void
+    {
+        $cache = Craft::$app->getCache();
+        TagDependency::invalidate($cache, self::GLOBAL_SCHEMA_CACHE_TAG);
+        Craft::info(
+            'All schema caches cleared',
+            __METHOD__
+        );
+    }
 
     /**
      * Return the most specific schema.org type possible from the $settings
@@ -232,17 +243,34 @@ class Schema
      */
     public static function getSchemaArray($path = ''): array
     {
-        if (empty(self::$schemaTypes)) {
-            $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/tree.jsonld');
-            self::$schemaTypes = JsonHelper::decode(@file_get_contents($filePath));
-            if (empty(self::$schemaTypes)) {
-                throw new \Exception(Craft::t('seomatic', 'Schema tree file not found'));
-            }
-            self::$schemaTypes = self::makeSchemaAssociative(self::$schemaTypes);
-            self::$schemaTypes = self::orphanChildren(self::$schemaTypes);
-        }
+        $dependency = new TagDependency([
+            'tags' => [
+                self::GLOBAL_SCHEMA_CACHE_TAG,
+                self::SCHEMA_CACHE_TAG . 'schemaArray',
+            ],
+        ]);
+        $cache = Craft::$app->getCache();
+        $typesArray = $cache->getOrSet(
+            self::CACHE_KEY . 'schemaArray',
+            function () use ($path) {
+                Craft::info(
+                    'schemaArray cache miss' . $path,
+                    __METHOD__
+                );
+                $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/tree.jsonld');
+                $schemaTypes = JsonHelper::decode(@file_get_contents($filePath));
+                if (empty($schemaTypes)) {
+                    throw new \Exception(Craft::t('seomatic', 'Schema tree file not found'));
+                }
+                $schemaTypes = self::makeSchemaAssociative($schemaTypes);
+                $schemaTypes = self::orphanChildren($schemaTypes);
+
+                return $schemaTypes;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
         // Get just the appropriate sub-array
-        $typesArray = self::$schemaTypes;
         if (!empty($path)) {
             $keys = explode(self::SCHEMA_PATH_DELIMITER, $path);
             foreach ($keys as $key) {
@@ -264,14 +292,31 @@ class Schema
      */
     public static function getSchemaTree()
     {
-        if (empty(self::$schemaTree)) {
-            $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/tree.jsonld');
-            self::$schemaTree = JsonHelper::decode(@file_get_contents($filePath));
-            if (empty(self::$schemaTree)) {
-                throw new \Exception(Craft::t('seomatic', 'Schema tree file not found'));
-            }
-        }
-        $typesArray = self::$schemaTree;
+        $dependency = new TagDependency([
+            'tags' => [
+                self::GLOBAL_SCHEMA_CACHE_TAG,
+                self::SCHEMA_CACHE_TAG . 'schemaTree',
+            ],
+        ]);
+        $cache = Craft::$app->getCache();
+        $typesArray = $cache->getOrSet(
+            self::CACHE_KEY . 'schemaArray',
+            function () {
+                Craft::info(
+                    'schemaTree cache miss',
+                    __METHOD__
+                );
+                $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/tree.jsonld');
+                $schemaTree = JsonHelper::decode(@file_get_contents($filePath));
+                if (empty($schemaTree)) {
+                    throw new \Exception(Craft::t('seomatic', 'Schema tree file not found'));
+                }
+
+                return $schemaTree;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
         if (!\is_array($typesArray)) {
             $typesArray = [];
         }
@@ -416,18 +461,12 @@ class Schema
                 $name .= ' (pending)';
             } else {
                 // Check to see if this is a Google Rich Snippet schema
-                if (empty(self::$googleRichSnippetTypes)) {
-                    $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/google-rich-snippets.json');
-                    self::$googleRichSnippetTypes = JsonHelper::decode(@file_get_contents($filePath));
-                    if (empty(self::$googleRichSnippetTypes)) {
-                        throw new \Exception(Craft::t('seomatic', 'Google rich snippets file not found'));
-                    }
-                }
+                $googleRichSnippetTypes = self::getGoogleRichSnippets();
                 $schemaPath = explode(self::SCHEMA_PATH_DELIMITER, $id);
                 // Use only the specific (last) type for now, rather than the complete path of types
                 $schemaPath = [end($schemaPath)];
-                if ((bool)array_intersect($schemaPath, array_keys(self::$googleRichSnippetTypes))) {
-                    $name .= ' (rich snippet)';
+                if ((bool)array_intersect($schemaPath, array_keys($googleRichSnippetTypes))) {
+                    $name .= ' (Google rich snippet)';
                 }
             }
             $result['label'] = $name;
@@ -435,5 +474,39 @@ class Schema
         }
 
         return $result;
+    }
+
+    /**
+     * Get the Google Rich Snippets types & URLs
+     *
+     * @return array
+     */
+    protected static function getGoogleRichSnippets(): array
+    {
+        $dependency = new TagDependency([
+            'tags' => [
+                self::GLOBAL_SCHEMA_CACHE_TAG,
+                self::SCHEMA_CACHE_TAG . 'googleRichSnippets',
+            ],
+        ]);
+        $cache = Craft::$app->getCache();
+        return $cache->getOrSet(
+            self::CACHE_KEY . 'googleRichSnippets',
+            function () {
+                Craft::info(
+                    'googleRichSnippets cache miss',
+                    __METHOD__
+                );
+                $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/google-rich-snippets.json');
+                $googleRichSnippetTypes = JsonHelper::decode(@file_get_contents($filePath));
+                if (empty($googleRichSnippetTypes)) {
+                    throw new \Exception(Craft::t('seomatic', 'Google rich snippets file not found'));
+                }
+
+                return $googleRichSnippetTypes;
+            },
+            Seomatic::$cacheDuration,
+            $dependency
+        );
     }
 }
