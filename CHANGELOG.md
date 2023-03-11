@@ -3,6 +3,7 @@
 ## 3.4.51 - UNRELEASED
 ### Added
 * Added `(rich snippet)` in the Main Entity of Page dropdown, for Schema.org types that Google uses for Rich Snippet results
+* Added a caching layer to the Schema helper
 
 ## 3.4.50 - 2023.03.09
 ### Added
