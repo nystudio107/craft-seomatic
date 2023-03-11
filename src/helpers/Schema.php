@@ -16,6 +16,7 @@ use craft\helpers\Json as JsonHelper;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
+use yii\helpers\Markdown;
 
 /**
  * @author    nystudio107
@@ -122,6 +123,12 @@ class Schema
             }
             if ($classRef) {
                 $result = $classRef->getStaticProperties();
+                if (isset($result['schemaTypeDescription'])) {
+                    $description = $result['schemaTypeDescription'];
+                    $description = Markdown::process((string)$description);
+                    $description = str_replace(['<p>', '</p>', '\n'], ['', '', ' '], $description);
+                    $result['schemaTypeDescription'] = $description;
+                }
             }
         }
 
@@ -284,6 +291,58 @@ class Schema
         }
 
         return $typesArray;
+    }
+
+    /**
+     * Return the schema layer, and Google Rich Snippet info
+     *
+     * @param string $schemaName
+     * @return array
+     * @throws \Exception
+     */
+    public static function getTypeMetaInfo($schemaName): array
+    {
+        $metaInfo = [
+            'schemaPending' => false,
+            'schemaRichSnippetUrls' => [],
+        ];
+        $schemaTree = self::getSchemaTree();
+        $schemaArray = self::pluckSchemaArray($schemaTree, $schemaName);
+        if (!empty($schemaArray)) {
+            $googleRichSnippetTypes = self::getGoogleRichSnippets();
+            $metaInfo['schemaPending'] = $schemaArray['pending'] ?? false;
+            $metaInfo['schemaRichSnippetUrls'] = $googleRichSnippetTypes[$schemaArray['name']] ?? [];
+        }
+
+        return $metaInfo;
+    }
+
+    /**
+     * Traverse the schema tree and pluck a single type array from it
+     *
+     * @param $schemaTree
+     * @param $schemaName
+     * @return array
+     */
+    protected static function pluckSchemaArray($schemaTree, $schemaName): array
+    {
+        if (!empty($schemaTree['children']) && \is_array($schemaTree['children'])) {
+            foreach ($schemaTree['children'] as $key => $value) {
+                if (!empty($value['name']) && $value['name'] === $schemaName) {
+                    unset($value['children']);
+                    return $value;
+                }
+                if (!empty($value['children'])) {
+                    $result = self::pluckSchemaArray($value, $schemaName);
+                    if (!empty($result)) {
+                        unset($result['children']);
+                        return $result;
+                    }
+                }
+            }
+        }
+
+        return [];
     }
 
     /**
@@ -456,18 +515,17 @@ class Schema
                     $result['children'] = $children;
                 }
             }
+            // Check to see if this is a Google Rich Snippet schema
+            $googleRichSnippetTypes = self::getGoogleRichSnippets();
+            $schemaPath = explode(self::SCHEMA_PATH_DELIMITER, $id);
+            // Use only the specific (last) type for now, rather than the complete path of types
+            $schemaPath = [end($schemaPath)];
+            if ((bool)array_intersect($schemaPath, array_keys($googleRichSnippetTypes))) {
+                $name .= ' (' . Craft::t('seomatic', 'Google rich result') . ')';
+            }
             // Mark it as pending, if applicable
             if (isset($typesArray['pending']) && $typesArray['pending']) {
-                $name .= ' (pending)';
-            } else {
-                // Check to see if this is a Google Rich Snippet schema
-                $googleRichSnippetTypes = self::getGoogleRichSnippets();
-                $schemaPath = explode(self::SCHEMA_PATH_DELIMITER, $id);
-                // Use only the specific (last) type for now, rather than the complete path of types
-                $schemaPath = [end($schemaPath)];
-                if ((bool)array_intersect($schemaPath, array_keys($googleRichSnippetTypes))) {
-                    $name .= ' (Google rich snippet)';
-                }
+                $name .= ' (' . Craft::t('seomatic', 'pending') . ')';
             }
             $result['label'] = $name;
             $result['id'] = $id;

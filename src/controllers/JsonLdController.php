@@ -11,11 +11,9 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Schema as SchemaHelper;
-
 use craft\web\Controller;
-
+use nystudio107\seomatic\helpers\Schema as SchemaHelper;
+use nystudio107\seomatic\Seomatic;
 use yii\web\Response;
 
 /**
@@ -65,6 +63,21 @@ class JsonLdController extends Controller
     public function actionGetType($schemaType): Response
     {
         return $this->asJson(SchemaHelper::getSchemaType($schemaType));
+    }
+
+    /**
+     * Get the fully composed schema type
+     *
+     * @param string $schemaType
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionGetTypeInfo($schemaType): Response
+    {
+        return $this->asJson([
+            'schema' => SchemaHelper::getSchemaType($schemaType),
+            'meta' => SchemaHelper::getTypeMetaInfo($schemaType),
+        ]);
     }
 
     /**
