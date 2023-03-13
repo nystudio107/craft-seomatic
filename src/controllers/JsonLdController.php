@@ -67,6 +67,21 @@ class JsonLdController extends Controller
     }
 
     /**
+     * Get the fully composed schema type
+     *
+     * @param string $schemaType
+     * @return Response
+     * @throws \Exception
+     */
+    public function actionGetTypeInfo($schemaType): Response
+    {
+        return $this->asJson([
+            'schema' => SchemaHelper::getSchemaType($schemaType),
+            'meta' => SchemaHelper::getTypeMetaInfo($schemaType),
+        ]);
+    }
+
+    /**
      * Get the decomposed schema type
      *
      * @param string $schemaType

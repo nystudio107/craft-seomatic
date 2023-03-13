@@ -531,5 +531,9 @@ return [
     'A larger image preview, up to the width of the viewport, may be shown.' => 'A larger image preview, up to the width of the viewport, may be shown.',
     'No snippet is to be shown. Equivalent to nosnippet.' => 'No snippet is to be shown. Equivalent to nosnippet.',
     'At most, a static image may be used, in accordance to the max-image-preview setting.' => 'At most, a static image may be used, in accordance to the max-image-preview setting.',
-    'Equivalent to noindex, nofollow.' => 'Equivalent to noindex, nofollow.'
+    'Equivalent to noindex, nofollow.' => 'Equivalent to noindex, nofollow.',
+    'SEOmatic schema caches' => 'SEOmatic schema caches',
+    'Google rich result' => 'Google rich result',
+    'pending' => 'pending',
+    'Google rich snippets file not found' => 'Google rich snippets file not found'
 ];

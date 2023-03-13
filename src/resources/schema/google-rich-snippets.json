@@ -1,0 +1,131 @@
+{
+  "Article": {
+    "Article": "https://developers.google.com/search/docs/appearance/structured-data/article",
+    "Speakable": "https://developers.google.com/search/docs/appearance/structured-data/speakable"
+  },
+  "NewsArticle": {
+    "Article": "https://developers.google.com/search/docs/appearance/structured-data/article"
+  },
+  "BlogPosting": {
+    "Article": "https://developers.google.com/search/docs/appearance/structured-data/article"
+  },
+  "Book": {
+    "Book": "https://developers.google.com/search/docs/appearance/structured-data/book"
+  },
+  "BreadcrumbList": {
+    "Breadcrumb": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb"
+  },
+  "ItemList": {
+    "Carousel": "https://developers.google.com/search/docs/appearance/structured-data/carousel",
+    "Recipe": "https://developers.google.com/search/docs/appearance/structured-data/recipe"
+  },
+  "Course": {
+    "Course": "https://developers.google.com/search/docs/appearance/structured-data/course"
+  },
+  "SpecialAnnouncement": {
+    "Special announcements": "https://developers.google.com/search/docs/appearance/structured-data/special-announcements"
+  },
+  "Dataset": {
+    "Dataset": "https://developers.google.com/search/docs/appearance/structured-data/dataset"
+  },
+  "DataCatalog": {
+    "Dataset": "https://developers.google.com/search/docs/appearance/structured-data/dataset"
+  },
+  "DataDownload": {
+    "Dataset": "https://developers.google.com/search/docs/appearance/structured-data/dataset"
+  },
+  "Quiz": {
+    "Education Q&A": "https://developers.google.com/search/docs/appearance/structured-data/education-qa",
+    "Practice problem": "https://developers.google.com/search/docs/appearance/structured-data/practice-problems"
+  },
+  "Question": {
+    "Education Q&A": "https://developers.google.com/search/docs/appearance/structured-data/education-qa",
+    "FAQ": "https://developers.google.com/search/docs/appearance/structured-data/faqpage"
+  },
+  "Answer": {
+    "Education Q&A": "https://developers.google.com/search/docs/appearance/structured-data/education-qa",
+    "FAQ": "https://developers.google.com/search/docs/appearance/structured-data/faqpage"
+  },
+  "EmployerAggregateRating": {
+    "Employer Aggregate Rating": "https://developers.google.com/search/docs/appearance/structured-data/employer-rating"
+  },
+  "Occupation": {
+    "Estimated salary": "https://developers.google.com/search/docs/appearance/structured-data/estimated-salary"
+  },
+  "Event": {
+    "Event": "https://developers.google.com/search/docs/appearance/structured-data/event"
+  },
+  "ClaimReview": {
+    "Fact Check": "https://developers.google.com/search/docs/appearance/structured-data/factcheck"
+  },
+  "FAQPage": {
+    "FAQ": "https://developers.google.com/search/docs/appearance/structured-data/faqpage"
+  },
+  "VirtualLocation": {
+    "Home activities": "https://developers.google.com/search/docs/appearance/structured-data/home-activities"
+  },
+  "HowTo": {
+    "How-to": "https://developers.google.com/search/docs/appearance/structured-data/how-to",
+    "Recipe": "https://developers.google.com/search/docs/appearance/structured-data/recipe"
+  },
+  "ImageObject": {
+    "Image metadata": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"
+  },
+  "JobPosting": {
+    "Job posting": "https://developers.google.com/search/docs/appearance/structured-data/job-posting"
+  },
+  "LearningResource": {
+    "Learning video": "https://developers.google.com/search/docs/appearance/structured-data/learning-video"
+  },
+  "VideoObject": {
+    "Video": "https://developers.google.com/search/docs/appearance/structured-data/video",
+    "Learning video": "https://developers.google.com/search/docs/appearance/structured-data/learning-video"
+  },
+  "Clip": {
+    "Video": "https://developers.google.com/search/docs/appearance/structured-data/video",
+    "Learning video": "https://developers.google.com/search/docs/appearance/structured-data/learning-video"
+  },
+  "LocalBusiness": {
+    "Local business": "https://developers.google.com/search/docs/appearance/structured-data/local-business"
+  },
+  "Organization": {
+    "Logo": "https://developers.google.com/search/docs/appearance/structured-data/logo"
+  },
+  "MathSolver": {
+    "Math solver": "https://developers.google.com/search/docs/appearance/structured-data/math-solvers"
+  },
+  "Movie": {
+    "Movie carousel": "https://developers.google.com/search/docs/appearance/structured-data/movie"
+  },
+  "Product": {
+    "Product": "https://developers.google.com/search/docs/appearance/structured-data/product"
+  },
+  "Review": {
+    "Review snippet": "https://developers.google.com/search/docs/appearance/structured-data/review-snippet",
+    "Product": "https://developers.google.com/search/docs/appearance/structured-data/product"
+  },
+  "Offer": {
+    "Product": "https://developers.google.com/search/docs/appearance/structured-data/product"
+  },
+  "QAPage": {
+    "Q&A": "https://developers.google.com/search/docs/appearance/structured-data/qapage"
+  },
+  "Recipe": {
+    "Recipe": "https://developers.google.com/search/docs/appearance/structured-data/recipe"
+  },
+  "WebSite": {
+    "Sitelinks search box": "https://developers.google.com/search/docs/appearance/structured-data/sitelinks-searchbox"
+  },
+  "SoftwareApplication": {
+    "Software App": "https://developers.google.com/search/docs/appearance/structured-data/software-app"
+  },
+  "WebPage": {
+    "Speakable": "https://developers.google.com/search/docs/appearance/structured-data/speakable"
+  },
+  "CreativeWork": {
+    "Subscription and paywalled content": "https://developers.google.com/search/docs/appearance/structured-data/paywalled-content"
+  },
+  "BroadcastEvent": {
+    "Video": "https://developers.google.com/search/docs/appearance/structured-data/video"
+  }
+}
