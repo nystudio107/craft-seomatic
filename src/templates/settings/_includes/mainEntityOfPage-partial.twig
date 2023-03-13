@@ -2,14 +2,14 @@
 {% import "_includes/forms" as forms %}
 
 <div class="instructions">
-    <p>{{ mainEntityDescription ~ " Choose as general or specific of an type as you wish.  Leave a sub-type blank if you don't want to specify a sub-type." |t("seomatic") |raw }}</p>
+    <p>{{ mainEntityDescription ~ " Choose as general or specific of an schema.org entity type as you wish." |t("seomatic") |raw }}</p>
 </div>
 
 {% set disableTreeSelect = disableTreeSelect|default(false) %}
 <div class="treeselect-wrapper">
     <schema-type-list
-            {% if entitySchemaPath | length %}entity="{{ entitySchemaPath }}"{% endif %}
-            {% if disableTreeSelect %}disabled="true"{% endif %}
+        {% if entitySchemaPath | length %}entity="{{ entitySchemaPath }}"{% endif %}
+        {% if disableTreeSelect %}disabled="true"{% endif %}
     >
 
     </schema-type-list>
@@ -50,10 +50,10 @@
 }) }}
 
 <script>
-    window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
+  window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
 </script>
 {% js %}
-    window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
+window.schemaSelectClass = '{{ "treeselect-wrapper" }}';
     $(document).on('schema-value-changed', function(e, v) {
         let siteTypeId = '{{ "siteType" |namespaceInputId }}';
         let siteSubTypeId = '{{ "siteSubType" |namespaceInputId }}';
