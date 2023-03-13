@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.22 - UNRELEASED
+## 4.0.22 - 2023.03.13
 ### Added
 * Added `(Google rich result)` in the Main Entity of Page dropdown, for Schema.org types that Google uses for Rich Results
 * Add descriptions & links for `(pending)` and `(Google rich result)` schemas in the Main Entity of Page dropdown
