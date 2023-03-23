@@ -212,9 +212,6 @@ return [
         'handle' => TagService::TWITTER_HANDLE,
         'include' => true,
         'class' => (string)MetaTagContainer::class,
-        'dependencies' => [
-            Dependency::SITE_DEPENDENCY => ['twitterHandle'],
-        ],
         'data' => [
             'twitter:card' => [
                 'charset' => '',
