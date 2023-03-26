@@ -360,7 +360,7 @@ class Schema
         ]);
         $cache = Craft::$app->getCache();
         $typesArray = $cache->getOrSet(
-            self::CACHE_KEY . 'schemaArray',
+            self::CACHE_KEY . 'schemaTree',
             function () {
                 Craft::info(
                     'schemaTree cache miss',
