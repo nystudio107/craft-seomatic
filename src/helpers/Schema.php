@@ -360,10 +360,10 @@ class Schema
         ]);
         $cache = Craft::$app->getCache();
         $typesArray = $cache->getOrSet(
-            self::CACHE_KEY . 'schemaArray',
+            self::CACHE_KEY . 'schemaTree',
             function () {
                 Craft::info(
-                    'schemaTree cache miss',
+                    'schemaArray cache miss',
                     __METHOD__
                 );
                 $filePath = Craft::getAlias('@nystudio107/seomatic/resources/schema/tree.jsonld');
