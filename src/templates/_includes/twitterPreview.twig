@@ -10,15 +10,16 @@
         {% if showSeoTitleNames %}
             <h4 class="metadata-title-separator"><span>Twitter</span></h4>
         {% endif %}
-        {% if seomatic.site.twitterHandle |length %}
-            {% set lg = false %}
-            {% if seomatic.meta.twitterCard == "summary_large_image" %}
-                {% set lg = true %}
-            {% endif %}
-            {% if lg %}
+        {% set lg = false %}
+        {% if seomatic.meta.twitterCard == "summary_large_image" %}
+            {% set lg = true %}
+        {% endif %}
+        {% if lg %}
             <div class="card-seo-twitter">
-                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
-                    <div class="card-seo-twitter__image js-preview-image {{ previewElementId }}-TwitterCard-image-wrapper"></div>
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}"
+                   rel="noopener" target="_blank">
+                    <div
+                        class="card-seo-twitter__image js-preview-image {{ previewElementId }}-TwitterCard-image-wrapper"></div>
                     <div class="card-seo-twitter__text">
                         <span class="card-seo-twitter__title js-preview-title">
                             {{ (twitterTitleArray.content ?? "") }}
@@ -32,15 +33,18 @@
                     </div>
                 </a>
             </div>
-            {% else %}
+        {% else %}
             <div class="card-seo-twitter">
-                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}" rel="noopener" target="_blank">
-                    <div class="card-seo-twitter__image js-preview-image card-seo-twitter__image-summary {{ previewElementId }}-TwitterCard-image-wrapper"></div>
+                <a class="seo-card-wrapper-link" href="{{ canonicalArray.href ?? seomatic.helper.siteUrl("/") }}"
+                   rel="noopener" target="_blank">
+                    <div
+                        class="card-seo-twitter__image js-preview-image card-seo-twitter__image-summary {{ previewElementId }}-TwitterCard-image-wrapper"></div>
                     <div class="card-seo-twitter__text card-seo-twitter__text-summary">
                         <span class="card-seo-twitter__title js-preview-title">
                             {{ (twitterTitleArray.content ?? "") }}
                         </span>
-                        <span class="card-seo-twitter__description card-seo-twitter__description-summary js-preview-description">
+                        <span
+                            class="card-seo-twitter__description card-seo-twitter__description-summary js-preview-description">
                             {{ (twitterDescriptionArray.content ?? "") }}
                         </span>
                         <span class="card-seo-twitter__link js-preview-domain">
@@ -50,23 +54,22 @@
                 </a>
             </div>
         {% endif %}
-            <script type="text/javascript">
-                var x = document.getElementsByClassName("{{ previewElementId }}-TwitterCard-image-wrapper");
-                var i;
-                for (i = 0; i < x.length; i++) {
-                    x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";
-                    {% if twitterImageArray.content is defined and twitterImageArray.content |length %}
-                    {% set cacheBustString = "" %}
-                    x[i].style.backgroundImage = "url('" + "{{ (twitterImageArray.content ~ cacheBustString) | raw }}" + "')";
-                    {% endif %}
-                }
-            </script>
-        {% else %}
-            {% if previewContext is not defined or previewContext != "sidebar" %}
-                <div class="field">
-                    <p class="warning">No Twitter Handle has been set. <a href="{{ cpUrl("seomatic/site/social") }}">Set it here.</a></p>
-                </div>
-            {% endif %}
+        <script type="text/javascript">
+          var x = document.getElementsByClassName("{{ previewElementId }}-TwitterCard-image-wrapper");
+          var i;
+          for (i = 0; i < x.length; i++) {
+            x[i].style.backgroundImage = "url('" + "{{ baseAssetsUrl ~ '/img/no_image_set.png' }}" + "')";
+              {% if twitterImageArray.content is defined and twitterImageArray.content |length %}
+              {% set cacheBustString = "" %}
+            x[i].style.backgroundImage = "url('" + "{{ (twitterImageArray.content ~ cacheBustString) | raw }}" + "')";
+              {% endif %}
+          }
+        </script>
+        {% if previewContext is not defined or previewContext != "sidebar" %}
+            <div class="field">
+                <p class="warning">No Twitter Handle has been set. <a href="{{ cpUrl("seomatic/site/social") }}">Set it
+                        here.</a></p>
+            </div>
         {% endif %}
     </div>
 </div>
