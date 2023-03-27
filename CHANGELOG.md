@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.52 - UNRELEASED
+## 3.4.52 - 2023.03.27
 ### Changed
 * Removed the requirement that the Site Twitter Handle is set for Twitter cards to be generated ([#1275](https://github.com/nystudio107/craft-seomatic/issues/1275))
 
