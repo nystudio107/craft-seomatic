@@ -3,6 +3,7 @@
 ## 4.0.24 - UNRELEASED
 ### Changed
 * Ensure that makes sure that alternate site url's also take into account a potential site override url in sitemaps ([#1298](https://github.com/nystudio107/craft-seomatic/pull/1298))
+* Use the `getSalePrice()` for the default `Product` and `DigitalProduct` JSON-LD structured data ([#930](https://github.com/nystudio107/craft-seomatic/issues/930))
 
 ## 4.0.23 - 2023.03.27
 ### Changed
