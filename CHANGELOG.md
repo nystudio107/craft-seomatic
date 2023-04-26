@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.24 - UNRELEASED
+### Fixed
+* Fixed an issue where SEOmatic would cause other plugins to fail to be able to register Twig extensions after it when using the CLI command `craft plugin/install --all` ([#1312](https://github.com/nystudio107/craft-seomatic/issues/1312))
+
 ### Changed
 * Ensure that makes sure that alternate site url's also take into account a potential site override url in sitemaps ([#1298](https://github.com/nystudio107/craft-seomatic/pull/1298))
 * Use the `getSalePrice()` for the default `Product` and `DigitalProduct` JSON-LD structured data ([#930](https://github.com/nystudio107/craft-seomatic/issues/930))
