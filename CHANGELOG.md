@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.24 - UNRELEASED
+## 4.0.24 - 2023.05.01
 ### Added
 * Added a **View Sitemap Index** button to SEOmatic → Site Settings → Sitemap ([#1085](https://github.com/nystudio107/craft-seomatic/issues/1085))
 
