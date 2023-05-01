@@ -1,5 +1,5 @@
 ---
-title: SEOmatic plugin for Craft CMS 3.x
+title: SEOmatic plugin for Craft CMS 4.x
 description: Documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
 ---
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/v4) 
