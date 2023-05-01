@@ -10,7 +10,7 @@ Please report any issues you find to the [SEOmatic Issues](https://github.com/ny
 
 ## Upgrading from SEOmatic 1.x for Craft CMS 2.x
 
-If you are upgrading a site from Craft CMS 2.x to Craft CMS 3.x that used the older SEOmatic plugin, here’s what you need to know.
+If you are upgrading a site from Craft CMS 2.x to Craft CMS 4.x that used the older SEOmatic plugin, here’s what you need to know.
 
 SEOmatic will migrate your old Craft 2.x Field settings & data in the following ways:
  
