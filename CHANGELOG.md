@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 3.4.53 - 2023.05.01
+### Added
+* Added a **View Sitemap Index** button to SEOmatic → Site Settings → Sitemap ([#1085](https://github.com/nystudio107/craft-seomatic/issues/1085))
+
+### Fixed
+* Fixed an issue where SEOmatic would cause other plugins to fail to be able to register Twig extensions after it when using the CLI command `craft plugin/install --all` ([#1312](https://github.com/nystudio107/craft-seomatic/issues/1312))
+* Fix cache-busting param on seo images ([#1310](https://github.com/nystudio107/craft-seomatic/pull/1310))
+* Fixed an issue where `encodeUrlQueryParams` wouldn't include the URL's port
+
+### Changed
+* Ensure that makes sure that alternate site url's also take into account a potential site override url in sitemaps ([#1298](https://github.com/nystudio107/craft-seomatic/pull/1298))
+* Use the `getSalePrice()` for the default `Product` and `DigitalProduct` JSON-LD structured data ([#930](https://github.com/nystudio107/craft-seomatic/issues/930))
+
 ## 3.4.52 - 2023.03.27
 ### Changed
 * Removed the requirement that the Site Twitter Handle is set for Twitter cards to be generated ([#1275](https://github.com/nystudio107/craft-seomatic/issues/1275))

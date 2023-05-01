@@ -432,26 +432,29 @@ class Seomatic extends Plugin
     protected function installGlobalEventListeners()
     {
         // Handler: Plugins::EVENT_AFTER_LOAD_PLUGINS
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_LOAD_PLUGINS,
-            function () {
-                // Delay registering SEO Elements to give other plugins a chance to load first
-                $this->seoElements->getAllSeoElementTypes(false);
-                // Delay installing GQL handlers to give other plugins a chance to register their own first
-                $this->installGqlHandlers();
-                // Install these only after all other plugins have loaded
-                $request = Craft::$app->getRequest();
-                // Only respond to non-console site requests
-                if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
-                    $this->handleSiteRequest();
+        $request = Craft::$app->getRequest();
+        if (!$request->getIsConsoleRequest()) {
+            Event::on(
+                Plugins::class,
+                Plugins::EVENT_AFTER_LOAD_PLUGINS,
+                function () {
+                    // Delay registering SEO Elements to give other plugins a chance to load first
+                    $this->seoElements->getAllSeoElementTypes(false);
+                    // Delay installing GQL handlers to give other plugins a chance to register their own first
+                    $this->installGqlHandlers();
+                    // Install these only after all other plugins have loaded
+                    $request = Craft::$app->getRequest();
+                    // Only respond to non-console site requests
+                    if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
+                        $this->handleSiteRequest();
+                    }
+                    // Respond to Control Panel requests
+                    if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+                        $this->handleAdminCpRequest();
+                    }
                 }
-                // Respond to Control Panel requests
-                if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
-                    $this->handleAdminCpRequest();
-                }
-            }
-        );
+            );
+        }
         // Handler: Fields::EVENT_REGISTER_FIELD_TYPES
         Event::on(
             Fields::class,

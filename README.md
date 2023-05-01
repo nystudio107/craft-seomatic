@@ -3,11 +3,11 @@
 
 # SEOmatic plugin for Craft CMS 3.x
 
-SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 3. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
+SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
 
 ![Screenshot](./docs/docs/resources/img/plugin-banner.jpg)
 
-Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOmatic for Craft CMS 3 is a complete re-write & re-architecture from scratch.
+Related: [SEOmatic for Craft 2.x](https://github.com/nystudio107/seomatic). SEOmatic for Craft CMS is a complete re-write & re-architecture from scratch.
 
 **Note**: _The license fee for this plugin is $99.00 via the Craft Plugin Store._
 
@@ -38,8 +38,6 @@ To install SEOmatic, follow these steps:
 3. Install the plugin via `./craft install/plugin seomatic` via the CLI, or in the Control Panel, go to Settings → Plugins and click the “Install” button for SEOmatic.
 
 You can also install SEOmatic via the **Plugin Store** in the Craft Control Panel.
-
-SEOmatic works on Craft 3.x.
 
 ## Documentation
 

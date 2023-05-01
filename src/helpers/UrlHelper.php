@@ -147,6 +147,9 @@ class UrlHelper extends CraftUrlHelper
         if (isset($urlParts['host'])) {
             $encodedUrl .= $urlParts['host'];
         }
+        if (isset($urlParts['port'])) {
+            $encodedUrl .= ':' . $urlParts['port'];
+        }
         if (isset($urlParts['path'])) {
             $encodedUrl .= $urlParts['path'];
         }
