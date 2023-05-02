@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.54 - UNRELEASED
+### Fixed
+* Revert ([this commit](https://github.com/nystudio107/craft-seomatic/commit/63897ade501f9cf3175eed57a6fb91940fd32a38)) which caused CLI-based GraphQL generation to fail
+
 ## 3.4.53 - 2023.05.01
 ### Added
 * Added a **View Sitemap Index** button to SEOmatic → Site Settings → Sitemap ([#1085](https://github.com/nystudio107/craft-seomatic/issues/1085))
