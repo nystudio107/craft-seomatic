@@ -3,6 +3,7 @@
 ## 3.4.54 - UNRELEASED
 ### Fixed
 * Revert ([this commit](https://github.com/nystudio107/craft-seomatic/commit/63897ade501f9cf3175eed57a6fb91940fd32a38)) which caused CLI-based GraphQL generation to fail
+* Better fix for an issue where SEOmatic would cause other plugins to fail to be able to register Twig extensions after it when using the CLI command `craft plugin/install --all` ([#1312](https://github.com/nystudio107/craft-seomatic/issues/1312))
 
 ## 3.4.53 - 2023.05.01
 ### Added
