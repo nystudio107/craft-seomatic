@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic\models;
 
-use Craft;
 use craft\behaviors\EnvAttributeParserBehavior;
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
@@ -165,7 +164,6 @@ class MetaBundle extends FluentModel
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
-
         // Meta global variables
         if ($this->metaGlobalVars !== null && is_array($this->metaGlobalVars)) {
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
@@ -185,10 +183,6 @@ class MetaBundle extends FluentModel
         // Frontend templates
         if ($this->frontendTemplatesContainer !== null && is_array($this->frontendTemplatesContainer)) {
             $this->frontendTemplatesContainer = FrontendTemplateContainer::create($this->frontendTemplatesContainer);
-        }
-        // If Craft hasn't been initialized yet, don't parse the bundle
-        if (Craft::$app->getIsInitialized()) {
-            $parse = false;
         }
         // Create our variable so that meta containers can be parsed based on dynamic values
         // Make sure Twig is loaded and instantiated first by priming the pump
