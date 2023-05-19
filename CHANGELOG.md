@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.25 - UNRELEASED
+## 4.0.25 - 2023.05.19
 ### Changed
 * Have the Site Name Position default to "Same as Global Setting" ([#1321](https://github.com/nystudio107/craft-seomatic/issues/1321))
 
