@@ -443,6 +443,7 @@ class Sitemap
                 $fieldMetaBundle = $element->$fieldHandle;
                 if ($fieldMetaBundle !== null && $seoSettingsField !== null) {
                     if ($seoSettingsField->sitemapTabEnabled) {
+                        Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($fieldMetaBundle, $fieldHandle);
                         // Combine the meta sitemap vars
                         $attributes = $fieldMetaBundle->metaSitemapVars->getAttributes();
 

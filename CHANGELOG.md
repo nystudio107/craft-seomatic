@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 4.0.25 - 2023.05.19
+### Changed
+* Have the Site Name Position default to "Same as Global Setting" ([#1321](https://github.com/nystudio107/craft-seomatic/issues/1321))
+
+### Fixed
+* Revert ([this commit](https://github.com/nystudio107/craft-seomatic/commit/63897ade501f9cf3175eed57a6fb91940fd32a38)) which caused CLI-based GraphQL generation to fail
+* Removed vestigial "No Twitter handle has been set" message ([#1316](https://github.com/nystudio107/craft-seomatic/issues/1316))
+* Fixed an issue that would cause SEOmatic to ignore the Override lightswitch setting for SEO Settings fields in the context of generated sitemaps
+
 ## 4.0.24 - 2023.05.01
 ### Added
 * Added a **View Sitemap Index** button to SEOmatic → Site Settings → Sitemap ([#1085](https://github.com/nystudio107/craft-seomatic/issues/1085))

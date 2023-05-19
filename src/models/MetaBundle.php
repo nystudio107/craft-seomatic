@@ -164,7 +164,6 @@ class MetaBundle extends FluentModel
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
-
         // Meta global variables
         if ($this->metaGlobalVars !== null && is_array($this->metaGlobalVars)) {
             $this->metaGlobalVars = MetaGlobalVars::create($this->metaGlobalVars);
