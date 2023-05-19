@@ -11,18 +11,16 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\MetaContainer;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-use nystudio107\seomatic\base\FluentModel;
-use nystudio107\seomatic\variables\SeomaticVariable;
-
 use craft\behaviors\EnvAttributeParserBehavior;
 use craft\helpers\Json as JsonHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
-
+use nystudio107\seomatic\base\FluentModel;
+use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\behaviors\AttributeTypecastBehavior;
 
 /**
@@ -132,7 +130,7 @@ class MetaBundle extends FluentModel
      * Create a new meta bundle
      *
      * @param array $config
-     * @param bool $parse    Whether the resulting metabundle should be parsed
+     * @param bool $parse Whether the resulting metabundle should be parsed
      *
      * @return null|MetaBundle
      */
@@ -153,7 +151,7 @@ class MetaBundle extends FluentModel
      * This is called after meta bundle data is loaded, to allow it to be
      * parsed, models instantiated, etc.
      *
-     * @param bool $parse    Whether the resulting metabundle should be parsed
+     * @param bool $parse Whether the resulting metabundle should be parsed
      */
     public function normalizeMetaBundleData(bool $parse = true)
     {
