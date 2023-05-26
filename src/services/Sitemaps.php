@@ -349,7 +349,7 @@ class Sitemaps extends Component implements SitemapInterface
             $sourceHandle,
             $siteId
         );
-        if ($site && $metaBundle) {
+        if ($site && $metaBundle && $metaBundle->metaSitemapVars->sitemapUrls) {
             try {
                 $url = UrlHelper::siteUrl(
                     '/sitemaps-'
