@@ -4,6 +4,9 @@
 ### Changed
 * Don't try to submit sitemap indexes to search engines if sitemaps are disabled for that section
 
+### Security
+* Addressed a potential XSS vulnerability when using `seomatic.helper.paginate()`
+
 ## 4.0.25 - 2023.05.19
 ### Changed
 * Have the Site Name Position default to "Same as Global Setting" ([#1321](https://github.com/nystudio107/craft-seomatic/issues/1321))
