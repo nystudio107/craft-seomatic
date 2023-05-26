@@ -98,6 +98,7 @@ class DynamicMeta
             if ($stripQueryParams) {
                 $url = preg_replace('/\?.*/', '', $url);
             }
+            $url = UrlHelper::absoluteUrlWithProtocol($url);
             if (!empty($url)) {
                 Seomatic::$seomaticVariable->meta->canonicalUrl = $url;
                 $canonical = Seomatic::$seomaticVariable->link->get('canonical');
@@ -110,6 +111,7 @@ class DynamicMeta
             if ($stripQueryParams) {
                 $url = preg_replace('/\?.*/', '', $url);
             }
+            $url = UrlHelper::absoluteUrlWithProtocol($url);
             if (!empty($url)) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel' => 'prev',
@@ -121,6 +123,7 @@ class DynamicMeta
             if ($stripQueryParams) {
                 $url = preg_replace('/\?.*/', '', $url);
             }
+            $url = UrlHelper::absoluteUrlWithProtocol($url);
             if (!empty($url)) {
                 $metaTag = Seomatic::$plugin->link->create([
                     'rel' => 'next',
