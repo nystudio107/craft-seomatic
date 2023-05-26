@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.55 - UNRELEASED
+### Changed
+* Don't try to submit sitemap indexes to search engines if sitemaps are disabled for that section
+
 ## 3.4.54 - 2023.05.19
 ### Changed
 * Have the Site Name Position default to "Same as Global Setting" ([#1321](https://github.com/nystudio107/craft-seomatic/issues/1321))
