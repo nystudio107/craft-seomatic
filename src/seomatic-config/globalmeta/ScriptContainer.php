@@ -22,7 +22,7 @@ use yii\web\View;
  */
 
 return [
-    MetaScriptContainer::CONTAINER_TYPE.ScriptService::GENERAL_HANDLE => [
+    MetaScriptContainer::CONTAINER_TYPE . ScriptService::GENERAL_HANDLE => [
         'name' => 'General',
         'description' => 'Script Tags',
         'handle' => ScriptService::GENERAL_HANDLE,
@@ -437,6 +437,8 @@ return [
                 'description' => 'Google Analytics gives you the digital analytics tools you need to analyze data from all touchpoints in one place, for a deeper understanding of the customer experience. You can then share the insights that matter with your whole organization. [Learn More](https://www.google.com/analytics/analytics/)',
                 'templatePath' => '_frontend/scripts/googleAnalytics.twig',
                 'position' => View::POS_HEAD,
+                'deprecated' => true,
+                'deprecationNotice' => 'Universal Analytics (which is what this script uses) is being [discontinued on July 1st, 2023](https://support.google.com/analytics/answer/11583528). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property.',
                 'vars' => [
                     'trackingId' => [
                         'title' => 'Google Analytics Tracking ID',
