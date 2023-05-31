@@ -86,6 +86,16 @@ class MetaScript extends NonceItem
     public $dataLayer = [];
 
     /**
+     * @var bool Whether this tag is deprecated or not
+     */
+    public $deprecated = false;
+
+    /**
+     * @var string The deprecation notice to display
+     */
+    public $deprecationNotice = '';
+
+    /**
      * @param array $config
      *
      * @return MetaScript
