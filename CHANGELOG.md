@@ -4,6 +4,7 @@
 ### Added
 * Show a deprecation notice on the **Google Analytics** tracking script setting, with an explanation of it being discontinued
 * Added the ability to completely disable scripts from displaying & rendering if they have been discontinued
+* Add an announcement if the site is using the soon to be deprecated Google Universal Analytics via SEOmatic
 
 ### Changed
 * Don't try to submit sitemap indexes to search engines if sitemaps are disabled for that section
