@@ -98,6 +98,15 @@ class MetaBundles extends Component
         ],
     ];
 
+    const PRESERVE_SCRIPT_SETTINGS = [
+        'include',
+        'tagAttrs',
+        'templateString',
+        'position',
+        'bodyTemplateString',
+        'bodyPosition',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -289,12 +298,14 @@ class MetaBundles extends Component
         // Preserve the metaBundleSettings
         $attributes = $baseConfig->metaBundleSettings->getAttributes();
         $metaBundle->metaBundleSettings->setAttributes($attributes);
-        // Preserve the Script containers, but add in any new containers
+        // Preserve the Script container user settings, but update everything else
         foreach ($baseConfig->metaContainers as $baseMetaContainerName => $baseMetaContainer) {
             if ($baseMetaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
                 foreach ($baseMetaContainer->data as $key => $value) {
                     if (!empty($metaBundle->metaContainers[$baseMetaContainerName])) {
-                        $metaBundle->metaContainers[$baseMetaContainerName]->data[$key] = $value;
+                        foreach (self::PRESERVE_SCRIPT_SETTINGS as $scriptSetting) {
+                            $metaBundle->metaContainers[$baseMetaContainerName]->data[$key][$scriptSetting] = $value[$scriptSetting] ?? '';
+                        }
                     }
                 }
             }

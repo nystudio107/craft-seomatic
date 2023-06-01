@@ -1,5 +1,17 @@
 # SEOmatic Changelog
 
+## 3.4.55 - 2023.06.01
+### Added
+* Show a deprecation notice on the **Google Analytics** tracking script setting, with an explanation of it being discontinued
+* Added the ability to completely disable scripts from displaying & rendering if they have been discontinued
+* Add an announcement if the site is using the soon to be deprecated Google Universal Analytics via SEOmatic
+
+### Changed
+* Don't try to submit sitemap indexes to search engines if sitemaps are disabled for that section
+
+### Security
+* Addressed a potential XSS vulnerability when using `seomatic.helper.paginate()`
+
 ## 3.4.54 - 2023.05.19
 ### Changed
 * Have the Site Name Position default to "Same as Global Setting" ([#1321](https://github.com/nystudio107/craft-seomatic/issues/1321))
