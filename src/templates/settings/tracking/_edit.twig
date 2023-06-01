@@ -33,7 +33,7 @@
 
     {% for scriptHandle,scriptData in scripts %}
         {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
-        {% if currentUser.can(permission) and currentSubSection == scriptHandle %}
+        {% if not scriptData.discontinued and currentUser.can(permission) and currentSubSection == scriptHandle %}
             <div id='{{ "tab-tracking-#{scriptHandle}" }}' class="seomatic-script-wrapper">
                 <h2>{{ subSectionTitle ~ " Settings"|t("seomatic") }}</h2>
                 {% if scriptData.deprecated %}

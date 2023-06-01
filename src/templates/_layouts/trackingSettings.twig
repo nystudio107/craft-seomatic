@@ -15,7 +15,7 @@
 } %}
 {% for scriptHandle,scriptData in scripts %}
     {% set permission = "seomatic:tracking-scripts:#{scriptHandle}" %}
-    {% if currentUser.can(permission) %}
+    {% if not scriptData.discontinued and currentUser.can(permission) %}
         {% set navItems = navItems |merge({
             (scriptHandle): {
                 title: "#{scriptData.name}"|t("seomatic"),
