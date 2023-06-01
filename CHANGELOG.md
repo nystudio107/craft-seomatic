@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.55 - UNRELEASED
+## 3.4.55 - 2023.06.01
 ### Added
 * Show a deprecation notice on the **Google Analytics** tracking script setting, with an explanation of it being discontinued
 * Added the ability to completely disable scripts from displaying & rendering if they have been discontinued
