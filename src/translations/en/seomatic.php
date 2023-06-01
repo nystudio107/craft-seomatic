@@ -508,5 +508,9 @@ return [
     'Google rich result' => 'Google rich result',
     'pending' => 'pending',
     'Google rich snippets file not found' => 'Google rich snippets file not found',
-    ' Choose as general or specific of an schema.org entity type as you wish.' => ' Choose as general or specific of an schema.org entity type as you wish.'
+    ' Choose as general or specific of an schema.org entity type as you wish.' => ' Choose as general or specific of an schema.org entity type as you wish.',
+    'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property..' => 'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property..',
+    'Google Universal Analytics deprecated' => 'Google Universal Analytics deprecated',
+    'Universal Analytics (which is used on this site) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property..' => 'Universal Analytics (which is used on this site) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property..',
+    'Twitter username for the website used in the card footer, without the preceding @.' => 'Twitter username for the website used in the card footer, without the preceding @.'
 ];
