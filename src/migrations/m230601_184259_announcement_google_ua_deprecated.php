@@ -34,7 +34,7 @@ class m230601_184259_announcement_google_ua_deprecated extends Migration
                     if ($enabled) {
                         Craft::$app->announcements->push(
                             Translation::prep('seomatic', 'Google Universal Analytics deprecated', []),
-                            Translation::prep('seomatic', 'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property..', [
+                            Translation::prep('seomatic', 'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property.', [
                                 'url' => 'https://support.google.com/analytics/answer/11583528',
                             ]),
                             'seomatic'
