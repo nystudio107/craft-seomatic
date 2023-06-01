@@ -96,6 +96,11 @@ class MetaScript extends NonceItem
     public $deprecationNotice = '';
 
     /**
+     * @var bool Whether this tag is discontinued, and should not be displayed or rendered
+     */
+    public $discontinued = false;
+
+    /**
      * @param array $config
      *
      * @return MetaScript
@@ -237,7 +242,8 @@ class MetaScript extends NonceItem
     public function prepForRender(&$data): bool
     {
         $shouldRender = parent::prepForRender($data);
-        if ($shouldRender) {
+        if ($this->discontinued) {
+            return false;
         }
 
         return $shouldRender;
