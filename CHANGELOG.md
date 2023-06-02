@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.56 - 2023.06.02
+### Fixed
+* Bumped the schema version to side-step a Craft bug that would throw an error when running `craft/update` with a plugin that had a new migration without a schema version change
+
 ## 3.4.55 - 2023.06.01
 ### Added
 * Show a deprecation notice on the **Google Analytics** tracking script setting, with an explanation of it being discontinued
