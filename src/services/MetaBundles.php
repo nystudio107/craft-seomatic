@@ -105,6 +105,7 @@ class MetaBundles extends Component
         'position',
         'bodyTemplateString',
         'bodyPosition',
+        'vars',
     ];
 
     // Protected Properties
