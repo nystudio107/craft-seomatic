@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.57 - 2023.06.13
+### Fixed
+* Fixed an issue that would cause settings in the Tracking Scripts settings to be wiped out whenever other settings in SEOmatic were saved ([#1327](https://github.com/nystudio107/craft-seomatic/issues/1327))
+
 ## 3.4.56 - 2023.06.02
 ### Fixed
 * Bumped the schema version to side-step a Craft bug that would throw an error when running `craft/update` with a plugin that had a new migration without a schema version change
