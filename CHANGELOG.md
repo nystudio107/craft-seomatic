@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.29 - UNRELEASED
+### Fixed
+* Fixed a regression that caused the SEO Preview to not appear in the sidebar for Commerce 4, due to Commerce 4 not supporting the `EVENT_DEFINE_SIDEBAR_HTML` event (despite there being code in Commerce 4 that appears to support it) ([#1336](https://github.com/nystudio107/craft-seomatic/issues/1336))
+
 ## 4.0.28 - 2023.06.13
 ### Fixed
 * Fixed an issue that would cause settings in the Tracking Scripts settings to be wiped out whenever other settings in SEOmatic were saved ([#1327](https://github.com/nystudio107/craft-seomatic/issues/1327))
