@@ -172,6 +172,41 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
         }
 
+        /**
+         * N.B. This is in here seemingly twice (see the Product::EVENT_DEFINE_SIDEBAR_HTML below)
+         * because Commerce apparently doesn't render the templates in a way that causes the
+         * Product::EVENT_DEFINE_SIDEBAR_HTML to be thrown, despite there being code that implies it does:
+         * https://github.com/craftcms/commerce/blob/develop/src/elements/Product.php#L796
+         **/
+
+        // Install only for non-console Control Panel requests
+        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+            // Commerce Product Types sidebar
+            $commerce = CommercePlugin::getInstance();
+            if ($commerce !== null) {
+                Seomatic::$view->hook('cp.commerce.product.edit.details', static function (&$context) {
+                    $html = '';
+                    Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+                    /** @var  $product Product */
+                    $product = $context[self::getElementRefHandle()] ?? null;
+                    if ($product !== null && $product->uri !== null) {
+                        Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
+                        // Render our preview sidebar template
+                        if (Seomatic::$settings->displayPreviewSidebar) {
+                            $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-preview.twig');
+                        }
+                        // Render our analysis sidebar template
+// @TODO: This will be added an upcoming 'pro' edition
+//                if (Seomatic::$settings->displayAnalysisSidebar) {
+//                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/product-analysis.twig');
+//                }
+                    }
+
+                    return $html;
+                });
+            }
+        }
+
         // Handler: Product::EVENT_DEFINE_SIDEBAR_HTML
         Event::on(
             Product::class,
