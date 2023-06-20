@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.29 - UNRELEASED
+### Changed
+* Use any custom field labels for "pull fields" in SEOmatic settings ([#1335](https://github.com/nystudio107/craft-seomatic/issues/1335))
+
 ### Fixed
 * Fixed a regression that caused the SEO Preview to not appear in the sidebar for Commerce 4, due to Commerce 4 not supporting the `EVENT_DEFINE_SIDEBAR_HTML` event (despite there being code in Commerce 4 that appears to support it) ([#1336](https://github.com/nystudio107/craft-seomatic/issues/1336))
 
