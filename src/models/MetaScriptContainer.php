@@ -11,12 +11,10 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\NonceContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 use yii\web\View;
 
@@ -56,16 +54,16 @@ class MetaScriptContainer extends NonceContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaScriptContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$dependency->tags[3].$this->dataLayerHash();
+        $uniqueKey = $this->handle . $dependency->tags[3] . $this->dataLayerHash();
         $cache = Craft::$app->getCache();
         if ($this->clearCache) {
             TagDependency::invalidate($cache, $dependency->tags[3]);
         }
         $tagData = $cache->getOrSet(
-            self::CONTAINER_TYPE.$uniqueKey,
+            self::CONTAINER_TYPE . $uniqueKey,
             function () use ($uniqueKey) {
                 Craft::info(
-                    self::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
                 );
                 $tagData = [];
@@ -73,6 +71,7 @@ class MetaScriptContainer extends NonceContainer
                     /** @var $metaScriptModel MetaScript */
                     foreach ($this->data as $metaScriptModel) {
                         if ($metaScriptModel->include) {
+                            // The regular script JS
                             $js = $metaScriptModel->render();
                             if (!empty($js)) {
                                 $scenario = $this->scenario;
@@ -82,6 +81,26 @@ class MetaScriptContainer extends NonceContainer
                                 $tagData[] = [
                                     'js' => $js,
                                     'position' => $metaScriptModel->position ?? $this->position,
+                                    'nonce' => $metaScriptModel->nonce ?? null,
+                                    'tagAttrs' => $options,
+                                ];
+                                // If `devMode` is enabled, validate the Meta Script and output any model errors
+                                if (Seomatic::$devMode) {
+                                    $metaScriptModel->debugMetaItem(
+                                        'Script attribute: '
+                                    );
+                                }
+                            }
+                            // The regular script JS
+                            $bodyJs = $metaScriptModel->renderBodyHtml();
+                            if (!empty($bodyJs)) {
+                                $scenario = $this->scenario;
+                                $metaScriptModel->setScenario('render');
+                                $options = $metaScriptModel->tagAttributes();
+                                $metaScriptModel->setScenario($scenario);
+                                $tagData[] = [
+                                    'js' => $bodyJs,
+                                    'position' => $metaScriptModel->bodyPosition ?? $this->position,
                                     'nonce' => $metaScriptModel->nonce ?? null,
                                     'tagAttrs' => $options,
                                 ];
@@ -134,9 +153,8 @@ class MetaScriptContainer extends NonceContainer
         if ($params['renderScriptTags']) {
             $html =
                 '<script>'
-                .$html
-                .'</script>'
-            ;
+                . $html
+                . '</script>';
         }
 
         return $html;

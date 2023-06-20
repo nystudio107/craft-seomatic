@@ -666,36 +666,6 @@ class Seomatic extends Plugin
      */
     protected function handleSiteRequest()
     {
-        // Handler: View::EVENT_BEGIN_BODY
-        Event::on(
-            View::class,
-            View::EVENT_BEGIN_BODY,
-            function () {
-                Craft::debug(
-                    'View::EVENT_BEGIN_BODY',
-                    __METHOD__
-                );
-                // The <body> placeholder tag has just rendered, include any script HTML
-                if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_BEGIN);
-                }
-            }
-        );
-        // Handler: View::EVENT_END_BODY
-        Event::on(
-            View::class,
-            View::EVENT_END_BODY,
-            function () {
-                Craft::debug(
-                    'View::EVENT_END_BODY',
-                    __METHOD__
-                );
-                // The </body> placeholder tag is about to be rendered, include any script HTML
-                if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(View::POS_END);
-                }
-            }
-        );
         // Handler: View::EVENT_END_PAGE
         Event::on(
             View::class,

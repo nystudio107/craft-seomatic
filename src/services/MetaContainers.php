@@ -165,55 +165,6 @@ class MetaContainers extends Component
     }
 
     /**
-     * Include any script body HTML
-     *
-     * @param int $bodyPosition
-     */
-    public function includeScriptBodyHtml(int $bodyPosition)
-    {
-        Craft::beginProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
-        $dependency = $this->containerDependency;
-        $uniqueKey = $dependency->tags[3] ?? self::GLOBALS_CACHE_KEY;
-        $uniqueKey .= $bodyPosition;
-        $scriptData = Craft::$app->getCache()->getOrSet(
-            self::GLOBALS_CACHE_KEY . $uniqueKey,
-            function () use ($uniqueKey, $bodyPosition) {
-                Craft::info(
-                    self::SCRIPTS_CACHE_KEY . ' cache miss: ' . $uniqueKey,
-                    __METHOD__
-                );
-                $scriptData = [];
-                $scriptContainers = $this->getContainersOfType(MetaScriptContainer::CONTAINER_TYPE);
-                foreach ($scriptContainers as $scriptContainer) {
-                    /** @var MetaScriptContainer $scriptContainer */
-                    if ($scriptContainer->include) {
-                        if ($scriptContainer->prepForInclusion()) {
-                            foreach ($scriptContainer->data as $metaScript) {
-                                /** @var MetaScript $metaScript */
-                                if (!empty($metaScript->bodyTemplatePath)
-                                    && ((int)$metaScript->bodyPosition === $bodyPosition)) {
-                                    $scriptData[] = $metaScript->renderBodyHtml();
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return $scriptData;
-            },
-            Seomatic::$cacheDuration,
-            $dependency
-        );
-        // Output the script HTML
-        foreach ($scriptData as $script) {
-            if (is_string($script) && !empty($script)) {
-                echo $script;
-            }
-        }
-        Craft::endProfile('MetaContainers::includeScriptBodyHtml', __METHOD__);
-    }
-
-    /**
      * Return the containers of a specific type
      *
      * @param string $type
