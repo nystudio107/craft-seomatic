@@ -5,6 +5,7 @@
 * Use any custom field labels for "pull fields" in SEOmatic settings ([#1335](https://github.com/nystudio107/craft-seomatic/issues/1335))
 
 ### Fixed
+* Fixed an issue where the `MetaJsonLd` container was not properly cached, which caused a performance issue as well as storing more data in the cache than necessary
 * Fixed a regression that caused the SEO Preview to not appear in the sidebar for Commerce 4, due to Commerce 4 not supporting the `EVENT_DEFINE_SIDEBAR_HTML` event (despite there being code in Commerce 4 that appears to support it) ([#1336](https://github.com/nystudio107/craft-seomatic/issues/1336))
 * Fixed an issue that caused you to be unable to dynamically include/exclude scripts that have body JavaScript via Twig, by unifying the rendering method ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334))
 
