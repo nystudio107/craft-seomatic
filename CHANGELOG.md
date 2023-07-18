@@ -2,6 +2,7 @@
 
 ## 3.4.58 - UNRELEASED
 ### Fixed
+* Fixed an issue where the `MetaJsonLd` container was not properly cached, which caused a performance issue as well as storing more data in the cache than necessary
 * Fixed an issue that caused you to be unable to dynamically include/exclude scripts that have body JavaScript via Twig, by unifying the rendering method ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334))
 
 ## 3.4.57 - 2023.06.13
