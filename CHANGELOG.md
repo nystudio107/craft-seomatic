@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.29 - UNRELEASED
+## 4.0.29 - 2023.07.18
 ### Changed
 * Use any custom field labels for "pull fields" in SEOmatic settings ([#1335](https://github.com/nystudio107/craft-seomatic/issues/1335))
 
