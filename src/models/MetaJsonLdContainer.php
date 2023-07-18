@@ -11,13 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\NonceContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 use yii\web\View;
 
@@ -52,16 +50,16 @@ class MetaJsonLdContainer extends NonceContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaJsonLdContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$dependency->tags[3];
+        $uniqueKey = $this->handle . $dependency->tags[3] . '-v2';
         $cache = Craft::$app->getCache();
         if ($this->clearCache) {
             TagDependency::invalidate($cache, $dependency->tags[3]);
         }
-        $tagData = $cache->getOrSet(
-            self::CONTAINER_TYPE.$uniqueKey,
+        [$jsonLd, $attrs] = $cache->getOrSet(
+            self::CONTAINER_TYPE . $uniqueKey,
             function () use ($uniqueKey) {
                 Craft::info(
-                    self::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
                 );
                 $tagData = [];
@@ -71,11 +69,6 @@ class MetaJsonLdContainer extends NonceContainer
                         if ($metaJsonLdModel->include) {
                             $options = $metaJsonLdModel->tagAttributes();
                             if ($metaJsonLdModel->prepForRender($options)) {
-                                $jsonLd = $metaJsonLdModel->render([
-                                    'renderRaw'        => true,
-                                    'renderScriptTags' => false,
-                                    'array'            => false,
-                                ]);
                                 $tagData[] = [
                                     'jsonLd' => $metaJsonLdModel,
                                     'position' => View::POS_END
@@ -86,7 +79,7 @@ class MetaJsonLdContainer extends NonceContainer
                                         'JSON-LD property: ',
                                         [
                                             'default' => 'error',
-                                            'google'  => 'warning',
+                                            'google' => 'warning',
                                         ]
                                     );
                                 }
@@ -95,7 +88,35 @@ class MetaJsonLdContainer extends NonceContainer
                     }
                 }
 
-                return $tagData;
+                // Create a root JSON-LD object
+                $jsonLdGraph = MetaJsonLd::create('jsonLd', [
+                    'graph' => [],
+                ]);
+                $jsonLdGraph->type = null;
+                // Add the JSON-LD objects to our root JSON-LD's graph
+                $cspNonce = null;
+                foreach ($tagData as $config) {
+                    $jsonLdGraph->graph[] = $config['jsonLd'];
+                    if (!empty($config['jsonLd']->nonce)) {
+                        $cspNonce = $config['jsonLd']->nonce;
+                    }
+                }
+                // Render the JSON-LD object
+                $jsonLd = $jsonLdGraph->render([
+                    'renderRaw' => true,
+                    'renderScriptTags' => false,
+                    'array' => false,
+                ]);
+
+                // Register the tags
+                $attrs = ['type' => 'application/ld+json'];
+                if (!empty($cspNonce)) {
+                    $attrs = array_merge($attrs, [
+                        'nonce' => $cspNonce,
+                    ]);
+                }
+
+                return [$jsonLd, $attrs];
             },
             Seomatic::$cacheDuration,
             $dependency
@@ -103,33 +124,6 @@ class MetaJsonLdContainer extends NonceContainer
         // Invalidate the cache we just created if there were pending image transforms in it
         if (ImageTransformHelper::$pendingImageTransforms) {
             TagDependency::invalidate($cache, $dependency->tags[3]);
-        }
-        // Create a root JSON-LD object
-        $jsonLdGraph = MetaJsonLd::create('jsonLd', [
-            'graph'        => [],
-        ]);
-        $jsonLdGraph->type = null;
-        // Add the JSON-LD objects to our root JSON-LD's graph
-        $cspNonce = null;
-        foreach ($tagData as $config) {
-            $jsonLdGraph->graph[] = $config['jsonLd'];
-            if (!empty($config['jsonLd']->nonce)) {
-                $cspNonce = $config['jsonLd']->nonce;
-            }
-        }
-        // Render the JSON-LD object
-        $jsonLd = $jsonLdGraph->render([
-            'renderRaw'        => true,
-            'renderScriptTags' => false,
-            'array'            => false,
-        ]);
-
-        // Register the tags
-        $attrs = ['type' => 'application/ld+json'];
-        if (!empty($cspNonce)) {
-            $attrs = array_merge($attrs, [
-                'nonce' => $cspNonce,
-            ]);
         }
         Seomatic::$view->registerScript(
             $jsonLd,

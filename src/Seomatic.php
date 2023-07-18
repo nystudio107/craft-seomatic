@@ -72,7 +72,6 @@ use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
 use yii\base\Event;
 use yii\base\View as BaseView;
-use yii\web\View as YiiView;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
 
@@ -703,36 +702,6 @@ class Seomatic extends Plugin
      */
     protected function handleSiteRequest(): void
     {
-        // Handler: View::EVENT_BEGIN_BODY
-        Event::on(
-            View::class,
-            YiiView::EVENT_BEGIN_BODY,
-            static function () {
-                Craft::debug(
-                    'View::EVENT_BEGIN_BODY',
-                    __METHOD__
-                );
-                // The <body> placeholder tag has just rendered, include any script HTML
-                if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(YiiView::POS_BEGIN);
-                }
-            }
-        );
-        // Handler: View::EVENT_END_BODY
-        Event::on(
-            View::class,
-            YiiView::EVENT_END_BODY,
-            static function () {
-                Craft::debug(
-                    'View::EVENT_END_BODY',
-                    __METHOD__
-                );
-                // The </body> placeholder tag is about to be rendered, include any script HTML
-                if (self::$settings->renderEnabled && self::$seomaticVariable) {
-                    self::$plugin->metaContainers->includeScriptBodyHtml(YiiView::POS_END);
-                }
-            }
-        );
         // Handler: View::EVENT_END_PAGE
         Event::on(
             View::class,

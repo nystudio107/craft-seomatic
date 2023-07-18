@@ -130,13 +130,13 @@ class Field
                 return self::$fieldsOfTypeFromLayoutCache[$memoKey];
             }
             $fieldClasses = self::FIELD_CLASSES[$fieldClassKey];
-            $fields = $layout->getCustomFields();
-            /** @var  $field BaseField */
-            foreach ($fields as $field) {
+            $fieldElements = $layout->getCustomFieldElements();
+            foreach ($fieldElements as $fieldElement) {
+                $field = $fieldElement->getField();
                 /** @var array $fieldClasses */
                 foreach ($fieldClasses as $fieldClass) {
                     if ($field instanceof $fieldClass) {
-                        $foundFields[$field->handle] = $field->name;
+                        $foundFields[$field->handle] = $fieldElement->label() ?? $field->name;
                     }
                 }
             }
