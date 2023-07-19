@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.59 - 2023.07.19
+### Fixed
+* Fixed a regression caused by ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334)) which caused Google Tag Manager noscript template is output with `<script>` tags around it ([#1346](https://github.com/nystudio107/craft-seomatic/issues/1346))
+
 ## 3.4.58 - 2023.07.18
 ### Fixed
 * Fixed an issue where the `MetaJsonLd` container was not properly cached, which caused a performance issue as well as storing more data in the cache than necessary
