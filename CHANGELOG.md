@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.60 - UNRELEASED
+### Fixed
+* Fixed an issue that caused you to be unable to dynamically include/exclude scripts that have body JavaScript via Twig, by unifying the rendering method ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334))
+
 ## 3.4.59 - 2023.07.19
 ### Fixed
 * Fixed a regression caused by ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334)) which caused Google Tag Manager noscript template is output with `<script>` tags around it ([#1346](https://github.com/nystudio107/craft-seomatic/issues/1346))
