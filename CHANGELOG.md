@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.60 - UNRELEASED
+### Changed
+* The Plugin Settings -> Tags -> **Add `hreflang` Tags** setting now also controls whether `hreflang` URLs are added to sitemaps ([#1340](https://github.com/nystudio107/craft-seomatic/issues/1340))
+
 ### Fixed
 * Fixed an issue that caused you to be unable to dynamically include/exclude scripts that have body JavaScript via Twig, by unifying the rendering method ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334))
 
