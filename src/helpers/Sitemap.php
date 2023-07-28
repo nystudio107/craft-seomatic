@@ -224,7 +224,7 @@ class Sitemap
                                     }
                                     // Make sure to only include the `hreflang` if the element exists,
                                     // and sitemaps are on for it
-                                    if ($altElement && $altElement->url) {
+                                    if (Seomatic::$settings->addHrefLang && $altElement && $altElement->url) {
                                         list($altSourceId, $altSourceBundleType, $altSourceHandle, $altSourceSiteId, $altTypeId)
                                             = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($altElement);
                                         $altMetaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceId(
