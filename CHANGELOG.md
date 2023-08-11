@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.60 - UNRELEASED
+### Added
+* Disallow ChatGPT bot in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://www.searchenginejournal.com/openai-launches-gptbot-how-to-restrict-access/493394/
+
 ### Changed
 * The Plugin Settings -> Tags -> **Add `hreflang` Tags** setting now also controls whether `hreflang` URLs are added to sitemaps ([#1340](https://github.com/nystudio107/craft-seomatic/issues/1340))
 
