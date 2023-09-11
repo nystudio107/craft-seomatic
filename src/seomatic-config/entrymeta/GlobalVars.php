@@ -19,7 +19,7 @@ return [
     '*' => [
         'mainEntityOfPage' => 'WebPage',
         'seoTitle' => '{{ entry.title }}',
-        'siteNamePosition' => 'sameAsGlobal',
+        'siteNamePosition' => '',
         'seoDescription' => '',
         'seoKeywords' => '',
         'seoImage' => '',
