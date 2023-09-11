@@ -9,6 +9,7 @@
 
 ### Fixed
 * Fixed an issue that caused you to be unable to dynamically include/exclude scripts that have body JavaScript via Twig, by unifying the rendering method ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334))
+* Fixed an issue that caused the default Content SEO Site Name Position to not default to Same As Global Site Name Position ([#1321](https://github.com/nystudio107/craft-seomatic/issues/1321)) ([#1333](https://github.com/nystudio107/craft-seomatic/issues/1333))
 
 ## 4.0.30 - 2023.07.19
 ### Fixed
