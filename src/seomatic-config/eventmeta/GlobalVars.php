@@ -19,7 +19,7 @@ return [
     '*' => [
         'mainEntityOfPage' => 'Event',
         'seoTitle' => '{{ event.title }}',
-        'siteNamePosition' => 'sameAsGlobal',
+        'siteNamePosition' => '',
         'seoDescription' => '',
         'seoKeywords' => '',
         'seoImage' => '',
