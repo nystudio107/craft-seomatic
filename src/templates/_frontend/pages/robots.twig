@@ -38,3 +38,7 @@ Disallow: /.env
 Disallow: /cache/
 
 {% endswitch %}
+
+# Disallow ChatGPT bot, as there's no benefit to allowing it to index your site
+User-agent: GPTBot
+Disallow: /

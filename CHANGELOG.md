@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 4.0.31 - 2023.09.12
+### Added
+* Disallow ChatGPT bot in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://www.searchenginejournal.com/openai-launches-gptbot-how-to-restrict-access/493394/
+
+### Changed
+* The Plugin Settings -> Tags -> **Add `hreflang` Tags** setting now also controls whether `hreflang` URLs are added to sitemaps ([#1340](https://github.com/nystudio107/craft-seomatic/issues/1340))
+
+### Fixed
+* Fixed an issue that caused you to be unable to dynamically include/exclude scripts that have body JavaScript via Twig, by unifying the rendering method ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334))
+* Fixed an issue that caused the default Content SEO Site Name Position to not default to Same As Global Site Name Position ([#1321](https://github.com/nystudio107/craft-seomatic/issues/1321)) ([#1333](https://github.com/nystudio107/craft-seomatic/issues/1333))
+
 ## 4.0.30 - 2023.07.19
 ### Fixed
 * Fixed a regression caused by ([#1334](https://github.com/nystudio107/craft-seomatic/issues/1334)) which caused Google Tag Manager noscript template is output with `<script>` tags around it ([#1346](https://github.com/nystudio107/craft-seomatic/issues/1346))
