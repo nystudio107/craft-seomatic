@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.61 - 2023.09.15
+### Fix
+* Syntax error in older versions of PHP ([#1359](https://github.com/nystudio107/craft-seomatic/pull/1359))
+
 ## 3.4.60 - 2023.09.12
 ### Added
 * Disallow ChatGPT bot in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://www.searchenginejournal.com/openai-launches-gptbot-how-to-restrict-access/493394/

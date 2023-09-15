@@ -140,7 +140,7 @@ class MetaScriptContainer extends NonceContainer
             if ($bodyJs) {
                 Seomatic::$view->registerHtml(
                     $config['js'],
-                    $config['position'],
+                    $config['position']
                 );
             } else {
                 Seomatic::$view->registerScript(
