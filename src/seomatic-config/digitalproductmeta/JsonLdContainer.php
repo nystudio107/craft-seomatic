@@ -73,7 +73,7 @@ return [
                     'seller' => [
                         'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                     ],
-                    'availability' => 'http://schema.org/{% if product.getIsAvailable() %}InStock{% else %}OutOfStock{% endif % }}',
+                    'availability' => 'http://schema.org/{% if product.getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
                 ],
             ],
         ],
