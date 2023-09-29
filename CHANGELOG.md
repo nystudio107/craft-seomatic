@@ -4,6 +4,9 @@
 ### Added
 * Disallow Google Bard and Vertex AI bots in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#common-crawlers
 
+### Fixed
+* Fixed a syntax error in the digitalproductmeta JsonLD Container ([#1361](https://github.com/nystudio107/craft-seomatic/issues/1361))
+
 ## 4.0.31 - 2023.09.12
 ### Added
 * Disallow ChatGPT bot in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://www.searchenginejournal.com/openai-launches-gptbot-how-to-restrict-access/493394/
