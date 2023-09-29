@@ -55,7 +55,7 @@ return [
         FrontendTemplates::SECURITY_TXT_HANDLE => [
             'include' => false,
             'handle' => FrontendTemplates::SECURITY_TXT_HANDLE,
-            'path' => 'security.txt',
+            'path' => '.well-known/security.txt',
             'template' => '_frontend/pages/security.twig',
             'controller' => 'frontend-template',
             'action' => 'security',

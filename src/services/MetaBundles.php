@@ -108,6 +108,11 @@ class MetaBundles extends Component
         'vars',
     ];
 
+    const PRESERVE_FRONTEND_TEMPLATE_SETTINGS = [
+        'include',
+        'templateString',
+    ];
+
     // Protected Properties
     // =========================================================================
 
@@ -289,9 +294,14 @@ class MetaBundles extends Component
                 $metaBundle->metaSiteVars->creator->setAttributes($attributes);
             }
         }
-        // Preserve the Frontend Templates, but add in any new containers
-        foreach ($baseConfig->frontendTemplatesContainer->data as $key => $value) {
-            $metaBundle->frontendTemplatesContainer->data[$key] = $value;
+        // Preserve the Frontend Templates container user settings, but update everything else
+        foreach ($baseConfig->frontendTemplatesContainer->data as $baseMetaContainerName => $baseMetaContainer) {
+            $attributes = $baseMetaContainer->getAttributes();
+            if (!empty($metaBundle->frontendTemplatesContainer->data[$baseMetaContainerName])) {
+                foreach (self::PRESERVE_FRONTEND_TEMPLATE_SETTINGS as $frontendTemplateSetting) {
+                    $metaBundle->frontendTemplatesContainer->data[$baseMetaContainerName]->$frontendTemplateSetting = $attributes[$frontendTemplateSetting] ?? '';
+                }
+            }
         }
         // Preserve the metaSitemapVars
         $attributes = $baseConfig->metaSitemapVars->getAttributes();
