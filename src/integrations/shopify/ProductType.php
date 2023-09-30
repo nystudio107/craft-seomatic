@@ -65,11 +65,11 @@ class ProductType extends Model
             $shopifySettings = $shopifyProducts->getSettings();
             $sites = Craft::$app->getSites()->getAllSites();
             foreach ($sites as $site) {
-                $siteSettings[] = new Section_SiteSettings([
+                $siteSettings[$site->id] = new Section_SiteSettings([
                     'id' => $site->id,
                     'sectionId' => $this->id,
                     'siteId' => $site->id,
-                    'hasUrls' => empty($shopifySettings->uriFormat),
+                    'hasUrls' => !empty($shopifySettings->uriFormat),
                     'uriFormat' => $shopifySettings->uriFormat,
                     'template' => $shopifySettings->template,
                 ]);
