@@ -82,7 +82,7 @@ class SeoShopifyProduct implements SeoElementInterface
      */
     public static function getElementRefHandle(): string
     {
-        return Product::refHandle() ?? 'product';
+        return 'product';
     }
 
     /**
