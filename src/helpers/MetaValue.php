@@ -215,8 +215,11 @@ class MetaValue
             if ($reflector) {
                 $refHandle = strtolower($reflector->getShortName());
             }
+            // Use the SeoElement interface to get the refHandle
+            $metaBundleSourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundleSourceType);
             // Prefer $element::refHandle()
-            $matchedElementType = $element::refHandle() ?? $refHandle ?? 'entry';
+            $matchedElementType = $seoElement::getElementRefHandle() ?? $refHandle ?? 'entry';
             if ($matchedElementType) {
                 self::$templateObjectVars[$matchedElementType] = $element;
                 self::$templatePreviewVars[$matchedElementType] = $element;

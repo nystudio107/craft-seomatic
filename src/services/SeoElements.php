@@ -22,6 +22,7 @@ use nystudio107\seomatic\seoelements\SeoDigitalProduct;
 use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\seoelements\SeoEvent;
 use nystudio107\seomatic\seoelements\SeoProduct;
+use nystudio107\seomatic\seoelements\SeoShopifyProduct;
 use nystudio107\seomatic\Seomatic;
 
 /**
@@ -61,6 +62,7 @@ class SeoElements extends Component
         SeoEntry::class,
         SeoEvent::class,
         SeoProduct::class,
+        SeoShopifyProduct::class,
     ];
 
     // Protected Properties
