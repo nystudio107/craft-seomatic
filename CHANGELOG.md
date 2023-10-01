@@ -2,6 +2,8 @@
 
 ## 4.0.32 - UNRELEASED
 ### Added
+* Added support for the Shopify plugin, so imported Shopify Products are automatically recognized by SEOmatic, and get properly mapped metadata
+
 * Disallow Google Bard and Vertex AI bots in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#common-crawlers
 
 ### Changed
