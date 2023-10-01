@@ -25,7 +25,7 @@ return [
         'seoTitleField'                 => 'title',
         'siteNamePositionSource'        => 'sameAsGlobal',
         'seoDescriptionSource'          => 'fromCustom',
-        'seoDescriptionField'           => '{{ product.bodyHtml | striptags }}',
+        'seoDescriptionField'           => '{{ product.bodyHtml | striptags | replace("/[\\t\\n\\r]+/", " ") }}',
         'seoKeywordsSource'             => 'fromCustom',
         'seoKeywordsField'              => '',
         'seoImageIds'                   => [],
