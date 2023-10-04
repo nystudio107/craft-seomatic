@@ -3,6 +3,7 @@
 ## 3.4.62 - UNRELEASED
 ### Added
 * Disallow Google Bard and Vertex AI bots in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#common-crawlers
+* Add integration with the Campaign plugin, so Campaign landing pages are automatically recognized by SEOmatic, and get properly mapped metadata
 
 ### Changed
 * Moved the `security.txt` location to `.well-known/security.txt` from the server root, and make the bundle updating mechanism preserve user settings in the process ([#1353](https://github.com/nystudio107/craft-seomatic/issues/1353))
