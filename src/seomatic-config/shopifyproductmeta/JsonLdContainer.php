@@ -66,6 +66,7 @@ return [
                     'type' => 'Offer',
                     'url' => '{{ seomatic.meta.canonicalUrl }}',
                     'price' => '{{ product.getDefaultVariant().price|number_format(2, ".", "") }}',
+                    // No way to get the store's currency from the Shopify plugin currently
                     'priceCurrency' => '',
                     'offeredBy' => [
                         'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
