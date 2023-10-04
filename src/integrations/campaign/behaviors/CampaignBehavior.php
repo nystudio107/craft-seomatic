@@ -1,11 +1,12 @@
 <?php
 /**
- * Similar plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS 3.x
  *
- * Similar for Craft lets you find elements, Entries, Categories, Commerce Products, etc, that are similar, based on... other related elements.
+ * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
+ * and flexible
  *
- * @link      https://nystudio107.com/
- * @copyright Copyright (c) 2018 nystudio107.com
+ * @link      https://nystudio107.com
+ * @copyright Copyright (c) 2017 nystudio107
  */
 
 namespace nystudio107\seomatic\integrations\campaign\behaviors;
