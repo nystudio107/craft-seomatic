@@ -6,6 +6,7 @@
 
 ### Changed
 * Moved the `security.txt` location to `.well-known/security.txt` from the server root, and make the bundle updating mechanism preserve user settings in the process ([#1353](https://github.com/nystudio107/craft-seomatic/issues/1353))
+* Improved the mapping of elements to SEO Elements by preferring the refHandle from the SEO Element
 
 ### Fixed
 * Fixed a syntax error in the digitalproductmeta JsonLD Container ([#1361](https://github.com/nystudio107/craft-seomatic/issues/1361))
