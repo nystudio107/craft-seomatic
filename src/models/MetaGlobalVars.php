@@ -203,7 +203,7 @@ class MetaGlobalVars extends InheritableSettingsModel
         // Find any instances of image-related fields that contain Twig code, and access assets
         // using the old `[0]` array syntax with `.collect()[0]`
         foreach (self::ADJUST_QUERY_ACCESS_FIELDS as $queryField) {
-            if (!empty($this->$queryField) && str_contains($this->$queryField, '{')) {
+            if (!empty($this->$queryField) && str_contains($this->$queryField, '{') && !str_contains($this->$queryField, '[0].src')) {
                 $this->$queryField = preg_replace('/(?<!\))\[0]/', '.collect()[0]', $this->$queryField);
             }
         }

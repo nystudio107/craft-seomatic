@@ -61,19 +61,19 @@ return [
                     'target' => '{{ seomatic.site.siteLinksSearchTarget }}',
                     'query-input' => '{{ seomatic.helper.siteLinksQueryInput() }}',
                 ],
-                'sku' => '{{ product.getSku() }}',
+                'sku' => '{{ product.getDefaultVariant().sku }}',
                 'offers' => [
                     'type' => 'Offer',
                     'url' => '{{ seomatic.meta.canonicalUrl }}',
-                    'price' => '{{ product.getDefaultVariant().getSalePrice()|number_format(2, ".", "") }}',
-                    'priceCurrency' => '{{ craft.commerce.paymentCurrencies.primaryPaymentCurrencyIso() }}',
+                    'price' => '{{ product.getDefaultVariant().price|number_format(2, ".", "") }}',
+                    'priceCurrency' => '{{ craft.shopify.store.currency ?? "" }}',
                     'offeredBy' => [
                         'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                     ],
                     'seller' => [
                         'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                     ],
-                    'availability' => 'http://schema.org/{% if product.getIsAvailable() %}InStock{% else %}OutOfStock{% endif %}',
+                    'availability' => 'http://schema.org/{% if product.shopifyStatus == "active" %}InStock{% else %}OutOfStock{% endif %}',
                 ],
             ],
         ],

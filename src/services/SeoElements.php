@@ -17,11 +17,13 @@ use craft\base\ElementInterface;
 use craft\events\RegisterComponentTypesEvent;
 use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\seoelements\SeoCampaign;
 use nystudio107\seomatic\seoelements\SeoCategory;
 use nystudio107\seomatic\seoelements\SeoDigitalProduct;
 use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\seoelements\SeoEvent;
 use nystudio107\seomatic\seoelements\SeoProduct;
+use nystudio107\seomatic\seoelements\SeoShopifyProduct;
 use nystudio107\seomatic\Seomatic;
 
 /**
@@ -56,11 +58,13 @@ class SeoElements extends Component
     const EVENT_REGISTER_SEO_ELEMENT_TYPES = 'registerSeoElementTypes';
 
     const DEFAULT_SEO_ELEMENT_TYPES = [
+        SeoCampaign::class,
         SeoCategory::class,
         SeoDigitalProduct::class,
         SeoEntry::class,
         SeoEvent::class,
         SeoProduct::class,
+        SeoShopifyProduct::class,
     ];
 
     // Protected Properties

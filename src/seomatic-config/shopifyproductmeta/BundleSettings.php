@@ -6,18 +6,18 @@
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2019 nystudio107
+ * @copyright Copyright (c) 2017 nystudio107
  */
 
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.2.0
+ * @since     3.0.0
  */
 
 return [
     '*' => [
-        'siteType' => 'Event',
+        'siteType' => 'Product',
         'siteSubType' => '',
         'siteSpecificType' => '',
 
@@ -25,13 +25,13 @@ return [
         'seoTitleField' => 'title',
         'siteNamePositionSource' => 'sameAsGlobal',
         'seoDescriptionSource' => 'fromCustom',
-        'seoDescriptionField' => '',
+        'seoDescriptionField' => '{{ product.bodyHtml | striptags | replace("/[\\t\\n\\r]+/", " ") }}',
         'seoKeywordsSource' => 'fromCustom',
         'seoKeywordsField' => '',
         'seoImageIds' => [],
-        'seoImageSource' => 'fromAsset',
-        'seoImageField' => '',
-        'seoImageTransform' => true,
+        'seoImageSource' => 'fromCustom',
+        'seoImageField' => '{{ product.images[0].src ?? ""}}',
+        'seoImageTransform' => false,
         'seoImageTransformMode' => 'crop',
         'seoImageDescriptionSource' => 'fromCustom',
         'seoImageDescriptionField' => '',
