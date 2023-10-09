@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.62 - UNRELEASED
+## 3.4.62 - 2023.10.09
 ### Added
 * Disallow Google Bard and Vertex AI bots in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#common-crawlers
 * Add integration with the Campaign plugin, so Campaign landing pages are automatically recognized by SEOmatic, and get properly mapped metadata
