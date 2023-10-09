@@ -67,28 +67,29 @@
     {% macro ogImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
         {% import "_includes/forms" as forms %}
         {% set disabled = suffix|length > 0 %}
-
-        <div class="field"
-             {% if field is not null and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
-            <div class="heading">
-                <label for="metaBundleSettings-ogImageTransformMode{{ suffix }}">
-                    {{ "Facebook OpenGraph Image Transform Mode"|t("seomatic") }}
-                </label>
+        <div class="og-image-transform-settings{% if not metaBundleSettings.ogImageTransform %} hidden{% endif %}">
+            <div class="field"
+                 {% if field is not null and 'ogImageTransformMode' not in field.facebookEnabledFields %}style="display: none;"{% endif %}>
+                <div class="heading">
+                    <label for="metaBundleSettings-ogImageTransformMode{{ suffix }}">
+                        {{ "Facebook OpenGraph Image Transform Mode"|t("seomatic") }}
+                    </label>
+                </div>
+                <div class="instructions">
+                    <p>{{ "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic") }}</p>
+                </div>
+                {% namespace "metaBundleSettings" %}
+                    {{ forms.selectField({
+                        id: "ogImageTransformMode" ~ suffix,
+                        name: "ogImageTransformMode",
+                        options: imageCropModes,
+                        value: metaBundleSettings.ogImageTransformMode,
+                        warning: false,
+                        errors: metaBundleSettings.getErrors("ogImageTransformMode"),
+                        disabled: disabled,
+                    }) }}
+                {% endnamespace %}
             </div>
-            <div class="instructions">
-                <p>{{ "The transform mode to use for the Facebook OpenGraph Image Transform."|t("seomatic") }}</p>
-            </div>
-            {% namespace "metaBundleSettings" %}
-                {{ forms.selectField({
-                    id: "ogImageTransformMode" ~ suffix,
-                    name: "ogImageTransformMode",
-                    options: imageCropModes,
-                    value: metaBundleSettings.ogImageTransformMode,
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("ogImageTransformMode"),
-                    disabled: disabled,
-                }) }}
-            {% endnamespace %}
         </div>
     {% endmacro %}
 
@@ -112,6 +113,7 @@
                     warning: false,
                     errors: metaBundleSettings.getErrors("ogImageTransform"),
                     disabled: disabled,
+                    toggle: ".og-image-transform-settings",
                 }) }}
             {% endnamespace %}
         </div>
