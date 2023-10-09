@@ -6,20 +6,20 @@
  * and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2019 nystudio107
+ * @copyright Copyright (c) 2017 nystudio107
  */
 
 /**
  * @author    nystudio107
  * @package   Seomatic
- * @since     3.2.0
+ * @since     3.0.0
  */
 
 return [
     '*' => [
-        'siteType' => 'Event',
-        'siteSubType' => '',
-        'siteSpecificType' => '',
+        'siteType' => 'CreativeWork',
+        'siteSubType' => 'Article',
+        'siteSpecificType' => 'NewsArticle',
 
         'seoTitleSource' => 'fromField',
         'seoTitleField' => 'title',
@@ -40,7 +40,7 @@ return [
         'twitterCreatorField' => '',
         'twitterTitleSource' => 'sameAsSeo',
         'twitterTitleField' => '',
-        'twitterSiteNamePositionSource' => 'sameAsGlobal',
+        'twitterSiteNamePositionSource' => 'fromCustom',
         'twitterDescriptionSource' => 'sameAsSeo',
         'twitterDescriptionField' => '',
         'twitterImageIds' => [],
@@ -53,7 +53,7 @@ return [
 
         'ogTitleSource' => 'sameAsSeo',
         'ogTitleField' => '',
-        'ogSiteNamePositionSource' => 'sameAsGlobal',
+        'ogSiteNamePositionSource' => 'fromCustom',
         'ogDescriptionSource' => 'sameAsSeo',
         'ogDescriptionField' => '',
         'ogImageIds' => [],
