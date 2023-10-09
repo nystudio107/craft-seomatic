@@ -9,6 +9,7 @@
 ### Changed
 * Moved the `security.txt` location to `.well-known/security.txt` from the server root, and make the bundle updating mechanism preserve user settings in the process ([#1353](https://github.com/nystudio107/craft-seomatic/issues/1353))
 * Hide the SEO Image / OG Image / Twitter Image mode selectors if transforming is disabled
+* Set the `twitterImageTransform` and `ogImageTransform` to `false` by default, since the default is also `sameAsSeo` and this will result in better default expected behavior ([#1364](https://github.com/nystudio107/craft-seomatic/issues/1364))
 
 ### Fixed
 * Fixed a syntax error in the digitalproductmeta JsonLD Container ([#1361](https://github.com/nystudio107/craft-seomatic/issues/1361))
