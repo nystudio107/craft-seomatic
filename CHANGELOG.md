@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.32 - UNRELEASED
+## 4.0.32 - 2023.10.09
 ### Added
 * Added support for the Shopify plugin, so imported Shopify Products are automatically recognized by SEOmatic, and get properly mapped metadata
 * Add integration with the Campaign plugin, so Campaign landing pages are automatically recognized by SEOmatic, and get properly mapped metadata
