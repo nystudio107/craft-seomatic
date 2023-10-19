@@ -11,13 +11,12 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use nystudio107\seomatic\behaviors\MetaItemAttributeParserBehavior;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLd;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\helpers\Inflector;
 
 /**
@@ -284,5 +283,19 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         if (!$validated) {
             $this->addError($attribute, 'Must be either a string or an array');
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defineBehaviors(): array
+    {
+        return [
+            'parser' => [
+                'class' => MetaItemAttributeParserBehavior::class,
+                'attributes' => [
+                ],
+            ],
+        ];
     }
 }

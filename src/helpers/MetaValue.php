@@ -113,8 +113,9 @@ class MetaValue
      *                              this array
      * @param bool $parseAsTwig Whether items should be parsed as a Twig
      *                              template in this array
+     * @param bool $recursive Whether to recursively parse the array
      */
-    public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true)
+    public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true, bool $recursive = false)
     {
         // Do this here as well so that parseString() won't potentially be constantly switching modes
         // while parsing through the array
@@ -128,6 +129,9 @@ class MetaValue
             }
         }
         foreach ($metaArray as $key => $value) {
+            if ($recursive && is_array($value)) {
+                self::parseArray($value, $resolveAliases, $parseAsTwig, $recursive);
+            }
             $shouldParse = $parseAsTwig;
             $shouldAlias = $resolveAliases;
             $tries = self::MAX_PARSE_TRIES;
