@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\models;
 
 use Craft;
+use craft\helpers\Html;
 use nystudio107\seomatic\base\NonceContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
@@ -62,61 +63,8 @@ class MetaJsonLdContainer extends NonceContainer
                     self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
                 );
-                $tagData = [];
-                if ($this->prepForInclusion()) {
-                    /** @var $metaJsonLdModel MetaJsonLd */
-                    foreach ($this->data as $metaJsonLdModel) {
-                        if ($metaJsonLdModel->include) {
-                            $options = $metaJsonLdModel->tagAttributes();
-                            if ($metaJsonLdModel->prepForRender($options)) {
-                                $tagData[] = [
-                                    'jsonLd' => $metaJsonLdModel,
-                                    'position' => View::POS_END
-                                ];
-                                // If `devMode` is enabled, validate the JSON-LD and output any model errors
-                                if (Seomatic::$devMode) {
-                                    $metaJsonLdModel->debugMetaItem(
-                                        'JSON-LD property: ',
-                                        [
-                                            'default' => 'error',
-                                            'google' => 'warning',
-                                        ]
-                                    );
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Create a root JSON-LD object
-                $jsonLdGraph = MetaJsonLd::create('jsonLd', [
-                    'graph' => [],
-                ]);
-                $jsonLdGraph->type = null;
-                // Add the JSON-LD objects to our root JSON-LD's graph
-                $cspNonce = null;
-                foreach ($tagData as $config) {
-                    $jsonLdGraph->graph[] = $config['jsonLd'];
-                    if (!empty($config['jsonLd']->nonce)) {
-                        $cspNonce = $config['jsonLd']->nonce;
-                    }
-                }
-                // Render the JSON-LD object
-                $jsonLd = $jsonLdGraph->render([
-                    'renderRaw' => true,
-                    'renderScriptTags' => false,
-                    'array' => false,
-                ]);
-
-                // Register the tags
-                $attrs = ['type' => 'application/ld+json'];
-                if (!empty($cspNonce)) {
-                    $attrs = array_merge($attrs, [
-                        'nonce' => $cspNonce,
-                    ]);
-                }
-
-                return [$jsonLd, $attrs];
+                
+                return $this->renderInternal();
             },
             Seomatic::$cacheDuration,
             $dependency
@@ -136,6 +84,16 @@ class MetaJsonLdContainer extends NonceContainer
     /**
      * @inheritdoc
      */
+    public function render(array $params = []): string
+    {
+        [$jsonLd, $attrs] = $this->renderInternal();
+
+        return trim(Html::script($jsonLd, $attrs));
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function normalizeContainerData()
     {
         parent::normalizeContainerData();
@@ -149,5 +107,72 @@ class MetaJsonLdContainer extends NonceContainer
             $jsonLd->type = $config['type'] ?? $config['@type'];
             $this->data[$key] = $jsonLd;
         }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Render the JSON-LD as a graph
+     *
+     * @return array
+     */
+    protected function renderInternal(): array
+    {
+        $tagData = [];
+        if ($this->prepForInclusion()) {
+            /** @var $metaJsonLdModel MetaJsonLd */
+            foreach ($this->data as $metaJsonLdModel) {
+                if ($metaJsonLdModel->include) {
+                    $options = $metaJsonLdModel->tagAttributes();
+                    if ($metaJsonLdModel->prepForRender($options)) {
+                        $tagData[] = [
+                            'jsonLd' => $metaJsonLdModel,
+                            'position' => View::POS_END
+                        ];
+                        // If `devMode` is enabled, validate the JSON-LD and output any model errors
+                        if (Seomatic::$devMode) {
+                            $metaJsonLdModel->debugMetaItem(
+                                'JSON-LD property: ',
+                                [
+                                    'default' => 'error',
+                                    'google' => 'warning',
+                                ]
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        // Create a root JSON-LD object
+        $jsonLdGraph = MetaJsonLd::create('jsonLd', [
+            'graph' => [],
+        ]);
+        $jsonLdGraph->type = null;
+        // Add the JSON-LD objects to our root JSON-LD's graph
+        $cspNonce = null;
+        foreach ($tagData as $config) {
+            $jsonLdGraph->graph[] = $config['jsonLd'];
+            if (!empty($config['jsonLd']->nonce)) {
+                $cspNonce = $config['jsonLd']->nonce;
+            }
+        }
+        // Render the JSON-LD object
+        $jsonLd = $jsonLdGraph->render([
+            'renderRaw' => true,
+            'renderScriptTags' => false,
+            'array' => false,
+        ]);
+
+        // Register the tags
+        $attrs = ['type' => 'application/ld+json'];
+        if (!empty($cspNonce)) {
+            $attrs = array_merge($attrs, [
+                'nonce' => $cspNonce,
+            ]);
+        }
+
+        return [$jsonLd, $attrs];
     }
 }

@@ -11,13 +11,12 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use nystudio107\seomatic\behaviors\MetaItemAttributeParserBehavior;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLd;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\helpers\Inflector;
 
 /**
@@ -138,12 +137,13 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      * Add debug logging for the MetaItem
      *
      * @param string $errorLabel
-     * @param array  $scenarios
+     * @param array $scenarios
      */
     public function debugMetaItem(
         $errorLabel = 'Error: ',
         array $scenarios = ['default' => 'error']
-    ) {
+    )
+    {
         $isMetaJsonLdModel = false;
         if (is_subclass_of($this, MetaJsonLd::class)) {
             $isMetaJsonLdModel = true;
@@ -184,10 +184,10 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                             }
                         }
                     }
-                    Craft::info(strtoupper($logLevel).' - '.$errorMsg, __METHOD__);
+                    Craft::info(strtoupper($logLevel) . ' - ' . $errorMsg, __METHOD__);
                     // Extra debugging info for MetaJsonLd objects
                     if ($isMetaJsonLdModel) {
-                        /** @var MetaJsonLd $className  */
+                        /** @var MetaJsonLd $className */
                         $className = \get_class($this);
                         if (!empty($className::$schemaPropertyDescriptions[$param])) {
                             $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
@@ -214,7 +214,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         }
         if (!empty($attrs) && ArrayHelper::isIndexed($attrs, true)) {
             $attrs = [];
-            foreach($this->tagAttrs as $attr) {
+            foreach ($this->tagAttrs as $attr) {
                 $attrs[$attr['name']] = $attr['value'];
             }
         }
@@ -266,12 +266,13 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      * Validate the passed in $attribute as either an array or a string
      *
      * @param mixed $attribute the attribute currently being validated
-     * @param mixed $params    the value of the "params" given in the rule
+     * @param mixed $params the value of the "params" given in the rule
      */
     public function validateStringOrArray(
         $attribute,
         $params
-    ) {
+    )
+    {
         $validated = false;
         if (\is_string($attribute)) {
             $validated = true;
@@ -282,5 +283,19 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         if (!$validated) {
             $this->addError($attribute, 'Must be either a string or an array');
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defineBehaviors(): array
+    {
+        return [
+            'parser' => [
+                'class' => MetaItemAttributeParserBehavior::class,
+                'attributes' => [
+                ],
+            ],
+        ];
     }
 }
