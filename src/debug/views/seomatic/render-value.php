@@ -20,12 +20,10 @@ use yii\helpers\VarDumper;
                     <?php $meta['PROPERTY_NAME'] = $propNames ?>
                     <?php $meta['PROPERTY_NAME'][] = $subName ?>
                     <tr>
-                        <th class="seomatic-property"><?= Html::encode($subName) ?>
-                            <?= $this->render('render-copy-menu', [
+                        <th class="seomatic-property"><?= Html::encode($subName) ?><?= $this->render('render-copy-menu', [
                                 'value' => $subValue ?? '',
                                 'meta' => $meta,
-                           ]) ?>
-                        </th>
+                           ]) ?></th>
                         <?= $this->render('render-value', [
                                 'value' => $subValue ?? '',
                                 'meta' => $meta,

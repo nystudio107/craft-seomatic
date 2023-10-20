@@ -26,12 +26,10 @@ $meta['TAG_NAME'] = '';
             <?php foreach ($values['unparsed'] as $name => $value): ?>
                 <?php $meta['PROPERTY_NAME'] = [$name] ?>
                 <tr>
-                    <th class="seomatic-property"><?= Html::encode($name) ?>
-                        <?= $this->render('render-copy-menu', [
+                    <th class="seomatic-property"><?= Html::encode($name) ?><?= $this->render('render-copy-menu', [
                             'value' => $name ?? '',
                             'meta' => $meta,
-                        ]) ?>
-                    </th>
+                        ]) ?></th>
                     <?= $this->render('render-value', [
                         'value' => $values['unparsed'][$name] ?? '',
                         'meta' => $meta,
