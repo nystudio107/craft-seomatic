@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 
 /* @var $value string|array */
+/* @var $meta array */
+$meta['PROPERTY_STRINGS'] = TAG_PROPERTY_STRINGS;
 
 $colors = [
     'warning' => 'warning',
@@ -38,11 +40,18 @@ if (is_array($value)) {
                 </thead>
                 <tbody>
                 <?php foreach ($value as $subName => $subValue): ?>
+                    <?php $meta['PROPERTY_NAME'] = [$subName]; ?>
                     <?php if ($subName === '__errors') continue; ?>
                     <tr>
-                        <th><?= Html::encode($subName) ?></th>
+                        <th class="seomatic-property"><?= Html::encode($subName) ?>
+                            <?= $this->render('render-copy-menu', [
+                                'value' => $subValue ?? '',
+                                'meta' => $meta,
+                            ]) ?>
+                        </th>
                         <?= $this->render('render-value', [
-                            'value' => $subValue ?? ''
+                            'value' => $subValue ?? '',
+                            'meta' => $meta,
                         ]) ?>
                     </tr>
                 <?php endforeach; ?></tbody></table><?php if (!empty($value['__errors'])): ?><?php foreach ($value['__errors'] as $logLevel => $errorCat): ?><?php if (!empty($errorCat)): ?><ul class="callout callout-<?= $logLevel ?> seomatic-error"><?php foreach ($errorCat as $property => $errors): ?><li class="seomatic-error <?= $logLevel ?>"><?= $property ?></li><ul><?php foreach (array_unique($errors) as $error): ?><li><?= $error ?></li><?php endforeach; ?></ul><?php endforeach; ?></ul><?php endif; ?><?php endforeach; ?><?php endif; ?></div></details></td>

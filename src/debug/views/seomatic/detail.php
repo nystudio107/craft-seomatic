@@ -36,122 +36,86 @@ const NAV_ITEMS = [
     'Global SEO' => MetaBundleDebugDataEvent::GLOBAL_META_BUNDLE,
 ];
 
+const VARIABLE_PROPERTY_STRINGS = [
+    'twig' => [
+        'getComment' => '{#-- Get the value --#}',
+        'get' => '{% set value = seomatic.SERVICE_NAME.PROPERTY_NAME %}',
+        'setComment' => '{#-- Set the value --#}',
+        'set' => '{% do seomatic.SERVICE_NAME.PROPERTY_NAME(value) %}',
+    ],
+    'php' => [
+        'getComment' => '/*-- Get the value --*/',
+        'get' => '$value = Seomatic::$seomaticVariable->SERVICE_NAME->PROPERTY_NAME;',
+        'setComment' => '/*-- Set the value --*/',
+        'set' => 'Seomatic::$seomaticVariable->SERVICE_NAME->PROPERTY_NAME($value);',
+    ],
+];
+
+const TAG_STRINGS = [
+    'twig' => [
+        'getComment' => '{#-- Get the tag --#}',
+        'get' => '{% set tag = seomatic.SERVICE_NAME.get(\'TAG_NAME\') %}',
+    ],
+    'php' => [
+        'getComment' => '/*-- Get the tag --*/',
+        'get' => '$tag = Seomatic::$seomaticVariable->SERVICE_NAME->get(\'TAG_NAME\');',
+    ],
+];
+
+const TAG_PROPERTY_STRINGS = [
+    'twig' => [
+        'getComment' => '{#-- Get the value --#}',
+        'get' => '{% set value = seomatic.SERVICE_NAME.get(\'TAG_NAME\').PROPERTY_NAME %}',
+        'setComment' => '{#-- Set the value --#}',
+        'set' => '{% do seomatic.SERVICE_NAME.get(\'TAG_NAME\').PROPERTY_NAME(value) %}',
+    ],
+    'php' => [
+        'getComment' => '/*-- Get the value --*/',
+        'get' => '$value = Seomatic::$seomaticVariable->SERVICE_NAME->get(\'TAG_NAME\')->PROPERTY_NAME;',
+        'setComment' => '/*-- Set the value --*/',
+        'set' => 'Seomatic::$seomaticVariable->SERVICE_NAME->get(\'TAG_NAME\')->PROPERTY_NAME($value);',
+    ],
+];
+
 const METABUNDLE_VARS = [
     'metaGlobalVars' => [
         'caption' => 'Meta Global Vars',
-        'twig' => [
-            'get' => '{{ seomatic.meta.Property }}',
-            'set' => '{% do seomatic.meta.Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->meta->Property;',
-            'set' => 'Seomatic::$seomaticVariable->meta->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'meta',
     ],
     'metaSiteVars' => [
         'caption' => 'Meta Site Vars',
-        'twig' => [
-            'get' => '{{ seomatic.site.Property }}',
-            'set' => '{% do seomatic.site.Property("value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->site->Property;',
-            'set' => 'Seomatic::$seomaticVariable->site->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'site',
     ],
     'metaSitemapVars' => [
         'caption' => 'Meta Sitemap Vars',
-        'twig' => [
-            'get' => '{{ seomatic.sitemap.Property }}',
-            'set' => '{% do seomatic.sitemap.Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->sitemap->Property;',
-            'set' => 'Seomatic::$seomaticVariable->sitemap->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'sitemap',
     ],
 ];
 
 const METABUNDLE_CONTAINERS = [
     'MetaTagContainergeneral' => [
-        'twig' => [
-            'get' => '{{ seomatic.tag.get("Tag").Property }}',
-            'set' => '{% do seomatic.tag.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'tag',
     ],
     'MetaTagContaineropengraph' => [
-        'twig' => [
-            'get' => '{{ seomatic.tag.get("Tag").Property }}',
-            'set' => '{% do seomatic.tag.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'tag',
     ],
     'MetaTagContainertwitter' => [
-        'twig' => [
-            'get' => '{{ seomatic.tag.get("Tag").Property }}',
-            'set' => '{% do seomatic.tag.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'tag',
     ],
     'MetaTagContainermiscellaneous' => [
-        'twig' => [
-            'get' => '{{ seomatic.tag.get("Tag").Property }}',
-            'set' => '{% do seomatic.tag.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->tag->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'tag',
     ],
     'MetaLinkContainergeneral' => [
-        'twig' => [
-            'get' => '{{ seomatic.link.get("Tag").Property }}',
-            'set' => '{% do seomatic.link.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->link->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->link->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'link',
     ],
     'MetaScriptContainergeneral' => [
-        'twig' => [
-            'get' => '{{ seomatic.script.get("Tag").Property }}',
-            'set' => '{% do seomatic.script.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->script->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->script->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'script',
     ],
     'MetaJsonLdContainergeneral' => [
-        'twig' => [
-            'get' => '{{ seomatic.jsonLd.get("Tag").Property }}',
-            'set' => '{% do seomatic.jsonLd.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->jsonLd->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->jsonLd->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'jsonLd',
     ],
     'MetaTitleContainergeneral' => [
-        'twig' => [
-            'get' => '{{ seomatic.title.get("Tag").Property }}',
-            'set' => '{% do seomatic.title.get("Tag").Property("Value") %}',
-        ],
-        'php' => [
-            'get' => 'Seomatic::$seomaticVariable->title->get("Tag")->Property;',
-            'set' => 'Seomatic::$seomaticVariable->title->get("Tag")->Property("Value");',
-        ],
+        'SERVICE_NAME' => 'title',
     ],
 ];
 
@@ -174,7 +138,7 @@ foreach (SECTIONS as $sectionName => $section) {
                     $content .= '<div class="callout callout-secondary seomatic-callout">no containers present</div>';
                 }
                 foreach ($metaContainers as $metaContainerName => $metaContainer) {
-                    $content .= $this->render('container-table', [
+                    $content .= $this->render('tag-table', [
                         'caption' => $metaContainer['description'],
                         'values' => [
                             'meta' => METABUNDLE_CONTAINERS[$metaContainerName],

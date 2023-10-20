@@ -4,6 +4,9 @@ use yii\helpers\Html;
 
 /* @var $caption string */
 /* @var $values array */
+$meta = $values['meta'];
+$meta['PROPERTY_STRINGS'] = VARIABLE_PROPERTY_STRINGS;
+$meta['TAG_NAME'] = '';
 ?>
 <h3><?= $caption ?></h3>
 <?php if (empty($values['unparsed'])): ?>
@@ -21,17 +24,21 @@ use yii\helpers\Html;
             </thead>
             <tbody>
             <?php foreach ($values['unparsed'] as $name => $value): ?>
+                <?php $meta['PROPERTY_NAME'] = [$name] ?>
                 <tr>
                     <th class="seomatic-property"><?= Html::encode($name) ?>
                         <?= $this->render('render-copy-menu', [
-                            'value' => $name ?? ''
+                            'value' => $name ?? '',
+                            'meta' => $meta,
                         ]) ?>
                     </th>
                     <?= $this->render('render-value', [
-                        'value' => $values['unparsed'][$name] ?? ''
+                        'value' => $values['unparsed'][$name] ?? '',
+                        'meta' => $meta,
                     ]) ?>
                     <?= $this->render('render-value', [
-                        'value' => $values['parsed'][$name] ?? ''
+                        'value' => $values['parsed'][$name] ?? '',
+                        'meta' => $meta,
                     ]) ?>
                 </tr>
             <?php endforeach; ?>
