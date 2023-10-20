@@ -129,6 +129,10 @@ li.nav-item:last-child a.nav-link.bundle-tabs::after {
     content: "";
 }
 
+th.seomatic-property {
+    position: relative;
+}
+
 div.seomatic-property-copy-wrapper {
     display: none;
     height: 20px;
@@ -139,36 +143,17 @@ div.seomatic-property-copy-wrapper {
 
 th.seomatic-property:hover > div.seomatic-property-copy-wrapper {
     display: block;
-    float: right;
-    cursor: context-menu;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
 }
 
 div.seomatic-property-copy-wrapper svg {
+    pointer-events: none;
     height: 20px;
     left: 0;
     position: absolute;
     top: 0;
     width: 20px;
 }
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
