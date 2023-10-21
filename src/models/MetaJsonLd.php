@@ -14,13 +14,15 @@ namespace nystudio107\seomatic\models;
 use Craft;
 use craft\helpers\Json;
 use craft\helpers\Template;
+use craft\validators\UrlValidator;
+use DateTime;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\validators\BooleanValidator;
 use yii\validators\DateValidator;
 use yii\validators\NumberValidator;
-use yii\validators\UrlValidator;
+use function is_object;
 
 /**
  * @author    nystudio107

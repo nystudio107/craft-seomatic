@@ -30,12 +30,12 @@ class SeomaticPanel extends Panel
     /**
      * @var array The accumulated MetaBundle debug data
      */
-    protected array $metaBundles = [];
+    protected $metaBundles = [];
 
     /**
      * @var string
      */
-    protected string $viewPath = '@nystudio107/seomatic/debug/views/seomatic/';
+    protected $viewPath = '@nystudio107/seomatic/debug/views/seomatic/';
 
     /**
      * @inheritdoc

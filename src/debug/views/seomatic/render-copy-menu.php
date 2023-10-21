@@ -1,7 +1,5 @@
 <?php
 
-use craft\helpers\Html;
-
 /* @var $value array */
 /* @var $meta array */
 $codeExamples = [];
@@ -13,5 +11,5 @@ foreach ($meta['PROPERTY_STRINGS']['twig'] as $subject) {
 $tooltip = implode(PHP_EOL, array_slice($codeExamples, 0, 4));
 ?>
 <div class="seomatic-property-copy-wrapper" title="<?= $tooltip ?>">
-    <?= Html::svg("@nystudio107/seomatic/debug/assets/img/copy-icon.svg") ?>
+    <?= @file_get_contents(Craft::getAlias("@nystudio107/seomatic/debug/assets/img/copy-icon.svg")) ?>
 </div>

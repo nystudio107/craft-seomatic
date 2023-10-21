@@ -3,8 +3,6 @@
  * @var \nystudio107\seomatic\debug\panels\SeomaticPanel $panel
  */
 
-use craft\helpers\Html;
-
 ?>
 <style>
 
@@ -27,6 +25,6 @@ use craft\helpers\Html;
 <div class="yii-debug-toolbar__block">
     <a href="<?= $panel->getUrl() ?>">
         SEOmatic
-        <div class="seomatic-icon-wrapper"><?= Html::svg("@nystudio107/seomatic/icon.svg") ?></div>
+        <div class="seomatic-icon-wrapper"><?= @file_get_contents(Craft::getAlias("@nystudio107/seomatic/icon.svg")) ?></div>
     </a>
 </div>
