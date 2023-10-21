@@ -53,7 +53,7 @@ const VARIABLE_PROPERTY_STRINGS = [
 
 const TAG_STRINGS = [
     'twig' => [
-        'getComment' => '{#-- Get the tag --#}',
+        'getComment' => '{# TWIG_VAR_HINT #}',
         'get' => '{% set tag = seomatic.SERVICE_NAME.get(\'TAG_NAME\') %}',
     ],
     'php' => [
@@ -81,41 +81,52 @@ const METABUNDLE_VARS = [
     'metaGlobalVars' => [
         'caption' => 'Meta Global Vars',
         'SERVICE_NAME' => 'meta',
+        'TWIG_VAR_HINT' => '@var vars \nystudio107\seomatic\models\MetaGlobalVars',
     ],
     'metaSiteVars' => [
         'caption' => 'Meta Site Vars',
         'SERVICE_NAME' => 'site',
+        'TWIG_VAR_HINT' => '@var vars \nystudio107\seomatic\models\MetaSiteVars',
     ],
     'metaSitemapVars' => [
         'caption' => 'Meta Sitemap Vars',
         'SERVICE_NAME' => 'sitemap',
+        'TWIG_VAR_HINT' => '@var vars \nystudio107\seomatic\models\MetaSitemapVars',
     ],
 ];
 
 const METABUNDLE_CONTAINERS = [
     'MetaTagContainergeneral' => [
         'SERVICE_NAME' => 'tag',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaTag',
     ],
     'MetaTagContaineropengraph' => [
         'SERVICE_NAME' => 'tag',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaTag',
     ],
     'MetaTagContainertwitter' => [
         'SERVICE_NAME' => 'tag',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaTag',
     ],
     'MetaTagContainermiscellaneous' => [
         'SERVICE_NAME' => 'tag',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaTag',
     ],
     'MetaLinkContainergeneral' => [
         'SERVICE_NAME' => 'link',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaLink',
     ],
     'MetaScriptContainergeneral' => [
         'SERVICE_NAME' => 'script',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaScript',
     ],
     'MetaJsonLdContainergeneral' => [
         'SERVICE_NAME' => 'jsonLd',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaJsonLd',
     ],
     'MetaTitleContainergeneral' => [
         'SERVICE_NAME' => 'title',
+        'TWIG_VAR_HINT' => '@var tag \nystudio107\seomatic\models\MetaTitle',
     ],
 ];
 

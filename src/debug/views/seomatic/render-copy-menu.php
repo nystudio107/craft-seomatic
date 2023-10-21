@@ -5,8 +5,8 @@ use craft\helpers\Html;
 /* @var $value array */
 /* @var $meta array */
 $codeExamples = [];
-$search = ['SERVICE_NAME', 'TAG_NAME', 'PROPERTY_NAME'];
-$replace = [$meta['SERVICE_NAME'], $meta['TAG_NAME'], implode('.', $meta['PROPERTY_NAME'] ?? [])];
+$search = ['SERVICE_NAME', 'TAG_NAME', 'TWIG_VAR_HINT', 'PROPERTY_NAME'];
+$replace = [$meta['SERVICE_NAME'], $meta['TAG_NAME'], $meta['TWIG_VAR_HINT'], implode('.', $meta['PROPERTY_NAME'] ?? [])];
 foreach ($meta['PROPERTY_STRINGS']['twig'] as $subject) {
     $codeExamples[] = str_replace($search, $replace, $subject);
 }
