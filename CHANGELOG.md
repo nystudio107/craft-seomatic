@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.33 - 2023.10.22
+### Added
+* Added an SEOmatic debug panel to the Yii2 Debug Toolbar to aid in debugging SEO metadata
+
 ## 4.0.32 - 2023.10.09
 ### Added
 * Added support for the Shopify plugin, so imported Shopify Products are automatically recognized by SEOmatic, and get properly mapped metadata
