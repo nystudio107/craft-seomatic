@@ -4,6 +4,42 @@ description: Advanced Usage documentation for the SEOmatic plugin. The SEOmatic 
 ---
 # Advanced Usage
 
+## Debug Toolbar
+
+SEOmatic included a debug panel for the [Yii2 Debug Toolbar](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar) that allows you to inspect & debug your SEO data.
+
+![Screenshot](./resources/screenshots/seomatic-yii2-debug-toolbar.png)
+
+The debug panel displays debug information about the tags SEOmatic generates, as well as the variables it uses to do so.
+
+You can view the **Combined** composed SEO data, or the discrete SEO data coming from the layered **Entry SEO**, **Content SEO**, and **Global SEO** settings.
+
+### Tags
+
+Tags are objects that represent rendered HTML tags the in the webpage. Tags are grouped together into containers for organizational purposes.
+
+![Screenshot](./resources/screenshots/seomatic-debug-tags.png)
+
+You can inspect the **Properties** of the tags in each container, as well as the corresponding **Parsed Properties** after they have been rendered as Twig.
+
+You can expand and sub-properties of nested properties by clicking on them.
+
+You'll also see the rendered tags that SEOmatic has added to your webpage under **Rendered Tags**.
+
+When hovering the cursor over any property, a clipboard icon will appear that when clicked on copies to the clipboard example code of how to get/set values for that particular property via Twig.
+
+### Variables
+
+Variables are used throughout SEOmatic when rendering tags, or controlling how tags are rendered. Tag properties often reference these variables via Twig expressions.
+
+![Screenshot](./resources/screenshots/seomatic-debug-variables.png)
+
+You can inspect the **Properties** of the variables, as well as the corresponding **Parsed Properties** after they have been rendered as Twig.
+
+You can expand and sub-properties of nested properties by clicking on them.
+
+When hovering the cursor over any property, a clipboard icon will appear that when clicked on copies to the clipboard example code of how to get/set values for that particular property via Twig.
+
 ## Config Settings
 
 SEOmatic supports the standard `config.php` multi-environment friendly config file for the plugin settings. Just copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way.

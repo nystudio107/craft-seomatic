@@ -11,18 +11,18 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\NonceItem;
-use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
-
 use Craft;
 use craft\helpers\Json;
 use craft\helpers\Template;
-
-use yii\validators\UrlValidator;
+use craft\validators\UrlValidator;
+use DateTime;
+use nystudio107\seomatic\base\NonceItem;
+use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
+use nystudio107\seomatic\Seomatic;
 use yii\validators\BooleanValidator;
-use yii\validators\NumberValidator;
 use yii\validators\DateValidator;
+use yii\validators\NumberValidator;
+use function is_object;
 
 /**
  * @author    nystudio107
@@ -106,7 +106,7 @@ class MetaJsonLd extends NonceItem
      * Create a new JSON-LD schema type object
      *
      * @param string $schemaType
-     * @param array  $config
+     * @param array $config
      *
      * @return MetaJsonLd
      */
@@ -114,7 +114,7 @@ class MetaJsonLd extends NonceItem
     {
         $model = null;
 
-        $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$schemaType;
+        $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $schemaType;
         /** @var $model MetaJsonLd */
         if (class_exists($className)) {
             self::cleanProperties($className, $config);
@@ -236,7 +236,8 @@ class MetaJsonLd extends NonceItem
             'renderScriptTags' => true,
             'array' => false,
         ]
-    ): string {
+    ): string
+    {
         $html = '';
         $options = $this->tagAttributes();
         if ($this->prepForRender($options)) {
@@ -266,15 +267,15 @@ class MetaJsonLd extends NonceItem
             if ($params['renderScriptTags']) {
                 $html =
                     '<script type="application/ld+json">'
-                    .$linebreak
-                    .$html
-                    .$linebreak
-                    .'</script>';
+                    . $linebreak
+                    . $html
+                    . $linebreak
+                    . '</script>';
             } elseif (Seomatic::$devMode) {
                 $html =
                     $linebreak
-                    .$html
-                    .$linebreak;
+                    . $html
+                    . $linebreak;
             }
             if ($params['renderRaw'] === true) {
                 $html = Template::raw($html);
@@ -340,15 +341,26 @@ class MetaJsonLd extends NonceItem
     }
 
     /**
+     * We don't want Craft's base Model messing with our dateCreated etc properties
+     *
+     * @return array|string[]
+     */
+    public function datetimeAttributes(): array
+    {
+        return [];
+    }
+
+    /**
      * Validate the passed in $attribute based on $schemaPropertyExpectedTypes
      *
      * @param string $attribute the attribute currently being validated
-     * @param mixed  $params    the value of the "params" given in the rule
+     * @param mixed $params the value of the "params" given in the rule
      */
     public function validateJsonSchema(
         $attribute,
         $params
-    ) {
+    )
+    {
         if (!\in_array($attribute, $this->getSchemaPropertyNames(), true)) {
             $this->addError($attribute, 'The attribute does not exist.');
         } else {
@@ -358,10 +370,10 @@ class MetaJsonLd extends NonceItem
             if (!\is_array($dataToValidate)) {
                 $dataToValidate = [$dataToValidate];
             }
-            foreach ($dataToValidate as $data) {
+            foreach ($dataToValidate as $key => $data) {
                 /** @var array $expectedTypes */
                 foreach ($expectedTypes as $expectedType) {
-                    $className = 'nystudio107\\seomatic\\models\\jsonld\\'.$expectedType;
+                    $className = 'nystudio107\\seomatic\\models\\jsonld\\' . $expectedType;
                     switch ($expectedType) {
                         // Text always validates
                         case 'Text':
@@ -401,6 +413,10 @@ class MetaJsonLd extends NonceItem
                         case 'Date':
                             $validator = new DateValidator;
                             $validator->type = DateValidator::TYPE_DATE;
+                            $validator->format = 'php:' . DateTime::ATOM;
+                            if ($validator->validate($data, $error)) {
+                                $validated = true;
+                            }
                             $validator->format = 'YYYY-MM-DD';
                             if ($validator->validate($data, $error)) {
                                 $validated = true;
@@ -435,14 +451,24 @@ class MetaJsonLd extends NonceItem
 
                         // By default, assume it's a schema.org JSON-LD object, and validate that
                         default:
-                            if (\is_object($data) && is_a($data, $className)) {
+                            // Allow for @id references
+                            if ($key === 'id') {
                                 $validated = true;
+                            }
+                            if (is_object($data) && ($data instanceof $className)) {
+                                $validated = true;
+                            }
+                            if (is_string($data)) {
+                                $targetClass = 'nystudio107\\seomatic\\models\\jsonld\\' . $data;
+                                if (class_exists($targetClass)) {
+                                    $validated = true;
+                                }
                             }
                             break;
                     }
                 }
                 if (!$validated) {
-                    $this->addError($attribute, 'Must be one of these types: '.implode(', ', $expectedTypes));
+                    $this->addError($attribute, 'Must be one of these types: ' . implode(', ', $expectedTypes));
                 }
             }
         }

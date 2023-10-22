@@ -44,17 +44,19 @@ abstract class MetaContainer extends SeomaticContainer implements MetaContainerI
     public function render(array $params = []): string
     {
         $html = '';
-
         if ($this->prepForInclusion()) {
             /** @var MetaItem $metaItemModel */
             foreach ($this->data as $metaItemModel) {
                 if ($metaItemModel->include) {
-                    $html .= $metaItemModel->render($params);
+                    $renderedTag = $metaItemModel->render($params);
+                    if (!empty($renderedTag)) {
+                        $html .= $metaItemModel->render($params);
+                    }
                 }
             }
         }
 
-        return $html;
+        return trim($html);
     }
 
     /**

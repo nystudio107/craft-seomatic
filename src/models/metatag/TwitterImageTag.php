@@ -11,8 +11,9 @@
 
 namespace nystudio107\seomatic\models\metatag;
 
-use nystudio107\seomatic\models\MetaTag;
+use craft\validators\UrlValidator;
 use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\MetaTag;
 
 /**
  * @author    nystudio107
@@ -51,7 +52,7 @@ class TwitterImageTag extends MetaTag
         $rules = parent::rules();
         $rules = array_merge($rules, [
             // content in this case should be a fully qualified URL
-            [['content'], 'url'],
+            [['content'], UrlValidator::class],
         ]);
 
         return $rules;
