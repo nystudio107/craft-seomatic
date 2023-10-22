@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.63 - 2023.10.22
+### Added
+* Added an SEOmatic debug panel to the Yii2 Debug Toolbar to aid in debugging SEO metadata
+
 ## 3.4.62 - 2023.10.09
 ### Added
 * Disallow Google Bard and Vertex AI bots in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#common-crawlers
