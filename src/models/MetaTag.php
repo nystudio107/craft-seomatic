@@ -173,11 +173,16 @@ class MetaTag extends MetaItem
     public function render(array $params = []): string
     {
         $html = '';
+        $linebreak = '';
+        // If `devMode` is enabled, make it more human-readable
+        if (Seomatic::$devMode) {
+            $linebreak = PHP_EOL;
+        }
         $configs = $this->tagAttributesArray();
         foreach ($configs as $config) {
             if ($this->prepForRender($config)) {
                 ksort($config);
-                $html .= Html::tag('meta', '', $config);
+                $html .= Html::tag('meta', '', $config) . $linebreak;
             }
         }
 
