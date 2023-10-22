@@ -11,13 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
-use Craft;
-
+use nystudio107\seomatic\Seomatic;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
 
@@ -160,10 +158,10 @@ class MetaTag extends MetaItem
                 if (Seomatic::$devMode) {
                     $error = Craft::t(
                         'seomatic',
-                        '{tagtype} tag `{key}` did not render because it is missing attributes. '.print_r($data, true),
+                        '{tagtype} tag `{key}` did not render because it is missing attributes. ' . print_r($data, true),
                         ['tagtype' => 'Meta', 'key' => $this->key]
                     );
-                    Craft::info('WARNING - '.$error, __METHOD__);
+                    Craft::info('WARNING - ' . $error, __METHOD__);
                 }
                 $shouldRender = false;
             }
@@ -178,11 +176,16 @@ class MetaTag extends MetaItem
     public function render(array $params = []): string
     {
         $html = '';
+        $linebreak = '';
+        // If `devMode` is enabled, make it more human-readable
+        if (Seomatic::$devMode) {
+            $linebreak = PHP_EOL;
+        }
         $configs = $this->tagAttributesArray();
         foreach ($configs as $config) {
             if ($this->prepForRender($config)) {
                 ksort($config);
-                $html .= Html::tag('meta', '', $config);
+                $html .= Html::tag('meta', '', $config) . $linebreak;
             }
         }
 
