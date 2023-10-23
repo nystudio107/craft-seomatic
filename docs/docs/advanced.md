@@ -28,6 +28,21 @@ You'll also see the rendered tags that SEOmatic has added to your webpage under 
 
 When hovering the cursor over any property, a clipboard icon will appear that when clicked on copies to the clipboard example code of how to get/set values for that particular property via Twig.
 
+Tag example:
+```twig
+{# @var tag \nystudio107\seomatic\models\MetaTag #}
+{% set tag = seomatic.tag.get('robots') %}
+```
+
+Tag property example:
+
+```twig
+{#-- Get the value --#}
+{% set value = seomatic.tag.get('robots').content %}
+{#-- Set the value --#}
+{% do seomatic.tag.get('robots').content(value) %}
+```
+
 ### Variables
 
 Variables are used throughout SEOmatic when rendering tags, or controlling how tags are rendered. Tag properties often reference these variables via Twig expressions.
@@ -39,6 +54,14 @@ You can inspect the **Properties** of the variables, as well as the correspondin
 You can expand and sub-properties of nested properties by clicking on them.
 
 When hovering the cursor over any property, a clipboard icon will appear that when clicked on copies to the clipboard example code of how to get/set values for that particular property via Twig.
+
+Variable example:
+```twig
+{#-- Get the value --#}
+{% set value = seomatic.meta.seoImage %}
+{#-- Set the value --#}
+{% do seomatic.meta.seoImage(value) %}
+```
 
 ## Config Settings
 
