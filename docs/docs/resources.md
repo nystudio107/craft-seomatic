@@ -12,6 +12,8 @@ description: SEO Resources documentation for the SEOmatic plugin. The SEOmatic p
 
 ## Articles on SEO/SEOmatic:
 
+* [Top 5 Sitemap Myths Demystified](https://nystudio107.com/blog/seo-myths-top-5-sitemap-myths-demystified)
+
 * [Advanced SEOmatic Tips](https://nystudio107.com/blog/tips-for-using-seomatic-effectively)
 
 * [Annotated JSON-LD Structured Data Examples](https://nystudio107.com/blog/annotated-json-ld-structured-data-examples)
