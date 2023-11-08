@@ -80,14 +80,8 @@ class CanonicalLink extends MetaLink
             if ($robots !== null && $robots->include && !Seomatic::$previewingMetaContainers && !Seomatic::$settings->alwaysIncludeCanonicalUrls) {
                 $robotsArray = $robots->renderAttributes();
                 $content = $robotsArray['content'] ?? '';
-                if (!empty($content)) {
-                    if (\is_array($content)) {
-                        if (\in_array('noindex', $content, true) || \in_array('none', $content, true)) {
-                            return false;
-                        }
-                    } else if ($content === 'noindex' || $content === 'none') {
-                        return false;
-                    }
+                if (str_contains($content, 'noindex') || str_contains($content, 'none')) {
+                    return false;
                 }
             }
             // Ensure the href is a full url
