@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.64 - UNRELEASED
+### Fixed
+* Fixed an issue where the `CanonicalLink` would render if the `Robots` tag contained multiple values ([#1378](https://github.com/nystudio107/craft-seomatic/issues/1378))
+
 ## 3.4.63 - 2023.10.22
 ### Added
 * Added an SEOmatic debug panel to the Yii2 Debug Toolbar to aid in debugging SEO metadata
