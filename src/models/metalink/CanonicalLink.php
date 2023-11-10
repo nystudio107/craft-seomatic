@@ -79,8 +79,8 @@ class CanonicalLink extends MetaLink
             $robots = Seomatic::$seomaticVariable->tag->get('robots');
             if ($robots !== null && $robots->include && !Seomatic::$previewingMetaContainers && !Seomatic::$settings->alwaysIncludeCanonicalUrls) {
                 $robotsArray = $robots->renderAttributes();
-                $content = $robotsArray['content'] ?? '';
-                if (str_contains($content, 'noindex') || str_contains($content, 'none')) {
+                $contentArray = explode(',', $robotsArray['content'] ?? '');
+                if (in_array('noindex', $contentArray, true) || in_array('none', $contentArray, true)) {
                     return false;
                 }
             }
