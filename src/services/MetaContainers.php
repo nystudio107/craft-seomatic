@@ -893,10 +893,21 @@ class MetaContainers extends Component
                 ?? Craft::$app->getSites()->primarySite->id
                 ?? 1;
         }
+        $element = null;
         $uri = trim($uri, '/');
         /** @var Element $element */
         $enabledOnly = !Seomatic::$previewingMetaContainers;
-        $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, $enabledOnly);
+        // Try to use Craft's matched element if looking for an enabled element, the current `siteId` is being used and
+        // the current `uri` matches what was in the request
+        if ($enabledOnly
+            && $siteId === Craft::$app->getSites()->currentSite->id
+            && Craft::$app->getRequest()->getPathInfo() === $uri)
+        {
+            $element = Craft::$app->getUrlManager()->getMatchedElement();
+        }
+        if (!$element) {
+            $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, $enabledOnly);
+        }
         if ($element && ($element->uri !== null)) {
             Seomatic::setMatchedElement($element);
         }
