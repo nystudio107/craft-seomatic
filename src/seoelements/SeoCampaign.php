@@ -144,7 +144,7 @@ class SeoCampaign implements SeoElementInterface
                         );
                         // Create the meta bundles for this campaign type if it's new
                         if ($event->isNew) {
-                            SeoEntry::createContentMetaBundle($event->campaignType);
+                            SeoCampaign::createContentMetaBundle($event->campaignType);
                             Seomatic::$plugin->sitemaps->submitSitemapIndex();
                         }
                     }
@@ -167,7 +167,7 @@ class SeoCampaign implements SeoElementInterface
                         );
                         // Delete the meta bundles for this campaign type
                         Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                            SeoEntry::getMetaBundleType(),
+                            SeoCampaign::getMetaBundleType(),
                             $event->campaignType->id
                         );
                     }
@@ -179,34 +179,36 @@ class SeoCampaign implements SeoElementInterface
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
         }
 
-        // Handler: Entry::EVENT_DEFINE_SIDEBAR_HTML
-        Event::on(
-            CampaignElement::class,
-            CampaignElement::EVENT_DEFINE_SIDEBAR_HTML,
-            static function (DefineHtmlEvent $event) {
-                Craft::debug(
-                    'CampaignElement::EVENT_DEFINE_SIDEBAR_HTML',
-                    __METHOD__
-                );
-                $html = '';
-                Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $campaign CampaignElement */
-                $campaign = $event->sender ?? null;
-                if ($campaign !== null && $campaign->uri !== null) {
-                    Seomatic::$plugin->metaContainers->previewMetaContainers($campaign->uri, $campaign->siteId, true);
-                    // Render our preview sidebar template
-                    if (Seomatic::$settings->displayPreviewSidebar && Seomatic::$matchedElement) {
-                        $html .= PluginTemplate::renderPluginTemplate('_sidebars/campaign-preview.twig');
-                    }
-                    // Render our analysis sidebar template
+        if (Seomatic::$craft37) {
+            // Handler: Entry::EVENT_DEFINE_SIDEBAR_HTML
+            Event::on(
+                CampaignElement::class,
+                CampaignElement::EVENT_DEFINE_SIDEBAR_HTML,
+                static function (DefineHtmlEvent $event) {
+                    Craft::debug(
+                        'CampaignElement::EVENT_DEFINE_SIDEBAR_HTML',
+                        __METHOD__
+                    );
+                    $html = '';
+                    Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
+                    /** @var  $campaign CampaignElement */
+                    $campaign = $event->sender ?? null;
+                    if ($campaign !== null && $campaign->uri !== null) {
+                        Seomatic::$plugin->metaContainers->previewMetaContainers($campaign->uri, $campaign->siteId, true);
+                        // Render our preview sidebar template
+                        if (Seomatic::$settings->displayPreviewSidebar && Seomatic::$matchedElement) {
+                            $html .= PluginTemplate::renderPluginTemplate('_sidebars/campaign-preview.twig');
+                        }
+                        // Render our analysis sidebar template
 // @TODO: This will be added an upcoming 'pro' edition
 //                if (Seomatic::$settings->displayAnalysisSidebar && Seomatic::$matchedElement) {
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/campaign-analysis.twig');
 //                }
+                    }
+                    $event->html .= $html;
                 }
-                $event->html .= $html;
-            }
-        );
+            );
+        }
     }
 
     /**

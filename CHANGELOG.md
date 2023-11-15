@@ -1,5 +1,14 @@
 # SEOmatic Changelog
 
+## 3.4.64 - 2023.11.15
+### Changed
+* Try to use Craft's matched element from `UrlManager` in `MetaContainers` if looking for an enabled element, the current `siteId` is being used and the current `uri` matches what was in the request ([#1381](https://github.com/nystudio107/craft-seomatic/pull/1381))
+
+### Fixed
+* Fixed an issue where the `CanonicalLink` would render if the `Robots` tag contained multiple values ([#1378](https://github.com/nystudio107/craft-seomatic/issues/1378))
+* Don't install an event listener for `CampaignElement::EVENT_DEFINE_SIDEBAR_HTML` unless on Craft 3.7 or later ([#1377](https://github.com/nystudio107/craft-seomatic/issues/1377))
+* Fixed incorrect references to `SeoEntry` in the Campaign `SeoElement` ([#1383](https://github.com/nystudio107/craft-seomatic/pull/1383))
+
 ## 3.4.63 - 2023.10.22
 ### Added
 * Added an SEOmatic debug panel to the Yii2 Debug Toolbar to aid in debugging SEO metadata
