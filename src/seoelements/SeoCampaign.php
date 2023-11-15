@@ -144,7 +144,7 @@ class SeoCampaign implements SeoElementInterface
                         );
                         // Create the meta bundles for this campaign type if it's new
                         if ($event->isNew) {
-                            SeoEntry::createContentMetaBundle($event->campaignType);
+                            SeoCampaign::createContentMetaBundle($event->campaignType);
                             Seomatic::$plugin->sitemaps->submitSitemapIndex();
                         }
                     }
@@ -167,7 +167,7 @@ class SeoCampaign implements SeoElementInterface
                         );
                         // Delete the meta bundles for this campaign type
                         Seomatic::$plugin->metaBundles->deleteMetaBundleBySourceId(
-                            SeoEntry::getMetaBundleType(),
+                            SeoCampaign::getMetaBundleType(),
                             $event->campaignType->id
                         );
                     }
