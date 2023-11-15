@@ -6,6 +6,7 @@
 
 ### Fixed
 * Fixed an issue where the `CanonicalLink` would render if the `Robots` tag contained multiple values ([#1378](https://github.com/nystudio107/craft-seomatic/issues/1378))
+* Fixed incorrect references to `SeoEntry` in the Campaign SeoElement ([#1382](https://github.com/nystudio107/craft-seomatic/pull/1382))
 
 ## 4.0.33 - 2023.10.22
 ### Added
