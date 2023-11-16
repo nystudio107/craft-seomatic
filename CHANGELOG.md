@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.35 - 2023.11.16
+### Fixed
+* Only try the `getMatchedElement()` optimization when it's not a console request, and surround it with `try/catch` to catch any potentially thrown exceptions ([#1384](https://github.com/nystudio107/craft-seomatic/issues/1384))
+
 ## 4.0.34 - 2023.11.15
 ### Changed
 * Try to use Craft's matched element from `UrlManager` in `MetaContainers` if looking for an enabled element, the current `siteId` is being used and the current `uri` matches what was in the request ([#1381](https://github.com/nystudio107/craft-seomatic/pull/1381))
