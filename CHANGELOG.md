@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.65 - 2023.11.16
+### Fixed
+* Fixed a regression that could cause an exception to be thrown when editing an entry in the Craft CP ([#1385](https://github.com/nystudio107/craft-seomatic/issues/1385))
+
 ## 3.4.64 - 2023.11.15
 ### Changed
 * Try to use Craft's matched element from `UrlManager` in `MetaContainers` if looking for an enabled element, the current `siteId` is being used and the current `uri` matches what was in the request ([#1381](https://github.com/nystudio107/craft-seomatic/pull/1381))

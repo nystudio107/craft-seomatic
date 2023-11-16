@@ -461,6 +461,7 @@ class MetaContainers extends Component
                 ?? Craft::$app->getSites()->primarySite->id
                 ?? 1;
         }
+        $element = null;
         $uri = trim($uri, '/');
         /** @var Element $element */
         $enabledOnly = !Seomatic::$previewingMetaContainers;
