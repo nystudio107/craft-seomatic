@@ -467,10 +467,16 @@ class MetaContainers extends Component
         $enabledOnly = !Seomatic::$previewingMetaContainers;
         // Try to use Craft's matched element if looking for an enabled element, the current `siteId` is being used and
         // the current `uri` matches what was in the request
-        if ($enabledOnly
-            && $siteId === Craft::$app->getSites()->currentSite->id
-            && Craft::$app->getRequest()->getPathInfo() === $uri) {
-            $element = Craft::$app->getUrlManager()->getMatchedElement();
+        $request = Craft::$app->getRequest();
+        if ($enabledOnly && !$request->getIsConsoleRequest()) {
+            try {
+                if ($siteId === Craft::$app->getSites()->currentSite->id
+                    && $request->getPathInfo() === $uri) {
+                    $element = Craft::$app->getUrlManager()->getMatchedElement();
+                }
+            } catch (\Throwable $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
         }
         if (!$element) {
             $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, $enabledOnly);
