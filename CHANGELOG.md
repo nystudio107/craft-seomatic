@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.66 - 2023.11.16
+### Fixed
+* Only try the `getMatchedElement()` optimization when it's not a console request, and surround it with `try/catch` to catch any potentially thrown exceptions ([#1384](https://github.com/nystudio107/craft-seomatic/issues/1384))
+
 ## 3.4.65 - 2023.11.16
 ### Fixed
 * Fixed a regression that could cause an exception to be thrown when editing an entry in the Craft CP ([#1385](https://github.com/nystudio107/craft-seomatic/issues/1385))
