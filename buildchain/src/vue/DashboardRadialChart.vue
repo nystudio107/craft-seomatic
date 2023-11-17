@@ -32,7 +32,7 @@ export default {
             show: false,
           },
           events: {
-            click: (event, chartContext, config) => {
+            click: () => {
               window.location = this.url;
             }
           },
