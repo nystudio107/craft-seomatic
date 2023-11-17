@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.67 - UNRELEASED
+### Added
+* Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+
 ## 3.4.66 - 2023.11.16
 ### Fixed
 * Only try the `getMatchedElement()` optimization when it's not a console request, and surround it with `try/catch` to catch any potentially thrown exceptions ([#1384](https://github.com/nystudio107/craft-seomatic/issues/1384))
