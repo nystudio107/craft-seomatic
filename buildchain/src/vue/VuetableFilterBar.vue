@@ -11,7 +11,7 @@
           @keyup="doFilter"
         >
         <button
-          class="btn delete icon"
+          class="btn delete icon seomatic-reset"
           @click="resetFilter"
         >
           Reset
