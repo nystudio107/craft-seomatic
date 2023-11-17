@@ -4,7 +4,7 @@ import DashboardMultiRadialChart from '@/vue/DashboardMultiRadialChart.vue';
 import DashboardRadialChart from '@/vue/DashboardRadialChart.vue';
 
 // Create our vue instance
-const vm = new Vue({
+new Vue({
   el: "#cp-nav-content",
   components: {
     ConfettiParty,
@@ -14,3 +14,10 @@ const vm = new Vue({
   data: {},
   methods: {},
 });
+
+// Accept HMR as per: https://vitejs.dev/guide/api-hmr.html
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    console.log("HMR")
+  });
+}

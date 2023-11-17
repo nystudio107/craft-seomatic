@@ -74,7 +74,7 @@ window.seomaticTabChangeHandler = seomaticTabChangeHandler;
 window.seomaticTabChangeHandler();
 
 function initFieldSettings() {
-  $('.inheritable-field .override .lightswitch').on('change', function (ev) {
+  $('.inheritable-field .override .lightswitch').on('change', function () {
     if ($(this).hasClass('on')) {
       $(this).parents('.inheritable-field').addClass('defined-settings').removeClass('inherited-settings');
       Craft.initUiElements($(this).parents('.inheritable-field'));
@@ -94,7 +94,7 @@ function initFieldSettings() {
       $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').hide();
     }
   });
-  $(selector).on('click', function (e) {
+  $(selector).on('click', function () {
     var value = $(this).find('input').first().val();
     if (value) {
       $(this).closest('.seomatic-script-wrapper').find('.seomatic-script-container').slideDown();
@@ -104,7 +104,7 @@ function initFieldSettings() {
   });
 
   // Show/hide the image source fields initially
-  $('.seomatic-imageSourceSelect > select').each(function (index, value) {
+  $('.seomatic-imageSourceSelect > select').each(function () {
     var popupValue = $(this).val();
     switch (popupValue) {
       case 'sameAsSeo':
@@ -137,7 +137,7 @@ function initFieldSettings() {
     }
   });
   // Handle hiding/showing the image source fields based on the selection
-  $('.seomatic-imageSourceSelect > select').on('change', function (e) {
+  $('.seomatic-imageSourceSelect > select').on('change', function () {
     switch (this.value) {
       case 'sameAsSeo':
         $(this).parents('.seomatic-imageSourceWrapper').find('.seomatic-imageSourceNotFromUrl').slideDown();
@@ -170,7 +170,7 @@ function initFieldSettings() {
   });
 
   // Show/hide the text source fields initially
-  $('.seomatic-textSourceSelect select').each(function (index, value) {
+  $('.seomatic-textSourceSelect select').each(function () {
     var popupValue = $(this).val();
     switch (popupValue) {
       case 'sameAsSeo':
@@ -195,7 +195,7 @@ function initFieldSettings() {
     }
   });
   // Handle hiding/showing the image source fields based on the selection
-  $('.field-settings .seomatic-textSourceSelect select').on('change', function (e) {
+  $('.field-settings .seomatic-textSourceSelect select').on('change', function () {
     switch (this.value) {
       case 'sameAsSeo':
       case 'sameAsGlobal':
