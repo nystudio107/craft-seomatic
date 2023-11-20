@@ -7,6 +7,7 @@
 ### Changed
 * Remove vestigial `queue` option from the console command
 * Rebrand `Twitter` to `X (Twitter)` in all user-displayed text
+* Updated the X (Twitter) large image previews to reflect the new style in X (Twitter)
 
 ## 3.4.66 - 2023.11.16
 ### Fixed
