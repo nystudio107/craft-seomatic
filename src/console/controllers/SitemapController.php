@@ -38,11 +38,6 @@ class SitemapController extends Controller
      */
     public $siteId;
 
-    /**
-     * @var bool Should the sitemap generation simply be queued, rather than run immediately?
-     */
-    public $queue = false;
-
     // Protected Properties
     // =========================================================================
 
@@ -65,7 +60,6 @@ class SitemapController extends Controller
         return [
             'handle',
             'siteId',
-            'queue',
         ];
     }
 
