@@ -3,7 +3,7 @@
 
 {% set additionalVars = {
     'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterSiteNamePosition"),
-    'fieldLabel': "Twitter Site Name Position Source"|t("seomatic"),
+    'fieldLabel': "X (Twitter) Site Name Position Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-twitterSiteNamePositionSource',
     'wrapperClass': 'seomatic-textSourceWrapper',
     'settingName': 'twitterSiteNamePosition'
@@ -15,7 +15,7 @@
         {% import "_includes/forms" as forms %}
 
         <div class="instructions">
-            {{ "Where the Site Name is placed relative to the Twitter Title in the &lt;twitter:title&gt; tag"|t("seomatic") |raw }}
+            {{ "Where the Site Name is placed relative to the X (Twitter) Title in the &lt;twitter:title&gt; tag"|t("seomatic") |raw }}
         </div>
         {% namespace "metaBundleSettings" %}
             <div class="heading">
@@ -56,7 +56,7 @@
     } %}
     {% set textOptions = { sameAsSeo: "Same as Site Name Position"|t("seomatic"), } | merge(textOptions) %}
     {% if pageContext == "content" %}
-        {% set textOptions = { sameAsGlobal: "Same as Global Twitter Site Name Position"|t("seomatic"), } | merge(textOptions) %}
+        {% set textOptions = { sameAsGlobal: "Same as Global X (Twitter) Site Name Position"|t("seomatic"), } | merge(textOptions) %}
     {% endif %}
 
     {% block inheritedValues %}
