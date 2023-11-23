@@ -9,6 +9,9 @@
 * Rebrand `Twitter` to `X (Twitter)` in all user-displayed text
 * Updated the X (Twitter) large image previews to reflect the new style in X (Twitter)
 
+### Fixed
+* Fixed an issue where the **Truncate Description Tags** toggle did not work as expected ([#1386](https://github.com/nystudio107/craft-seomatic/issues/1386))
+
 ## 4.0.35 - 2023.11.16
 ### Fixed
 * Only try the `getMatchedElement()` optimization when it's not a console request, and surround it with `try/catch` to catch any potentially thrown exceptions ([#1384](https://github.com/nystudio107/craft-seomatic/issues/1384))
