@@ -11,9 +11,9 @@
 
 namespace nystudio107\seomatic\models\metatag;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\Text as TextHelper;
 use nystudio107\seomatic\models\MetaTag;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -67,10 +67,10 @@ class TwitterDescriptionTag extends MetaTag
         if ($shouldRender) {
             if (!empty($data['content'])) {
                 // Truncate the Description tag content
-                if (Seomatic::$settings->truncateTitleTags) {
+                if (Seomatic::$settings->truncateDescriptionTags) {
                     $data['content'] = TextHelper::truncateOnWord(
                         $data['content'],
-                        300,
+                        Seomatic::$settings->maxDescriptionLength,
                         '…'
                     );
                 }
