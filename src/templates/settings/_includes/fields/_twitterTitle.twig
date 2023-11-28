@@ -4,7 +4,7 @@
 {% set additionalVars = {
     'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterTitle"),
     'wrapperClass': 'seomatic-textSourceWrapper',
-    'fieldLabel': "Twitter Title Source"|t("seomatic"),
+    'fieldLabel': "X (Twitter) Title Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-twitterTitleSource',
     'settingName': 'twitterTitle'
 } %}
@@ -13,7 +13,7 @@
     {% macro twitterTitleField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
-            <p>{{ "The Twitter Title is displayed in bold at the top of your Twitter card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
+            <p>{{ "The X (Twitter) Title is displayed in bold at the top of your X (Twitter) card. Make sure it is a pithy summary of your webpage."|t("seomatic") }}</p>
         </div>
 
         {% import "_includes/forms" as forms %}

@@ -13,7 +13,7 @@ export default defineConfig(({command}) => ({
   base: command === 'serve' ? '' : '/dist/',
   build: {
     emptyOutDir: true,
-    manifest: true,
+    manifest: 'manifest.json',
     outDir: '../src/web/assets/dist',
     rollupOptions: {
       input: {
@@ -22,10 +22,8 @@ export default defineConfig(({command}) => ({
         'seomatic': 'src/js/seomatic.js',
         'seomatic-meta': 'src/js/seomatic-meta.js',
       },
-      output: {
-        sourcemap: true
-      },
-    }
+    },
+    sourcemap: true
   },
   plugins: [
     viteRestartPlugin({

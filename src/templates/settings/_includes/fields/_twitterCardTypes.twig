@@ -3,7 +3,7 @@
 
 {% set additionalVars = {
     'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterCard"),
-    'fieldLabel': "Twitter Card Type"|t("seomatic"),
+    'fieldLabel': "X (Twitter) Card Type"|t("seomatic"),
     'labelFor': 'metaGlobalVars-twitterCard',
     'settingName': 'twitterCard'
 } %}
@@ -12,7 +12,7 @@
     {% macro twitterCardTypeField(twitterCardTypes, metaGlobalVars, suffix) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
-            <p>{{ "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic") }}</p>
+            <p>{{ "With X (Twitter) Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic") }}</p>
         </div>
         {% import "_includes/forms" as forms %}
         {% namespace "metaGlobalVars" %}

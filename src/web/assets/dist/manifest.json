@@ -1,58 +1,42 @@
 {
-  "__plugin-vue2_normalizer-fe1301b8.js": {
-    "file": "assets/_plugin-vue2_normalizer-fe1301b8.js"
-  },
-  "src/img/Seomatic-icon.svg": {
-    "file": "assets/Seomatic-icon-c671f9a1.svg",
-    "src": "src/img/Seomatic-icon.svg"
-  },
-  "src/js/content-seo.css": {
-    "file": "assets/content-seo-1aae9b07.css",
-    "src": "src/js/content-seo.css"
+  "__plugin-vue2_normalizer-GTIfvTtm.js": {
+    "file": "assets/_plugin-vue2_normalizer-GTIfvTtm.js"
   },
   "src/js/content-seo.js": {
     "css": [
-      "assets/content-seo-1aae9b07.css"
+      "assets/content-seo-Giv5N7ev.css"
     ],
-    "file": "assets/content-seo-ffa54eb0.js",
+    "file": "assets/content-seo-gI1u1G_9.js",
     "imports": [
-      "__plugin-vue2_normalizer-fe1301b8.js"
+      "__plugin-vue2_normalizer-GTIfvTtm.js"
     ],
     "isEntry": true,
     "src": "src/js/content-seo.js"
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard-31b6fb60.js",
+    "file": "assets/dashboard-_FYjRlxc.js",
     "imports": [
-      "__plugin-vue2_normalizer-fe1301b8.js"
+      "__plugin-vue2_normalizer-GTIfvTtm.js"
     ],
     "isEntry": true,
     "src": "src/js/dashboard.js"
   },
-  "src/js/seomatic-meta.css": {
-    "file": "assets/seomatic-meta-3fbed9de.css",
-    "src": "src/js/seomatic-meta.css"
-  },
   "src/js/seomatic-meta.js": {
     "css": [
-      "assets/seomatic-meta-3fbed9de.css"
+      "assets/seomatic-meta-5Xhz8OwB.css"
     ],
-    "file": "assets/seomatic-meta-a4958a4a.js",
+    "file": "assets/seomatic-meta-_MISoTat.js",
     "imports": [
-      "__plugin-vue2_normalizer-fe1301b8.js"
+      "__plugin-vue2_normalizer-GTIfvTtm.js"
     ],
     "isEntry": true,
     "src": "src/js/seomatic-meta.js"
   },
-  "src/js/seomatic.css": {
-    "file": "assets/seomatic-a35ff6b2.css",
-    "src": "src/js/seomatic.css"
-  },
   "src/js/seomatic.js": {
     "css": [
-      "assets/seomatic-a35ff6b2.css"
+      "assets/seomatic-Oe0o_wUu.css"
     ],
-    "file": "assets/seomatic-6caf088f.js",
+    "file": "assets/seomatic-TIRao9FJ.js",
     "isEntry": true,
     "src": "src/js/seomatic.js"
   }
