@@ -411,6 +411,13 @@ h4.metadata-title-separator span {
   padding: 9px;
 }
 
+.card-seo-twitter__text-large {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: transparent;
+}
+
 @media only screen and (min-width: 770px) {
   .card-seo-twitter__text {
     padding: 0.75em 1em;
@@ -491,10 +498,24 @@ h4.metadata-title-separator span {
   text-overflow: ellipsis;
 }
 
+.card-seo-twitter__text-overlay {
+  color: rgb(255 255 255);
+  background-color: rgb(0 0 0 / 30%);
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 @media only screen and (min-width: 770px) {
   .card-seo-twitter__link {
     margin-top: 0.32333em;
     color: #8899a6;
+  }
+
+  .card-seo-twitter__text-overlay {
+    color: rgb(255 255 255);
+    background-color: rgb(0 0 0 / 30%);
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
 

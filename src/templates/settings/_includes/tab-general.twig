@@ -2,107 +2,107 @@
 {% import "_includes/forms" as forms %}
 
 <fieldset>
-{% if field is not defined or 'seoPreview' in field.generalEnabledFields %}
-    <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
-    {% include "seomatic/_includes/googlePreview.twig" %}
-{% endif %}
+    {% if field is not defined or 'seoPreview' in field.generalEnabledFields %}
+        <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
+        {% include "seomatic/_includes/googlePreview.twig" %}
+    {% endif %}
 
-{% if parentBundles is not defined %}
-    {% set parentBundles = [] %}
-{% endif %}
+    {% if parentBundles is not defined %}
+        {% set parentBundles = [] %}
+    {% endif %}
 
-{############### Main Entity of Page ###############}
+    {# ############## Main Entity of Page ############## #}
 
-{% if field is not defined or 'mainEntityOfPage' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_mainEntityOfPage.twig" %}
-{% endif %}
+    {% if field is not defined or 'mainEntityOfPage' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_mainEntityOfPage.twig" %}
+    {% endif %}
 
-{############### SEO Title ###############}
-{% if field is not defined or 'seoTitle' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_seoTitle.twig" %}
-{% endif %}
+    {# ############## SEO Title ############## #}
+    {% if field is not defined or 'seoTitle' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_seoTitle.twig" %}
+    {% endif %}
 
-{############### Site Name Position ###############}
-{% if field is not defined or 'siteNamePosition' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_siteNamePosition.twig" %}
-{% endif %}
+    {# ############## Site Name Position ############## #}
+    {% if field is not defined or 'siteNamePosition' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_siteNamePosition.twig" %}
+    {% endif %}
 
-{############### SEO Description ###############}
+    {# ############## SEO Description ############## #}
 
-{% if field is not defined or 'seoDescription' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_seoDescription.twig" %}
-{% endif %}
+    {% if field is not defined or 'seoDescription' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_seoDescription.twig" %}
+    {% endif %}
 
-{############### SEO Keywords ###############}
+    {# ############## SEO Keywords ############## #}
 
-{% if field is not defined or 'seoKeywords' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_seoKeywords.twig" %}
-{% endif %}
+    {% if field is not defined or 'seoKeywords' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_seoKeywords.twig" %}
+    {% endif %}
 
-{############### SEO Image ###############}
+    {# ############## SEO Image ############## #}
 
-{% if field is not defined or 'seoImage' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/seo-image-partial.twig" %}
-{% endif %}
+    {% if field is not defined or 'seoImage' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/seo-image-partial.twig" %}
+    {% endif %}
 
-{############### Facebook OpenGraph Image ###############}
+    {# ############## Facebook OpenGraph Image ############## #}
 
-{# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
-{% if field is not defined %}
-    <div style="display: none;">
-        {% include "seomatic/settings/_includes/facebook-og-image-partial.twig" %}
-    </div>
-{% endif %}
+    {# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
+    {% if field is not defined %}
+        <div style="display: none;">
+            {% include "seomatic/settings/_includes/facebook-og-image-partial.twig" %}
+        </div>
+    {% endif %}
 
-{############### Twitter Image ###############}
+    {# ############## Twitter Image ############## #}
 
-{# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
-{% if field is not defined %}
-    <div style="display: none;">
-        {############### Twitter Card Type ###############}
+    {# These fields are added as hidden here so that "Same as SEO Image" changes can propagate down to them #}
+    {% if field is not defined %}
+        <div style="display: none;">
+            {# ############## Twitter Card Type ############## #}
 
-        {# This has to be here because different Twitter Card types have different sizes for image transforms#}
-        {% set twitterCardTypes = {
-            summary: "Summary Card"|t("seomatic"),
-            summary_large_image: "Summary Card with Large Image"|t("seomatic"),
-            app: "App Card"|t("seomatic"),
-            player: "Player Card"|t("seomatic"),
-        } %}
-        {% if pageContext == "field" %}
-            {% set twitterCardTypes = { "": ""} | merge(twitterCardTypes) %}
-        {% endif %}
+            {# This has to be here because different Twitter Card types have different sizes for image transforms #}
+            {% set twitterCardTypes = {
+                summary: "Summary Card"|t("seomatic"),
+                summary_large_image: "Summary Card with Large Image"|t("seomatic"),
+                app: "App Card"|t("seomatic"),
+                player: "Player Card"|t("seomatic"),
+            } %}
+            {% if pageContext == "field" %}
+                {% set twitterCardTypes = { "": ""} | merge(twitterCardTypes) %}
+            {% endif %}
 
-        {% namespace "metaGlobalVars" %}
-            {{ forms.selectField({
-                label: "Twitter Card Type"|t("seomatic"),
-                instructions: "With Twitter Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic"),
-                id: "twitterCard",
-                name: "twitterCard",
-                options: twitterCardTypes,
-                value: metaGlobalVars.twitterCard,
-                errors: metaGlobalVars.getErrors("twitterCard"),
-            }) }}
-        {% endnamespace %}
+            {% namespace "metaGlobalVars" %}
+                {{ forms.selectField({
+                    label: "X (Twitter) Card Type"|t("seomatic"),
+                    instructions: "With X (Twitter) Cards, you can attach rich photos and information to Tweets that drive traffic to your website. Users who Tweet links to your content will have a 'Card' added to the Tweet that’s visible to all of their followers."|t("seomatic"),
+                    id: "twitterCard",
+                    name: "twitterCard",
+                    options: twitterCardTypes,
+                    value: metaGlobalVars.twitterCard,
+                    errors: metaGlobalVars.getErrors("twitterCard"),
+                }) }}
+            {% endnamespace %}
 
-        {% include "seomatic/settings/_includes/twitter-image-partial.twig" %}
-    </div>
-{% endif %}
+            {% include "seomatic/settings/_includes/twitter-image-partial.twig" %}
+        </div>
+    {% endif %}
 
-{############### SEO Image Description ###############}
+    {# ############## SEO Image Description ############## #}
 
-{% if field is not defined or 'seoImageDescription' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_seoImageDescription.twig" %}
-{% endif %}
+    {% if field is not defined or 'seoImageDescription' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_seoImageDescription.twig" %}
+    {% endif %}
 
-{############### Robots ###############}
+    {# ############## Robots ############## #}
 
-{% if field is not defined or 'robots' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_robots.twig" %}
-{% endif %}
+    {% if field is not defined or 'robots' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_robots.twig" %}
+    {% endif %}
 
-{############### Canonical URL ###############}
+    {# ############## Canonical URL ############## #}
 
-{% if field is not defined or 'canonicalUrl' in field.generalEnabledFields %}
-    {% include "seomatic/settings/_includes/fields/_canonicalUrl.twig" %}
-{% endif %}
+    {% if field is not defined or 'canonicalUrl' in field.generalEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_canonicalUrl.twig" %}
+    {% endif %}
 </fieldset>

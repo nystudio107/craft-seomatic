@@ -8,7 +8,7 @@
 <div class="preview-column">
     <div class="displaypreview" style="{{ displayPreviewInlineStyles ?? '' }}">
         {% if showSeoTitleNames %}
-            <h4 class="metadata-title-separator"><span>Twitter</span></h4>
+            <h4 class="metadata-title-separator"><span>X (Twitter)</span></h4>
         {% endif %}
         {% set lg = false %}
         {% if seomatic.meta.twitterCard == "summary_large_image" %}
@@ -20,14 +20,8 @@
                    rel="noopener" target="_blank">
                     <div
                         class="card-seo-twitter__image js-preview-image {{ previewElementId }}-TwitterCard-image-wrapper"></div>
-                    <div class="card-seo-twitter__text">
-                        <span class="card-seo-twitter__title js-preview-title">
-                            {{ (twitterTitleArray.content ?? "") }}
-                        </span>
-                        <span class="card-seo-twitter__description js-preview-description">
-                            {{ (twitterDescriptionArray.content ?? "") }}
-                        </span>
-                        <span class="card-seo-twitter__link js-preview-domain">
+                    <div class="card-seo-twitter__text card-seo-twitter__text-large">
+                        <span class="card-seo-twitter__link js-preview-domain card-seo-twitter__text-overlay">
                             {{ seomatic.helper.siteUrl("/") | replace({'http://': ''}) | replace({'https://': ''})  | replace({'/': ''}) }}
                         </span>
                     </div>

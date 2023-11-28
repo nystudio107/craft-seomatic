@@ -80,7 +80,7 @@ export default {
   },
   mounted() {
     this.componentValue = this.jsonValue;
-    this.$refs.robotsselect.$on('input', (value, instance) => {
+    this.$refs.robotsselect.$on('input', (value) => {
       if (typeof value === 'undefined' || value.length === 0) {
         value = ['all'];
       }

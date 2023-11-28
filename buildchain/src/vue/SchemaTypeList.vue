@@ -94,7 +94,7 @@ export default {
     }
   },
   watch: {
-    schemaName: function (value) {
+    schemaName: function () {
       let action = 'get-type-info';
       const api = Craft.getActionUrl('seomatic/json-ld/' + action + '?schemaType=' + this.schemaName);
       this.axios.get(api).then((response) => {
@@ -117,7 +117,7 @@ export default {
         this.options = response.data;
       }
     });
-    this.$refs.treeselect.$on('input', (value, instance) => {
+    this.$refs.treeselect.$on('input', (value) => {
       if (value === undefined) {
         this.schemaName = null;
       } else {

@@ -169,8 +169,12 @@ class Sitemap
                         $robotsEnabled = $metaBundle->metaGlobalVars->robots !== 'none' &&
                             $metaBundle->metaGlobalVars->robots !== 'noindex';
                     }
+                    $enabled = true;
+                    if (Seomatic::$craft34) {
+                        $enabled = $element->getEnabledForSite($metaBundle->sourceSiteId);
+                    }
                     // Only add in a sitemap entry if it meets our criteria
-                    if ($path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
+                    if ($enabled && $path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
                         // Get the url and canonicalUrl
                         try {
                             $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
@@ -233,9 +237,13 @@ class Sitemap
                                             $altSourceSiteId
                                         );
                                         if ($altMetaBundle) {
+                                            $altEnabled = true;
+                                            if (Seomatic::$craft34) {
+                                                $altEnabled = $altElement->getEnabledForSite($altMetaBundle->sourceSiteId);
+                                            }
                                             // Make sure this entry isn't disabled
                                             self::combineFieldSettings($altElement, $altMetaBundle);
-                                            if ($altMetaBundle->metaSitemapVars->sitemapUrls) {
+                                            if ($altEnabled && $altMetaBundle->metaSitemapVars->sitemapUrls) {
                                                 try {
                                                     $altUrl = UrlHelper::siteUrl($altElement->url, null, null, $altSourceId);
                                                 } catch (Exception $e) {

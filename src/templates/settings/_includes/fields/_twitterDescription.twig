@@ -4,7 +4,7 @@
 {% set additionalVars = {
     'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterDescription"),
     'wrapperClass': 'seomatic-textSourceWrapper',
-    'fieldLabel': "Twitter Description Source"|t("seomatic"),
+    'fieldLabel': "X (Twitter) Description Source"|t("seomatic"),
     'labelFor': 'metaBundleSettings-twitterDescriptionSource',
     'settingName': 'twitterDescription'
 } %}
@@ -13,7 +13,7 @@
     {% macro twitterDescriptionField(textOptions, textFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
-            <p>{{ "Twitter descriptions are displayed below the Twitter Title in your Twitter Cards. Use them to provide a summary of what your page is about."|t("seomatic") }}</p>
+            <p>{{ "X (Twitter) descriptions are displayed below the X (Twitter) Title in your X (Twitter) Cards. Use them to provide a summary of what your page is about."|t("seomatic") }}</p>
         </div>
 
         {% import "_includes/forms" as forms %}

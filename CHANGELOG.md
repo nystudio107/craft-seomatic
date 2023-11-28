@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 3.4.67 - 2023.11.28
+### Added
+* Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+* The sitemaps now check `enabledForSite` to determine whether elements should be included in the sitemap ([#1388](https://github.com/nystudio107/craft-seomatic/issues/1388))
+
+### Changed
+* Remove vestigial `queue` option from the console command
+* Rebrand `Twitter` to `X (Twitter)` in all user-displayed text
+* Updated the X (Twitter) large image previews to reflect the new style in X (Twitter)
+
+### Fixed
+* Fixed an issue where the **Truncate Description Tags** toggle did not work as expected ([#1386](https://github.com/nystudio107/craft-seomatic/issues/1386))
+* Fixed an issue where the frontend SEO preview URLs could be wrong if you're using the Site URL Override feature ([#950](https://github.com/nystudio107/craft-seomatic/issues/950#issuecomment-1829947536))
+
 ## 3.4.66 - 2023.11.16
 ### Fixed
 * Only try the `getMatchedElement()` optimization when it's not a console request, and surround it with `try/catch` to catch any potentially thrown exceptions ([#1384](https://github.com/nystudio107/craft-seomatic/issues/1384))
