@@ -12,6 +12,7 @@
 
 ### Fixed
 * Fixed an issue where the **Truncate Description Tags** toggle did not work as expected ([#1386](https://github.com/nystudio107/craft-seomatic/issues/1386))
+* Fixed an issue where the frontend SEO preview URLs could be wrong if you're using the Site URL Override feature ([#950](https://github.com/nystudio107/craft-seomatic/issues/950#issuecomment-1829947536))
 
 ## 3.4.66 - 2023.11.16
 ### Fixed
