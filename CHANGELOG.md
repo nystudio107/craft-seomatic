@@ -3,6 +3,7 @@
 ## 4.0.36 - UNRELEASED
 ### Added
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+* The sitemaps now check `enabledForSite` to determine whether elements should be included in the sitemap ([#1388](https://github.com/nystudio107/craft-seomatic/issues/1388))
 
 ### Changed
 * Remove vestigial `queue` option from the console command
