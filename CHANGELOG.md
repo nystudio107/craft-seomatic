@@ -3,6 +3,7 @@
 ## 3.4.68 - UNRELEASED
 ### Changed
 * If the Site URL Override feature is used, pass along the parameters, too, when building the URL ([#950](https://github.com/nystudio107/craft-seomatic/issues/950))
+* Removed the automatic Google Sitemap ping endpoint, since [Google has deprecated it and will be removing it entirely soon](https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping) ([#1392](https://github.com/nystudio107/craft-seomatic/issues/1392))
 
 ## 3.4.67 - 2023.11.28
 ### Added
