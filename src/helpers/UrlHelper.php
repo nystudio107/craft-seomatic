@@ -51,7 +51,7 @@ class UrlHelper extends CraftUrlHelper
                 $url = rtrim($url, '/');
             }
 
-            return $url;
+            return DynamicMeta::sanitizeUrl(parent::urlWithParams($url, $params), false, false);
         }
 
         return DynamicMeta::sanitizeUrl(parent::siteUrl($path, $params, $scheme, $siteId), false, false);
