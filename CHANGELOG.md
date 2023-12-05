@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.37 - UNRELEASED
+### Changed
+* If the Site URL Override feature is used, pass along the parameters, too, when building the URL ([#950](https://github.com/nystudio107/craft-seomatic/issues/950))
+
 ## 4.0.36 - 2023.11.28
 ### Added
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
