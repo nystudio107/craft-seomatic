@@ -334,7 +334,11 @@ class DynamicMeta
             Craft::error($e->getMessage(), __METHOD__);
         }
         if (!empty(Seomatic::$settings->siteUrlOverride)) {
-            $siteUrl = Seomatic::$settings->siteUrlOverride;
+            try {
+                $siteUrl = UrlHelper::getSiteUrlOverrideSetting($siteId);
+            } catch (\Throwable $e) {
+                // That's okay
+            }
         }
         $siteUrl = $siteUrl ?: '/';
         /** @var  $crumbs BreadcrumbList */
