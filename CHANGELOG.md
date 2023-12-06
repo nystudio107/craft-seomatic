@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.68 - UNRELEASED
+### Added
+* Allow the `config/seomatic.php` `siteUrlOverride` to be set to either a string, or an array of site URLs, indexed by the site handle for overriding complex headless multi-site Craft setups ([#1376](https://github.com/nystudio107/craft-seomatic/issues/1376))
+
 ### Changed
 * If the Site URL Override feature is used, pass along the parameters, too, when building the URL ([#950](https://github.com/nystudio107/craft-seomatic/issues/950))
 * Removed the automatic Google Sitemap ping endpoint, since [Google has deprecated it and will be removing it entirely soon](https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping) ([#1392](https://github.com/nystudio107/craft-seomatic/issues/1392))
