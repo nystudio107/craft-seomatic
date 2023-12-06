@@ -9,8 +9,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\base\SeoElementInterface;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -81,7 +79,7 @@ return [
     // If `devMode` is on, prefix the <title> with this string
     'devModeTitlePrefix' => '&#x1f6a7; ',
 
-     //  Prefix the Control Panel <title> with this string
+    //  Prefix the Control Panel <title> with this string
     'cpTitlePrefix' => '&#x2699; ',
 
     // If `devMode` is on, prefix the Control Panel <title> with this string
@@ -141,6 +139,12 @@ return [
     // SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you
     // are using it in a non-standard environment, such as a headless GraphQL or
     // ElementAPI server, you can override what it uses for the `siteUrl` below.
+    // This can be either a simple string, or an array of strings indexed by the site
+    // handle, for multi-site setups. e.g.:
+    // 'siteUrlOverride' => [
+    //     'default' => 'http://example.com/',
+    //     'spanish' => 'http://example.com/es/',
+    // ],
     'siteUrlOverride' => '',
 
     // The duration of the SEOmatic meta cache in seconds. Null means always cached until explicitly broken

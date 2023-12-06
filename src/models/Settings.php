@@ -200,11 +200,16 @@ class Settings extends VarsModel
     public $generatorEnabled = true;
 
     /**
-     * @var string
+     * @var string|array
      * SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you
      * are using it in a non-standard environment, such as a headless GraphQL or
      * ElementAPI server, you can override what it uses for the `siteUrl` below.
-     */
+     * This can be either a simple string, or an array of strings indexed by the site
+     * handle, for multi-site setups. e.g.:
+     * 'siteUrlOverride' => [
+     *     'default' => 'http://example.com/',
+     *     'spanish' => 'http://example.com/es/',
+     * ],     */
     public $siteUrlOverride = '';
 
     /**
@@ -308,7 +313,7 @@ class Settings extends VarsModel
             ['maxTitleLength', 'default', 'value' => 70],
             ['maxDescriptionLength', 'integer', 'min' => 10],
             ['maxDescriptionLength', 'default', 'value' => 155],
-            ['siteUrlOverride', 'string'],
+            ['siteUrlOverride', 'safe'],
             ['siteUrlOverride', 'default', 'value' => ''],
             [
                 [
