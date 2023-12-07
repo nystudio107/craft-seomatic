@@ -101,6 +101,21 @@ Event::on(MetaContainers::class, MetaContainers::EVENT_INVALIDATE_CONTAINER_CACH
 });
 ```
 
+### IncludeSitemapEntryEvent
+
+    const EVENT_INCLUDE_SITEMAP_ENTRY = 'IncludeSitemapEntryEvent';
+
+The event that is triggered when an entry is about to be included in a sitemap.
+
+```php
+    use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
+    use nystudio107\seomatic\helpers\Sitemap;
+    use yii\base\Event;
+    Event::on(Sitemap::class, Sitemap::EVENT_INCLUDE_SITEMAP_ENTRY, function(IncludeSitemapEntryEvent $e) {
+        $e->include = false;
+    });
+```
+
 ### RegisterSitemapUrlsEvent
 
     const EVENT_REGISTER_SITEMAP_URLS = 'registerSitemapUrls';
