@@ -2,6 +2,7 @@
 
 ## 4.0.37 - UNRELEASED
 ### Added
+* Added a `EVENT_INCLUDE_SITEMAP_ENTRY` event to allow plugins or modules to determine whether entries should be added to the sitemap or not ([#1393](https://github.com/nystudio107/craft-seomatic/issues/1393))
 * Allow the `config/seomatic.php` `siteUrlOverride` to be set to either a string, or an array of site URLs, indexed by the site handle for overriding complex headless multi-site Craft setups ([#1376](https://github.com/nystudio107/craft-seomatic/issues/1376))
 
 ### Changed
