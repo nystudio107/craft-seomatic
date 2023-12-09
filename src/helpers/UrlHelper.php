@@ -73,8 +73,7 @@ class UrlHelper extends CraftUrlHelper
         $overlap = 0;
         $url = rtrim($url, '/');
         $path = ltrim($path, '/');
-        $urlLength = strlen($url);
-        $urlOffset = $urlLength;
+        $urlOffset = strlen($url);
         $pathLength = strlen($path);
         $pathOffset = 0;
         while ($urlOffset > 0 && $pathOffset < $pathLength) {
