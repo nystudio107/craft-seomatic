@@ -45,7 +45,7 @@ class UrlHelper extends CraftUrlHelper
             // Extract out just the path part
             $parts = self::decomposeUrl($path);
             $path = $parts['path'] . $parts['suffix'];
-            $url = rtrim($siteUrl, '/') . '/' . ltrim($path, '/');
+            $url = self::mergeUrlWithPath($siteUrl, $path);
             // Handle trailing slashes properly for generated URLs
             $generalConfig = Craft::$app->getConfig()->getGeneral();
             if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
@@ -59,6 +59,33 @@ class UrlHelper extends CraftUrlHelper
         }
 
         return DynamicMeta::sanitizeUrl(parent::siteUrl($path, $params, $scheme, $siteId), false, false);
+    }
+
+    /**
+     * Merge the $url and $path together, combining any overlapping path segments
+     *
+     * @param string $url
+     * @param string $path
+     * @return string
+     */
+    public static function mergeUrlWithPath(string $url, string $path): string
+    {
+        $overlap = 0;
+        $url = rtrim($url, '/');
+        $path = ltrim($path, '/');
+        $urlLength = strlen($url);
+        $urlOffset = $urlLength;
+        $pathLength = strlen($path);
+        $pathOffset = 0;
+        while ($urlOffset > 0 && $pathOffset < $pathLength) {
+            $urlOffset--;
+            $pathOffset++;
+            if (str_starts_with($path, substr($url, $urlOffset, $pathOffset))) {
+                $overlap = $pathOffset;
+            }
+        }
+
+        return $url . '/' . ltrim(substr($path, $overlap), '/');
     }
 
     /**
