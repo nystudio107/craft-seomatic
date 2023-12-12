@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 3.4.68 - 2023.12.12
+### Added
+* SEOmatic now requires at least Craft CMS `^3.2.0` or later
+* Added a `EVENT_INCLUDE_SITEMAP_ENTRY` event to allow plugins or modules to determine whether entries should be added to the sitemap or not ([#1393](https://github.com/nystudio107/craft-seomatic/issues/1393))
+* Allow the `config/seomatic.php` `siteUrlOverride` to be set to either a string, or an array of site URLs, indexed by the site handle for overriding complex headless multi-site Craft setups ([#1376](https://github.com/nystudio107/craft-seomatic/issues/1376))
+
+### Changed
+* Switch over to listening for element changes via `Element::EVENT_AFTER_PROPAGATE` events instead of `Elements::EVENT_AFTER_SAVE_ELEMENT` and have it check the `Element::$resaving` attribute instead of `Model::$scenario` = `SCENARIO_ESSENTIALS` to determine whether sitemap queue jobs should be created ([#1388](https://github.com/nystudio107/craft-seomatic/issues/1388))
+* If the Site URL Override feature is used, pass along the parameters, too, when building the URL ([#950](https://github.com/nystudio107/craft-seomatic/issues/950))
+* Removed the automatic Google Sitemap ping endpoint, since [Google has deprecated it and will be removing it entirely soon](https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping) ([#1392](https://github.com/nystudio107/craft-seomatic/issues/1392))
+
 ## 3.4.67 - 2023.11.28
 ### Added
 * Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain

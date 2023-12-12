@@ -20,6 +20,7 @@ use craft\elements\User;
 use craft\errors\SiteNotFoundException;
 use craft\events\DefineGqlTypeFieldsEvent;
 use craft\events\ElementEvent;
+use craft\events\ModelEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
@@ -464,17 +465,17 @@ class Seomatic extends Plugin
                 $event->types[] = Seomatic_MetaField::class;
             }
         );
-        // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
+        // Handler: Element::EVENT_AFTER_PROPAGATE
         Event::on(
-            Elements::class,
-            Elements::EVENT_AFTER_SAVE_ELEMENT,
-            function (ElementEvent $event) {
+            Element::class,
+            Element::EVENT_AFTER_PROPAGATE,
+            static function (ModelEvent $event) {
                 Craft::debug(
-                    'Elements::EVENT_AFTER_SAVE_ELEMENT',
+                    'Element::EVENT_AFTER_PROPAGATE',
                     __METHOD__
                 );
                 /** @var  $element Element */
-                $element = $event->element;
+                $element = $event->sender;
                 self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
                     $event->isNew
