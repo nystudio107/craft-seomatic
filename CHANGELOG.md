@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.68 - UNRELEASED
+## 3.4.68 - 2023.12.12
 ### Added
 * SEOmatic now requires at least Craft CMS `^3.2.0` or later
 * Added a `EVENT_INCLUDE_SITEMAP_ENTRY` event to allow plugins or modules to determine whether entries should be added to the sitemap or not ([#1393](https://github.com/nystudio107/craft-seomatic/issues/1393))
