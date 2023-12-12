@@ -5,6 +5,7 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
+use craft\base\Event;
 use craft\console\Application as ConsoleApplication;
 use craft\db\Paginator;
 use craft\elements\Asset;
@@ -13,6 +14,7 @@ use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\jobs\GenerateSitemap;
@@ -30,6 +32,29 @@ use yii\helpers\Html;
  */
 class Sitemap
 {
+    /**
+     * @event IncludeSitemapEntryEvent The event that is triggered when an entry is
+     * about to be included in a sitemap
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
+     * use nystudio107\seomatic\helpers\Sitemap;
+     * use yii\base\Event;
+     * Event::on(Sitemap::class, Sitemap::EVENT_INCLUDE_SITEMAP_ENTRY, function(IncludeSitemapEntryEvent $e) {
+     *     $e->include = false;
+     * });
+     * ```
+     */
+    const EVENT_INCLUDE_SITEMAP_ENTRY = 'includeSitemapEntry';
+
+    /**
+     * Generate a sitemap with the passed in $params
+     *
+     * @param array $params
+     * @return void
+     * @throws \craft\errors\SiteNotFoundException
+     */
     public static function generateSitemap(array $params)
     {
         /** @var \craft\queue\Queue $queue */
@@ -170,8 +195,15 @@ class Sitemap
                             $metaBundle->metaGlobalVars->robots !== 'noindex';
                     }
                     $enabled = $element->getEnabledForSite($metaBundle->sourceSiteId);
+                    $enabled = $enabled && $path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled;
+                    $event = new IncludeSitemapEntryEvent([
+                        'include' => $enabled,
+                        'element' => $element,
+                        'metaBundle' => $metaBundle,
+                    ]);
+                    Event::trigger(self::class, self::EVENT_INCLUDE_SITEMAP_ENTRY, $event);
                     // Only add in a sitemap entry if it meets our criteria
-                    if ($enabled && $path !== null && $metaBundle->metaSitemapVars->sitemapUrls && $robotsEnabled) {
+                    if ($event->include) {
                         // Get the url and canonicalUrl
                         try {
                             $url = UrlHelper::siteUrl($path, null, null, $metaBundle->sourceSiteId);
