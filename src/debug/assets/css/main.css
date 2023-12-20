@@ -149,7 +149,7 @@ th.seomatic-property:hover > div.seomatic-property-copy-wrapper {
     cursor: pointer;
 }
 
-div.seomatic-property-copy-wrapper svg {
+div.seomatic-property-copy-wrapper img {
     pointer-events: none;
     height: 20px;
     left: 0;
