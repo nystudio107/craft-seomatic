@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\models\metatag;
 use Craft;
 use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\services\Helper as SeomaticHelper;
+use yii\web\BadRequestHttpException;
 
 /**
  * @author    nystudio107
@@ -86,10 +87,19 @@ class RobotsTag extends MetaTag
             // Set meta robots tag to `none` for http status codes >= 400
             $request = Craft::$app->getRequest();
             $response = Craft::$app->getResponse();
-            if (!$request->isConsoleRequest
-                && $response->statusCode >= 400
-            ) {
-                $data['content'] = 'none';
+            if (!$request->isConsoleRequest) {
+                if ($response->statusCode >= 400) {
+                    $data['content'] = 'none';
+                }
+                if ($request->getIsCpRequest()) {
+                    $data['content'] = 'none';
+                }
+                try {
+                    if ($request->getToken() !== null) {
+                        $data['content'] = 'none';
+                    }
+                } catch (BadRequestHttpException $e) {
+                }
             }
             // Set meta robots tag to `none` if this is any kind of Craft preview
             if (SeomaticHelper::isPreview()) {
