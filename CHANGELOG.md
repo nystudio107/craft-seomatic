@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 4.0.38 - UNRELEASED
+### Fixed
+* Fixed overly large debug toolbar pane response size due to repeating inline SVG icons
+* Ensure that CP requests and Tokenized requests have `robots` tag & header set to `none` ([#1394](https://github.com/nystudio107/craft-seomatic/issues/1394))
+
 ## 4.0.37 - 2023.12.12
 ### Added
 * Added a `EVENT_INCLUDE_SITEMAP_ENTRY` event to allow plugins or modules to determine whether entries should be added to the sitemap or not ([#1393](https://github.com/nystudio107/craft-seomatic/issues/1393))
