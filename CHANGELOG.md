@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.4.69 - UNRELEASED
+### Fixed
+* Fixed overly large debug toolbar pane response size due to repeating inline SVG icons
+* Ensure that CP requests and Tokenized requests have `robots` tag & header set to `none` ([#1394](https://github.com/nystudio107/craft-seomatic/issues/1394))
+
 ## 3.4.68 - 2023.12.12
 ### Added
 * SEOmatic now requires at least Craft CMS `^3.2.0` or later
