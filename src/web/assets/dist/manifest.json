@@ -14,7 +14,7 @@
     "src": "src/js/content-seo.js"
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard-_FYjRlxc.js",
+    "file": "assets/dashboard-VeePx6HY.js",
     "imports": [
       "__plugin-vue2_normalizer-GTIfvTtm.js"
     ],
@@ -25,7 +25,7 @@
     "css": [
       "assets/seomatic-meta-5Xhz8OwB.css"
     ],
-    "file": "assets/seomatic-meta-_MISoTat.js",
+    "file": "assets/seomatic-meta-VrUgd3Wx.js",
     "imports": [
       "__plugin-vue2_normalizer-GTIfvTtm.js"
     ],
@@ -34,9 +34,9 @@
   },
   "src/js/seomatic.js": {
     "css": [
-      "assets/seomatic-Oe0o_wUu.css"
+      "assets/seomatic-bxoB8j_R.css"
     ],
-    "file": "assets/seomatic-TIRao9FJ.js",
+    "file": "assets/seomatic-lfI0nDSS.js",
     "isEntry": true,
     "src": "src/js/seomatic.js"
   }
