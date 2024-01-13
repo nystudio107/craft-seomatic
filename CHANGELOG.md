@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.0.38 - UNRELEASED
+### Changed
+* Updated docs to use node 20 & a new sitemap plugin
+
 ### Fixed
 * Fixed overly large debug toolbar pane response size due to repeating inline SVG icons
 * Ensure that CP requests and Tokenized requests have `robots` tag & header set to `none` ([#1394](https://github.com/nystudio107/craft-seomatic/issues/1394))
