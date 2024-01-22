@@ -1,6 +1,6 @@
 name: Build and Deploy Docs
 env:
-  DOCS_DEST_DIR: /seomatic/
+  DOCS_DEST_DIR: /seomatic/v4/
 on:
   push:
     branches:
