@@ -50,7 +50,8 @@ export default defineConfig({
       {text: 'Issues', link: 'https://github.com/nystudio107/craft-seomatic/issues'},
       {
         text: 'v3', items: [
-          {text: 'v4', link: 'https://nystudio107.com/docs/seomatic/'},
+          {text: 'v5', link: 'https://nystudio107.com/docs/seomatic/'},
+          {text: 'v4', link: 'https://nystudio107.com/docs/seomatic/v4/'},
           {text: 'v3', link: '/'},
         ],
       },
