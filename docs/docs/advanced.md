@@ -208,7 +208,7 @@ SEOmatic allows you to fetch the meta information for any page via a controller 
 
 ### GraphQL Query support
 
-To retrieve SEOmatic container data through [GraphQL in Craft CMS 4](https://craftcms.com/docs/4.x/graphql.html#sending-api-requests), use the `seomatic` field in your GraphQL query. Each parameter will return that container’s data, ready for insertion into the DOM.
+To retrieve SEOmatic container data through [GraphQL in Craft CMS 5](https://craftcms.com/docs/4.x/graphql.html#sending-api-requests), use the `seomatic` field in your GraphQL query. Each parameter will return that container’s data, ready for insertion into the DOM.
 
 #### Stand-alone GraphQL queries
 

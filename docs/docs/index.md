@@ -1,13 +1,13 @@
 ---
-title: SEOmatic plugin for Craft CMS 4.x
-description: Documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
+title: SEOmatic plugin for Craft CMS 5
+description: Documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 5.
 ---
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/v4) 
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=v4)](https://scrutinizer-ci.com/code-intelligence)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=v5)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v5) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=v5)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v5) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=v5)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/v5) 
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=v5)](https://scrutinizer-ci.com/code-intelligence)
 
-# SEOmatic plugin for Craft CMS 4.x
+# SEOmatic plugin for Craft CMS 5.x
 
-SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 4. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
+SEOmatic facilitates [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance) & implementation for Craft CMS 5. It is a turnkey SEO system that is comprehensive, powerful, and flexible.
 
 ![Screenshot](./resources/img/plugin-banner.jpg)
 
@@ -23,7 +23,7 @@ SEOmatic is the SEO tool that the SEO experts at [Moz.com](https://moz.com/) and
 
 ## Requirements
 
-This plugin requires Craft CMS 4.0.0 or later.
+This plugin requires Craft CMS 5.0.0 or later.
 
 ## Installation
 
