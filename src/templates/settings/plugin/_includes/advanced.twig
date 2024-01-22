@@ -34,17 +34,30 @@
             errors: settings.getErrors("lowercaseCanonicalUrl"),
         }) }}
 
-        {{ forms.autosuggestField({
-            label: "Site URL Override"|t("seomatic"),
-            instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
-            suggestEnvVars: true,
-            suggestAliases: true,
-            id: "siteUrlOverride",
-            name: "siteUrlOverride",
-            value: settings.siteUrlOverride,
-            warning: configWarning("siteUrlOverride", "seomatic"),
-            errors: settings.getErrors("siteUrlOverride"),
-        }) }}
+        {% if settings.siteUrlOverride is iterable %}
+            <div class="field">
+                <div class="heading">
+                    <label>
+                        {{ "Site URL Override"|t("seomatic") }}
+                    </label>
+                </div>
+                <div class="instructions">
+                    <p>{{ "The Site URL Override is overriden as an array for a multi-site setup in the `config/seomatic.php` file."|t("seomatic") }}</p>
+                </div>
+            </div>
+        {% else %}
+            {{ forms.autosuggestField({
+                label: "Site URL Override"|t("seomatic"),
+                instructions: "SEOmatic uses the Craft `siteUrl` to generate the external URLs.  If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl` below."|t("seomatic"),
+                suggestEnvVars: true,
+                suggestAliases: true,
+                id: "siteUrlOverride",
+                name: "siteUrlOverride",
+                value: settings.siteUrlOverride,
+                warning: configWarning("siteUrlOverride", "seomatic"),
+                errors: settings.getErrors("siteUrlOverride"),
+            }) }}
+        {% endif %}
 
         {{ forms.selectField({
             label: "Meta Cache Duration"|t("seomatic"),

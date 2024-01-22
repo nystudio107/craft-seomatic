@@ -21,6 +21,7 @@ use craft\elements\User;
 use craft\errors\SiteNotFoundException;
 use craft\events\DefineGqlTypeFieldsEvent;
 use craft\events\ElementEvent;
+use craft\events\ModelEvent;
 use craft\events\PluginEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\events\RegisterComponentTypesEvent;
@@ -35,7 +36,6 @@ use craft\feedme\Plugin as FeedMe;
 use craft\feedme\services\Fields as FeedMeFields;
 use craft\gql\TypeManager;
 use craft\helpers\StringHelper;
-use craft\helpers\UrlHelper;
 use craft\services\Elements;
 use craft\services\Fields;
 use craft\services\Gql;
@@ -43,6 +43,7 @@ use craft\services\Plugins;
 use craft\services\Sites as SitesService;
 use craft\services\UserPermissions;
 use craft\utilities\ClearCaches;
+use craft\web\Application;
 use craft\web\UrlManager;
 use craft\web\View;
 use nystudio107\codeeditor\autocompletes\EnvironmentVariableAutocomplete;
@@ -52,6 +53,7 @@ use nystudio107\codeeditor\services\AutocompleteService;
 use nystudio107\codeeditor\validators\TwigTemplateValidator;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
+use nystudio107\seomatic\debug\panels\SeomaticPanel;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\gql\arguments\SeomaticArguments;
@@ -59,19 +61,21 @@ use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\gql\queries\SeomaticQuery;
 use nystudio107\seomatic\gql\resolvers\SeomaticResolver;
 use nystudio107\seomatic\gql\types\SeomaticEnvironmentType;
-use nystudio107\seomatic\helpers\Environment;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\Schema as SchemaHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\integrations\feedme\SeoSettings as SeoSettingsFeedMe;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\Settings;
 use nystudio107\seomatic\services\ServicesTrait;
 use nystudio107\seomatic\twigextensions\SeomaticTwigExtension;
 use nystudio107\seomatic\variables\SeomaticVariable;
+use yii\base\Application as BaseApplication;
 use yii\base\Event;
 use yii\base\View as BaseView;
+use yii\debug\Module;
 
 /** @noinspection MissingPropertyAnnotationsInspection */
 
@@ -512,17 +516,17 @@ class Seomatic extends Plugin
                 $event->types[] = Seomatic_MetaField::class;
             }
         );
-        // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
+        // Handler: Element::EVENT_AFTER_PROPAGATE
         Event::on(
-            Elements::class,
-            Elements::EVENT_AFTER_SAVE_ELEMENT,
-            static function (ElementEvent $event) {
+            Element::class,
+            Element::EVENT_AFTER_PROPAGATE,
+            static function (ModelEvent $event) {
                 Craft::debug(
-                    'Elements::EVENT_AFTER_SAVE_ELEMENT',
+                    'Element::EVENT_AFTER_PROPAGATE',
                     __METHOD__
                 );
                 /** @var  $element Element */
-                $element = $event->element;
+                $element = $event->sender;
                 self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
                     $event->isNew
@@ -572,6 +576,22 @@ class Seomatic extends Plugin
                 }
             );
         }
+        // Yii2 Debug Toolbar support
+        Event::on(
+            Application::class,
+            BaseApplication::EVENT_BEFORE_REQUEST,
+            static function () {
+                /** @var Module|null $debugModule */
+                $debugModule = Craft::$app->getModule('debug');
+
+                if ($debugModule) {
+                    $debugModule->panels['seomatic'] = new SeomaticPanel([
+                        'id' => 'seomatic',
+                        'module' => $debugModule,
+                    ]);
+                }
+            }
+        );
         // FeedMe Support
         if (class_exists(FeedMe::class)) {
             Event::on(

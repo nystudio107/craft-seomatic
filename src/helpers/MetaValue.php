@@ -113,8 +113,9 @@ class MetaValue
      *                              this array
      * @param bool $parseAsTwig Whether items should be parsed as a Twig
      *                              template in this array
+     * @param bool $recursive Whether to recursively parse the array
      */
-    public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true)
+    public static function parseArray(array &$metaArray, bool $resolveAliases = true, bool $parseAsTwig = true, bool $recursive = false)
     {
         // Do this here as well so that parseString() won't potentially be constantly switching modes
         // while parsing through the array
@@ -128,6 +129,9 @@ class MetaValue
             }
         }
         foreach ($metaArray as $key => $value) {
+            if ($recursive && is_array($value)) {
+                self::parseArray($value, $resolveAliases, $parseAsTwig, $recursive);
+            }
             $shouldParse = $parseAsTwig;
             $shouldAlias = $resolveAliases;
             $tries = self::MAX_PARSE_TRIES;
@@ -215,11 +219,15 @@ class MetaValue
             if ($reflector) {
                 $refHandle = strtolower($reflector->getShortName());
             }
+            $elementRefHandle = $element::refHandle();
             // Use the SeoElement interface to get the refHandle
             $metaBundleSourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundleSourceType);
+            if ($seoElement) {
+                $elementRefHandle = $seoElement::getElementRefHandle();
+            }
             // Prefer $element::refHandle()
-            $matchedElementType = $seoElement::getElementRefHandle() ?? $refHandle ?? 'entry';
+            $matchedElementType = $elementRefHandle ?? $refHandle ?? 'entry';
             if ($matchedElementType) {
                 self::$templateObjectVars[$matchedElementType] = $element;
                 self::$templatePreviewVars[$matchedElementType] = $element;

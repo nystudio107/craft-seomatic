@@ -66,7 +66,7 @@ return [
                     'type' => 'Offer',
                     'url' => '{{ seomatic.meta.canonicalUrl }}',
                     'price' => '{{ product.getDefaultVariant().price|number_format(2, ".", "") }}',
-                    'priceCurrency' => '',
+                    'priceCurrency' => '{{ craft.shopify.store.currency ?? "" }}',
                     'offeredBy' => [
                         'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                     ],

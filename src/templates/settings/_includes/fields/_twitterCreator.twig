@@ -3,7 +3,7 @@
 
 {% set additionalVars = {
     'isInherited': seomatic.helper.isInherited(metaGlobalVars, "twitterCreator"),
-    'fieldLabel': "Twitter Creator Source"|t("seomatic"),
+    'fieldLabel': "X (Twitter) Creator Source"|t("seomatic"),
     'labelFor': 'metaGlobalVars-twitterCreatorSource',
     'wrapperClass': 'seomatic-textSourceWrapper',
     'settingName': 'twitterCreator'
@@ -13,7 +13,7 @@
     {% macro twitterCreatorField(textOptions, metaBundleSettings, metaGlobalVars, suffix) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
-            <p>{{ "Twitter username for the content creator / author, without the preceding @."|t("seomatic") }}</p>
+            <p>{{ "X (Twitter) username for the content creator / author, without the preceding @."|t("seomatic") }}</p>
         </div>
         {% import "_includes/forms" as forms %}
         {% namespace "metaBundleSettings" %}
@@ -33,7 +33,8 @@
         {% if userFieldSources is defined and userFieldSources |length %}
             {% namespace "metaBundleSettings" %}
                 <div class="heading seomatic-textSourceFromField">
-                    <label for="metaBundleSettings-twitterCreatorField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
+                    <label
+                        for="metaBundleSettings-twitterCreatorField{{ suffix }}">{{ "Source Field: "|t("seomatic") }}</label>
                     {{ forms.select({
                         id: "twitterCreatorField" ~ suffix,
                         name: "twitterCreatorField",
@@ -67,7 +68,7 @@
     {% if userFieldSources is defined and userFieldSources |length %}
         {% set textOptions = { fromUserField: "From User Field"|t("seomatic"), } | merge(textOptions) %}
     {% endif %}
-    {% set textOptions = { sameAsSiteTwitter: "Same as Site Twitter Handle"|t("seomatic"), } | merge(textOptions) %}
+    {% set textOptions = { sameAsSiteTwitter: "Same as Site X (Twitter) Handle"|t("seomatic"), } | merge(textOptions) %}
 
     {% block inheritedValues %}
         {{ _self.twitterCreatorField(textOptions, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited") }}

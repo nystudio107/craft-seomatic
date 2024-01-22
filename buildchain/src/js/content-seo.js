@@ -19,7 +19,7 @@ import ContentSeoTable from '@/vue/ContentSeoTable.vue';
 
 Vue.use(VueEvents);
 // Create our vue instance
-const vm = new Vue({
+new Vue({
   el: "#cp-nav-content",
   components: {
     'content-seo-table': ContentSeoTable,

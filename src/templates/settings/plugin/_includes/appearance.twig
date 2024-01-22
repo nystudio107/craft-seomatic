@@ -7,7 +7,7 @@
 
         {{ forms.lightswitchField({
             label: "Display Sidebar SEO Preview"|t("seomatic"),
-            instructions: "Controls whether to display the Google, Twitter, Facebook, etc. social media previews in the sidebar on entry, category, and product pages."|t("seomatic"),
+            instructions: "Controls whether to display the Google, X (Twitter), Facebook, etc. social media previews in the sidebar on entry, category, and product pages."|t("seomatic"),
             id: "displayPreviewSidebar",
             name: "displayPreviewSidebar",
             on: settings.displayPreviewSidebar,
@@ -17,7 +17,7 @@
 
         {{ forms.lightswitchField({
             label: "Add Social Media Preview Target"|t("seomatic"),
-            instructions: "Controls whether to add the Google, Twitter, Facebook, etc. social media previews as a Preview Target."|t("seomatic"),
+            instructions: "Controls whether to add the Google, X (Twitter), Facebook, etc. social media previews as a Preview Target."|t("seomatic"),
             id: "socialMediaPreviewTarget",
             name: "socialMediaPreviewTarget",
             on: settings.socialMediaPreviewTarget,
@@ -33,7 +33,7 @@
                 name: 'sidebarDisplayPreviewTypes',
                 options: {
                     'google': 'Google'|t('seomatic'),
-                    'twitter': 'Twitter'|t('seomatic'),
+                    'twitter': 'X (Twitter)'|t('seomatic'),
                     'facebook': 'Facebook'|t('seomatic'),
                     'linkedin': 'LinkedIn'|t('seomatic'),
                     'pinterest': 'Pinterest'|t('seomatic'),

@@ -67,29 +67,31 @@
 
     {% macro seoImageTransformModeField(field, imageCropModes, metaBundleSettings, suffix) %}
         {% set disabled = suffix|length > 0 %}
-        <div class="field"
-             {% if field is not null and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
-            <div class="heading">
-                <label for="metaBundleSettings-seoImageTransformMode{{ suffix }}">
-                    {{ "SEO Image Transform Mode"|t("seomatic") }}
-                </label>
-            </div>
-            <div class="instructions">
-                <p>{{ "The transform mode to use for the SEO Image Transform."|t("seomatic") }}</p>
-            </div>
-            {% import "_includes/forms" as forms %}
+        <div class="seo-image-transform-settings{% if not metaBundleSettings.seoImageTransform %} hidden{% endif %}">
+            <div class="field"
+                 {% if field is not null and 'seoImageTransformMode' not in field.generalEnabledFields %}style="display: none;"{% endif %}>
+                <div class="heading">
+                    <label for="metaBundleSettings-seoImageTransformMode{{ suffix }}">
+                        {{ "SEO Image Transform Mode"|t("seomatic") }}
+                    </label>
+                </div>
+                <div class="instructions">
+                    <p>{{ "The transform mode to use for the SEO Image Transform."|t("seomatic") }}</p>
+                </div>
+                {% import "_includes/forms" as forms %}
 
-            {% namespace "metaBundleSettings" %}
-                {{ forms.selectField({
-                    id: "seoImageTransformMode" ~ suffix,
-                    name: "seoImageTransformMode",
-                    options: imageCropModes,
-                    value: metaBundleSettings.seoImageTransformMode,
-                    warning: false,
-                    errors: metaBundleSettings.getErrors("seoImageTransformMode"),
-                    disabled: disabled,
-                }) }}
-            {% endnamespace %}
+                {% namespace "metaBundleSettings" %}
+                    {{ forms.selectField({
+                        id: "seoImageTransformMode" ~ suffix,
+                        name: "seoImageTransformMode",
+                        options: imageCropModes,
+                        value: metaBundleSettings.seoImageTransformMode,
+                        warning: false,
+                        errors: metaBundleSettings.getErrors("seoImageTransformMode"),
+                        disabled: disabled,
+                    }) }}
+                {% endnamespace %}
+            </div>
         </div>
     {% endmacro %}
 
@@ -113,6 +115,7 @@
                     warning: false,
                     errors: metaBundleSettings.getErrors("seoImageTransform"),
                     disabled: disabled,
+                    toggle: ".seo-image-transform-settings",
                 }) }}
             {% endnamespace %}
         </div>
@@ -121,7 +124,7 @@
     {% macro seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
-            <p>{{ "This is the image that will be used for display as the global website brand, as well as on Twitter Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
+            <p>{{ "This is the image that will be used for display as the global website brand, as well as on X (Twitter) Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
         </div>
 
         {% import "_includes/forms" as forms %}

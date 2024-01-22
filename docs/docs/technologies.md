@@ -64,7 +64,7 @@ Sites that are grouped together under the same Site Group will have `<link rel="
 
 To disable SEOmatic’s automatic rendering of these tags, you can do:
 ```twig
-{% do seomatic.tag.get('alternate').include(false) %}
+{% do seomatic.link.get('alternate').include(false) %}
 {% do seomatic.tag.get('og:locale:alternate').include(false) %}
 ```
 

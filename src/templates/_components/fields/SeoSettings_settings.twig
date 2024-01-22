@@ -14,7 +14,7 @@
 
 <div>
 
-    {############### Element Preview Type ###############}
+    {# ############## Element Preview Type ############## #}
 
     {{ forms.selectField({
         label: "Element Preview Type"|t("seomatic"),
@@ -24,7 +24,7 @@
         options: {
             "none": "None"|t("seomatic"),
             "google": "Google"|t("seomatic"),
-            "twitter": "Twitter"|t("seomatic"),
+            "twitter": "X (Twitter)"|t("seomatic"),
             "facebook": "Facebook"|t("seomatic"),
             "linkedin": "LinkedIn"|t("seomatic"),
             "pinterest": "Pinterest"|t("seomatic"),
@@ -35,7 +35,7 @@
         errors: field.getErrors("elementDisplayPreviewType"),
     }) }}
 
-    {############### General tab settings ###############}
+    {# ############## General tab settings ############## #}
 
     <div class="field seomatic-script-wrapper">
         <div class="seomatic-script-lightswitch">
@@ -75,13 +75,13 @@
         </div>
     </div>
 
-    {############### Twitter tab settings ###############}
+    {# ############## Twitter tab settings ############## #}
 
     <div class="field seomatic-script-wrapper">
         <div class="seomatic-script-lightswitch">
             {{ forms.lightswitchField({
-                label: "Twitter Tab"|t("seomatic"),
-                instructions: "Controls whether to display the Twitter SEO settings tab"|t("seomatic"),
+                label: "X (Twitter) Tab"|t("seomatic"),
+                instructions: "Controls whether to display the X (Twitter) SEO settings tab"|t("seomatic"),
                 id: "twitterTabEnabled",
                 name: "twitterTabEnabled",
                 on: field.twitterTabEnabled,
@@ -91,20 +91,20 @@
         </div>
         <div class="seomatic-script-container" {% if not field.twitterTabEnabled %}style="display: none;"{% endif %}>
             {{ forms.checkboxSelectField({
-                instructions: "Choose the Twitter SEO settings fields to display"|t,
+                instructions: "Choose the X (Twitter) SEO settings fields to display"|t,
                 id: 'twitterEnabledFields',
                 name: 'twitterEnabledFields',
                 options: {
                     'seoPreview': 'SEO Preview'|t('seomatic'),
-                    'twitterCardType': 'Twitter Card Type'|t('seomatic'),
-                    'twitterCreator': 'Twitter Creator'|t('seomatic'),
-                    'twitterTitle': 'Twitter Title'|t('seomatic'),
-                    'twitterSiteNamePosition': 'Twitter Site Name Position'|t('seomatic'),
-                    'twitterDescription': 'Twitter Description'|t('seomatic'),
-                    'twitterImage': 'Twitter Image'|t('seomatic'),
-                    'transformTwitterImage': 'Transform Twitter Image'|t('seomatic'),
-                    'twitterImageTransformMode': 'Twitter Image Transform Mode'|t('seomatic'),
-                    'twitterImageDescription': 'Twitter Image Description'|t('seomatic'),
+                    'twitterCardType': 'X (Twitter) Card Type'|t('seomatic'),
+                    'twitterCreator': 'X (Twitter) Creator'|t('seomatic'),
+                    'twitterTitle': 'X (Twitter) Title'|t('seomatic'),
+                    'twitterSiteNamePosition': 'X (Twitter) Site Name Position'|t('seomatic'),
+                    'twitterDescription': 'X (Twitter) Description'|t('seomatic'),
+                    'twitterImage': 'X (Twitter) Image'|t('seomatic'),
+                    'transformTwitterImage': 'Transform X (Twitter) Image'|t('seomatic'),
+                    'twitterImageTransformMode': 'X (Twitter) Image Transform Mode'|t('seomatic'),
+                    'twitterImageDescription': 'X (Twitter) Image Description'|t('seomatic'),
                 },
                 values: field.twitterEnabledFields,
                 warning: false,
@@ -114,7 +114,7 @@
     </div>
 
 
-    {############### Facebook tab settings ###############}
+    {# ############## Facebook tab settings ############## #}
 
     <div class="field seomatic-script-wrapper">
         <div class="seomatic-script-lightswitch">
@@ -152,7 +152,7 @@
     </div>
 
 
-    {############### Sitemap tab settings ###############}
+    {# ############## Sitemap tab settings ############## #}
 
     <div class="field seomatic-script-wrapper">
         <div class="seomatic-script-lightswitch">

@@ -1,13 +1,63 @@
 # SEOmatic Changelog
 
-## 4.0.32 - UNRELEASED
+## 4.0.38 - UNRELEASED
+### Changed
+* Updated docs to use node 20 & a new sitemap plugin
+
+### Fixed
+* Fixed overly large debug toolbar pane response size due to repeating inline SVG icons
+* Ensure that CP requests and Tokenized requests have `robots` tag & header set to `none` ([#1394](https://github.com/nystudio107/craft-seomatic/issues/1394))
+
+## 4.0.37 - 2023.12.12
+### Added
+* Added a `EVENT_INCLUDE_SITEMAP_ENTRY` event to allow plugins or modules to determine whether entries should be added to the sitemap or not ([#1393](https://github.com/nystudio107/craft-seomatic/issues/1393))
+* Allow the `config/seomatic.php` `siteUrlOverride` to be set to either a string, or an array of site URLs, indexed by the site handle for overriding complex headless multi-site Craft setups ([#1376](https://github.com/nystudio107/craft-seomatic/issues/1376))
+
+### Changed
+* Switch over to listening for element changes via `Element::EVENT_AFTER_PROPAGATE` events instead of `Elements::EVENT_AFTER_SAVE_ELEMENT` and have it check the `Element::$resaving` attribute instead of `Model::$scenario` = `SCENARIO_ESSENTIALS` to determine whether sitemap queue jobs should be created ([#1388](https://github.com/nystudio107/craft-seomatic/issues/1388))
+* If the Site URL Override feature is used, pass along the parameters, too, when building the URL ([#950](https://github.com/nystudio107/craft-seomatic/issues/950))
+* Removed the automatic Google Sitemap ping endpoint, since [Google has deprecated it and will be removing it entirely soon](https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping) ([#1392](https://github.com/nystudio107/craft-seomatic/issues/1392))
+
+## 4.0.36 - 2023.11.28
+### Added
+* Switch over to Vite `^5.0.0` & Node `^20.0.0` for the buildchain
+* The sitemaps now check `enabledForSite` to determine whether elements should be included in the sitemap ([#1388](https://github.com/nystudio107/craft-seomatic/issues/1388))
+
+### Changed
+* Remove vestigial `queue` option from the console command
+* Rebrand `Twitter` to `X (Twitter)` in all user-displayed text
+* Updated the X (Twitter) large image previews to reflect the new style in X (Twitter)
+
+### Fixed
+* Fixed an issue where the **Truncate Description Tags** toggle did not work as expected ([#1386](https://github.com/nystudio107/craft-seomatic/issues/1386))
+* Fixed an issue where the frontend SEO preview URLs could be wrong if you're using the Site URL Override feature ([#950](https://github.com/nystudio107/craft-seomatic/issues/950#issuecomment-1829947536))
+
+## 4.0.35 - 2023.11.16
+### Fixed
+* Only try the `getMatchedElement()` optimization when it's not a console request, and surround it with `try/catch` to catch any potentially thrown exceptions ([#1384](https://github.com/nystudio107/craft-seomatic/issues/1384))
+
+## 4.0.34 - 2023.11.15
+### Changed
+* Try to use Craft's matched element from `UrlManager` in `MetaContainers` if looking for an enabled element, the current `siteId` is being used and the current `uri` matches what was in the request ([#1381](https://github.com/nystudio107/craft-seomatic/pull/1381))
+
+### Fixed
+* Fixed an issue where the `CanonicalLink` would render if the `Robots` tag contained multiple values ([#1378](https://github.com/nystudio107/craft-seomatic/issues/1378))
+* Fixed incorrect references to `SeoEntry` in the Campaign `SeoElement` ([#1382](https://github.com/nystudio107/craft-seomatic/pull/1382))
+
+## 4.0.33 - 2023.10.22
+### Added
+* Added an SEOmatic debug panel to the Yii2 Debug Toolbar to aid in debugging SEO metadata
+
+## 4.0.32 - 2023.10.09
 ### Added
 * Added support for the Shopify plugin, so imported Shopify Products are automatically recognized by SEOmatic, and get properly mapped metadata
-
+* Add integration with the Campaign plugin, so Campaign landing pages are automatically recognized by SEOmatic, and get properly mapped metadata
 * Disallow Google Bard and Vertex AI bots in `robots.txt` by default, as there's no benefit to allowing it to index your site. ref: https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers#common-crawlers
 
 ### Changed
 * Moved the `security.txt` location to `.well-known/security.txt` from the server root, and make the bundle updating mechanism preserve user settings in the process ([#1353](https://github.com/nystudio107/craft-seomatic/issues/1353))
+* Hide the SEO Image / OG Image / Twitter Image mode selectors if transforming is disabled
+* Set the `twitterImageTransform` and `ogImageTransform` to `false` by default, since the default is also `sameAsSeo` and this will result in better default expected behavior ([#1364](https://github.com/nystudio107/craft-seomatic/issues/1364))
 
 ### Fixed
 * Fixed a syntax error in the digitalproductmeta JsonLD Container ([#1361](https://github.com/nystudio107/craft-seomatic/issues/1361))
