@@ -208,7 +208,9 @@ SEOmatic allows you to fetch the meta information for any page via a controller 
 
 ### GraphQL Query support
 
-To retrieve SEOmatic container data through the native [GraphQL in Craft CMS 3.3](https://docs.craftcms.com/v3/graphql.html#sending-api-requests) or the [CraftQL plugin](https://github.com/markhuot/craftql), use the `seomatic` field in your GraphQL query. Each parameter will return that container’s data, ready for insertion into the DOM.
+To retrieve SEOmatic container data through [GraphQL in Craft CMS 4](https://craftcms.com/docs/4.x/graphql.html#sending-api-requests), use the `seomatic` field in your GraphQL query. Each parameter will return that container’s data, ready for insertion into the DOM.
+
+#### Stand-alone GraphQL queries
 
 You must as least pass in the URI you want metadata for:
 
@@ -294,6 +296,50 @@ This is useful if you are using a single Craft CMS instance to render metadata f
 Valid values are `local` for local development, `staging` for staging, and `live` for live production.
 
 ![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
+
+#### Piggybacking GraphQL queries
+
+You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request.
+
+Craft CMS GraphQL:
+
+```graphql
+{
+  entry(section: "homepage") {
+    id
+    title
+    seomatic {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+      metaSiteVarsContainer
+    }
+  }
+}
+```
+
+In this case, no arguments are passed in, because the URI and siteId will be taken from the parent Entry element. But you can pass in the `asArray` argument too:
+
+Craft CMS GraphQL:
+
+```graphql
+{
+  entry(section: "homepage") {
+    id
+    title
+    seomatic(asArray: true) {
+      metaTitleContainer
+      metaTagContainer
+      metaLinkContainer
+      metaScriptContainer
+      metaJsonLdContainer
+      metaSiteVarsContainer
+    }
+  }
+}
+```
 
 ### Frontend Templates GraphQL queries
 
@@ -390,93 +436,6 @@ SEOmatic also allows you to query for `sitemapStyles`:
 ```
 
 This returns the [XSL stylesheet](https://www.w3.org/Style/XSL/WhatIsXSL.html) that SEOmatic uses to make the sitemaps pleasant for humans to read.
-
-#### Piggybacking GraphQL queries
-
-You can also piggyback on an entries query, to return all of your data for an entry as well as the SEOmatic metadata in one request.
-
-**N.B.:** This requires using either Craft CMS 3.4 or later, or the CraftQL plugin to work.
-
-Native Craft CMS GraphQL:
-
-```graphql
-{
-  entry(section: "homepage") {
-    id
-    title
-    seomatic {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
-      metaSiteVarsContainer
-    }
-  }
-}
-```
-
-CraftQL Plugin:
-
-```graphql
-{
-  entry(section: homepage) {
-    id
-    title
-    ... on Homepage {
-      seomatic {
-        metaTitleContainer
-        metaTagContainer
-        metaLinkContainer
-        metaScriptContainer
-        metaJsonLdContainer
-      }
-    }
-  }
-}
-```
-
-In this case, no arguments are passed in, because the URI and siteId will be taken from the parent Entry element. But you can pass in the `asArray` argument too:
-
-Native Craft CMS GraphQL:
-
-```graphql
-{
-  entry(section: "homepage") {
-    id
-    title
-    seomatic(asArray: true) {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
-      metaSiteVarsContainer
-    }
-  }
-}
-```
-
-CraftQL Plugin:
-
-```graphql
-{
-  entry(section: homepage) {
-    id
-    title
-    ... on Homepage {
-      seomatic(asArray: true) {
-        metaTitleContainer
-        metaTagContainer
-        metaLinkContainer
-        metaScriptContainer
-        metaJsonLdContainer
-      }
-    }
-  }
-}
-```
-
 
 ### Meta Container API Endpoints
 
