@@ -1,6 +1,6 @@
 name: Build and Deploy Docs
 env:
-  DOCS_DEST_DIR: /seomatic/
+  DOCS_DEST_DIR: /seomatic/v4/
 on:
   push:
     branches:
@@ -22,11 +22,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        node-version: [ 14.x ]
+        node-version: [ 20.x ]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci

@@ -1,6 +1,7 @@
 <?php
 
 use craft\helpers\Html;
+use nystudio107\seomatic\debug\assets\DebugAsset;
 
 /* @var $value array */
 /* @var $meta array */
@@ -11,7 +12,9 @@ foreach ($meta['PROPERTY_STRINGS']['twig'] as $subject) {
     $codeExamples[] = str_replace($search, $replace, $subject);
 }
 $tooltip = implode(PHP_EOL, array_slice($codeExamples, 0, 4));
+$bundle = $this->getAssetManager()->getBundle(DebugAsset::class);
+$iconUrl = $bundle->baseUrl . "/img/copy-icon.svg";
 ?>
 <div class="seomatic-property-copy-wrapper" title="<?= $tooltip ?>">
-    <?= Html::svg("@nystudio107/seomatic/debug/assets/img/copy-icon.svg") ?>
+    <?= Html::img($iconUrl) ?>
 </div>
