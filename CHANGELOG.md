@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.69 - UNRELEASED
+## 3.4.69 - 2024.01.22
 ### Changed
 * Updated docs to use node 20 & a new sitemap plugin
 
