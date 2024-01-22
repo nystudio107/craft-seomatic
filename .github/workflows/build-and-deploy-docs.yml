@@ -4,12 +4,12 @@ env:
 on:
   push:
     branches:
-      - v4
+      - v5
     paths:
       - 'docs/**'
   pull_request:
     branches:
-      - v4
+      - v5
     paths:
       - 'docs/**'
   workflow_dispatch:
