@@ -2,7 +2,7 @@
 
 Plugin Settings let you control various SEOmatic settings across all sites/languages.
 
-![Screenshot](../resources/screenshots/seomatic-plugin-settings.png)
+![Screenshot of the SEOmatic plugin settings in the Craft control panel, with tabs for General, Appearance, Titles, Tags, Endpoints, and Advanced](../resources/screenshots/seomatic-plugin-settings.png)
 
 ## General Plugin Settings
 

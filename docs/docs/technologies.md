@@ -96,11 +96,11 @@ SEOmatic will generate metadata, sitemaps, and have a Craft CP UI for them. If y
 
 SEOmatic supports using Emojis in any of the fields in SEOmatic, so you could use one in the SEO Description, for instance:
 
-![Screenshot](./resources/screenshots/seomatic-emoji-support.png)
+![Screenshot of an SEO Settings field that includes emoji in a Custom Text description override](./resources/screenshots/seomatic-emoji-support.png)
 
 It’s up to Google whether or not to display the emojis that you add to your SEO meta, but used effectively, they can help make your entries in the SERP stand out from others. Learn more: [Why Use Emojis in Your SEO / PPC Strategy?](https://www.jellyfish.net/en-us/news-and-views/why-use-emojis-in-your-seo-ppc-strategy)
 
-![Screenshot](./resources/screenshots/seomatic-mac-emoji-keyboard.png)
+![Screenshot of SEOmatic’s General settings in the Global SEO section, with the macOS emoji picker open and a boom emoji leading the global site title](./resources/screenshots/seomatic-mac-emoji-keyboard.png)
 
 On the Mac, you can invoke an Emoji keyboard inside of any text field by hitting Command Control Space. This works in any Mac application, not just web browsers or SEOmatic.
 

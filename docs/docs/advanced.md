@@ -7,9 +7,9 @@ description: Advanced Usage documentation for the SEOmatic plugin. The SEOmatic 
 
 ## Debug Toolbar
 
-SEOmatic included a debug panel for the [Yii2 Debug Toolbar](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar) that allows you to inspect & debug your SEO data.
+SEOmatic includes a debug panel for the [Yii2 Debug Toolbar](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar) that allows you to inspect and debug your SEO data.
 
-![Screenshot](./resources/screenshots/seomatic-yii2-debug-toolbar.png)
+![Screenshot of Craft’s debug toolbar with an SEOmatic section at the far right](./resources/screenshots/seomatic-yii2-debug-toolbar.png)
 
 The debug panel displays debug information about the tags SEOmatic generates, as well as the variables it uses to do so.
 
@@ -19,7 +19,7 @@ You can view the **Combined** composed SEO data, or the discrete SEO data coming
 
 Tags are objects that represent rendered HTML tags the in the webpage. Tags are grouped together into containers for organizational purposes.
 
-![Screenshot](./resources/screenshots/seomatic-debug-tags.png)
+![Screenshot of the expanded debug toolbar open to the SEOmatic section, which has tabs for Tags and Variables, a visualization of the SEO cascade, and a listing of meta tag properties and how they’re rendered](./resources/screenshots/seomatic-debug-tags.png)
 
 You can inspect the **Properties** of the tags in each container, as well as the corresponding **Parsed Properties** after they have been rendered as Twig.
 
@@ -48,7 +48,7 @@ Tag property example:
 
 Variables are used throughout SEOmatic when rendering tags, or controlling how tags are rendered. Tag properties often reference these variables via Twig expressions.
 
-![Screenshot](./resources/screenshots/seomatic-debug-variables.png)
+![Screenshot of the SEOmatic debug toolbar section examining meta global vars, where the title text includes Twig usage tips](./resources/screenshots/seomatic-debug-variables.png)
 
 You can inspect the **Properties** of the variables, as well as the corresponding **Parsed Properties** after they have been rendered as Twig.
 
@@ -57,6 +57,7 @@ You can expand and sub-properties of nested properties by clicking on them.
 When hovering the cursor over any property, a clipboard icon will appear that when clicked on copies to the clipboard example code of how to get/set values for that particular property via Twig.
 
 Variable example:
+
 ```twig
 {#-- Get the value --#}
 {% set value = seomatic.meta.seoImage %}
@@ -224,9 +225,9 @@ Event::on(
 
 ## Meta Bundle / Container Settings
 
-The directory `vendor/nystudio107/seomatic/src/seomatic-config` contains a number of files that are used when initially configuring SEOmatic.
+The [`vendor/nystudio107/seomatic/src/seomatic-config`](https://github.com/nystudio107/craft-seomatic/tree/develop-v4/src/seomatic-config) directory contains a number of files that are used when initially configuring SEOmatic.
 
-![Screenshot](./resources/screenshots/seomatic-seomatic-config.png)
+![Screenshot of a Finder window displaying the contents of the seomatic-config directory, whose visible top-level folders are categorymeta, entrymeta, and globalmeta](./resources/screenshots/seomatic-seomatic-config.png)
 
 You can copy this entire directory to your Craft `config/` directory, and customize the files to your heart’s content. SEOmatic will first look in the `config/` directory for any given file, and then fall back on its own internal `seomatic-config` files.
 
@@ -327,7 +328,7 @@ This is useful if you are using a single Craft CMS instance to render metadata f
 
 Valid values are `local` for local development, `staging` for staging, and `live` for live production.
 
-![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
+![Screenshot of CraftQL for some reason demonstrating a GraphQL query](./resources/screenshots/seomatic-craftql-query.png)
 
 #### Piggybacking GraphQL queries
 
@@ -377,7 +378,7 @@ Craft CMS GraphQL:
 
 SEOmatic an provide you with the front-end templates such as `robots.txt`, `humans.txt`, etc. as well:
 
-![Screenshot](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
+![Screenshot of Craft’s GraphQL explorer querying SEOmatic’s `frontendTemplates`](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
 
 ```graphql
 {
@@ -404,7 +405,7 @@ Arguments:
 
 SEOmatic can provide you with the sitemap data via GraphQL as well.
 
-![Screenshot](./resources/screenshots/seomatic-graphql-sitemaps-query.png)
+![Screenshot of Craft’s GraphQL explorer querying SEOmatic’s `sitemapIndexes`, `sitemaps`, and `sitemapStyles`](./resources/screenshots/seomatic-graphql-sitemaps-query.png)
 
 SEOmatic allows you to query for `sitemapIndexes`:
 

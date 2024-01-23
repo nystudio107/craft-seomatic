@@ -15,35 +15,35 @@ However, in some cases you may want more control over page SEO for specific entr
 
 When a new entry is created with an SEO Settings field in it, the field values will all have the **Override** light switch turned off.
 
-The Field settings let you control exactly what fields will appear and be visible for you or your client to override:
+The field settings let you control exactly what fields will appear and be visible for you or your client to override:
 
-![Screenshot](./resources/screenshots/seomatic-field-settings.png)
+![Screenshot of settings for the SEO Settings field type](./resources/screenshots/seomatic-field-settings.png)
 
 By default, just a few sensible settings are made visible in the Field:
 
-![Screenshot](./resources/screenshots/seomatic-field-defaults.png)
+![Screenshot of the SEO Settings field as seen from an entry detail page](./resources/screenshots/seomatic-field-defaults.png)
 
 With the **Override** light switch off, the settings will default to the Content SEO and/or Global SEO setting for that field, so you can use the Field only for the exceptional cases.
 
 If you turn the **Override** light switch on:
 
-![Screenshot](./resources/screenshots/seomatic-field-defaults-override.png)
+![Screenshot of the SEO Settings field as seen from an entry detail page, with the SEO Description Source switch flipped on and a Custom Text selection making an input available for text entry](./resources/screenshots/seomatic-field-defaults-override.png)
 
 ...you can override the given setting on a per-entry basis.
 
 You can enable every possible field to be displayed in the SEO Settings field if you like:
 
-![Screenshot](./resources/screenshots/seomatic-field-full.png)
+![Screenshot of the SEO Settings field as seen from an entry detail page, showing more tabs (General, Twitter, Facebook, Sitemap) and more fields in the selected General tab](./resources/screenshots/seomatic-field-full.png)
 
 But it’s probably best to limit it to just the things that you or your client might want to change on a per-entry basis.
 
 If you enable an SEO Settings field in an Element Index’s Table Columns, you’ll see an SEO preview there as well:
 
-![Screenshot](./resources/screenshots/seomatic-table-columns-google.png)
+![Screenshot of a Craft CMS Entries channel listing, with an SEO Settings column to the right that displays a SERP preview next to each item](./resources/screenshots/seomatic-table-columns-google.png)
 
 You can control whether the preview will be from Google, Facebook, or Twitter in the Field Settings.
 
-![Screenshot](./resources/screenshots/seomatic-table-columns-facebook.png)
+![Screenshot of a Craft CMS Entries channel listing, with an SEO Settings column to the right displaying a social card preview next to each item](./resources/screenshots/seomatic-table-columns-facebook.png)
 
 ### Template Access
 
