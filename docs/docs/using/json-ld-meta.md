@@ -18,7 +18,7 @@ Create a new [Article](http://schema.org/Article) JSON-LD meta object:
 }) %}
 ```
 
-Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO Control Panel section to modify it (schema.org: [mainEntityOfPage](http://schema.org/docs/datamodel.html#mainEntityBackground)):
+Get the existing **MainEntityOfPage** as set in the Global SEO or Content SEO control panel section to modify it (schema.org: [mainEntityOfPage](http://schema.org/docs/datamodel.html#mainEntityBackground)):
 ```twig
 {% set mainEntity = seomatic.jsonLd.get('mainEntityOfPage') %}
 ```
@@ -96,7 +96,7 @@ Propagate **SiteNavigationElement**:
 {% endfor %}
 ```
 
-Get the existing **Identity** as set in the Site Settings Control Panel section to modify it:
+Get the existing **Identity** as set in the Site Settings control panel section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
 ```
@@ -117,7 +117,7 @@ Let’s say you want to add a [Brand](https://schema.org/Brand) to the **Identit
 
 The `, false` parameter tells it to create the JSON-LD object, but to _not_ automatically add it to the JSON-LD container. We do this because we don’t want it rendered on its own, we want it as part of the existing `mainEntityOfPage` JSON-LD object.
 
-Get the existing **Creator** as set in the Site Settings Control Panel section to modify it:
+Get the existing **Creator** as set in the Site Settings control panel section to modify it:
 ```twig
 {% set identity = seomatic.jsonLd.get('creator') %}
 ```

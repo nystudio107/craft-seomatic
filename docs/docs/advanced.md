@@ -67,7 +67,7 @@ Variable example:
 
 SEOmatic supports the standard `config.php` multi-environment friendly config file for the plugin settings. Just copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way.
 
-These are the same settings that are configured in the **Plugin Settings** in the Control Panel.
+These are the same settings that are configured in the **Plugin Settings** in the control panel.
 
 ## Events
 

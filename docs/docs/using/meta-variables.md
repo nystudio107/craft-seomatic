@@ -1,6 +1,6 @@
 # Meta Variables
 
-The `seomatic.meta` variable contains all of the meta variables that control the SEO that will be rendered on the site. They are pre-populated from your settings and content in the Control Panel, but you can change them as you see fit.
+The `seomatic.meta` variable contains all of the meta variables that control the SEO that will be rendered on the site. They are pre-populated from your settings and content in the control panel, but you can change them as you see fit.
 
 ## General Variables
 

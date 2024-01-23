@@ -24,8 +24,8 @@ Plugin Settings let you control various SEOmatic settings across all sites/langu
 ## Title Plugin Settings
 
 * **devMode `<title>` prefix** – If devMode is on, prefix the `<title>` with this string.
-* **Control Panel `<title>` prefix** – Prefix the Control Panel `<title>` with this string.
-* **devMode Control Panel `<title>` prefix** – If devMode is on, prefix the Control Panel `<title>` with this string.
+* **Control Panel `<title>` prefix** – Prefix the control panel `<title>` with this string.
+* **devMode Control Panel `<title>` prefix** – If devMode is on, prefix the control panel `<title>` with this string.
 * **Separator Character** – The separator character to use for the `<title>` tag.
 * **Max SEO Title Length** – The max number of characters in the `<title>` tag; anything beyond this will be truncated on word boundaries.
 * **Max SEO Description Length** – The max number of characters in the `meta description` tag.
