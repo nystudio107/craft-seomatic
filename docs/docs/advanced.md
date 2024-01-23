@@ -75,8 +75,6 @@ These are the same settings that are configured in the **Plugin Settings** in th
 
 ### IncludeContainerEvent
 
-    const EVENT_INCLUDE_CONTAINER = 'includeContainer';
-
 The event that is triggered when a container is about to be included.
 
 ```php
@@ -94,8 +92,6 @@ Event::on(
 ```
 
 ### InvalidateContainerCachesEvent
-
-    const EVENT_INVALIDATE_CONTAINER_CACHES = 'invalidateContainerCaches';
 
 The event that is triggered when SEOmatic is about to clear its meta container caches
 
@@ -115,8 +111,6 @@ Event::on(
 
 ### IncludeSitemapEntryEvent
 
-    const EVENT_INCLUDE_SITEMAP_ENTRY = 'IncludeSitemapEntryEvent';
-
 The event that is triggered when an entry is about to be included in a sitemap.
 
 ```php
@@ -134,8 +128,6 @@ Event::on(
 ```
 
 ### RegisterSitemapUrlsEvent
-
-    const EVENT_REGISTER_SITEMAP_URLS = 'registerSitemapUrls';
 
 The event that is triggered when registering additional URLs for a sitemap.
 
@@ -160,8 +152,6 @@ Event::on(
 
 ### RegisterSitemapsEvent
 
-    const EVENT_REGISTER_SITEMAPS = 'registerSitemaps';
-
 The event that is triggered when registering additional sitemaps for the sitemap index.
 
 ```php
@@ -183,8 +173,6 @@ Event::on(
 
 ### RegisterComponentTypesEvent
 
-    const EVENT_REGISTER_SEO_ELEMENT_TYPES = 'registerSeoElementTypes';
-
 The event that is triggered when registering SeoElement types
 
 SeoElement types must implement [[SeoElementInterface]]
@@ -204,8 +192,6 @@ Event::on(
 ```
 
 ### AddDynamicMetaEvent
-
-    const EVENT_ADD_DYNAMIC_META = 'addDynamicMeta';
 
 The event that is triggered when SEOmatic has included the standard meta containers, and gives your plugin/module the chance to add whatever custom dynamic meta items you like
 
