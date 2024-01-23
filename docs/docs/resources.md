@@ -1,7 +1,8 @@
 ---
 title: SEO Resources
-description: SEO Resources documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+description: SEO Resources documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
 ---
+
 # SEO Resources
 
 ## Crafting Modern SEO Presentation:

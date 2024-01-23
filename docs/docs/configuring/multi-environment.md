@@ -112,8 +112,8 @@ return [
 ];
 ```
 
-Copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way. See the [Craft Environments](https://docs.craftcms.com/v3/config/environments.html#config-files) page for details, and **N.B.:**
+Copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way. See the [Craft Environments](https://craftcms.com/docs/4.x/config/#config-files) page for details, and **N.B.:**
 
 > The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you
 
-This is how you can make your multi-environment nomenclature to SEOmatic’s. This works exactly like Craft’s [multi-environment config](https://docs.craftcms.com/v3/configuration.html#application-config) files such as `general.php` and `db.php`. See SEOmatic’s `config.php` for details.
+This is how you can make your multi-environment nomenclature to SEOmatic’s. This works exactly like Craft’s [multi-environment config](https://craftcms.com/docs/4.x/config/#multi-environment-configs) files such as `general.php` and `db.php`. See [SEOmatic’s `config.php`](https://github.com/nystudio107/craft-seomatic/blob/develop-v4/src/config.php) for details.

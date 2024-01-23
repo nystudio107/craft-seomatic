@@ -1,7 +1,8 @@
 ---
 title: SEO Settings Field
-description: SEOmatic Fields documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+description: SEOmatic Fields documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
 ---
+
 # SEO Settings Field
 
 SEOmatic has an SEO Settings Field that you can add to your Field Layouts. For most sites, the Field is not needed; instead set up the fields to pull from in the Content SEO settings for each Section.

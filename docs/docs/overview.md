@@ -2,6 +2,7 @@
 title: SEOmatic Overview
 description: SEOmatic Overview documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3 & 4.
 ---
+
 # SEOmatic Overview
 
 SEOmatic allows you to quickly get a site running with a robust, comprehensive SEO strategy that follows [modern best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance). It does this in a Craft-y way that’s flexible and customizable.

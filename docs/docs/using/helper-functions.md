@@ -1,6 +1,6 @@
 # Helper Functions
 
-* **`seomatic.helper.paginate(PAGEINFO)`** – Given the `PAGEINFO` variable from the `{% paginate %}` tag as [described here](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
+* **`seomatic.helper.paginate(PAGEINFO)`** – Given the `PAGEINFO` variable from the `{% paginate %}` tag as [described here](https://craftcms.com/docs/4.x/dev/tags.html#paginate), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
 * **`seomatic.helper.isPreview()`** – Returns `true` if the current request is a preview, `false` if it is not.
 * **`seomatic.helper.sameAsByHandle(HANDLE)`** – Returns an array of information about the **Same As URLs** site specified in `HANDLE`. Here’s an example of the information in the returned array:
   ```php

@@ -1,7 +1,8 @@
 ---
 title: SEO Technologies
-description: SEO Technologies documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+description: SEO Technologies documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
 ---
+
 # SEO Technologies
 
 ## Pagination and SEO
@@ -12,7 +13,7 @@ If you are using paginated entries, you’ll want to add some additional markup 
 {% do seomatic.helper.paginate(PAGEINFO) %}
 ```
 
-The `PAGEINFO` here is the variable from the `{% paginate %}` tag as [described here](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
+The `PAGEINFO` here is the variable from the `{% paginate %}` tag as [described here](https://craftcms.com/docs/4.x/dev/tags.html#paginate), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
 
 A complete example (following [Craft’s {% paginate %} documentation](https://craftcms.com/docs/4.x/dev/tags.html#paginate)) might look like this:
 
@@ -43,7 +44,7 @@ More info: [SEO Guide to Google Webmaster Recommendations for Pagination](https:
 
 SEOmatic comes with multi-site support baked in. Each site has its own localized settings that can be different on a per-site basis.
 
-Craft CMS [defines Sites](https://docs.craftcms.com/v3/sites.html) as any combination of site settings and locale (language). But there needs to be some way to organize these sites to define a relationship between them. That’s what [Site Groups](https://github.com/craftcms/cms/issues/1668) are for.
+Craft CMS [defines Sites](https://craftcms.com/docs/4.x/sites.html) as any combination of site settings and locale (language). But there needs to be some way to organize these sites to define a relationship between them. That’s what [Site Groups](https://github.com/craftcms/cms/issues/1668) are for.
 
 SEOmatic treats each Site Group as a separate entity, and any sites contained in that site group are treated as localizations of the same site.
 

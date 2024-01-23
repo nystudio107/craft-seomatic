@@ -1,6 +1,6 @@
 ---
 title: Configuring SEOmatic
-description: Configuring SEOmatic documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+description: Configuring SEOmatic documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
 ---
 # Configuring SEOmatic
 
@@ -25,7 +25,7 @@ Make sure you’ve set up your [Multi-Environment Config Settings](#multi-enviro
 While you may not normally need to take advantage of it, SEOmatic’s text input fields for the [Global SEO](#global-seo) and [Content SEO](#content-seo) settings have bonus perks:
 
 - They’re parsed as Twig object templates, so you can use single- and double-bracket Twig expressions in them along with plain old text.
-- They’re parsed for aliases and [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings).
+- They’re parsed for aliases and [environment variables](https://craftcms.com/docs/4.x/config/#control-panel-settings).
 - They have access to SEOmatic’s global variables.
 
 #### Examples
