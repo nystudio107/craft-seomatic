@@ -1,16 +1,14 @@
 ---
-title: SEOmatic Fields
+title: SEO Settings Field
 description: SEOmatic Fields documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
 ---
-# SEOmatic Fields
-
-## SEO Settings Field
+# SEO Settings Field
 
 SEOmatic has an SEO Settings Field that you can add to your Field Layouts. For most sites, the Field is not needed; instead set up the fields to pull from in the Content SEO settings for each Section.
 
 Modern SEO works best if it actually reflects what is on the page, visible to the user, so pulling from your page’s content will work well in most cases.
 
-### Using SEO Settings Fields
+## Using SEO Settings Fields
 
 However, in some cases you may want more control over page SEO for specific entries. That’s where the SEO Settings field comes in. Add it to your Section’s Field Layout, and you can override specific SEO settings on a per-entry basis.
 
@@ -65,5 +63,3 @@ There may be occasions where you want to output the final parsed value of an SEO
 This will output the final parsed value of the `entry.mySeoSettingsField.metaGlobalVars.seoDescription` variable.
 
 This parsing is done automatically by SEOmatic just before the meta information is added to your page.
-
-Brought to you by [nystudio107](https://nystudio107.com/)

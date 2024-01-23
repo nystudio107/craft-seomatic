@@ -21,5 +21,3 @@ description: SEO Resources documentation for the SEOmatic plugin. The SEOmatic p
 * [Modern SEO: Snake Oil vs. Substance](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance)
 
 * [JSON-LD, Structured Data and Erotica](https://nystudio107.com/blog/json-ld-structured-data-and-erotica)
-
-Brought to you by [nystudio107](https://nystudio107.com/)

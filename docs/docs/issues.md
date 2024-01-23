@@ -6,11 +6,11 @@ description: Issues & Upgrading documentation for the SEOmatic plugin. The SEOma
 
 ## Issues
 
-Please report any issues you find to the [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) page.
+Please report any issues you find to [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) on GitHub.
 
 ## Upgrading from SEOmatic 1.x for Craft CMS 2.x
 
-If you are upgrading a site from Craft CMS 2.x to Craft CMS 4.x that used the older SEOmatic plugin, here’s what you need to know.
+If you’re upgrading a site from Craft CMS 2.x to 4.x that used the older SEOmatic plugin, here’s what you need to know.
 
 SEOmatic will migrate your old Craft 2.x Field settings & data in the following ways:
  
@@ -38,6 +38,4 @@ Once you have added an SEO Settings field added to a Section, it will show up as
 
 ![Screenshot](./resources/screenshots/seomatic-feedme-import.png)
 
-See the [FeedMe documentation](https://docs.craftcms.com/feed-me/v4/) for more information on importing data into Craft CMS.
-
-Brought to you by [nystudio107](https://nystudio107.com/)
+See the [Feed Me documentation](https://docs.craftcms.com/feed-me/v4/) for more information on importing data into Craft CMS.

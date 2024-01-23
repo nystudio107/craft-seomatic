@@ -11,24 +11,31 @@ If you are using paginated entries, you’ll want to add some additional markup 
 ```twig
 {% do seomatic.helper.paginate(PAGEINFO) %}
 ```
- 
- The `PAGEINFO` here is the variable from the `{% paginate %}` tag as [described here](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
 
-A complete example (just a modified version of the [Craft 3 Documentation on {% Paginate %}](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable)) might look like this:
+The `PAGEINFO` here is the variable from the `{% paginate %}` tag as [described here](https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable), this will properly set the `canonicalUrl`, as well as adding the `<link rel='prev'>` and `<link rel='next'>` tags for you.
 
-```twig
-{% paginate craft.entries.section('blog').limit(10) as pageInfo, pageEntries %}
+A complete example (following [Craft’s {% paginate %} documentation](https://craftcms.com/docs/4.x/dev/tags.html#paginate)) might look like this:
+
+```twig{4}
+{% paginate craft.entries()
+  .section('blog')
+  .limit(10) as pageInfo, pageEntries %}
 {% do seomatic.helper.paginate(pageInfo) %}
 
 {% for entry in pageEntries %}
-    <article>
-        <h1>{{ entry.title }}</h1>
-        {{ entry.body }}
-    </article>
+  <article>
+    <h1>{{ entry.title }}</h1>
+    {{ entry.body }}
+  </article>
 {% endfor %}
 
-{% if pageInfo.prevUrl %}<a href="{{ pageInfo.prevUrl }}">Previous Page</a>{% endif %}
-{% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
+{% if pageInfo.prevUrl %}
+  <a href="{{ pageInfo.prevUrl }}">Previous Page</a>
+{% endif %}
+
+{% if pageInfo.nextUrl %}
+  <a href="{{ pageInfo.nextUrl }}">Next Page</a>
+{% endif %}
 ```
 More info: [SEO Guide to Google Webmaster Recommendations for Pagination](https://moz.com/blog/seo-guide-to-google-webmaster-recommendations-for-pagination)
 
@@ -108,8 +115,7 @@ Add the following to the non-AMP template to tell Google where the AMP version o
 {% set linkTag = seomatic.link.create({
   "rel": "amphtml",
   "href": yourAmpPageLink
-  })
-%}
+}) %}
 ```
 
 And this to the AMP template to tell Google where the canonical HTML page is:
@@ -126,23 +132,25 @@ Since AMP [doesn’t allow for third-party JavaScript](https://medium.com/google
 This will cause SEOmatic to not render _any_ custom scripts you might have enabled (such as Google Analytics, gtag, etc.)
 
 Then you can include Google AMP Analytics as per [Adding Analytics to your AMP pages](https://developers.google.com/analytics/devguides/collection/amp-analytics/) (this assumes you’re using `gtag`):
-```
+
+```twig
 {% set script = seomatic.script.get('gtag') %}
 {% set analyticsId = script.vars.googleAnalyticsId.value ??? '' %}
+
 <amp-analytics type="googleanalytics">
-    <script type="application/json">
-        {
-            "vars": {
-                "account": "{{ analyticsId }}"
-            },
-            "triggers": {
-                "trackPageview": {
-                    "on": "visible",
-                    "request": "pageview"
-                }
-            }
+  <script type="application/json">
+    {
+      "vars": {
+        "account": "{{ analyticsId }}"
+      },
+      "triggers": {
+        "trackPageview": {
+          "on": "visible",
+          "request": "pageview"
         }
-    </script>
+      }
+    }
+  </script>
 </amp-analytics>
 ```
 
@@ -153,5 +161,3 @@ The above uses the `???` empty coalesce operator that comes with SEOmatic; check
 SEOmatic fully supports working with SPAs, allowing you to receive the metadata needed for a given route either as an array, or as DOM elements ready to be inserted.
 
 See the **Headless SPA API** section for details.
-
-Brought to you by [nystudio107](https://nystudio107.com/)
