@@ -2,7 +2,6 @@
 title: SEOmatic plugin for Craft CMS 4.x
 description: Documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
 ---
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/v4) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=v4)](https://scrutinizer-ci.com/code-intelligence)
 
 # SEOmatic Plugin for Craft CMS 4.x
 
@@ -10,9 +9,11 @@ SEOmatic is a comprehensive, powerful, and flexible turnkey SEO system that faci
 
 ![Plugin banner that reads “Introducing SEOmatic, SEO done right.”](./resources/img/plugin-banner.jpg)
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/quality-score.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/coverage.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/?branch=v4) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/build.png?b=v4)](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/build-status/v4) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-seomatic/badges/code-intelligence.svg?b=v4)](https://scrutinizer-ci.com/code-intelligence)
+
 ## Key Features
 
-- Healthy SEO by default, tailored to your Craft site’s content model.
+- Healthy SEO by default, tailored to your Craft site’s content model—including Craft Commerce products.
 - Implements JSON-LD microdata, Twitter Cards tags, Facebook Open Graph tags, XML sitemaps, robots.txt, humans.txt, and HTML meta tags.
 - Custom fields for overriding default SEO values.
 - Control panel SEO previews for content authors.
