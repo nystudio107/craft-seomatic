@@ -5,7 +5,9 @@ description: SEO Technologies documentation for the SEOmatic plugin. The SEOmati
 
 # SEO Technologies
 
-## Pagination and SEO
+How SEOmatic supports important technical aspects of SEO in Craft-y ways.
+
+## Pagination & SEO
 
 If you are using paginated entries, you’ll want to add some additional markup to your templates to make Google et al aware of this. Fortunately, SEOmatic makes that easy, you simply do:
 
@@ -161,4 +163,4 @@ The above uses the `???` empty coalesce operator that comes with SEOmatic; check
 
 SEOmatic fully supports working with SPAs, allowing you to receive the metadata needed for a given route either as an array, or as DOM elements ready to be inserted.
 
-See the **Headless SPA API** section for details.
+See the [Headless SPA API](advanced.md#headless-spa-api) section for details.

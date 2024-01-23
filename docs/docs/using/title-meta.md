@@ -1,4 +1,6 @@
-# Title Meta Object Functions `seomatic.title`
+# Title Meta Object Functions
+
+The `seomatic.title` functions are for working with a page’s `<title>` tag.
 
 * **`seomatic.title.get(META_HANDLE)`** – Returns the Title meta object of the handle `META_HANDLE` or `null` if it is not found.
 * **`seomatic.title.create()`** – Creates a Title meta object from an array of key/value properties.
@@ -20,5 +22,5 @@ Note that you can achieve the same result with:
 {% do seomatic.meta.seoTitle("My page title") %}
 ```
 
-...since the `seoTitle` populates the `<title">` Title meta object.
+...since the `seoTitle` populates the `<title>` Title meta object.
 

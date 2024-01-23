@@ -5,6 +5,8 @@ description: Advanced Usage documentation for the SEOmatic plugin. The SEOmatic 
 
 # Advanced Usage
 
+Using the debug toolbar, managing config settings, events for PHP developers, bundle / container settings, and using the headless SPA API.
+
 ## Debug Toolbar
 
 SEOmatic includes a debug panel for the [Yii2 Debug Toolbar](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar) that allows you to inspect and debug your SEO data.

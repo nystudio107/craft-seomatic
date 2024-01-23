@@ -1,5 +1,7 @@
 # JSON-LD Meta Object Functions
 
+The `seomatic.jsonLd` functions make it easier to create, manipulate, and render valid JSON-LD microdata.
+
 * **`seomatic.jsonLd.get(META_HANDLE)`** – Returns the JSON-LD meta object of the handle `META_HANDLE` or `null` if it is not found.
 * **`seomatic.jsonLd.create()`** – Creates a JSON-LD meta object from an array of key-value properties. The `type` can be any of the [Schema.org](http://schema.org/docs/full.html) types.
 * **`seomatic.jsonLd.add(META_OBJECT)`** – Adds the `META_OBJECT` to the JSON-LD container to be rendered.

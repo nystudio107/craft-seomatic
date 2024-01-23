@@ -5,6 +5,8 @@ description: SEO Resources documentation for the SEOmatic plugin. The SEOmatic p
 
 # SEO Resources
 
+Learn more about SEO goals, strategy, and tips.
+
 ## Crafting Modern SEO Presentation:
 
 [![Crafting Modern SEO video](https://i.vimeocdn.com/video/671925645-ac6a1d9ae202eede970bc17a8438f8efe076e0a4be34eac8bfff83bad4885ac3-d?mw=1920&mh=1080&q=70)](http://dotall.com/sessions/seo-best-practices-from-a-developers-point-of-view)

@@ -1,5 +1,7 @@
 # Link Meta Object Functions
 
+The `seomatic.link` functions are for working with `<link>` tags.
+
 * **`seomatic.link.get(META_HANDLE)`** – Returns the Link meta object of the handle `META_HANDLE` or `null` if it is not found.
 * **`seomatic.link.create(CONFIG_ARRAY)`** – Creates a Link meta object from an array of key-value properties.
 * **`seomatic.link.add(META_OBJECT)`** – Adds the `META_OBJECT` to the Link container to be rendered.

@@ -1,5 +1,7 @@
 # Tag Meta Object Functions
 
+The `seomatic.tag` functions are for working with `<meta>` tags.
+
 * **`seomatic.tag.get(META_HANDLE)`** – Returns the Tag meta object of the handle `META_HANDLE` or `null` if it is not found.
 * **`seomatic.tag.create()`** – Creates a Tag meta object from an array of key-value properties.
 * **`seomatic.tag.add(META_OBJECT)`** – Adds the `META_OBJECT` to the Tag container to be rendered.

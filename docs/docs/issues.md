@@ -5,6 +5,8 @@ description: Issues & Upgrading documentation for the SEOmatic plugin. The SEOma
 
 # Issues & Upgrading
 
+Where to report issues and notes for upgrading from previous versions.
+
 ## Issues
 
 Please report any issues you find to [SEOmatic Issues](https://github.com/nystudio107/craft-seomatic/issues) on GitHub.
