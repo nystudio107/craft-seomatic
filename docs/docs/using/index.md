@@ -97,7 +97,7 @@ Or
 
 SEOmatic variables are also parsed for aliases, and in Craft 3.1, for [environment variables](https://docs.craftcms.com/v3/config/environments.html#control-panel-settings) as well.
 
-There may be occasions where you want to output the final parsed value of an SEOmatic variable on the frontend. You can do that via `seomatic.meta.parsedValue()`. For example:
+There may be occasions where you want to output the final parsed value of an SEOmatic variable on the front end. You can do that via `seomatic.meta.parsedValue()`. For example:
 
 ```twig
 {{ seomatic.meta.parsedValue('seoDescription') }}

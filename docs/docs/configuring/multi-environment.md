@@ -100,10 +100,10 @@ return [
     // If devMode is on, caches last 30 seconds.
     'metaCacheDuration' => null,
 
-    // Determines whether the meta container endpoint should be enabled for anonymous frontend access
+    // Determines whether the meta container endpoint should be enabled for anonymous front end access
     'enableMetaContainerEndpoint' => false,
 
-    // Determines whether the JSON-LD endpoint should be enabled for anonymous frontend access
+    // Determines whether the JSON-LD endpoint should be enabled for anonymous front end access
     'enableJsonLdEndpoint' => false,
 
     // SeoElementInterface[] The default SeoElement type classes

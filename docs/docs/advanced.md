@@ -235,7 +235,7 @@ You can bump the `Bundle.php`'s `bundleVersion` setting if you want it to re-rea
 
 ## Headless SPA API
 
-SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the metadata via a frontend framework like VueJS or React.
+SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the metadata via a front-end framework like VueJS or React.
 
 ### GraphQL Query support
 
@@ -374,7 +374,7 @@ Craft CMS GraphQL:
 
 ### Frontend Templates GraphQL queries
 
-SEOmatic an provide you with the frontend templates such as `robots.txt`, `humans.txt`, etc. as well:
+SEOmatic an provide you with the front-end templates such as `robots.txt`, `humans.txt`, etc. as well:
 
 ![Screenshot](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
 
@@ -397,7 +397,7 @@ Arguments:
 
 `site:` String - Optional - The site handle to resolve the sitemap for.
 
-`type:` String - The frontend container type, which can be `robots`, `humans`, `security`, or `ads`
+`type:` String - The front-end container type, which can be `robots`, `humans`, `security`, or `ads`
 
 #### Sitemap GraphQL queries
 
