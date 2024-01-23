@@ -30,11 +30,11 @@ If feasible, we think the best way to update sites using SEOmatic is to start fr
 
 It is highly recommended that you set up mappings from existing content to your SEO via the **Content SEO** settings as described above. Usually this obviates the need to import data into SEOmatic, instead _pulling_ it from your content.
 
-In addition to that, however, if you also have custom SEO data that you need to import, you can import that into an SEO Settings field using the [FeedMe plugin](https://plugins.craftcms.com/feed-me) from Pixel & Tonic.
+In addition to that, however, if you also have custom SEO data that you need to import, you can import that into an SEO Settings field using the [  plugin](https://plugins.craftcms.com/feed-me) from Pixel & Tonic.
 
 **N.B.:** The SEO Settings field is intended to be used as a custom override for your Content SEO Settings. In many cases, you won’t need or want an SEO Settings field at all.
 
-Once you have added an SEO Settings field added to a Section, it will show up as an import target in FeedMe:
+Once you have added an SEO Settings field added to a Section, it will show up as an import target in Feed Me:
 
 ![Screenshot](./resources/screenshots/seomatic-feedme-import.png)
 
