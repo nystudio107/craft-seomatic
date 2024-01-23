@@ -90,7 +90,7 @@ SEOmatic automatically works with the following plugins:
 
 This means that SEOmatic will treat the Elements that these plugins provide as first class citizens, just like Craft Entries & Categories.
 
-SEOmatic will generate metadata, sitemaps, and have a Craft CP UI for them. If you have a custom Element provided by a plugin or module, you can integrate it using the [SeoElementInterface](https://github.com/nystudio107/craft-seomatic/blob/v3/src/base/SeoElementInterface.php).
+SEOmatic will generate metadata, sitemaps, and have a Craft CP UI for them. If you have a custom Element provided by a plugin or module, you can integrate it using the [SeoElementInterface](https://github.com/nystudio107/craft-seomatic/blob/v4/src/base/SeoElementInterface.php).
 
 ## Emoji Support
 

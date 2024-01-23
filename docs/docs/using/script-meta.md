@@ -14,5 +14,5 @@ Don’t include the Google Analytics script on the page:
 {% do seomatic.script.get("googleAnalytics").include(false) %}
 ```
 
-For a complete list of the Script handles SEOmatic uses can be found in [ScriptContainer.php](https://github.com/nystudio107/craft-seomatic/blob/v3/src/seomatic-config/globalmeta/ScriptContainer.php)
+For a complete list of the Script handles SEOmatic uses can be found in [ScriptContainer.php](https://github.com/nystudio107/craft-seomatic/blob/v4/src/seomatic-config/globalmeta/ScriptContainer.php)
 
