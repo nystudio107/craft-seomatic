@@ -27,11 +27,10 @@ To check what `alternate` links are rendered:
 ```twig
 {% set alt = seomatic.link.get('alternate') %}
 {% do alt.href([
-    'http://example.com',
-    'http://example.com/es'
-  ]).hreflang([
-    'x-default',
-    'es',
-  ])
-%}
+  'http://example.com',
+  'http://example.com/es'
+]).hreflang([
+  'x-default',
+  'es',
+]) %}
 ```

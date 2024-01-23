@@ -11,9 +11,15 @@ The `???` Empty Coalescing operator is similar to the `??` [null coalescing oper
 The problem is that to [code defensively](https://nystudio107.com/blog/handling-errors-gracefully-in-craft-cms#defensive-coding-in-twig), you want to make sure that all of these things are defined, not null, and also have a value. So you end up with something like:
 
 ```twig
-{% if entry is defined and entry.description is defined and entry.description | length %}
+{% if entry is defined and
+  entry.description is defined and
+  entry.description | length
+%}
   {% set description = entry.description %}
-{% elseif category is defined and category.description is defined and category.description | length %}
+{% elseif category is defined and
+  category.description is defined and
+  category.description | length
+%}
   {% set description = category.description %}
 {% else %}
   {% set description = global.description %}
@@ -25,7 +31,9 @@ This gets quite verbose and quite tiresome quickly. There are other ways you can
 You can use the [null coalescing operator](https://nystudio107.com/blog/handling-errors-gracefully-in-craft-cms#coalescing-the-night-away), which picks the first thing that is defined and not null:
 
 ```twig
-{% set description = entry.description ?? category.description ?? global.description %}
+{% set description = entry.description ??
+  category.description ??
+  global.description %}
 ```
 
 But the problem here is it’ll _just_ pick the first thing that is defined and not `null`. So if `entry.description` is an empty string, it’ll use that, which is rarely what you want.
@@ -33,10 +41,12 @@ But the problem here is it’ll _just_ pick the first thing that is defined and 
 Enter the Empty Coalescing operator, and it becomes:
 
 ```twig
-{% set description = entry.description ??? category.description ??? global.description %}
+{% set description = entry.description ???
+  category.description ???
+  global.description %}
 ```
 
-Now the first thing that is defined, not null, _and_ not empty will be what `description` is set to.
+Now `description` will be set to the first thing that is defined, not null, _and_ not empty.
 
 Nice. Simple. Readable. And most importantly, likely the result you’re expecting.
 

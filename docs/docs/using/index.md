@@ -46,7 +46,7 @@ You can also set multiple variables at once using array syntax:
 ```twig
 {% do seomatic.meta.setAttributes({
   "seoTitle": "Some Title",
-  "seoDescription": "This is my description. There are many like it, but this one is mine."
+  "seoDescription": "This is my description. There are many like it..."
 }) %}
 ```
 
@@ -55,8 +55,7 @@ Or you can chain them together:
 ```twig
 {% do seomatic.meta
   .seoTitle("Some Title")
-  .seoDescription("This is my description. There are many like it, but this one is mine.")
-%}
+  .seoDescription("This is my description. There are many like it...") %}
 ```
 
 These do the same thing, so use whichever you prefer.
@@ -162,8 +161,7 @@ And you can set multiple attributes at once using an array syntax:
 {% do seomatic.tag.get("description").setAttributes({
   "content": "Some Description",
   "include": false
-  })
-%}
+}) %}
 ```
 
 Which is the same as doing:
@@ -171,8 +169,7 @@ Which is the same as doing:
 ```twig
 {% do seomatic.tag.get("description")
   .content("Some Description")
-  .include(false)
-%}
+  .include(false) %}
 ```
 
 So use whatever you like better.
@@ -185,14 +182,14 @@ Should you need to add extra tag attributes to a Meta Item, such as the various 
 {% set tag = seomatic.tag.get('description') %}
 {% if tag | length %}
   {% do tag.tagAttrs({
-    "data-type": "lazy-description",
+    "data-type": "whatever",
   }) %}
 {% endif %}
 ```
 
-This will generate a tag that looks like this:
+This will generate a tag like this:
 ```html
-<meta name="description" content="Here is my description!" data-type="lazy-description">
+<meta name="description" content="My description!" data-type="whatever">
 ```
 
 A more practical example would be using [Klaro](https://heyklaro.com/) to manage Cookie consent, etc. to not activate Google Analytics until consent is given:
