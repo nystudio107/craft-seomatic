@@ -41,6 +41,6 @@ To install SEOmatic, follow these steps:
 
 You can also install SEOmatic via the **Plugin Store** in the Craft Control Panel.
 
-SEOmatic works on Craft 4.x.
+SEOmatic works on Craft 5.x.
 
 Brought to you by [nystudio107](https://nystudio107.com/)

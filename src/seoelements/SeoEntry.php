@@ -440,7 +440,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         $sourceHandle = '';
         /** @var Entry $element */
         try {
-            $sourceHandle = $element->getSection()->handle;
+            $sourceHandle = $element->getSection()?->handle;
         } catch (InvalidConfigException $e) {
         }
 
