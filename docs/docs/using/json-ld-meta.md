@@ -55,7 +55,8 @@ Display the breadcrumbs on the page:
 {% endfor %}
 ```
 
-To entirely replace the existing **BreadcrumbList** on a page:
+To replace the existing **BreadcrumbList** on a page:
+
 ```twig
 {% set crumbList = seomatic.jsonLd.create({
   'type': 'BreadcrumbList',
@@ -84,8 +85,7 @@ To entirely replace the existing **BreadcrumbList** on a page:
 }) %}
 ```
 
-If you need to create a schema element and propagate it, then use "key".
-Propagate **SiteNavigationElement**:
+Use `key` to create a schema element and propagate it. Propagate **SiteNavigationElement**:
 
 ```twig
 {% for nav in navigationMenu %}
@@ -99,6 +99,7 @@ Propagate **SiteNavigationElement**:
 ```
 
 Get the existing **Identity** as set in the Site Settings control panel section to modify it:
+
 ```twig
 {% set identity = seomatic.jsonLd.get('identity') %}
 ```

@@ -2,8 +2,8 @@
 
 The `seomatic.title` functions are for working with a page’s `<title>` tag.
 
-* **`seomatic.title.get(META_HANDLE)`** – Returns the Title meta object of the handle `META_HANDLE` or `null` if it is not found.
-* **`seomatic.title.create()`** – Creates a Title meta object from an array of key/value properties.
+* **`seomatic.title.get(META_HANDLE)`** – Returns the Title meta object of the handle `META_HANDLE` or `null` if it’s not found.
+* **`seomatic.title.create()`** – Creates a Title meta object from an array of key-value properties.
 * **`seomatic.title.add(META_OBJECT)`** – Adds the `META_OBJECT` to the Title container to be rendered.
 * **`seomatic.title.render()`** – Renders Title meta object to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings.
 * **`seomatic.title.container()`** – Returns the container that holds an array with the Title meta object in it.
