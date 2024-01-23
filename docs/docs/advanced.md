@@ -472,7 +472,9 @@ This returns the [XSL stylesheet](https://www.w3.org/Style/XSL/WhatIsXSL.html) t
 
 ### Meta Container API Endpoints
 
-**N.B.:** Anonymous access to the Meta Container endpoints are disabled by default; you’ll need to enable them in **SEOmatic** → **Plugin Settings** → **Endpoints**.
+::: tip
+Anonymous access to the Meta Container endpoints are disabled by default; enable them in **SEOmatic** → **Plugin Settings** → **Endpoints**.
+:::
 
 To get all of the meta containers for a given URI, the controller action is:
 
@@ -893,7 +895,9 @@ All of the individual container controller API endpoints also accept the `&asArr
 
 ### Schema.org API Endpoints
 
-**N.B.:** Anonymous access to the Schema.org JSON-LD endpoints are disabled by default; you’ll need to enable them in **SEOmatic** → **Plugin Settings** → **Endpoints**.
+::: tip
+Anonymous access to the Schema.org JSON-LD endpoints are disabled by default; enable them in **SEOmatic** → **Plugin Settings** → **Endpoints**.
+:::
 
 To get a key-value array of a given [Schema.org](http://schema.org/docs/full.html) type:
 
