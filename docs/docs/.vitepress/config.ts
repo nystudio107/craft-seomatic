@@ -69,11 +69,11 @@ export default defineConfig({
               {text: 'seomatic.script', link: '/using/script-meta'},
               {text: 'seomatic.tag', link: '/using/tag-meta'},
               {text: 'seomatic.title', link: '/using/title-meta'},
+              {text: 'Pagination', link: '/using/pagination'},
               {text: 'Meta Containers', link: '/using/meta-containers'},
             ]
           },
           {text: 'SEO Settings Field', link: '/fields'},
-          {text: 'Pagination', link: '/pagination'},
           {text: 'Multi-Site', link: '/multi-site'},
           {text: 'Google AMP', link: '/google-amp'},
           {text: 'Advanced Usage', link: '/advanced'},

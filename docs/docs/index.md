@@ -15,6 +15,7 @@ SEOmatic is a comprehensive, powerful, and flexible turnkey SEO system that faci
 
 - Healthy SEO by default, tailored to your Craft site’s content model—including Craft Commerce products.
 - Implements HTML tags, JSON-LD microdata, Twitter Card tags, Facebook Open Graph tags, XML sitemaps, robots.txt, humans.txt, and ads.txt.
+- Supports SEO-friendly pagination.
 - Control panel SEO previews for content authors.
 - Custom fields for overriding default SEO values.
 - Visual Configuration overview for helping with project setup.

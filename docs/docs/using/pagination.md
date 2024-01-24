@@ -1,4 +1,4 @@
-## Pagination & SEO
+# Pagination & SEO
 
 If you are using paginated entries, you’ll want to add some additional markup to your templates to make Google et al aware of this. Fortunately, SEOmatic makes that easy, you simply do:
 
