@@ -9,7 +9,7 @@ SEOmatic allows you to quickly get a site running with a robust, comprehensive S
 
 SEOmatic adds meta containers that are available to your templates much like Craft’s `entry` variables. Working with them should feel familiar and flexible.
 
-Unlike Craft’s `entry` variables, the meta containers may use information that’s modified at different levels and expressed different ways on the site.
+Unlike Craft’s `entry` variables, the meta containers may use information that’s modified at different levels and expressed in different ways on the site.
 
 SEOmatic manages caches behind the scenes to ensure all this information can be used effectively with a minimal impact on site performance.
 
