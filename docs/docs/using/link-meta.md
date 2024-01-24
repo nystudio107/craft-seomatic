@@ -5,7 +5,7 @@ The `seomatic.link` functions are for working with `<link>` tags.
 * **`seomatic.link.get(META_HANDLE)`** – Returns the Link meta object of the handle `META_HANDLE` or `null` if it is not found.
 * **`seomatic.link.create(CONFIG_ARRAY)`** – Creates a Link meta object from an array of key-value properties.
 * **`seomatic.link.add(META_OBJECT)`** – Adds the `META_OBJECT` to the Link container to be rendered.
-* **`seomatic.link.render()`** – Renders all of the Link meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings.
+* **`seomatic.link.render()`** – Renders all of the Link meta objects to your template. Only necessary if you’ve disabled **Automatic Render** in [Plugin Settings](../configuring/plugin-settings.md).
 * **`seomatic.link.container()`** – Returns the container that holds an array of all of the Link meta objects.
 
 ## Link Meta Object Examples:

@@ -5,7 +5,7 @@ The `seomatic.jsonLd` functions make it easier to create, manipulate, and render
 * **`seomatic.jsonLd.get(META_HANDLE)`** – Returns the JSON-LD meta object of the handle `META_HANDLE` or `null` if it is not found.
 * **`seomatic.jsonLd.create()`** – Creates a JSON-LD meta object from an array of key-value properties. The `type` can be any of the [Schema.org](http://schema.org/docs/full.html) types.
 * **`seomatic.jsonLd.add(META_OBJECT)`** – Adds the `META_OBJECT` to the JSON-LD container to be rendered.
-* **`seomatic.jsonLd.render()`** – Renders all of the JSON-LD meta objects to your template. This is only needed if you have turned off **Automatic Render** in Plugin Settings.
+* **`seomatic.jsonLd.render()`** – Renders all of the JSON-LD meta objects to your template. Only necessary if you’ve disabled **Automatic Render** in [Plugin Settings](../configuring/plugin-settings.md).
 * **`seomatic.jsonLd.container()`** – Returns the container that holds an array of all of the JSON-LD meta objects.
 
 ## JSON-LD Meta Object Examples:
