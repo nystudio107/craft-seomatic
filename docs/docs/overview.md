@@ -32,3 +32,34 @@ In this way, the SEO data that SEOmatic provides _cascades_ together to form the
 You can work with and further manipulate the SEO information from that cascade using robust Twig and PHP APIs, for complete control over the SEO meta data that is rendered for your website.
 
 See [Using SEOmatic](./using/) for an in-depth look at how SEOmatic works under the hood, and for reference on the Twig APIs.
+
+## Plugin Support
+
+SEOmatic automatically works with the following plugins:
+
+* [Craft Commerce](https://plugins.craftcms.com/commerce) from Pixel & Tonic
+* [Digital Products](https://plugins.craftcms.com/digital-products) from Pixel & Tonic
+* [Calendar](https://plugins.craftcms.com/calendar) from Solspace
+* [Campaign](https://plugins.craftcms.com/campaign) from Put Your Lights On
+
+This means that SEOmatic will treat the Elements that these plugins provide as first class citizens, just like Craft Entries & Categories.
+
+SEOmatic will generate metadata, sitemaps, and have a Craft CP UI for them. If you have a custom Element provided by a plugin or module, you can integrate it using the [SeoElementInterface](https://github.com/nystudio107/craft-seomatic/blob/v4/src/base/SeoElementInterface.php).
+
+## Emoji Support
+
+SEOmatic supports using Emojis in any of the fields in SEOmatic, so you could use one in the SEO Description, for instance:
+
+![Screenshot of an SEO Settings field that includes emoji in a Custom Text description override](./resources/screenshots/seomatic-emoji-support.png)
+
+It’s up to Google whether or not to display the emojis that you add to your SEO meta, but used effectively, they can help make your entries in the SERP stand out from others. Learn more: [Why Use Emojis in Your SEO / PPC Strategy?](https://www.jellyfish.net/en-us/news-and-views/why-use-emojis-in-your-seo-ppc-strategy)
+
+![Screenshot of SEOmatic’s General settings in the Global SEO section, with the macOS emoji picker open and a boom emoji leading the global site title](./resources/screenshots/seomatic-mac-emoji-keyboard.png)
+
+On the Mac, you can invoke an Emoji keyboard inside of any text field by hitting Command Control Space. This works in any Mac application, not just web browsers or SEOmatic.
+
+## Single Page App (SPA) Support
+
+SEOmatic fully supports working with SPAs, allowing you to receive the metadata needed for a given route either as an array, or as DOM elements ready to be inserted.
+
+See the [Headless SPA API](advanced.md#headless-spa-api) section for details.

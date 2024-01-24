@@ -33,7 +33,6 @@ export default defineConfig({
         items: [
           {text: 'Features & Installation', link: '/'},
           {text: 'Overview', link: '/overview'},
-          {text: 'Technologies', link: '/technologies'},
           {text: 'Issues & Upgrading', link: '/issues'},
         ],
       },
@@ -74,6 +73,9 @@ export default defineConfig({
             ]
           },
           {text: 'SEO Settings Field', link: '/fields'},
+          {text: 'Pagination', link: '/pagination'},
+          {text: 'Multi-Site', link: '/multi-site'},
+          {text: 'Google AMP', link: '/google-amp'},
           {text: 'Advanced Usage', link: '/advanced'},
         ],
       },
