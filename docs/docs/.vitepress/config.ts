@@ -33,6 +33,7 @@ export default defineConfig({
         items: [
           {text: 'Features & Installation', link: '/'},
           {text: 'Overview', link: '/overview'},
+          {text: 'Technologies', link: '/technologies'},
           {text: 'Issues & Upgrading', link: '/issues'},
         ],
       },
@@ -79,7 +80,6 @@ export default defineConfig({
       {
         text: 'SEO Reference',
         items: [
-          {text: 'Technologies', link: '/technologies'},
           {text: 'Resources', link: '/resources'},
         ],
       },
