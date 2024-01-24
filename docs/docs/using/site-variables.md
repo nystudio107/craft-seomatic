@@ -49,7 +49,7 @@ The `seomatic.site.identity` encapsulates all of the information associated with
 * **`seomatic.site.identity.organizationContactPoints`** – Only for entities of the type Organization, an array of contact points for the organization. [Learn More](https://developers.google.com/search/docs/guides/enhance-site#provide-business-contact-markup)
 * **`seomatic.site.identity.corporationTickerSymbol`** – Only for entities of the type Corporation, the exchange ticker symbol of the corporation.
 * **`seomatic.site.identity.localBusinessPriceRange`** – Only for entities of the type LocalBusiness, the approximate price range of the goods or services offered by this local business.
-* **`seomatic.site.identity.localBusinessOpeningHours`** – Only for entities of the type LocalBusiness, an array of the opening hours for this local business. [Learn More][https://developers.google.com/search/docs/data-types/local-business]
+* **`seomatic.site.identity.localBusinessOpeningHours`** – Only for entities of the type LocalBusiness, an array of the opening hours for this local business. [Learn More](https://developers.google.com/search/docs/appearance/structured-data/local-business)
 * **`seomatic.site.identity.restaurantServesCuisine`** – Only for entities of the type Food Establishment, the primary type of cuisine that the food establishment serves.
 * **`seomatic.site.identity.restaurantMenuUrl`** – Only for entities of the type Food Establishment, a URL to the food establishment’s menu.
 * **`seomatic.site.identity.restaurantReservationsUrl`** – Only for entities of the type Food Establishment, a URL to the food establishment’s reservations page.
@@ -90,7 +90,7 @@ The `seomatic.site.creator` encapsulates all of the information associated with 
 * **`seomatic.site.creator.organizationContactPoints`** – Only for entities of the type Organization, an array of contact points for the organization. [Learn More](https://developers.google.com/search/docs/guides/enhance-site#provide-business-contact-markup)
 * **`seomatic.site.creator.corporationTickerSymbol`** – Only for entities of the type Corporation, the exchange ticker symbol of the corporation.
 * **`seomatic.site.creator.localBusinessPriceRange`** – Only for entities of the type LocalBusiness, the approximate price range of the goods or services offered by this local business.
-* **`seomatic.site.creator.localBusinessOpeningHours`** – Only for entities of the type LocalBusiness, an array of the opening hours for this local business. [Learn More][https://developers.google.com/search/docs/data-types/local-business]
+* **`seomatic.site.creator.localBusinessOpeningHours`** – Only for entities of the type LocalBusiness, an array of the opening hours for this local business. [Learn More](https://developers.google.com/search/docs/appearance/structured-data/local-business)
 * **`seomatic.site.creator.restaurantServesCuisine`** – Only for entities of the type Food Establishment, the primary type of cuisine that the food establishment serves.
 * **`seomatic.site.creator.restaurantMenuUrl`** – Only for entities of the type Food Establishment, a URL to the food establishment’s menu.
 * **`seomatic.site.creator.restaurantReservationsUrl`** – Only for entities of the type Food Establishment, a URL to the food establishment’s reservations page.

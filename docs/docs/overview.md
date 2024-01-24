@@ -31,4 +31,4 @@ In this way, the SEO data that SEOmatic provides _cascades_ together to form the
 
 You can work with and further manipulate the SEO information from that cascade using robust Twig and PHP APIs, for complete control over the SEO meta data that is rendered for your website.
 
-See [Using SEOmatic](./using.md) for an in-depth look at how SEOmatic works under the hood, and for reference on the Twig APIs.
+See [Using SEOmatic](./using/) for an in-depth look at how SEOmatic works under the hood, and for reference on the Twig APIs.

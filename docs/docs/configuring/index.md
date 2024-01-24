@@ -17,12 +17,12 @@ As soon as you install SEOmatic, it automatically will render metadata on your w
 All of SEOmatic’s settings are multi-site aware, allowing you to have different settings for each site/language combination.
 
 ::: tip Check Your Multi-Environment Settings
-Make sure you’ve set up your [Multi-Environment Config Settings](#multi-environment-config-settings) properly if you’re using SEOmatic in multiple environments.
+Make sure you’ve set up your [Multi-Environment Config Settings](./multi-environment.md) properly if you’re using SEOmatic in multiple environments.
 :::
 
 ## Control Panel Settings Fields
 
-While you may not normally need to take advantage of it, SEOmatic’s text input fields for the [Global SEO](#global-seo) and [Content SEO](#content-seo) settings have bonus perks:
+While you may not normally need to take advantage of it, SEOmatic’s text input fields for the [Global SEO](./global-seo.md) and [Content SEO](./content-seo.md) settings have bonus perks:
 
 - They’re parsed as Twig object templates, so you can use single- and double-bracket Twig expressions in them along with plain old text.
 - They’re parsed for aliases and [environment variables](https://craftcms.com/docs/4.x/config/#control-panel-settings).
@@ -36,13 +36,13 @@ This outputs the contents of the **companyInfo** field from the **siteInfo** glo
 {{ siteInfo.companyInfo }}
 ```
 
-This outputs the contents of the **description** field from the current entry, which would be relevant to a [Content SEO](#content-seo) setting:
+This outputs the contents of the **description** field from the current entry, which would be relevant to a [Content SEO](./content-seo.md) setting:
 
 ```twig
 {{ entry.description }}
 ```
 
-This complex expression uses SEOmatic’s [empty coalesce operator](#seomatics--empty-coalesce-operator) (`???`) to output the first global field that isn’t empty, or fallback text:
+This complex expression uses SEOmatic’s [empty coalesce operator](../using/empty-coalesce-operator.md) (`???`) to output the first global field that isn’t empty, or fallback text:
 
 ```twig
 {{ siteInfo.companyInfo ??? siteInfo.companyText ??? "Some default text" }}

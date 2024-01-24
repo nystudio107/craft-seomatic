@@ -157,7 +157,7 @@ Then you can include Google AMP Analytics as per [Adding Analytics to your AMP p
 </amp-analytics>
 ```
 
-The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic’s ??? Empty Coalesce operator](#seomatics--empty-coalesce-operator) for details.
+The above uses the `???` empty coalesce operator that comes with SEOmatic; check out [SEOmatic’s ??? Empty Coalesce operator](./using/empty-coalesce-operator.md) for details.
 
 ## Single Page App (SPA) Support
 
