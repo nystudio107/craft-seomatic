@@ -1,4 +1,4 @@
-## Multi-Site Language/Locale Support
+# Multi-Site Language/Locale Support
 
 SEOmatic comes with multi-site support baked in. Each site has its own localized settings that can be different on a per-site basis.
 

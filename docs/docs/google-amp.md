@@ -1,4 +1,4 @@
-## Google AMP Support
+# Google AMP Support
 
 SEOmatic works great with [Google AMP](https://www.ampproject.org/)! In fact, it will provide the [JSON-LD structured data](https://www.ampproject.org/docs/fundamentals/spec) that is _required_ by the AMP spec.
 
