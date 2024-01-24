@@ -19,10 +19,9 @@ SEOmatic is a comprehensive, powerful, and flexible turnkey SEO system that faci
 - Control panel SEO previews for content authors.
 - Custom fields for overriding default SEO values.
 - Visual Configuration overview for helping with project setup.
+- Deep support for Craft features: multi-site, customizable permissions, headless mode, GraphQL, and more.
 - Tools for validating and debugging metadata.
-- Customizable permissions for tailoring what editors are able to change.
 - Various utilities for managing additional meta tags, text excerpts, and more.
-- Deep support for Craft features: multi-site, headless mode, GraphQL, and more.
 
 ::: tip Use Retour for 404 Redirects
 SEOmatic _does not_ cover is 404 redirects; for that we recommend our [Retour plugin](https://github.com/nystudio107/craft-retour).
