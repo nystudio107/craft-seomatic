@@ -89,6 +89,7 @@ SEOmatic automatically works with the following plugins:
 * [Craft Commerce](https://plugins.craftcms.com/commerce) from Pixel & Tonic
 * [Digital Products](https://plugins.craftcms.com/digital-products) from Pixel & Tonic
 * [Calendar](https://plugins.craftcms.com/calendar) from Solspace
+* [Campaign](https://plugins.craftcms.com/campaign) from Put Your Lights On
 
 This means that SEOmatic will treat the Elements that these plugins provide as first class citizens, just like Craft Entries & Categories.
 
