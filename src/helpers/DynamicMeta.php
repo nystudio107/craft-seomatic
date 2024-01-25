@@ -549,9 +549,6 @@ class DynamicMeta
                     $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
-                    if (isset($element->enabledForSite) && !(bool)$element->enabledForSite) {
-                        $includeUrl = false;
-                    }
                     /** @var MetaBundle $metaBundle */
                     list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                         = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
@@ -588,10 +585,17 @@ class DynamicMeta
                                     $robotsArray = explode(',', $fieldMetaBundle->metaGlobalVars->robots);
                                     if (in_array('noindex', $robotsArray, true) || in_array('none', $robotsArray, true)) {
                                         $includeUrl = false;
+                                    } else {
+                                        // Otherwise, include the URL
+                                        $includeUrl = true;
                                     }
                                 }
                             }
                         }
+                    }
+                    // Never include the URL if the element isn't enabled for the site
+                    if (isset($element->enabledForSite) && !(bool)$element->enabledForSite) {
+                        $includeUrl = false;
                     }
                 } else {
                     $includeUrl = false;
