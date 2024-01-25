@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.39 - UNRELEASED
+### Fixed
+* Fixed an issue where `DynamicMeta` didn't properly take into account that `robots` can be a comma delimited list of values now ([#1399](https://github.com/nystudio107/craft-seomatic/issues/1399))
+
 ## 4.0.38 - 2024.01.22
 ### Changed
 * Updated docs to use node 20 & a new sitemap plugin
