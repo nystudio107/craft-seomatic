@@ -561,8 +561,9 @@ class DynamicMeta
                         $sourceSiteId
                     );
                     if ($metaBundle !== null) {
-                        // If robots is set tp 'none' don't include the URL
-                        if ($metaBundle->metaGlobalVars->robots === 'none' || $metaBundle->metaGlobalVars->robots === 'noindex') {
+                        // If robots contains 'none' or 'noindex' don't include the URL
+                        $robotsArray = explode(',', $metaBundle->metaGlobalVars->robots);
+                        if (in_array('noindex', $robotsArray, true) || in_array('none', $robotsArray, true)) {
                             $includeUrl = false;
                         }
                     }
@@ -583,8 +584,9 @@ class DynamicMeta
                                     && in_array('robots', $seoSettingsField->generalEnabledFields, false)
                                     && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaGlobalVars, 'robots')
                                 ) {
-                                    // If robots is set to 'none' don't include the URL
-                                    if ($fieldMetaBundle->metaGlobalVars->robots === 'none' || $fieldMetaBundle->metaGlobalVars->robots === 'noindex') {
+                                    // If robots contains 'none' or 'noindex' don't include the URL
+                                    $robotsArray = explode(',', $fieldMetaBundle->metaGlobalVars->robots);
+                                    if (in_array('noindex', $robotsArray, true) || in_array('none', $robotsArray, true)) {
                                         $includeUrl = false;
                                     }
                                 }
