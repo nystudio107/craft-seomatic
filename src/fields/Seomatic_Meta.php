@@ -66,6 +66,14 @@ class Seomatic_Meta extends Field
     /**
      * @inheritdoc
      */
+    public static function dbType(): array|string|null
+    {
+        return Schema::TYPE_TEXT;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function displayName(): string
     {
         return Craft::t('seomatic', 'SEOmatic Meta (deprecated)');
@@ -92,14 +100,6 @@ class Seomatic_Meta extends Field
         ]);
 
         return $rules;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getContentColumnType(): array|string
-    {
-        return Schema::TYPE_TEXT;
     }
 
     /**
