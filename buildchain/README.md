@@ -4,7 +4,7 @@ This buildchain is a self-contained build system for the `seomatic` JavaScript b
 
 ## Overview
 
-The buildchain builds & bundles all of the `seomatic` TypeScript/JavaScript code along with CSS and any other static resources via Vite via a Docker container.
+The buildchain builds & bundles all of the `seomatic` TypeScript/JavaScript code, Vue components, CSS, and any other static resources via Vite via a Docker container.
 
 Source files:
 
