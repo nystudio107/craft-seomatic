@@ -34,7 +34,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     // Constants
     // =========================================================================
 
-    const ARRAY_PROPERTIES = [
+    public const ARRAY_PROPERTIES = [
     ];
 
     // Public Methods
@@ -141,9 +141,8 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      */
     public function debugMetaItem(
         $errorLabel = 'Error: ',
-        array $scenarios = ['default' => 'error']
-    )
-    {
+        array $scenarios = ['default' => 'error'],
+    ) {
         $isMetaJsonLdModel = false;
         if (is_subclass_of($this, MetaJsonLd::class)) {
             $isMetaJsonLdModel = true;
@@ -270,9 +269,8 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      */
     public function validateStringOrArray(
         $attribute,
-        $params
-    )
-    {
+        $params,
+    ) {
         $validated = false;
         if (\is_string($attribute)) {
             $validated = true;

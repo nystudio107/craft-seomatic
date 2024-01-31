@@ -25,7 +25,7 @@ class DescriptionTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'DescriptionTag';
+    public const ITEM_TYPE = 'DescriptionTag';
 
     // Static Methods
     // =========================================================================

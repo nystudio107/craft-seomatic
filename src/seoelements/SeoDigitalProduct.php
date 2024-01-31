@@ -44,12 +44,12 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
     // Constants
     // =========================================================================
 
-    const META_BUNDLE_TYPE = 'digitalproduct';
-    const ELEMENT_CLASSES = [
+    public const META_BUNDLE_TYPE = 'digitalproduct';
+    public const ELEMENT_CLASSES = [
         Product::class,
     ];
-    const REQUIRED_PLUGIN_HANDLE = 'digital-products';
-    const CONFIG_FILE_PATH = 'digitalproductmeta/Bundle';
+    public const REQUIRED_PLUGIN_HANDLE = 'digital-products';
+    public const CONFIG_FILE_PATH = 'digitalproductmeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -105,7 +105,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             ProductTypes::class,
             ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-            function (ProductTypeEvent $event) {
+            function(ProductTypeEvent $event) {
                 Craft::debug(
                     'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                     __METHOD__
@@ -121,7 +121,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
                 ProductTypes::class,
                 ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
                 /** @var ProductTypeEvent $event */
-                static function ($event) {
+                static function($event) {
                     Craft::debug(
                         'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                         __METHOD__
@@ -177,7 +177,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Product::class,
             Product::EVENT_DEFINE_SIDEBAR_HTML,
-            static function (DefineHtmlEvent $event) {
+            static function(DefineHtmlEvent $event) {
                 Craft::debug(
                     'Product::EVENT_DEFINE_SIDEBAR_HTML',
                     __METHOD__
@@ -233,9 +233,8 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
         int        $elementId,
-        int        $siteId
-    )
-    {
+        int        $siteId,
+    ) {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)

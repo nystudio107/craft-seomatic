@@ -268,7 +268,7 @@ class MetaBundleSettings extends VarsModel
                     'ogImageDescriptionSource',
                     'ogImageDescriptionField',
                 ],
-                'string'
+                'string',
             ],
             [
                 ['seoImageTransformMode', 'twitterImageTransformMode', 'ogImageTransformMode'],
@@ -285,7 +285,7 @@ class MetaBundleSettings extends VarsModel
                     'twitterImageTransform',
                     'ogImageTransform',
                 ],
-                'boolean'
+                'boolean',
             ],
             [
                 ['seoImageSource', 'twitterImageSource', 'ogImageSource'], 'in', 'range' => [

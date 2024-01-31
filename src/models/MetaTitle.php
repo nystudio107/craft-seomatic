@@ -27,8 +27,8 @@ class MetaTitle extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaTitle';
-    const DEFAULT_TITLE_KEY = 'title';
+    public const ITEM_TYPE = 'MetaTitle';
+    public const DEFAULT_TITLE_KEY = 'title';
 
     // Static Methods
     // =========================================================================

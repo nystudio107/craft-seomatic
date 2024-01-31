@@ -31,7 +31,7 @@ class Link extends MetaService
     // Constants
     // =========================================================================
 
-    const DEFAULT_TYPE = null;
+    public const DEFAULT_TYPE = null;
 
     // Public Methods
     // =========================================================================

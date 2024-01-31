@@ -63,16 +63,16 @@ class MetaContainers extends Component
     // Constants
     // =========================================================================
 
-    const GLOBAL_METACONTAINER_CACHE_TAG = 'seomatic_metacontainer';
-    const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
+    public const GLOBAL_METACONTAINER_CACHE_TAG = 'seomatic_metacontainer';
+    public const METACONTAINER_CACHE_TAG = 'seomatic_metacontainer_';
 
-    const CACHE_KEY = 'seomatic_metacontainer_';
-    const INVALID_RESPONSE_CACHE_KEY = 'seomatic_invalid_response';
-    const GLOBALS_CACHE_KEY = 'parsed_globals_';
-    const SCRIPTS_CACHE_KEY = 'body_scripts_';
+    public const CACHE_KEY = 'seomatic_metacontainer_';
+    public const INVALID_RESPONSE_CACHE_KEY = 'seomatic_invalid_response';
+    public const GLOBALS_CACHE_KEY = 'parsed_globals_';
+    public const SCRIPTS_CACHE_KEY = 'body_scripts_';
 
     /** @var array Rules for replacement values on arbitrary empty values */
-    const COMPOSITE_SETTING_LOOKUP = [
+    public const COMPOSITE_SETTING_LOOKUP = [
         'ogImage' => [
             'metaBundleSettings.ogImageSource' => 'sameAsSeo.seoImage',
         ],
@@ -95,7 +95,7 @@ class MetaContainers extends Component
      * });
      * ```
      */
-    const EVENT_INVALIDATE_CONTAINER_CACHES = 'invalidateContainerCaches';
+    public const EVENT_INVALIDATE_CONTAINER_CACHES = 'invalidateContainerCaches';
 
     /**
      * @event MetaBundleDebugDataEvent The event that is triggered to record MetaBundle
@@ -111,7 +111,7 @@ class MetaContainers extends Component
      * });
      * ```
      */
-    const EVENT_METABUNDLE_DEBUG_DATA = 'metaBundleDebugData';
+    public const EVENT_METABUNDLE_DEBUG_DATA = 'metaBundleDebugData';
 
     // Public Properties
     // =========================================================================
@@ -254,7 +254,7 @@ class MetaContainers extends Component
         $uniqueKey = $dependency->tags[3] ?? self::GLOBALS_CACHE_KEY;
         list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
             self::GLOBALS_CACHE_KEY . $uniqueKey,
-            function () use ($uniqueKey) {
+            function() use ($uniqueKey) {
                 Craft::info(
                     self::GLOBALS_CACHE_KEY . ' cache miss: ' . $uniqueKey,
                     __METHOD__
@@ -288,9 +288,8 @@ class MetaContainers extends Component
         string $uri = '',
         int    $siteId = null,
         bool   $parseVariables = false,
-        bool   $includeElement = true
-    )
-    {
+        bool   $includeElement = true,
+    ) {
         // If we've already previewed the containers for this request, there's no need to do it again
         if (Seomatic::$previewingMetaContainers && !Seomatic::$headlessRequest) {
             return;
@@ -425,7 +424,7 @@ class MetaContainers extends Component
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
                     self::CACHE_KEY . $cacheKey,
-                    function () use ($uri, $siteId) {
+                    function() use ($uri, $siteId) {
                         Craft::info(
                             'Meta container cache miss: ' . $uri . '/' . $siteId,
                             __METHOD__
@@ -990,8 +989,8 @@ class MetaContainers extends Component
                             $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
 
                             foreach ($rules as $settingPath => $action) {
-                                list ($container, $property) = explode('.', $settingPath);
-                                list ($testValue, $sourceSetting) = explode('.', $action);
+                                list($container, $property) = explode('.', $settingPath);
+                                list($testValue, $sourceSetting) = explode('.', $action);
 
                                 $bundleProp = $parentBundle->{$container}->{$property} ?? null;
                                 if ($bundleProp == $testValue) {

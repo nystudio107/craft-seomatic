@@ -42,13 +42,13 @@ class Sitemaps extends Component implements SitemapInterface
     // Constants
     // =========================================================================
 
-    const SEOMATIC_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapIndexTemplate::TEMPLATE_TYPE;
+    public const SEOMATIC_SITEMAPINDEX_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapIndexTemplate::TEMPLATE_TYPE;
 
-    const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapTemplate::TEMPLATE_TYPE;
+    public const SEOMATIC_SITEMAP_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapTemplate::TEMPLATE_TYPE;
 
-    const SEOMATIC_SITEMAPCUSTOM_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapCustomTemplate::TEMPLATE_TYPE;
+    public const SEOMATIC_SITEMAPCUSTOM_CONTAINER = Seomatic::SEOMATIC_HANDLE . SitemapCustomTemplate::TEMPLATE_TYPE;
 
-    const SEARCH_ENGINE_SUBMISSION_URLS = [
+    public const SEARCH_ENGINE_SUBMISSION_URLS = [
     ];
 
     // Protected Properties
@@ -82,7 +82,7 @@ class Sitemaps extends Component implements SitemapInterface
             Event::on(
                 UrlManager::class,
                 UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-                function (RegisterUrlRulesEvent $event) {
+                function(RegisterUrlRulesEvent $event) {
                     Craft::debug(
                         'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
                         __METHOD__

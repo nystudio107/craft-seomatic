@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\services\MetaBundles;
-
 use craft\base\Element;
+
+use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 /**
  * @author    nystudio107
@@ -26,95 +25,95 @@ class Migration
     // Constants
     // =========================================================================
 
-    const FIELD_MIGRATION_CONTEXT = 'field';
-    const SECTION_MIGRATION_CONTEXT = 'section';
+    public const FIELD_MIGRATION_CONTEXT = 'field';
+    public const SECTION_MIGRATION_CONTEXT = 'section';
 
-    const MIGRATION_CONTEXTS = [
-        self::FIELD_MIGRATION_CONTEXT   => [
-            'metaGlobalVars'     => [
+    public const MIGRATION_CONTEXTS = [
+        self::FIELD_MIGRATION_CONTEXT => [
+            'metaGlobalVars' => [
                 'mainEntityOfPage' => 'seoMainEntityOfPage',
-                'seoTitle'         => 'seoTitle',
-                'seoDescription'   => 'seoDescription',
-                'seoKeywords'      => 'seoKeywords',
-                'canonicalUrl'     => 'canonicalUrlOverride',
-                'robots'           => 'robots',
-                'ogType'           => 'openGraphType',
+                'seoTitle' => 'seoTitle',
+                'seoDescription' => 'seoDescription',
+                'seoKeywords' => 'seoKeywords',
+                'canonicalUrl' => 'canonicalUrlOverride',
+                'robots' => 'robots',
+                'ogType' => 'openGraphType',
             ],
             'metaBundleSettings' => [
-                'siteType'             => 'seoMainEntityCategory',
-                'siteSubType'          => 'seoMainEntityOfPage',
-                'seoTitleSource'       => 'seoTitleSource',
-                'seoTitleField'        => 'seoTitleSourceField',
+                'siteType' => 'seoMainEntityCategory',
+                'siteSubType' => 'seoMainEntityOfPage',
+                'seoTitleSource' => 'seoTitleSource',
+                'seoTitleField' => 'seoTitleSourceField',
                 'seoDescriptionSource' => 'seoDescriptionSource',
-                'seoDescriptionField'  => 'seoDescriptionSourceField',
-                'seoKeywordsSource'    => 'seoKeywordsSource',
-                'seoKeywordsField'     => 'seoKeywordsSourceField',
-                'seoImageIds'          => 'seoImageId',
-                'seoImageSource'       => 'seoImageIdSource',
-                'seoImageField'        => 'seoImageIdSourceField',
-                'twitterImageIds'      => 'seoTwitterImageId',
-                'twitterImageSource'   => 'seoTwitterImageIdSource',
-                'twitterImageField'    => 'seoTwitterImageIdSourceField',
-                'ogImageIds'           => 'seoFacebookImageId',
-                'ogImageSource'        => 'seoFacebookImageIdSource',
-                'ogImageField'         => 'seoFacebookImageIdSourceField',
+                'seoDescriptionField' => 'seoDescriptionSourceField',
+                'seoKeywordsSource' => 'seoKeywordsSource',
+                'seoKeywordsField' => 'seoKeywordsSourceField',
+                'seoImageIds' => 'seoImageId',
+                'seoImageSource' => 'seoImageIdSource',
+                'seoImageField' => 'seoImageIdSourceField',
+                'twitterImageIds' => 'seoTwitterImageId',
+                'twitterImageSource' => 'seoTwitterImageIdSource',
+                'twitterImageField' => 'seoTwitterImageIdSourceField',
+                'ogImageIds' => 'seoFacebookImageId',
+                'ogImageSource' => 'seoFacebookImageIdSource',
+                'ogImageField' => 'seoFacebookImageIdSourceField',
             ],
         ],
         self::SECTION_MIGRATION_CONTEXT => [
-            'metaGlobalVars'     => [
+            'metaGlobalVars' => [
                 'mainEntityOfPage' => 'seoMainEntityOfPage',
-                'robots'           => 'robots',
-                'ogType'           => 'openGraphType',
+                'robots' => 'robots',
+                'ogType' => 'openGraphType',
             ],
             'metaBundleSettings' => [
-                'siteType'             => 'seoMainEntityCategory',
-                'siteSubType'          => 'seoMainEntityOfPage',
-                'seoTitleSource'       => 'seoTitleSource',
-                'seoTitleField'        => 'seoTitleSourceField',
+                'siteType' => 'seoMainEntityCategory',
+                'siteSubType' => 'seoMainEntityOfPage',
+                'seoTitleSource' => 'seoTitleSource',
+                'seoTitleField' => 'seoTitleSourceField',
                 'seoDescriptionSource' => 'seoDescriptionSource',
-                'seoDescriptionField'  => 'seoDescriptionSourceField',
-                'seoKeywordsSource'    => 'seoKeywordsSource',
-                'seoKeywordsField'     => 'seoKeywordsSourceField',
-                'seoImageIds'          => 'seoImageId',
-                'seoImageSource'       => 'seoImageIdSource',
-                'seoImageField'        => 'seoImageIdSourceField',
-                'twitterImageIds'      => 'seoTwitterImageId',
-                'twitterImageSource'   => 'seoTwitterImageIdSource',
-                'twitterImageField'    => 'seoTwitterImageIdSourceField',
-                'ogImageIds'           => 'seoFacebookImageId',
-                'ogImageSource'        => 'seoFacebookImageIdSource',
-                'ogImageField'         => 'seoFacebookImageIdSourceField',
+                'seoDescriptionField' => 'seoDescriptionSourceField',
+                'seoKeywordsSource' => 'seoKeywordsSource',
+                'seoKeywordsField' => 'seoKeywordsSourceField',
+                'seoImageIds' => 'seoImageId',
+                'seoImageSource' => 'seoImageIdSource',
+                'seoImageField' => 'seoImageIdSourceField',
+                'twitterImageIds' => 'seoTwitterImageId',
+                'twitterImageSource' => 'seoTwitterImageIdSource',
+                'twitterImageField' => 'seoTwitterImageIdSourceField',
+                'ogImageIds' => 'seoFacebookImageId',
+                'ogImageSource' => 'seoFacebookImageIdSource',
+                'ogImageField' => 'seoFacebookImageIdSourceField',
             ],
         ],
     ];
 
-    const ARRAY_VALUE_MAP = [
+    public const ARRAY_VALUE_MAP = [
     ];
 
-    const FIELD_VALUE_MAP = [
-        'seoTitleSource'       => [
-            'field'  => 'fromField',
+    public const FIELD_VALUE_MAP = [
+        'seoTitleSource' => [
+            'field' => 'fromField',
             'custom' => 'fromCustom',
         ],
         'seoDescriptionSource' => [
-            'field'  => 'fromField',
+            'field' => 'fromField',
             'custom' => 'fromCustom',
         ],
-        'seoKeywordsSource'    => [
-            'field'    => 'fromField',
-            'custom'   => 'fromCustom',
+        'seoKeywordsSource' => [
+            'field' => 'fromField',
+            'custom' => 'fromCustom',
             'keywords' => 'keywordsFromField',
         ],
-        'seoImageSource'       => [
-            'field'  => 'fromField',
+        'seoImageSource' => [
+            'field' => 'fromField',
             'custom' => 'fromAsset',
         ],
-        'twitterImageSource'   => [
-            'field'  => 'fromField',
+        'twitterImageSource' => [
+            'field' => 'fromField',
             'custom' => 'fromAsset',
         ],
-        'ogImageSource'        => [
-            'field'  => 'fromField',
+        'ogImageSource' => [
+            'field' => 'fromField',
             'custom' => 'fromAsset',
         ],
     ];

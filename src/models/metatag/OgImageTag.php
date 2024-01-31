@@ -25,7 +25,7 @@ class OgImageTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'OgImageTag';
+    public const ITEM_TYPE = 'OgImageTag';
 
     // Static Methods
     // =========================================================================

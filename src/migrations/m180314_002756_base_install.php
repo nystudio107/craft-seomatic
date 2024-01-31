@@ -45,5 +45,4 @@ class m180314_002756_base_install extends Install
 
     // Protected Methods
     // =========================================================================
-
 }

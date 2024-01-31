@@ -25,7 +25,7 @@ class TwitterDescriptionTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'TwitterDescriptionTag';
+    public const ITEM_TYPE = 'TwitterDescriptionTag';
 
     // Static Methods
     // =========================================================================

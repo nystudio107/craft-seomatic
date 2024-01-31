@@ -44,12 +44,12 @@ class SeoCampaign implements SeoElementInterface
     // Constants
     // =========================================================================
 
-    const META_BUNDLE_TYPE = 'campaign';
-    const ELEMENT_CLASSES = [
+    public const META_BUNDLE_TYPE = 'campaign';
+    public const ELEMENT_CLASSES = [
         CampaignElement::class,
     ];
-    const REQUIRED_PLUGIN_HANDLE = 'campaign';
-    const CONFIG_FILE_PATH = 'campaignmeta/Bundle';
+    public const REQUIRED_PLUGIN_HANDLE = 'campaign';
+    public const CONFIG_FILE_PATH = 'campaignmeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -105,7 +105,7 @@ class SeoCampaign implements SeoElementInterface
         Event::on(
             CampaignTypesService::class,
             CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE,
-            function (CampaignTypeEvent $event) {
+            function(CampaignTypeEvent $event) {
                 Craft::debug(
                     'CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE',
                     __METHOD__
@@ -116,7 +116,7 @@ class SeoCampaign implements SeoElementInterface
         Event::on(
             CampaignTypesService::class,
             CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE,
-            function (CampaignTypeEvent $event) {
+            function(CampaignTypeEvent $event) {
                 Craft::debug(
                     'CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE',
                     __METHOD__
@@ -131,7 +131,7 @@ class SeoCampaign implements SeoElementInterface
             Event::on(
                 CampaignTypesService::class,
                 CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE,
-                function (CampaignTypeEvent $event) {
+                function(CampaignTypeEvent $event) {
                     Craft::debug(
                         'CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE',
                         __METHOD__
@@ -154,7 +154,7 @@ class SeoCampaign implements SeoElementInterface
             Event::on(
                 CampaignTypesService::class,
                 CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE,
-                function (CampaignTypeEvent $event) {
+                function(CampaignTypeEvent $event) {
                     Craft::debug(
                         'CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE',
                         __METHOD__
@@ -183,7 +183,7 @@ class SeoCampaign implements SeoElementInterface
         Event::on(
             CampaignElement::class,
             CampaignElement::EVENT_DEFINE_SIDEBAR_HTML,
-            static function (DefineHtmlEvent $event) {
+            static function(DefineHtmlEvent $event) {
                 Craft::debug(
                     'CampaignElement::EVENT_DEFINE_SIDEBAR_HTML',
                     __METHOD__
@@ -239,9 +239,8 @@ class SeoCampaign implements SeoElementInterface
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
         int        $elementId,
-        int        $siteId
-    )
-    {
+        int        $siteId,
+    ) {
         return CampaignElement::find()
             ->campaignType($metaBundle->sourceHandle)
             ->id($elementId)

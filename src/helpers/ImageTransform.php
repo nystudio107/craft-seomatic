@@ -50,12 +50,12 @@ class ImageTransform
     /**
      * @var bool
      */
-    static public $pendingImageTransforms = false;
+    public static $pendingImageTransforms = false;
 
     // Static Private Properties
     // =========================================================================
 
-    static private $transforms = [
+    private static $transforms = [
         'base' => [
             'format' => null,
             'quality' => self::SOCIAL_TRANSFORM_QUALITY,
@@ -83,7 +83,7 @@ class ImageTransform
         ],
     ];
 
-    static private $cachedAssetsElements = [];
+    private static $cachedAssetsElements = [];
 
     // Static Methods
     // =========================================================================
@@ -103,9 +103,8 @@ class ImageTransform
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -182,9 +181,8 @@ class ImageTransform
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         $width = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -214,9 +212,8 @@ class ImageTransform
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         $height = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode

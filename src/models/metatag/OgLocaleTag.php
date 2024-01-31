@@ -11,8 +11,8 @@
 
 namespace nystudio107\seomatic\models\metatag;
 
-use nystudio107\seomatic\models\MetaTag;
 use nystudio107\seomatic\helpers\Localization as LocalizationHelper;
+use nystudio107\seomatic\models\MetaTag;
 
 /**
  * @author    nystudio107
@@ -24,7 +24,7 @@ class OgLocaleTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'OgLocaleTag';
+    public const ITEM_TYPE = 'OgLocaleTag';
 
     // Static Methods
     // =========================================================================

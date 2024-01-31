@@ -18,11 +18,10 @@ namespace nystudio107\seomatic\base;
  */
 interface MetaItemInterface
 {
-
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'Generic';
+    public const ITEM_TYPE = 'Generic';
 
     // Public Methods
     // =========================================================================

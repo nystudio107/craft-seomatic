@@ -45,12 +45,12 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
     // Constants
     // =========================================================================
 
-    const META_BUNDLE_TYPE = 'product';
-    const ELEMENT_CLASSES = [
+    public const META_BUNDLE_TYPE = 'product';
+    public const ELEMENT_CLASSES = [
         Product::class,
     ];
-    const REQUIRED_PLUGIN_HANDLE = 'commerce';
-    const CONFIG_FILE_PATH = 'productmeta/Bundle';
+    public const REQUIRED_PLUGIN_HANDLE = 'commerce';
+    public const CONFIG_FILE_PATH = 'productmeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -106,7 +106,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             ProductTypes::class,
             ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-            function (ProductTypeEvent $event) {
+            function(ProductTypeEvent $event) {
                 Craft::debug(
                     'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                     __METHOD__
@@ -121,7 +121,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 ProductTypes::class,
                 ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-                static function (ProductTypeEvent $event) {
+                static function(ProductTypeEvent $event) {
                     Craft::debug(
                         'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                         __METHOD__
@@ -184,7 +184,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
             // Commerce Product Types sidebar
             $commerce = CommercePlugin::getInstance();
             if ($commerce !== null) {
-                Seomatic::$view->hook('cp.commerce.product.edit.details', static function (&$context) {
+                Seomatic::$view->hook('cp.commerce.product.edit.details', static function(&$context) {
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                     /** @var  $product Product */
@@ -211,7 +211,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Product::class,
             Product::EVENT_DEFINE_SIDEBAR_HTML,
-            static function (DefineHtmlEvent $event) {
+            static function(DefineHtmlEvent $event) {
                 Craft::debug(
                     'Product::EVENT_DEFINE_SIDEBAR_HTML',
                     __METHOD__
@@ -267,9 +267,8 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
         int        $elementId,
-        int        $siteId
-    )
-    {
+        int        $siteId,
+    ) {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)
