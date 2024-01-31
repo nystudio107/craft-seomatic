@@ -1,8 +1,14 @@
 # SEOmatic Changelog
 
 ## 5.0.0-beta.3 - UNRELEASED
+### Added
+* Add `phpstan` and `ecs` code linting
+* Add `code-analysis.yaml` GitHub action
+
 ### Changed
 * `getContentColumnType()` -> `dbType()`, add `phpType()` in the Field classes
+* PHPstan code cleanup
+* ECS code cleanup
 
 ### Fixed
 * Fixed an issue where `DynamicMeta` didn't properly take into account that `robots` can be a comma delimited list of values now ([#1399](https://github.com/nystudio107/craft-seomatic/issues/1399))
