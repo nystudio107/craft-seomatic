@@ -18,7 +18,6 @@ namespace nystudio107\seomatic\base;
  */
 interface ContainerInterface
 {
-
     // Constants
     // =========================================================================
 

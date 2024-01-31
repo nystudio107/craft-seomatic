@@ -104,7 +104,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             ProductTypes::class,
             ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-            function (ProductTypeEvent $event) {
+            function(ProductTypeEvent $event) {
                 Craft::debug(
                     'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                     __METHOD__
@@ -119,7 +119,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 ProductTypes::class,
                 ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
-                static function (ProductTypeEvent $event) {
+                static function(ProductTypeEvent $event) {
                     Craft::debug(
                         'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                         __METHOD__
@@ -175,7 +175,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
             // Commerce Product Types sidebar
             $commerce = CommercePlugin::getInstance();
             if ($commerce !== null) {
-                Seomatic::$view->hook('cp.commerce.product.edit.details', static function (&$context) {
+                Seomatic::$view->hook('cp.commerce.product.edit.details', static function(&$context) {
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                     /** @var  $product Product */
@@ -230,8 +230,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId
-    )
-    {
+    ) {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)

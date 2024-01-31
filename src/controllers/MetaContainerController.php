@@ -9,21 +9,21 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use craft\web\Controller;
 use nystudio107\seomatic\helpers\Container as ContainerHelper;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaSiteVars;
-use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\models\MetaTagContainer;
 
-use Craft;
-use craft\web\Controller;
+use nystudio107\seomatic\models\MetaTitleContainer;
+use nystudio107\seomatic\Seomatic;
 
-use yii\web\Response;
 use yii\web\JsonResponseFormatter;
+use yii\web\Response;
 
 /**
  * @author    nystudio107
@@ -302,5 +302,4 @@ class MetaContainerController extends Controller
 
         return $this->asJson($result);
     }
-
 }

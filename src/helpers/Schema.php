@@ -260,7 +260,7 @@ class Schema
         $cache = Craft::$app->getCache();
         $typesArray = $cache->getOrSet(
             self::CACHE_KEY . 'schemaArray',
-            function () use ($path) {
+            function() use ($path) {
                 Craft::info(
                     'schemaArray cache miss: ' . $path,
                     __METHOD__
@@ -361,7 +361,7 @@ class Schema
         $cache = Craft::$app->getCache();
         $typesArray = $cache->getOrSet(
             self::CACHE_KEY . 'schemaTree',
-            function () {
+            function() {
                 Craft::info(
                     'schemaTree cache miss',
                     __METHOD__
@@ -502,7 +502,7 @@ class Schema
                 $id = implode(self::SCHEMA_PATH_DELIMITER, [
                     $parts[0],
                     $parts[1],
-                    end($parts)
+                    end($parts),
                 ]);
             }
             if (!empty($typesArray['children'])) {
@@ -551,7 +551,7 @@ class Schema
         $cache = Craft::$app->getCache();
         return $cache->getOrSet(
             self::CACHE_KEY . 'googleRichSnippets',
-            function () {
+            function() {
                 Craft::info(
                     'googleRichSnippets cache miss',
                     __METHOD__

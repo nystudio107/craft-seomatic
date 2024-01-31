@@ -117,7 +117,7 @@ class MetaTag extends MetaItem
         $rules = array_merge($rules, [
             [['charset', 'httpEquiv', 'name', 'property'], 'string'],
             [['content'], 'validateStringOrArray'],
-            [['name'], 'safe', 'on' => ['warning']]
+            [['name'], 'safe', 'on' => ['warning']],
         ]);
 
         return $rules;

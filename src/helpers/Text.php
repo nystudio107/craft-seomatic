@@ -11,9 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\helpers\Field as FieldHelper;
+use benf\neo\elements\Block as NeoBlock;
 
-use nystudio107\seomatic\Seomatic;
+use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
 
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
@@ -21,20 +21,20 @@ use craft\elements\MatrixBlock;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
 
-use yii\base\InvalidConfigException;
+use nystudio107\seomatic\helpers\Field as FieldHelper;
+
+use nystudio107\seomatic\Seomatic;
+use PhpScience\TextRank\TextRankFacade;
+use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
+use Stringy\Stringy;
 
 use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
-use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+
 use verbb\supertable\elements\db\SuperTableBlockQuery;
 
-use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
-use benf\neo\elements\Block as NeoBlock;
-
-use Stringy\Stringy;
-
-use PhpScience\TextRank\TextRankFacade;
-use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
+use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+use yii\base\InvalidConfigException;
 
 /**
  * @author    nystudio107
@@ -164,7 +164,7 @@ class Text
             $tags = $tags->all();
         }
         foreach ($tags as $tag) {
-            $result .= $tag->title.', ';
+            $result .= $tag->title . ', ';
         }
         $result = rtrim($result, ', ');
 
@@ -206,7 +206,7 @@ class Text
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
                             if ($field->handle === $fieldHandle || empty($fieldHandle)) {
-                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                                $result .= self::extractTextFromField($block[$field->handle]) . ' ';
                             }
                         }
                     }
@@ -252,7 +252,7 @@ class Text
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
                             if ($field->handle === $fieldHandle || empty($fieldHandle)) {
-                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                                $result .= self::extractTextFromField($block[$field->handle]) . ' ';
                             }
                         }
                     }
@@ -298,7 +298,7 @@ class Text
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
                             if ($field->handle === $fieldHandle || empty($fieldHandle)) {
-                                $result .= self::extractTextFromField($block[$field->handle]).' ';
+                                $result .= self::extractTextFromField($block[$field->handle]) . ' ';
                             }
                         }
                     }
@@ -481,9 +481,9 @@ class Text
             $language = 'English';
         }
 
-        $className = 'PhpScience\\TextRank\\Tool\\StopWords\\'.ucfirst($language);
+        $className = 'PhpScience\\TextRank\\Tool\\StopWords\\' . ucfirst($language);
         if (class_exists($className)) {
-            $stopWords = new $className;
+            $stopWords = new $className();
         }
 
         return $stopWords;

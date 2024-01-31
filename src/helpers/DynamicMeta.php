@@ -42,7 +42,6 @@ use function in_array;
 use function is_array;
 use function is_string;
 
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -389,7 +388,7 @@ class DynamicMeta
         if ($lastElement && $element) {
             if ($lastElement->uri !== '__home__' && $element->uri) {
                 $path = $lastElement->uri;
-                $segments = array_values(array_filter(explode('/', $path), function ($segment) {
+                $segments = array_values(array_filter(explode('/', $path), function($segment) {
                     return $segment !== '';
                 }));
             }
@@ -459,7 +458,6 @@ class DynamicMeta
                     if ($siteLocalizedUrl['primary'] && Seomatic::$settings->addXDefaultHrefLang) {
                         $metaTag->hreflang[] = 'x-default';
                         $metaTag->href[] = $siteLocalizedUrl['url'];
-
                     }
                 }
                 Seomatic::$plugin->link->add($metaTag);

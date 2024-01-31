@@ -11,33 +11,33 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
-use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
-use nystudio107\seomatic\services\MetaBundles;
-
+use benf\neo\elements\Block as NeoBlock;
+use benf\neo\Field as NeoField;
+use besteadfast\preparsefield\fields\PreparseFieldType;
 use Craft;
+
 use craft\base\Element;
 use craft\base\Field as BaseField;
 use craft\base\Volume;
-use craft\elements\User;
 use craft\ckeditor\Field as CKEditorField;
 use craft\elements\MatrixBlock;
+use craft\elements\User;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
 use craft\fields\PlainText as PlainTextField;
 use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
+use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
+
+use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\MetaBundles;
 
 use verbb\doxter\fields\Doxter as DoxterField;
-use verbb\supertable\fields\SuperTableField;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 
-use benf\neo\Field as NeoField;
-use benf\neo\elements\Block as NeoBlock;
-
-use besteadfast\preparsefield\fields\PreparseFieldType;
+use verbb\supertable\fields\SuperTableField;
 
 use yii\base\InvalidConfigException;
 
@@ -58,7 +58,7 @@ class Field
     const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
 
     const FIELD_CLASSES = [
-        self::TEXT_FIELD_CLASS_KEY  => [
+        self::TEXT_FIELD_CLASS_KEY => [
             CKEditorField::class,
             PlainTextField::class,
             MatrixField::class,
@@ -129,7 +129,7 @@ class Field
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
-            $memoKey = $fieldClassKey.$layout->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldClassKey . $layout->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$fieldsOfTypeFromLayoutCache[$memoKey])) {
                 return self::$fieldsOfTypeFromLayoutCache[$memoKey];
             }
@@ -245,8 +245,8 @@ class Field
                 // Prefix the keys with the global set name
                 $prefix = $global->handle;
                 $fields = array_combine(
-                    array_map(function ($key) use ($prefix) {
-                        return $prefix.'.'.$key;
+                    array_map(function($key) use ($prefix) {
+                        return $prefix . '.' . $key;
                     }, array_keys($fields)),
                     $fields
                 );
@@ -320,7 +320,7 @@ class Field
         }
         if ($matrixBlockTypeModel) {
             // Cache me if you can
-            $memoKey = $fieldType.$matrixBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldType . $matrixBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$matrixFieldsOfTypeCache[$memoKey])) {
                 return self::$matrixFieldsOfTypeCache[$memoKey];
             }
@@ -363,7 +363,7 @@ class Field
         }
         if ($neoBlockTypeModel) {
             // Cache me if you can
-            $memoKey = $fieldType.$neoBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldType . $neoBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$neoFieldsOfTypeCache[$memoKey])) {
                 return self::$neoFieldsOfTypeCache[$memoKey];
             }
@@ -405,7 +405,7 @@ class Field
         }
         if ($superTableBlockTypeModel) {
             // Cache me if you can
-            $memoKey = $fieldType.$superTableBlock->id.($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldType . $superTableBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
                 return self::$superTableFieldsOfTypeCache[$memoKey];
             }
@@ -426,5 +426,4 @@ class Field
 
         return $foundFields;
     }
-
 }

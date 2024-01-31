@@ -70,7 +70,7 @@ return [
     'sidebarDisplayPreviewTypes' => [
         'google',
         'twitter',
-        'facebook'
+        'facebook',
     ],
 
     // Should SEOmatic display the SEO Analysis sidebar?
@@ -163,5 +163,5 @@ return [
 
     // string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
     'allowedUrlParams' => [
-    ]
+    ],
 ];

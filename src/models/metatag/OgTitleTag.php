@@ -11,10 +11,10 @@
 
 namespace nystudio107\seomatic\models\metatag;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\Text as TextHelper;
 use nystudio107\seomatic\models\MetaTag;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -125,7 +125,7 @@ class OgTitleTag extends MetaTag
                     $suffix = '';
                     break;
             }
-            $lengthAdjust = mb_strlen($prefix.$suffix);
+            $lengthAdjust = mb_strlen($prefix . $suffix);
             // Truncate the og:title tag content
             $truncLen = Seomatic::$settings->maxTitleLength - $lengthAdjust;
             if ($truncLen < 0) {
@@ -138,7 +138,7 @@ class OgTitleTag extends MetaTag
                     '…'
                 );
             }
-            $data['content'] = $prefix.$data['content'].$suffix;
+            $data['content'] = $prefix . $data['content'] . $suffix;
         }
 
         return $shouldRender;

@@ -11,8 +11,8 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -106,7 +106,7 @@ class JsonLd extends \craft\helpers\Json
         );
         // Rename keys as appropriate
         foreach (self::AT_PREFIXED_ATTRIBUTES as $key) {
-            $array = self::changeKey($array, $key, '@'.$key);
+            $array = self::changeKey($array, $key, '@' . $key);
         }
         if ($depth > 1) {
             foreach (self::IGNORE_ATTRIBUTES as $attribute) {

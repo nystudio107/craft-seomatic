@@ -125,7 +125,7 @@ class MetaLink extends MetaItem
             [['crossorigin', 'media', 'rel', 'sizes', 'type'], 'string'],
             ['crossorigin', 'in', 'range' => [
                 'anonymous',
-                'use-credentials'
+                'use-credentials',
             ]],
             ['href', 'validateStringOrArray'],
             ['hreflang', 'validateStringOrArray'],

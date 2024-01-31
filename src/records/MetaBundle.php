@@ -38,7 +38,6 @@ class MetaBundle extends ActiveRecord
      */
     public function beforeSave($insert)
     {
-
         $result = parent::beforeSave($insert);
 
         if (!Craft::$app->getDb()->getSupportsMb4()) {

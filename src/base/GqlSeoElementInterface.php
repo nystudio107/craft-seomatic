@@ -11,12 +11,6 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\models\MetaBundle;
-
-use craft\base\ElementInterface;
-use craft\base\Model;
-use craft\elements\db\ElementQueryInterface;
-
 /**
  * @author    nystudio107
  * @package   Seomatic

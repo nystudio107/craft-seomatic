@@ -229,7 +229,7 @@ class Sitemap
                                 continue;
                             }
                         }
-                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime;
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime();
                         $lines[] = '<url>';
                         // Standard sitemap key/values
                         $lines[] = '<loc>';
@@ -574,7 +574,7 @@ class Sitemap
     {
         if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
             if (\in_array($asset->kind, SitemapTemplate::FILE_TYPES, false)) {
-                $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime;
+                $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime();
                 $lines[] = '<url>';
                 $lines[] = '<loc>';
                 $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));

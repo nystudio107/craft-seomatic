@@ -9,7 +9,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaLinkContainer;
 use nystudio107\seomatic\services\Link as LinkService;
 
@@ -20,15 +19,15 @@ use nystudio107\seomatic\services\Link as LinkService;
  */
 
 return [
-    MetaLinkContainer::CONTAINER_TYPE.LinkService::GENERAL_HANDLE => [
-        'name'         => 'General',
-        'description'  => 'Link Tags',
-        'handle'       => LinkService::GENERAL_HANDLE,
-        'class'        => (string)MetaLinkContainer::class,
-        'include'      => true,
+    MetaLinkContainer::CONTAINER_TYPE . LinkService::GENERAL_HANDLE => [
+        'name' => 'General',
+        'description' => 'Link Tags',
+        'handle' => LinkService::GENERAL_HANDLE,
+        'class' => (string)MetaLinkContainer::class,
+        'include' => true,
         'dependencies' => [
         ],
-        'data'         => [
+        'data' => [
         ],
     ],
 ];

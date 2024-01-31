@@ -155,7 +155,7 @@ foreach (SECTIONS as $sectionName => $section) {
                             'meta' => METABUNDLE_CONTAINERS[$metaContainerName],
                             'unparsed' => $panel->data[$metaBundleCategory]['unparsed']['metaContainers'][$metaContainerName]['data'] ?? [],
                             'parsed' => $panel->data[$metaBundleCategory]['parsed']['metaContainers'][$metaContainerName]['data'] ?? [],
-                        ]
+                        ],
                     ]);
                     $editorLanguage = 'html';
                     if ($metaContainerName === 'MetaJsonLdContainergeneral') {
@@ -167,7 +167,7 @@ foreach (SECTIONS as $sectionName => $section) {
                             'id' => $sectionName . '-' . $metaBundleCategory . '-' . $metaContainerName . '-rendered-tags',
                             'view' => $this,
                             'language' => $editorLanguage,
-                        ]
+                        ],
                     ]);
                 }
                 break;
@@ -180,7 +180,7 @@ foreach (SECTIONS as $sectionName => $section) {
                             'meta' => $varsMeta,
                             'unparsed' => $panel->data[$metaBundleCategory]['unparsed'][$varName] ?? [],
                             'parsed' => $panel->data[$metaBundleCategory]['parsed'][$varName] ?? [],
-                        ]
+                        ],
                     ]);
                 }
                 break;
@@ -205,10 +205,10 @@ foreach (SECTIONS as $sectionName => $section) {
                 'data-toggle' => 'tab',
                 'role' => 'tab',
                 'aria-controls' => "r-tab-{$sectionName}",
-                'aria-selected' => $firstLoop ? 'true' : 'false'
+                'aria-selected' => $firstLoop ? 'true' : 'false',
             ]),
             [
-                'class' => 'nav-item'
+                'class' => 'nav-item',
             ]
         );
         ?>
@@ -235,10 +235,10 @@ foreach (SECTIONS as $sectionName => $section) {
                             'data-toggle' => 'tab',
                             'role' => 'tab',
                             'aria-controls' => "r-tab-{$sectionName}-{$k}",
-                            'aria-selected' => $k === 0 ? 'true' : 'false'
+                            'aria-selected' => $k === 0 ? 'true' : 'false',
                         ]),
                         [
-                            'class' => 'nav-item'
+                            'class' => 'nav-item',
                         ]
                     );
                 }

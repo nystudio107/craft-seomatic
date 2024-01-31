@@ -11,10 +11,10 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\Text as TextHelper;
+use nystudio107\seomatic\Seomatic;
 
 use yii\helpers\Html;
 
@@ -148,16 +148,18 @@ class MetaTitle extends MetaItem
                     break;
             }
             // Handle the case of empty titles
-            if ($prefix === (' '.$separator.' ')) {
+            if ($prefix === (' ' . $separator . ' ')) {
                 $prefix = '';
             }
-            if ($suffix === (' '.$separator)) {
+            if ($suffix === (' ' . $separator)) {
                 $suffix = '';
             }
             // Remove potential double spaces
-            $prefix = preg_replace('/\s+/', ' ', $prefix);;
-            $suffix = preg_replace('/\s+/', ' ', $suffix);;
-            $lengthAdjust = mb_strlen($prefix.$suffix);
+            $prefix = preg_replace('/\s+/', ' ', $prefix);
+            ;
+            $suffix = preg_replace('/\s+/', ' ', $suffix);
+            ;
+            $lengthAdjust = mb_strlen($prefix . $suffix);
             // Parse the data
             $scenario = $this->scenario;
             $this->setScenario('render');
@@ -176,7 +178,7 @@ class MetaTitle extends MetaItem
                         '…'
                     );
                 }
-                $data = $prefix.$data.$suffix;
+                $data = $prefix . $data . $suffix;
             } else {
                 // If no title is provided, just use the site name
                 $data = MetaValueHelper::parseString($this->siteName);
@@ -195,7 +197,7 @@ class MetaTitle extends MetaItem
     /**
      * @inheritdoc
      */
-    public function render(array $params = []):string
+    public function render(array $params = []): string
     {
         $html = '';
         $title = $this->title;

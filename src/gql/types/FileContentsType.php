@@ -83,7 +83,7 @@ class FileContentsType extends ObjectType
             'contents' => [
                 'name' => 'contents',
                 'type' => Type::string(),
-            ]
+            ],
         ];
 
         return TypeManager::prepareFieldDefinitions($fields, self::getName());

@@ -11,10 +11,10 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\helpers\Dependency;
+use craft\validators\ArrayValidator;
 use nystudio107\seomatic\events\IncludeContainerEvent;
 
-use craft\validators\ArrayValidator;
+use nystudio107\seomatic\helpers\Dependency;
 
 /**
  * @author    nystudio107

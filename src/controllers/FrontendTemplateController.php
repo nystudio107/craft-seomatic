@@ -9,11 +9,11 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\services\FrontendTemplates;
-
 use Craft;
 use craft\web\Controller;
+
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\FrontendTemplates;
 
 use yii\web\Response;
 
@@ -99,5 +99,4 @@ class FrontendTemplateController extends Controller
 
         return $this->asRaw($text);
     }
-
 }

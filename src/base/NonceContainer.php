@@ -11,12 +11,12 @@
 
 namespace nystudio107\seomatic\base;
 
+use Craft;
+use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\Dependency;
 
-use Craft;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -71,7 +71,7 @@ abstract class NonceContainer extends MetaContainer implements NonceContainerInt
             $serializedNonces = implode(" ", $cspNonces);
             $cspDirective = self::CSP_DIRECTIVE;
             $cspValue = "{$cspDirective} {$serializedNonces};";
-            foreach(self::CSP_HEADERS as $cspHeader) {
+            foreach (self::CSP_HEADERS as $cspHeader) {
                 Craft::$app->getResponse()->getHeaders()->add($cspHeader, $cspValue);
             }
         }

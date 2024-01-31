@@ -3,9 +3,9 @@
 namespace nystudio107\seomatic\migrations;
 
 use Craft;
-use nystudio107\seomatic\seoelements\SeoEvent;
-
 use craft\db\Migration;
+
+use nystudio107\seomatic\seoelements\SeoEvent;
 use Solspace\Calendar\Calendar as CalendarPlugin;
 
 /**

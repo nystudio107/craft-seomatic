@@ -402,8 +402,7 @@ class MetaBundles extends Component
         $sourceModel,
         int $sourceSiteId,
         $baseConfig = null
-    )
-    {
+    ) {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
         /** @var Section|CategoryGroup|ProductType $sourceModel */
@@ -811,7 +810,6 @@ class MetaBundles extends Component
         // Since sectionIds, CategoryIds, etc. are not unique, we need to do separate queries and combine them
         $seoElements = Seomatic::$plugin->seoElements->getAllSeoElementTypes();
         foreach ($seoElements as $seoElement) {
-
             $subQuery = (new Query())
                 ->from(['{{%seomatic_metabundles}}'])
                 ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE]);
@@ -828,7 +826,7 @@ class MetaBundles extends Component
                 ->leftJoin(['mb2' => $subQuery], [
                     'and',
                     '[[mb.sourceId]] = [[mb2.sourceId]]',
-                    '[[mb.id]] < [[mb2.id]]'
+                    '[[mb.id]] < [[mb2.id]]',
                 ])
                 ->where(['mb2.id' => null]);
             $bundles = array_merge($bundles, $bundleQuery->all());
@@ -896,7 +894,7 @@ class MetaBundles extends Component
             $emptyValues = array_merge($emptyValues, array_fill_keys($inherited, ''));
             foreach ($inherited as $inheritedAttribute) {
                 foreach (self::COMPOSITE_INHERITANCE_CHILDREN[$inheritedAttribute] ?? [] as $child) {
-                    list ($model, $attribute) = explode('.', $child);
+                    list($model, $attribute) = explode('.', $child);
                     $metaBundle->{$model}->$attribute = '';
                 }
             }

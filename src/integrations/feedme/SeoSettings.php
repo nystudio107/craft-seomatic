@@ -9,22 +9,21 @@
 
 namespace nystudio107\seomatic\integrations\feedme;
 
-use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
+use Cake\Utility\Hash;
 
 use Craft;
 use craft\db\Query;
 use craft\db\Table;
 use craft\elements\Asset as AssetElement;
-use craft\helpers\ArrayHelper;
-use craft\helpers\Db;
-use craft\helpers\UrlHelper;
-
 use craft\feedme\base\Field as FeedMeField;
 use craft\feedme\base\FieldInterface as FeedMeFieldInterface;
+
 use craft\feedme\helpers\AssetHelper;
 use craft\feedme\helpers\DataHelper;
+use craft\helpers\ArrayHelper;
+use craft\helpers\UrlHelper;
 
-use Cake\Utility\Hash;
+use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 
 /**
  * @author    nystudio107

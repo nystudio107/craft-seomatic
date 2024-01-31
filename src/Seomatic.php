@@ -332,7 +332,7 @@ class Seomatic extends Plugin
         // Install our event listeners only if our table schema exists
         if ($this->migrationsAndSchemaReady()) {
             // Add in our Twig extensions
-            self::$view->registerTwigExtension(new SeomaticTwigExtension);
+            self::$view->registerTwigExtension(new SeomaticTwigExtension());
             $request = Craft::$app->getRequest();
             // Add in our event listeners that are needed for every request
             $this->installGlobalEventListeners();
@@ -349,7 +349,7 @@ class Seomatic extends Plugin
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
+            function(PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // Invalidate our caches after we've been installed
                     $this->clearAllCaches();
@@ -370,7 +370,7 @@ class Seomatic extends Plugin
         Event::on(
             ClearCaches::class,
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
-            function (RegisterCacheOptionsEvent $event) {
+            function(RegisterCacheOptionsEvent $event) {
                 Craft::debug(
                     'ClearCaches::EVENT_REGISTER_CACHE_OPTIONS',
                     __METHOD__
@@ -386,7 +386,7 @@ class Seomatic extends Plugin
         Event::on(
             Plugins::class,
             Plugins::EVENT_BEFORE_SAVE_PLUGIN_SETTINGS,
-            function (PluginEvent $event) {
+            function(PluginEvent $event) {
                 if ($event->plugin === $this && !Craft::$app->getDb()->getSupportsMb4()) {
                     // For all the emojis
                     $settingsModel = $this->getSettings();
@@ -439,7 +439,7 @@ class Seomatic extends Plugin
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_LOAD_PLUGINS,
-            function () {
+            function() {
                 // Delay registering SEO Elements to give other plugins a chance to load first
                 $this->seoElements->getAllSeoElementTypes(false);
                 // Delay installing GQL handlers to give other plugins a chance to register their own first
@@ -460,7 +460,7 @@ class Seomatic extends Plugin
         Event::on(
             Fields::class,
             Fields::EVENT_REGISTER_FIELD_TYPES,
-            function (RegisterComponentTypesEvent $event) {
+            function(RegisterComponentTypesEvent $event) {
                 $event->types[] = SeoSettingsField::class;
                 $event->types[] = Seomatic_MetaField::class;
             }
@@ -469,7 +469,7 @@ class Seomatic extends Plugin
         Event::on(
             Element::class,
             Element::EVENT_AFTER_PROPAGATE,
-            static function (ModelEvent $event) {
+            static function(ModelEvent $event) {
                 Craft::debug(
                     'Element::EVENT_AFTER_PROPAGATE',
                     __METHOD__
@@ -489,7 +489,7 @@ class Seomatic extends Plugin
         Event::on(
             Elements::class,
             Elements::EVENT_AFTER_DELETE_ELEMENT,
-            function (ElementEvent $event) {
+            function(ElementEvent $event) {
                 Craft::debug(
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
                     __METHOD__
@@ -508,7 +508,7 @@ class Seomatic extends Plugin
             Event::on(
                 Entry::class,
                 Entry::EVENT_REGISTER_PREVIEW_TARGETS,
-                function (RegisterPreviewTargetsEvent $e) {
+                function(RegisterPreviewTargetsEvent $e) {
                     /** @var Element $element */
                     $element = $e->sender;
                     if ($element->uri !== null) {
@@ -529,7 +529,7 @@ class Seomatic extends Plugin
         Event::on(
             Application::class,
             BaseApplication::EVENT_BEFORE_REQUEST,
-            static function () {
+            static function() {
                 /** @var Module|null $debugModule */
                 $debugModule = Craft::$app->getModule('debug');
 
@@ -546,7 +546,7 @@ class Seomatic extends Plugin
             Event::on(
                 FeedMeFields::class,
                 FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
-                function (RegisterFeedMeFieldsEvent $e) {
+                function(RegisterFeedMeFieldsEvent $e) {
                     Craft::debug(
                         'FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS',
                         __METHOD__
@@ -555,7 +555,7 @@ class Seomatic extends Plugin
                 }
             );
         }
-        $updateMetaBundles = function ($message) {
+        $updateMetaBundles = function($message) {
             Craft::debug(
                 $message,
                 __METHOD__
@@ -574,7 +574,7 @@ class Seomatic extends Plugin
         Event::on(
             SitesService::class,
             SitesService::EVENT_AFTER_SAVE_SITE,
-            function () use ($updateMetaBundles) {
+            function() use ($updateMetaBundles) {
                 $updateMetaBundles('SitesService::EVENT_AFTER_SAVE_SITE');
             }
         );
@@ -583,7 +583,7 @@ class Seomatic extends Plugin
         Event::on(
             SitesService::class,
             SitesService::EVENT_AFTER_DELETE_SITE,
-            function () use ($updateMetaBundles) {
+            function() use ($updateMetaBundles) {
                 $updateMetaBundles('SitesService::EVENT_AFTER_DELETE_SITE');
             }
         );
@@ -602,7 +602,7 @@ class Seomatic extends Plugin
             Event::on(
                 Gql::class,
                 Gql::EVENT_REGISTER_GQL_TYPES,
-                function (RegisterGqlTypesEvent $event) {
+                function(RegisterGqlTypesEvent $event) {
                     Craft::debug(
                         'Gql::EVENT_REGISTER_GQL_TYPES',
                         __METHOD__
@@ -615,7 +615,7 @@ class Seomatic extends Plugin
             Event::on(
                 Gql::class,
                 Gql::EVENT_REGISTER_GQL_QUERIES,
-                function (RegisterGqlQueriesEvent $event) {
+                function(RegisterGqlQueriesEvent $event) {
                     Craft::debug(
                         'Gql::EVENT_REGISTER_GQL_QUERIES',
                         __METHOD__
@@ -631,7 +631,7 @@ class Seomatic extends Plugin
                 Event::on(
                     Gql::class,
                     Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
-                    function (RegisterGqlSchemaComponentsEvent $event) {
+                    function(RegisterGqlSchemaComponentsEvent $event) {
                         Craft::debug(
                             'Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS',
                             __METHOD__
@@ -649,7 +649,7 @@ class Seomatic extends Plugin
             Event::on(
                 TypeManager::class,
                 TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS,
-                function (DefineGqlTypeFieldsEvent $event) use ($knownInterfaceNames) {
+                function(DefineGqlTypeFieldsEvent $event) use ($knownInterfaceNames) {
                     if (in_array($event->typeName, $knownInterfaceNames, true)) {
                         Craft::debug(
                             'TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS',
@@ -663,7 +663,7 @@ class Seomatic extends Plugin
                                 'type' => SeomaticInterface::getType(),
                                 'args' => SeomaticArguments::getArguments(),
                                 'resolve' => SeomaticResolver::class . '::resolve',
-                                'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.')
+                                'description' => Craft::t('seomatic', 'This query is used to query for SEOmatic meta data.'),
                             ];
                         }
                     }
@@ -690,7 +690,7 @@ class Seomatic extends Plugin
         Event::on(
             View::class,
             View::EVENT_END_PAGE,
-            function () {
+            function() {
                 Craft::debug(
                     'View::EVENT_END_PAGE',
                     __METHOD__
@@ -713,7 +713,7 @@ class Seomatic extends Plugin
         // Don't cache Control Panel requests
         self::$cacheDuration = 1;
         // Prefix the Control Panel title
-        self::$view->hook('cp.layouts.base', function (&$context) {
+        self::$view->hook('cp.layouts.base', function(&$context) {
             if (self::$devMode) {
                 $context['docTitle'] = self::$settings->devModeCpTitlePrefix . $context['docTitle'];
             } else {
@@ -735,7 +735,7 @@ class Seomatic extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            function(RegisterUrlRulesEvent $event) {
                 Craft::debug(
                     'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
                     __METHOD__
@@ -777,7 +777,7 @@ class Seomatic extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            function(RegisterUrlRulesEvent $event) {
                 Craft::debug(
                     'UrlManager::EVENT_REGISTER_CP_URL_RULES',
                     __METHOD__
@@ -793,7 +793,7 @@ class Seomatic extends Plugin
         Event::on(
             UserPermissions::class,
             UserPermissions::EVENT_REGISTER_PERMISSIONS,
-            function (RegisterUserPermissionsEvent $event) {
+            function(RegisterUserPermissionsEvent $event) {
                 Craft::debug(
                     'UserPermissions::EVENT_REGISTER_PERMISSIONS',
                     __METHOD__
@@ -804,7 +804,7 @@ class Seomatic extends Plugin
         );
         // Handler: AutocompleteService::EVENT_REGISTER_CODEEDITOR_AUTOCOMPLETES
         Event::on(AutocompleteService::class, AutocompleteService::EVENT_REGISTER_CODEEDITOR_AUTOCOMPLETES,
-            function (RegisterCodeEditorAutocompletesEvent $event) {
+            function(RegisterCodeEditorAutocompletesEvent $event) {
                 if ($event->fieldType === self::SEOMATIC_EXPRESSION_FIELD_TYPE) {
                     $event->types[] = EnvironmentVariableAutocomplete::class;
                 }
@@ -816,7 +816,7 @@ class Seomatic extends Plugin
         // Handler: TwigTemplateValidator::EVENT_REGISTER_TWIG_VALIDATOR_VARIABLES
         Event::on(TwigTemplateValidator::class,
             TwigTemplateValidator::EVENT_REGISTER_TWIG_VALIDATOR_VARIABLES,
-            function (RegisterTwigValidatorVariablesEvent $event) {
+            function(RegisterTwigValidatorVariablesEvent $event) {
                 if (Seomatic::$seomaticVariable === null) {
                     Seomatic::$seomaticVariable = new SeomaticVariable();
                     Seomatic::$plugin->metaContainers->loadGlobalMetaContainers();

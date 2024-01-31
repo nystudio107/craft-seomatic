@@ -85,7 +85,7 @@ trait ServicesTrait
                     'errorEntry' => 'src/js/seomatic.js',
                     'useDevServer' => true,
                 ],
-            ]
+            ],
         ], $config);
 
         parent::__construct($id, $parent, $config);

@@ -11,13 +11,13 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
-use nystudio107\minify\Minify;
-
 use Craft;
+
 use craft\helpers\Template;
+
 use craft\web\View;
+use nystudio107\minify\Minify;
+use nystudio107\seomatic\Seomatic;
 
 use yii\base\Exception;
 
@@ -95,7 +95,6 @@ class PluginTemplate
                 if ($minify) {
                     $htmlText = Minify::$plugin->minify->$minifier($htmlText);
                 }
-
             }
         } catch (\Exception $e) {
             $htmlText = Craft::t(

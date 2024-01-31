@@ -32,7 +32,7 @@ class Environment
         'dev',
         'development',
         'loc',
-        'local'
+        'local',
     ];
 
     const STAGING_ENVIRONMENTS = [
@@ -43,7 +43,7 @@ class Environment
         'uat',
         'acc',
         'acceptance',
-        'sandbox'
+        'sandbox',
     ];
 
     const PRODUCTION_ENVIRONMENTS = [
@@ -51,7 +51,7 @@ class Environment
         'prod',
         'production',
         'pub',
-        'public'
+        'public',
     ];
 
     // Static Methods

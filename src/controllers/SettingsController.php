@@ -603,8 +603,7 @@ class SettingsController extends Controller
         string $siteHandle = null,
                $typeId = null,
                $loadFromSiteHandle = null
-    ): Response
-    {
+    ): Response {
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
@@ -757,8 +756,7 @@ class SettingsController extends Controller
         string $sourceHandle,
         string $groupName,
         array  &$variables
-    )
-    {
+    ) {
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromSource(
@@ -1009,7 +1007,7 @@ class SettingsController extends Controller
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
                 if (!empty($siteSettings['additionalSitemapUrls'])) {
-                    $siteSettings['additionalSitemapUrlsDateUpdated'] = new DateTime;
+                    $siteSettings['additionalSitemapUrlsDateUpdated'] = new DateTime();
                     Seomatic::$plugin->sitemaps->submitCustomSitemap($siteId);
                 }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
@@ -1147,7 +1145,7 @@ class SettingsController extends Controller
         // Add in the variables to the autocomplete cache so they can be accessed across requests
         $subSectionSettings = $variables['scripts'][$subSection];
         $variables['codeEditorOptions'] = [
-            TrackingVarsAutocomplete::OPTIONS_DATA_KEY => $subSectionSettings->vars
+            TrackingVarsAutocomplete::OPTIONS_DATA_KEY => $subSectionSettings->vars,
         ];
         // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;

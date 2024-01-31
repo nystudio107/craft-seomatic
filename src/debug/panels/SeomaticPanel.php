@@ -24,7 +24,7 @@ class SeomaticPanel extends Panel
     const CONTAINER_PARSED_PROPERTIES = [
         'metaGlobalVars',
         'metaSiteVars',
-        'metaSitemapVars'
+        'metaSitemapVars',
     ];
 
     /**
@@ -46,12 +46,11 @@ class SeomaticPanel extends Panel
 
         Event::on(MetaContainers::class,
             MetaContainers::EVENT_METABUNDLE_DEBUG_DATA,
-            function (MetaBundleDebugDataEvent $e) {
+            function(MetaBundleDebugDataEvent $e) {
                 if ($e->metaBundle) {
                     $this->metaBundles[$e->metaBundleCategory] = $e->metaBundle;
                 }
             });
-
     }
 
     /**

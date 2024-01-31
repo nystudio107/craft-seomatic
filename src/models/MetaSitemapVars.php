@@ -126,21 +126,21 @@ class MetaSitemapVars extends InheritableSettingsModel
             ],
             [
                 [
-                    'sitemapPriority'
+                    'sitemapPriority',
                 ],
-                'number'
+                'number',
             ],
             [
                 [
-                    'sitemapLimit'
+                    'sitemapLimit',
                 ],
-                'integer'
+                'integer',
             ],
             [
                 [
-                    'structureDepth'
+                    'structureDepth',
                 ],
-                'integer'
+                'integer',
             ],
             [
                 [
@@ -149,14 +149,14 @@ class MetaSitemapVars extends InheritableSettingsModel
                     'sitemapAltLinks',
                     'sitemapFiles',
                 ],
-                'boolean'
+                'boolean',
             ],
             [
                 [
                     'sitemapImageFieldMap',
-                    'sitemapVideoFieldMap'
+                    'sitemapVideoFieldMap',
                 ],
-                ArrayValidator::class
+                ArrayValidator::class,
             ],
         ];
     }
