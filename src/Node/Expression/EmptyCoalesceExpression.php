@@ -64,11 +64,11 @@ class EmptyCoalesceExpression extends AbstractExpression
     {
         //$this->getNode('expr1')->setAttribute('always_defined', true);
         $compiler
-            ->raw('(('.self::class.'::empty(')
+            ->raw('((' . self::class . '::empty(')
             ->subcompile($this->getNode('left'))
             ->raw(') ? null : ')
             ->subcompile($this->getNode('left'))
-            ->raw(') ?? ('.self::class.'::empty(')
+            ->raw(') ?? (' . self::class . '::empty(')
             ->subcompile($this->getNode('right'))
             ->raw(') ? null : ')
             ->subcompile($this->getNode('right'))

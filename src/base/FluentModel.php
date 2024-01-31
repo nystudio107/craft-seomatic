@@ -25,7 +25,6 @@ use yii\base\InvalidArgumentException;
  */
 abstract class FluentModel extends Model
 {
-
     // Static Protected Methods
     // =========================================================================
 
@@ -78,7 +77,7 @@ abstract class FluentModel extends Model
         // Set the property
         $value = $args[0];
         if (\is_object($value) && $value instanceof Markup) {
-                $value = (string)$value;
+            $value = (string)$value;
         }
         $property->setValue($this, $value);
 

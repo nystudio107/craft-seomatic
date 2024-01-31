@@ -18,11 +18,10 @@ namespace nystudio107\seomatic\base;
  */
 interface ContainerInterface
 {
-
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'GenericContainer';
+    public const CONTAINER_TYPE = 'GenericContainer';
 
     /**
      * @event IncludeContainerEvent The event that is triggered when a container is
@@ -38,7 +37,7 @@ interface ContainerInterface
      * });
      * ```
      */
-    const EVENT_INCLUDE_CONTAINER = 'includeContainer';
+    public const EVENT_INCLUDE_CONTAINER = 'includeContainer';
 
     // Static Methods
     // =========================================================================

@@ -22,7 +22,7 @@ class PullField
     // =========================================================================
 
 
-    const PULL_TEXT_FIELDS = [
+    public const PULL_TEXT_FIELDS = [
         ['fieldName' => 'seoTitle', 'seoField' => 'seoTitle'],
         ['fieldName' => 'siteNamePosition', 'seoField' => 'siteNamePosition'],
         ['fieldName' => 'seoDescription', 'seoField' => 'seoDescription'],
@@ -39,7 +39,7 @@ class PullField
         ['fieldName' => 'twitterImageDescription', 'seoField' => 'seoImageDescription'],
     ];
 
-    const PULL_ASSET_FIELDS = [
+    public const PULL_ASSET_FIELDS = [
         ['fieldName' => 'seoImage', 'seoField' => 'seoImage', 'transformModeField' => 'seoImageTransformMode', 'transformName' => 'base'],
         ['fieldName' => 'ogImage', 'seoField' => 'seoImage', 'transformModeField' => 'ogImageTransformMode', 'transformName' => 'facebook'],
         ['fieldName' => 'twitterImage', 'seoField' => 'seoImage', 'transformModeField' => 'twitterImageTransformMode', 'transformName' => 'twitter'],

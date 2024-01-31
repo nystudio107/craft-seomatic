@@ -25,7 +25,7 @@ class OgDescriptionTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'OgDescriptionTag';
+    public const ITEM_TYPE = 'OgDescriptionTag';
 
     // Static Methods
     // =========================================================================

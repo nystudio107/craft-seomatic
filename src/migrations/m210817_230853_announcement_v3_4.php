@@ -17,7 +17,6 @@ class m210817_230853_announcement_v3_4 extends Migration
     public function safeUp()
     {
         if (version_compare(Craft::$app->getVersion(), '3.7', '>=')) {
-
             Craft::$app->announcements->push(
                 Translation::prep('seomatic', 'SEO Settings fields', []),
                 Translation::prep('seomatic', 'The [SEO Settings]({url}) fields now feature **Override** lightswitches next to each setting, letting you explicitly override SEO settings on a per-entry basis.', [

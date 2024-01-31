@@ -9,7 +9,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaTitleContainer;
 use nystudio107\seomatic\services\Title as TitleService;
 
@@ -20,15 +19,15 @@ use nystudio107\seomatic\services\Title as TitleService;
  */
 
 return [
-    MetaTitleContainer::CONTAINER_TYPE.TitleService::GENERAL_HANDLE => [
-        'name'         => 'General',
-        'description'  => 'Meta Title Tag',
-        'handle'       => TitleService::GENERAL_HANDLE,
-        'class'        => (string)MetaTitleContainer::class,
-        'include'      => true,
+    MetaTitleContainer::CONTAINER_TYPE . TitleService::GENERAL_HANDLE => [
+        'name' => 'General',
+        'description' => 'Meta Title Tag',
+        'handle' => TitleService::GENERAL_HANDLE,
+        'class' => (string)MetaTitleContainer::class,
+        'include' => true,
         'dependencies' => [
         ],
-        'data'         => [
+        'data' => [
         ],
     ],
 ];

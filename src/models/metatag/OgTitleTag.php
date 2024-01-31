@@ -26,7 +26,7 @@ class OgTitleTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'OgTitleTag';
+    public const ITEM_TYPE = 'OgTitleTag';
 
     // Static Methods
     // =========================================================================

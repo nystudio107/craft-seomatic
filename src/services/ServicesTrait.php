@@ -88,7 +88,7 @@ trait ServicesTrait
                     'errorEntry' => 'src/js/seomatic.js',
                     'useDevServer' => true,
                 ],
-            ]
+            ],
         ];
     }
 

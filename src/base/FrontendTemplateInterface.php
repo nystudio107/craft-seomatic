@@ -18,11 +18,10 @@ namespace nystudio107\seomatic\base;
  */
 interface FrontendTemplateInterface
 {
-
     // Constants
     // =========================================================================
 
-    const TEMPLATE_TYPE = 'GenericTemplate';
+    public const TEMPLATE_TYPE = 'GenericTemplate';
 
     // Public Methods
     // =========================================================================

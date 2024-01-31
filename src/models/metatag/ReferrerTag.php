@@ -23,7 +23,7 @@ class ReferrerTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'ReferrerTag';
+    public const ITEM_TYPE = 'ReferrerTag';
 
     // Static Methods
     // =========================================================================
