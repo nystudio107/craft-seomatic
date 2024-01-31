@@ -28,10 +28,6 @@
       "homepage": "https://nystudio107.com"
     }
   ],
-  "require-dev": {
-    "codeception/codeception": "^3.0",
-    "vlucas/phpdotenv": "^3.0"
-  },
   "require": {
     "craftcms/cms": "^3.2.0",
     "nystudio107/craft-plugin-vite": "^1.0.31",
@@ -40,7 +36,17 @@
     "davechild/textstatistics": "1.0.2",
     "sunra/php-simple-html-dom-parser": "^1.5.2"
   },
+  "require-dev": {
+    "codeception/codeception": "^3.0",
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main",
+    "craftcms/rector": "dev-main",
+    "vlucas/phpdotenv": "^3.0"
+  },
   "scripts": {
+    "phpstan": "vendor/bin/phpstan --ansi --memory-limit=1G",
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --fix --ansi",
     "test": "codecept run unit --coverage-xml"
   },
   "config": {
