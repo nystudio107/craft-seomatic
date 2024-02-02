@@ -20,6 +20,7 @@ And this to the AMP template to tell Google where the canonical HTML page is:
 ```
 
 Since AMP [doesn’t allow for third-party JavaScript](https://medium.com/google-developers/how-to-avoid-common-mistakes-when-publishing-accelerated-mobile-pages-9ea61abf530f), you might want to add this to your AMP templates:
+
 ```twig
 {% do seomatic.script.container().include(false) %}
 ```

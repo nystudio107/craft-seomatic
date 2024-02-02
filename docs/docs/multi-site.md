@@ -29,6 +29,7 @@ If you _don’t_ want to organize your sites in this manner, you’ll need to tu
 Sites that are grouped together under the same Site Group will have `<link rel="alternate" hreflang="XX">` & `<meta content="xx_XX" property="og:locale:alternate">` URLs added automatically in the HTML.
 
 To disable SEOmatic’s automatic rendering of these tags, you can do:
+
 ```twig
 {% do seomatic.link.get('alternate').include(false) %}
 {% do seomatic.tag.get('og:locale:alternate').include(false) %}
