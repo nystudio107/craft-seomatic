@@ -151,6 +151,7 @@ All meta objects also have an `include` property that determines whether or not 
 ```
 
 You could also chain this together in a single line:
+
 ```twig
 {% do seomatic.tag.get("description").include(false) %}
 ```
@@ -188,6 +189,7 @@ Should you need to add extra tag attributes to a Meta Item, such as the various 
 ```
 
 This will generate a tag like this:
+
 ```html
 <meta name="description" content="My description!" data-type="whatever">
 ```
@@ -214,10 +216,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-XXXXXXXXX', 'auto');
 ga('send', 'pageview');
 </script>
-
 ```
 
-For a complete list of the Script handles SEOmatic uses can be found in [ScriptContainer.php](https://github.com/nystudio107/craft-seomatic/blob/v4/src/seomatic-config/globalmeta/ScriptContainer.php)
+See [ScriptContainer.php](https://github.com/nystudio107/craft-seomatic/blob/v4/src/seomatic-config/globalmeta/ScriptContainer.php) for a complete list of the script handles SEOmatic uses.
 
 ### Meta Object `.create()`
 
@@ -242,6 +243,7 @@ By default, newly created meta objects are added to the appropriate meta contain
 ### Meta Object Validation
 
 All meta objects can self-validate:
+
 ```twig
 {% set myJsonLd = seomatic.jsonLd.create({
   'type': 'Article',
