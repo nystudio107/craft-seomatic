@@ -201,12 +201,16 @@ The event that is triggered when SEOmatic has included the standard meta contain
 use nystudio107\seomatic\events\AddDynamicMetaEvent;
 use nystudio107\seomatic\helpers\DynamicMeta;
 use yii\base\Event;
+use nystudio107\seomatic\Seomatic;
 
 Event::on(
     DynamicMeta::class,
     DynamicMeta::EVENT_ADD_DYNAMIC_META,
     function(AddDynamicMetaEvent $event) {
         // Add whatever dynamic meta items to the containers as you like
+        Seomatic::$plugin->getMetaContainers()
+          ->metaGlobalVars
+          ->seoDescription = "This description overrides any others!";
     }
 );
 ```
