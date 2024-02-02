@@ -34,6 +34,7 @@ export default defineConfig({
           {text: 'Features & Installation', link: '/'},
           {text: 'Overview', link: '/overview'},
           {text: 'Issues & Upgrading', link: '/issues'},
+          {text: 'What it Does', link: '/what-it-does'},
         ],
       },
       {
