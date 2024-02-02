@@ -101,7 +101,7 @@ class FileController extends Controller
                 $fileName,
                 [
                     'inline' => $inline,
-                    'mimeType' => FileHelper::getMimeTypeByExtension($fileName)
+                    'mimeType' => FileHelper::getMimeTypeByExtension($fileName),
                 ]
             );
         } else {

@@ -46,13 +46,13 @@ class Field
     // Constants
     // =========================================================================
 
-    const TEXT_FIELD_CLASS_KEY = 'text';
-    const ASSET_FIELD_CLASS_KEY = 'asset';
-    const BLOCK_FIELD_CLASS_KEY = 'block';
-    const SEO_SETTINGS_CLASS_KEY = 'seo';
-    const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
+    public const TEXT_FIELD_CLASS_KEY = 'text';
+    public const ASSET_FIELD_CLASS_KEY = 'asset';
+    public const BLOCK_FIELD_CLASS_KEY = 'block';
+    public const SEO_SETTINGS_CLASS_KEY = 'seo';
+    public const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
 
-    const FIELD_CLASSES = [
+    public const FIELD_CLASSES = [
         self::TEXT_FIELD_CLASS_KEY => [
             CKEditorField::class,
             PlainTextField::class,
@@ -119,9 +119,8 @@ class Field
     public static function fieldsOfTypeFromLayout(
         string      $fieldClassKey,
         FieldLayout $layout,
-        bool        $keysOnly = true
-    ): array
-    {
+        bool        $keysOnly = true,
+    ): array {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
@@ -163,9 +162,8 @@ class Field
     public static function fieldsOfTypeFromElement(
         Element $element,
         string  $fieldClassKey,
-        bool    $keysOnly = true
-    ): array
-    {
+        bool    $keysOnly = true,
+    ): array {
         $foundFields = [];
         $layout = $element->getFieldLayout();
         if ($layout !== null) {
@@ -242,7 +240,7 @@ class Field
                 // Prefix the keys with the global set name
                 $prefix = $global->handle;
                 $fields = array_combine(
-                    array_map(function ($key) use ($prefix) {
+                    array_map(function($key) use ($prefix) {
                         return $prefix . '.' . $key;
                     }, array_keys($fields)),
                     $fields
@@ -274,9 +272,8 @@ class Field
         string $sourceBundleType,
         string $sourceHandle,
         string $fieldClassKey,
-        bool   $keysOnly = true
-    ): array
-    {
+        bool   $keysOnly = true,
+    ): array {
         $foundFields = [];
         $layouts = [];
         // Get the layouts
@@ -424,5 +421,4 @@ class Field
 
         return $foundFields;
     }
-
 }

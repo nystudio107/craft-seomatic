@@ -26,7 +26,7 @@ class TwitterTitleTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'TwitterTitleTag';
+    public const ITEM_TYPE = 'TwitterTitleTag';
 
     // Static Methods
     // =========================================================================

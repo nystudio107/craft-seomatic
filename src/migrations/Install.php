@@ -199,7 +199,7 @@ class Install extends Migration
     {
         // Migrate the old Seomatic_Meta field
         $this->update('{{%fields}}', [
-            'type' => Seomatic_MetaField::class
+            'type' => Seomatic_MetaField::class,
         ], ['type' => 'Seomatic_Meta']);
     }
 

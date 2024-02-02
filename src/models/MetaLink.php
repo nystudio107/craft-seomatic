@@ -30,9 +30,9 @@ class MetaLink extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaLink';
+    public const ITEM_TYPE = 'MetaLink';
 
-    const ARRAY_PROPERTIES = [
+    public const ARRAY_PROPERTIES = [
         'href',
     ];
 
@@ -119,7 +119,7 @@ class MetaLink extends MetaItem
             [['crossorigin', 'media', 'rel', 'sizes', 'type'], 'string'],
             ['crossorigin', 'in', 'range' => [
                 'anonymous',
-                'use-credentials'
+                'use-credentials',
             ]],
             ['href', 'validateStringOrArray'],
             ['hreflang', 'validateStringOrArray'],

@@ -11,11 +11,11 @@
 
 namespace nystudio107\seomatic\gql\types;
 
-use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
-
 use craft\gql\base\ObjectType;
 
 use GraphQL\Type\Definition\ResolveInfo;
+
+use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 
 /**
  * Class SeomaticType

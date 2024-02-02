@@ -34,7 +34,7 @@ class MetaSiteVars extends VarsModel
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaSiteVarsContainer';
+    public const CONTAINER_TYPE = 'MetaSiteVarsContainer';
 
     // Static Methods
     // =========================================================================
@@ -169,13 +169,13 @@ class MetaSiteVars extends VarsModel
                     'siteLinksQueryInput',
                     'referrer',
                 ],
-                'string'
+                'string',
             ],
             [
                 [
-                    'additionalSitemapUrlsDateUpdated'
+                    'additionalSitemapUrlsDateUpdated',
                 ],
-                DateTimeValidator::class
+                DateTimeValidator::class,
             ],
             [
                 [

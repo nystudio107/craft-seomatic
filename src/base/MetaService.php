@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\Seomatic;
-
-use Craft;
 use craft\base\Component;
+
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -26,7 +25,7 @@ abstract class MetaService extends Component implements MetaServiceInterface
     // Constants
     // =========================================================================
 
-    const GENERAL_HANDLE = 'general';
+    public const GENERAL_HANDLE = 'general';
 
     // Public Methods
     // =========================================================================

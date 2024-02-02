@@ -21,10 +21,10 @@ use yii\base\Event;
  */
 class MetaBundleDebugDataEvent extends Event
 {
-    const GLOBAL_META_BUNDLE = 'global';
-    const CONTENT_META_BUNDLE = 'content';
-    const FIELD_META_BUNDLE = 'field';
-    const COMBINED_META_BUNDLE = 'combined';
+    public const GLOBAL_META_BUNDLE = 'global';
+    public const CONTENT_META_BUNDLE = 'content';
+    public const FIELD_META_BUNDLE = 'field';
+    public const COMBINED_META_BUNDLE = 'combined';
 
     // Properties
     // =========================================================================

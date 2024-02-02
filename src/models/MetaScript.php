@@ -28,7 +28,7 @@ class MetaScript extends NonceItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaScript';
+    public const ITEM_TYPE = 'MetaScript';
 
     // Static Methods
     // =========================================================================

@@ -44,7 +44,7 @@ class EmbeddedModelValidator extends Validator
                         $model->addError(
                             $attribute,
                             Craft::t('seomatic', 'Object failed to validate')
-                            .'-'.$attributeError.' - '.$valueError
+                            . '-' . $attributeError . ' - ' . $valueError
                         );
                     }
                 }

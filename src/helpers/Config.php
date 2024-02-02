@@ -11,10 +11,10 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
+
 use craft\helpers\StringHelper;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -26,7 +26,7 @@ class Config
     // Constants
     // =========================================================================
 
-    const LOCAL_CONFIG_DIR = 'seomatic-config';
+    public const LOCAL_CONFIG_DIR = 'seomatic-config';
 
     // Static Methods
     // =========================================================================

@@ -11,9 +11,9 @@
 
 namespace nystudio107\seomatic\migrations;
 
-use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
-
 use craft\db\Migration;
+
+use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 
 /**
  * @author    nystudio107
@@ -34,7 +34,7 @@ class m180314_002755_field_type extends Migration
 
         // Migrate the old Seomatic_Meta field
         $this->update('{{%fields}}', [
-            'type' => Seomatic_MetaField::class
+            'type' => Seomatic_MetaField::class,
         ], ['type' => 'Seomatic_Meta']);
 
         // Refresh the field memoization
@@ -57,5 +57,4 @@ class m180314_002755_field_type extends Migration
 
     // Protected Methods
     // =========================================================================
-
 }

@@ -42,7 +42,7 @@ class Text
     // Constants
     // =========================================================================
 
-    const LANGUAGE_MAP = [
+    public const LANGUAGE_MAP = [
         'en' => 'English',
         'fr' => 'French',
         'de' => 'German',
@@ -479,7 +479,7 @@ class Text
 
         $className = 'PhpScience\\TextRank\\Tool\\StopWords\\' . ucfirst($language);
         if (class_exists($className)) {
-            $stopWords = new $className;
+            $stopWords = new $className();
         }
 
         return $stopWords;

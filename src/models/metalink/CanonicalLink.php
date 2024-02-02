@@ -27,7 +27,7 @@ class CanonicalLink extends MetaLink
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'CanonicalLink';
+    public const ITEM_TYPE = 'CanonicalLink';
 
     // Static Methods
     // =========================================================================

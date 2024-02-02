@@ -23,7 +23,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'FrontendTemplateContainer';
+    public const CONTAINER_TYPE = 'FrontendTemplateContainer';
 
     // Public Properties
     // =========================================================================

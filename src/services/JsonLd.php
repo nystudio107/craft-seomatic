@@ -31,7 +31,7 @@ class JsonLd extends MetaService
     // Constants
     // =========================================================================
 
-    const DEFAULT_TYPE = 'Thing';
+    public const DEFAULT_TYPE = 'Thing';
 
     // Public Methods
     // =========================================================================

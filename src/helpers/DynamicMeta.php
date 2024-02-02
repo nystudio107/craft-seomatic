@@ -42,7 +42,6 @@ use function in_array;
 use function is_array;
 use function is_string;
 
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -68,7 +67,7 @@ class DynamicMeta
      * });
      * ```
      */
-    const EVENT_ADD_DYNAMIC_META = 'addDynamicMeta';
+    public const EVENT_ADD_DYNAMIC_META = 'addDynamicMeta';
 
     // Static Methods
     // =========================================================================
@@ -389,7 +388,7 @@ class DynamicMeta
         if ($lastElement && $element) {
             if ($lastElement->uri !== '__home__' && $element->uri) {
                 $path = $lastElement->uri;
-                $segments = array_values(array_filter(explode('/', $path), function ($segment) {
+                $segments = array_values(array_filter(explode('/', $path), function($segment) {
                     return $segment !== '';
                 }));
             }
@@ -459,7 +458,6 @@ class DynamicMeta
                     if ($siteLocalizedUrl['primary'] && Seomatic::$settings->addXDefaultHrefLang) {
                         $metaTag->hreflang[] = 'x-default';
                         $metaTag->href[] = $siteLocalizedUrl['url'];
-
                     }
                 }
                 Seomatic::$plugin->link->add($metaTag);
@@ -549,9 +547,6 @@ class DynamicMeta
                     $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
-                    if (isset($element->enabledForSite) && !(bool)$element->enabledForSite) {
-                        $includeUrl = false;
-                    }
                     /** @var MetaBundle $metaBundle */
                     list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                         = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
@@ -561,8 +556,9 @@ class DynamicMeta
                         $sourceSiteId
                     );
                     if ($metaBundle !== null) {
-                        // If robots is set tp 'none' don't include the URL
-                        if ($metaBundle->metaGlobalVars->robots === 'none' || $metaBundle->metaGlobalVars->robots === 'noindex') {
+                        // If robots contains 'none' or 'noindex' don't include the URL
+                        $robotsArray = explode(',', $metaBundle->metaGlobalVars->robots);
+                        if (in_array('noindex', $robotsArray, true) || in_array('none', $robotsArray, true)) {
                             $includeUrl = false;
                         }
                     }
@@ -583,13 +579,21 @@ class DynamicMeta
                                     && in_array('robots', $seoSettingsField->generalEnabledFields, false)
                                     && !Seomatic::$plugin->helper->isInherited($fieldMetaBundle->metaGlobalVars, 'robots')
                                 ) {
-                                    // If robots is set to 'none' don't include the URL
-                                    if ($fieldMetaBundle->metaGlobalVars->robots === 'none' || $fieldMetaBundle->metaGlobalVars->robots === 'noindex') {
+                                    // If robots contains 'none' or 'noindex' don't include the URL
+                                    $robotsArray = explode(',', $fieldMetaBundle->metaGlobalVars->robots);
+                                    if (in_array('noindex', $robotsArray, true) || in_array('none', $robotsArray, true)) {
                                         $includeUrl = false;
+                                    } else {
+                                        // Otherwise, include the URL
+                                        $includeUrl = true;
                                     }
                                 }
                             }
                         }
+                    }
+                    // Never include the URL if the element isn't enabled for the site
+                    if (isset($element->enabledForSite) && !(bool)$element->enabledForSite) {
+                        $includeUrl = false;
                     }
                 } else {
                     $includeUrl = false;

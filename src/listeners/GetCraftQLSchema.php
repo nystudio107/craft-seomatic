@@ -9,18 +9,18 @@
 
 namespace nystudio107\seomatic\listeners;
 
-use nystudio107\seomatic\helpers\Container as ContainerHelper;
-use nystudio107\seomatic\models\MetaJsonLdContainer;
-use nystudio107\seomatic\models\MetaLinkContainer;
-use nystudio107\seomatic\models\MetaScriptContainer;
-use nystudio107\seomatic\models\MetaTitleContainer;
-use nystudio107\seomatic\models\MetaTagContainer;
-
 use craft\base\Element;
 use craft\helpers\Json;
-
-use markhuot\CraftQL\Events\AlterSchemaFields;
 use markhuot\CraftQL\Builders\Field as FieldBuilder;
+use markhuot\CraftQL\Events\AlterSchemaFields;
+use nystudio107\seomatic\helpers\Container as ContainerHelper;
+use nystudio107\seomatic\models\MetaJsonLdContainer;
+
+use nystudio107\seomatic\models\MetaLinkContainer;
+use nystudio107\seomatic\models\MetaScriptContainer;
+
+use nystudio107\seomatic\models\MetaTagContainer;
+use nystudio107\seomatic\models\MetaTitleContainer;
 
 /**
  * @author    nystudio107
@@ -32,7 +32,7 @@ class GetCraftQLSchema
     // Constants
     // =========================================================================
 
-    const CRAFT_QL_FIELDS = [
+    public const CRAFT_QL_FIELDS = [
         'metaTitleContainer' => MetaTitleContainer::CONTAINER_TYPE,
         'metaTagContainer' => MetaTagContainer::CONTAINER_TYPE,
         'metaLinkContainer' => MetaLinkContainer::CONTAINER_TYPE,
@@ -56,7 +56,7 @@ class GetCraftQLSchema
         foreach (self::CRAFT_QL_FIELDS as $fieldHandle => $containerType) {
             $seomaticField
                 ->addStringField($fieldHandle)
-                ->resolve(function (array $data) use ($containerType) {
+                ->resolve(function(array $data) use ($containerType) {
                     // $root contains the data returned by the field below
                     $result = ContainerHelper::getContainerArrays(
                         [$containerType],
@@ -73,13 +73,13 @@ class GetCraftQLSchema
         }
         // Add the root
         $event->schema->addField('seomatic')
-            ->arguments(function (FieldBuilder $field) {
+            ->arguments(function(FieldBuilder $field) {
                 $field->addIntArgument('siteId');
                 $field->addStringArgument('uri');
                 $field->addBooleanArgument('asArray');
             })
             ->type($seomaticField)
-            ->resolve(function ($root, $args, $context, $info) {
+            ->resolve(function($root, $args, $context, $info) {
                 // If our root is an Element, extract the URI and siteId from it
                 if ($root instanceof Element) {
                     /** Element $root */

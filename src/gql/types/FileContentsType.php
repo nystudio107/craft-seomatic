@@ -82,7 +82,7 @@ class FileContentsType extends ObjectType
             'contents' => [
                 'name' => 'contents',
                 'type' => Type::string(),
-            ]
+            ],
         ];
 
         return Craft::$app->getGql()->prepareFieldDefinitions($fields, self::getName());

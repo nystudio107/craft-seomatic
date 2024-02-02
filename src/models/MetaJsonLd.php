@@ -50,28 +50,28 @@ class MetaJsonLd extends NonceItem
      *
      * @var string
      */
-    static public string $schemaTypeName = 'JsonLd';
+    public static string $schemaTypeName = 'JsonLd';
 
     /**
      * The Schema.org Type Scope
      *
      * @var string
      */
-    static public string $schemaTypeScope = 'https://schema.org/';
+    public static string $schemaTypeScope = 'https://schema.org/';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    static public string $schemaTypeDescription = 'Generic JsonLd type.';
+    public static string $schemaTypeDescription = 'Generic JsonLd type.';
 
     /**
      * The Schema.org Type Extends
      *
      * @var string
      */
-    static public string $schemaTypeExtends = '';
+    public static string $schemaTypeExtends = '';
 
     // Public Properties
     // =========================================================================
@@ -247,9 +247,8 @@ class MetaJsonLd extends NonceItem
             'renderRaw' => true,
             'renderScriptTags' => true,
             'array' => false,
-        ]
-    ): string
-    {
+        ],
+    ): string {
         $html = '';
         $options = $this->tagAttributes();
         if ($this->prepForRender($options)) {
@@ -370,9 +369,8 @@ class MetaJsonLd extends NonceItem
      */
     public function validateJsonSchema(
         $attribute,
-        $params
-    )
-    {
+        $params,
+    ) {
         if (!in_array($attribute, $this->getSchemaPropertyNames(), true)) {
             $this->addError($attribute, 'The attribute does not exist.');
         } else {
@@ -394,7 +392,7 @@ class MetaJsonLd extends NonceItem
 
                         // Use Yii's validator for URLs
                         case 'URL':
-                            $validator = new UrlValidator;
+                            $validator = new UrlValidator();
                             if ($validator->validate($data, $error)) {
                                 $validated = true;
                             }
@@ -402,7 +400,7 @@ class MetaJsonLd extends NonceItem
 
                         // Use Yii's validator for Booleans
                         case 'Boolean':
-                            $validator = new BooleanValidator;
+                            $validator = new BooleanValidator();
                             if ($validator->validate($data, $error)) {
                                 $validated = true;
                             }
@@ -412,7 +410,7 @@ class MetaJsonLd extends NonceItem
                         case 'Number':
                         case 'Float':
                         case 'Integer':
-                            $validator = new NumberValidator;
+                            $validator = new NumberValidator();
                             if ($expectedType === 'Integer') {
                                 $validator->integerOnly = true;
                             }
@@ -423,7 +421,7 @@ class MetaJsonLd extends NonceItem
 
                         // Use Yii's validator for Dates
                         case 'Date':
-                            $validator = new DateValidator;
+                            $validator = new DateValidator();
                             $validator->type = DateValidator::TYPE_DATE;
                             $validator->format = 'php:' . DateTime::ATOM;
                             if ($validator->validate($data, $error)) {
@@ -437,7 +435,7 @@ class MetaJsonLd extends NonceItem
 
                         // Use Yii's validator for DateTimes
                         case 'DateTime':
-                            $validator = new DateValidator;
+                            $validator = new DateValidator();
                             $validator->type = DateValidator::TYPE_DATETIME;
                             $validator->format = 'YYYY-MM-DDThh:mm:ss.sTZD';
                             if ($validator->validate($data, $error)) {
@@ -447,7 +445,7 @@ class MetaJsonLd extends NonceItem
 
                         // Use Yii's validator for Times
                         case 'Time':
-                            $validator = new DateValidator;
+                            $validator = new DateValidator();
                             $validator->type = DateValidator::TYPE_TIME;
                             $validator->format = 'hh:mm:ss.sTZD';
                             if ($validator->validate($data, $error)) {
@@ -501,6 +499,6 @@ class MetaJsonLd extends NonceItem
         return $result;
     }
 
-// Private Methods
+    // Private Methods
 // =========================================================================
 }

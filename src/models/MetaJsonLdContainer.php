@@ -30,7 +30,7 @@ class MetaJsonLdContainer extends NonceContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaJsonLdContainer';
+    public const CONTAINER_TYPE = 'MetaJsonLdContainer';
 
     // Public Properties
     // =========================================================================
@@ -58,7 +58,7 @@ class MetaJsonLdContainer extends NonceContainer
         }
         [$jsonLd, $attrs] = $cache->getOrSet(
             self::CONTAINER_TYPE . $uniqueKey,
-            function () use ($uniqueKey) {
+            function() use ($uniqueKey) {
                 Craft::info(
                     self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
@@ -128,7 +128,7 @@ class MetaJsonLdContainer extends NonceContainer
                     if ($metaJsonLdModel->prepForRender($options)) {
                         $tagData[] = [
                             'jsonLd' => $metaJsonLdModel,
-                            'position' => View::POS_END
+                            'position' => View::POS_END,
                         ];
                         // If `devMode` is enabled, validate the JSON-LD and output any model errors
                         if (Seomatic::$devMode) {

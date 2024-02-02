@@ -25,7 +25,7 @@ class TwitterImageTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'TwitterImageTag';
+    public const ITEM_TYPE = 'TwitterImageTag';
 
     // Static Methods
     // =========================================================================
