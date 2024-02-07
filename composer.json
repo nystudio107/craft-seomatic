@@ -50,6 +50,7 @@
     "craftcms/rector": "dev-main",
     "craftcms/commerce": "^4.0.0",
     "craftcms/digital-products": "^3.0.0",
+    "craftcms/feed-me": "^5.0.0",
     "putyourlightson/craft-campaign": "^2.0.0",
     "solspace/craft-calendar": "^4.0.0",
     "spicyweb/craft-neo": "^4.0.0",
