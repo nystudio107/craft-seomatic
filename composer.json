@@ -49,6 +49,7 @@
     "markhuot/craftql": "^1.0.0",
     "craftcms/commerce": "^3.0.0",
     "craftcms/digital-products": "^2.0.0",
+    "craftcms/feed-me": "^4.0.0",
     "putyourlightson/craft-campaign": "^1.0.0",
     "solspace/craft-calendar": "^3.0.0",
     "spicyweb/craft-neo": "^2.13.3",
