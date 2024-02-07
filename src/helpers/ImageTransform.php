@@ -40,6 +40,8 @@ class ImageTransform
     public const ALLOWED_SOCIAL_MIME_TYPES = [
         'image/jpeg',
         'image/png',
+        'image/webp',
+        'image/gif',
     ];
 
     public const DEFAULT_SOCIAL_FORMAT = 'jpg';
@@ -118,7 +120,7 @@ class ImageTransform
         if (($asset !== null) && ($asset instanceof Asset)) {
             // Make sure the format is an allowed format, otherwise explicitly change it
             $mimeType = $asset->getMimeType();
-            if (!in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
+            if ($transform !== null && !in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
                 $transform->format = self::DEFAULT_SOCIAL_FORMAT;
             }
             // Generate a transformed image
