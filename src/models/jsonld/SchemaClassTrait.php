@@ -25,7 +25,7 @@ trait SchemaClassTrait
      * Relates a term (i.e. a property, class or enumeration) to one that
      * supersedes it.
      *
-     * @var Class|Property|Enumeration
+     * @var SchemaClass|Property|Enumeration
      */
     public $supersededBy;
 }

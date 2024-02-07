@@ -34,7 +34,7 @@ trait StatisticalPopulationTrait
      * Indicates the populationType common to all members of a
      * [[StatisticalPopulation]].
      *
-     * @var Class
+     * @var SchemaClass
      */
     public $populationType;
 

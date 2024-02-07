@@ -25,7 +25,7 @@ trait PropertyTrait
      * Relates a term (i.e. a property, class or enumeration) to one that
      * supersedes it.
      *
-     * @var Class|Property|Enumeration
+     * @var SchemaClass|Property|Enumeration
      */
     public $supersededBy;
 
@@ -33,7 +33,7 @@ trait PropertyTrait
      * Relates a property to a class that is (one of) the type(s) the property is
      * expected to be used on.
      *
-     * @var Class
+     * @var SchemaClass
      */
     public $domainIncludes;
 
@@ -52,7 +52,7 @@ trait PropertyTrait
      * Relates a property to a class that constitutes (one of) the expected
      * type(s) for values of the property.
      *
-     * @var Class
+     * @var SchemaClass
      */
     public $rangeIncludes;
 }
