@@ -4,9 +4,11 @@
 {% set params = [] %}
 
 {% if showSites %}
-    <div id="sites-btn" class="btn menubtn" data-icon="world">{{ sitesMenuLabel }}</div>
+    <a id="sites-btn" class="crumb-link" data-icon="world"> {{ sitesMenuLabel }} </a>
+    <button type="button" class="btn menubtn" aria-label="Select site" aria-controls="language-menu"
+            data-disclosure-trigger="" aria-expanded="false"></button>
 
-    <div class="menu">
+    <div id="language-menu" class="padded menu">
         {% set siteGroups = craft.app.sites.getAllGroups() %}
         {% for group in siteGroups %}
             {% set groupSiteIds = group.getSiteIds()|intersect(siteIds) %}
@@ -18,17 +20,18 @@
                         {% set status = siteId in enabledSiteIds ? 'enabled' : 'disabled' %}
                         <li>
                             {% if siteId == currentSiteId %}
-                                <a class="sel">
+                                <a class="menu-item sel" aria-selected="true">
                                     <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                 </a>
                             {% else %}
                                 {% set url = url(baseUrl~site.handle, params) %}
                                 {% if status == "enabled" %}
-                                <a href="{{ url }}">
-                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
-                                </a>
+                                    <a class="menu-item" href="{{ url }}">
+                                        <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                    </a>
                                 {% else %}
-                                    <div style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
+                                    <div class="menu-item"
+                                         style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
                                         <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                     </div>
                                 {% endif %}
