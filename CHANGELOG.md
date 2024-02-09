@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.70 - UNRELEASED
+## 3.4.70 - 2024.02.09
 ### Added
 * Add `phpstan` and `ecs` code linting
 * Add `code-analysis.yaml` GitHub action
