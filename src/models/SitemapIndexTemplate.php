@@ -11,20 +11,20 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\base\FrontendTemplate;
-use nystudio107\seomatic\base\SitemapInterface;
-use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
-use nystudio107\seomatic\events\RegisterSitemapsEvent;
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
 use Craft;
 use craft\models\SiteGroup;
+use nystudio107\seomatic\base\FrontendTemplate;
+use nystudio107\seomatic\base\SitemapInterface;
+use nystudio107\seomatic\events\RegisterSitemapsEvent;
+use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
 
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\Seomatic;
+
+use yii\base\Event;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
-use yii\base\Event;
 
 /**
  * @author    nystudio107
@@ -149,7 +149,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet(self::CACHE_KEY.$groupId.'.'.$siteId, function () use ($groupSiteIds, $siteId) {
+        return $cache->getOrSet(self::CACHE_KEY . $groupId . '.' . $siteId, function() use ($groupSiteIds, $siteId) {
             Craft::info(
                 'Sitemap index cache miss',
                 __METHOD__
@@ -273,7 +273,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     // Find the most recent date
                     $dateUpdated = !empty($additionalSitemap['lastmod'])
                         ? $additionalSitemap['lastmod']
-                        : new \DateTime;
+                        : new \DateTime();
                     $lines[] = '<lastmod>';
                     $lines[] = $dateUpdated->format(\DateTime::W3C);
                     $lines[] = '</lastmod>';
@@ -315,7 +315,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '</loc>';
             // Find the most recent date
             $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                ?? new \DateTime;
+                ?? new \DateTime();
             foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
                 if (!empty($additionalSitemapUrl['lastmod'])) {
                     if ($additionalSitemapUrl['lastmod'] > $dateUpdated) {

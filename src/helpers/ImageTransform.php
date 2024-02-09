@@ -36,6 +36,8 @@ class ImageTransform
     const ALLOWED_SOCIAL_MIME_TYPES = [
         'image/jpeg',
         'image/png',
+        'image/webp',
+        'image/gif',
     ];
 
     const DEFAULT_SOCIAL_FORMAT = 'jpg';
@@ -46,12 +48,12 @@ class ImageTransform
     /**
      * @var bool
      */
-    static public $pendingImageTransforms = false;
+    public static $pendingImageTransforms = false;
 
     // Static Private Properties
     // =========================================================================
 
-    static private $transforms = [
+    private static $transforms = [
         'base' => [
             'format' => null,
             'quality' => self::SOCIAL_TRANSFORM_QUALITY,
@@ -79,7 +81,7 @@ class ImageTransform
         ],
     ];
 
-    static private $cachedAssetsElements = [];
+    private static $cachedAssetsElements = [];
 
     // Static Methods
     // =========================================================================
@@ -100,8 +102,7 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -115,7 +116,7 @@ class ImageTransform
         if (($asset !== null) && ($asset instanceof Asset)) {
             // Make sure the format is an allowed format, otherwise explicitly change it
             $mimeType = $asset->getMimeType();
-            if (!\in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
+            if ($transform !== null && !\in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
                 $transform->format = self::DEFAULT_SOCIAL_FORMAT;
             }
             // Generate a transformed image
@@ -179,8 +180,7 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         $width = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -211,8 +211,7 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         $height = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode

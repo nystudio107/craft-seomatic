@@ -90,7 +90,7 @@ class Sitemaps extends Component implements SitemapInterface
             Event::on(
                 UrlManager::class,
                 UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-                function (RegisterUrlRulesEvent $event) {
+                function(RegisterUrlRulesEvent $event) {
                     Craft::debug(
                         'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
                         __METHOD__

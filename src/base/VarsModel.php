@@ -11,9 +11,9 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
-
 use Craft;
+
+use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 
 /**
  * @author    nystudio107

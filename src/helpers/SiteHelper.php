@@ -11,9 +11,9 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
-
 use Craft;
+
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107

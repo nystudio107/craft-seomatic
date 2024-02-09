@@ -11,27 +11,27 @@
 
 namespace nystudio107\seomatic\seoelements;
 
-use craft\gql\interfaces\elements\Entry as EntryInterface;
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
-use nystudio107\seomatic\base\SeoElementInterface;
-use nystudio107\seomatic\helpers\ArrayHelper;
-use nystudio107\seomatic\helpers\Config as ConfigHelper;
-use nystudio107\seomatic\helpers\PluginTemplate;
-use nystudio107\seomatic\models\MetaBundle;
-
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\elements\Entry;
 use craft\events\SectionEvent;
+use craft\gql\interfaces\elements\Entry as EntryInterface;
 use craft\models\EntryDraft;
 use craft\models\EntryVersion;
+
 use craft\models\Section;
 use craft\models\Site;
 use craft\services\Sections;
+use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
+use nystudio107\seomatic\base\SeoElementInterface;
+use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\Config as ConfigHelper;
+use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\models\MetaBundle;
+use nystudio107\seomatic\Seomatic;
 
 use yii\base\Event;
 use yii\base\InvalidConfigException;
@@ -135,7 +135,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Sections::class,
                 Sections::EVENT_AFTER_SAVE_SECTION,
-                function (SectionEvent $event) {
+                function(SectionEvent $event) {
                     Craft::debug(
                         'Sections::EVENT_AFTER_SAVE_SECTION',
                         __METHOD__
@@ -158,7 +158,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Sections::class,
                 Sections::EVENT_AFTER_DELETE_SECTION,
-                function (SectionEvent $event) {
+                function(SectionEvent $event) {
                     Craft::debug(
                         'Sections::EVENT_AFTER_DELETE_SECTION',
                         __METHOD__
@@ -186,7 +186,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             // Entries sidebar
-            Seomatic::$view->hook('cp.entries.edit.details', function (&$context) {
+            Seomatic::$view->hook('cp.entries.edit.details', function(&$context) {
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var  $entry Entry */
@@ -225,7 +225,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         ;
         if ($metaBundle->sourceType === 'structure'
             && !empty($metaBundle->metaSitemapVars->structureDepth)) {
-            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+            $query->level($metaBundle->metaSitemapVars->structureDepth . '<=');
         }
 
         return $query;

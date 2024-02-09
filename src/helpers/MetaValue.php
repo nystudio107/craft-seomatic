@@ -91,8 +91,7 @@ class MetaValue
         bool $resolveAliases = true,
         bool $parseAsTwig = true,
         $tries = self::MAX_PARSE_TRIES
-    )
-    {
+    ) {
         // If it's a string, and there are no dynamic tags, just return the template
         if (is_string($metaValue) && !StringHelper::contains($metaValue, '{', false)) {
             return self::parseMetaString($metaValue, $resolveAliases, $parseAsTwig) ?? $metaValue;

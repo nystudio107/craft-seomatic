@@ -32,11 +32,11 @@ $meta['PROPERTY_STRINGS'] = TAG_STRINGS;
                         ]) ?></th>
                     <?= $this->render('render-tag', [
                         'value' => $values['unparsed'][$name] ?? '',
-                        'meta' => $meta
+                        'meta' => $meta,
                     ]) ?>
                     <?= $this->render('render-tag', [
                         'value' => $values['parsed'][$name] ?? '',
-                        'meta' => $meta
+                        'meta' => $meta,
                     ]) ?>
                 </tr>
             <?php endforeach; ?>

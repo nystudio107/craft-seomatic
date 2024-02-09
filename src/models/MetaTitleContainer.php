@@ -11,10 +11,10 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\MetaContainer;
 
-use Craft;
+use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 
 /**
@@ -48,16 +48,16 @@ class MetaTitleContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaTitleContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$dependency->tags[3];
+        $uniqueKey = $this->handle . $dependency->tags[3];
         $cache = Craft::$app->getCache();
         if ($this->clearCache) {
             TagDependency::invalidate($cache, $dependency->tags[3]);
         }
         $tagData = $cache->getOrSet(
-            self::CONTAINER_TYPE.$uniqueKey,
-            function () use ($uniqueKey) {
+            self::CONTAINER_TYPE . $uniqueKey,
+            function() use ($uniqueKey) {
                 Craft::info(
-                    self::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
                 );
                 $tagData = '';

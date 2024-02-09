@@ -254,7 +254,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                 $value = StringHelper::encodeMb4($value);
             }
             if (\is_array($value)) {
-                array_walk_recursive($value, function (&$arrayValue, $arrayKey) {
+                array_walk_recursive($value, function(&$arrayValue, $arrayKey) {
                     if ($arrayValue !== null && \is_string($arrayValue)) {
                         $arrayValue = StringHelper::encodeMb4($arrayValue);
                     }
@@ -274,7 +274,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $tagOptions = [
             'depends' => [
                 'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset',
-            ]
+            ],
         ];
         // JS/CSS modules
         try {
@@ -308,7 +308,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $tagOptions = [
             'depends' => [
                 'nystudio107\\seomatic\\assetbundles\\seomatic\\SeomaticAsset',
-            ]
+            ],
         ];
         // JS/CSS modules
         try {
@@ -397,7 +397,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $cacheDuration = null;
             $html = $cache->getOrSet(
                 self::CACHE_KEY . $cacheKey,
-                function () use ($uri, $siteId, $element) {
+                function() use ($uri, $siteId, $element) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
                     $variables = [
                         'previewTypes' => [
@@ -436,8 +436,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         Element $element,
         string  $groupName,
         array   &$variables
-    )
-    {
+    ) {
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromElement(

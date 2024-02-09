@@ -3,10 +3,10 @@
 namespace nystudio107\seomatic\migrations;
 
 use Craft;
-use nystudio107\seomatic\seoelements\SeoProduct;
+use craft\commerce\Plugin as CommercePlugin;
 
 use craft\db\Migration;
-use craft\commerce\Plugin as CommercePlugin;
+use nystudio107\seomatic\seoelements\SeoProduct;
 
 /**
  * m180711_024947_commerce_products migration.

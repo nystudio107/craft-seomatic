@@ -11,27 +11,27 @@
 
 namespace nystudio107\seomatic\seoelements;
 
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
+use Craft;
+use craft\base\ElementInterface;
+use craft\base\Model;
+use craft\digitalproducts\elements\Product;
+use craft\digitalproducts\events\ProductTypeEvent;
+use craft\digitalproducts\gql\interfaces\elements\Product as DigitalProductInterface;
+use craft\digitalproducts\models\ProductType;
+use craft\digitalproducts\Plugin as DigitalProductsPlugin;
+
+use craft\digitalproducts\services\ProductTypes;
+use craft\elements\db\ElementQueryInterface;
+use craft\models\Site;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
+
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
-
-use Craft;
-use craft\base\ElementInterface;
-use craft\base\Model;
-use craft\elements\db\ElementQueryInterface;
-use craft\models\Site;
-
-use craft\digitalproducts\Plugin as DigitalProductsPlugin;
-use craft\digitalproducts\elements\Product;
-use craft\digitalproducts\gql\interfaces\elements\Product as DigitalProductInterface;
-use craft\digitalproducts\events\ProductTypeEvent;
-use craft\digitalproducts\models\ProductType;
-use craft\digitalproducts\services\ProductTypes;
+use nystudio107\seomatic\Seomatic;
 
 use yii\base\Event;
 
@@ -122,7 +122,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
                 ProductTypes::class,
                 ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE,
                 /** @var ProductTypeEvent $event */
-                static function ($event) {
+                static function($event) {
                     Craft::debug(
                         'ProductTypes::EVENT_AFTER_SAVE_PRODUCTTYPE',
                         __METHOD__
@@ -178,7 +178,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
             // Digital Product Types sidebar
             $digitalProducts = DigitalProductsPlugin::getInstance();
             if ($digitalProducts !== null) {
-                Seomatic::$view->hook('cp.digital-products.product.edit.details', static function (&$context) {
+                Seomatic::$view->hook('cp.digital-products.product.edit.details', static function(&$context) {
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                     /** @var  $product Product */

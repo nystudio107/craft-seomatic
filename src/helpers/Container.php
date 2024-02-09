@@ -48,8 +48,7 @@ class Container
         string $uri,
         int    $siteId = null,
         bool   $asArray = false
-    ): array
-    {
+    ): array {
         // Normalize the incoming URI to account for `__home__`
         $uri = ($uri === '__home__') ? '' : $uri;
         // Determine the siteId
@@ -95,7 +94,7 @@ class Container
         $cache = Craft::$app->getCache();
         $result = $cache->getOrSet(
             self::CACHE_KEY . $cacheKey,
-            function () use ($uri, $siteId, $containerKeys, $asArray) {
+            function() use ($uri, $siteId, $containerKeys, $asArray) {
                 $result = [];
                 Craft::info(
                     'Meta controller container cache miss: ' . $uri . '/' . $siteId,

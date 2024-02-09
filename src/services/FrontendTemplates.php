@@ -116,7 +116,7 @@ class FrontendTemplates extends Component
             Event::on(
                 UrlManager::class,
                 UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-                function (RegisterUrlRulesEvent $event) {
+                function(RegisterUrlRulesEvent $event) {
                     Craft::debug(
                         'UrlManager::EVENT_REGISTER_SITE_URL_RULES',
                         __METHOD__
@@ -178,7 +178,7 @@ class FrontendTemplates extends Component
         $cache = Craft::$app->getCache();
         $html = $cache->getOrSet(
             self::CACHE_KEY . $template . $siteId,
-            function () use ($template, $params) {
+            function() use ($template, $params) {
                 Craft::info(
                     'Frontend template cache miss: ' . $template,
                     __METHOD__

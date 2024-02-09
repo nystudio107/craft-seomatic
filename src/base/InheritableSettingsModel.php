@@ -22,7 +22,6 @@ use craft\helpers\StringHelper;
  */
 abstract class InheritableSettingsModel extends VarsModel
 {
-
     /**
      * @var array A list of all the settings for which the inherited values should be used.
      */

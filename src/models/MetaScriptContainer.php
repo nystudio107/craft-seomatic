@@ -62,7 +62,7 @@ class MetaScriptContainer extends NonceContainer
         }
         $tagData = $cache->getOrSet(
             self::CONTAINER_TYPE . $uniqueKey,
-            function () use ($uniqueKey) {
+            function() use ($uniqueKey) {
                 Craft::info(
                     self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__

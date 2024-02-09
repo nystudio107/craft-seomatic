@@ -17,10 +17,10 @@ class m210817_230853_announcement_v3_4 extends Migration
     {
         if (version_compare(Craft::$app->getVersion(), '3.7', '>=')) {
             Craft::$app->announcements->push(
-                function ($language) {
+                function($language) {
                     return Craft::t('seomatic', 'SEO Settings fields', [], $language);
                 },
-                function ($language) {
+                function($language) {
                     return Craft::t('seomatic', 'The [SEO Settings]({url}) fields now feature **Override** lightswitches next to each setting, letting you explicitly override SEO settings on a per-entry basis.', [
                         'url' => 'https://nystudio107.com/docs/seomatic/fields.html',
                     ], $language);

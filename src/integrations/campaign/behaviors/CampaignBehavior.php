@@ -53,5 +53,4 @@ class CampaignBehavior extends Behavior
 
         return $siteSettings;
     }
-
 }

@@ -96,7 +96,7 @@ class Settings extends VarsModel
     public $sidebarDisplayPreviewTypes = [
         'google',
         'twitter',
-        'facebook'
+        'facebook',
     ];
 
     /**
@@ -283,7 +283,7 @@ class Settings extends VarsModel
                     'addPaginatedHreflang',
                     'manuallySetEnvironment',
                 ],
-                'boolean'
+                'boolean',
             ],
             ['cspNonce', 'string'],
             ['cspNonce', 'in', 'range' => [
@@ -304,7 +304,7 @@ class Settings extends VarsModel
                     'alwaysIncludeCanonicalUrls',
                     'lowercaseCanonicalUrl',
                 ],
-                'boolean'
+                'boolean',
             ],
             [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix', 'truncateTitleTags', 'truncateDescriptionTags'], 'string'],
             ['separatorChar', 'string'],

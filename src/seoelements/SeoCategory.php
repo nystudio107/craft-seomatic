@@ -11,25 +11,25 @@
 
 namespace nystudio107\seomatic\seoelements;
 
+use Craft;
+use craft\base\ElementInterface;
+use craft\base\Model;
+use craft\elements\Category;
+use craft\elements\db\ElementQueryInterface;
+use craft\events\CategoryGroupEvent;
 use craft\gql\interfaces\elements\Category as CategoryInterface;
-use nystudio107\seomatic\base\GqlSeoElementInterface;
-use nystudio107\seomatic\Seomatic;
+use craft\models\CategoryGroup;
+use craft\models\Site;
+
+use craft\services\Categories;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
+use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\MetaBundle;
-
-use Craft;
-use craft\base\ElementInterface;
-use craft\base\Model;
-use craft\elements\db\ElementQueryInterface;
-use craft\elements\Category;
-use craft\events\CategoryGroupEvent;
-use craft\models\CategoryGroup;
-use craft\models\Site;
-use craft\services\Categories;
+use nystudio107\seomatic\Seomatic;
 
 use yii\base\Event;
 use yii\base\InvalidConfigException;
@@ -41,7 +41,6 @@ use yii\base\InvalidConfigException;
  */
 class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
 {
-
     // Constants
     // =========================================================================
 
@@ -132,7 +131,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Categories::class,
                 Categories::EVENT_AFTER_SAVE_GROUP,
-                function (CategoryGroupEvent $event) {
+                function(CategoryGroupEvent $event) {
                     Craft::debug(
                         'Categories::EVENT_AFTER_SAVE_GROUP',
                         __METHOD__
@@ -155,7 +154,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Categories::class,
                 Categories::EVENT_AFTER_DELETE_GROUP,
-                function (CategoryGroupEvent $event) {
+                function(CategoryGroupEvent $event) {
                     Craft::debug(
                         'Categories::EVENT_AFTER_DELETE_GROUP',
                         __METHOD__
@@ -183,7 +182,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             // Category Groups sidebar
-            Seomatic::$view->hook('cp.categories.edit.details', function (&$context) {
+            Seomatic::$view->hook('cp.categories.edit.details', function(&$context) {
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var  $category Category */
@@ -221,7 +220,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             ->limit($metaBundle->metaSitemapVars->sitemapLimit)
             ;
         if (!empty($metaBundle->metaSitemapVars->structureDepth)) {
-            $query->level($metaBundle->metaSitemapVars->structureDepth.'<=');
+            $query->level($metaBundle->metaSitemapVars->structureDepth . '<=');
         }
 
         return $query;

@@ -11,17 +11,15 @@
 
 namespace nystudio107\seomatic\controllers;
 
+use Craft;
+use craft\helpers\FileHelper;
+
+use craft\web\Controller;
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
 
-use Craft;
-use craft\elements\Asset;
-use craft\helpers\FileHelper;
-use craft\helpers\Assets as AssetsHelper;
-use craft\web\Controller;
-
-use yii\web\NotFoundHttpException;
 use yii\web\HttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\web\ServerErrorHttpException;
 
@@ -87,7 +85,7 @@ class FileController extends Controller
             }
             // Add the Link header
             if (!empty($canonical)) {
-                $headerValue = '<'.$canonical.'>; rel="canonical"';
+                $headerValue = '<' . $canonical . '>; rel="canonical"';
                 $response->headers->add('Link', $headerValue);
             }
             // Ensure the file type is allowed
@@ -105,7 +103,7 @@ class FileController extends Controller
                 $fileName,
                 [
                     'inline' => $inline,
-                    'mimeType' => FileHelper::getMimeTypeByExtension($fileName)
+                    'mimeType' => FileHelper::getMimeTypeByExtension($fileName),
                 ]
             );
         } else {

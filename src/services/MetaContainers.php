@@ -254,7 +254,7 @@ class MetaContainers extends Component
         $uniqueKey = $dependency->tags[3] ?? self::GLOBALS_CACHE_KEY;
         list($this->metaGlobalVars, $this->metaSiteVars) = Craft::$app->getCache()->getOrSet(
             self::GLOBALS_CACHE_KEY . $uniqueKey,
-            function () use ($uniqueKey) {
+            function() use ($uniqueKey) {
                 Craft::info(
                     self::GLOBALS_CACHE_KEY . ' cache miss: ' . $uniqueKey,
                     __METHOD__
@@ -289,8 +289,7 @@ class MetaContainers extends Component
         int    $siteId = null,
         bool   $parseVariables = false,
         bool   $includeElement = true
-    )
-    {
+    ) {
         // If we've already previewed the containers for this request, there's no need to do it again
         if (Seomatic::$previewingMetaContainers && !Seomatic::$headlessRequest) {
             return;
@@ -425,7 +424,7 @@ class MetaContainers extends Component
                 $cache = Craft::$app->getCache();
                 list($this->metaGlobalVars, $this->metaSiteVars, $this->metaSitemapVars, $this->metaContainers) = $cache->getOrSet(
                     self::CACHE_KEY . $cacheKey,
-                    function () use ($uri, $siteId) {
+                    function() use ($uri, $siteId) {
                         Craft::info(
                             'Meta container cache miss: ' . $uri . '/' . $siteId,
                             __METHOD__
@@ -715,8 +714,8 @@ class MetaContainers extends Component
                             $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
 
                             foreach ($rules as $settingPath => $action) {
-                                list ($container, $property) = explode('.', $settingPath);
-                                list ($testValue, $sourceSetting) = explode('.', $action);
+                                list($container, $property) = explode('.', $settingPath);
+                                list($testValue, $sourceSetting) = explode('.', $action);
 
                                 $bundleProp = $parentBundle->{$container}->{$property} ?? null;
                                 if ($bundleProp == $testValue) {

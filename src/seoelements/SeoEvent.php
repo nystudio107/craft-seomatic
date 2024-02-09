@@ -84,7 +84,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         BaseEvent::on(
             CalendarsService::class,
             CalendarsService::EVENT_AFTER_SAVE,
-            function (SaveModelEvent $event) {
+            function(SaveModelEvent $event) {
                 Craft::debug(
                     'CalendarsService::EVENT_AFTER_DELETE',
                     __METHOD__
@@ -95,7 +95,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         BaseEvent::on(
             CalendarsService::class,
             CalendarsService::EVENT_AFTER_DELETE,
-            function (DeleteModelEvent $event) {
+            function(DeleteModelEvent $event) {
                 Craft::debug(
                     'CalendarsService::EVENT_AFTER_DELETE',
                     __METHOD__
@@ -110,7 +110,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
             BaseEvent::on(
                 CalendarsService::class,
                 CalendarsService::EVENT_AFTER_SAVE,
-                function (SaveModelEvent $event) {
+                function(SaveModelEvent $event) {
                     Craft::debug(
                         'CalendarsService::EVENT_AFTER_SAVE',
                         __METHOD__
@@ -135,7 +135,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
             BaseEvent::on(
                 CalendarsService::class,
                 CalendarsService::EVENT_AFTER_DELETE,
-                function (DeleteModelEvent $event) {
+                function(DeleteModelEvent $event) {
                     Craft::debug(
                         'CalendarsService::EVENT_AFTER_DELETE',
                         __METHOD__
@@ -165,7 +165,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         // Install only for non-console Control Panel requests
         if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
             // Events sidebar
-            Seomatic::$view->hook('cp.solspace.calendar.events.edit.details', function (&$context) {
+            Seomatic::$view->hook('cp.solspace.calendar.events.edit.details', function(&$context) {
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
                 /** @var Event $event */
@@ -185,7 +185,6 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
 
                 return $html;
             });
-
         }
     }
 
@@ -258,8 +257,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId
-    )
-    {
+    ) {
         return Event::find()
             ->id($elementId)
             ->siteId($siteId)

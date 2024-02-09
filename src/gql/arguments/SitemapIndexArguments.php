@@ -32,14 +32,13 @@ class SitemapIndexArguments extends Arguments
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'Optional - The site ID to resolve the sitemap for.'
+                'description' => 'Optional - The site ID to resolve the sitemap for.',
             ],
             'site' => [
                 'name' => 'site',
                 'type' => Type::string(),
-                'description' => 'Optional - The site handle to resolve the sitemap for.'
+                'description' => 'Optional - The site handle to resolve the sitemap for.',
             ],
         ];
     }
 }
-

@@ -252,5 +252,4 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             __METHOD__
         );
     }
-
 }

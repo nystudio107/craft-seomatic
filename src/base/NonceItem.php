@@ -81,11 +81,11 @@ abstract class NonceItem extends MetaItem implements NonceItemInterface
     public function generateNonce()
     {
         $result = null;
-            try {
-                $result = bin2hex(random_bytes(22));
-            } catch (\Exception $e) {
-                // That's okay
-            }
+        try {
+            $result = bin2hex(random_bytes(22));
+        } catch (\Exception $e) {
+            // That's okay
+        }
 
         return $result;
     }

@@ -9,12 +9,12 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\helpers\PluginTemplate;
-use nystudio107\seomatic\services\Sitemaps;
-
 use Craft;
 use craft\web\Controller;
+use nystudio107\seomatic\helpers\PluginTemplate;
+
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\Sitemaps;
 
 use yii\web\Response;
 

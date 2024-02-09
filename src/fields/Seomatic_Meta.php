@@ -10,8 +10,8 @@
 namespace nystudio107\seomatic\fields;
 
 use Craft;
-use craft\base\Field;
 use craft\base\ElementInterface;
+use craft\base\Field;
 use craft\helpers\Json;
 
 use yii\db\Schema;

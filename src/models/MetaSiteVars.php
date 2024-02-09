@@ -182,13 +182,13 @@ class MetaSiteVars extends VarsModel
                     'siteLinksQueryInput',
                     'referrer',
                 ],
-                'string'
+                'string',
             ],
             [
                 [
-                    'additionalSitemapUrlsDateUpdated'
+                    'additionalSitemapUrlsDateUpdated',
                 ],
-                DateTimeValidator::class
+                DateTimeValidator::class,
             ],
             [
                 [

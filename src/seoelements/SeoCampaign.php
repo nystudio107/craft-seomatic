@@ -105,7 +105,7 @@ class SeoCampaign implements SeoElementInterface
         Event::on(
             CampaignTypesService::class,
             CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE,
-            function (CampaignTypeEvent $event) {
+            function(CampaignTypeEvent $event) {
                 Craft::debug(
                     'CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE',
                     __METHOD__
@@ -116,7 +116,7 @@ class SeoCampaign implements SeoElementInterface
         Event::on(
             CampaignTypesService::class,
             CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE,
-            function (CampaignTypeEvent $event) {
+            function(CampaignTypeEvent $event) {
                 Craft::debug(
                     'CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE',
                     __METHOD__
@@ -131,7 +131,7 @@ class SeoCampaign implements SeoElementInterface
             Event::on(
                 CampaignTypesService::class,
                 CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE,
-                function (CampaignTypeEvent $event) {
+                function(CampaignTypeEvent $event) {
                     Craft::debug(
                         'CampaignTypesService::EVENT_AFTER_SAVE_CAMPAIGN_TYPE',
                         __METHOD__
@@ -154,7 +154,7 @@ class SeoCampaign implements SeoElementInterface
             Event::on(
                 CampaignTypesService::class,
                 CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE,
-                function (CampaignTypeEvent $event) {
+                function(CampaignTypeEvent $event) {
                     Craft::debug(
                         'CampaignTypesService::EVENT_AFTER_DELETE_CAMPAIGN_TYPE',
                         __METHOD__
@@ -184,7 +184,7 @@ class SeoCampaign implements SeoElementInterface
             Event::on(
                 CampaignElement::class,
                 CampaignElement::EVENT_DEFINE_SIDEBAR_HTML,
-                static function (DefineHtmlEvent $event) {
+                static function(DefineHtmlEvent $event) {
                     Craft::debug(
                         'CampaignElement::EVENT_DEFINE_SIDEBAR_HTML',
                         __METHOD__
@@ -242,8 +242,7 @@ class SeoCampaign implements SeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId
-    )
-    {
+    ) {
         return CampaignElement::find()
             ->campaignType($metaBundle->sourceHandle)
             ->id($elementId)

@@ -477,8 +477,7 @@ class Helper extends Component
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId, $transformMode);
     }
 
@@ -498,8 +497,7 @@ class Helper extends Component
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId, $transformMode);
     }
 

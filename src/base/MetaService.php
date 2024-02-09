@@ -11,10 +11,9 @@
 
 namespace nystudio107\seomatic\base;
 
-use nystudio107\seomatic\Seomatic;
-
-use Craft;
 use craft\base\Component;
+
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
