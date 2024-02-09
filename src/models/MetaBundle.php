@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -270,29 +270,29 @@ class MetaBundle extends FluentModel
                 [
                     'sourceId',
                     'sourceSiteId',
-                    'typeId'
+                    'typeId',
                 ],
                 'number',
-                'min' => 1
+                'min' => 1,
             ],
             [
                 [
-                    'sourceDateUpdated'
+                    'sourceDateUpdated',
                 ],
-                DateTimeValidator::class
+                DateTimeValidator::class,
             ],
             [
                 [
                     'sourceAltSiteSettings',
                 ],
-                'safe'
+                'safe',
             ],
             [
                 [
                     'metaContainers',
                     'redirectsContainer',
                 ],
-                ArrayValidator::class
+                ArrayValidator::class,
             ],
             [
                 [
@@ -302,7 +302,7 @@ class MetaBundle extends FluentModel
                     'metaBundleSettings',
                     'frontendTemplatesContainer',
                 ],
-                'safe'
+                'safe',
             ],
         ];
 
@@ -321,7 +321,7 @@ class MetaBundle extends FluentModel
                 'class' => EnvAttributeParserBehavior::class,
                 'attributes' => [
                 ],
-            ]
+            ],
         ]);
     }
 }

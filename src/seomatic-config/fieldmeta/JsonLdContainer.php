@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -9,7 +9,6 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\services\JsonLd as JsonLdService;
 
@@ -20,15 +19,15 @@ use nystudio107\seomatic\services\JsonLd as JsonLdService;
  */
 
 return [
-    MetaJsonLdContainer::CONTAINER_TYPE.JsonLdService::GENERAL_HANDLE => [
-        'name'         => 'General',
-        'description'  => 'JsonLd Tags',
-        'handle'       => JsonLdService::GENERAL_HANDLE,
-        'class'        => (string)MetaJsonLdContainer::class,
-        'include'      => true,
+    MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE => [
+        'name' => 'General',
+        'description' => 'JsonLd Tags',
+        'handle' => JsonLdService::GENERAL_HANDLE,
+        'class' => (string)MetaJsonLdContainer::class,
+        'include' => true,
         'dependencies' => [
         ],
-        'data'         => [
+        'data' => [
         ],
     ],
 ];

@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,27 +11,27 @@
 
 namespace nystudio107\seomatic\gql\interfaces;
 
+use craft\gql\base\InterfaceType as BaseInterfaceType;
+use craft\gql\GqlEntityRegistry;
+use GraphQL\Type\Definition\InterfaceType;
+use GraphQL\Type\Definition\Type;
 use nystudio107\seomatic\gql\arguments\FrontendContainerArguments;
 use nystudio107\seomatic\gql\arguments\SitemapArguments;
+
 use nystudio107\seomatic\gql\arguments\SitemapIndexArguments;
 use nystudio107\seomatic\gql\resolvers\FrontendContainerResolver;
 use nystudio107\seomatic\gql\resolvers\SitemapResolver;
-use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
-
 use nystudio107\seomatic\gql\types\FileContentsType;
+use nystudio107\seomatic\gql\types\generators\SeomaticGenerator;
 use nystudio107\seomatic\models\FrontendTemplateContainer;
 use nystudio107\seomatic\models\MetaJsonLdContainer;
 use nystudio107\seomatic\models\MetaLinkContainer;
+
 use nystudio107\seomatic\models\MetaScriptContainer;
 use nystudio107\seomatic\models\MetaSiteVars;
+
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\models\MetaTitleContainer;
-
-use craft\gql\base\InterfaceType as BaseInterfaceType;
-use craft\gql\GqlEntityRegistry;
-
-use GraphQL\Type\Definition\InterfaceType;
-use GraphQL\Type\Definition\Type;
 
 /**
  * Class SeomaticInterface
@@ -45,7 +45,7 @@ class SeomaticInterface extends BaseInterfaceType
     // Constants
     // =========================================================================
 
-    const GRAPH_QL_FIELDS = [
+    public const GRAPH_QL_FIELDS = [
         'metaTitleContainer' => MetaTitleContainer::CONTAINER_TYPE,
         'metaTagContainer' => MetaTagContainer::CONTAINER_TYPE,
         'metaLinkContainer' => MetaLinkContainer::CONTAINER_TYPE,
@@ -55,7 +55,7 @@ class SeomaticInterface extends BaseInterfaceType
         'frontendTemplateContainer' => FrontendTemplateContainer::CONTAINER_TYPE,
     ];
 
-    const DEPRECATED_GRAPH_QL_FIELDS = [
+    public const DEPRECATED_GRAPH_QL_FIELDS = [
         'frontendTemplateContainer' => 'This query is deprecated and will be removed in the future. You should use `frontendTemplates` instead.',
     ];
 
@@ -78,9 +78,9 @@ class SeomaticInterface extends BaseInterfaceType
 
         $type = GqlEntityRegistry::createEntity(self::class, new InterfaceType([
             'name' => static::getName(),
-            'fields' => self::class.'::getFieldDefinitions',
+            'fields' => self::class . '::getFieldDefinitions',
             'description' => 'This is the interface implemented by SEOmatic.',
-            'resolveType' => function (array $value) {
+            'resolveType' => function(array $value) {
                 return GqlEntityRegistry::getEntity(SeomaticGenerator::getName());
             },
         ]));
@@ -104,11 +104,10 @@ class SeomaticInterface extends BaseInterfaceType
     {
         $fields = [];
         foreach (self::GRAPH_QL_FIELDS as $key => $value) {
-
             $fields[$key] = [
                 'name' => $key,
                 'type' => Type::string(),
-                'description' => 'The '.$value.' SEOmatic container.',
+                'description' => 'The ' . $value . ' SEOmatic container.',
             ];
             if (isset(self::DEPRECATED_GRAPH_QL_FIELDS[$key])) {
                 $fields[$key]['deprecationReason'] = self::DEPRECATED_GRAPH_QL_FIELDS[$key];
@@ -119,27 +118,27 @@ class SeomaticInterface extends BaseInterfaceType
             'name' => 'sitemaps',
             'args' => SitemapArguments::getArguments(),
             'type' => Type::listOf(FileContentsType::getType()),
-            'resolve' => SitemapResolver::class .'::getSitemaps'
+            'resolve' => SitemapResolver::class . '::getSitemaps',
         ];
 
         $fields['sitemapIndexes'] = [
             'name' => 'sitemapIndexes',
             'args' => SitemapIndexArguments::getArguments(),
             'type' => Type::listOf(FileContentsType::getType()),
-            'resolve' => SitemapResolver::class .'::getSitemapIndexes'
+            'resolve' => SitemapResolver::class . '::getSitemapIndexes',
         ];
 
         $fields['sitemapStyles'] = [
             'name' => 'sitemapStyles',
             'type' => FileContentsType::getType(),
-            'resolve' => SitemapResolver::class .'::getSitemapStyles'
+            'resolve' => SitemapResolver::class . '::getSitemapStyles',
         ];
 
         $fields['frontendTemplates'] = [
             'name' => 'frontendTemplates',
             'args' => FrontendContainerArguments::getArguments(),
             'type' => Type::listOf(FileContentsType::getType()),
-            'resolve' => FrontendContainerResolver::class .'::getContainerFiles'
+            'resolve' => FrontendContainerResolver::class . '::getContainerFiles',
         ];
 
         return $fields;

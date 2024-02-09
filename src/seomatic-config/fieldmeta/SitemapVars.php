@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -16,14 +16,14 @@
  */
 
 return [
-    'sitemapUrls'          => null,
-    'sitemapAssets'        => null,
-    'sitemapFiles'         => null,
-    'sitemapAltLinks'      => null,
-    'sitemapChangeFreq'    => '',
-    'sitemapPriority'      => '',
-    'sitemapLimit'         => null,
-    'structureDepth'       => null,
+    'sitemapUrls' => null,
+    'sitemapAssets' => null,
+    'sitemapFiles' => null,
+    'sitemapAltLinks' => null,
+    'sitemapChangeFreq' => '',
+    'sitemapPriority' => '',
+    'sitemapLimit' => null,
+    'structureDepth' => null,
     'sitemapImageFieldMap' => [
     ],
     'sitemapVideoFieldMap' => [

@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -55,9 +55,9 @@ class SeoElements extends Component
      * );
      * ```
      */
-    const EVENT_REGISTER_SEO_ELEMENT_TYPES = 'registerSeoElementTypes';
+    public const EVENT_REGISTER_SEO_ELEMENT_TYPES = 'registerSeoElementTypes';
 
-    const DEFAULT_SEO_ELEMENT_TYPES = [
+    public const DEFAULT_SEO_ELEMENT_TYPES = [
         SeoCampaign::class,
         SeoCategory::class,
         SeoDigitalProduct::class,

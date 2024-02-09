@@ -25,98 +25,98 @@ use nystudio107\seomatic\models\MetaJsonLd;
  */
 class Time extends MetaJsonLd implements TimeInterface
 {
-	use TimeTrait;
+    use TimeTrait;
 
-	/**
-	 * The Schema.org Type Name
-	 *
-	 * @var string
-	 */
-	public static string $schemaTypeName = 'Time';
+    /**
+     * The Schema.org Type Name
+     *
+     * @var string
+     */
+    public static string $schemaTypeName = 'Time';
 
-	/**
-	 * The Schema.org Type Scope
-	 *
-	 * @var string
-	 */
-	public static string $schemaTypeScope = 'https://schema.org/Time';
+    /**
+     * The Schema.org Type Scope
+     *
+     * @var string
+     */
+    public static string $schemaTypeScope = 'https://schema.org/Time';
 
-	/**
-	 * The Schema.org Type Extends
-	 *
-	 * @var string
-	 */
-	public static string $schemaTypeExtends = 'Thing';
+    /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    public static string $schemaTypeExtends = 'Thing';
 
-	/**
-	 * The Schema.org Type Description
-	 *
-	 * @var string
-	 */
-	public static string $schemaTypeDescription = 'A point in time recurring on multiple days in the form hh:mm:ss[Z|(+|-)hh:mm] (see [XML schema for details](http://www.w3.org/TR/xmlschema-2/#time)).';
-
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getSchemaPropertyNames(): array
-	{
-		return array_keys($this->getSchemaPropertyExpectedTypes());
-	}
+    /**
+     * The Schema.org Type Description
+     *
+     * @var string
+     */
+    public static string $schemaTypeDescription = 'A point in time recurring on multiple days in the form hh:mm:ss[Z|(+|-)hh:mm] (see [XML schema for details](http://www.w3.org/TR/xmlschema-2/#time)).';
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSchemaPropertyExpectedTypes(): array
-	{
-		return [
-
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyNames(): array
+    {
+        return array_keys($this->getSchemaPropertyExpectedTypes());
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSchemaPropertyDescriptions(): array
-	{
-		return [
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
+    {
+        return [
 
-		];
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getGoogleRequiredSchema(): array
-	{
-		return [];
-	}
+        ];
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getGoogleRecommendedSchema(): array
-	{
-		return [];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+
+        ];
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function defineRules(): array
-	{
-		$rules = parent::defineRules();
-		    $rules = array_merge($rules, [
-		        [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
-		        [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-		        [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
-		    ]);
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return [];
+    }
 
-		    return $rules;
-	}
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return [];
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
+        $rules = array_merge($rules, [
+                [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+                [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+                [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.'],
+            ]);
+
+        return $rules;
+    }
 }

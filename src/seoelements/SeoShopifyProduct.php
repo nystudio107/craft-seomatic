@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -40,12 +40,12 @@ class SeoShopifyProduct implements SeoElementInterface
     // Constants
     // =========================================================================
 
-    const META_BUNDLE_TYPE = 'shopifyproduct';
-    const ELEMENT_CLASSES = [
+    public const META_BUNDLE_TYPE = 'shopifyproduct';
+    public const ELEMENT_CLASSES = [
         Product::class,
     ];
-    const REQUIRED_PLUGIN_HANDLE = 'shopify';
-    const CONFIG_FILE_PATH = 'shopifyproductmeta/Bundle';
+    public const REQUIRED_PLUGIN_HANDLE = 'shopify';
+    public const CONFIG_FILE_PATH = 'shopifyproductmeta/Bundle';
 
     // Public Static Properties
     // =========================================================================
@@ -106,7 +106,7 @@ class SeoShopifyProduct implements SeoElementInterface
         Event::on(
             Products::class,
             Products::EVENT_BEFORE_SYNCHRONIZE_PRODUCT,
-            function (ShopifyProductSyncEvent $event) {
+            function(ShopifyProductSyncEvent $event) {
                 Craft::debug(
                     'Products::EVENT_BEFORE_SYNCHRONIZE_PRODUCT',
                     __METHOD__
@@ -130,7 +130,7 @@ class SeoShopifyProduct implements SeoElementInterface
         Event::on(
             Product::class,
             Product::EVENT_DEFINE_SIDEBAR_HTML,
-            static function (DefineHtmlEvent $event) {
+            static function(DefineHtmlEvent $event) {
                 Craft::debug(
                     'Product::EVENT_DEFINE_SIDEBAR_HTML',
                     __METHOD__
@@ -185,9 +185,8 @@ class SeoShopifyProduct implements SeoElementInterface
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
         int        $elementId,
-        int        $siteId
-    )
-    {
+        int        $siteId,
+    ) {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)

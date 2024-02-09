@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -39,7 +39,6 @@ class MetaBundle extends ActiveRecord
      */
     public function beforeSave($insert): bool
     {
-
         $result = parent::beforeSave($insert);
 
         if (!Craft::$app->getDb()->getSupportsMb4()) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -26,7 +26,7 @@ class EditableTemplate extends FrontendTemplate
     // Constants
     // =========================================================================
 
-    const TEMPLATE_TYPE = 'EditableTemplate';
+    public const TEMPLATE_TYPE = 'EditableTemplate';
 
     // Static Methods
     // =========================================================================
@@ -108,8 +108,7 @@ class EditableTemplate extends FrontendTemplate
     /**
      * @inheritdoc
      */
-    public
-    function render(array $params = []): string
+    public function render(array $params = []): string
     {
         return PluginTemplateHelper::renderStringTemplate($this->templateString);
     }

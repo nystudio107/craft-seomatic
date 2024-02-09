@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -24,7 +24,6 @@ use nystudio107\seomatic\services\FrontendTemplates;
  */
 class SeomaticFrontendTemplateType extends EnumType
 {
-
     /**
      * @var string
      */
@@ -45,21 +44,21 @@ class SeomaticFrontendTemplateType extends EnumType
             'values' => [
                 FrontendTemplates::HUMANS_TXT_HANDLE => [
                     'value' => FrontendTemplates::HUMANS_TXT_HANDLE,
-                    'description' => 'The humans.txt file'
+                    'description' => 'The humans.txt file',
                 ],
                 FrontendTemplates::ROBOTS_TXT_HANDLE => [
                     'value' => FrontendTemplates::ROBOTS_TXT_HANDLE,
-                    'description' => 'The robots.txt file'
+                    'description' => 'The robots.txt file',
                 ],
                 FrontendTemplates::ADS_TXT_HANDLE => [
                     'value' => FrontendTemplates::ADS_TXT_HANDLE,
-                    'description' => 'The ads.txt file'
+                    'description' => 'The ads.txt file',
                 ],
                 FrontendTemplates::SECURITY_TXT_HANDLE => [
                     'value' => FrontendTemplates::SECURITY_TXT_HANDLE,
-                    'description' => 'The security.txt file'
+                    'description' => 'The security.txt file',
                 ],
-            ]
+            ],
         ]);
         parent::__construct($config);
     }

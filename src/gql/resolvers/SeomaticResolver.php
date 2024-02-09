@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,16 +11,16 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
-use nystudio107\seomatic\helpers\Gql as GqlHelper;
-use nystudio107\seomatic\helpers\Container as ContainerHelper;
-
 use craft\base\Element;
 use craft\gql\base\Resolver;
 use craft\helpers\Json;
-
 use GraphQL\Type\Definition\ResolveInfo;
+
+use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
+use nystudio107\seomatic\helpers\Container as ContainerHelper;
+use nystudio107\seomatic\helpers\Gql as GqlHelper;
+
+use nystudio107\seomatic\Seomatic;
 
 /**
  * Class SeomaticResolver
@@ -31,7 +31,6 @@ use GraphQL\Type\Definition\ResolveInfo;
  */
 class SeomaticResolver extends Resolver
 {
-
     // Public Methods
     // =========================================================================
 

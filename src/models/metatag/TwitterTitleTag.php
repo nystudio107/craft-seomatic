@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -26,7 +26,7 @@ class TwitterTitleTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'TwitterTitleTag';
+    public const ITEM_TYPE = 'TwitterTitleTag';
 
     // Static Methods
     // =========================================================================

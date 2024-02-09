@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * @link      https://nystudio107.com/
  * @copyright Copyright (c) 2019 nystudio107
@@ -28,12 +28,12 @@ class ContentSeoController extends Controller
     // Constants
     // =========================================================================
 
-    const SORT_MAP = [
+    public const SORT_MAP = [
         'DESC' => SORT_DESC,
         'ASC' => SORT_ASC,
     ];
 
-    const ALLOWED_SORT_FIELDS = [
+    public const ALLOWED_SORT_FIELDS = [
         'sourceName',
         'sourceType',
     ];
@@ -67,9 +67,8 @@ class ContentSeoController extends Controller
         int    $page = 1,
         int    $per_page = 20,
                $filter = '',
-               $siteId = 0
-    ): Response
-    {
+               $siteId = 0,
+    ): Response {
         $data = [];
         $sortField = 'sourceName';
         $sortType = 'ASC';

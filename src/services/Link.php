@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -31,7 +31,7 @@ class Link extends MetaService
     // Constants
     // =========================================================================
 
-    const DEFAULT_TYPE = null;
+    public const DEFAULT_TYPE = null;
 
     // Public Methods
     // =========================================================================

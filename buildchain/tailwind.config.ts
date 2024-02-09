@@ -4,6 +4,9 @@ export default {
     '../src/templates/**/*.{twig,html}',
     './src/vue/**/*.{vue,html}',
   ],
+  blocklist: [
+    'static',
+  ],
   theme: {},
   plugins: [],
 };

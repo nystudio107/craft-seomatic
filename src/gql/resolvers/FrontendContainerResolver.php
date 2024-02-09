@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -26,7 +26,6 @@ use nystudio107\seomatic\models\FrontendTemplateContainer;
  */
 class FrontendContainerResolver
 {
-
     // Public Methods
     // =========================================================================
 
@@ -53,14 +52,14 @@ class FrontendContainerResolver
 
         if (!empty($arguments['type'])) {
             $containerItems = [
-                $arguments['type'] => $containerItems[$arguments['type']] ?? []
+                $arguments['type'] => $containerItems[$arguments['type']] ?? [],
             ];
         }
 
-        array_walk($containerItems, function (&$contents, $type) use ($typeMap) {
+        array_walk($containerItems, function(&$contents, $type) use ($typeMap) {
             $contents = [
                 'filename' => $typeMap[$type],
-                'contents' => $contents
+                'contents' => $contents,
             ];
         });
 

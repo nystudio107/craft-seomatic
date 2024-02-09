@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -32,15 +32,15 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
     // Constants
     // =========================================================================
 
-    const TEMPLATE_TYPE = 'SitemapTemplate';
+    public const TEMPLATE_TYPE = 'SitemapTemplate';
 
-    const CACHE_KEY = 'seomatic_sitemap_';
+    public const CACHE_KEY = 'seomatic_sitemap_';
 
-    const QUEUE_JOB_CACHE_KEY = 'seomatic_sitemap_queue_job_';
+    public const QUEUE_JOB_CACHE_KEY = 'seomatic_sitemap_queue_job_';
 
-    const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
+    public const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
-    const FILE_TYPES = [
+    public const FILE_TYPES = [
         'excel',
         'pdf',
         'illustrator',
@@ -252,5 +252,4 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             __METHOD__
         );
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -511,5 +511,5 @@ return [
     ' Choose as general or specific of an schema.org entity type as you wish.' => ' Choose as general or specific of an schema.org entity type as you wish.',
     'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property.' => 'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property.',
     'Google Universal Analytics deprecated' => 'Google Universal Analytics deprecated',
-    'X (Twitter) username for the website used in the card footer, without the preceding @.' => 'X (Twitter) username for the website used in the card footer, without the preceding @.'
+    'X (Twitter) username for the website used in the card footer, without the preceding @.' => 'X (Twitter) username for the website used in the card footer, without the preceding @.',
 ];

@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -34,7 +34,7 @@ class MetaSiteVars extends VarsModel
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaSiteVarsContainer';
+    public const CONTAINER_TYPE = 'MetaSiteVarsContainer';
 
     // Static Methods
     // =========================================================================
@@ -169,13 +169,13 @@ class MetaSiteVars extends VarsModel
                     'siteLinksQueryInput',
                     'referrer',
                 ],
-                'string'
+                'string',
             ],
             [
                 [
-                    'additionalSitemapUrlsDateUpdated'
+                    'additionalSitemapUrlsDateUpdated',
                 ],
-                DateTimeValidator::class
+                DateTimeValidator::class,
             ],
             [
                 [

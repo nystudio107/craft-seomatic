@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -45,14 +45,14 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     // Constants
     // =========================================================================
 
-    const META_BUNDLE_TYPE = 'section';
-    const ELEMENT_CLASSES = [
+    public const META_BUNDLE_TYPE = 'section';
+    public const ELEMENT_CLASSES = [
         Entry::class,
         EntryDraft::class,
         EntryVersion::class,
     ];
-    const REQUIRED_PLUGIN_HANDLE = null;
-    const CONFIG_FILE_PATH = 'entrymeta/Bundle';
+    public const REQUIRED_PLUGIN_HANDLE = null;
+    public const CONFIG_FILE_PATH = 'entrymeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -108,7 +108,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Sections::class,
             Sections::EVENT_AFTER_SAVE_SECTION,
-            function (SectionEvent $event) {
+            function(SectionEvent $event) {
                 Craft::debug(
                     'Sections::EVENT_AFTER_SAVE_SECTION',
                     __METHOD__
@@ -119,7 +119,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Sections::class,
             Sections::EVENT_AFTER_DELETE_SECTION,
-            function (SectionEvent $event) {
+            function(SectionEvent $event) {
                 Craft::debug(
                     'Sections::EVENT_AFTER_DELETE_SECTION',
                     __METHOD__
@@ -134,7 +134,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Sections::class,
                 Sections::EVENT_AFTER_SAVE_SECTION,
-                function (SectionEvent $event) {
+                function(SectionEvent $event) {
                     Craft::debug(
                         'Sections::EVENT_AFTER_SAVE_SECTION',
                         __METHOD__
@@ -157,7 +157,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Sections::class,
                 Sections::EVENT_AFTER_DELETE_SECTION,
-                function (SectionEvent $event) {
+                function(SectionEvent $event) {
                     Craft::debug(
                         'Sections::EVENT_AFTER_DELETE_SECTION',
                         __METHOD__
@@ -186,7 +186,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Entry::class,
             Entry::EVENT_DEFINE_SIDEBAR_HTML,
-            static function (DefineHtmlEvent $event) {
+            static function(DefineHtmlEvent $event) {
                 Craft::debug(
                     'Entry::EVENT_DEFINE_SIDEBAR_HTML',
                     __METHOD__
@@ -246,9 +246,8 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
         int        $elementId,
-        int        $siteId
-    )
-    {
+        int        $siteId,
+    ) {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)

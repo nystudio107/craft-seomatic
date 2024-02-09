@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,11 +11,11 @@
 
 namespace nystudio107\seomatic\gql\types;
 
-use nystudio107\seomatic\helpers\Environment;
-
 use craft\gql\GqlEntityRegistry;
 
 use GraphQL\Type\Definition\EnumType;
+
+use nystudio107\seomatic\helpers\Environment;
 
 /**
  * Class SeomaticEnvironmentType
@@ -26,7 +26,6 @@ use GraphQL\Type\Definition\EnumType;
  */
 class SeomaticEnvironmentType extends EnumType
 {
-
     /**
      * @var string
      */
@@ -48,17 +47,17 @@ class SeomaticEnvironmentType extends EnumType
             'values' => [
                 Environment::SEOMATIC_DEV_ENV => [
                     'value' => Environment::SEOMATIC_DEV_ENV,
-                    'description' => 'Local Development environment, with debugging enabled and indexing disabled'
+                    'description' => 'Local Development environment, with debugging enabled and indexing disabled',
                 ],
                 Environment::SEOMATIC_STAGING_ENV => [
                     'value' => Environment::SEOMATIC_STAGING_ENV,
-                    'description' => 'Staging environment, with indexing disabled'
+                    'description' => 'Staging environment, with indexing disabled',
                 ],
                 Environment::SEOMATIC_PRODUCTION_ENV => [
                     'value' => Environment::SEOMATIC_PRODUCTION_ENV,
-                    'description' => 'Live production environment, with indexing enabled'
+                    'description' => 'Live production environment, with indexing enabled',
                 ],
-            ]
+            ],
         ]);
         parent::__construct($config);
     }

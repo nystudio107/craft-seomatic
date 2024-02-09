@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -28,7 +28,7 @@ class MetaScript extends NonceItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaScript';
+    public const ITEM_TYPE = 'MetaScript';
 
     // Static Methods
     // =========================================================================

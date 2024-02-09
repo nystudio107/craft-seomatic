@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -27,8 +27,8 @@ class MetaTitle extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaTitle';
-    const DEFAULT_TITLE_KEY = 'title';
+    public const ITEM_TYPE = 'MetaTitle';
+    public const DEFAULT_TITLE_KEY = 'title';
 
     // Static Methods
     // =========================================================================

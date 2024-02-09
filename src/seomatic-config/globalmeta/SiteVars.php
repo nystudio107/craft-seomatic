@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -19,65 +19,65 @@ use nystudio107\seomatic\helpers\Config;
 
 return [
     '*' => [
-        'siteName'                  => '',
-        'identity'                  => Config::getConfigFromFile('globalmeta/Identity'),
-        'creator'                   => Config::getConfigFromFile('globalmeta/Creator'),
-        'twitterHandle'             => '',
-        'facebookProfileId'         => '',
-        'facebookAppId'             => '',
-        'googleSiteVerification'    => '',
-        'bingSiteVerification'      => '',
+        'siteName' => '',
+        'identity' => Config::getConfigFromFile('globalmeta/Identity'),
+        'creator' => Config::getConfigFromFile('globalmeta/Creator'),
+        'twitterHandle' => '',
+        'facebookProfileId' => '',
+        'facebookAppId' => '',
+        'googleSiteVerification' => '',
+        'bingSiteVerification' => '',
         'pinterestSiteVerification' => '',
-        'sameAsLinks'               => [
-            'twitter'    => [
+        'sameAsLinks' => [
+            'twitter' => [
                 'siteName' => 'Twitter',
-                'handle'   => 'twitter',
-                'url'      => '',
+                'handle' => 'twitter',
+                'url' => '',
             ],
-            'facebook'   => [
+            'facebook' => [
                 'siteName' => 'Facebook',
-                'handle'   => 'facebook',
-                'url'      => '',
+                'handle' => 'facebook',
+                'url' => '',
             ],
-            'wikipedia'  => [
+            'wikipedia' => [
                 'siteName' => 'Wikipedia',
-                'handle'   => 'wikipedia',
-                'url'      => '',
+                'handle' => 'wikipedia',
+                'url' => '',
             ],
-            'linkedin'   => [
+            'linkedin' => [
                 'siteName' => 'LinkedIn',
-                'handle'   => 'linkedin',
-                'url'      => '',
+                'handle' => 'linkedin',
+                'url' => '',
             ],
             'googleplus' => [
                 'siteName' => 'Google+',
-                'handle'   => 'googleplus',
-                'url'      => '',
+                'handle' => 'googleplus',
+                'url' => '',
             ],
-            'youtube'    => [
+            'youtube' => [
                 'siteName' => 'YouTube',
-                'handle'   => 'youtube',
-                'url'      => '',
+                'handle' => 'youtube',
+                'url' => '',
             ],
-            'instagram'  => [
+            'instagram' => [
                 'siteName' => 'Instagram',
-                'handle'   => 'instagram',
-                'url'      => '',
+                'handle' => 'instagram',
+                'url' => '',
             ],
-            'pinterest'  => [
+            'pinterest' => [
                 'siteName' => 'Pinterest',
-                'handle'   => 'pinterest',
-                'url'      => '',
+                'handle' => 'pinterest',
+                'url' => '',
             ],
-            'github'     => [
+            'github' => [
                 'siteName' => 'GitHub',
-                'handle'   => 'github',
-                'url'      => '',
+                'handle' => 'github',
+                'url' => '',
             ],
-            'vimeo'      => [
+            'vimeo' => [
                 'siteName' => 'Vimeo',
-                'handle'   => 'vimeo',
-                'url'      => '',
+                'handle' => 'vimeo',
+                'url' => '',
             ],
         ],
         'siteLinksSearchTarget' => '',

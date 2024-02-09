@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * @link      https://nystudio107.com/
  * @copyright Copyright (c) 2017 nystudio107
@@ -9,11 +9,11 @@
 
 namespace nystudio107\seomatic\controllers;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\services\FrontendTemplates;
-
 use Craft;
 use craft\web\Controller;
+
+use nystudio107\seomatic\Seomatic;
+use nystudio107\seomatic\services\FrontendTemplates;
 
 use yii\web\Response;
 
@@ -99,5 +99,4 @@ class FrontendTemplateController extends Controller
 
         return $this->asRaw($text);
     }
-
 }

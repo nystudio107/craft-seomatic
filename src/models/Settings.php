@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -94,7 +94,7 @@ class Settings extends VarsModel
     public array $sidebarDisplayPreviewTypes = [
         'google',
         'twitter',
-        'facebook'
+        'facebook',
     ];
 
     /**
@@ -288,7 +288,7 @@ class Settings extends VarsModel
                     'addPaginatedHreflang',
                     'manuallySetEnvironment',
                 ],
-                'boolean'
+                'boolean',
             ],
             ['cspNonce', 'string'],
             ['cspNonce', 'in', 'range' => [
@@ -311,7 +311,7 @@ class Settings extends VarsModel
                     'truncateTitleTags',
                     'truncateDescriptionTags',
                 ],
-                'boolean'
+                'boolean',
             ],
             [['devModeTitlePrefix', 'cpTitlePrefix', 'devModeCpTitlePrefix'], 'string'],
             ['separatorChar', 'string'],
@@ -350,7 +350,7 @@ class Settings extends VarsModel
                 'attributes' => [
                     'environment',
                 ],
-            ]
+            ],
         ]);
     }
 }

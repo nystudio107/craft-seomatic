@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -43,7 +43,7 @@ class Helper extends Component
     // Constants
     // =========================================================================
 
-    const TWITTER_TRANSFORM_MAP = [
+    public const TWITTER_TRANSFORM_MAP = [
         'summary' => 'twitter-summary',
         'summary_large_image' => 'twitter-large',
         'app' => 'twitter-large',
@@ -474,9 +474,8 @@ class Helper extends Component
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId, $transformMode);
     }
 
@@ -495,9 +494,8 @@ class Helper extends Component
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId, $transformMode);
     }
 

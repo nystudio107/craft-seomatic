@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * @link      https://nystudio107.com/
  * @copyright Copyright (c) 2017 nystudio107
@@ -49,16 +49,16 @@ class SettingsController extends Controller
     // Constants
     // =========================================================================
 
-    const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic';
+    public const DOCUMENTATION_URL = 'https://github.com/nystudio107/craft-seomatic';
 
-    const SETUP_GRADES = [
+    public const SETUP_GRADES = [
         ['id' => 'data1', 'name' => 'A', 'color' => '#008002'],
         ['id' => 'data2', 'name' => 'B', 'color' => '#9ACD31'],
         ['id' => 'data4', 'name' => 'C', 'color' => '#FFA500'],
         ['id' => 'data5', 'name' => 'D', 'color' => '#8B0100'],
     ];
 
-    const SEO_SETUP_FIELDS = [
+    public const SEO_SETUP_FIELDS = [
         'mainEntityOfPage' => 'Main Entity of Page',
         'seoTitle' => 'SEO Title',
         'seoDescription' => 'SEO Description',
@@ -67,13 +67,13 @@ class SettingsController extends Controller
         'seoImageDescription' => 'SEO Image Description',
     ];
 
-    const SITE_SETUP_FIELDS = [
+    public const SITE_SETUP_FIELDS = [
         'siteName' => 'Site Name',
         'twitterHandle' => 'Twitter Handle',
         'facebookProfileId' => 'Facebook Profile ID',
     ];
 
-    const IDENTITY_SETUP_FIELDS = [
+    public const IDENTITY_SETUP_FIELDS = [
         'computedType' => 'Identity Entity Type',
         'genericName' => 'Identity Entity Name',
         'genericDescription' => 'Identity Entity Description',
@@ -503,9 +503,8 @@ class SettingsController extends Controller
         string $sourceHandle,
         string $siteHandle = null,
                $typeId = null,
-               $loadFromSiteHandle = null
-    ): Response
-    {
+               $loadFromSiteHandle = null,
+    ): Response {
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
@@ -807,7 +806,7 @@ class SettingsController extends Controller
                     $siteSettings['creator'] = $metaBundle->metaSiteVars->creator;
                 }
                 if (!empty($siteSettings['additionalSitemapUrls'])) {
-                    $siteSettings['additionalSitemapUrlsDateUpdated'] = new DateTime;
+                    $siteSettings['additionalSitemapUrlsDateUpdated'] = new DateTime();
                     Seomatic::$plugin->sitemaps->submitCustomSitemap($siteId);
                 }
                 $metaBundle->metaSiteVars->setAttributes($siteSettings);
@@ -918,7 +917,7 @@ class SettingsController extends Controller
         // Add in the variables to the autocomplete cache so they can be accessed across requests
         $subSectionSettings = $variables['scripts'][$subSection];
         $variables['codeEditorOptions'] = [
-            TrackingVarsAutocomplete::OPTIONS_DATA_KEY => $subSectionSettings->vars
+            TrackingVarsAutocomplete::OPTIONS_DATA_KEY => $subSectionSettings->vars,
         ];
         // Plugin and section settings
         $pluginName = Seomatic::$settings->pluginName;
@@ -1206,9 +1205,8 @@ class SettingsController extends Controller
         string $sourceBundleType,
         string $sourceHandle,
         string $groupName,
-        array  &$variables
-    )
-    {
+        array  &$variables,
+    ) {
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromSource(

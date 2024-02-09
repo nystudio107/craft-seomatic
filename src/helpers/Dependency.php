@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -23,14 +23,14 @@ class Dependency
     // Constants
     // =========================================================================
 
-    const CONFIG_DEPENDENCY = 'config';
-    const SITE_DEPENDENCY = 'site';
-    const META_DEPENDENCY = 'meta';
-    const TAG_DEPENDENCY = 'tag';
-    const SCRIPT_DEPENDENCY = 'script';
-    const LINK_DEPENDENCY = 'link';
-    const JSONLD_DEPENDENCY = 'jsonld';
-    const FRONTEND_TEMPLATE_DEPENDENCY = 'frontend_template';
+    public const CONFIG_DEPENDENCY = 'config';
+    public const SITE_DEPENDENCY = 'site';
+    public const META_DEPENDENCY = 'meta';
+    public const TAG_DEPENDENCY = 'tag';
+    public const SCRIPT_DEPENDENCY = 'script';
+    public const LINK_DEPENDENCY = 'link';
+    public const JSONLD_DEPENDENCY = 'jsonld';
+    public const FRONTEND_TEMPLATE_DEPENDENCY = 'frontend_template';
 
     // Static Methods
     // =========================================================================

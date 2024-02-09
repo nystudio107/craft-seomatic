@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -41,16 +41,15 @@ use yii\base\InvalidConfigException;
  */
 class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
 {
-
     // Constants
     // =========================================================================
 
-    const META_BUNDLE_TYPE = 'categorygroup';
-    const ELEMENT_CLASSES = [
+    public const META_BUNDLE_TYPE = 'categorygroup';
+    public const ELEMENT_CLASSES = [
         Category::class,
     ];
-    const REQUIRED_PLUGIN_HANDLE = null;
-    const CONFIG_FILE_PATH = 'categorymeta/Bundle';
+    public const REQUIRED_PLUGIN_HANDLE = null;
+    public const CONFIG_FILE_PATH = 'categorymeta/Bundle';
 
     // Public Static Methods
     // =========================================================================
@@ -106,7 +105,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Categories::class,
             Categories::EVENT_AFTER_SAVE_GROUP,
-            function (CategoryGroupEvent $event) {
+            function(CategoryGroupEvent $event) {
                 Craft::debug(
                     'Categories::EVENT_AFTER_SAVE_GROUP',
                     __METHOD__
@@ -117,7 +116,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Categories::class,
             Categories::EVENT_AFTER_DELETE_GROUP,
-            function (CategoryGroupEvent $event) {
+            function(CategoryGroupEvent $event) {
                 Craft::debug(
                     'Categories::EVENT_AFTER_DELETE_GROUP',
                     __METHOD__
@@ -132,7 +131,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Categories::class,
                 Categories::EVENT_AFTER_SAVE_GROUP,
-                function (CategoryGroupEvent $event) {
+                function(CategoryGroupEvent $event) {
                     Craft::debug(
                         'Categories::EVENT_AFTER_SAVE_GROUP',
                         __METHOD__
@@ -155,7 +154,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
             Event::on(
                 Categories::class,
                 Categories::EVENT_AFTER_DELETE_GROUP,
-                function (CategoryGroupEvent $event) {
+                function(CategoryGroupEvent $event) {
                     Craft::debug(
                         'Categories::EVENT_AFTER_DELETE_GROUP',
                         __METHOD__
@@ -184,7 +183,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         Event::on(
             Category::class,
             Category::EVENT_DEFINE_SIDEBAR_HTML,
-            static function (DefineHtmlEvent $event) {
+            static function(DefineHtmlEvent $event) {
                 Craft::debug(
                     'Category::EVENT_DEFINE_SIDEBAR_HTML',
                     __METHOD__
@@ -243,9 +242,8 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
         int        $elementId,
-        int        $siteId
-    )
-    {
+        int        $siteId,
+    ) {
         return Category::find()
             ->id($elementId)
             ->siteId($siteId)

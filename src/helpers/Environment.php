@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -25,18 +25,18 @@ class Environment
     // Constants
     // =========================================================================
 
-    const SEOMATIC_DEV_ENV = 'local';
-    const SEOMATIC_STAGING_ENV = 'staging';
-    const SEOMATIC_PRODUCTION_ENV = 'live';
+    public const SEOMATIC_DEV_ENV = 'local';
+    public const SEOMATIC_STAGING_ENV = 'staging';
+    public const SEOMATIC_PRODUCTION_ENV = 'live';
 
-    const DEV_ENVIRONMENTS = [
+    public const DEV_ENVIRONMENTS = [
         'dev',
         'development',
         'loc',
-        'local'
+        'local',
     ];
 
-    const STAGING_ENVIRONMENTS = [
+    public const STAGING_ENVIRONMENTS = [
         'stage',
         'staging',
         'test',
@@ -44,15 +44,15 @@ class Environment
         'uat',
         'acc',
         'acceptance',
-        'sandbox'
+        'sandbox',
     ];
 
-    const PRODUCTION_ENVIRONMENTS = [
+    public const PRODUCTION_ENVIRONMENTS = [
         'live',
         'prod',
         'production',
         'pub',
-        'public'
+        'public',
     ];
 
     // Static Methods

@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -32,14 +32,13 @@ class SitemapIndexArguments extends Arguments
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'Optional - The site ID to resolve the sitemap for.'
+                'description' => 'Optional - The site ID to resolve the sitemap for.',
             ],
             'site' => [
                 'name' => 'site',
                 'type' => Type::string(),
-                'description' => 'Optional - The site handle to resolve the sitemap for.'
+                'description' => 'Optional - The site handle to resolve the sitemap for.',
             ],
         ];
     }
 }
-

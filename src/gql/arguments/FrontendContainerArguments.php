@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -33,19 +33,18 @@ class FrontendContainerArguments extends Arguments
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'The site ID to fetch frontend containers for.'
+                'description' => 'The site ID to fetch frontend containers for.',
             ],
             'site' => [
                 'name' => 'site',
                 'type' => Type::string(),
-                'description' => 'The site handle to fetch frontend containers for.'
+                'description' => 'The site handle to fetch frontend containers for.',
             ],
             'type' => [
                 'name' => 'type',
                 'type' => SeomaticFrontendTemplateType::getType(),
-                'description' => 'The frontend container type.'
+                'description' => 'The frontend container type.',
             ],
         ];
     }
 }
-

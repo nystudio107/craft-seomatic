@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -54,13 +54,13 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
      * });
      * ```
      */
-    const EVENT_REGISTER_SITEMAPS = 'registerSitemaps';
+    public const EVENT_REGISTER_SITEMAPS = 'registerSitemaps';
 
-    const TEMPLATE_TYPE = 'SitemapIndexTemplate';
+    public const TEMPLATE_TYPE = 'SitemapIndexTemplate';
 
-    const CACHE_KEY = 'seomatic_sitemap_index';
+    public const CACHE_KEY = 'seomatic_sitemap_index';
 
-    const SITEMAP_INDEX_CACHE_TAG = 'seomatic_sitemap_index';
+    public const SITEMAP_INDEX_CACHE_TAG = 'seomatic_sitemap_index';
 
     // Static Methods
     // =========================================================================
@@ -150,7 +150,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet(self::CACHE_KEY . $groupId . '.' . $siteId, function () use ($groupSiteIds, $siteId) {
+        return $cache->getOrSet(self::CACHE_KEY . $groupId . '.' . $siteId, function() use ($groupSiteIds, $siteId) {
             Craft::info(
                 'Sitemap index cache miss',
                 __METHOD__
@@ -274,7 +274,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     // Find the most recent date
                     $dateUpdated = !empty($additionalSitemap['lastmod'])
                         ? $additionalSitemap['lastmod']
-                        : new DateTime;
+                        : new DateTime();
                     $lines[] = '<lastmod>';
                     $lines[] = $dateUpdated->format(DateTime::W3C);
                     $lines[] = '</lastmod>';
@@ -316,7 +316,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '</loc>';
             // Find the most recent date
             $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                ?? new DateTime;
+                ?? new DateTime();
             foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
                 if (!empty($additionalSitemapUrl['lastmod'])) {
                     if ($additionalSitemapUrl['lastmod'] > $dateUpdated) {

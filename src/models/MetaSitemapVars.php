@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -117,21 +117,21 @@ class MetaSitemapVars extends InheritableSettingsModel
             ],
             [
                 [
-                    'sitemapPriority'
+                    'sitemapPriority',
                 ],
-                'number'
+                'number',
             ],
             [
                 [
-                    'sitemapLimit'
+                    'sitemapLimit',
                 ],
-                'integer'
+                'integer',
             ],
             [
                 [
-                    'structureDepth'
+                    'structureDepth',
                 ],
-                'integer'
+                'integer',
             ],
             [
                 [
@@ -140,14 +140,14 @@ class MetaSitemapVars extends InheritableSettingsModel
                     'sitemapAltLinks',
                     'sitemapFiles',
                 ],
-                'boolean'
+                'boolean',
             ],
             [
                 [
                     'sitemapImageFieldMap',
-                    'sitemapVideoFieldMap'
+                    'sitemapVideoFieldMap',
                 ],
-                ArrayValidator::class
+                ArrayValidator::class,
             ],
         ];
     }

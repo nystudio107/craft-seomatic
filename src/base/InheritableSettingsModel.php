@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -22,7 +22,6 @@ use craft\helpers\StringHelper;
  */
 abstract class InheritableSettingsModel extends VarsModel
 {
-
     /**
      * @var array A list of all the settings for which the inherited values should be used.
      */

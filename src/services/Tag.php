@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -31,11 +31,11 @@ class Tag extends MetaService
     // Constants
     // =========================================================================
 
-    const FACEBOOK_HANDLE = 'opengraph';
-    const TWITTER_HANDLE = 'twitter';
-    const MISC_HANDLE = 'miscellaneous';
+    public const FACEBOOK_HANDLE = 'opengraph';
+    public const TWITTER_HANDLE = 'twitter';
+    public const MISC_HANDLE = 'miscellaneous';
 
-    const DEFAULT_TYPE = null;
+    public const DEFAULT_TYPE = null;
 
     // Public Methods
     // =========================================================================

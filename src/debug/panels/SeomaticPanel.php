@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -21,10 +21,10 @@ use yii\debug\Panel;
 
 class SeomaticPanel extends Panel
 {
-    const CONTAINER_PARSED_PROPERTIES = [
+    public const CONTAINER_PARSED_PROPERTIES = [
         'metaGlobalVars',
         'metaSiteVars',
-        'metaSitemapVars'
+        'metaSitemapVars',
     ];
 
     /**
@@ -46,12 +46,11 @@ class SeomaticPanel extends Panel
 
         Event::on(MetaContainers::class,
             MetaContainers::EVENT_METABUNDLE_DEBUG_DATA,
-            function (MetaBundleDebugDataEvent $e) {
+            function(MetaBundleDebugDataEvent $e) {
                 if ($e->metaBundle) {
                     $this->metaBundles[$e->metaBundleCategory] = $e->metaBundle;
                 }
             });
-
     }
 
     /**
