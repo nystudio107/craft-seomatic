@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,11 +11,11 @@
 
 namespace nystudio107\seomatic\models\metalink;
 
-use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\models\MetaLink;
-use nystudio107\seomatic\helpers\UrlHelper;
-
 use craft\helpers\StringHelper;
+use nystudio107\seomatic\helpers\UrlHelper;
+use nystudio107\seomatic\models\MetaLink;
+
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -27,7 +27,7 @@ class HomeLink extends MetaLink
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'HomeLink';
+    public const ITEM_TYPE = 'HomeLink';
 
     // Static Methods
     // =========================================================================

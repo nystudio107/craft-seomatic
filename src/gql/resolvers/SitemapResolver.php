@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,15 +11,15 @@
 
 namespace nystudio107\seomatic\gql\resolvers;
 
+use Craft;
+use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
+
 use nystudio107\seomatic\models\SitemapIndexTemplate;
+
 use nystudio107\seomatic\models\SitemapTemplate;
-
-use Craft;
-
-use GraphQL\Type\Definition\ResolveInfo;
 
 /**
  * Class SitemapResolver
@@ -30,7 +30,6 @@ use GraphQL\Type\Definition\ResolveInfo;
  */
 class SitemapResolver
 {
-
     // Public Methods
     // =========================================================================
 
@@ -42,7 +41,7 @@ class SitemapResolver
         // If there's a filename provided, return the sitemap.
         if (!empty($arguments['filename'])) {
             return [
-                self::getSitemapItemByFilename($arguments['filename'])
+                self::getSitemapItemByFilename($arguments['filename']),
             ];
         }
         $siteId = GqlHelper::getSiteIdFromGqlArguments($arguments);
@@ -53,11 +52,11 @@ class SitemapResolver
         }
 
         // If either of the source bundle arguments are present, get the sitemap
-        if (!empty($arguments['sourceBundleType']) || !empty($arguments['sourceBundleHandle']))  {
+        if (!empty($arguments['sourceBundleType']) || !empty($arguments['sourceBundleHandle'])) {
             $filename = self::createFilenameFromComponents($site->groupId, $arguments['sourceBundleType'] ?? '', $arguments['sourceBundleHandle'] ?? '', $siteId);
 
             return [
-                self::getSitemapItemByFilename($filename)
+                self::getSitemapItemByFilename($filename),
             ];
         }
 
@@ -74,7 +73,6 @@ class SitemapResolver
         foreach ($sitemapIndexItems as $sitemapIndexItem) {
             $contents = $sitemapIndexItem['contents'];
             if (preg_match_all('/<loc>(.*?)<\/loc>/m', $contents, $matches)) {
-
                 foreach ($matches[1] as $url) {
                     $parts = explode('/', $url);
                     $filename = end($parts);
@@ -106,22 +104,22 @@ class SitemapResolver
         $sitemapIndexListEntry = self::getSitemapIndexListEntry($siteId, $groupId);
 
         return [
-            $sitemapIndexListEntry
+            $sitemapIndexListEntry,
         ];
     }
 
-/**
-     * Get all the sitemap index items by params.
-     *
-     * @param array $params
-     * @return array
-     * @throws \yii\web\NotFoundHttpException
-     */
+    /**
+         * Get all the sitemap index items by params.
+         *
+         * @param array $params
+         * @return array
+         * @throws \yii\web\NotFoundHttpException
+         */
     public static function getSitemapStyles($source, $arguments, $context, ResolveInfo $resolveInfo): array
     {
         return [
             'filename' => 'sitemap.xsl',
-            'contents' => $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', [])
+            'contents' => $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', []),
         ];
     }
 
@@ -137,7 +135,7 @@ class SitemapResolver
             'filename' => $sitemapIndex->getFilename($groupId),
             'contents' => $sitemapIndex->render([
                 'siteId' => $siteId,
-                'groupId' => $groupId
+                'groupId' => $groupId,
             ]),
         ];
 
@@ -163,7 +161,7 @@ class SitemapResolver
 
         return [
             'filename' => $filename,
-            'contents' => $sitemap->render(array_merge($matches, ['immediately' => true]))
+            'contents' => $sitemap->render(array_merge($matches, ['immediately' => true])),
         ];
     }
 

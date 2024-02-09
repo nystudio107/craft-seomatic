@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,12 +11,12 @@
 
 namespace nystudio107\seomatic\gql\queries;
 
+use craft\gql\base\Query;
 use nystudio107\seomatic\gql\arguments\SeomaticArguments;
 use nystudio107\seomatic\gql\interfaces\SeomaticInterface;
 use nystudio107\seomatic\gql\resolvers\SeomaticResolver;
-use nystudio107\seomatic\helpers\Gql as GqlHelper;
 
-use craft\gql\base\Query;
+use nystudio107\seomatic\helpers\Gql as GqlHelper;
 
 /**
  * Class SeomaticQuery
@@ -41,7 +41,7 @@ class SeomaticQuery extends Query
                 'type' => SeomaticInterface::getType(),
                 'args' => SeomaticArguments::getArguments(),
                 'resolve' => SeomaticResolver::class . '::resolve',
-                'description' => 'This query is used to query for SEOmatic meta data.'
+                'description' => 'This query is used to query for SEOmatic meta data.',
             ],
         ];
     }

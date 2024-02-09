@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -36,20 +36,20 @@ class MetaValue
     // Constants
     // =========================================================================
 
-    const MAX_TEMPLATE_LENGTH = 4096;
-    const MAX_PARSE_TRIES = 5;
+    public const MAX_TEMPLATE_LENGTH = 4096;
+    public const MAX_PARSE_TRIES = 5;
     // Semicolon because that is the resolved config key when rendering tags,
     // kebab-case because that is the config keys as defined in the config files.
-    const NO_ALIASES = [
+    public const NO_ALIASES = [
         'twitter:site',
         'twitter:creator',
         'twitterSite',
         'twitterCreator',
     ];
-    const NO_PARSING = [
+    public const NO_PARSING = [
         'siteLinksSearchTarget',
     ];
-    const PARSE_ONCE = [
+    public const PARSE_ONCE = [
         'target',
         'urlTemplate',
     ];
@@ -89,9 +89,8 @@ class MetaValue
         $metaValue,
         bool $resolveAliases = true,
         bool $parseAsTwig = true,
-        $tries = self::MAX_PARSE_TRIES
-    )
-    {
+        $tries = self::MAX_PARSE_TRIES,
+    ) {
         // If it's a string, and there are no dynamic tags, just return the template
         if (is_string($metaValue) && !str_contains($metaValue, '{')) {
             return self::parseMetaString($metaValue, $resolveAliases, $parseAsTwig) ?? $metaValue;

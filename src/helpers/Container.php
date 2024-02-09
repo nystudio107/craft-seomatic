@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -28,7 +28,7 @@ class Container
     // Constants
     // =========================================================================
 
-    const CACHE_KEY = 'seomatic_metacontroller_';
+    public const CACHE_KEY = 'seomatic_metacontroller_';
 
     // Static Methods
     // =========================================================================
@@ -47,9 +47,8 @@ class Container
         array  $containerKeys,
         string $uri,
         int    $siteId = null,
-        bool   $asArray = false
-    ): array
-    {
+        bool   $asArray = false,
+    ): array {
         // Normalize the incoming URI to account for `__home__`
         $uri = ($uri === '__home__') ? '' : $uri;
         // Determine the siteId
@@ -95,7 +94,7 @@ class Container
         $cache = Craft::$app->getCache();
         $result = $cache->getOrSet(
             self::CACHE_KEY . $cacheKey,
-            function () use ($uri, $siteId, $containerKeys, $asArray) {
+            function() use ($uri, $siteId, $containerKeys, $asArray) {
                 $result = [];
                 Craft::info(
                     'Meta controller container cache miss: ' . $uri . '/' . $siteId,

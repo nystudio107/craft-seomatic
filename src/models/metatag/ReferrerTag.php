@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -23,7 +23,7 @@ class ReferrerTag extends MetaTag
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'ReferrerTag';
+    public const ITEM_TYPE = 'ReferrerTag';
 
     // Static Methods
     // =========================================================================

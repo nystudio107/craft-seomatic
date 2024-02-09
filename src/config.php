@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -70,7 +70,7 @@ return [
     'sidebarDisplayPreviewTypes' => [
         'google',
         'twitter',
-        'facebook'
+        'facebook',
     ],
 
     // Should SEOmatic display the SEO Analysis sidebar?
@@ -163,5 +163,5 @@ return [
 
     // string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
     'allowedUrlParams' => [
-    ]
+    ],
 ];

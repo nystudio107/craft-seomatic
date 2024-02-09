@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -18,9 +18,8 @@ namespace nystudio107\seomatic\base;
  */
 interface SitemapInterface
 {
-
     // Constants
     // =========================================================================
 
-    const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
+    public const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
 }

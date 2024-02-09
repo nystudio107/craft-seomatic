@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -31,9 +31,9 @@ class MetaTag extends MetaItem
     // Constants
     // =========================================================================
 
-    const ITEM_TYPE = 'MetaTag';
+    public const ITEM_TYPE = 'MetaTag';
 
-    const ARRAY_PROPERTIES = [
+    public const ARRAY_PROPERTIES = [
         'content',
     ];
 
@@ -114,7 +114,7 @@ class MetaTag extends MetaItem
         $rules = array_merge($rules, [
             [['charset', 'httpEquiv', 'name', 'property'], 'string'],
             [['content'], 'validateStringOrArray'],
-            [['name'], 'safe', 'on' => ['warning']]
+            [['name'], 'safe', 'on' => ['warning']],
         ]);
 
         return $rules;

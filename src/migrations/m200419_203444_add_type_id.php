@@ -2,7 +2,6 @@
 
 namespace nystudio107\seomatic\migrations;
 
-use Craft;
 use craft\db\Migration;
 
 /**

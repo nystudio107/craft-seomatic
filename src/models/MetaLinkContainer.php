@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,11 +11,11 @@
 
 namespace nystudio107\seomatic\models;
 
-use nystudio107\seomatic\Seomatic;
+use Craft;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 
-use Craft;
+use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 
 /**
@@ -28,7 +28,7 @@ class MetaLinkContainer extends MetaContainer
     // Constants
     // =========================================================================
 
-    const CONTAINER_TYPE = 'MetaLinkContainer';
+    public const CONTAINER_TYPE = 'MetaLinkContainer';
 
     // Public Properties
     // =========================================================================
@@ -49,16 +49,16 @@ class MetaLinkContainer extends MetaContainer
     public function includeMetaData($dependency)
     {
         Craft::beginProfile('MetaLinkContainer::includeMetaData', __METHOD__);
-        $uniqueKey = $this->handle.$dependency->tags[3];
+        $uniqueKey = $this->handle . $dependency->tags[3];
         $cache = Craft::$app->getCache();
         if ($this->clearCache) {
             TagDependency::invalidate($cache, $dependency->tags[3]);
         }
         $tagData = $cache->getOrSet(
-            self::CONTAINER_TYPE.$uniqueKey,
-            function () use ($uniqueKey) {
+            self::CONTAINER_TYPE . $uniqueKey,
+            function() use ($uniqueKey) {
                 Craft::info(
-                    self::CONTAINER_TYPE.' cache miss: '.$uniqueKey,
+                    self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
                 );
                 $tagData = [];

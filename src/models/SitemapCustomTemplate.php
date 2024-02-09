@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -52,17 +52,17 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
      * });
      * ```
      */
-    const EVENT_REGISTER_SITEMAP_URLS = 'registerSitemapUrls';
+    public const EVENT_REGISTER_SITEMAP_URLS = 'registerSitemapUrls';
 
-    const TEMPLATE_TYPE = 'SitemapCustomTemplate';
+    public const TEMPLATE_TYPE = 'SitemapCustomTemplate';
 
-    const CACHE_KEY = 'seomatic_sitemap_';
+    public const CACHE_KEY = 'seomatic_sitemap_';
 
-    const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
+    public const SITEMAP_CACHE_TAG = 'seomatic_sitemap_';
 
-    const CUSTOM_HANDLE = 'custom';
+    public const CUSTOM_HANDLE = 'custom';
 
-    const CUSTOM_SCOPE = 'global';
+    public const CUSTOM_SCOPE = 'global';
 
     // Static Methods
     // =========================================================================
@@ -131,7 +131,7 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
-        return $cache->getOrSet(self::CACHE_KEY . $groupId . self::CUSTOM_SCOPE . $handle . $siteId, function () use (
+        return $cache->getOrSet(self::CACHE_KEY . $groupId . self::CUSTOM_SCOPE . $handle . $siteId, function() use (
             $handle,
             $siteId
         ) {
@@ -177,7 +177,7 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
                     );
                     $dateUpdated = $additionalSitemapUrl['lastmod']
                         ?? $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                        ?? new DateTime;
+                        ?? new DateTime();
                     $lines[] = '<url>';
                     // Standard sitemap key/values
                     $lines[] = '<loc>';

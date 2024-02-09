@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,10 +11,10 @@
 
 namespace nystudio107\seomatic\gql\arguments;
 
-use nystudio107\seomatic\gql\types\SeomaticEnvironmentType;
-
 use craft\gql\base\Arguments;
+
 use GraphQL\Type\Definition\Type;
+use nystudio107\seomatic\gql\types\SeomaticEnvironmentType;
 
 /**
  * Class SeomaticArguments
@@ -34,22 +34,22 @@ class SeomaticArguments extends Arguments
             'uri' => [
                 'name' => 'uri',
                 'type' => Type::string(),
-                'description' => 'The URI to resolve the SEOmatic metdata for.'
+                'description' => 'The URI to resolve the SEOmatic metdata for.',
             ],
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'Optional - The site ID to resolve the SEOmatic metdata for.'
+                'description' => 'Optional - The site ID to resolve the SEOmatic metdata for.',
             ],
             'site' => [
                 'name' => 'site',
                 'type' => Type::string(),
-                'description' => 'Optional - The site handle to resolve the SEOmatic metdata for.'
+                'description' => 'Optional - The site handle to resolve the SEOmatic metdata for.',
             ],
             'asArray' => [
                 'name' => 'asArray',
                 'type' => Type::boolean(),
-                'description' => 'Whether the meta items should be returned as an array or as pre-rendered tag text.'
+                'description' => 'Whether the meta items should be returned as an array or as pre-rendered tag text.',
             ],
             'environment' => SeomaticEnvironmentType::getType(),
         ];

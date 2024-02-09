@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -25,7 +25,6 @@ use yii\base\InvalidArgumentException;
  */
 abstract class FluentModel extends Model
 {
-
     // Static Protected Methods
     // =========================================================================
 
@@ -78,7 +77,7 @@ abstract class FluentModel extends Model
         // Set the property
         $value = $args[0];
         if (\is_object($value) && $value instanceof Markup) {
-                $value = (string)$value;
+            $value = (string)$value;
         }
         $property->setValue($this, $value);
 

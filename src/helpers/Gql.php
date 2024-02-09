@@ -1,4 +1,5 @@
 <?php
+
 namespace nystudio107\seomatic\helpers;
 
 use Craft;

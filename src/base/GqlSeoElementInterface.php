@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -10,12 +10,6 @@
  */
 
 namespace nystudio107\seomatic\base;
-
-use nystudio107\seomatic\models\MetaBundle;
-
-use craft\base\ElementInterface;
-use craft\base\Model;
-use craft\elements\db\ElementQueryInterface;
 
 /**
  * @author    nystudio107

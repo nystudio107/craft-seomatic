@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,8 +11,8 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\Seomatic;
 
 /**
  * @author    nystudio107
@@ -24,24 +24,24 @@ class JsonLd extends \craft\helpers\Json
     // Constants
     // =========================================================================
 
-    const IGNORE_ATTRIBUTES = [
+    public const IGNORE_ATTRIBUTES = [
         '@context',
     ];
 
-    const AT_PREFIXED_ATTRIBUTES = [
+    public const AT_PREFIXED_ATTRIBUTES = [
         'id',
         'context',
         'type',
         'graph',
     ];
 
-    const IGNORE_ALWAYS_ATTRIBUTES = [
+    public const IGNORE_ALWAYS_ATTRIBUTES = [
         'include',
         'key',
         'nonce',
     ];
 
-    const FULLY_QUALIFIED_URL_KEYS = [
+    public const FULLY_QUALIFIED_URL_KEYS = [
         'url',
         'logo',
     ];
@@ -62,7 +62,7 @@ class JsonLd extends \craft\helpers\Json
         $options =
         JSON_UNESCAPED_UNICODE
         | JSON_UNESCAPED_SLASHES
-        | JSON_HEX_TAG
+        | JSON_HEX_TAG,
     ) {
         // If `devMode` is enabled, make the JSON-LD human-readable
         if (Seomatic::$devMode) {
@@ -106,7 +106,7 @@ class JsonLd extends \craft\helpers\Json
         );
         // Rename keys as appropriate
         foreach (self::AT_PREFIXED_ATTRIBUTES as $key) {
-            $array = self::changeKey($array, $key, '@'.$key);
+            $array = self::changeKey($array, $key, '@' . $key);
         }
         if ($depth > 1) {
             foreach (self::IGNORE_ATTRIBUTES as $attribute) {

@@ -19,12 +19,12 @@ $codeEditorOptions = Json::encode([
     'placeholderText' => '',
     'wrapperClass' => 'monaco-editor-inline-frame',
     'fixedHeightEditor' => false,
-    'displayLanguageIcon' => true
+    'displayLanguageIcon' => true,
 ]);
 $monacoOptions = Json::encode([
     'language' => $values['language'],
     'domReadOnly' => true,
-    'readOnly' => true
+    'readOnly' => true,
 ]);
 $endpointAlias = Craft::getAlias('@codeEditorEndpointUrl');
 $view->registerJs("makeMonacoEditor('{$codeEditorId}', 'CodeEditor', '{$monacoOptions}', '{$codeEditorOptions}', '{$endpointAlias}');");

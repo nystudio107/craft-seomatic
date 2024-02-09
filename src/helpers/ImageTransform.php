@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -40,6 +40,8 @@ class ImageTransform
     public const ALLOWED_SOCIAL_MIME_TYPES = [
         'image/jpeg',
         'image/png',
+        'image/webp',
+        'image/gif',
     ];
 
     public const DEFAULT_SOCIAL_FORMAT = 'jpg';
@@ -50,12 +52,12 @@ class ImageTransform
     /**
      * @var bool
      */
-    static public $pendingImageTransforms = false;
+    public static $pendingImageTransforms = false;
 
     // Static Private Properties
     // =========================================================================
 
-    static private $transforms = [
+    private static $transforms = [
         'base' => [
             'format' => null,
             'quality' => self::SOCIAL_TRANSFORM_QUALITY,
@@ -83,7 +85,7 @@ class ImageTransform
         ],
     ];
 
-    static private $cachedAssetsElements = [];
+    private static $cachedAssetsElements = [];
 
     // Static Methods
     // =========================================================================
@@ -103,9 +105,8 @@ class ImageTransform
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -119,7 +120,7 @@ class ImageTransform
         if (($asset !== null) && ($asset instanceof Asset)) {
             // Make sure the format is an allowed format, otherwise explicitly change it
             $mimeType = $asset->getMimeType();
-            if (!in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
+            if ($transform !== null && !in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
                 $transform->format = self::DEFAULT_SOCIAL_FORMAT;
             }
             // Generate a transformed image
@@ -182,9 +183,8 @@ class ImageTransform
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         $width = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -214,9 +214,8 @@ class ImageTransform
         $asset,
         $transformName = '',
         $siteId = null,
-        $transformMode = null
-    ): string
-    {
+        $transformMode = null,
+    ): string {
         $height = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode

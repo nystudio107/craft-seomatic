@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -11,11 +11,11 @@
 
 namespace nystudio107\seomatic\twigextensions;
 
+use Craft;
 use nystudio107\seomatic\Node\Expression\EmptyCoalesceExpression;
 use nystudio107\seomatic\Seomatic;
-use nystudio107\seomatic\variables\SeomaticVariable;
 
-use Craft;
+use nystudio107\seomatic\variables\SeomaticVariable;
 
 use Twig\ExpressionParser;
 use Twig\Extension\AbstractExtension;
@@ -106,10 +106,9 @@ class SeomaticTwigExtension extends AbstractExtension implements GlobalsInterfac
                 '???' => [
                     'precedence' => 300,
                     'class' => EmptyCoalesceExpression::class,
-                    'associativity' => ExpressionParser::OPERATOR_RIGHT
+                    'associativity' => ExpressionParser::OPERATOR_RIGHT,
                 ],
             ],
         ];
     }
-
 }

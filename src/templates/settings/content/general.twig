@@ -6,7 +6,7 @@
 
 {% block header %}
     {{ block('pageTitle') }}
-    {{ block('contextMenu') }}
+
     <div class="flex-grow"></div>
     <div class="flex-grow"></div>
     {{ block('copyFromMenu') }}
@@ -42,13 +42,13 @@
         message: "Any text fields can include double-bracket tags that output Seomatic properties, such as `{{ seomatic.meta.seoTitle }}`."
     } %}
     {% switch currentSourceBundleType %}
-        {% case "section" %}
-            {% include "seomatic/_includes/footer-message.twig" with {
-                message: "Any text fields can include single-bracket tags that output Entry properties, such as `{entry.title}`."
-            } %}
-        {% case "category" %}
-            {% include "seomatic/_includes/footer-message.twig" with {
-                message: "Any text fields can include single-bracket tags that output Category properties, such as `{category.title}`."
-            } %}
+    {% case "section" %}
+        {% include "seomatic/_includes/footer-message.twig" with {
+            message: "Any text fields can include single-bracket tags that output Entry properties, such as `{entry.title}`."
+        } %}
+    {% case "category" %}
+        {% include "seomatic/_includes/footer-message.twig" with {
+            message: "Any text fields can include single-bracket tags that output Category properties, such as `{category.title}`."
+        } %}
     {% endswitch %}
 {% endblock %}

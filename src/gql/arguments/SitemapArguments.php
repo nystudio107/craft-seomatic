@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -32,29 +32,28 @@ class SitemapArguments extends Arguments
             'filename' => [
                 'name' => 'filename',
                 'type' => Type::string(),
-                'description' => 'Optional - the sitemap filename.'
+                'description' => 'Optional - the sitemap filename.',
             ],
             'siteId' => [
                 'name' => 'siteId',
                 'type' => Type::int(),
-                'description' => 'Optional - The site ID to list the sitemaps for.'
+                'description' => 'Optional - The site ID to list the sitemaps for.',
             ],
             'site' => [
                 'name' => 'site',
                 'type' => Type::string(),
-                'description' => 'Optional - The site handle to list the sitemaps for.'
+                'description' => 'Optional - The site handle to list the sitemaps for.',
             ],
             'sourceBundleType' => [
                 'name' => 'sourceBundleType',
                 'type' => Type::string(),
-                'description' => 'Optional - The source bundle type to get the sitemaps for.'
+                'description' => 'Optional - The source bundle type to get the sitemaps for.',
             ],
             'sourceBundleHandle' => [
                 'name' => 'sourceBundleHandle',
                 'type' => Type::string(),
-                'description' => 'Optional - The source bundles handle to get the  sitemap for.'
+                'description' => 'Optional - The source bundles handle to get the  sitemap for.',
             ],
         ];
     }
 }
-

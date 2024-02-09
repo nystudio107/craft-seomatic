@@ -1,6 +1,6 @@
 <?php
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -101,7 +101,7 @@ class FileController extends Controller
                 $fileName,
                 [
                     'inline' => $inline,
-                    'mimeType' => FileHelper::getMimeTypeByExtension($fileName)
+                    'mimeType' => FileHelper::getMimeTypeByExtension($fileName),
                 ]
             );
         } else {
