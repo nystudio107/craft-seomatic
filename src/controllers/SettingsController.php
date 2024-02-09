@@ -504,7 +504,8 @@ class SettingsController extends Controller
         string $siteHandle = null,
                $typeId = null,
                $loadFromSiteHandle = null,
-    ): Response {
+    ): Response
+    {
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
@@ -1206,7 +1207,8 @@ class SettingsController extends Controller
         string $sourceHandle,
         string $groupName,
         array  &$variables,
-    ) {
+    )
+    {
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromSource(
