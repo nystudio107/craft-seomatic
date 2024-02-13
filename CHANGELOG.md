@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.71 - 2024.02.13
+### Fixed
+* Fixed a regression where the `robots` tag would be set to `none` for CP requests, which is incorrect, because GraphQL and meta container endpoints are CP requests  ([#1414](https://github.com/nystudio107/craft-seomatic/issues/1414))
+
 ## 3.4.70 - 2024.02.09
 ### Added
 * Add `phpstan` and `ecs` code linting
