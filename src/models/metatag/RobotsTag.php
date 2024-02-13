@@ -91,9 +91,6 @@ class RobotsTag extends MetaTag
                 if ($response->statusCode >= 400) {
                     $data['content'] = 'none';
                 }
-                if ($request->getIsCpRequest()) {
-                    $data['content'] = 'none';
-                }
                 try {
                     if ($request->getToken() !== null) {
                         $data['content'] = 'none';
