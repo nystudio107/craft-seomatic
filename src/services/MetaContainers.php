@@ -410,14 +410,13 @@ class MetaContainers extends Component
                 ],
             ]);
             $this->containerDependency = $dependency;
-            $debugModule = Craft::$app->getModule('debug');
-            if (Seomatic::$previewingMetaContainers || $debugModule) {
+            if (Seomatic::$previewingMetaContainers) {
                 Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers($siteId);
                 $this->loadGlobalMetaContainers($siteId);
                 $this->loadContentMetaContainers();
                 $this->loadFieldMetaContainers();
                 // We only need the dynamic data for headless requests
-                if (Seomatic::$headlessRequest || Seomatic::$plugin->helper::isPreview() || $debugModule) {
+                if (Seomatic::$headlessRequest || Seomatic::$plugin->helper::isPreview()) {
                     DynamicMetaHelper::addDynamicMetaToContainers($uri, $siteId);
                 }
             } else {
