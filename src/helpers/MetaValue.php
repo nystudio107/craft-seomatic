@@ -19,7 +19,6 @@ use craft\helpers\StringHelper;
 use craft\web\View;
 use nystudio107\seomatic\Seomatic;
 use ReflectionClass;
-use ReflectionException;
 use Throwable;
 use Twig\Markup;
 use yii\base\Exception;
@@ -91,7 +90,8 @@ class MetaValue
         bool $resolveAliases = true,
         bool $parseAsTwig = true,
         $tries = self::MAX_PARSE_TRIES
-    ) {
+    )
+    {
         // If it's a string, and there are no dynamic tags, just return the template
         if (is_string($metaValue) && !StringHelper::contains($metaValue, '{', false)) {
             return self::parseMetaString($metaValue, $resolveAliases, $parseAsTwig) ?? $metaValue;
@@ -210,15 +210,8 @@ class MetaValue
         if ($element !== null) {
             $refHandle = null;
             // Get a fallback from the element's root class name
-            try {
-                $reflector = new ReflectionClass($element);
-            } catch (ReflectionException $e) {
-                $reflector = null;
-                Craft::error($e->getMessage(), __METHOD__);
-            }
-            if ($reflector) {
-                $refHandle = strtolower($reflector->getShortName());
-            }
+            $reflector = new ReflectionClass($element);
+            $refHandle = strtolower($reflector->getShortName());
             $elementRefHandle = $element::refHandle();
             // Use the SeoElement interface to get the refHandle
             $metaBundleSourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
@@ -227,7 +220,7 @@ class MetaValue
                 $elementRefHandle = $seoElement::getElementRefHandle();
             }
             // Prefer $element::refHandle()
-            $matchedElementType = $elementRefHandle ?? $refHandle ?? 'entry';
+            $matchedElementType = $elementRefHandle ?? $refHandle;
             if ($matchedElementType) {
                 self::$templateObjectVars[$matchedElementType] = $element;
                 self::$templatePreviewVars[$matchedElementType] = $element;
@@ -243,7 +236,7 @@ class MetaValue
     // =========================================================================
 
     /**
-     * @param string|Asset $metaValue
+     * @param string|object $metaValue
      * @param bool $resolveAliases Whether @ aliases should be resolved
      *                                     in this string
      * @param bool $parseAsTwig Whether items should be parsed as a
@@ -324,7 +317,6 @@ class MetaValue
                 return trim(html_entity_decode((string)$metaValue, ENT_NOQUOTES, 'UTF-8'));
             }
             if ($metaValue instanceof Asset) {
-                /** @var Asset $metaValue */
                 return $metaValue->uri;
             }
         }

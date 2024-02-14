@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\base;
 
 use craft\validators\ArrayValidator;
 use nystudio107\seomatic\events\IncludeContainerEvent;
-
 use nystudio107\seomatic\helpers\Dependency;
 
 /**
@@ -28,6 +27,11 @@ abstract class Container extends FluentModel implements ContainerInterface
 
     use ContainerTrait;
 
+    // Constants
+    // =========================================================================
+
+    const CONTAINER_TYPE = 'GenericContainer';
+
     // Static Methods
     // =========================================================================
 
@@ -36,12 +40,11 @@ abstract class Container extends FluentModel implements ContainerInterface
      *
      * @param array $config
      *
-     * @return null|Container
+     * @return static
      */
     public static function create(array $config = [])
     {
         $className = static::class;
-        /** @var Container $model */
         $model = new $className($config);
         $model->normalizeContainerData();
 

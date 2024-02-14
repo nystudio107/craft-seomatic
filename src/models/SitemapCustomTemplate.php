@@ -12,14 +12,13 @@
 namespace nystudio107\seomatic\models;
 
 use Craft;
+use DateTime;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\helpers\UrlHelper;
-
 use nystudio107\seomatic\Seomatic;
-
 use yii\caching\TagDependency;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
@@ -150,54 +149,52 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
             if ($metaBundle === null) {
                 throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
             }
-            if ($metaBundle) {
-                $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
-                $urlsetLine .= '>';
-                $lines[] = $urlsetLine;
-                // If it's null, just throw a 404
-                if ($metaBundle->metaSiteVars->additionalSitemapUrls === null) {
-                    throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
-                }
-                $additionalSitemapUrls = $metaBundle->metaSiteVars->additionalSitemapUrls;
-                $additionalSitemapUrls = empty($additionalSitemapUrls) ? [] : $additionalSitemapUrls;
-                // Allow plugins/modules to add custom URLs
-                $event = new RegisterSitemapUrlsEvent([
-                    'sitemaps' => $additionalSitemapUrls,
-                    'siteId' => $metaBundle->sourceSiteId,
-                ]);
-                $this->trigger(self::EVENT_REGISTER_SITEMAP_URLS, $event);
-                $additionalSitemapUrls = array_filter($event->sitemaps);
-                // Output the sitemap entry
-                foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
-                    $loc = MetaValueHelper::parseString($additionalSitemapUrl['loc']);
-                    $url = UrlHelper::siteUrl(
-                        $loc,
-                        null,
-                        null,
-                        $metaBundle->sourceSiteId
-                    );
-                    $dateUpdated = $additionalSitemapUrl['lastmod']
-                        ?? $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                        ?? new \DateTime();
-                    $lines[] = '<url>';
-                    // Standard sitemap key/values
-                    $lines[] = '<loc>';
-                    $lines[] = Html::encode($url);
-                    $lines[] = '</loc>';
-                    $lines[] = '<lastmod>';
-                    $lines[] = $dateUpdated->format(\DateTime::W3C);
-                    $lines[] = '</lastmod>';
-                    $lines[] = '<changefreq>';
-                    $lines[] = $additionalSitemapUrl['changefreq'];
-                    $lines[] = '</changefreq>';
-                    $lines[] = '<priority>';
-                    $lines[] = $additionalSitemapUrl['priority'];
-                    $lines[] = '</priority>';
-                    $lines[] = '</url>';
-                }
-                // Sitemap index closing tag
-                $lines[] = '</urlset>';
+            $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+            $urlsetLine .= '>';
+            $lines[] = $urlsetLine;
+            // If it's null, just throw a 404
+            if ($metaBundle->metaSiteVars->additionalSitemapUrls === null) {
+                throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
             }
+            $additionalSitemapUrls = $metaBundle->metaSiteVars->additionalSitemapUrls;
+            $additionalSitemapUrls = empty($additionalSitemapUrls) ? [] : $additionalSitemapUrls;
+            // Allow plugins/modules to add custom URLs
+            $event = new RegisterSitemapUrlsEvent([
+                'sitemaps' => $additionalSitemapUrls,
+                'siteId' => $metaBundle->sourceSiteId,
+            ]);
+            $this->trigger(self::EVENT_REGISTER_SITEMAP_URLS, $event);
+            $additionalSitemapUrls = array_filter($event->sitemaps);
+            // Output the sitemap entry
+            foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
+                $loc = MetaValueHelper::parseString($additionalSitemapUrl['loc']);
+                $url = UrlHelper::siteUrl(
+                    $loc,
+                    null,
+                    null,
+                    $metaBundle->sourceSiteId
+                );
+                $dateUpdated = $additionalSitemapUrl['lastmod']
+                    ?? $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
+                    ?? new DateTime();
+                $lines[] = '<url>';
+                // Standard sitemap key/values
+                $lines[] = '<loc>';
+                $lines[] = Html::encode($url);
+                $lines[] = '</loc>';
+                $lines[] = '<lastmod>';
+                $lines[] = $dateUpdated->format(DateTime::W3C);
+                $lines[] = '</lastmod>';
+                $lines[] = '<changefreq>';
+                $lines[] = $additionalSitemapUrl['changefreq'];
+                $lines[] = '</changefreq>';
+                $lines[] = '<priority>';
+                $lines[] = $additionalSitemapUrl['priority'];
+                $lines[] = '</priority>';
+                $lines[] = '</url>';
+            }
+            // Sitemap index closing tag
+            $lines[] = '</urlset>';
 
             return implode('', $lines);
         }, Seomatic::$cacheDuration, $dependency);

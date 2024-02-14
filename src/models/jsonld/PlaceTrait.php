@@ -267,7 +267,7 @@ trait PlaceTrait
     /**
      * The opening hours of a certain place.
      *
-     * @var OpeningHoursSpecification
+     * @var array|OpeningHoursSpecification
      */
     public $openingHoursSpecification;
 

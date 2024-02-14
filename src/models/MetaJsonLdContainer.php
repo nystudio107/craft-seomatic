@@ -38,7 +38,7 @@ class MetaJsonLdContainer extends NonceContainer
     /**
      * The data in this container
      *
-     * @var MetaJsonLd[] $data
+     * @var MetaJsonLd[]|array $data
      */
     public $data = [];
 
@@ -63,7 +63,7 @@ class MetaJsonLdContainer extends NonceContainer
                     self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
                 );
-                
+
                 return $this->renderInternal();
             },
             Seomatic::$cacheDuration,
@@ -98,6 +98,7 @@ class MetaJsonLdContainer extends NonceContainer
     {
         parent::normalizeContainerData();
 
+        /** @var array $config */
         foreach ($this->data as $key => $config) {
             $schemaType = $config['type'] ?? $config['@type'];
             $config['key'] = $key;
@@ -121,7 +122,7 @@ class MetaJsonLdContainer extends NonceContainer
     {
         $tagData = [];
         if ($this->prepForInclusion()) {
-            /** @var $metaJsonLdModel MetaJsonLd */
+            /** @var MetaJsonLd $metaJsonLdModel */
             foreach ($this->data as $metaJsonLdModel) {
                 if ($metaJsonLdModel->include) {
                     $options = $metaJsonLdModel->tagAttributes();

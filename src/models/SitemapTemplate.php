@@ -216,7 +216,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $response = Craft::$app->getResponse();
             if (!$request->isConsoleRequest && $throwException) {
                 $response->setStatusCode(503);
-                $response->headers->add('Retry-After', 60);
+                $response->headers->add('Retry-After', '60');
                 $response->headers->add('Cache-Control', 'no-cache, no-store');
                 // Return an empty XML document
                 $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';

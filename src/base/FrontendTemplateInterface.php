@@ -21,7 +21,7 @@ interface FrontendTemplateInterface
     // Constants
     // =========================================================================
 
-    const TEMPLATE_TYPE = 'GenericTemplate';
+    //const TEMPLATE_TYPE = 'GenericTemplate';
 
     // Public Methods
     // =========================================================================

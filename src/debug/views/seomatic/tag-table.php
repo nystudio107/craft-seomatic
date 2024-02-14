@@ -1,9 +1,15 @@
 <?php
+/**
+ * @var SeomaticPanel $panel
+ * @var View $this
+ * @var array $values
+ * @var string $caption
+ */
 
+use nystudio107\seomatic\debug\panels\SeomaticPanel;
 use yii\helpers\Html;
+use yii\web\View;
 
-/* @var $caption string */
-/* @var $values array */
 $meta = $values['meta'];
 $meta['PROPERTY_STRINGS'] = TAG_STRINGS;
 ?>

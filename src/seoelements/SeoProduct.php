@@ -22,6 +22,7 @@ use craft\commerce\Plugin as CommercePlugin;
 use craft\commerce\services\ProductTypes;
 use craft\elements\db\ElementQueryInterface;
 use craft\models\Site;
+use Exception;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -178,7 +179,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
                 Seomatic::$view->hook('cp.commerce.product.edit.details', static function(&$context) {
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                    /** @var  $product Product */
+                    /** @var Product $product */
                     $product = $context[self::getElementRefHandle()] ?? null;
                     if ($product !== null && $product->uri !== null) {
                         Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
@@ -230,7 +231,8 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId
-    ) {
+    )
+    {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)
@@ -279,7 +281,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
                 if ($productType) {
                     $layoutId = $productType->getFieldLayoutId();
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $layoutId = null;
             }
             if ($layoutId) {

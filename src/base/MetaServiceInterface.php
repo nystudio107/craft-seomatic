@@ -11,6 +11,8 @@
 
 namespace nystudio107\seomatic\base;
 
+use Twig\Markup;
+
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -24,7 +26,7 @@ interface MetaServiceInterface
     /**
      * Get a meta item of a given key
      *
-     * @param string $key    The key of the MetaItem to fetch
+     * @param string $key The key of the MetaItem to fetch
      * @param string $handle An optional handle to for the MetaContainer to search (defaults to all)
      *
      * @return null|MetaItem
@@ -35,7 +37,7 @@ interface MetaServiceInterface
      * Create a meta item
      *
      * @param array $config The configuration array used to create the MetaItem
-     * @param bool  $add    Whether to add the newly created tag to a container
+     * @param bool $add Whether to add the newly created tag to a container
      *
      * @return MetaItem
      */
@@ -45,7 +47,7 @@ interface MetaServiceInterface
      * Add a meta item to its appropriate container
      *
      * @param MetaItem $metaItem The MetaItem to add
-     * @param string   $handle   An optional container handle to add the MetaItem to (defaults to GENERAL)
+     * @param string $handle An optional container handle to add the MetaItem to (defaults to GENERAL)
      *
      * @return null|MetaItem
      */
@@ -54,7 +56,7 @@ interface MetaServiceInterface
     /**
      * Render all of the MetaItems in this container
      *
-     * @return \Twig_Markup|null
+     * @return Markup|null
      */
     public function render();
 

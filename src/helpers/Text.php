@@ -27,6 +27,7 @@ use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
 use verbb\supertable\elements\db\SuperTableBlockQuery;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+use verbb\supertable\models\SuperTableBlockTypeModel;
 use yii\base\InvalidConfigException;
 use function array_slice;
 use function function_exists;
@@ -259,7 +260,7 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param SuperTableBlockQuery|SuperTableBlock[] $blocks
+     * @param SuperTableBlockQuery|SuperTableBlock[]|array $blocks
      * @param string $fieldHandle
      *
      * @return string
@@ -276,6 +277,7 @@ class Text
         }
         foreach ($blocks as $block) {
             try {
+                /** @var SuperTableBlockTypeModel $superTableBlockTypeModel */
                 $superTableBlockTypeModel = $block->getType();
             } catch (InvalidConfigException $e) {
                 $superTableBlockTypeModel = null;
@@ -283,6 +285,8 @@ class Text
             // Find any text fields inside of the matrix block
             if ($superTableBlockTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
+                // The SuperTableBlockTypeModel class lacks @mixin FieldLayoutBehavior in its annotations
+                /** @phpstan-ignore-next-line */
                 $fields = $superTableBlockTypeModel->getFields();
 
                 foreach ($fields as $field) {
@@ -333,9 +337,7 @@ class Text
             return $text;
         }
 
-        $result = is_array($keywords)
-            ? implode(', ', array_slice(array_keys($keywords), 0, $limit))
-            : (string)$keywords;
+        $result = implode(', ', array_slice(array_keys($keywords), 0, $limit));
 
         return self::sanitizeUserInput($result);
     }
@@ -371,9 +373,7 @@ class Text
             return $text;
         }
 
-        $result = is_array($sentences)
-            ? implode(' ', $sentences)
-            : (string)$sentences;
+        $result = implode(' ', $sentences);
 
         return self::sanitizeUserInput($result);
     }
@@ -402,7 +402,7 @@ class Text
         // Change single brackets to parenthesis
         $str = preg_replace('/{/', '(', $str);
         $str = preg_replace('/}/', ')', $str);
-        if (empty($str) || is_array($str)) {
+        if (empty($str)) {
             $str = '';
         }
 

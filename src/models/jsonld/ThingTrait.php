@@ -64,7 +64,7 @@ trait ThingTrait
      * identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or
      * official website.
      *
-     * @var URL
+     * @var array|URL
      */
     public $sameAs;
 

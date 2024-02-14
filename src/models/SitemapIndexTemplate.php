@@ -12,19 +12,19 @@
 namespace nystudio107\seomatic\models;
 
 use Craft;
-use craft\models\SiteGroup;
+use DateTime;
+use Exception;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\events\RegisterSitemapsEvent;
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
-
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\Seomatic;
-
 use yii\base\Event;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
+use function in_array;
 
 /**
  * @author    nystudio107
@@ -130,7 +130,6 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         $groupId = $params['groupId'];
         $siteId = $params['siteId'];
         if (Seomatic::$settings->siteGroupsSeparate) {
-            /** @var SiteGroup $siteGroup */
             $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
             if ($siteGroup === null) {
                 throw new NotFoundHttpException(Craft::t('seomatic', 'Sitemap.xml not found for groupId {groupId}', [
@@ -162,7 +161,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             // One sitemap entry for each MeteBundle
             $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
             Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
-            /** @var  $metaBundle MetaBundle */
+            /** @var MetaBundle $metaBundle */
             foreach ($metaBundles as $metaBundle) {
                 $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
                 // Check to see if robots is `none` or `no index`
@@ -176,7 +175,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     $sitemapUrls = true;
                 }
                 // Only add in a sitemap entry if it meets our criteria
-                if (\in_array($metaBundle->sourceSiteId, $groupSiteIds, false)
+                if (in_array($metaBundle->sourceSiteId, $groupSiteIds, false)
                     && $sitemapUrls
                     && $robotsEnabled) {
                     $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
@@ -186,6 +185,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     );
                     // Get all of the elements for this meta bundle type
                     $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+                    $totalElements = 0;
                     if ($seoElement !== null) {
                         // Ensure `null` so that the resulting element query is correct
                         if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
@@ -204,7 +204,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                         $lines[] = '</loc>';
                         if ($metaBundle->sourceDateUpdated !== null) {
                             $lines[] = '<lastmod>';
-                            $lines[] = $metaBundle->sourceDateUpdated->format(\DateTime::W3C);
+                            $lines[] = $metaBundle->sourceDateUpdated->format(DateTime::W3C);
                             $lines[] = '</lastmod>';
                         }
                         $lines[] = '</sitemap>';
@@ -245,10 +245,10 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
      * meta bundle metaSiteVars->additionalSitemaps
      *
      * @param MetaBundle $metaBundle
-     * @param int        $groupSiteId
-     * @param array      $lines
+     * @param int $groupSiteId
+     * @param array $lines
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function addAdditionalSitemaps(MetaBundle $metaBundle, int $groupSiteId, array &$lines)
     {
@@ -273,9 +273,9 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     // Find the most recent date
                     $dateUpdated = !empty($additionalSitemap['lastmod'])
                         ? $additionalSitemap['lastmod']
-                        : new \DateTime();
+                        : new DateTime();
                     $lines[] = '<lastmod>';
-                    $lines[] = $dateUpdated->format(\DateTime::W3C);
+                    $lines[] = $dateUpdated->format(DateTime::W3C);
                     $lines[] = '</lastmod>';
                     $lines[] = '</sitemap>';
                 }
@@ -288,10 +288,10 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
      * the global meta bundle metaSiteVars->additionalSitemapUrls
      *
      * @param MetaBundle $metaBundle
-     * @param int        $groupSiteId
-     * @param array      $lines
+     * @param int $groupSiteId
+     * @param array $lines
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function addAdditionalSitemapUrls(MetaBundle $metaBundle, int $groupSiteId, array &$lines)
     {
@@ -315,7 +315,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '</loc>';
             // Find the most recent date
             $dateUpdated = $metaBundle->metaSiteVars->additionalSitemapUrlsDateUpdated
-                ?? new \DateTime();
+                ?? new DateTime();
             foreach ($additionalSitemapUrls as $additionalSitemapUrl) {
                 if (!empty($additionalSitemapUrl['lastmod'])) {
                     if ($additionalSitemapUrl['lastmod'] > $dateUpdated) {
@@ -325,7 +325,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             }
             if ($dateUpdated !== null) {
                 $lines[] = '<lastmod>';
-                $lines[] = $dateUpdated->format(\DateTime::W3C);
+                $lines[] = $dateUpdated->format(DateTime::W3C);
                 $lines[] = '</lastmod>';
             }
             $lines[] = '</sitemap>';

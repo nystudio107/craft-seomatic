@@ -18,6 +18,7 @@ use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
+use function count;
 
 /**
  * @author    nystudio107
@@ -37,6 +38,37 @@ class MetaLink extends MetaItem
 
     // Static Methods
     // =========================================================================
+    /**
+     * @var string
+     */
+    public $crossorigin;
+
+    // Public Properties
+    // =========================================================================
+    /**
+     * @var string|array
+     */
+    public $href;
+    /**
+     * @var string|array
+     */
+    public $hreflang;
+    /**
+     * @var string
+     */
+    public $media;
+    /**
+     * @var string
+     */
+    public $rel;
+    /**
+     * @var string
+     */
+    public $sizes;
+    /**
+     * @var string
+     */
+    public $type;
 
     /**
      * @param null|string $tagType
@@ -62,44 +94,6 @@ class MetaLink extends MetaItem
 
         return new $className($config);
     }
-
-    // Public Properties
-    // =========================================================================
-
-    /**
-     * @var string
-     */
-    public $crossorigin;
-
-    /**
-     * @var string|array
-     */
-    public $href;
-
-    /**
-     * @var string
-     */
-    public $hreflang;
-
-    /**
-     * @var string
-     */
-    public $media;
-
-    /**
-     * @var string
-     */
-    public $rel;
-
-    /**
-     * @var string
-     */
-    public $sizes;
-
-    /**
-     * @var string
-     */
-    public $type;
 
     // Public Methods
     // =========================================================================
@@ -177,7 +171,7 @@ class MetaLink extends MetaItem
         if ($shouldRender) {
             MetaValueHelper::parseArray($data);
             // Only render if there's more than one attribute
-            if (\count($data) > 1) {
+            if (count($data) > 1) {
                 // Special-case scenarios
                 if (Seomatic::$devMode) {
                 }
@@ -233,7 +227,7 @@ class MetaLink extends MetaItem
                 $attributes[] = $config;
             }
         }
-        if (\count($attributes) === 1) {
+        if (count($attributes) === 1) {
             $attributes = $attributes[0];
         }
 

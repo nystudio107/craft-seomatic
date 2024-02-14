@@ -135,12 +135,12 @@ class Settings extends VarsModel
     public $maxDescriptionLength = 155;
 
     /**
-     * @var string Should Title tags be truncated at the max length, on word boundaries?
+     * @var bool Should Title tags be truncated at the max length, on word boundaries?
      */
     public $truncateTitleTags = true;
 
     /**
-     * @var string Should Description tags be truncated at the max length, on word boundaries?
+     * @var bool Should Description tags be truncated at the max length, on word boundaries?
      */
     public $truncateDescriptionTags = true;
 
@@ -213,7 +213,7 @@ class Settings extends VarsModel
     public $siteUrlOverride = '';
 
     /**
-     * @var int
+     * @var int|string|null
      * The duration of the SEOmatic meta cache in seconds.  Null means always cached until explicitly broken
      * If devMode is on, caches last 30 seconds.
      */

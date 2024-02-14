@@ -13,8 +13,9 @@ use Craft;
 use craft\elements\Asset;
 use craft\errors\MissingComponentException;
 use craft\helpers\UrlHelper;
-use craft\models\Site;
 use craft\web\Controller;
+use craft\web\UrlManager;
+use craft\web\User;
 use DateTime;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
@@ -217,95 +218,17 @@ class SettingsController extends Controller
     }
 
     /**
-     * Return a siteId from a siteHandle
-     *
-     * @param string $siteHandle
-     *
-     * @return int|null
-     * @throws NotFoundHttpException
-     */
-    protected function getSiteIdFromHandle($siteHandle)
-    {
-        // Get the site to edit
-        if ($siteHandle !== null) {
-            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
-            if (!$site) {
-                throw new NotFoundHttpException('Invalid site handle: ' . $siteHandle);
-            }
-            $siteId = $site->id;
-        } else {
-            $siteId = Craft::$app->getSites()->currentSite->id;
-        }
-
-        return $siteId;
-    }
-
-    /**
-     * @param string $siteHandle
-     * @param        $siteId
-     * @param        $variables
-     *
-     * @throws ForbiddenHttpException
-     */
-    protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables, $element = null)
-    {
-        // Enabled sites
-        $sites = Craft::$app->getSites();
-        if (Craft::$app->getIsMultiSite()) {
-            // Set defaults based on the section settings
-            $variables['enabledSiteIds'] = [];
-            $variables['siteIds'] = [];
-
-            /** @var Site $site */
-            foreach ($sites->getEditableSiteIds() as $editableSiteId) {
-                $variables['enabledSiteIds'][] = $editableSiteId;
-                $variables['siteIds'][] = $editableSiteId;
-            }
-
-            // Make sure the $siteId they are trying to edit is in our array of editable sites
-            if (!in_array($siteId, $variables['enabledSiteIds'], false)) {
-                if (!empty($variables['enabledSiteIds'])) {
-                    $siteId = reset($variables['enabledSiteIds']);
-                } else {
-                    $this->requirePermission('editSite:' . $siteId);
-                }
-            }
-        }
-
-        // Set the currentSiteId and currentSiteHandle
-        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
-        $variables['currentSiteHandle'] = empty($siteHandle)
-            ? Craft::$app->getSites()->currentSite->handle
-            : $siteHandle;
-
-        // Page title
-        $variables['showSites'] = (
-            Craft::$app->getIsMultiSite() &&
-            count($variables['enabledSiteIds'])
-        );
-
-        if ($variables['showSites']) {
-            $variables['sitesMenuLabel'] = Craft::t(
-                'site',
-                $sites->getSiteById((int)$variables['currentSiteId'])->name
-            );
-        } else {
-            $variables['sitesMenuLabel'] = '';
-        }
-    }
-
-    /**
      * Global settings
      *
      * @param string $subSection
      * @param string|null $siteHandle
-     * @param null $loadFromSiteHandle
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
-    public function actionGlobal(string $subSection = 'general', string $siteHandle = null, $loadFromSiteHandle = null, $editedMetaBundle = null): Response
+    public function actionGlobal(string $subSection = 'general', string $siteHandle = null, string $loadFromSiteHandle = null, $editedMetaBundle = null): Response
     {
         $variables = [];
         $siteId = $this->getSiteIdFromHandle($siteHandle);
@@ -419,28 +342,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * @param array $variables
-     */
-    protected function setGlobalFieldSourceVariables(array &$variables)
-    {
-        $variables['textFieldSources'] = array_merge(
-            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
-            FieldHelper::fieldsOfTypeFromGlobals(
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
-            )
-        );
-        $variables['assetFieldSources'] = array_merge(
-            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
-            FieldHelper::fieldsOfTypeFromGlobals(
-                FieldHelper::ASSET_FIELD_CLASS_KEY,
-                false
-            )
-        );
-    }
-
-    /**
-     * @return Response
+     * @return Response|null
      * @throws BadRequestHttpException
      * @throws MissingComponentException
      */
@@ -511,7 +413,9 @@ class SettingsController extends Controller
                 Craft::error(print_r($metaBundle->metaGlobalVars->getErrors(), true), __METHOD__);
                 Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save settings due to a Twig error."));
                 // Send the redirect back to the template
-                Craft::$app->getUrlManager()->setRouteParams([
+                /** @var UrlManager $urlManager */
+                $urlManager = Craft::$app->getUrlManager();
+                $urlManager->setRouteParams([
                     'editedMetaBundle' => $metaBundle,
                 ]);
 
@@ -589,8 +493,8 @@ class SettingsController extends Controller
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param string|null $siteHandle
-     * @param int|null $typeId
-     * @param null $loadFromSiteHandle
+     * @param string|int|null $typeId
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -603,12 +507,13 @@ class SettingsController extends Controller
         string $siteHandle = null,
                $typeId = null,
                $loadFromSiteHandle = null
-    ): Response {
+    ): Response
+    {
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
-        if ($typeId !== null && is_string($typeId)) {
+        if (is_string($typeId)) {
             $typeId = (int)$typeId;
         }
         // Get the (entry) type menu
@@ -722,105 +627,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Remove any sites for which meta bundles do not exist (they may be
-     * disabled for this section)
-     *
-     * @param string $sourceBundleType
-     * @param string $sourceHandle
-     * @param array $variables
-     */
-    protected function cullDisabledSites(string $sourceBundleType, string $sourceHandle, array &$variables)
-    {
-        if (isset($variables['enabledSiteIds'])) {
-            foreach ($variables['enabledSiteIds'] as $key => $value) {
-                $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
-                    $sourceBundleType,
-                    $sourceHandle,
-                    $value
-                );
-                if ($metaBundle === null) {
-                    unset($variables['enabledSiteIds'][$key]);
-                }
-            }
-        }
-    }
-
-    /**
-     * @param string $sourceBundleType
-     * @param string $sourceHandle
-     * @param string $groupName
-     * @param array $variables
-     */
-    protected function setContentFieldSourceVariables(
-        string $sourceBundleType,
-        string $sourceHandle,
-        string $groupName,
-        array  &$variables
-    ) {
-        $variables['textFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
-            FieldHelper::fieldsOfTypeFromSource(
-                $sourceBundleType,
-                $sourceHandle,
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
-            )
-        );
-        $variables['assetFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => $groupName . ' Fields']],
-            FieldHelper::fieldsOfTypeFromSource(
-                $sourceBundleType,
-                $sourceHandle,
-                FieldHelper::ASSET_FIELD_CLASS_KEY,
-                false
-            )
-        );
-        $variables['assetVolumeTextFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], '' => '--', 'title' => 'Title'],
-            array_merge(
-                FieldHelper::fieldsOfTypeFromAssetVolumes(
-                    FieldHelper::TEXT_FIELD_CLASS_KEY,
-                    false
-                )
-            )
-        );
-        $variables['userFieldSources'] = array_merge(
-            ['entryGroup' => ['optgroup' => 'User Fields']],
-            FieldHelper::fieldsOfTypeFromUsers(
-                FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
-            )
-        );
-    }
-
-    /**
-     * @param string $sourceBundleType
-     * @param string $sourceHandle
-     * @param null|int $siteId
-     *
-     * @return string
-     */
-    protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle, $siteId): string
-    {
-        $uri = null;
-        // Pick an Element to be used for the preview
-        if ($sourceBundleType === MetaBundles::GLOBAL_META_BUNDLE) {
-            $uri = MetaBundles::GLOBAL_META_BUNDLE;
-        } else {
-            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
-            if ($seoElement !== null) {
-                $uri = $seoElement::previewUri($sourceHandle, $siteId);
-            }
-        }
-        // Special-case for the __home__ slug, and default to /
-        if (($uri === '__home__') || ($uri === null)) {
-            $uri = '/';
-        }
-
-        return $uri;
-    }
-
-    /**
      * @return Response
      * @throws BadRequestHttpException
      * @throws MissingComponentException
@@ -876,15 +682,12 @@ class SettingsController extends Controller
         return $this->redirectToPostedUrl();
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Site settings
      *
      * @param string $subSection
-     * @param string $siteHandle
-     * @param null $loadFromSiteHandle
+     * @param string|null $siteHandle
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -1023,33 +826,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * Prep the entity settings for saving to the db
-     *
-     * @param array &$settings
-     */
-    protected function prepEntitySettings(&$settings)
-    {
-        DynamicMetaHelper::normalizeTimes($settings['localBusinessOpeningHours']);
-        if (!empty($settings['siteType'])) {
-            $settings['computedType'] = SchemaHelper::getSpecificEntityType($settings);
-        } else {
-            $settings['computedType'] = 'WebPage';
-        }
-        // Empty out the entity image settings to ensure the image gets removed if it no longer exists
-        $settings['genericImage'] = '';
-        $settings['genericImageWidth'] = '';
-        $settings['genericImageHeight'] = '';
-        if (!empty($settings['genericImageIds'])) {
-            $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
-            if ($asset !== null) {
-                $settings['genericImage'] = $asset->getUrl();
-                $settings['genericImageWidth'] = $asset->getWidth();
-                $settings['genericImageHeight'] = $asset->getHeight();
-            }
-        }
-    }
-
-    /**
      * Plugin settings
      *
      * @return Response The rendered result
@@ -1058,8 +834,10 @@ class SettingsController extends Controller
     public function actionPlugin(): Response
     {
         // Ensure they have permission to edit the plugin settings
-        $currentUser = Craft::$app->getUser()->getIdentity();
-        if (!$currentUser->can('seomatic:plugin-settings')) {
+        /** @var User $user */
+        $user = Craft::$app->getUser();
+        $currentUser = $user->getIdentity();
+        if (!$currentUser || !$currentUser->can('seomatic:plugin-settings')) {
             throw new ForbiddenHttpException('You do not have permission to edit SEOmatic plugin settings.');
         }
         $general = Craft::$app->getConfig()->getGeneral();
@@ -1107,8 +885,8 @@ class SettingsController extends Controller
      * Tracking settings
      *
      * @param string $subSection
-     * @param string $siteHandle
-     * @param null $loadFromSiteHandle
+     * @param string|null $siteHandle
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -1191,7 +969,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * @return Response
+     * @return Response|null
      * @throws BadRequestHttpException
      * @throws MissingComponentException
      */
@@ -1213,7 +991,7 @@ class SettingsController extends Controller
                 foreach ($metaBundle->metaContainers as $metaContainer) {
                     if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
                         $data = $metaContainer->getData($scriptHandle);
-                        /** @var MetaScript $data */
+                        /** @var MetaScript|null $data */
                         if ($data) {
                             /** @var array $scriptData */
                             foreach ($scriptData as $key => $value) {
@@ -1235,7 +1013,9 @@ class SettingsController extends Controller
             if ($hasErrors) {
                 Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save tracking settings due to a Twig error."));
                 // Send the redirect back to the template
-                Craft::$app->getUrlManager()->setRouteParams([
+                /** @var UrlManager $urlManager */
+                $urlManager = Craft::$app->getUrlManager();
+                $urlManager->setRouteParams([
                     'editedMetaBundle' => $metaBundle,
                 ]);
 
@@ -1262,8 +1042,10 @@ class SettingsController extends Controller
     public function actionSavePluginSettings()
     {
         // Ensure they have permission to edit the plugin settings
-        $currentUser = Craft::$app->getUser()->getIdentity();
-        if (!$currentUser->can('seomatic:plugin-settings')) {
+        /** @var User $user */
+        $user = Craft::$app->getUser();
+        $currentUser = $user->getIdentity();
+        if (!$currentUser || !$currentUser->can('seomatic:plugin-settings')) {
             throw new ForbiddenHttpException('You do not have permission to edit SEOmatic plugin settings.');
         }
         $general = Craft::$app->getConfig()->getGeneral();
@@ -1284,7 +1066,9 @@ class SettingsController extends Controller
             Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save plugin settings."));
 
             // Send the plugin back to the template
-            Craft::$app->getUrlManager()->setRouteParams([
+            /** @var UrlManager $urlManager */
+            $urlManager = Craft::$app->getUrlManager();
+            $urlManager->setRouteParams([
                 'plugin' => $plugin,
             ]);
 
@@ -1295,5 +1079,233 @@ class SettingsController extends Controller
         Craft::$app->getSession()->setNotice(Craft::t('app', 'Plugin settings saved.'));
 
         return $this->redirectToPostedUrl();
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Return a siteId from a siteHandle
+     *
+     * @param string|null $siteHandle
+     *
+     * @return int|null
+     * @throws NotFoundHttpException
+     */
+    protected function getSiteIdFromHandle($siteHandle)
+    {
+        // Get the site to edit
+        if ($siteHandle !== null) {
+            $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
+            if (!$site) {
+                throw new NotFoundHttpException('Invalid site handle: ' . $siteHandle);
+            }
+            $siteId = $site->id;
+        } else {
+            $siteId = Craft::$app->getSites()->currentSite->id;
+        }
+
+        return $siteId;
+    }
+
+    /**
+     * @param string $siteHandle
+     * @param        $siteId
+     * @param        $variables
+     *
+     * @throws ForbiddenHttpException
+     */
+    protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables, $element = null)
+    {
+        // Enabled sites
+        $sites = Craft::$app->getSites();
+        if (Craft::$app->getIsMultiSite()) {
+            // Set defaults based on the section settings
+            $variables['enabledSiteIds'] = [];
+            $variables['siteIds'] = [];
+
+            foreach ($sites->getEditableSiteIds() as $editableSiteId) {
+                $variables['enabledSiteIds'][] = $editableSiteId;
+                $variables['siteIds'][] = $editableSiteId;
+            }
+
+            // Make sure the $siteId they are trying to edit is in our array of editable sites
+            if (!in_array($siteId, $variables['enabledSiteIds'], false)) {
+                if (!empty($variables['enabledSiteIds'])) {
+                    $siteId = reset($variables['enabledSiteIds']);
+                } else {
+                    $this->requirePermission('editSite:' . $siteId);
+                }
+            }
+        }
+
+        // Set the currentSiteId and currentSiteHandle
+        $variables['currentSiteId'] = empty($siteId) ? Craft::$app->getSites()->currentSite->id : $siteId;
+        $variables['currentSiteHandle'] = empty($siteHandle)
+            ? Craft::$app->getSites()->currentSite->handle
+            : $siteHandle;
+
+        // Page title
+        $variables['showSites'] = (
+            Craft::$app->getIsMultiSite() &&
+            count($variables['enabledSiteIds'])
+        );
+
+        if ($variables['showSites']) {
+            $variables['sitesMenuLabel'] = Craft::t(
+                'site',
+                $sites->getSiteById((int)$variables['currentSiteId'])->name
+            );
+        } else {
+            $variables['sitesMenuLabel'] = '';
+        }
+    }
+
+    /**
+     * @param array $variables
+     */
+    protected function setGlobalFieldSourceVariables(array &$variables)
+    {
+        $variables['textFieldSources'] = array_merge(
+            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
+            FieldHelper::fieldsOfTypeFromGlobals(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetFieldSources'] = array_merge(
+            ['globalsGroup' => ['optgroup' => 'Globals Fields']],
+            FieldHelper::fieldsOfTypeFromGlobals(
+                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                false
+            )
+        );
+    }
+
+    /**
+     * Remove any sites for which meta bundles do not exist (they may be
+     * disabled for this section)
+     *
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
+     * @param array $variables
+     */
+    protected function cullDisabledSites(string $sourceBundleType, string $sourceHandle, array &$variables)
+    {
+        if (isset($variables['enabledSiteIds'])) {
+            foreach ($variables['enabledSiteIds'] as $key => $value) {
+                $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+                    $sourceBundleType,
+                    $sourceHandle,
+                    $value
+                );
+                if ($metaBundle === null) {
+                    unset($variables['enabledSiteIds'][$key]);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
+     * @param string $groupName
+     * @param array $variables
+     */
+    protected function setContentFieldSourceVariables(
+        string $sourceBundleType,
+        string $sourceHandle,
+        string $groupName,
+        array  &$variables
+    )
+    {
+        $variables['textFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
+            FieldHelper::fieldsOfTypeFromSource(
+                $sourceBundleType,
+                $sourceHandle,
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => $groupName . ' Fields']],
+            FieldHelper::fieldsOfTypeFromSource(
+                $sourceBundleType,
+                $sourceHandle,
+                FieldHelper::ASSET_FIELD_CLASS_KEY,
+                false
+            )
+        );
+        $variables['assetVolumeTextFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'Asset Volume Fields'], '' => '--', 'title' => 'Title'],
+            array_merge(
+                FieldHelper::fieldsOfTypeFromAssetVolumes(
+                    FieldHelper::TEXT_FIELD_CLASS_KEY,
+                    false
+                )
+            )
+        );
+        $variables['userFieldSources'] = array_merge(
+            ['entryGroup' => ['optgroup' => 'User Fields']],
+            FieldHelper::fieldsOfTypeFromUsers(
+                FieldHelper::TEXT_FIELD_CLASS_KEY,
+                false
+            )
+        );
+    }
+
+    /**
+     * @param string $sourceBundleType
+     * @param string $sourceHandle
+     * @param null|int $siteId
+     *
+     * @return string
+     */
+    protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle, $siteId): string
+    {
+        $uri = null;
+        // Pick an Element to be used for the preview
+        if ($sourceBundleType === MetaBundles::GLOBAL_META_BUNDLE) {
+            $uri = MetaBundles::GLOBAL_META_BUNDLE;
+        } else {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                $uri = $seoElement::previewUri($sourceHandle, $siteId);
+            }
+        }
+        // Special-case for the __home__ slug, and default to /
+        if (($uri === '__home__') || ($uri === null)) {
+            $uri = '/';
+        }
+
+        return $uri;
+    }
+
+    /**
+     * Prep the entity settings for saving to the db
+     *
+     * @param array &$settings
+     */
+    protected function prepEntitySettings(&$settings)
+    {
+        DynamicMetaHelper::normalizeTimes($settings['localBusinessOpeningHours']);
+        if (!empty($settings['siteType'])) {
+            $settings['computedType'] = SchemaHelper::getSpecificEntityType($settings);
+        } else {
+            $settings['computedType'] = 'WebPage';
+        }
+        // Empty out the entity image settings to ensure the image gets removed if it no longer exists
+        $settings['genericImage'] = '';
+        $settings['genericImageWidth'] = '';
+        $settings['genericImageHeight'] = '';
+        if (!empty($settings['genericImageIds'])) {
+            $asset = Craft::$app->getAssets()->getAssetById($settings['genericImageIds'][0]);
+            if ($asset !== null) {
+                $settings['genericImage'] = $asset->getUrl();
+                $settings['genericImageWidth'] = $asset->getWidth();
+                $settings['genericImageHeight'] = $asset->getHeight();
+            }
+        }
     }
 }

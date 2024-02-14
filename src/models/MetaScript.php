@@ -17,6 +17,7 @@ use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\PluginTemplate as PluginTemplateHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\web\View;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -61,12 +62,12 @@ class MetaScript extends NonceItem
     public $position = View::POS_HEAD;
 
     /**
-     * @var
+     * @var string
      */
     public $bodyTemplatePath;
 
     /**
-     * @var
+     * @var string
      */
     public $bodyTemplateString;
 
@@ -321,7 +322,7 @@ class MetaScript extends NonceItem
         ]);
         if (Seomatic::$craft31) {
             foreach ($variables as $key => $value) {
-                if (!empty($value['value']) && \is_string($value['value'])) {
+                if (!empty($value['value']) && is_string($value['value'])) {
                     $variables[$key]['value'] = Craft::parseEnv($value['value']);
                     $variables[$key]['value'] = trim($variables[$key]['value']);
                 }

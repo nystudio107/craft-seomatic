@@ -11,12 +11,11 @@
 
 namespace nystudio107\seomatic\base;
 
-use Craft;
 use craft\base\Model;
-
-use twig\Markup;
-
+use ReflectionClass;
+use Twig\Markup;
 use yii\base\InvalidArgumentException;
+use function is_object;
 
 /**
  * @author    nystudio107
@@ -32,7 +31,7 @@ abstract class FluentModel extends Model
      * Remove any properties that don't exist in the model
      *
      * @param string $class
-     * @param array  $config
+     * @param array $config
      */
     protected static function cleanProperties(string $class, array &$config)
     {
@@ -50,22 +49,13 @@ abstract class FluentModel extends Model
      * Add fluent getters/setters for this class
      *
      * @param string $method The method name (property name)
-     * @param array  $args   The arguments list
+     * @param array $args The arguments list
      *
      * @return mixed            The value of the property
      */
     public function __call($method, $args)
     {
-        try {
-            $reflector = new \ReflectionClass(static::class);
-        } catch (\ReflectionException $e) {
-            Craft::error(
-                $e->getMessage(),
-                __METHOD__
-            );
-
-            return null;
-        }
+        $reflector = new ReflectionClass(static::class);
         if (!$reflector->hasProperty($method)) {
             throw new InvalidArgumentException("Property {$method} doesn't exist");
         }
@@ -76,7 +66,7 @@ abstract class FluentModel extends Model
         }
         // Set the property
         $value = $args[0];
-        if (\is_object($value) && $value instanceof Markup) {
+        if (is_object($value) && $value instanceof Markup) {
             $value = (string)$value;
         }
         $property->setValue($this, $value);

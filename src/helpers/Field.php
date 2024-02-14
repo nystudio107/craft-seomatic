@@ -34,6 +34,7 @@ use nystudio107\seomatic\services\MetaBundles;
 use verbb\doxter\fields\Doxter as DoxterField;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use verbb\supertable\fields\SuperTableField;
+use verbb\supertable\models\SuperTableBlockTypeModel;
 use yii\base\InvalidConfigException;
 
 /**
@@ -393,6 +394,7 @@ class Field
         $foundFields = [];
 
         try {
+            /** @var SuperTableBlockTypeModel $superTableBlockTypeModel */
             $superTableBlockTypeModel = $superTableBlock->getType();
         } catch (InvalidConfigException $e) {
             $superTableBlockTypeModel = null;
@@ -403,6 +405,7 @@ class Field
             if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
                 return self::$superTableFieldsOfTypeCache[$memoKey];
             }
+            // The SuperTableBlockTypeModel class lacks @mixin FieldLayoutBehavior in its annotations
             /** @phpstan-ignore-next-line */
             $fields = $superTableBlockTypeModel->getFields();
             /** @var BaseField $field */

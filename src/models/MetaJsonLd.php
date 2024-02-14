@@ -16,12 +16,15 @@ use craft\helpers\Json;
 use craft\helpers\Template;
 use craft\validators\UrlValidator;
 use DateTime;
+use Exception;
 use nystudio107\seomatic\base\NonceItem;
 use nystudio107\seomatic\helpers\JsonLd as JsonLdHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\validators\BooleanValidator;
 use yii\validators\DateValidator;
 use yii\validators\NumberValidator;
+use function in_array;
+use function is_array;
 use function is_object;
 
 /**
@@ -80,7 +83,7 @@ class MetaJsonLd extends NonceItem
     /**
      * The item's type.
      *
-     * @var string [schema.org types: Text]
+     * @var string|null [schema.org types: Text]
      */
     public $type;
 
@@ -236,7 +239,8 @@ class MetaJsonLd extends NonceItem
             'renderScriptTags' => true,
             'array' => false,
         ]
-    ): string {
+    ): string
+    {
         $html = '';
         $options = $this->tagAttributes();
         if ($this->prepForRender($options)) {
@@ -255,7 +259,7 @@ class MetaJsonLd extends NonceItem
             $this->setScenario('render');
             try {
                 $html = JsonLdHelper::encode($this);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Craft::error($e, __METHOD__);
                 Craft::$app->getErrorHandler()->logException($e);
             }
@@ -358,14 +362,15 @@ class MetaJsonLd extends NonceItem
     public function validateJsonSchema(
         $attribute,
         $params
-    ) {
-        if (!\in_array($attribute, $this->getSchemaPropertyNames(), true)) {
+    )
+    {
+        if (!in_array($attribute, $this->getSchemaPropertyNames(), true)) {
             $this->addError($attribute, 'The attribute does not exist.');
         } else {
             $expectedTypes = $this->getSchemaPropertyExpectedTypes()[$attribute];
             $validated = false;
             $dataToValidate = $this->$attribute;
-            if (!\is_array($dataToValidate)) {
+            if (!is_array($dataToValidate)) {
                 $dataToValidate = [$dataToValidate];
             }
             foreach ($dataToValidate as $key => $data) {

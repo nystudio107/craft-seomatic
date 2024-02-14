@@ -69,7 +69,7 @@ class SeoElements extends Component
     // =========================================================================
 
     /**
-     * @var SeoElementInterface[] indexed by [sourceType]
+     * @var string[] indexed by [sourceType]
      */
     protected $seoElements;
 
@@ -86,7 +86,9 @@ class SeoElements extends Component
         if ($metaBundleType === null) {
             return null;
         }
+        /** @var SeoElementInterface[] $seoElements */
         $seoElements = $this->getAllSeoElementTypes();
+
         return $seoElements[$metaBundleType] ?? null;
     }
 
@@ -134,8 +136,8 @@ class SeoElements extends Component
     public function getMetaBundleTypeFromElement(ElementInterface $element)
     {
         $seoElements = $this->getAllSeoElementTypes();
+        /** @var SeoElementInterface $seoElement */
         foreach ($seoElements as $metaBundleType => $seoElement) {
-            /** @var SeoElementInterface $seoElement */
             foreach ($seoElement::getElementClasses() as $elementClass) {
                 if ($element instanceof $elementClass) {
                     return $metaBundleType;

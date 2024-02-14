@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\migrations;
 
 use Craft;
 use craft\config\DbConfig;
-
 use craft\db\Migration;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
 use nystudio107\seomatic\Seomatic;
@@ -119,41 +118,25 @@ class Install extends Migration
     {
         // seomatic_metabundles table
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%seomatic_metabundles}}',
-                'sourceBundleType',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%seomatic_metabundles}}',
             'sourceBundleType',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%seomatic_metabundles}}',
-                'sourceId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%seomatic_metabundles}}',
             'sourceId',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%seomatic_metabundles}}',
-                'sourceSiteId',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%seomatic_metabundles}}',
             'sourceSiteId',
             false
         );
         $this->createIndex(
-            $this->db->getIndexName(
-                '{{%seomatic_metabundles}}',
-                'sourceHandle',
-                false
-            ),
+            $this->db->getIndexName(),
             '{{%seomatic_metabundles}}',
             'sourceHandle',
             false
@@ -173,7 +156,7 @@ class Install extends Migration
     protected function addForeignKeys()
     {
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%seomatic_metabundles}}', 'sourceSiteId'),
+            $this->db->getForeignKeyName(),
             '{{%seomatic_metabundles}}',
             'sourceSiteId',
             '{{%sites}}',

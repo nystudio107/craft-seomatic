@@ -1,12 +1,15 @@
 <?php
 /**
- * @var \nystudio107\seomatic\debug\panels\SeomaticPanel $panel
+ * @var SeomaticPanel $panel
+ * @var View $this
  */
 
 use nystudio107\codeeditor\assetbundles\codeeditor\CodeEditorAsset;
 use nystudio107\seomatic\debug\assets\DebugAsset;
+use nystudio107\seomatic\debug\panels\SeomaticPanel;
 use nystudio107\seomatic\events\MetaBundleDebugDataEvent;
 use yii\helpers\Html;
+use yii\web\View;
 
 DebugAsset::register($this);
 $bundle = CodeEditorAsset::register($this);

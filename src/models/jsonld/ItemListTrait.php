@@ -48,7 +48,7 @@ trait ItemListTrait
      * sufficient for indicating the order or elements.  Use ListItem with a
      * 'position' property in such cases.
      *
-     * @var string|ListItem|Text|Thing
+     * @var array|string|ListItem|Text|Thing
      */
     public $itemListElement;
 }

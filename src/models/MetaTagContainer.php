@@ -14,7 +14,6 @@ namespace nystudio107\seomatic\models;
 use Craft;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 
@@ -36,7 +35,7 @@ class MetaTagContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaTag[] $data
+     * @var MetaTag[]|array $data
      */
     public $data = [];
 
@@ -63,7 +62,6 @@ class MetaTagContainer extends MetaContainer
                 );
                 $tagData = [];
                 if ($this->prepForInclusion()) {
-                    /** @var $metaTagModel MetaTag */
                     foreach ($this->data as $metaTagModel) {
                         if ($metaTagModel->include) {
                             $configs = $metaTagModel->tagAttributesArray();
@@ -109,6 +107,7 @@ class MetaTagContainer extends MetaContainer
     {
         parent::normalizeContainerData();
 
+        /** @var array $config */
         foreach ($this->data as $key => $config) {
             $config['key'] = $key;
             $this->data[$key] = MetaTag::create($key, $config);

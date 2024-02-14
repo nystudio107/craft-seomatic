@@ -18,11 +18,6 @@ namespace nystudio107\seomatic\base;
  */
 interface ContainerInterface
 {
-    // Constants
-    // =========================================================================
-
-    const CONTAINER_TYPE = 'GenericContainer';
-
     /**
      * @event IncludeContainerEvent The event that is triggered when a container is
      * about to be included.

@@ -16,6 +16,7 @@ use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use craft\models\Site;
+use Exception;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\base\GqlSeoElementInterface;
 use nystudio107\seomatic\base\SeoElementInterface;
@@ -26,6 +27,7 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use Solspace\Calendar\Bundles\GraphQL\Interfaces\EventInterface;
 use Solspace\Calendar\Calendar as CalendarPlugin;
+use Solspace\Calendar\Elements\Db\EventQuery;
 use Solspace\Calendar\Elements\Event;
 use Solspace\Calendar\Events\DeleteModelEvent;
 use Solspace\Calendar\Events\SaveModelEvent;
@@ -234,7 +236,9 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function sitemapElementsQuery(MetaBundle $metaBundle): ElementQueryInterface
     {
-        $query = Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        $query
             ->setCalendar($metaBundle->sourceHandle)
             ->setLoadOccurrences(false)
             ->siteId((int)$metaBundle->sourceSiteId)
@@ -257,7 +261,8 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId
-    ) {
+    )
+    {
         return Event::find()
             ->id($elementId)
             ->siteId($siteId)
@@ -277,7 +282,9 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     public static function previewUri(string $sourceHandle, $siteId)
     {
         $uri = null;
-        $element = Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        $element = $query
             ->setCalendar($sourceHandle)
             ->siteId($siteId)
             ->one();
@@ -306,7 +313,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
                 if ($calendarModel) {
                     $layoutId = $calendarModel->fieldLayoutId;
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $layoutId = null;
             }
             if ($layoutId) {
@@ -368,15 +375,16 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     /**
      * Return the most recently updated Element from a given source model
      *
-     * @param Model $sourceModel
+     * @param CalendarModel $sourceModel
      * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
     public static function mostRecentElement(Model $sourceModel, int $sourceSiteId)
     {
-        /** @var CalendarModel $sourceModel */
-        return Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        return $query
             ->setCalendar($sourceModel->handle)
             ->siteId($sourceSiteId)
             ->limit(1)
@@ -453,7 +461,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         /** @var Event $element */
         try {
             $sourceHandle = $element->getCalendar()->handle;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
 
         return $sourceHandle;
