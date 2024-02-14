@@ -2,6 +2,7 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use benf\neo\elements\Block as NeoBlock;
 use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
@@ -9,8 +10,11 @@ use craft\console\Application as ConsoleApplication;
 use craft\db\Paginator;
 use craft\elements\Asset;
 use craft\elements\MatrixBlock;
+use craft\errors\SiteNotFoundException;
 use craft\fields\Assets as AssetsField;
 use craft\models\SiteGroup;
+use craft\queue\Queue;
+use DateTime;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
@@ -20,10 +24,15 @@ use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
+use Throwable;
+use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use yii\base\Event;
 use yii\base\Exception;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
+use function array_intersect_key;
+use function count;
+use function in_array;
 
 /**
  * @author    nystudio107
@@ -53,11 +62,11 @@ class Sitemap
      *
      * @param array $params
      * @return void
-     * @throws \craft\errors\SiteNotFoundException
+     * @throws SiteNotFoundException
      */
     public static function generateSitemap(array $params)
     {
-        /** @var \craft\queue\Queue $queue */
+        /** @var Queue $queue */
         $queue = $params['queue'] ?? null;
         /** @var GenerateSitemap $job */
         $job = $params['job'] ?? null;
@@ -88,7 +97,7 @@ class Sitemap
                         $group = $thisSite->getGroup();
                         $groupId = $group->id;
                     }
-                } catch (\Throwable $e) {
+                } catch (Throwable $e) {
                     Craft::error($e->getMessage(), __METHOD__);
                 }
             }
@@ -121,7 +130,7 @@ class Sitemap
         if ($metaBundle === null) {
             return;
         }
-        $multiSite = \count($metaBundle->sourceAltSiteSettings) > 1;
+        $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
         $totalElements = null;
         if ($metaBundle) {
             $urlsetLine = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
@@ -229,14 +238,14 @@ class Sitemap
                                 continue;
                             }
                         }
-                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new \DateTime();
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated ?? new DateTime();
                         $lines[] = '<url>';
                         // Standard sitemap key/values
                         $lines[] = '<loc>';
                         $lines[] = Html::encode($url);
                         $lines[] = '</loc>';
                         $lines[] = '<lastmod>';
-                        $lines[] = $dateUpdated->format(\DateTime::W3C);
+                        $lines[] = $dateUpdated->format(DateTime::W3C);
                         $lines[] = '</lastmod>';
                         $lines[] = '<changefreq>';
                         $lines[] = $metaBundle->metaSitemapVars->sitemapChangeFreq;
@@ -249,7 +258,7 @@ class Sitemap
                             $primarySiteId = Craft::$app->getSites()->getPrimarySite()->id;
                             /** @var  $altSiteSettings */
                             foreach ($metaBundle->sourceAltSiteSettings as $altSiteSettings) {
-                                if (\in_array($altSiteSettings['siteId'], $groupSiteIds, false) && SiteHelper::siteEnabledWithUrls($altSiteSettings['siteId'])) {
+                                if (in_array($altSiteSettings['siteId'], $groupSiteIds, false) && SiteHelper::siteEnabledWithUrls($altSiteSettings['siteId'])) {
                                     $altElement = null;
                                     if ($seoElement !== null) {
                                         $altElement = $seoElement::sitemapAltElement(
@@ -490,7 +499,7 @@ class Sitemap
                         // Get the explicitly inherited attributes
                         $inherited = array_keys(ArrayHelper::remove($attributes, 'inherited', []));
 
-                        $attributes = \array_intersect_key(
+                        $attributes = array_intersect_key(
                             $attributes,
                             array_flip($seoSettingsField->sitemapEnabledFields)
                         );
@@ -573,14 +582,14 @@ class Sitemap
     protected static function assetFilesSitemapLink(Asset $asset, MetaBundle $metaBundle, array &$lines)
     {
         if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
-            if (\in_array($asset->kind, SitemapTemplate::FILE_TYPES, false)) {
-                $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new \DateTime();
+            if (in_array($asset->kind, SitemapTemplate::FILE_TYPES, false)) {
+                $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new DateTime();
                 $lines[] = '<url>';
                 $lines[] = '<loc>';
                 $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
                 $lines[] = '</loc>';
                 $lines[] = '<lastmod>';
-                $lines[] = $dateUpdated->format(\DateTime::W3C);
+                $lines[] = $dateUpdated->format(DateTime::W3C);
                 $lines[] = '</lastmod>';
                 $lines[] = '<changefreq>';
                 $lines[] = $metaBundle->metaSitemapVars->sitemapChangeFreq;
