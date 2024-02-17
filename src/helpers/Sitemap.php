@@ -377,6 +377,9 @@ class Sitemap
                             if ($block instanceof MatrixBlock) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
                             }
+                            if ($block instanceof SuperTableBlock) {
+                                $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
+                            }
                             if ($block instanceof NeoBlock) {
                                 $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
                             }
