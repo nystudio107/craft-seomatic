@@ -181,8 +181,8 @@ class Sitemaps extends Component implements SitemapInterface
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
         if ($seoElement) {
             if (!empty($seoElement::typeMenuFromHandle($metaBundle->sourceHandle))) {
+                /** @var Section|null $section */
                 $section = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
-                /** @var Section $section */
                 if ($section !== null) {
                     $entryTypes = $section->getEntryTypes();
                     // Fetch each meta bundle for each entry type to see if _any_ of them have sitemap URLs

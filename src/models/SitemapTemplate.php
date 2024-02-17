@@ -161,7 +161,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $existingJobId = $cache->get($queueJobCacheKey);
             // Make sure the queue uses the Craft web interface
             if ($existingJobId && $queue instanceof QueueInterface) {
-                $queue = Craft::$app->getQueue();
                 $queue->release($existingJobId);
                 $cache->delete($queueJobCacheKey);
             }
