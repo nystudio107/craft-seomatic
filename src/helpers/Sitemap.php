@@ -327,7 +327,7 @@ class Sitemap
                         );
                         foreach ($blockFields as $blockField) {
                             $blocks = $element[$blockField]->all();
-                            /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[] $blocks */
+                            /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
                                 if ($block instanceof MatrixBlock) {
@@ -371,7 +371,7 @@ class Sitemap
                     );
                     foreach ($blockFields as $blockField) {
                         $blocks = $element[$blockField]->all();
-                        /** @var MatrixBlock|NeoBlock $block */
+                        /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
                         foreach ($blocks as $block) {
                             $assetFields = [];
                             if ($block instanceof MatrixBlock) {
