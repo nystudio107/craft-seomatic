@@ -120,7 +120,8 @@ class Field
         string      $fieldClassKey,
         FieldLayout $layout,
         bool        $keysOnly = true,
-    ): array {
+    ): array
+    {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
@@ -163,7 +164,8 @@ class Field
         Element $element,
         string  $fieldClassKey,
         bool    $keysOnly = true,
-    ): array {
+    ): array
+    {
         $foundFields = [];
         $layout = $element->getFieldLayout();
         if ($layout !== null) {
@@ -234,6 +236,7 @@ class Field
         $foundFields = [];
         $globals = Craft::$app->getGlobals()->getAllSets();
         foreach ($globals as $global) {
+            /** @var FieldLayout|null $layout */
             $layout = $global->getFieldLayout();
             if ($layout) {
                 $fields = self::fieldsOfTypeFromLayout($fieldClassKey, $layout, $keysOnly);
@@ -273,7 +276,8 @@ class Field
         string $sourceHandle,
         string $fieldClassKey,
         bool   $keysOnly = true,
-    ): array {
+    ): array
+    {
         $foundFields = [];
         $layouts = [];
         // Get the layouts
@@ -320,7 +324,7 @@ class Field
                 return self::$matrixFieldsOfTypeCache[$memoKey];
             }
             $fields = $matrixBlockTypeModel->getCustomFields();
-            /** @var  $field BaseField */
+            /** @var BaseField $field */
             foreach ($fields as $field) {
                 if ($field instanceof $fieldType) {
                     $foundFields[$field->handle] = $field->name;
@@ -351,20 +355,16 @@ class Field
     {
         $foundFields = [];
 
-        try {
-            $neoBlockTypeModel = $neoBlock->getType();
-        } catch (InvalidConfigException $e) {
-            $neoBlockTypeModel = null;
-        }
-        if ($neoBlockTypeModel) {
+        $layout = $neoBlock->getFieldLayout();
+        if ($layout) {
             // Cache me if you can
             $memoKey = $fieldType . $neoBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$neoFieldsOfTypeCache[$memoKey])) {
                 return self::$neoFieldsOfTypeCache[$memoKey];
             }
-            $fields = $neoBlockTypeModel->getFields();
-            /** @var  $field BaseField */
-            foreach ($fields as $field) {
+            $fieldElements = $layout->getCustomFieldElements();
+            foreach ($fieldElements as $fieldElement) {
+                $field = $fieldElement->getField();
                 if ($field instanceof $fieldType) {
                     $foundFields[$field->handle] = $field->name;
                 }
@@ -404,9 +404,13 @@ class Field
             if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
                 return self::$superTableFieldsOfTypeCache[$memoKey];
             }
-            $fields = $superTableBlockTypeModel->getCustomFields();
-            /** @var  $field BaseField */
-            foreach ($fields as $field) {
+            /** @var ?FieldLayout $layout */
+            // The SuperTableBlockType class lacks @mixin FieldLayoutBehavior in its annotations
+            /** @phpstan-ignore-next-line */
+            $layout = $superTableBlockTypeModel->getFieldLayout();
+            $fieldElements = $layout->getCustomFieldElements();
+            foreach ($fieldElements as $fieldElement) {
+                $field = $fieldElement->getField();
                 if ($field instanceof $fieldType) {
                     $foundFields[$field->handle] = $field->name;
                 }

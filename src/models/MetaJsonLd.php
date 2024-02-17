@@ -86,7 +86,7 @@ class MetaJsonLd extends NonceItem
     /**
      * The item's type.
      *
-     * @var string [schema.org types: Text]
+     * @var string|null [schema.org types: Text]
      */
     public $type;
 
@@ -248,7 +248,8 @@ class MetaJsonLd extends NonceItem
             'renderScriptTags' => true,
             'array' => false,
         ],
-    ): string {
+    ): string
+    {
         $html = '';
         $options = $this->tagAttributes();
         if ($this->prepForRender($options)) {
@@ -370,7 +371,8 @@ class MetaJsonLd extends NonceItem
     public function validateJsonSchema(
         $attribute,
         $params,
-    ) {
+    )
+    {
         if (!in_array($attribute, $this->getSchemaPropertyNames(), true)) {
             $this->addError($attribute, 'The attribute does not exist.');
         } else {

@@ -15,7 +15,9 @@ use Craft;
 use craft\errors\SiteNotFoundException;
 use craft\helpers\UrlHelper as CraftUrlHelper;
 use nystudio107\seomatic\Seomatic;
+use Throwable;
 use yii\base\Exception;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -37,7 +39,7 @@ class UrlHelper extends CraftUrlHelper
     {
         try {
             $siteUrl = self::getSiteUrlOverrideSetting($siteId);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // That's okay
         }
         if (!empty($siteUrl)) {
@@ -93,7 +95,7 @@ class UrlHelper extends CraftUrlHelper
     public static function pageTriggerValue(): array
     {
         $pageTrigger = Craft::$app->getConfig()->getGeneral()->pageTrigger;
-        if (!\is_string($pageTrigger) || $pageTrigger === '') {
+        if (!is_string($pageTrigger) || $pageTrigger === '') {
             $pageTrigger = 'p';
         }
         // Is this query string-based pagination?
@@ -240,8 +242,6 @@ class UrlHelper extends CraftUrlHelper
 
             return $siteUrlOverride[$site->handle] ?? '';
         }
-
-        return '';
     }
 
     // Protected Methods

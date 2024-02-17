@@ -190,7 +190,7 @@ class SeoCampaign implements SeoElementInterface
                 );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $campaign CampaignElement */
+                /** @var CampaignElement $campaign */
                 $campaign = $event->sender ?? null;
                 if ($campaign !== null && $campaign->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($campaign->uri, $campaign->siteId, true);
@@ -240,7 +240,8 @@ class SeoCampaign implements SeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    ) {
+    )
+    {
         return CampaignElement::find()
             ->campaignType($metaBundle->sourceHandle)
             ->id($elementId)

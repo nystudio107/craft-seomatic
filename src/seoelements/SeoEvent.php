@@ -12,6 +12,7 @@
 namespace nystudio107\seomatic\seoelements;
 
 use Craft;
+use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
@@ -28,6 +29,7 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use Solspace\Calendar\Bundles\GraphQL\Interfaces\EventInterface;
 use Solspace\Calendar\Calendar as CalendarPlugin;
+use Solspace\Calendar\Elements\Db\EventQuery;
 use Solspace\Calendar\Elements\Event;
 use Solspace\Calendar\Events\DeleteModelEvent;
 use Solspace\Calendar\Events\SaveModelEvent;
@@ -228,7 +230,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function getElementRefHandle(): string
     {
-        return Event::refHandle() ?? 'event';
+        return Event::refHandle();
     }
 
     /**
@@ -240,7 +242,9 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function sitemapElementsQuery(MetaBundle $metaBundle): ElementQueryInterface
     {
-        $query = Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        $query
             ->setCalendar($metaBundle->sourceHandle)
             ->setLoadOccurrences(false)
             ->siteId((int)$metaBundle->sourceSiteId)
@@ -263,7 +267,8 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    ) {
+    )
+    {
         return Event::find()
             ->id($elementId)
             ->siteId($siteId)
@@ -283,7 +288,10 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     public static function previewUri(string $sourceHandle, $siteId)
     {
         $uri = null;
-        $element = Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        /** @var Element|null $element */
+        $element = $query
             ->setCalendar($sourceHandle)
             ->siteId($siteId)
             ->one();
@@ -374,20 +382,24 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     /**
      * Return the most recently updated Element from a given source model
      *
-     * @param Model $sourceModel
+     * @param CalendarModel $sourceModel
      * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
     public static function mostRecentElement(Model $sourceModel, int $sourceSiteId)
     {
-        /** @var CalendarModel $sourceModel */
-        return Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        /** @var Element|null $element */
+        $element = $query
             ->setCalendar($sourceModel->handle)
             ->siteId($sourceSiteId)
             ->limit(1)
             ->orderBy(['elements.dateUpdated' => SORT_DESC])
             ->one();
+
+        return $element;
     }
 
     /**

@@ -190,7 +190,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
                 );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $category Category */
+                /** @var Category $category */
                 $category = $event->sender ?? null;
                 if ($category !== null && $category->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($category->uri, $category->siteId, true);
@@ -243,7 +243,8 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    ) {
+    )
+    {
         return Category::find()
             ->id($elementId)
             ->siteId($siteId)

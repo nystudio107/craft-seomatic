@@ -1,9 +1,12 @@
 <?php
 /**
- * @var \nystudio107\seomatic\debug\panels\SeomaticPanel $panel
+ * @var SeomaticPanel $panel
+ * @var View $this
  */
 
 use craft\helpers\Html;
+use nystudio107\seomatic\debug\panels\SeomaticPanel;
+use yii\web\View;
 
 ?>
 <style>

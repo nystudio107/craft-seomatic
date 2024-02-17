@@ -30,10 +30,12 @@ use nystudio107\seomatic\models\jsonld\Organization;
 use nystudio107\seomatic\models\jsonld\Thing;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaJsonLd;
+use nystudio107\seomatic\models\MetaLink;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\Helper as SeomaticHelper;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
+use Throwable;
 use yii\base\Event;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -77,9 +79,9 @@ class DynamicMeta
      * Twig {% paginate %} tag:
      * https://docs.craftcms.com/v3/templating/tags/paginate.html#the-pageInfo-variable
      *
-     * @param Paginate $pageInfo
+     * @param ?Paginate $pageInfo
      */
-    public static function paginate(Paginate $pageInfo)
+    public static function paginate(?Paginate $pageInfo)
     {
         if ($pageInfo !== null && $pageInfo->currentPage !== null) {
             // Let the meta containers know that this page is paginated
@@ -326,21 +328,20 @@ class DynamicMeta
         if ($site === null) {
             return;
         }
+        $siteUrl = '/';
         try {
             $siteUrl = SiteHelper::siteEnabledWithUrls($siteId) ? $site->baseUrl : Craft::$app->getSites()->getPrimarySite()->baseUrl;
         } catch (SiteNotFoundException $e) {
-            $siteUrl = Craft::$app->getConfig()->general->siteUrl;
             Craft::error($e->getMessage(), __METHOD__);
         }
         if (!empty(Seomatic::$settings->siteUrlOverride)) {
             try {
                 $siteUrl = UrlHelper::getSiteUrlOverrideSetting($siteId);
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 // That's okay
             }
         }
-        $siteUrl = $siteUrl ?: '/';
-        /** @var  $crumbs BreadcrumbList */
+        /** @var BreadcrumbList $crumbs */
         $crumbs = Seomatic::$plugin->jsonLd->create([
             'type' => 'BreadcrumbList',
             'name' => 'Breadcrumbs',
@@ -383,7 +384,7 @@ class DynamicMeta
         // Build up the segments, and look for elements that match
         $uri = '';
         $segments = Craft::$app->getRequest()->getSegments();
-        /** @var  $lastElement Element */
+        /** @var Element|null $lastElement */
         $lastElement = Seomatic::$matchedElement;
         if ($lastElement && $element) {
             if ($lastElement->uri !== '__home__' && $element->uri) {
@@ -396,7 +397,7 @@ class DynamicMeta
         // Parse through the segments looking for elements that match
         foreach ($segments as $segment) {
             $uri .= $segment;
-            /** @var Element $element */
+            /** @var Element|null $element */
             $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, true);
             if ($element && $element->uri) {
                 $position++;
@@ -427,7 +428,7 @@ class DynamicMeta
     /**
      * Add meta hreflang tags if there is more than one site
      *
-     * @param string $uri
+     * @param string|null $uri
      * @param int|null $siteId
      */
     public static function addMetaLinkHrefLang(string $uri = null, int $siteId = null)
@@ -440,6 +441,7 @@ class DynamicMeta
         }
         if (!empty($siteLocalizedUrls)) {
             // Add the rel=alternate tag
+            /** @var MetaLink $metaTag */
             $metaTag = Seomatic::$plugin->link->create([
                 'rel' => 'alternate',
                 'hreflang' => [],
@@ -541,9 +543,9 @@ class DynamicMeta
                 $url = $elements->getElementUriForSite($matchedElement->getId(), $site->id);
                 // See if they have disabled sitemaps or robots for this entry,
                 // and if so, don't include it in the hreflang
-                /** @var Element $element */
                 $element = null;
                 if ($url) {
+                    /** @var Element $element */
                     $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
@@ -626,7 +628,6 @@ class DynamicMeta
             }
             $url = UrlHelper::absoluteUrlWithProtocol($url);
 
-            $url = $url ?? '';
             $url = self::sanitizeUrl($url);
             $language = $site->language;
             $ogLanguage = LocalizationHelper::normalizeOgLocaleLanguage($language);
@@ -760,15 +761,15 @@ class DynamicMeta
      * Add the ContactPoint to the $jsonLd based on the Entity settings
      *
      * @param MetaJsonLd $jsonLd
-     * @param Entity $entity
+     * @param Entity|null $entity
      */
-    public static function addContactPoints(MetaJsonLd $jsonLd, Entity $entity)
+    public static function addContactPoints(MetaJsonLd $jsonLd, ?Entity $entity)
     {
         Craft::beginProfile('DynamicMeta::addContactPoints', __METHOD__);
         if ($jsonLd instanceof Organization && $entity !== null) {
             /** @var Organization $jsonLd */
             $contactPoints = [];
-            if ($entity->organizationContactPoints !== null && is_array($entity->organizationContactPoints)) {
+            if (is_array($entity->organizationContactPoints)) {
                 foreach ($entity->organizationContactPoints as $contacts) {
                     /** @var ContactPoint $contact */
                     $contact = Seomatic::$plugin->jsonLd->create([

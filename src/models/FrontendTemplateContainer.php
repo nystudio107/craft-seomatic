@@ -53,6 +53,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     {
         parent::normalizeContainerData();
 
+        /** @var array $config */
         foreach ($this->data as $key => $config) {
             $this->addData(EditableTemplate::create($config), $key);
         }

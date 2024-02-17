@@ -474,7 +474,7 @@ trait OrganizationTrait
     /**
      * A contact point for a person or organization.
      *
-     * @var ContactPoint
+     * @var array|ContactPoint
      */
     public $contactPoint;
 

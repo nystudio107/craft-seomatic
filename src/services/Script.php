@@ -41,7 +41,7 @@ class Script extends MetaService
      */
     public function get(string $key, string $handle = self::GENERAL_HANDLE)
     {
-        /** @var  $metaItem MetaScript */
+        /** @var MetaScript $metaItem */
         $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaScriptContainer::CONTAINER_TYPE);
 
         return $metaItem;
