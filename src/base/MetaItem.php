@@ -148,8 +148,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     public function debugMetaItem(
         $errorLabel = 'Error: ',
         array $scenarios = ['default' => 'error']
-    )
-    {
+    ) {
         $isMetaJsonLdModel = false;
         if (is_subclass_of($this, MetaJsonLd::class)) {
             $isMetaJsonLdModel = true;
@@ -195,10 +194,9 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                     if ($isMetaJsonLdModel) {
                         /** @var MetaJsonLd $className */
                         $className = get_class($this);
-                        if (!empty($className::$schemaPropertyDescriptions[$param])) {
+                        if (!empty($className->schemaPropertyDescriptions[$param])) {
                             $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
-                            /** @var $className MetaJsonLd */
-                            $errorMsg .= ' -> ' . $className::$schemaPropertyDescriptions[$param];
+                            $errorMsg .= ' -> ' . $className->schemaPropertyDescriptions[$param];
                             Craft::info($errorMsg, __METHOD__);
                         }
                     }
@@ -277,8 +275,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
     public function validateStringOrArray(
         $attribute,
         $params
-    )
-    {
+    ) {
         $validated = false;
         if (is_string($attribute)) {
             $validated = true;
