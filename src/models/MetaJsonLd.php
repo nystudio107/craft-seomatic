@@ -31,6 +31,12 @@ use function is_object;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
+ *
+ * @property-read array $googleRecommendedSchema
+ * @property-read array $googleRequiredSchema
+ * @property-read array $schemaPropertyDescriptions
+ * @property-read array $schemaPropertyExpectedTypes
+ * @property-read array $schemaPropertyNames
  */
 class MetaJsonLd extends NonceItem
 {
@@ -86,7 +92,7 @@ class MetaJsonLd extends NonceItem
     /**
      * The item's type.
      *
-     * @var string [schema.org types: Text]
+     * @var string|null [schema.org types: Text]
      */
     public $type;
 

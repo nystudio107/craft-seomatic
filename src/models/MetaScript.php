@@ -61,12 +61,12 @@ class MetaScript extends NonceItem
     public $position = View::POS_HEAD;
 
     /**
-     * @var
+     * @var string
      */
     public $bodyTemplatePath;
 
     /**
-     * @var
+     * @var string
      */
     public $bodyTemplateString;
 

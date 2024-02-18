@@ -1,7 +1,15 @@
 <?php
+/**
+ * @var SeomaticPanel $panel
+ * @var View $this
+ * @var array $value
+ * @var array $meta
+ */
 
 use craft\helpers\Html;
 use nystudio107\seomatic\debug\assets\DebugAsset;
+use nystudio107\seomatic\debug\panels\SeomaticPanel;
+use yii\web\View;
 
 /* @var $value array */
 /* @var $meta array */

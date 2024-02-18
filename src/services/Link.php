@@ -47,7 +47,7 @@ class Link extends MetaService
      */
     public function get(string $key, string $handle = self::GENERAL_HANDLE)
     {
-        /** @var  $metaItem MetaLink */
+        /** @var MetaLink $metaItem */
         $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaLinkContainer::CONTAINER_TYPE);
 
         return $metaItem;

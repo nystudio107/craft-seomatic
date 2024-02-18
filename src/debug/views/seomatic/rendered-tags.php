@@ -1,10 +1,15 @@
 <?php
+/**
+ * @var SeomaticPanel $panel
+ * @var View $this
+ * @var array $values
+ */
 
 use craft\helpers\Json;
+use nystudio107\seomatic\debug\panels\SeomaticPanel;
+use yii\web\View;
 
-/* @var $values array */
 $view = $values['view'];
-/* @var $view \yii\web\View */
 ?>
 <details open class="seomatic-rendered-tags-details">
     <summary>Rendered Tags</summary>

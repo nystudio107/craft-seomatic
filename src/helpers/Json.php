@@ -42,19 +42,19 @@ class Json extends \yii\helpers\Json
 
     /**
      * Decodes the given JSON string into a PHP data structure.
-     * @param string $json the JSON string to be decoded
+     * @param array|string|null $json the JSON string to be decoded
      * @param bool $asArray whether to return objects in terms of associative arrays.
      * @return mixed the PHP data
      * @throws InvalidArgumentException if there is any decoding error
      */
     public static function decode($json, $asArray = true)
     {
-        if (\is_array($json)) {
+        if (is_array($json)) {
             throw new InvalidArgumentException('Invalid JSON data.');
         } elseif ($json === null || $json === '') {
             return null;
         }
-        $decode = json_decode((string) $json, $asArray, 512, JSON_BIGINT_AS_STRING);
+        $decode = json_decode((string)$json, $asArray, 512, JSON_BIGINT_AS_STRING);
         static::handleJsonError(json_last_error());
 
         return $decode;

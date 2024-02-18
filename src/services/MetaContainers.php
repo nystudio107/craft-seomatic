@@ -17,6 +17,7 @@ use craft\base\Element;
 use craft\commerce\Plugin as CommercePlugin;
 use craft\console\Application as ConsoleApplication;
 use craft\elements\GlobalSet;
+use craft\web\UrlManager;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
@@ -44,6 +45,7 @@ use nystudio107\seomatic\seoelements\SeoProduct;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\JsonLd as JsonLdService;
 use nystudio107\seomatic\variables\SeomaticVariable;
+use Throwable;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
@@ -117,17 +119,17 @@ class MetaContainers extends Component
     // =========================================================================
 
     /**
-     * @var MetaGlobalVars
+     * @var MetaGlobalVars|null
      */
     public $metaGlobalVars;
 
     /**
-     * @var MetaSiteVars
+     * @var MetaSiteVars|null
      */
     public $metaSiteVars;
 
     /**
-     * @var MetaSitemapVars
+     * @var MetaSitemapVars|null
      */
     public $metaSitemapVars;
 
@@ -142,7 +144,7 @@ class MetaContainers extends Component
     public $cachedJsonLdNonce;
 
     /**
-     * @var MetaContainer
+     * @var MetaContainer[]|array|null
      */
     public $metaContainers = [];
 
@@ -191,7 +193,7 @@ class MetaContainers extends Component
     public function getContainersOfType(string $type): array
     {
         $containers = [];
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type) {
                 $containers[] = $metaContainer;
@@ -354,7 +356,7 @@ class MetaContainers extends Component
      * @param string|null $uri
      * @param int|null $siteId
      */
-    public function loadMetaContainers(string $uri = '', int $siteId = null)
+    public function loadMetaContainers(?string $uri = '', int $siteId = null)
     {
         Craft::beginProfile('MetaContainers::loadMetaContainers', __METHOD__);
         // Avoid recursion
@@ -455,7 +457,7 @@ class MetaContainers extends Component
     public function getMatchedMetaBundle()
     {
         $metaBundle = null;
-        /** @var Element $element */
+        /** @var Element|null $element */
         $element = Seomatic::$matchedElement;
         if ($element) {
             $sourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
@@ -572,7 +574,7 @@ class MetaContainers extends Component
      */
     public function addToMetaContainer(MetaItem $data, string $key)
     {
-        /** @var  $container MetaContainer */
+        /** @var MetaContainer $container */
         $container = $this->getMetaContainer($key);
 
         if ($container !== null) {
@@ -609,12 +611,12 @@ class MetaContainers extends Component
      *
      * @return null|MetaContainer
      */
-    public function createMetaContainer(string $type, string $key): MetaContainer
+    public function createMetaContainer(string $type, string $key): ?MetaContainer
     {
         /** @var MetaContainer $container */
         $container = null;
         if (empty($this->metaContainers[$key])) {
-            /** @var MetaContainer $className */
+            /** @var string|null $className */
             $className = null;
             // Create a new container based on the type passed in
             switch ($type) {
@@ -636,9 +638,7 @@ class MetaContainers extends Component
             }
             if ($className) {
                 $container = $className::create();
-                if ($container) {
-                    $this->metaContainers[$key] = $container;
-                }
+                $this->metaContainers[$key] = $container;
             }
         }
 
@@ -676,7 +676,7 @@ class MetaContainers extends Component
 
             return $html;
         }
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
                 $result = $metaContainer->render([
@@ -741,7 +741,7 @@ class MetaContainers extends Component
 
             return $renderedTemplates;
         }
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
@@ -768,10 +768,9 @@ class MetaContainers extends Component
     public function getMetaItemByKey(string $key, string $type = '')
     {
         $metaItem = null;
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if (($metaContainer::CONTAINER_TYPE === $type) || empty($type)) {
-                /** @var  $metaTag MetaItem */
                 foreach ($metaContainer->data as $metaItem) {
                     if ($key === $metaItem->key) {
                         return $metaItem;
@@ -900,12 +899,14 @@ class MetaContainers extends Component
         // the current `uri` matches what was in the request
         $request = Craft::$app->getRequest();
         if ($enabledOnly && !$request->getIsConsoleRequest()) {
+            /** @var UrlManager $urlManager */
+            $urlManager = Craft::$app->getUrlManager();
             try {
                 if ($siteId === Craft::$app->getSites()->currentSite->id
                     && $request->getPathInfo() === $uri) {
-                    $element = Craft::$app->getUrlManager()->getMatchedElement();
+                    $element = $urlManager->getMatchedElement();
                 }
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
         }

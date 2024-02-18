@@ -17,7 +17,6 @@ use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\base\Plugin;
 use craft\elements\Entry;
-use craft\elements\User;
 use craft\errors\SiteNotFoundException;
 use craft\events\DefineGqlTypeFieldsEvent;
 use craft\events\ElementEvent;
@@ -258,6 +257,7 @@ class Seomatic extends Plugin
     public function getSettings(): ?Model
     {
         // For all the emojis
+        /* @var Settings $settingsModel */
         $settingsModel = parent::getSettings();
         if ($settingsModel !== null && !self::$savingSettings) {
             $attributes = $settingsModel->attributes();
@@ -314,9 +314,12 @@ class Seomatic extends Plugin
             $gql->invalidateCaches();
         }
         // If the FastCGI Cache Bust plugin is installed, clear its caches too
+        /** @var ?FastcgiCacheBust $plugin */
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
         if ($plugin !== null) {
-            FastcgiCacheBust::$plugin->cache->clearAll();
+            // FastcgiCacheBust has an error in its PHPdoc
+            /** @phpstan-ignore-next-line */
+            $plugin->cache->clearAll();
         }
     }
 
@@ -339,7 +342,6 @@ class Seomatic extends Plugin
     {
         $subNavs = [];
         $navItem = parent::getCpNavItem();
-        /** @var User $currentUser */
         $request = Craft::$app->getRequest();
         $siteSuffix = '';
         if ($request->getSegment(1) === 'seomatic') {
@@ -526,7 +528,7 @@ class Seomatic extends Plugin
                     'Element::EVENT_AFTER_PROPAGATE',
                     __METHOD__
                 );
-                /** @var  $element Element */
+                /** @var Element $element */
                 $element = $event->sender;
                 self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
@@ -546,7 +548,7 @@ class Seomatic extends Plugin
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
                     __METHOD__
                 );
-                /** @var  $element Element */
+                /** @var Element $element */
                 $element = $event->element;
                 self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
