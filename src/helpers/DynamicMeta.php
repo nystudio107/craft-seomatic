@@ -694,7 +694,7 @@ class DynamicMeta
         }
         // Site Identity JSON-LD
         $identity = Seomatic::$plugin->jsonLd->get('identity');
-        /** @var Thing $identity */
+        /** @var Thing|null $identity */
         if ($identity !== null && property_exists($identity, 'sameAs')) {
             $identity->sameAs = $sameAsUrls;
         }

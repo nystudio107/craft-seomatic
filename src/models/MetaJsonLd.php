@@ -31,6 +31,12 @@ use function is_object;
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
+ *
+ * @property-read array $googleRecommendedSchema
+ * @property-read array $googleRequiredSchema
+ * @property-read array $schemaPropertyDescriptions
+ * @property-read array $schemaPropertyExpectedTypes
+ * @property-read array $schemaPropertyNames
  */
 class MetaJsonLd extends NonceItem
 {
@@ -248,8 +254,7 @@ class MetaJsonLd extends NonceItem
             'renderScriptTags' => true,
             'array' => false,
         ],
-    ): string
-    {
+    ): string {
         $html = '';
         $options = $this->tagAttributes();
         if ($this->prepForRender($options)) {
@@ -371,8 +376,7 @@ class MetaJsonLd extends NonceItem
     public function validateJsonSchema(
         $attribute,
         $params,
-    )
-    {
+    ) {
         if (!in_array($attribute, $this->getSchemaPropertyNames(), true)) {
             $this->addError($attribute, 'The attribute does not exist.');
         } else {
