@@ -11,7 +11,23 @@ module.exports = {
             severity: 'warning'
         },
         terminology: {
-            terms: `${__dirname}/.textlint.terms.json`
+            terms: `${__dirname}/.textlint.terms.json`,
+            exclude: [
+                "front[- ]end(\\w*)",
+                "back[- ]end(\\w*)",
+                "command ?line",
+                "PDF",
+                "PNG",
+                "JPG",
+                "GIF",
+                "HTML",
+                "CSS",
+                "ID",
+                "Markdown",
+                "URL",
+                "walk[- ]through",
+                "web[- ]?site(s)?"
+            ]
         },
         'write-good': {
             severity: 'warning'
