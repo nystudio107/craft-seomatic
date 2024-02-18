@@ -50,7 +50,9 @@ Plugin Settings let you control various SEOmatic settings across all sites/langu
 ## Advanced Plugin Settings
 
 * **Site Groups define logically separate sites** – If you are using Site Groups to logically separate 'sister sites’, turn this on.
+* **Always include `canonical` links regardless of environment** - SEO best practices are to have canonical links not appear on pages that are not intended to be indexed. SEOmatic does this for you by default, but you can override that behavior with this setting
 * **Lowercase Canonical URL** – Should the Canonical URL be automatically lower-cased?
+* **SEOmatic Debug Toolbar Panel** - Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar.
 * **Site URL Override** – SEOmatic uses the Craft siteUrl to generate the external URLs. If you are using it in a non-standard environment, such as a headless GraphQL or ElementAPI server, you can override what it uses for the `siteUrl`.
 * **Meta Cache Duration** – The duration of the SEOmatic meta cache. The default Unlimited setting is typically desired, as SEOmatic will break the cache as needed. If devMode is on, caches last 30 seconds.
 
