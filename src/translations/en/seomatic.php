@@ -512,4 +512,9 @@ return [
     'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property.' => 'Universal Analytics (which is used on this site via the SEOmatic plugin) is being [discontinued on July 1st, 2023]({url}). You should use Google gtag.js or Google Tag Manager instead and transition to a new GA4 property.',
     'Google Universal Analytics deprecated' => 'Google Universal Analytics deprecated',
     'X (Twitter) username for the website used in the card footer, without the preceding @.' => 'X (Twitter) username for the website used in the card footer, without the preceding @.',
+    'Whether the X (Twitter) image should be automatically transformed to an appropriate file format and aspect ratio for the chosen Twitter Card type.' => 'Whether the X (Twitter) image should be automatically transformed to an appropriate file format and aspect ratio for the chosen Twitter Card type.',
+    'Twitter' => 'Twitter',
+    'The Site URL Override is overriden as an array for a multi-site setup in the `config/seomatic.php` file.' => 'The Site URL Override is overriden as an array for a multi-site setup in the `config/seomatic.php` file.',
+    'SEOmatic Debug Toolbar Panel' => 'SEOmatic Debug Toolbar Panel',
+    'Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar.' => 'Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar.'
 ];
