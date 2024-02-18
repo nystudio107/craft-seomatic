@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.72 - UNRELEASED
+### Added
+* Added an **SEOmatic Debug Toolbar Panel** setting to Plugin Settings → Advanced that lets you control whether the SEOmatic Debug Toolbar panel is added to the Yii2 Debug Toolbar (if it is enabled)
+
 ### Changed
 * PHPstan code cleanup
 
