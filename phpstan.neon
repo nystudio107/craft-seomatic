@@ -5,3 +5,13 @@ parameters:
     level: 5
     paths:
         - src
+    excludePaths:
+    # Until the plugins are ported, exclude them
+        - src/integrations/campaign/behaviors/CampaignBehavior.php
+        - src/integrations/feedme/SeoSettings.php
+        - src/integrations/shopify/ProductType.php
+        - src/seoelements/SeoCampaign.php
+        - src/seoelements/SeoDigitalProduct.php
+        - src/seoelements/SeoEvent.php
+        - src/seoelements/SeoProduct.php
+        - src/seoelements/SeoShopifyProduct.php
