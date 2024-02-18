@@ -17,6 +17,10 @@ The debug panel displays debug information about the tags SEOmatic generates, as
 
 You can view the **Combined** composed SEO data, or the discrete SEO data coming from the layered **Entry SEO**, **Content SEO**, and **Global SEO** settings.
 
+The SEOmatic Debug Toolbar panel provides valuable debugging information if you have the Yii2 Debug Toolbar enabled, but it does add some overhead as well.
+
+If you're doing performance profiling, you can keep the Yii2 Debug Toolbar enabled, but disable the SEOmatic panel via **Plugin Settings → Advanced → SEOmatic Debug Toolbar Panel**.
+
 ### Tags
 
 Tags are objects that represent rendered HTML tags the in the webpage. Tags are grouped together into containers for organizational purposes.
