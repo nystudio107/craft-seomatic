@@ -6,7 +6,7 @@ A list of these content types includes status indicators identifying what’s be
 
 ![Screenshot of SEOmatic’s Content SEO settings landing, which lists each of the site’s content sections in a table by name, with additional columns for entry count, section type, title indicator, description indicator, image indicator, sitemap indicator, and robots setting](../resources/screenshots/seomatic-content.png)
 
-SEOmatic allows you to have different Content SEO settings on both a per-site and per-[Entry Type](https://craftcms.com/docs/5.x/entries.html#entry-types) basis.
+SEOmatic allows you to have different Content SEO settings on both a per-site and per-[Entry Type](https://craftcms.com/docs/5.x/reference/element-types/entries.html#entry-types) basis.
 
 Click the name of any listed item to edit its settings.
 
@@ -52,7 +52,7 @@ Section Sitemaps are automatically submitted to search engines whenever a new El
 
 Because XML sitemaps can be time-intensive to generate with a growing number of entries, SEOmatic creates your sitemaps via a queue job and caches the result. The cache is automatically broken whenever something in that sitemap is changed, and a new queue job is created to regenerate it.
 
-If `runQueueAutomatically` is set to `false` in [General Config Settings](https://craftcms.com/docs/5.x/config/general.html#runqueueautomatically) the Queue job to create the sitemap will not be run during the http request for the sitemap. You’ll need to run it manually via whatever means you use to run the Queue.
+If `runQueueAutomatically` is set to `false` in [General Config Settings](https://craftcms.com/docs/5.x/reference/config/general.html#runqueueautomatically) the Queue job to create the sitemap will not be run during the http request for the sitemap. You’ll need to run it manually via whatever means you use to run the Queue.
 
 Normally SEOmatic will regenerate the sitemap for a Section, Category Group, or Product any time you save an element. However, if you are importing a large number of elements, or prefer to regenerate the sitemap manually you can set disable the **Regenerate Sitemaps Automatically** option in SEOmatic’s Plugin Settings.
 

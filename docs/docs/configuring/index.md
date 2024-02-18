@@ -25,7 +25,7 @@ Make sure you’ve set up your [Multi-Environment Config Settings](./multi-envir
 While you may not normally need to take advantage of it, SEOmatic’s text input fields for the [Global SEO](./global-seo.md) and [Content SEO](./content-seo.md) settings have bonus perks:
 
 - They’re parsed as Twig object templates, so you can use single- and double-bracket Twig expressions in them along with plain old text.
-- They’re parsed for aliases and [environment variables](https://craftcms.com/docs/5.x/config/#control-panel-settings).
+- They’re parsed for aliases and [environment variables](https://craftcms.com/docs/5.x/configure.html#control-panel-settings).
 - They have access to SEOmatic’s global variables.
 
 #### Examples
