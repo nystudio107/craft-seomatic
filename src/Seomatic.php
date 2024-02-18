@@ -113,7 +113,7 @@ class Seomatic extends Plugin
     // =========================================================================
 
     /**
-     * @var null|Seomatic
+     * @var ?Seomatic
      */
     public static ?Seomatic $plugin;
 
@@ -228,7 +228,9 @@ class Seomatic extends Plugin
             $this->controllerNamespace = 'nystudio107\seomatic\console\controllers';
         }
         // Initialize properties
-        self::$settings = self::$plugin->getSettings();
+        /** @var Settings $settings */
+        $settings = self::$plugin->getSettings();
+        self::$settings = $settings;
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
         self::$cacheDuration = self::$devMode
@@ -256,7 +258,6 @@ class Seomatic extends Plugin
     public function getSettings(): ?Model
     {
         // For all the emojis
-        /* @var Settings $settingsModel */
         $settingsModel = parent::getSettings();
         if ($settingsModel !== null && !self::$savingSettings) {
             $attributes = $settingsModel->attributes();
