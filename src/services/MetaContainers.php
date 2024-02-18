@@ -412,7 +412,7 @@ class MetaContainers extends Component
                 ],
             ]);
             $this->containerDependency = $dependency;
-            $debugModule = Craft::$app->getModule('debug');
+            $debugModule = Seomatic::$settings->enableDebugToolbarPanel ? Craft::$app->getModule('debug') : null;
             if (Seomatic::$previewingMetaContainers || $debugModule) {
                 Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers($siteId);
                 $this->loadGlobalMetaContainers($siteId);

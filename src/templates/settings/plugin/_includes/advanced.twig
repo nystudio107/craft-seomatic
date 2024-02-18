@@ -34,6 +34,16 @@
             errors: settings.getErrors("lowercaseCanonicalUrl"),
         }) }}
 
+        {{ forms.lightswitchField({
+            label: "SEOmatic Debug Toolbar Panel"|t("seomatic")|md,
+            instructions: "Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar."|t("seomatic"),
+            id: "enableDebugToolbarPanel",
+            name: "enableDebugToolbarPanel",
+            on: settings.enableDebugToolbarPanel,
+            warning: configWarning("enableDebugToolbarPanel", "seomatic"),
+            errors: settings.getErrors("enableDebugToolbarPanel"),
+        }) }}
+
         {% if settings.siteUrlOverride is iterable %}
             <div class="field">
                 <div class="heading">
