@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 5.0.0-beta.5 - UNRELEASED
+### Changed
+* PHPstan code cleanup
+
+### Fixed
+* Fixed an issue that would cause assets in Neo blocks to not appear as images in the sitemap
+* Fixed an issue that would cause assets in SuperTable blocks to not appear as images in the sitemap
+* Fixed an issue with missing classes in `Sitemap` helper
+* Fixed an issue that would cause text in Neo blocks to not get extracted
+
 ## 5.0.0-beta.4 - 2024.02.13
 ### Fixed
 * Fixed a regression where the `robots` tag would be set to `none` for CP requests, which is incorrect, because GraphQL and meta container endpoints are CP requests  ([#1414](https://github.com/nystudio107/craft-seomatic/issues/1414))
