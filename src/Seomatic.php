@@ -638,7 +638,7 @@ class Seomatic extends Plugin
             BaseApplication::EVENT_BEFORE_REQUEST,
             static function() {
                 /** @var Module|null $debugModule */
-                $debugModule = Craft::$app->getModule('debug');
+                $debugModule = Seomatic::$settings->enableDebugToolbarPanel ? Craft::$app->getModule('debug') : null;
 
                 if ($debugModule) {
                     $debugModule->panels['seomatic'] = new SeomaticPanel([

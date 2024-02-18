@@ -157,6 +157,12 @@ return [
     // Determines whether the JSON-LD endpoint should be enabled for anonymous frontend access
     'enableJsonLdEndpoint' => false,
 
+    // Determines whether the SEO File Link endpoint should be enabled for anonymous frontend access
+    'enableSeoFileLinkEndpoint' => false,
+
+    // Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar
+    'enableDebugToolbarPanel' => true,
+
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [
     ],

@@ -235,6 +235,11 @@ class Settings extends VarsModel
     public $enableSeoFileLinkEndpoint = false;
 
     /**
+     * @var bool Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar
+     */
+    public $enableDebugToolbarPanel = true;
+
+    /**
      * @var SeoElementInterface[] The default SeoElement type classes
      */
     public $defaultSeoElementTypes = [
@@ -303,6 +308,7 @@ class Settings extends VarsModel
                     'enableSeoFileLinkEndpoint',
                     'alwaysIncludeCanonicalUrls',
                     'lowercaseCanonicalUrl',
+                    'enableDebugToolbarPanel',
                 ],
                 'boolean',
             ],

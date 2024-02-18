@@ -291,8 +291,7 @@ class MetaContainers extends Component
         int    $siteId = null,
         bool   $parseVariables = false,
         bool   $includeElement = true
-    )
-    {
+    ) {
         // If we've already previewed the containers for this request, there's no need to do it again
         if (Seomatic::$previewingMetaContainers && !Seomatic::$headlessRequest) {
             return;
@@ -413,7 +412,7 @@ class MetaContainers extends Component
                 ],
             ]);
             $this->containerDependency = $dependency;
-            $debugModule = Craft::$app->getModule('debug');
+            $debugModule = Seomatic::$settings->enableDebugToolbarPanel ? Craft::$app->getModule('debug') : null;
             if (Seomatic::$previewingMetaContainers || $debugModule) {
                 Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers($siteId);
                 $this->loadGlobalMetaContainers($siteId);
