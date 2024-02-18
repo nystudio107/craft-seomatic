@@ -4,6 +4,10 @@ This page offers a more in-depth look at what SEOmatic does for you automaticall
 
 Once you’re familiar with the [meta cascade](./overview.md#the-meta-cascade), it’s safe to jump straight to [configuration](./configuring/) if you’d rather skip this under-the-hood tour.
 
+None of the information presented here is necessary for you to understand in order to use SEOmatic effectively.
+
+This section is provided in case you want a gestalt view of how it all works.
+
 ## Minimal Configuration
 
 SEOmatic’s approach is to be as useful as possible with the least amount of required configuration.
@@ -15,7 +19,7 @@ Because of this, and because it’s deeply integrated with Craft CMS, several th
 - XML sitemaps and robots.txt are served, taking care to prevent indexing for non-production environments.
 - Front-end and control panel page titles include emoji to visually identify non-production environments.
 - HTTP response headers are added to front-end and control panel URLs.
-- An SEOmatic section is included when Craft’s debug toolbar is enabled.
+- An SEOmatic panel is included when Craft’s [debug toolbar](./advanced.md#debug-toolbar) is enabled.
 - Page titles are prepended with 🚧 to indicate non-production environments.
 
 ## Leveraging the Content Model
@@ -30,11 +34,19 @@ This can be a subtle thing for a small site, and a huge deal as it grows and evo
 
 ### Routes → Bundles → Containers
 
-In order to make this possible, SEOmatic responds to a Craft request by examining its route and finding relevant content that’s organized in bundles.
+In order to make this possible, SEOmatic responds to a Craft request by examining its route and finding relevant SEO settings organized in bundles.
 
-You can think of bundles as blobs of SEO content that may be relevant to a given route. The information in these bundles is ultimately destined for containers.
+You can think of bundles as blobs of SEO settings that may be relevant to a given route.
 
-SEOmatic’s concept of a container is a blueprint that describes what must be squeezed out of a bundle into a response body like HTML, XML, or JSON.
+SEOmatic starts with the Global SEO settings as a base, and then layers on top any Content SEO settings the correspond to a more specific Craft CMS Section. If there are any SEO Settings fields in that Section, those are then layered on top of the Content SEO settings.
+
+This is called the [meta cascade](./overview.md#the-meta-cascade).
+
+From these combined SEO settings, SEOmatic then creates containers that have objects for all of the tags, links, scripts, and other SEO metadata that it will render on your page for you.
+
+These containers are injected in your Twig templates so that you can modify them as you see fit before the metadata they contain is finally rendered on the page.
+
+You can also modify the containers via PHP in a custom module or plugin as well.
 
 The [title container](https://github.com/nystudio107/craft-seomatic/blob/develop-v4/src/seomatic-config/globalmeta/TitleContainer.php), for example, describes the `<title>` HTML tag. It has simple settings for how the site name should be treated in addition to the page title.
 
@@ -78,9 +90,7 @@ You might set your own SEO description—used in several places—in Twig:
 You could do the exact same thing with PHP:
 
 ```php
-Seomatic::$plugin->getMetaContainers()
-  ->metaGlobalVars
-  ->seoDescription = "This is my description. There are many like it, but this one is mine.";
+Seomatic::$seomaticVariable->meta->seoDescription = "This is my description. There are many like it, but this one is mine.";
 ```
 
 ::: tip
