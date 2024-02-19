@@ -1,0 +1,41 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "newsSitemap", "metaSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "newsSitemap"),
+    'fieldLabel': "News Sitemap"|t("seomatic"),
+    'settingName': 'newsSitemap',
+    'labelFor': 'metaSitemapVars-newsSitemap',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro newsSitemapField(metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
+        <div class="instructions">
+            {{ "Whether this sitemap is a [news sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap), and should include `<news:news>` entries for items published within the last 2 days"|t("seomatic")|md }}
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+
+            {{ forms.lightswitchField({
+                id: "newsSitemap" ~ suffix,
+                name: "newsSitemap",
+                on: metaSitemapVars.newsSitemap,
+                warning: false,
+                errors: metaSitemapVars.getErrors("newsSitemap"),
+                disabled: disabled,
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.newsSitemapField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.newsSitemapField(metaSitemapVars) }}
+    {% endblock %}
+{% endembed %}

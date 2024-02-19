@@ -137,6 +137,9 @@ class Sitemap
         if ($multiSite) {
             $urlsetLine .= ' xmlns:xhtml="http://www.w3.org/1999/xhtml"';
         }
+        if ((bool)$metaBundle->metaSitemapVars->newsSitemap) {
+            $urlsetLine .= ' xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"';
+        }
         $urlsetLine .= '>';
         $lines[] = $urlsetLine;
         // Get all of the elements for this meta bundle type
@@ -302,6 +305,25 @@ class Sitemap
                                     }
                                 }
                             }
+                        }
+                    }
+                    // Handle news sitemaps https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap
+                    if ((bool)$metaBundle->metaSitemapVars->newsSitemap) {
+                        $now = new DateTime();
+                        $interval = $now->diff($dateUpdated);
+                        if ($interval->days <= 2) {
+                            $language = strtolower($element->getLanguage());
+                            if (!str_starts_with($language, 'zh')) {
+                                $language = substr($language, 0, 2);
+                            }
+                            $lines[] = '<news:news>';
+                            $lines[] = '<news:publication>';
+                            $lines[] = '<news:name>' . $metaBundle->metaSitemapVars->newsPublicationName . '</news:name>';
+                            $lines[] = '<news:language>' . $language . '</news:language>';
+                            $lines[] = '</news:publication>';
+                            $lines[] = '<news:publication_date>' . $dateUpdated->format(DateTime::W3C) . '</news:publication_date>';
+                            $lines[] = '<news:title>' . $element->title . '</news:title>';
+                            $lines[] = '</news:news>';
                         }
                     }
                     // Handle any Assets

@@ -19,6 +19,8 @@ return [
     '*' => [
         'sitemapUrls' => true,
         'sitemapAssets' => true,
+        'newsSitemap' => false,
+        'newsPublicationName' => '',
         'sitemapFiles' => true,
         'sitemapAltLinks' => true,
         'sitemapChangeFreq' => 'weekly',

@@ -23,19 +23,6 @@ use nystudio107\seomatic\base\InheritableSettingsModel;
  */
 class MetaSitemapVars extends InheritableSettingsModel
 {
-    // Static Methods
-    // =========================================================================
-
-    /**
-     * @param array $config
-     *
-     * @return null|MetaSitemapVars
-     */
-    public static function create(array $config = [])
-    {
-        return new MetaSitemapVars($config);
-    }
-
     // Public Properties
     // =========================================================================
 
@@ -48,6 +35,16 @@ class MetaSitemapVars extends InheritableSettingsModel
      * @var bool
      */
     public $sitemapAssets;
+
+    /**
+     * @var bool
+     */
+    public $newsSitemap = false;
+
+    /**
+     * @var string
+     */
+    public $newsPublicationName = '';
 
     /**
      * @var bool
@@ -89,6 +86,19 @@ class MetaSitemapVars extends InheritableSettingsModel
      */
     public $sitemapVideoFieldMap = [];
 
+    // Public Static Methods
+    // =========================================================================
+
+    /**
+     * @param array $config
+     *
+     * @return null|MetaSitemapVars
+     */
+    public static function create(array $config = [])
+    {
+        return new MetaSitemapVars($config);
+    }
+
     // Public Methods
     // =========================================================================
 
@@ -121,6 +131,7 @@ class MetaSitemapVars extends InheritableSettingsModel
             [
                 [
                     'sitemapChangeFreq',
+                    'newsPublicationName',
                 ],
                 'string',
             ],
@@ -148,6 +159,7 @@ class MetaSitemapVars extends InheritableSettingsModel
                     'sitemapAssets',
                     'sitemapAltLinks',
                     'sitemapFiles',
+                    'newsSitemap',
                 ],
                 'boolean',
             ],
