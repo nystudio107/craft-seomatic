@@ -36,75 +36,89 @@ class MetaSiteVars extends VarsModel
 
     const CONTAINER_TYPE = 'MetaSiteVarsContainer';
 
-    // Static Methods
+    // Public Properties
     // =========================================================================
+
     /**
      * @var string The name of the website
      */
     public $siteName = '';
 
-    // Public Properties
-    // =========================================================================
     /**
      * @var Entity|array
      */
     public $identity;
+
     /**
      * @var Entity|array
      */
     public $creator;
+
     /**
      * @var string The Twitter handle
      */
     public $twitterHandle = '';
+
     /**
      * @var string The Facebook profile ID
      */
     public $facebookProfileId = '';
+
     /**
      * @var string The Facebook app ID
      */
     public $facebookAppId = '';
+
     /**
      * @var string The Google Site Verification code
      */
     public $googleSiteVerification = '';
+
     /**
      * @var string The Bing Site Verification code
      */
     public $bingSiteVerification = '';
+
     /**
      * @var string The Pinterest Site Verification code
      */
     public $pinterestSiteVerification = '';
+
     /**
      * @var string The Facebook Site Verification code
      */
     public $facebookSiteVerification = '';
+
     /**
      * @var array Array of links for Same As... sites, indexed by the handle
      */
     public $sameAsLinks = [];
+
     /**
      * @var string Google Site Links search target
      */
     public $siteLinksSearchTarget = '';
+
     /**
      * @var string Google Site Links query input
      */
     public $siteLinksQueryInput = '';
+
     /**
      * @var string Default referrer tag setting
      */
     public $referrer = 'no-referrer-when-downgrade';
+
     /**
      * @var array Array of additional custom sitemap URLs
      */
     public $additionalSitemapUrls = [];
+
     /**
      * @var DateTime
      */
     public $additionalSitemapUrlsDateUpdated;
+
     /**
      * @var array Array of additional sitemaps
      */
