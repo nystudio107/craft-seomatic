@@ -59,6 +59,18 @@
         {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" %}
     {% endif %}
 
+    {# ############## News Sitemap ############## #}
+
+    {% if field is not defined or 'newsSitemap' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_newsSitemap.twig" %}
+    {% endif %}
+
+    {# ############## News Publication Name ############## #}
+
+    {% if field is not defined or 'newsPublicationName' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_newsPublicationName.twig" %}
+    {% endif %}
+
     {% namespace "metaSitemapVars" %}
         {% if (field is not defined or 'structureDepth' in field.sitemapEnabledFields) and sourceType == 'structure' %}
             {{ forms.selectField({
