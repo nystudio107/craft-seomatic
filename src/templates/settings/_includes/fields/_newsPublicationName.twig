@@ -1,0 +1,41 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "newsPublicationName", "metaSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "newsPublicationName"),
+    'fieldLabel': "News Publication Name"|t("seomatic"),
+    'settingName': 'newsPublicationName',
+    'labelFor': 'metaSitemapVars-newsPublicationName',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro newsPublicationNameField(metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
+        <div class="instructions">
+            {{ "The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses."|t("seomatic")|md }}
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+
+            {{ forms.textField({
+                id: "newsPublicationName" ~ suffix,
+                name: "newsPublicationName",
+                on: metaSitemapVars.newsPublicationName,
+                warning: false,
+                errors: metaSitemapVars.getErrors("newsPublicationName"),
+                disabled: disabled,
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.newsPublicationNameField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.newsPublicationNameField(metaSitemapVars) }}
+    {% endblock %}
+{% endembed %}

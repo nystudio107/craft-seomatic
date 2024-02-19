@@ -137,6 +137,9 @@ class Sitemap
         if ($multiSite) {
             $urlsetLine .= ' xmlns:xhtml="http://www.w3.org/1999/xhtml"';
         }
+        if ((bool)$metaBundle->metaSitemapVars->newsSitemap) {
+            $urlsetLine .= ' xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"';
+        }
         $urlsetLine .= '>';
         $lines[] = $urlsetLine;
         // Get all of the elements for this meta bundle type

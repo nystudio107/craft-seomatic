@@ -516,5 +516,11 @@ return [
     'Twitter' => 'Twitter',
     'The Site URL Override is overriden as an array for a multi-site setup in the `config/seomatic.php` file.' => 'The Site URL Override is overriden as an array for a multi-site setup in the `config/seomatic.php` file.',
     'SEOmatic Debug Toolbar Panel' => 'SEOmatic Debug Toolbar Panel',
-    'Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar.' => 'Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar.'
+    'Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar.' => 'Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar.',
+    'Whether this sitemap is a [news sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap), and should include news entries for items published within the last 2 days' => 'Whether this sitemap is a [news sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap), and should include news entries for items published within the last 2 days',
+    'Whether this sitemap is a [news sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap), and should include `<news:news>` entries for items published within the last 2 days' => 'Whether this sitemap is a [news sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap), and should include `<news:news>` entries for items published within the last 2 days',
+    'Whether this sitemap is a news sitemap, and should include news entries for items published within the last 2 days' => 'Whether this sitemap is a news sitemap, and should include news entries for items published within the last 2 days',
+    'News Publication Name' => 'News Publication Name',
+    'News Sitemap' => 'News Sitemap',
+    'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.' => 'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.'
 ];
