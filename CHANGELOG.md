@@ -7,6 +7,7 @@
 * Updated to schema.org [v26.0](https://schema.org/docs/releases.html), fixes ([#1420](https://github.com/nystudio107/craft-seomatic/issues/1420))
 
 ### Changed
+* Completely revamped the documentation to hopefully make it more accessible & useful (thanks to Matt Stein @ Working Concept)
 * PHPstan code cleanup
 
 ### Fixed
