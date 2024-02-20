@@ -44,6 +44,7 @@
     "craftcms/ecs": "dev-main",
     "craftcms/phpstan": "dev-main",
     "craftcms/rector": "dev-main",
+    "nystudio107/craft-minify": "^5.0.0-beta.1",
     "putyourlightson/craft-blitz": "^5.0.0-beta.1"
   },
   "scripts": {
