@@ -46,7 +46,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     public const META_BUNDLE_TYPE = 'section';
     public const ELEMENT_CLASSES = [
         Entry::class,
-        1, ];
+    ];
     public const REQUIRED_PLUGIN_HANDLE = null;
     public const CONFIG_FILE_PATH = 'entrymeta/Bundle';
 
@@ -243,7 +243,8 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    ) {
+    )
+    {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)
