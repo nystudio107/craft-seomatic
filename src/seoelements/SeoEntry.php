@@ -242,8 +242,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId
-    )
-    {
+    ) {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)

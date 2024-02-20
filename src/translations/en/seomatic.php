@@ -519,5 +519,5 @@ return [
     'The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments.' => 'The script that will render in the `<body>`. Note that this script will not render in `local` development or `staging` environments.',
     'Head - in the <head> tag' => 'Head - in the <head> tag',
     'Additional attributes to add to the `<script>` tag' => 'Additional attributes to add to the `<script>` tag',
-    'Body Begin - after the <body> tag ' => 'Body Begin - after the <body> tag '
+    'Body Begin - after the <body> tag ' => 'Body Begin - after the <body> tag ',
 ];

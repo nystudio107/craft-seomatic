@@ -242,8 +242,7 @@ class SeoCampaign implements SeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId
-    )
-    {
+    ) {
         return CampaignElement::find()
             ->campaignType($metaBundle->sourceHandle)
             ->id($elementId)

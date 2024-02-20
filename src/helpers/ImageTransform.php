@@ -106,8 +106,7 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         $url = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -185,8 +184,7 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         $width = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode
@@ -218,8 +216,7 @@ class ImageTransform
         $transformName = '',
         $siteId = null,
         $transformMode = null
-    ): string
-    {
+    ): string {
         $height = '';
         $transform = self::createSocialTransform($transformName);
         // Let them override the mode

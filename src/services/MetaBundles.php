@@ -348,8 +348,7 @@ class MetaBundles extends Component
         $sourceModel,
         int $sourceSiteId,
         $baseConfig = null
-    )
-    {
+    ) {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
         /** @var Section|CategoryGroup|ProductType $sourceModel */
