@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\helpers;
 
 use craft\base\Element;
-
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 
 /**
@@ -123,7 +122,7 @@ class Migration
 
     /**
      * @param null|Element $element
-     * @param string       $mapContext
+     * @param string $mapContext
      *
      * @return array
      */
@@ -143,9 +142,7 @@ class Migration
         foreach ($fieldHandles as $fieldHandle) {
             if (!empty($element->$fieldHandle)) {
                 $fieldValue = $element->$fieldHandle;
-                if (!empty($fieldValue)) {
-                    $config = self::seomaticMetaFieldMappings($migrationFieldsArrays, $fieldValue);
-                }
+                $config = self::seomaticMetaFieldMappings($migrationFieldsArrays, $fieldValue);
             }
         }
 
@@ -176,9 +173,11 @@ class Migration
                         $value = self::FIELD_VALUE_MAP[$mapFieldTo][$value];
                     }
                     // Map it to an array of values if needs be
+                    /* -- This never happens
                     if (\in_array($mapFieldTo, self::ARRAY_VALUE_MAP, true)) {
                         $value = [$value];
                     }
+                    */
                     $config[$migrationFieldKey][$mapFieldTo] = $value;
                 }
             }

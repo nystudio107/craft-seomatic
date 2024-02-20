@@ -3,6 +3,7 @@ import {h, watch} from 'vue'
 import './custom.css'
 
 import NYSLogo from './NYSLogo.vue';
+import UsedByLogos from './UsedByLogos.vue';
 
 // Could also come from .env
 const GA_ID = 'UA-69117511-1';
@@ -15,7 +16,9 @@ export default {
       }
     )
   },
-  enhanceApp: (ctx) => {
+  enhanceApp: ({ app, router }) => {
+    app.component('UsedByLogos', UsedByLogos);
+
     // Google analytics integration
     if (import.meta.env.PROD && GA_ID && typeof window !== 'undefined') {
       (function (i, s, o, g, r, a, m) {
@@ -33,7 +36,7 @@ export default {
       ga('create', GA_ID, 'auto')
       ga('set', 'anonymizeIp', true)
       // Send a page view any time the route changes
-      watch(ctx.router.route, (newValue, oldValue) => {
+      watch(router.route, (newValue, oldValue) => {
         ga('set', 'page', newValue.path)
         ga('send', 'pageview')
       })

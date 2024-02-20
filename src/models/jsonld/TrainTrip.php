@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * TrainTrip - A trip on a commercial train line.
  *
  * @author    nystudio107
@@ -72,31 +72,32 @@ class TrainTrip extends MetaJsonLd implements TrainTripInterface, TripInterface,
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'arrivalPlatform' => ['Text'],
-            'arrivalStation' => ['TrainStation'],
-            'arrivalTime' => ['DateTime', 'Time'],
-            'departurePlatform' => ['Text'],
-            'departureStation' => ['TrainStation'],
-            'departureTime' => ['Time', 'DateTime'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'itinerary' => ['ItemList', 'Place'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'offers' => ['Demand', 'Offer'],
-            'partOfTrip' => ['Trip'],
-            'potentialAction' => ['Action'],
-            'provider' => ['Organization', 'Person'],
-            'sameAs' => ['URL'],
-            'subTrip' => ['Trip'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'trainName' => ['Text'],
-            'trainNumber' => ['Text'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'arrivalPlatform' => ['array', 'Text', 'Text[]'],
+            'arrivalStation' => ['array', 'TrainStation', 'TrainStation[]'],
+            'arrivalTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
+            'departurePlatform' => ['array', 'Text', 'Text[]'],
+            'departureStation' => ['array', 'TrainStation', 'TrainStation[]'],
+            'departureTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'itinerary' => ['array', 'Place', 'Place[]', 'array', 'ItemList', 'ItemList[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'partOfTrip' => ['array', 'Trip', 'Trip[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subTrip' => ['array', 'Trip', 'Trip[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'trainName' => ['array', 'Text', 'Text[]'],
+            'trainNumber' => ['array', 'Text', 'Text[]'],
+            'tripOrigin' => ['array', 'Place', 'Place[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -107,7 +108,7 @@ class TrainTrip extends MetaJsonLd implements TrainTripInterface, TripInterface,
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'arrivalPlatform' => 'The platform where the train arrives.',
             'arrivalStation' => 'The station where the train trip ends.',
@@ -131,6 +132,7 @@ class TrainTrip extends MetaJsonLd implements TrainTripInterface, TripInterface,
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
             'trainName' => 'The name of the train (e.g. The Orient Express).',
             'trainNumber' => 'The unique identifier for the train.',
+            'tripOrigin' => 'The location of origin of the trip, prior to any destination(s).',
             'url' => 'URL of the item.',
         ];
     }

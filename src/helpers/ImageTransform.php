@@ -17,9 +17,13 @@ use craft\elements\db\ElementQuery;
 use craft\helpers\StringHelper;
 use craft\models\AssetTransform;
 use craft\volumes\Local;
+use DateTime;
+use Exception;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\base\InvalidConfigException;
+use function in_array;
+use function is_array;
 
 /**
  * @author    nystudio107
@@ -110,13 +114,13 @@ class ImageTransform
             $transformMode = $transform->mode ?? 'crop';
         }
         if ($transform !== null) {
-            $transform->mode = $transformMode ?? $transform->mode;
+            $transform->mode = $transformMode;
         }
         $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
             // Make sure the format is an allowed format, otherwise explicitly change it
             $mimeType = $asset->getMimeType();
-            if ($transform !== null && !\in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
+            if ($transform !== null && !in_array($mimeType, self::ALLOWED_SOCIAL_MIME_TYPES, false)) {
                 $transform->format = self::DEFAULT_SOCIAL_FORMAT;
             }
             // Generate a transformed image
@@ -144,7 +148,7 @@ class ImageTransform
             }
             try {
                 $url = $assets->getAssetUrl($asset, $transform, $generateNow);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $url = $asset->getUrl();
             }
             if ($url === null) {
@@ -152,10 +156,10 @@ class ImageTransform
             }
             // If we have a url, add an `mtime` param to cache bust
             if (!empty($url) && empty(parse_url($url, PHP_URL_QUERY))) {
-                $now = new \DateTime();
+                $now = new DateTime();
                 $newestChange = max($asset->dateModified, $asset->dateUpdated);
                 $url = UrlHelper::url($url, [
-                    'mtime' => $newestChange->getTimestamp() ?? $now->getTimestamp(),
+                    'mtime' => $newestChange->getTimestamp(),
                 ]);
             }
         }
@@ -188,11 +192,12 @@ class ImageTransform
             $transform->mode = $transformMode ?? $transform->mode;
         }
         $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
-        if (($asset !== null) && ($asset instanceof Asset)) {
-            $width = (string)$asset->getWidth($transform);
+        if ($asset instanceof Asset) {
+            $width = $asset->getWidth($transform);
             if ($width === null) {
                 $width = '';
             }
+            $width = (string)$width;
         }
 
         return $width;
@@ -219,11 +224,12 @@ class ImageTransform
             $transform->mode = $transformMode ?? $transform->mode;
         }
         $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
-        if (($asset !== null) && ($asset instanceof Asset)) {
-            $height = (string)$asset->getHeight($transform);
+        if ($asset instanceof Asset) {
+            $height = $asset->getHeight($transform);
             if ($height === null) {
                 $height = '';
             }
+            $height = (string)$height;
         }
 
         return $height;
@@ -242,7 +248,7 @@ class ImageTransform
         $elements = Craft::$app->getElements();
         $assets = [];
         if (!empty($assetIds)) {
-            if (\is_array($assetIds)) {
+            if (is_array($assetIds)) {
                 foreach ($assetIds as $assetId) {
                     if (!empty($assetId)) {
                         $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
@@ -250,9 +256,7 @@ class ImageTransform
                 }
             } else {
                 $assetId = $assetIds;
-                if (!empty($assetId)) {
-                    $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
-                }
+                $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
             }
         }
 
@@ -268,7 +272,7 @@ class ImageTransform
      * @param int|array|Asset|ElementQuery $asset the Asset or Asset ID or ElementQuery
      * @param int|null $siteId
      *
-     * @return Asset|null
+     * @return Asset|array|null
      */
     protected static function assetFromAssetOrIdOrQuery($asset, $siteId = null)
     {

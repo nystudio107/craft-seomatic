@@ -28,168 +28,127 @@ class MetaGlobalVars extends InheritableSettingsModel
     // =========================================================================
 
     /**
-     * @param array $config
-     *
-     * @return null|MetaGlobalVars
-     */
-    public static function create(array $config = [])
-    {
-        return new MetaGlobalVars($config);
-    }
-
-    // Public Properties
-    // =========================================================================
-
-    /**
      * @var string
      */
     public $language;
 
+    // Public Properties
+    // =========================================================================
     /**
      * @var string The schema.org type representing the mainEntityOfPage
      */
     public $mainEntityOfPage = 'WebPage';
-
     /**
      * @var string The seoTitle is used in the `<title>` tag, and as a default
      *      setting for the ogTitle & twitterTitle
      */
     public $seoTitle;
-
     /**
      * @var string where the site name should be positioned in the `<title>` tag
      */
     public $siteNamePosition;
-
     /**
      * @var string The seoDescription is used for the `<meta name="description">`
      *      tag, and as a default setting for the Description & twitterDescription
      */
     public $seoDescription;
-
     /**
      * @var string The $seoKeywords are used for the `<meta name="keywords">` tag
      */
     public $seoKeywords;
-
     /**
      * @var string Fully qualified URL to the SEO image
      */
     public $seoImage;
-
     /**
      * @var string Width of the SEO image
      */
     public $seoImageWidth;
-
     /**
      * @var string Height of the SEO image
      */
     public $seoImageHeight;
-
     /**
      * @var string SEO image description
      */
     public $seoImageDescription;
-
     /**
-     * @var string The search engine friendly URL that you want the search engines to treat as authoritative.
+     * @var string|object The search engine friendly URL that you want the search engines to treat as authoritative.
      */
     public $canonicalUrl;
-
     /**
      * @var string The robots meta tag lets you utilize a granular, page-specific approach to controlling how
      * an individual page should be indexed and served to users in search results.
      */
     public $robots;
-
     /**
      * @var string The type of OpenGraph object representing the page
      */
     public $ogType;
-
     /**
      * @var string The title for the OpenGraph object, which appears when sharing it on Facebook
      */
     public $ogTitle;
-
     /**
      * @var string Where the site name should be positioned in the `og:title` tag
      */
     public $ogSiteNamePosition;
-
     /**
      * @var string The description of the OpenGraph object, which appears when sharing it on Facebook
      */
     public $ogDescription;
-
     /**
      * @var string Fully qualified URL to the image representing the OpenGraph object, which appears when sharing it on Facebook
      */
     public $ogImage;
-
     /**
      * @var string The width of the ogImage
      */
     public $ogImageWidth;
-
     /**
      * @var string The height of the ogImage
      */
     public $ogImageHeight;
-
     /**
      * @var string The description of the ogImage
      */
     public $ogImageDescription;
-
     /**
      * @var string The type of Twitter card to use
      */
     public $twitterCard;
-
     /**
      * @var string Twitter username for the content creator / author, without the preceding @
      */
     public $twitterCreator;
-
     /**
      * @var string The title for the Twitter card, which appears when sharing it on Twitter
      */
     public $twitterTitle;
-
     /**
      * @var string Where the site name should be positioned in the `twitter:title` tag
      */
     public $twitterSiteNamePosition;
-
     /**
      * @var string The description of the Twitter card, which appears when sharing it on Twitter
      */
     public $twitterDescription;
-
     /**
      * @var string Fully qualified URL to the Twitter image, which appears when sharing it on Twitter
      */
     public $twitterImage;
-
     /**
      * @var string The width of the Twitter image
      */
     public $twitterImageWidth;
-
     /**
      * @var string The height of the Twitter image
      */
     public $twitterImageHeight;
-
     /**
      * @var string The description of the Twitter image
      */
     public $twitterImageDescription;
-
-    // Public Methods
-    // =========================================================================
 
     /**
      * @inheritdoc
@@ -199,6 +158,19 @@ class MetaGlobalVars extends InheritableSettingsModel
         // Unset any deprecated properties
         //unset($config['siteNamePosition']);
         parent::__construct($config);
+    }
+
+    // Public Methods
+    // =========================================================================
+
+    /**
+     * @param array $config
+     *
+     * @return null|MetaGlobalVars
+     */
+    public static function create(array $config = [])
+    {
+        return new MetaGlobalVars($config);
     }
 
     /**

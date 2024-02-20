@@ -28,9 +28,14 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\MetaContainers;
+use ReflectionClass;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 use yii\db\Schema;
+use function in_array;
+use function is_array;
+use function is_object;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -176,15 +181,15 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $config = [];
         // Handle incoming values potentially being JSON, an array, or an object
         if (!empty($value)) {
-            if (\is_string($value)) {
+            if (is_string($value)) {
                 // Decode any html entities
                 $value = html_entity_decode($value, ENT_NOQUOTES, 'UTF-8');
                 $config = Json::decodeIfJson($value);
             }
-            if (\is_array($value)) {
+            if (is_array($value)) {
                 $config = $value;
             }
-            if (\is_object($value) && $value instanceof MetaBundle) {
+            if (is_object($value) && $value instanceof MetaBundle) {
                 $config = $value->toArray();
             }
         } else {
@@ -199,15 +204,8 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $elementName = '';
             /** @var Element $element */
             if ($element !== null) {
-                try {
-                    $reflector = new \ReflectionClass($element);
-                } catch (\ReflectionException $e) {
-                    $reflector = null;
-                    Craft::error($e->getMessage(), __METHOD__);
-                }
-                if ($reflector) {
-                    $elementName = strtolower($reflector->getShortName());
-                }
+                $reflector = new ReflectionClass($element);
+                $elementName = strtolower($reflector->getShortName());
             }
             // Handle the pull fields
             if (!empty($config['metaGlobalVars']) && !empty($config['metaBundleSettings'])) {
@@ -225,7 +223,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             }
             // Handle the mainEntityOfPage
             $mainEntity = '';
-            if (\in_array('mainEntityOfPage', $this->generalEnabledFields, false) &&
+            if (in_array('mainEntityOfPage', $this->generalEnabledFields, false) &&
                 !empty($config['metaBundleSettings'])) {
                 $mainEntity = SchemaHelper::getSpecificEntityType($config['metaBundleSettings'], true);
             }
@@ -249,13 +247,13 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     {
         $value = parent::serializeValue($value, $element);
         if (!Craft::$app->getDb()->getSupportsMb4()) {
-            if (\is_string($value)) {
+            if (is_string($value)) {
                 // Encode any 4-byte UTF-8 characters.
                 $value = StringHelper::encodeMb4($value);
             }
-            if (\is_array($value)) {
+            if (is_array($value)) {
                 array_walk_recursive($value, function(&$arrayValue, $arrayKey) {
-                    if ($arrayValue !== null && \is_string($arrayValue)) {
+                    if ($arrayValue !== null && is_string($arrayValue)) {
                         $arrayValue = StringHelper::encodeMb4($arrayValue);
                     }
                 });
@@ -401,7 +399,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                     Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
                     $variables = [
                         'previewTypes' => [
-                            $this->elementDisplayPreviewType ?? '',
+                            $this->elementDisplayPreviewType,
                         ],
                         'previewElementId' => $element->id,
                     ];

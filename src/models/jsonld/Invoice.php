@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Invoice - A statement of the money due for goods or services; a bill.
  *
  * @author    nystudio107
@@ -71,34 +71,34 @@ class Invoice extends MetaJsonLd implements InvoiceInterface, IntangibleInterfac
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'accountId' => ['Text'],
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'billingPeriod' => ['Duration'],
-            'broker' => ['Person', 'Organization'],
-            'category' => ['URL', 'CategoryCode', 'Text', 'Thing', 'PhysicalActivityCategory'],
-            'confirmationNumber' => ['Text'],
-            'customer' => ['Organization', 'Person'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'minimumPaymentDue' => ['MonetaryAmount', 'PriceSpecification'],
-            'name' => ['Text'],
-            'paymentDue' => ['DateTime'],
-            'paymentDueDate' => ['Date', 'DateTime'],
-            'paymentMethod' => ['PaymentMethod'],
-            'paymentMethodId' => ['Text'],
-            'paymentStatus' => ['Text', 'PaymentStatusType'],
-            'potentialAction' => ['Action'],
-            'provider' => ['Organization', 'Person'],
-            'referencesOrder' => ['Order'],
-            'sameAs' => ['URL'],
-            'scheduledPaymentDate' => ['Date'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'totalPaymentDue' => ['MonetaryAmount', 'PriceSpecification'],
-            'url' => ['URL'],
+            'accountId' => ['array', 'Text', 'Text[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'billingPeriod' => ['array', 'Duration', 'Duration[]'],
+            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'category' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Thing', 'Thing[]'],
+            'confirmationNumber' => ['array', 'Text', 'Text[]'],
+            'customer' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'minimumPaymentDue' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'paymentDue' => ['array', 'DateTime', 'DateTime[]'],
+            'paymentDueDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'paymentMethod' => ['array', 'PaymentMethod', 'PaymentMethod[]'],
+            'paymentMethodId' => ['array', 'Text', 'Text[]'],
+            'paymentStatus' => ['array', 'Text', 'Text[]', 'array', 'PaymentStatusType', 'PaymentStatusType[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'referencesOrder' => ['array', 'Order', 'Order[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'scheduledPaymentDate' => ['array', 'Date', 'Date[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'totalPaymentDue' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -110,7 +110,7 @@ class Invoice extends MetaJsonLd implements InvoiceInterface, IntangibleInterfac
     {
         return [
             'accountId' => 'The identifier for the account the payment will be applied to.',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'billingPeriod' => 'The time interval used to compute the invoice.',
             'broker' => 'An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.',

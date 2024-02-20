@@ -18,6 +18,8 @@
 return [
     'sitemapUrls' => null,
     'sitemapAssets' => null,
+    'newsSitemap' => null,
+    'newsPublicationName' => '',
     'sitemapFiles' => null,
     'sitemapAltLinks' => null,
     'sitemapChangeFreq' => '',

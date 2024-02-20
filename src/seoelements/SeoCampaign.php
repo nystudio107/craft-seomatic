@@ -191,7 +191,7 @@ class SeoCampaign implements SeoElementInterface
                     );
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                    /** @var  $campaign CampaignElement */
+                    /** @var CampaignElement $campaign */
                     $campaign = $event->sender ?? null;
                     if ($campaign !== null && $campaign->uri !== null) {
                         Seomatic::$plugin->metaContainers->previewMetaContainers($campaign->uri, $campaign->siteId, true);

@@ -31,7 +31,7 @@ class FrontendTemplateContainer extends SeomaticContainer
     /**
      * The FrontendTemplates in this container
      *
-     * @var EditableTemplate[] $data
+     * @var EditableTemplate[]|array $data
      */
     public $data = [];
 
@@ -54,6 +54,7 @@ class FrontendTemplateContainer extends SeomaticContainer
         parent::normalizeContainerData();
 
         foreach ($this->data as $key => $config) {
+            /** @var array $config */
             $this->addData(EditableTemplate::create($config), $key);
         }
     }

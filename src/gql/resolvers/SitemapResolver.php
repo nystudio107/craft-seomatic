@@ -16,10 +16,9 @@ use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
-
 use nystudio107\seomatic\models\SitemapIndexTemplate;
-
 use nystudio107\seomatic\models\SitemapTemplate;
+use yii\web\NotFoundHttpException;
 
 /**
  * Class SitemapResolver
@@ -34,7 +33,12 @@ class SitemapResolver
     // =========================================================================
 
     /**
-     * Get all the sitemaps.
+     * @param $source
+     * @param array $arguments
+     * @param $context
+     * @param ResolveInfo $resolveInfo
+     * @return array|array[]|null[]
+     * @throws NotFoundHttpException
      */
     public static function getSitemaps($source, array $arguments, $context, ResolveInfo $resolveInfo)
     {
@@ -59,14 +63,7 @@ class SitemapResolver
                 self::getSitemapItemByFilename($filename),
             ];
         }
-
-        // Otherwise, fetch the index and list all.
-        // Get all the indexes as sitemap items
-        $sitemapIndexArguments = [
-            'groupId' => $site->groupId,
-            'siteId' => $siteId,
-        ];
-
+        $sitemapList = [];
         $sitemapIndexItems = [self::getSitemapIndexListEntry($siteId, $site->groupId)];
 
         // Scrape each index for individual entries
@@ -91,10 +88,12 @@ class SitemapResolver
     }
 
     /**
-     * Get all the sitemap index items by params.
-     *
-     * @return array
-     * @throws \yii\web\NotFoundHttpException
+     * @param $source
+     * @param $arguments
+     * @param $context
+     * @param ResolveInfo $resolveInfo
+     * @return array[]
+     * @throws NotFoundHttpException
      */
     public static function getSitemapIndexes($source, $arguments, $context, ResolveInfo $resolveInfo): array
     {
@@ -109,12 +108,12 @@ class SitemapResolver
     }
 
     /**
-         * Get all the sitemap index items by params.
-         *
-         * @param array $params
-         * @return array
-         * @throws \yii\web\NotFoundHttpException
-         */
+     * @param $source
+     * @param $arguments
+     * @param $context
+     * @param ResolveInfo $resolveInfo
+     * @return array
+     */
     public static function getSitemapStyles($source, $arguments, $context, ResolveInfo $resolveInfo): array
     {
         return [
@@ -125,30 +124,30 @@ class SitemapResolver
 
     /**
      * @param $siteId
+     * @param $groupId
      * @return array
-     * @throws \yii\web\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     protected static function getSitemapIndexListEntry($siteId, $groupId): array
     {
         $sitemapIndex = SitemapIndexTemplate::create();
-        $sitemapIndexItem = [
-            'filename' => $sitemapIndex->getFilename($groupId),
-            'contents' => $sitemapIndex->render([
-                'siteId' => $siteId,
-                'groupId' => $groupId,
-            ]),
-        ];
+        if ($sitemapIndex) {
+            return [
+                'filename' => $sitemapIndex->getFilename($groupId),
+                'contents' => $sitemapIndex->render([
+                    'siteId' => $siteId,
+                    'groupId' => $groupId,
+                ]),
+            ];
+        }
 
-        return $sitemapIndexItem;
+        return [];
     }
 
     /**
-     * Get a sitemap item by its filename
-     *
      * @param $filename
-     * @param $matches
      * @return array|null
-     * @throws \yii\web\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
     protected static function getSitemapItemByFilename($filename)
     {

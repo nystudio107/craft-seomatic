@@ -33,13 +33,13 @@ use yii\di\ServiceLocator;
 /**
  * Seomatic defines the `seomatic` global template variable.
  *
- * @property Helper helper
- * @property JsonLd jsonLd
- * @property Link link
- * @property Script script
- * @property Tag tag
- * @property Title title
- * @property VitePluginService vite
+ * @property Helper $helper
+ * @property JsonLd $jsonLd
+ * @property Link $link
+ * @property Script $script
+ * @property Tag $tag
+ * @property Title $title
+ * @property VitePluginService $vite
  *
  * @author    nystudio107
  * @package   Seomatic
@@ -192,6 +192,8 @@ class SeomaticVariable extends ServiceLocator
         }
         // Try to also check the `ENVIRONMENT` env var
         $envVar = getenv('ENVIRONMENT');
+        // This can change depending on the user settings
+        /** @phpstan-ignore-next-line */
         if (Seomatic::$settings->manuallySetEnvironment) {
             $envVar = $settingsEnv;
         }

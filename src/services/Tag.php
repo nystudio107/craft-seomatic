@@ -48,7 +48,7 @@ class Tag extends MetaService
      */
     public function get(string $key, string $handle = self::GENERAL_HANDLE)
     {
-        /** @var  $metaItem MetaTag */
+        /** @var MetaTag $metaItem */
         $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaTagContainer::CONTAINER_TYPE);
 
         return $metaItem;

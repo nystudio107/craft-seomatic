@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * FloorPlan - A FloorPlan is an explicit representation of a collection of similar
  * accommodations, allowing the provision of common information (room counts,
  * sizes, layout diagrams) and offers for rental or sale. In typical use, some
@@ -79,30 +79,30 @@ class FloorPlan extends MetaJsonLd implements FloorPlanInterface, IntangibleInte
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'amenityFeature' => ['LocationFeatureSpecification'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'floorSize' => ['QuantitativeValue'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'isPlanForApartment' => ['Accommodation'],
-            'layoutImage' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'numberOfAccommodationUnits' => ['QuantitativeValue'],
-            'numberOfAvailableAccommodationUnits' => ['QuantitativeValue'],
-            'numberOfBathroomsTotal' => ['Integer'],
-            'numberOfBedrooms' => ['Number', 'QuantitativeValue'],
-            'numberOfFullBathrooms' => ['Number'],
-            'numberOfPartialBathrooms' => ['Number'],
-            'numberOfRooms' => ['Number', 'QuantitativeValue'],
-            'petsAllowed' => ['Text', 'Boolean'],
-            'potentialAction' => ['Action'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'amenityFeature' => ['array', 'LocationFeatureSpecification', 'LocationFeatureSpecification[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'floorSize' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'isPlanForApartment' => ['array', 'Accommodation', 'Accommodation[]'],
+            'layoutImage' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'numberOfAccommodationUnits' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'numberOfAvailableAccommodationUnits' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'numberOfBathroomsTotal' => ['array', 'Integer', 'Integer[]'],
+            'numberOfBedrooms' => ['array', 'Number', 'Number[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'numberOfFullBathrooms' => ['array', 'Number', 'Number[]'],
+            'numberOfPartialBathrooms' => ['array', 'Number', 'Number[]'],
+            'numberOfRooms' => ['array', 'Number', 'Number[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'petsAllowed' => ['array', 'Boolean', 'Boolean[]', 'array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -113,12 +113,12 @@ class FloorPlan extends MetaJsonLd implements FloorPlanInterface, IntangibleInte
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'amenityFeature' => 'An amenity feature (e.g. a characteristic or service) of the Accommodation. This generic property does not make a statement about whether the feature is included in an offer for the main accommodation or available at extra costs.',
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
-            'floorSize' => 'The size of the accommodation, e.g. in square meter or squarefoot. Typical unit code(s): MTK for square meter, FTK for square foot, or YDK for square yard ',
+            'floorSize' => 'The size of the accommodation, e.g. in square meter or squarefoot. Typical unit code(s): MTK for square meter, FTK for square foot, or YDK for square yard.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
             'isPlanForApartment' => 'Indicates some accommodation that this floor plan describes.',

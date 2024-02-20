@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * TaxiReservation - A reservation for a taxi.  Note: This type is for information about actual
  * reservations, e.g. in confirmation emails or HTML pages with individual
  * confirmations of reservations. For offers of tickets, use [[Offer]].
@@ -74,34 +74,34 @@ class TaxiReservation extends MetaJsonLd implements TaxiReservationInterface, Re
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'bookingAgent' => ['Organization', 'Person'],
-            'bookingTime' => ['DateTime'],
-            'broker' => ['Person', 'Organization'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'modifiedTime' => ['DateTime'],
-            'name' => ['Text'],
-            'partySize' => ['QuantitativeValue', 'Integer'],
-            'pickupLocation' => ['Place'],
-            'pickupTime' => ['DateTime'],
-            'potentialAction' => ['Action'],
-            'priceCurrency' => ['Text'],
-            'programMembershipUsed' => ['ProgramMembership'],
-            'provider' => ['Organization', 'Person'],
-            'reservationFor' => ['Thing'],
-            'reservationId' => ['Text'],
-            'reservationStatus' => ['ReservationStatusType'],
-            'reservedTicket' => ['Ticket'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'totalPrice' => ['Number', 'PriceSpecification', 'Text'],
-            'underName' => ['Organization', 'Person'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'bookingAgent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'bookingTime' => ['array', 'DateTime', 'DateTime[]'],
+            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'modifiedTime' => ['array', 'DateTime', 'DateTime[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'partySize' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Integer', 'Integer[]'],
+            'pickupLocation' => ['array', 'Place', 'Place[]'],
+            'pickupTime' => ['array', 'DateTime', 'DateTime[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'priceCurrency' => ['array', 'Text', 'Text[]'],
+            'programMembershipUsed' => ['array', 'ProgramMembership', 'ProgramMembership[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'reservationFor' => ['array', 'Thing', 'Thing[]'],
+            'reservationId' => ['array', 'Text', 'Text[]'],
+            'reservationStatus' => ['array', 'ReservationStatusType', 'ReservationStatusType[]'],
+            'reservedTicket' => ['array', 'Ticket', 'Ticket[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'totalPrice' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'underName' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -112,7 +112,7 @@ class TaxiReservation extends MetaJsonLd implements TaxiReservationInterface, Re
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'bookingAgent' => '\'bookingAgent\' is an out-dated term indicating a \'broker\' that serves as a booking agent.',
             'bookingTime' => 'The date and time the reservation was booked.',

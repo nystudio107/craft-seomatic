@@ -15,7 +15,6 @@ use benf\neo\elements\Block as NeoBlock;
 use benf\neo\Field as NeoField;
 use besteadfast\preparsefield\fields\PreparseFieldType;
 use Craft;
-
 use craft\base\Element;
 use craft\base\Field as BaseField;
 use craft\base\Volume;
@@ -29,16 +28,13 @@ use craft\fields\Tags as TagsField;
 use craft\models\FieldLayout;
 use craft\redactor\Field as RedactorField;
 use nystudio107\seomatic\fields\Seomatic_Meta as Seomatic_MetaField;
-
 use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\MetaBundles;
-
 use verbb\doxter\fields\Doxter as DoxterField;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
-
 use verbb\supertable\fields\SuperTableField;
-
+use verbb\supertable\models\SuperTableBlockTypeModel;
 use yii\base\InvalidConfigException;
 
 /**
@@ -115,16 +111,16 @@ class Field
      * Return all of the fields from the $layout that are of the type
      * $fieldClassKey
      *
-     * @param string      $fieldClassKey
+     * @param string $fieldClassKey
      * @param FieldLayout $layout
-     * @param bool        $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
     public static function fieldsOfTypeFromLayout(
-        string $fieldClassKey,
+        string      $fieldClassKey,
         FieldLayout $layout,
-        bool $keysOnly = true
+        bool        $keysOnly = true
     ): array {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
@@ -135,7 +131,7 @@ class Field
             }
             $fieldClasses = self::FIELD_CLASSES[$fieldClassKey];
             $fields = $layout->getFields();
-            /** @var  $field BaseField */
+            /** @var BaseField $field */
             foreach ($fields as $field) {
                 /** @var array $fieldClasses */
                 foreach ($fieldClasses as $fieldClass) {
@@ -159,15 +155,15 @@ class Field
      * Return all of the fields in the $element of the type $fieldClassKey
      *
      * @param Element $element
-     * @param string  $fieldClassKey
-     * @param bool    $keysOnly
+     * @param string $fieldClassKey
+     * @param bool $keysOnly
      *
      * @return array
      */
     public static function fieldsOfTypeFromElement(
         Element $element,
-        string $fieldClassKey,
-        bool $keysOnly = true
+        string  $fieldClassKey,
+        bool    $keysOnly = true
     ): array {
         $foundFields = [];
         $layout = $element->getFieldLayout();
@@ -181,8 +177,8 @@ class Field
     /**
      * Return all of the fields from Users layout of the type $fieldClassKey
      *
-     * @param string  $fieldClassKey
-     * @param bool    $keysOnly
+     * @param string $fieldClassKey
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -198,7 +194,7 @@ class Field
      * $fieldClassKey
      *
      * @param string $fieldClassKey
-     * @param bool   $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -230,7 +226,7 @@ class Field
      * $fieldClassKey
      *
      * @param string $fieldClassKey
-     * @param bool   $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -269,7 +265,7 @@ class Field
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param string $fieldClassKey
-     * @param bool   $keysOnly
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -277,7 +273,7 @@ class Field
         string $sourceBundleType,
         string $sourceHandle,
         string $fieldClassKey,
-        bool $keysOnly = true
+        bool   $keysOnly = true
     ): array {
         $foundFields = [];
         $layouts = [];
@@ -304,8 +300,8 @@ class Field
      * Return all of the fields in the $matrixBlock of the type $fieldType class
      *
      * @param MatrixBlock $matrixBlock
-     * @param string      $fieldType
-     * @param bool        $keysOnly
+     * @param string $fieldType
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -325,7 +321,7 @@ class Field
                 return self::$matrixFieldsOfTypeCache[$memoKey];
             }
             $fields = $matrixBlockTypeModel->getFields();
-            /** @var  $field BaseField */
+            /** @var BaseField $field */
             foreach ($fields as $field) {
                 if ($field instanceof $fieldType) {
                     $foundFields[$field->handle] = $field->name;
@@ -347,8 +343,8 @@ class Field
      * Return all of the fields in the $neoBlock of the type $fieldType class
      *
      * @param NeoBlock $neoBlock
-     * @param string   $fieldType
-     * @param bool     $keysOnly
+     * @param string $fieldType
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -356,19 +352,15 @@ class Field
     {
         $foundFields = [];
 
-        try {
-            $neoBlockTypeModel = $neoBlock->getType();
-        } catch (InvalidConfigException $e) {
-            $neoBlockTypeModel = null;
-        }
-        if ($neoBlockTypeModel) {
+        $layout = $neoBlock->getFieldLayout();
+        if ($layout) {
             // Cache me if you can
             $memoKey = $fieldType . $neoBlock->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$neoFieldsOfTypeCache[$memoKey])) {
                 return self::$neoFieldsOfTypeCache[$memoKey];
             }
-            $fields = $neoBlockTypeModel->getFields();
-            /** @var  $field BaseField */
+            $fields = $layout->getFields();
+            /** @var BaseField $field */
             foreach ($fields as $field) {
                 if ($field instanceof $fieldType) {
                     $foundFields[$field->handle] = $field->name;
@@ -389,8 +381,8 @@ class Field
      * Return all of the fields in the $superTableBlock of the type $fieldType class
      *
      * @param SuperTableBlock $superTableBlock
-     * @param string          $fieldType
-     * @param bool            $keysOnly
+     * @param string $fieldType
+     * @param bool $keysOnly
      *
      * @return array
      */
@@ -399,6 +391,7 @@ class Field
         $foundFields = [];
 
         try {
+            /** @var SuperTableBlockTypeModel $superTableBlockTypeModel */
             $superTableBlockTypeModel = $superTableBlock->getType();
         } catch (InvalidConfigException $e) {
             $superTableBlockTypeModel = null;
@@ -409,8 +402,10 @@ class Field
             if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
                 return self::$superTableFieldsOfTypeCache[$memoKey];
             }
+            // The SuperTableBlockTypeModel class lacks @mixin FieldLayoutBehavior in its annotations
+            /** @phpstan-ignore-next-line */
             $fields = $superTableBlockTypeModel->getFields();
-            /** @var  $field BaseField */
+            /** @var BaseField $field */
             foreach ($fields as $field) {
                 if ($field instanceof $fieldType) {
                     $foundFields[$field->handle] = $field->name;

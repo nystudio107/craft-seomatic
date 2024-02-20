@@ -98,6 +98,18 @@
             }) }}
         {% endif %}
 
+        {# ############## News Sitemap ############## #}
+
+        {% if field is not defined or 'newsSitemap' in field.sitemapEnabledFields %}
+            {% include "seomatic/settings/_includes/fields/_newsSitemap.twig" %}
+        {% endif %}
+
+        {# ############## News Publication Name ############## #}
+
+        {% if field is not defined or 'newsPublicationName' in field.sitemapEnabledFields %}
+            {% include "seomatic/settings/_includes/fields/_newsPublicationName.twig" %}
+        {% endif %}
+
         {% if field is not defined or 'sitemapImageFieldMap' in field.sitemapEnabledFields %}
             {{ forms.editableTableField({
                 label: "Image Sitemap Fields"|t("seomatic"),

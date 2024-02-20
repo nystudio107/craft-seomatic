@@ -26,6 +26,7 @@ use nystudio107\seomatic\models\Entity;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\jsonld\ContactPoint;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
+use nystudio107\seomatic\models\jsonld\OpeningHoursSpecification;
 use nystudio107\seomatic\models\jsonld\Organization;
 use nystudio107\seomatic\models\jsonld\Thing;
 use nystudio107\seomatic\models\MetaBundle;
@@ -34,6 +35,7 @@ use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\Helper as SeomaticHelper;
 use RecursiveArrayIterator;
 use RecursiveIteratorIterator;
+use Throwable;
 use yii\base\Event;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
@@ -335,12 +337,12 @@ class DynamicMeta
         if (!empty(Seomatic::$settings->siteUrlOverride)) {
             try {
                 $siteUrl = UrlHelper::getSiteUrlOverrideSetting($siteId);
-            } catch (\Throwable $e) {
+            } catch (Throwable $e) {
                 // That's okay
             }
         }
         $siteUrl = $siteUrl ?: '/';
-        /** @var  $crumbs BreadcrumbList */
+        /** @var BreadcrumbList $crumbs */
         $crumbs = Seomatic::$plugin->jsonLd->create([
             'type' => 'BreadcrumbList',
             'name' => 'Breadcrumbs',
@@ -370,7 +372,7 @@ class DynamicMeta
                 ]);
                 $crumbs->itemListElement[] = $listItem;
             } else {
-                $item = UrlHelper::stripQueryString($siteUrl ?? '/');
+                $item = UrlHelper::stripQueryString($siteUrl);
                 $item = UrlHelper::absoluteUrlWithProtocol($item);
                 $crumbs->itemListElement[] = MetaJsonLd::create('ListItem', [
                     'position' => $position,
@@ -383,7 +385,7 @@ class DynamicMeta
         // Build up the segments, and look for elements that match
         $uri = '';
         $segments = Craft::$app->getRequest()->getSegments();
-        /** @var  $lastElement Element */
+        /** @var Element|null $lastElement */
         $lastElement = Seomatic::$matchedElement;
         if ($lastElement && $element) {
             if ($lastElement->uri !== '__home__' && $element->uri) {
@@ -396,7 +398,7 @@ class DynamicMeta
         // Parse through the segments looking for elements that match
         foreach ($segments as $segment) {
             $uri .= $segment;
-            /** @var Element $element */
+            /** @var Element|null $element */
             $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, true);
             if ($element && $element->uri) {
                 $position++;
@@ -541,9 +543,9 @@ class DynamicMeta
                 $url = $elements->getElementUriForSite($matchedElement->getId(), $site->id);
                 // See if they have disabled sitemaps or robots for this entry,
                 // and if so, don't include it in the hreflang
-                /** @var Element $element */
                 $element = null;
                 if ($url) {
+                    /** @var Element $element */
                     $element = $elements->getElementByUri($url, $site->id, false);
                 }
                 if ($element !== null) {
@@ -625,8 +627,6 @@ class DynamicMeta
                 $url = UrlHelper::stripQueryString($url);
             }
             $url = UrlHelper::absoluteUrlWithProtocol($url);
-
-            $url = $url ?? '';
             $url = self::sanitizeUrl($url);
             $language = $site->language;
             $ogLanguage = LocalizationHelper::normalizeOgLocaleLanguage($language);
@@ -703,14 +703,13 @@ class DynamicMeta
     /**
      * Add the OpeningHoursSpecific to the $jsonLd based on the Entity settings
      *
-     * @param MetaJsonLd $jsonLd
-     * @param Entity $entity
+     * @param MetaJsonLd|LocalBusiness $jsonLd
+     * @param Entity|null $entity
      */
-    public static function addOpeningHours(MetaJsonLd $jsonLd, Entity $entity)
+    public static function addOpeningHours(MetaJsonLd $jsonLd, $entity)
     {
         Craft::beginProfile('DynamicMeta::addOpeningHours', __METHOD__);
         if ($jsonLd instanceof LocalBusiness && $entity !== null) {
-            /** @var LocalBusiness $jsonLd */
             $openingHours = [];
             $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             $times = $entity->localBusinessOpeningHours;
@@ -741,6 +740,7 @@ class DynamicMeta
                     }
                 }
                 if ($openTime && $closeTime) {
+                    /** @var OpeningHoursSpecification $hours */
                     $hours = Seomatic::$plugin->jsonLd->create([
                         'type' => 'OpeningHoursSpecification',
                         'opens' => $openTime,
@@ -768,7 +768,7 @@ class DynamicMeta
         if ($jsonLd instanceof Organization && $entity !== null) {
             /** @var Organization $jsonLd */
             $contactPoints = [];
-            if ($entity->organizationContactPoints !== null && is_array($entity->organizationContactPoints)) {
+            if (is_array($entity->organizationContactPoints)) {
                 foreach ($entity->organizationContactPoints as $contacts) {
                     /** @var ContactPoint $contact */
                     $contact = Seomatic::$plugin->jsonLd->create([

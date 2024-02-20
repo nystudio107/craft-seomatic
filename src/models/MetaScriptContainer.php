@@ -67,7 +67,7 @@ class MetaScriptContainer extends NonceContainer
                     self::CONTAINER_TYPE . ' cache miss: ' . $uniqueKey,
                     __METHOD__
                 );
-                
+
                 return $this->renderInternal();
             },
             Seomatic::$cacheDuration,
@@ -160,6 +160,7 @@ class MetaScriptContainer extends NonceContainer
     {
         parent::normalizeContainerData();
 
+        /** @var array $config */
         foreach ($this->data as $key => $config) {
             $config['key'] = $key;
             $this->data[$key] = MetaScript::create($config);
@@ -178,7 +179,6 @@ class MetaScriptContainer extends NonceContainer
     {
         $tagData = [];
         if ($this->prepForInclusion()) {
-            /** @var $metaScriptModel MetaScript */
             foreach ($this->data as $metaScriptModel) {
                 if ($metaScriptModel->include) {
                     // The regular script JS
@@ -190,7 +190,7 @@ class MetaScriptContainer extends NonceContainer
                         $metaScriptModel->setScenario($scenario);
                         $tagData[] = [
                             'js' => $js,
-                            'position' => $metaScriptModel->position ?? $this->position,
+                            'position' => $metaScriptModel->position,
                             'nonce' => $metaScriptModel->nonce ?? null,
                             'tagAttrs' => $options,
                             'bodyJs' => false,
@@ -211,7 +211,7 @@ class MetaScriptContainer extends NonceContainer
                         $metaScriptModel->setScenario($scenario);
                         $tagData[] = [
                             'js' => $bodyJs,
-                            'position' => $metaScriptModel->bodyPosition ?? $this->position,
+                            'position' => $metaScriptModel->bodyPosition,
                             'nonce' => $metaScriptModel->nonce ?? null,
                             'tagAttrs' => $options,
                             'bodyJs' => true,

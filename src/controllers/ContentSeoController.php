@@ -17,6 +17,7 @@ use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
+use function count;
 
 /**
  * @author    nystudio107
@@ -42,7 +43,7 @@ class ContentSeoController extends Controller
     // =========================================================================
 
     /**
-     * @var    bool|array
+     * @inerhitdoc
      */
     protected $allowAnonymous = [
     ];
@@ -152,8 +153,8 @@ class ContentSeoController extends Controller
                     $dataItem['robots'] = $metaBundle->metaGlobalVars->robots;
                     // Calculate the setup stat
                     $stat = 0;
-                    $numGrades = \count(SettingsController::SETUP_GRADES);
-                    $numFields = \count(SettingsController::SEO_SETUP_FIELDS);
+                    $numGrades = count(SettingsController::SETUP_GRADES);
+                    $numFields = count(SettingsController::SEO_SETUP_FIELDS);
                     foreach (SettingsController::SEO_SETUP_FIELDS as $setupField => $setupLabel) {
                         $stat += (int)!empty($metaBundle->metaGlobalVars[$setupField]);
                         $value = $variables['contentSetupChecklist'][$setupField]['value'] ?? 0;

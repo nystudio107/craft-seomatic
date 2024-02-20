@@ -17,6 +17,7 @@ use craft\base\Element;
 use craft\commerce\Plugin as CommercePlugin;
 use craft\console\Application as ConsoleApplication;
 use craft\elements\GlobalSet;
+use craft\web\UrlManager;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
 use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
@@ -44,6 +45,7 @@ use nystudio107\seomatic\seoelements\SeoProduct;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\JsonLd as JsonLdService;
 use nystudio107\seomatic\variables\SeomaticVariable;
+use Throwable;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
@@ -117,17 +119,17 @@ class MetaContainers extends Component
     // =========================================================================
 
     /**
-     * @var MetaGlobalVars
+     * @var MetaGlobalVars|null
      */
     public $metaGlobalVars;
 
     /**
-     * @var MetaSiteVars
+     * @var MetaSiteVars|null
      */
     public $metaSiteVars;
 
     /**
-     * @var MetaSitemapVars
+     * @var MetaSitemapVars|null
      */
     public $metaSitemapVars;
 
@@ -142,7 +144,7 @@ class MetaContainers extends Component
     public $cachedJsonLdNonce;
 
     /**
-     * @var MetaContainer
+     * @var MetaContainer[]|array|null
      */
     public $metaContainers = [];
 
@@ -191,7 +193,7 @@ class MetaContainers extends Component
     public function getContainersOfType(string $type): array
     {
         $containers = [];
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type) {
                 $containers[] = $metaContainer;
@@ -354,7 +356,7 @@ class MetaContainers extends Component
      * @param string|null $uri
      * @param int|null $siteId
      */
-    public function loadMetaContainers(string $uri = '', int $siteId = null)
+    public function loadMetaContainers(?string $uri = '', ?int $siteId = null)
     {
         Craft::beginProfile('MetaContainers::loadMetaContainers', __METHOD__);
         // Avoid recursion
@@ -410,7 +412,7 @@ class MetaContainers extends Component
                 ],
             ]);
             $this->containerDependency = $dependency;
-            $debugModule = Craft::$app->getModule('debug');
+            $debugModule = Seomatic::$settings->enableDebugToolbarPanel ? Craft::$app->getModule('debug') : null;
             if (Seomatic::$previewingMetaContainers || $debugModule) {
                 Seomatic::$plugin->frontendTemplates->loadFrontendTemplateContainers($siteId);
                 $this->loadGlobalMetaContainers($siteId);
@@ -448,44 +450,6 @@ class MetaContainers extends Component
     }
 
     /**
-     * Set the element that matches the $uri
-     *
-     * @param string $uri
-     * @param int|null $siteId
-     */
-    protected function setMatchedElement(string $uri, int $siteId = null)
-    {
-        if ($siteId === null) {
-            $siteId = Craft::$app->getSites()->currentSite->id
-                ?? Craft::$app->getSites()->primarySite->id
-                ?? 1;
-        }
-        $element = null;
-        $uri = trim($uri, '/');
-        /** @var Element $element */
-        $enabledOnly = !Seomatic::$previewingMetaContainers;
-        // Try to use Craft's matched element if looking for an enabled element, the current `siteId` is being used and
-        // the current `uri` matches what was in the request
-        $request = Craft::$app->getRequest();
-        if ($enabledOnly && !$request->getIsConsoleRequest()) {
-            try {
-                if ($siteId === Craft::$app->getSites()->currentSite->id
-                    && $request->getPathInfo() === $uri) {
-                    $element = Craft::$app->getUrlManager()->getMatchedElement();
-                }
-            } catch (\Throwable $e) {
-                Craft::error($e->getMessage(), __METHOD__);
-            }
-        }
-        if (!$element) {
-            $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, $enabledOnly);
-        }
-        if ($element && ($element->uri !== null)) {
-            Seomatic::setMatchedElement($element);
-        }
-    }
-
-    /**
      * Return the MetaBundle that corresponds with the Seomatic::$matchedElement
      *
      * @return null|MetaBundle
@@ -493,7 +457,7 @@ class MetaContainers extends Component
     public function getMatchedMetaBundle()
     {
         $metaBundle = null;
-        /** @var Element $element */
+        /** @var Element|null $element */
         $element = Seomatic::$matchedElement;
         if ($element) {
             $sourceType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($element);
@@ -511,35 +475,6 @@ class MetaContainers extends Component
         $this->matchedMetaBundle = $metaBundle;
 
         return $metaBundle;
-    }
-
-    /**
-     * Return as key/value pairs any allowed parameters in the request
-     *
-     * @return string
-     */
-    protected function getAllowedUrlParams(): string
-    {
-        $result = '';
-        $allowedParams = Seomatic::$settings->allowedUrlParams;
-        if (Craft::$app->getPlugins()->getPlugin(SeoProduct::REQUIRED_PLUGIN_HANDLE)) {
-            $commerce = CommercePlugin::getInstance();
-            if ($commerce !== null) {
-                $allowedParams[] = 'variant';
-            }
-        }
-        // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
-        $request = Craft::$app->getRequest();
-        if (!$request->isConsoleRequest) {
-            foreach ($allowedParams as $allowedParam) {
-                $value = $request->getParam($allowedParam);
-                if ($value !== null) {
-                    $result .= "{$allowedParam}={$value}";
-                }
-            }
-        }
-
-        return $result;
     }
 
     /**
@@ -577,27 +512,6 @@ class MetaContainers extends Component
             }
         }
         Craft::endProfile('MetaContainers::loadGlobalMetaContainers', __METHOD__);
-    }
-
-    /**
-     * Load the meta containers specific to the matched meta bundle
-     */
-    protected function loadContentMetaContainers()
-    {
-        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
-        $metaBundle = $this->getMatchedMetaBundle();
-        if ($metaBundle) {
-            // Fire an 'metaBundleDebugData' event
-            if ($this->hasEventHandlers(self::EVENT_METABUNDLE_DEBUG_DATA)) {
-                $event = new MetaBundleDebugDataEvent([
-                    'metaBundleCategory' => MetaBundleDebugDataEvent::CONTENT_META_BUNDLE,
-                    'metaBundle' => $metaBundle,
-                ]);
-                $this->trigger(self::EVENT_METABUNDLE_DEBUG_DATA, $event);
-            }
-            $this->addMetaBundleToContainers($metaBundle);
-        }
-        Craft::endProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
     }
 
     /**
@@ -652,9 +566,6 @@ class MetaContainers extends Component
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Add the passed in MetaItem to the MetaContainer indexed as $key
      *
@@ -663,7 +574,7 @@ class MetaContainers extends Component
      */
     public function addToMetaContainer(MetaItem $data, string $key)
     {
-        /** @var  $container MetaContainer */
+        /** @var MetaContainer $container */
         $container = $this->getMetaContainer($key);
 
         if ($container !== null) {
@@ -693,73 +604,6 @@ class MetaContainers extends Component
     }
 
     /**
-     * Load any meta containers in the current element
-     */
-    protected function loadFieldMetaContainers()
-    {
-        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
-        $element = Seomatic::$matchedElement;
-        if ($element && $this->includeMatchedElement) {
-            /** @var Element $element */
-            $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
-            foreach ($fieldHandles as $fieldHandle) {
-                if (!empty($element->$fieldHandle)) {
-                    /** @var MetaBundle $metaBundle */
-                    $metaBundle = $element->$fieldHandle;
-                    Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
-
-                    // See which properties have to be overridden, because the parent bundle says so.
-                    foreach (self::COMPOSITE_SETTING_LOOKUP as $settingName => $rules) {
-                        if (empty($metaBundle->metaGlobalVars->{$settingName})) {
-                            $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
-
-                            foreach ($rules as $settingPath => $action) {
-                                list($container, $property) = explode('.', $settingPath);
-                                list($testValue, $sourceSetting) = explode('.', $action);
-
-                                $bundleProp = $parentBundle->{$container}->{$property} ?? null;
-                                if ($bundleProp == $testValue) {
-                                    $metaBundle->metaGlobalVars->{$settingName} = $metaBundle->metaGlobalVars->{$sourceSetting};
-                                }
-                            }
-                        }
-                    }
-
-                    // Handle re-creating the `mainEntityOfPage` so that the model injected into the
-                    // templates has the appropriate attributes
-                    $generalContainerKey = MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE;
-                    $generalContainer = $this->metaContainers[$generalContainerKey];
-                    if (($generalContainer !== null) && !empty($generalContainer->data['mainEntityOfPage'])) {
-                        /** @var MetaJsonLd $jsonLdModel */
-                        $jsonLdModel = $generalContainer->data['mainEntityOfPage'];
-                        $config = $jsonLdModel->getAttributes();
-                        $schemaType = $metaBundle->metaGlobalVars->mainEntityOfPage ?? $config['type'] ?? null;
-                        // If the schemaType is '' we should fall back on whatever the mainEntityOfPage already is
-                        if (empty($schemaType)) {
-                            $schemaType = null;
-                        }
-                        if ($schemaType !== null) {
-                            $config['key'] = 'mainEntityOfPage';
-                            $schemaType = MetaValueHelper::parseString($schemaType);
-                            $generalContainer->data['mainEntityOfPage'] = MetaJsonLd::create($schemaType, $config);
-                        }
-                    }
-                    // Fire an 'metaBundleDebugData' event
-                    if ($this->hasEventHandlers(self::EVENT_METABUNDLE_DEBUG_DATA)) {
-                        $event = new MetaBundleDebugDataEvent([
-                            'metaBundleCategory' => MetaBundleDebugDataEvent::FIELD_META_BUNDLE,
-                            'metaBundle' => $metaBundle,
-                        ]);
-                        $this->trigger(self::EVENT_METABUNDLE_DEBUG_DATA, $event);
-                    }
-                    $this->addMetaBundleToContainers($metaBundle);
-                }
-            }
-        }
-        Craft::endProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
-    }
-
-    /**
      * Create a MetaContainer of the given $type with the $key
      *
      * @param string $type
@@ -767,12 +611,12 @@ class MetaContainers extends Component
      *
      * @return null|MetaContainer
      */
-    public function createMetaContainer(string $type, string $key): MetaContainer
+    public function createMetaContainer(string $type, string $key): ?MetaContainer
     {
         /** @var MetaContainer $container */
         $container = null;
         if (empty($this->metaContainers[$key])) {
-            /** @var MetaContainer $className */
+            /** @var string|null $className */
             $className = null;
             // Create a new container based on the type passed in
             switch ($type) {
@@ -791,6 +635,8 @@ class MetaContainers extends Component
                 case MetaTitleContainer::CONTAINER_TYPE:
                     $className = MetaTitleContainer::class;
                     break;
+                default:
+                    break;
             }
             if ($className) {
                 $container = $className::create();
@@ -800,9 +646,12 @@ class MetaContainers extends Component
             }
         }
 
-        /** @var MetaContainer $className */
+        /** @var MetaContainer|null $container */
         return $container;
     }
+
+    // Protected Methods
+    // =========================================================================
 
     /**
      * Render the HTML of all MetaContainers of a specific $type
@@ -831,7 +680,7 @@ class MetaContainers extends Component
 
             return $html;
         }
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
                 $result = $metaContainer->render([
@@ -896,7 +745,7 @@ class MetaContainers extends Component
 
             return $renderedTemplates;
         }
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if ($metaContainer::CONTAINER_TYPE === $type && $metaContainer->include) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
@@ -912,9 +761,6 @@ class MetaContainers extends Component
         return $htmlArray;
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Return a MetaItem object by $key from container $type
      *
@@ -926,10 +772,9 @@ class MetaContainers extends Component
     public function getMetaItemByKey(string $key, string $type = '')
     {
         $metaItem = null;
-        /** @var  $metaContainer MetaContainer */
+        /** @var MetaContainer $metaContainer */
         foreach ($this->metaContainers as $metaContainer) {
             if (($metaContainer::CONTAINER_TYPE === $type) || empty($type)) {
-                /** @var  $metaTag MetaItem */
                 foreach ($metaContainer->data as $metaItem) {
                     if ($key === $metaItem->key) {
                         return $metaItem;
@@ -1032,6 +877,166 @@ class MetaContainers extends Component
         if (!Craft::$app instanceof ConsoleApplication) {
             $this->trigger(self::EVENT_INVALIDATE_CONTAINER_CACHES, $event);
         }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Set the element that matches the $uri
+     *
+     * @param string $uri
+     * @param int|null $siteId
+     */
+    protected function setMatchedElement(string $uri, int $siteId = null)
+    {
+        if ($siteId === null) {
+            $siteId = Craft::$app->getSites()->currentSite->id
+                ?? Craft::$app->getSites()->primarySite->id
+                ?? 1;
+        }
+        $element = null;
+        $uri = trim($uri, '/');
+        /** @var Element $element */
+        $enabledOnly = !Seomatic::$previewingMetaContainers;
+        // Try to use Craft's matched element if looking for an enabled element, the current `siteId` is being used and
+        // the current `uri` matches what was in the request
+        $request = Craft::$app->getRequest();
+        if ($enabledOnly && !$request->getIsConsoleRequest()) {
+            try {
+                if ($siteId === Craft::$app->getSites()->currentSite->id
+                    && $request->getPathInfo() === $uri) {
+                    /** @var UrlManager $urlManager */
+                    $urlManager = Craft::$app->getUrlManager();
+                    $element = $urlManager->getMatchedElement();
+                }
+            } catch (Throwable $e) {
+                Craft::error($e->getMessage(), __METHOD__);
+            }
+        }
+        if (!$element) {
+            $element = Craft::$app->getElements()->getElementByUri($uri, $siteId, $enabledOnly);
+        }
+        if ($element && ($element->uri !== null)) {
+            Seomatic::setMatchedElement($element);
+        }
+    }
+
+    /**
+     * Return as key/value pairs any allowed parameters in the request
+     *
+     * @return string
+     */
+    protected function getAllowedUrlParams(): string
+    {
+        $result = '';
+        $allowedParams = Seomatic::$settings->allowedUrlParams;
+        if (Craft::$app->getPlugins()->getPlugin(SeoProduct::REQUIRED_PLUGIN_HANDLE)) {
+            $commerce = CommercePlugin::getInstance();
+            if ($commerce !== null) {
+                $allowedParams[] = 'variant';
+            }
+        }
+        // Iterate through the allowed parameters, adding the key/value pair to the $result string as found
+        $request = Craft::$app->getRequest();
+        if (!$request->isConsoleRequest) {
+            foreach ($allowedParams as $allowedParam) {
+                $value = $request->getParam($allowedParam);
+                if ($value !== null) {
+                    $result .= "{$allowedParam}={$value}";
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Load the meta containers specific to the matched meta bundle
+     */
+    protected function loadContentMetaContainers()
+    {
+        Craft::beginProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
+        $metaBundle = $this->getMatchedMetaBundle();
+        if ($metaBundle) {
+            // Fire an 'metaBundleDebugData' event
+            if ($this->hasEventHandlers(self::EVENT_METABUNDLE_DEBUG_DATA)) {
+                $event = new MetaBundleDebugDataEvent([
+                    'metaBundleCategory' => MetaBundleDebugDataEvent::CONTENT_META_BUNDLE,
+                    'metaBundle' => $metaBundle,
+                ]);
+                $this->trigger(self::EVENT_METABUNDLE_DEBUG_DATA, $event);
+            }
+            $this->addMetaBundleToContainers($metaBundle);
+        }
+        Craft::endProfile('MetaContainers::loadContentMetaContainers', __METHOD__);
+    }
+
+    /**
+     * Load any meta containers in the current element
+     */
+    protected function loadFieldMetaContainers()
+    {
+        Craft::beginProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
+        $element = Seomatic::$matchedElement;
+        if ($element && $this->includeMatchedElement) {
+            /** @var Element $element */
+            $fieldHandles = FieldHelper::fieldsOfTypeFromElement($element, FieldHelper::SEO_SETTINGS_CLASS_KEY, true);
+            foreach ($fieldHandles as $fieldHandle) {
+                if (!empty($element->$fieldHandle)) {
+                    /** @var MetaBundle $metaBundle */
+                    $metaBundle = $element->$fieldHandle;
+                    Seomatic::$plugin->metaBundles->pruneFieldMetaBundleSettings($metaBundle, $fieldHandle);
+
+                    // See which properties have to be overridden, because the parent bundle says so.
+                    foreach (self::COMPOSITE_SETTING_LOOKUP as $settingName => $rules) {
+                        if (empty($metaBundle->metaGlobalVars->{$settingName})) {
+                            $parentBundle = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
+
+                            foreach ($rules as $settingPath => $action) {
+                                list($container, $property) = explode('.', $settingPath);
+                                list($testValue, $sourceSetting) = explode('.', $action);
+
+                                $bundleProp = $parentBundle->{$container}->{$property} ?? null;
+                                if ($bundleProp == $testValue) {
+                                    $metaBundle->metaGlobalVars->{$settingName} = $metaBundle->metaGlobalVars->{$sourceSetting};
+                                }
+                            }
+                        }
+                    }
+
+                    // Handle re-creating the `mainEntityOfPage` so that the model injected into the
+                    // templates has the appropriate attributes
+                    $generalContainerKey = MetaJsonLdContainer::CONTAINER_TYPE . JsonLdService::GENERAL_HANDLE;
+                    $generalContainer = $this->metaContainers[$generalContainerKey];
+                    if (($generalContainer !== null) && !empty($generalContainer->data['mainEntityOfPage'])) {
+                        /** @var MetaJsonLd $jsonLdModel */
+                        $jsonLdModel = $generalContainer->data['mainEntityOfPage'];
+                        $config = $jsonLdModel->getAttributes();
+                        $schemaType = $metaBundle->metaGlobalVars->mainEntityOfPage ?? $config['type'] ?? null;
+                        // If the schemaType is '' we should fall back on whatever the mainEntityOfPage already is
+                        if (empty($schemaType)) {
+                            $schemaType = null;
+                        }
+                        if ($schemaType !== null) {
+                            $config['key'] = 'mainEntityOfPage';
+                            $schemaType = MetaValueHelper::parseString($schemaType);
+                            $generalContainer->data['mainEntityOfPage'] = MetaJsonLd::create($schemaType, $config);
+                        }
+                    }
+                    // Fire an 'metaBundleDebugData' event
+                    if ($this->hasEventHandlers(self::EVENT_METABUNDLE_DEBUG_DATA)) {
+                        $event = new MetaBundleDebugDataEvent([
+                            'metaBundleCategory' => MetaBundleDebugDataEvent::FIELD_META_BUNDLE,
+                            'metaBundle' => $metaBundle,
+                        ]);
+                        $this->trigger(self::EVENT_METABUNDLE_DEBUG_DATA, $event);
+                    }
+                    $this->addMetaBundleToContainers($metaBundle);
+                }
+            }
+        }
+        Craft::endProfile('MetaContainers::loadFieldMetaContainers', __METHOD__);
     }
 
     /**

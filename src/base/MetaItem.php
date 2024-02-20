@@ -12,12 +12,17 @@
 namespace nystudio107\seomatic\base;
 
 use Craft;
+use Exception;
 use nystudio107\seomatic\behaviors\MetaItemAttributeParserBehavior;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\Dependency;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\Seomatic;
 use yii\helpers\Inflector;
+use function count;
+use function get_class;
+use function is_array;
+use function is_string;
 
 /**
  * @author    nystudio107
@@ -36,6 +41,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
 
     const ARRAY_PROPERTIES = [
     ];
+    const ITEM_TYPE = 'Generic';
 
     // Public Methods
     // =========================================================================
@@ -52,9 +58,9 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
             $envVars = null;
             try {
                 $envVars = ArrayHelper::getValue($this->environment, Seomatic::$environment);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
             }
-            if (\is_array($envVars)) {
+            if (is_array($envVars)) {
                 foreach ($envVars as $key => $value) {
                     $attributes[$key] = $value;
                 }
@@ -155,7 +161,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                 $extraInfo = '';
                 // Add a URL to the schema.org type if this is a MetaJsonLD object
                 if ($isMetaJsonLdModel) {
-                    /** @var  $this MetaJsonLd */
+                    /** @var MetaJsonLd $this */
                     $extraInfo = ' for http://schema.org/' . $this->type;
                 }
                 $errorMsg =
@@ -187,11 +193,10 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
                     // Extra debugging info for MetaJsonLd objects
                     if ($isMetaJsonLdModel) {
                         /** @var MetaJsonLd $className */
-                        $className = \get_class($this);
-                        if (!empty($className::$schemaPropertyDescriptions[$param])) {
+                        $className = get_class($this);
+                        if (!empty($className->schemaPropertyDescriptions[$param])) {
                             $errorMsg = Craft::t('seomatic', $errorLabel) . $param;
-                            /** @var $className MetaJsonLd */
-                            $errorMsg .= ' -> ' . $className::$schemaPropertyDescriptions[$param];
+                            $errorMsg .= ' -> ' . $className->schemaPropertyDescriptions[$param];
                             Craft::info($errorMsg, __METHOD__);
                         }
                     }
@@ -207,7 +212,7 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
      */
     public function tagAttributes(): array
     {
-        $attrs = $this->tagAttrs ?? [];
+        $attrs = $this->tagAttrs;
         if (!is_array($attrs)) {
             $attrs = [];
         }
@@ -243,16 +248,16 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
 
         // See if any of the potentially array properties actually are
         foreach (static::ARRAY_PROPERTIES as $arrayProperty) {
-            if (!empty($options[$arrayProperty]) && \is_array($options[$arrayProperty])) {
-                $optionsCount = \count($options[$arrayProperty]) > $optionsCount
-                    ? \count($options[$arrayProperty]) : $optionsCount;
+            if (!empty($options[$arrayProperty]) && is_array($options[$arrayProperty])) {
+                $optionsCount = count($options[$arrayProperty]) > $optionsCount
+                    ? count($options[$arrayProperty]) : $optionsCount;
             }
         }
         // Return an array of resulting options
         while ($optionsCount--) {
             $resultOptions = $options;
             foreach ($resultOptions as $key => $value) {
-                $resultOptions[$key] = (\is_array($value) && isset($value[$optionsCount]))
+                $resultOptions[$key] = (is_array($value) && isset($value[$optionsCount]))
                     ? $value[$optionsCount] : $value;
             }
             $result[] = $resultOptions;
@@ -272,10 +277,10 @@ abstract class MetaItem extends FluentModel implements MetaItemInterface
         $params
     ) {
         $validated = false;
-        if (\is_string($attribute)) {
+        if (is_string($attribute)) {
             $validated = true;
         }
-        if (\is_array($attribute)) {
+        if (is_array($attribute)) {
             $validated = true;
         }
         if (!$validated) {

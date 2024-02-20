@@ -40,14 +40,16 @@ class CampaignBehavior extends Behavior
     {
         $siteSettings = [];
         $sites = Craft::$app->getSites()->getAllSites();
+        /** @var CampaignTypeModel $owner */
+        $owner = $this->owner;
         foreach ($sites as $site) {
             $siteSettings[$site->id] = new Section_SiteSettings([
                 'id' => $site->id,
-                'sectionId' => $this->owner->id,
+                'sectionId' => $owner->id,
                 'siteId' => $site->id,
-                'hasUrls' => !empty($this->owner->uriFormat),
-                'uriFormat' => $this->owner->uriFormat,
-                'template' => $this->owner->htmlTemplate,
+                'hasUrls' => !empty($owner->uriFormat),
+                'uriFormat' => $owner->uriFormat,
+                'template' => $owner->htmlTemplate,
             ]);
         }
 

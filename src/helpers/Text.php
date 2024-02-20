@@ -12,29 +12,26 @@
 namespace nystudio107\seomatic\helpers;
 
 use benf\neo\elements\Block as NeoBlock;
-
 use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
-
 use craft\elements\db\MatrixBlockQuery;
 use craft\elements\db\TagQuery;
 use craft\elements\MatrixBlock;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
-
 use nystudio107\seomatic\helpers\Field as FieldHelper;
-
 use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
 use Stringy\Stringy;
-
 use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
-
 use verbb\supertable\elements\db\SuperTableBlockQuery;
-
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
+use verbb\supertable\models\SuperTableBlockTypeModel;
 use yii\base\InvalidConfigException;
+use function array_slice;
+use function function_exists;
+use function is_array;
 
 /**
  * @author    nystudio107
@@ -63,9 +60,9 @@ class Text
      * truncating occurs, the string is further truncated so that the substring
      * may be appended without exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -88,9 +85,9 @@ class Text
      * string is further truncated so that the substring may be appended without
      * exceeding the desired length.
      *
-     * @param  string $string    The string to truncate
-     * @param  int    $length    Desired length of the truncated string
-     * @param  string $substring The substring to append if it can fit
+     * @param string $string The string to truncate
+     * @param int $length Desired length of the truncated string
+     * @param string $substring The substring to append if it can fit
      *
      * @return string with the resulting $str after truncating
      */
@@ -120,21 +117,21 @@ class Text
             return '';
         }
         if ($field instanceof MatrixBlockQuery
-            || (\is_array($field) && $field[0] instanceof MatrixBlock)) {
+            || (is_array($field) && $field[0] instanceof MatrixBlock)) {
             $result = self::extractTextFromMatrix($field);
         } elseif ($field instanceof NeoBlockQuery
-            || (\is_array($field) && $field[0] instanceof NeoBlock)) {
+            || (is_array($field) && $field[0] instanceof NeoBlock)) {
             $result = self::extractTextFromNeo($field);
         } elseif ($field instanceof SuperTableBlockQuery
-            || (\is_array($field) && $field[0] instanceof SuperTableBlock)) {
+            || (is_array($field) && $field[0] instanceof SuperTableBlock)) {
             $result = self::extractTextFromSuperTable($field);
         } elseif ($field instanceof TagQuery
-            || (\is_array($field) && $field[0] instanceof Tag)) {
+            || (is_array($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
         } elseif ($field instanceof DoxterData) {
             $result = self::smartStripTags(Doxter::$plugin->getService()->parseMarkdown($field->getRaw()));
         } else {
-            if (\is_array($field)) {
+            if (is_array($field)) {
                 $result = self::smartStripTags((string)$field[0]);
             } else {
                 $result = self::smartStripTags((string)$field);
@@ -149,7 +146,7 @@ class Text
      * Extract concatenated text from all of the tags in the $tagElement and
      * return as a comma-delimited string
      *
-     * @param TagQuery|Tag[] $tags
+     * @param TagQuery|Tag[]|array $tags
      *
      * @return string
      */
@@ -175,8 +172,8 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param MatrixBlockQuery|MatrixBlock[] $blocks
-     * @param string                         $fieldHandle
+     * @param MatrixBlockQuery|MatrixBlock[]|array $blocks
+     * @param string $fieldHandle
      *
      * @return string
      */
@@ -221,8 +218,8 @@ class Text
      * Extract text from all of the blocks in a Neo field, concatenating it
      * together.
      *
-     * @param NeoBlockQuery|NeoBlock[] $blocks
-     * @param string                         $fieldHandle
+     * @param NeoBlockQuery|NeoBlock[]|array $blocks
+     * @param string $fieldHandle
      *
      * @return string
      */
@@ -237,15 +234,11 @@ class Text
             $blocks = $blocks->all();
         }
         foreach ($blocks as $block) {
-            try {
-                $neoBlockTypeModel = $block->getType();
-            } catch (InvalidConfigException $e) {
-                $neoBlockTypeModel = null;
-            }
+            $layout = $block->getFieldLayout();
             // Find any text fields inside of the matrix block
-            if ($neoBlockTypeModel) {
+            if ($layout) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fields = $neoBlockTypeModel->getFields();
+                $fields = $layout->getFields();
 
                 foreach ($fields as $field) {
                     /** @var array $fieldClasses */
@@ -267,8 +260,8 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param SuperTableBlockQuery|SuperTableBlock[] $blocks
-     * @param string                         $fieldHandle
+     * @param SuperTableBlockQuery|SuperTableBlock[]|array $blocks
+     * @param string $fieldHandle
      *
      * @return string
      */
@@ -284,6 +277,7 @@ class Text
         }
         foreach ($blocks as $block) {
             try {
+                /** @var SuperTableBlockTypeModel $superTableBlockTypeModel */
                 $superTableBlockTypeModel = $block->getType();
             } catch (InvalidConfigException $e) {
                 $superTableBlockTypeModel = null;
@@ -291,6 +285,8 @@ class Text
             // Find any text fields inside of the matrix block
             if ($superTableBlockTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
+                // The SuperTableBlockTypeModel class lacks @mixin FieldLayoutBehavior in its annotations
+                /** @phpstan-ignore-next-line */
                 $fields = $superTableBlockTypeModel->getFields();
 
                 foreach ($fields as $field) {
@@ -314,8 +310,8 @@ class Text
      * delimited string
      *
      * @param string $text
-     * @param int    $limit
-     * @param bool   $useStopWords
+     * @param int $limit
+     * @param bool $useStopWords
      *
      * @return string
      */
@@ -341,9 +337,7 @@ class Text
             return $text;
         }
 
-        $result = \is_array($keywords)
-            ? implode(', ', \array_slice(array_keys($keywords), 0, $limit))
-            : (string)$keywords;
+        $result = implode(', ', array_slice(array_keys($keywords), 0, $limit));
 
         return self::sanitizeUserInput($result);
     }
@@ -353,7 +347,7 @@ class Text
      * text
      *
      * @param string $text
-     * @param bool   $useStopWords
+     * @param bool $useStopWords
      *
      * @return string
      */
@@ -379,9 +373,7 @@ class Text
             return $text;
         }
 
-        $result = \is_array($sentences)
-            ? implode(' ', $sentences)
-            : (string)$sentences;
+        $result = implode(' ', $sentences);
 
         return self::sanitizeUserInput($result);
     }
@@ -410,7 +402,7 @@ class Text
         // Change single brackets to parenthesis
         $str = preg_replace('/{/', '(', $str);
         $str = preg_replace('/}/', ')', $str);
-        if (empty($str) || is_array($str)) {
+        if (empty($str)) {
             $str = '';
         }
 
@@ -447,7 +439,7 @@ class Text
             return '';
         }
         // Convert to UTF-8
-        if (\function_exists('iconv')) {
+        if (function_exists('iconv')) {
             $text = iconv(mb_detect_encoding($text, mb_detect_order(), true), 'UTF-8//IGNORE', $text);
         } else {
             ini_set('mbstring.substitute_character', 'none');

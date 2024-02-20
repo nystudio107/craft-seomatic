@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Ligament - A short band of tough, flexible, fibrous connective tissue that functions
  * to connect multiple bones, cartilages, and structurally support joints.
  *
@@ -73,34 +73,34 @@ class Ligament extends MetaJsonLd implements LigamentInterface, AnatomicalStruct
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'associatedPathophysiology' => ['Text'],
-            'bodyLocation' => ['Text'],
-            'code' => ['MedicalCode'],
-            'connectedTo' => ['AnatomicalStructure'],
-            'description' => ['Text'],
-            'diagram' => ['ImageObject'],
-            'disambiguatingDescription' => ['Text'],
-            'funding' => ['Grant'],
-            'guideline' => ['MedicalGuideline'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'legalStatus' => ['Text', 'DrugLegalStatus', 'MedicalEnumeration'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'medicineSystem' => ['MedicineSystem'],
-            'name' => ['Text'],
-            'partOfSystem' => ['AnatomicalSystem'],
-            'potentialAction' => ['Action'],
-            'recognizingAuthority' => ['Organization'],
-            'relatedCondition' => ['MedicalCondition'],
-            'relatedTherapy' => ['MedicalTherapy'],
-            'relevantSpecialty' => ['MedicalSpecialty'],
-            'sameAs' => ['URL'],
-            'study' => ['MedicalStudy'],
-            'subStructure' => ['AnatomicalStructure'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'associatedPathophysiology' => ['array', 'Text', 'Text[]'],
+            'bodyLocation' => ['array', 'Text', 'Text[]'],
+            'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
+            'connectedTo' => ['array', 'AnatomicalStructure', 'AnatomicalStructure[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'diagram' => ['array', 'ImageObject', 'ImageObject[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'funding' => ['array', 'Grant', 'Grant[]'],
+            'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'partOfSystem' => ['array', 'AnatomicalSystem', 'AnatomicalSystem[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
+            'relatedCondition' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
+            'relatedTherapy' => ['array', 'MedicalTherapy', 'MedicalTherapy[]'],
+            'relevantSpecialty' => ['array', 'MedicalSpecialty', 'MedicalSpecialty[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'study' => ['array', 'MedicalStudy', 'MedicalStudy[]'],
+            'subStructure' => ['array', 'AnatomicalStructure', 'AnatomicalStructure[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -111,7 +111,7 @@ class Ligament extends MetaJsonLd implements LigamentInterface, AnatomicalStruct
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'associatedPathophysiology' => 'If applicable, a description of the pathophysiology associated with the anatomical system, including potential abnormal changes in the mechanical, physical, and biochemical functions of the system.',
             'bodyLocation' => 'Location in the body of the anatomical structure.',

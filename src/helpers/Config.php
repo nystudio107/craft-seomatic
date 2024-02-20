@@ -12,9 +12,9 @@
 namespace nystudio107\seomatic\helpers;
 
 use Craft;
-
 use craft\helpers\StringHelper;
 use nystudio107\seomatic\Seomatic;
+use function is_array;
 
 /**
  * @author    nystudio107
@@ -36,7 +36,7 @@ class Config
      * @nystudio107/seomatic
      *
      * @param string $filePath
-     * @param null   $alias
+     * @param string|null $alias
      *
      * @return array
      */
@@ -59,7 +59,7 @@ class Config
             }
         }
 
-        if (!\is_array($config = @include $path)) {
+        if (!is_array($config = @include $path)) {
             return [];
         }
 

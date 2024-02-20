@@ -22,7 +22,6 @@ use craft\models\Section;
 use craft\models\Section_SiteSettings;
 use craft\models\Site;
 use DateTime;
-use Exception;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -32,6 +31,7 @@ use nystudio107\seomatic\helpers\Migration as MigrationHelper;
 use nystudio107\seomatic\helpers\SiteHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaScriptContainer;
+use nystudio107\seomatic\models\metatag\RobotsTag;
 use nystudio107\seomatic\models\MetaTagContainer;
 use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 use nystudio107\seomatic\Seomatic;
@@ -269,61 +269,6 @@ class MetaBundles extends Component
     }
 
     /**
-     * Preserve user settings from the meta bundle when updating it from the
-     * config
-     *
-     * @param MetaBundle $metaBundle The new meta bundle
-     * @param MetaBundle $baseConfig The existing meta bundle to preserve
-     *                               settings from
-     */
-    protected function mergeMetaBundleSettings(MetaBundle $metaBundle, MetaBundle $baseConfig)
-    {
-        // Preserve the metaGlobalVars
-        $attributes = $baseConfig->metaGlobalVars->getAttributes();
-        $metaBundle->metaGlobalVars->setAttributes($attributes);
-        // Preserve the metaSiteVars
-        if ($baseConfig->metaSiteVars !== null) {
-            $attributes = $baseConfig->metaSiteVars->getAttributes();
-            $metaBundle->metaSiteVars->setAttributes($attributes);
-            if ($baseConfig->metaSiteVars->identity !== null) {
-                $attributes = $baseConfig->metaSiteVars->identity->getAttributes();
-                $metaBundle->metaSiteVars->identity->setAttributes($attributes);
-            }
-            if ($baseConfig->metaSiteVars->creator !== null) {
-                $attributes = $baseConfig->metaSiteVars->creator->getAttributes();
-                $metaBundle->metaSiteVars->creator->setAttributes($attributes);
-            }
-        }
-        // Preserve the Frontend Templates container user settings, but update everything else
-        foreach ($baseConfig->frontendTemplatesContainer->data as $baseMetaContainerName => $baseMetaContainer) {
-            $attributes = $baseMetaContainer->getAttributes();
-            if (!empty($metaBundle->frontendTemplatesContainer->data[$baseMetaContainerName])) {
-                foreach (self::PRESERVE_FRONTEND_TEMPLATE_SETTINGS as $frontendTemplateSetting) {
-                    $metaBundle->frontendTemplatesContainer->data[$baseMetaContainerName]->$frontendTemplateSetting = $attributes[$frontendTemplateSetting] ?? '';
-                }
-            }
-        }
-        // Preserve the metaSitemapVars
-        $attributes = $baseConfig->metaSitemapVars->getAttributes();
-        $metaBundle->metaSitemapVars->setAttributes($attributes);
-        // Preserve the metaBundleSettings
-        $attributes = $baseConfig->metaBundleSettings->getAttributes();
-        $metaBundle->metaBundleSettings->setAttributes($attributes);
-        // Preserve the Script container user settings, but update everything else
-        foreach ($baseConfig->metaContainers as $baseMetaContainerName => $baseMetaContainer) {
-            if ($baseMetaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
-                foreach ($baseMetaContainer->data as $key => $value) {
-                    if (!empty($metaBundle->metaContainers[$baseMetaContainerName])) {
-                        foreach (self::PRESERVE_SCRIPT_SETTINGS as $scriptSetting) {
-                            $metaBundle->metaContainers[$baseMetaContainerName]->data[$key][$scriptSetting] = $value[$scriptSetting] ?? '';
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
      * @param MetaBundle $metaBundle
      * @param int $siteId
      */
@@ -356,6 +301,7 @@ class MetaBundles extends Component
             // @TODO remove this hack that doesn't allow environment-transformed settings to be saved in a meta bundle with a proper system to address it
             // The issue was that the containers were getting saved to the db with a hard-coded setting in them, because they'd
             // been set that way by the environment, whereas to be changeable via the GUI, it needs to be set to {seomatic.meta.robots}
+            /** @var RobotsTag|null $robotsTag */
             $robotsTag = $metaBundle->metaContainers[MetaTagContainer::CONTAINER_TYPE . TagService::GENERAL_HANDLE]->data['robots'] ?? null;
             if (!empty($robotsTag)) {
                 $robotsTag->content = $robotsTag->environment['live']['content'] ?? '{seomatic.meta.robots}';
@@ -424,14 +370,11 @@ class MetaBundles extends Component
             if ($siteSetting->hasUrls && SiteHelper::siteEnabledWithUrls($sourceSiteId)) {
                 // Get the most recent dateUpdated
                 $element = $seoElement::mostRecentElement($sourceModel, $sourceSiteId);
-                /** @var Element $element */
+                /** @var Element|null $element */
                 if ($element) {
                     $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
                 } else {
-                    try {
-                        $dateUpdated = new DateTime();
-                    } catch (Exception $e) {
-                    }
+                    $dateUpdated = new DateTime();
                 }
                 // Create a new meta bundle with propagated defaults
                 $metaBundleDefaults = ArrayHelper::merge(
@@ -547,7 +490,7 @@ class MetaBundles extends Component
      * @param int|null $sourceId
      * @param bool $isNew
      */
-    public function invalidateMetaBundleById(string $sourceBundleType, int $sourceId, bool $isNew = false)
+    public function invalidateMetaBundleById(string $sourceBundleType, ?int $sourceId, bool $isNew = false)
     {
         $metaBundleInvalidated = false;
         $sites = Craft::$app->getSites()->getAllSites();
@@ -610,7 +553,7 @@ class MetaBundles extends Component
      *
      * @return null|MetaBundle
      */
-    public function getMetaBundleBySourceId(string $sourceBundleType, int $sourceId, int $sourceSiteId, $typeId = null)
+    public function getMetaBundleBySourceId(string $sourceBundleType, int $sourceId, ?int $sourceSiteId, $typeId = null)
     {
         $metaBundle = null;
         $typeId = (int)$typeId;
@@ -699,7 +642,7 @@ class MetaBundles extends Component
     /**
      * Invalidate the caches and data structures associated with this MetaBundle
      *
-     * @param Element $element
+     * @param Element|null $element
      * @param bool $isNew
      */
     public function invalidateMetaBundleByElement($element, bool $isNew = false)
@@ -734,19 +677,12 @@ class MetaBundles extends Component
                 // Invalidate the sitemap cache
                 $metaBundle = $this->getMetaBundleBySourceId($sourceBundleType, $sourceId, $sourceSiteId);
                 if ($metaBundle) {
-                    if ($element) {
-                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                    } else {
-                        try {
-                            $dateUpdated = new DateTime();
-                        } catch (Exception $e) {
-                        }
-                    }
+                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
                     $metaBundle->sourceDateUpdated = $dateUpdated;
                     // Update the meta bundle data
                     $this->updateMetaBundle($metaBundle, $sourceSiteId);
-                    if ($metaBundle
-                        && $metaBundle->metaSitemapVars->sitemapUrls
+                    if (
+                        $metaBundle->metaSitemapVars->sitemapUrls
                         && !$element->resaving
                         && Seomatic::$settings->regenerateSitemapsAutomatically) {
                         $sitemapInvalidated = true;
@@ -869,7 +805,7 @@ class MetaBundles extends Component
      */
     public function pruneFieldMetaBundleSettings(MetaBundle $metaBundle, string $fieldHandle)
     {
-        /** @var SeoSettings $seoSettingsField */
+        /** @var SeoSettings|null $seoSettingsField */
         $seoSettingsField = Craft::$app->getFields()->getFieldByHandle($fieldHandle);
         if ($seoSettingsField) {
             $seoSettingsEnabledFields = array_flip(array_merge(
@@ -960,7 +896,7 @@ class MetaBundles extends Component
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
             if ($seoElement) {
                 $sourceModel = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
-                /** @var Section|CategoryGroup|ProductType $sourceModel */
+                /** @var Section|CategoryGroup|ProductType|null $sourceModel */
                 if ($sourceModel === null) {
                     $prune = true;
                 } else {
@@ -1009,9 +945,9 @@ class MetaBundles extends Component
      *
      * @param string $sourceBundleType
      * @param int $sourceId
-     * @param null $siteId
+     * @param int|null $siteId
      */
-    public function deleteMetaBundleBySourceId(string $sourceBundleType, int $sourceId, $siteId = null)
+    public function deleteMetaBundleBySourceId(string $sourceBundleType, int $sourceId, ?int $siteId = null)
     {
         $sites = [];
         if ($siteId === null) {
@@ -1019,7 +955,7 @@ class MetaBundles extends Component
         } else {
             $sites[] = Craft::$app->getSites()->getSiteById($siteId);
         }
-        /** @var  $site Site */
+        /** @var Site $site */
         foreach ($sites as $site) {
             // Look for a matching meta bundle in the db
             $metaBundleRecord = MetaBundleRecord::findOne([
@@ -1079,9 +1015,6 @@ class MetaBundles extends Component
         }
     }
 
-    // Protected Methods
-    // =========================================================================
-
     /**
      * Create the default global meta bundles
      */
@@ -1090,6 +1023,64 @@ class MetaBundles extends Component
         $sites = Craft::$app->getSites()->getAllSites();
         foreach ($sites as $site) {
             $this->createGlobalMetaBundleForSite($site->id);
+        }
+    }
+
+    // Protected Methods
+    // =========================================================================
+
+    /**
+     * Preserve user settings from the meta bundle when updating it from the
+     * config
+     *
+     * @param MetaBundle $metaBundle The new meta bundle
+     * @param MetaBundle $baseConfig The existing meta bundle to preserve
+     *                               settings from
+     */
+    protected function mergeMetaBundleSettings(MetaBundle $metaBundle, MetaBundle $baseConfig)
+    {
+        // Preserve the metaGlobalVars
+        $attributes = $baseConfig->metaGlobalVars->getAttributes();
+        $metaBundle->metaGlobalVars->setAttributes($attributes);
+        // Preserve the metaSiteVars
+        if ($baseConfig->metaSiteVars !== null) {
+            $attributes = $baseConfig->metaSiteVars->getAttributes();
+            $metaBundle->metaSiteVars->setAttributes($attributes);
+            if ($baseConfig->metaSiteVars->identity !== null) {
+                $attributes = $baseConfig->metaSiteVars->identity->getAttributes();
+                $metaBundle->metaSiteVars->identity->setAttributes($attributes);
+            }
+            if ($baseConfig->metaSiteVars->creator !== null) {
+                $attributes = $baseConfig->metaSiteVars->creator->getAttributes();
+                $metaBundle->metaSiteVars->creator->setAttributes($attributes);
+            }
+        }
+        // Preserve the Frontend Templates container user settings, but update everything else
+        foreach ($baseConfig->frontendTemplatesContainer->data as $baseMetaContainerName => $baseMetaContainer) {
+            $attributes = $baseMetaContainer->getAttributes();
+            if (!empty($metaBundle->frontendTemplatesContainer->data[$baseMetaContainerName])) {
+                foreach (self::PRESERVE_FRONTEND_TEMPLATE_SETTINGS as $frontendTemplateSetting) {
+                    $metaBundle->frontendTemplatesContainer->data[$baseMetaContainerName]->$frontendTemplateSetting = $attributes[$frontendTemplateSetting] ?? '';
+                }
+            }
+        }
+        // Preserve the metaSitemapVars
+        $attributes = $baseConfig->metaSitemapVars->getAttributes();
+        $metaBundle->metaSitemapVars->setAttributes($attributes);
+        // Preserve the metaBundleSettings
+        $attributes = $baseConfig->metaBundleSettings->getAttributes();
+        $metaBundle->metaBundleSettings->setAttributes($attributes);
+        // Preserve the Script container user settings, but update everything else
+        foreach ($baseConfig->metaContainers as $baseMetaContainerName => $baseMetaContainer) {
+            if ($baseMetaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
+                foreach ($baseMetaContainer->data as $key => $value) {
+                    if (!empty($metaBundle->metaContainers[$baseMetaContainerName])) {
+                        foreach (self::PRESERVE_SCRIPT_SETTINGS as $scriptSetting) {
+                            $metaBundle->metaContainers[$baseMetaContainerName]->data[$key][$scriptSetting] = $value[$scriptSetting] ?? '';
+                        }
+                    }
+                }
+            }
         }
     }
 }

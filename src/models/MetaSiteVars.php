@@ -15,9 +15,12 @@ use Craft;
 use craft\helpers\DateTimeHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
+use DateTime;
 use nystudio107\seomatic\base\VarsModel;
 use nystudio107\seomatic\helpers\Json as JsonHelper;
-use yii\web\ServerErrorHttpException;
+use Throwable;
+use function is_array;
+use function is_string;
 
 /**
  * Site variables object, containing values that determine side-wide settings
@@ -33,22 +36,6 @@ class MetaSiteVars extends VarsModel
 
     const CONTAINER_TYPE = 'MetaSiteVarsContainer';
 
-    // Static Methods
-    // =========================================================================
-
-    /**
-     * @param array $config
-     *
-     * @return null|MetaSiteVars
-     */
-    public static function create(array $config = [])
-    {
-        $model = new MetaSiteVars($config);
-        $model->normalizeData();
-
-        return $model;
-    }
-
     // Public Properties
     // =========================================================================
 
@@ -58,12 +45,12 @@ class MetaSiteVars extends VarsModel
     public $siteName = '';
 
     /**
-     * @var Entity
+     * @var Entity|array
      */
     public $identity;
 
     /**
-     * @var Entity
+     * @var Entity|array
      */
     public $creator;
 
@@ -108,7 +95,7 @@ class MetaSiteVars extends VarsModel
     public $sameAsLinks = [];
 
     /**
-     * @var array Google Site Links search target
+     * @var string Google Site Links search target
      */
     public $siteLinksSearchTarget = '';
 
@@ -128,7 +115,7 @@ class MetaSiteVars extends VarsModel
     public $additionalSitemapUrls = [];
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     public $additionalSitemapUrlsDateUpdated;
 
@@ -136,6 +123,19 @@ class MetaSiteVars extends VarsModel
      * @var array Array of additional sitemaps
      */
     public $additionalSitemaps = [];
+
+    /**
+     * @param array $config
+     *
+     * @return null|MetaSiteVars
+     */
+    public static function create(array $config = [])
+    {
+        $model = new MetaSiteVars($config);
+        $model->normalizeData();
+
+        return $model;
+    }
 
     // Public Methods
     // =========================================================================
@@ -151,14 +151,14 @@ class MetaSiteVars extends VarsModel
         if (empty($this->siteName)) {
             try {
                 $info = Craft::$app->getInfo();
-            } catch (ServerErrorHttpException $e) {
+            } catch (Throwable $e) {
                 $info = null;
             }
             $siteName = Craft::$app->config->general->siteName;
-            if (\is_array($siteName)) {
+            if (is_array($siteName)) {
                 $siteName = reset($siteName);
             }
-            $this->siteName = $siteName ?? $info->name;
+            $this->siteName = empty($siteName) ?: $info->getName();
         }
     }
 
@@ -223,7 +223,7 @@ class MetaSiteVars extends VarsModel
         // Decode any JSON data
         $properties = $this->getAttributes();
         foreach ($properties as $property => $value) {
-            if (!empty($value) && \is_string($value)) {
+            if (!empty($value) && is_string($value)) {
                 $this->$property = JsonHelper::decodeIfJson($value);
             }
         }
@@ -244,11 +244,11 @@ class MetaSiteVars extends VarsModel
             $this->facebookAppId = (string)$this->facebookAppId;
         }
         // Identity
-        if ($this->identity !== null && \is_array($this->identity)) {
+        if (is_array($this->identity)) {
             $this->identity = new Entity($this->identity);
         }
         // Creator
-        if ($this->creator !== null && \is_array($this->creator)) {
+        if (is_array($this->creator)) {
             $this->creator = new Entity($this->creator);
         }
     }

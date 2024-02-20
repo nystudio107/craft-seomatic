@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\models;
 
 use Craft;
 use nystudio107\seomatic\base\MetaContainer;
-
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 
@@ -35,7 +34,7 @@ class MetaTitleContainer extends MetaContainer
     /**
      * The data in this container
      *
-     * @var MetaTitle[] $data
+     * @var MetaTitle[]|array $data
      */
     public $data = [];
 
@@ -62,7 +61,6 @@ class MetaTitleContainer extends MetaContainer
                 );
                 $tagData = '';
                 if ($this->prepForInclusion()) {
-                    /** @var $metaTitleModel MetaTitle */
                     foreach ($this->data as $metaTitleModel) {
                         if ($metaTitleModel->include) {
                             $title = $metaTitleModel->title;
@@ -100,6 +98,7 @@ class MetaTitleContainer extends MetaContainer
     {
         parent::normalizeContainerData();
 
+        /** @var array $config */
         foreach ($this->data as $key => $config) {
             $config['key'] = $key;
             $this->data[$key] = MetaTitle::create($config);
