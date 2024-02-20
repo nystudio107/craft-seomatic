@@ -19,8 +19,6 @@ use craft\elements\Entry;
 use craft\events\DefineHtmlEvent;
 use craft\events\SectionEvent;
 use craft\gql\interfaces\elements\Entry as EntryInterface;
-use craft\models\EntryDraft;
-use craft\models\EntryVersion;
 use craft\models\Section;
 use craft\models\Site;
 use craft\services\Entries;

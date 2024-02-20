@@ -110,7 +110,8 @@ class MetaScriptContainer extends NonceContainer
      */
     public function render(array $params = [
         'renderScriptTags' => true,
-    ]): string {
+    ]): string
+    {
         $html = '';
         $linebreak = '';
         // If `devMode` is enabled, make the scripts human-readable

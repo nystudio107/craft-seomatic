@@ -522,5 +522,5 @@ return [
     'Whether this sitemap is a news sitemap, and should include news entries for items published within the last 2 days' => 'Whether this sitemap is a news sitemap, and should include news entries for items published within the last 2 days',
     'News Publication Name' => 'News Publication Name',
     'News Sitemap' => 'News Sitemap',
-    'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.' => 'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.'
+    'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.' => 'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.',
 ];

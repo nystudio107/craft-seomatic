@@ -26,6 +26,7 @@ use nystudio107\seomatic\models\Entity;
 use nystudio107\seomatic\models\jsonld\BreadcrumbList;
 use nystudio107\seomatic\models\jsonld\ContactPoint;
 use nystudio107\seomatic\models\jsonld\LocalBusiness;
+use nystudio107\seomatic\models\jsonld\OpeningHoursSpecification;
 use nystudio107\seomatic\models\jsonld\Organization;
 use nystudio107\seomatic\models\jsonld\Thing;
 use nystudio107\seomatic\models\MetaBundle;
@@ -705,9 +706,9 @@ class DynamicMeta
      * Add the OpeningHoursSpecific to the $jsonLd based on the Entity settings
      *
      * @param MetaJsonLd $jsonLd
-     * @param Entity $entity
+     * @param ?Entity $entity
      */
-    public static function addOpeningHours(MetaJsonLd $jsonLd, Entity $entity)
+    public static function addOpeningHours(MetaJsonLd $jsonLd, ?Entity $entity)
     {
         Craft::beginProfile('DynamicMeta::addOpeningHours', __METHOD__);
         if ($jsonLd instanceof LocalBusiness && $entity !== null) {
@@ -742,6 +743,7 @@ class DynamicMeta
                     }
                 }
                 if ($openTime && $closeTime) {
+                    /** @var OpeningHoursSpecification $hours */
                     $hours = Seomatic::$plugin->jsonLd->create([
                         'type' => 'OpeningHoursSpecification',
                         'opens' => $openTime,
