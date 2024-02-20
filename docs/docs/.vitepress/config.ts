@@ -29,19 +29,63 @@ export default defineConfig({
     lastUpdatedText: 'Last Updated',
     sidebar: [
       {
-        text: 'Topics',
+        text: 'Getting Started',
         items: [
-          {text: 'SEOmatic Plugin', link: '/'},
-          {text: 'SEOmatic Overview', link: '/overview.html'},
-          {text: 'Issues & Upgrading', link: '/issues.html'},
-          {text: 'SEO Resources', link: '/resources.html'},
-          {text: 'SEO Technologies', link: '/technologies.html'},
-          {text: 'Configuring SEOmatic', link: '/configuring.html'},
-          {text: 'SEOmatic Fields', link: '/fields.html'},
-          {text: 'Using SEOmatic', link: '/using.html'},
-          {text: 'Advanced Usage', link: '/advanced.html'},
+          {text: 'Features & Installation', link: '/'},
+          {text: 'Overview', link: '/overview'},
+          {text: 'Issues & Upgrading', link: '/issues'},
+          {text: 'What it Does', link: '/what-it-does'},
         ],
-      }
+      },
+      {
+        text: 'Using SEOmatic',
+        items: [
+          {
+            text: 'Configuration',
+            link: '/configuring/',
+            collapsed: true,
+            items: [
+              {text: 'Dashboard', link: '/configuring/dashboard'},
+              {text: 'Global SEO', link: '/configuring/global-seo'},
+              {text: 'Content SEO', link: '/configuring/content-seo'},
+              {text: 'Site Settings', link: '/configuring/site-settings'},
+              {text: 'Tracking Scripts', link: '/configuring/tracking-scripts'},
+              {text: 'Plugin Settings', link: '/configuring/plugin-settings'},
+              {text: 'Multi-Environment Config Settings', link: '/configuring/multi-environment'},
+              {text: 'Access Permissions', link: '/configuring/access-permissions'},
+            ]
+          },
+          {
+            text: 'Twig Templating',
+            link: '/using/',
+            collapsed: true,
+            items: [
+              {text: '???', link: '/using/empty-coalesce-operator'},
+              {text: 'seomatic.meta', link: '/using/meta-variables'},
+              {text: 'seomatic.site', link: '/using/site-variables'},
+              {text: 'seomatic.config', link: '/using/config-variables'},
+              {text: 'seomatic.helper', link: '/using/helper-functions'},
+              {text: 'seomatic.jsonLd', link: '/using/json-ld-meta'},
+              {text: 'seomatic.link', link: '/using/link-meta'},
+              {text: 'seomatic.script', link: '/using/script-meta'},
+              {text: 'seomatic.tag', link: '/using/tag-meta'},
+              {text: 'seomatic.title', link: '/using/title-meta'},
+              {text: 'Pagination', link: '/using/pagination'},
+              {text: 'Meta Containers', link: '/using/meta-containers'},
+            ]
+          },
+          {text: 'SEO Settings Field', link: '/fields'},
+          {text: 'Multi-Site', link: '/multi-site'},
+          {text: 'Google AMP', link: '/google-amp'},
+          {text: 'Advanced Usage', link: '/advanced'},
+        ],
+      },
+      {
+        text: 'SEO Reference',
+        items: [
+          {text: 'Resources', link: '/resources'},
+        ],
+      },
     ],
     nav: [
       {text: 'Home', link: 'https://nystudio107.com/plugins/seomatic'},
