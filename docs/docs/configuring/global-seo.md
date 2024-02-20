@@ -59,7 +59,7 @@ Edit the default **Humans.txt Template** to your heart’s content. Click **View
 
 ![Screenshot of SEOmatic’s Ads settings in the Global SEO section, with a “View ads.txt” button, a lightswitch for whether it should be rendered, and a code field for editing its template](../resources/screenshots/seomatic-global-ads.png)
 
-The [ads.txt](https://web.archive.org/web/20231230052053/https://iabtechlab.com/ads-txt/) project aims to increase transparency in the programmatic advertising ecosystem. “Ads.txt” stands for Authorized Digital Sellers and is a simple, flexible and secure method that publishers and distributors can use to publicly declare the companies they authorize to sell their digital inventory.
+The [ads.txt](https://iabtechlab.com/ads-txt/) project aims to increase transparency in the programmatic advertising ecosystem. “Ads.txt” stands for Authorized Digital Sellers and is a simple, flexible and secure method that publishers and distributors can use to publicly declare the companies they authorize to sell their digital inventory.
 
 Edit the **Ads.txt Template** as needed and click **View ads.txt** to view the rendered output.
 
