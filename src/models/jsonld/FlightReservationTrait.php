@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for FlightReservation.
  *
  * @author    nystudio107
@@ -22,31 +22,31 @@ namespace nystudio107\seomatic\models\jsonld;
 trait FlightReservationTrait
 {
     /**
-     * The type of security screening the passenger is subject to.
+     * The airline-specific indicator of boarding order / preference.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $securityScreening;
+    public $boardingGroup;
 
     /**
      * The passenger's sequence number as assigned by the airline.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $passengerSequenceNumber;
+
+    /**
+     * The type of security screening the passenger is subject to.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $securityScreening;
 
     /**
      * The priority status assigned to a passenger for security or boarding (e.g.
      * FastTrack or Priority).
      *
-     * @var string|Text|QualitativeValue
+     * @var string|array|Text|Text[]|array|QualitativeValue|QualitativeValue[]
      */
     public $passengerPriorityStatus;
-
-    /**
-     * The airline-specific indicator of boarding order / preference.
-     *
-     * @var string|Text
-     */
-    public $boardingGroup;
 }

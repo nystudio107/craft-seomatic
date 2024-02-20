@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MerchantReturnPolicySeasonalOverride.
  *
  * @author    nystudio107
@@ -22,9 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MerchantReturnPolicySeasonalOverrideTrait
 {
     /**
+     * The end date and time of the item (in [ISO 8601 date
+     * format](http://en.wikipedia.org/wiki/ISO_8601)).
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $endDate;
+
+    /**
      * Specifies an applicable return policy (from an enumeration).
      *
-     * @var MerchantReturnEnumeration
+     * @var array|MerchantReturnEnumeration|MerchantReturnEnumeration[]
      */
     public $returnPolicyCategory;
 
@@ -34,7 +42,7 @@ trait MerchantReturnPolicySeasonalOverrideTrait
      * [[returnPolicyCategory]] property is specified as
      * [[MerchantReturnFiniteReturnWindow]].
      *
-     * @var int|DateTime|Integer|Date
+     * @var int|array|Integer|Integer[]|array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $merchantReturnDays;
 
@@ -42,15 +50,7 @@ trait MerchantReturnPolicySeasonalOverrideTrait
      * The start date and time of the item (in [ISO 8601 date
      * format](http://en.wikipedia.org/wiki/ISO_8601)).
      *
-     * @var DateTime|Date
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $startDate;
-
-    /**
-     * The end date and time of the item (in [ISO 8601 date
-     * format](http://en.wikipedia.org/wiki/ISO_8601)).
-     *
-     * @var DateTime|Date
-     */
-    public $endDate;
 }

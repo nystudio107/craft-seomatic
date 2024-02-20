@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for TherapeuticProcedure.
  *
  * @author    nystudio107
@@ -22,17 +22,9 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TherapeuticProcedureTrait
 {
     /**
-     * A dosing schedule for the drug for a given population, either observed,
-     * recommended, or maximum dose based on the type used.
-     *
-     * @var DoseSchedule
-     */
-    public $doseSchedule;
-
-    /**
      * Specifying a drug or medicine used in a medication procedure.
      *
-     * @var Drug
+     * @var array|Drug|Drug[]
      */
     public $drug;
 
@@ -43,7 +35,15 @@ trait TherapeuticProcedureTrait
      * or requiring immediate medical attention), tag it as a
      * seriousAdverseOutcome instead.
      *
-     * @var MedicalEntity
+     * @var array|MedicalEntity|MedicalEntity[]
      */
     public $adverseOutcome;
+
+    /**
+     * A dosing schedule for the drug for a given population, either observed,
+     * recommended, or maximum dose based on the type used.
+     *
+     * @var array|DoseSchedule|DoseSchedule[]
+     */
+    public $doseSchedule;
 }

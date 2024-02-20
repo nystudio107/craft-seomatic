@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for TradeAction.
  *
  * @author    nystudio107
@@ -21,6 +21,19 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait TradeActionTrait
 {
+    /**
+     * The currency of the price, or a price component when attached to
+     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
+     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
+     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
+     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
+     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
+     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $priceCurrency;
+
     /**
      * The offer price of a product, or of a price component when attached to
      * PriceSpecification and its subtypes.  Usage guidelines:  * Use the
@@ -41,7 +54,7 @@ trait TradeActionTrait
      * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE'
      * (U+0039)) rather than superficially similar Unicode symbols.
      *
-     * @var string|float|Text|Number
+     * @var string|float|array|Text|Text[]|array|Number|Number[]
      */
     public $price;
 
@@ -49,20 +62,7 @@ trait TradeActionTrait
      * One or more detailed price specifications, indicating the unit price and
      * delivery or payment charges.
      *
-     * @var PriceSpecification
+     * @var array|PriceSpecification|PriceSpecification[]
      */
     public $priceSpecification;
-
-    /**
-     * The currency of the price, or a price component when attached to
-     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
-     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
-     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
-     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
-     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
-     * (LETS) and other currency types, e.g. "Ithaca HOUR".
-     *
-     * @var string|Text
-     */
-    public $priceCurrency;
 }

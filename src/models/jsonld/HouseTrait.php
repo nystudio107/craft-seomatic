@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for House.
  *
  * @author    nystudio107
@@ -27,7 +27,7 @@ trait HouseTrait
      * The type of room can be put in the unitText property of the
      * QuantitativeValue.
      *
-     * @var float|Number|QuantitativeValue
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $numberOfRooms;
 }

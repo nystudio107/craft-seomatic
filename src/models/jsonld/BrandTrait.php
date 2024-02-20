@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Brand.
  *
  * @author    nystudio107
@@ -24,21 +24,21 @@ trait BrandTrait
     /**
      * A slogan or motto associated with the item.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $slogan;
 
     /**
      * A review of the item.
      *
-     * @var Review
+     * @var array|Review|Review[]
      */
     public $review;
 
     /**
      * An associated logo.
      *
-     * @var ImageObject|URL
+     * @var array|URL|URL[]|array|ImageObject|ImageObject[]
      */
     public $logo;
 
@@ -46,7 +46,7 @@ trait BrandTrait
      * The overall rating, based on a collection of reviews or ratings, of the
      * item.
      *
-     * @var AggregateRating
+     * @var array|AggregateRating|AggregateRating[]
      */
     public $aggregateRating;
 }

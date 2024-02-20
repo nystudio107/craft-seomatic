@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Review.
  *
  * @author    nystudio107
@@ -22,11 +22,36 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ReviewTrait
 {
     /**
+     * The rating given in this review. Note that reviews can themselves be rated.
+     * The ```reviewRating``` applies to rating given by the review. The
+     * [[aggregateRating]] property applies to the review itself, as a creative
+     * work.
+     *
+     * @var array|Rating|Rating[]
+     */
+    public $reviewRating;
+
+    /**
      * The actual body of the review.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $reviewBody;
+
+    /**
+     * This Review or Rating is relevant to this part or facet of the
+     * itemReviewed.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $reviewAspect;
+
+    /**
+     * An associated [[Review]].
+     *
+     * @var array|Review|Review[]
+     */
+    public $associatedReview;
 
     /**
      * An associated [[MediaReview]], related by specific common content, topic or
@@ -36,16 +61,28 @@ trait ReviewTrait
      * [[ClaimReview]], while [[relatedClaimReview]] would be used on
      * [[MediaReview]].
      *
-     * @var Review
+     * @var array|Review|Review[]
      */
     public $associatedMediaReview;
 
     /**
-     * An associated [[Review]].
+     * The item that is being reviewed/rated.
      *
-     * @var Review
+     * @var array|Thing|Thing[]
      */
-    public $associatedReview;
+    public $itemReviewed;
+
+    /**
+     * An associated [[ClaimReview]], related by specific common content, topic or
+     * claim. The expectation is that this property would be most typically used
+     * in cases where a single activity is conducting both claim reviews and media
+     * reviews, in which case [[relatedMediaReview]] would commonly be used on a
+     * [[ClaimReview]], while [[relatedClaimReview]] would be used on
+     * [[MediaReview]].
+     *
+     * @var array|Review|Review[]
+     */
+    public $associatedClaimReview;
 
     /**
      * Provides positive considerations regarding something, for example product
@@ -56,34 +93,9 @@ trait ReviewTrait
      * unstructured text (repeated as necessary), or if ordered, as a list (in
      * which case the most positive is at the beginning of the list).
      *
-     * @var string|Text|WebContent|ListItem|ItemList
+     * @var string|array|ItemList|ItemList[]|array|WebContent|WebContent[]|array|Text|Text[]|array|ListItem|ListItem[]
      */
     public $positiveNotes;
-
-    /**
-     * The rating given in this review. Note that reviews can themselves be rated.
-     * The ```reviewRating``` applies to rating given by the review. The
-     * [[aggregateRating]] property applies to the review itself, as a creative
-     * work.
-     *
-     * @var Rating
-     */
-    public $reviewRating;
-
-    /**
-     * This Review or Rating is relevant to this part or facet of the
-     * itemReviewed.
-     *
-     * @var string|Text
-     */
-    public $reviewAspect;
-
-    /**
-     * The item that is being reviewed/rated.
-     *
-     * @var Thing
-     */
-    public $itemReviewed;
 
     /**
      * Provides negative considerations regarding something, most typically in
@@ -97,19 +109,7 @@ trait ReviewTrait
      * unstructured text (repeated as necessary), or if ordered, as a list (in
      * which case the most negative is at the beginning of the list).
      *
-     * @var string|ListItem|Text|ItemList|WebContent
+     * @var string|array|ItemList|ItemList[]|array|Text|Text[]|array|WebContent|WebContent[]|array|ListItem|ListItem[]
      */
     public $negativeNotes;
-
-    /**
-     * An associated [[ClaimReview]], related by specific common content, topic or
-     * claim. The expectation is that this property would be most typically used
-     * in cases where a single activity is conducting both claim reviews and media
-     * reviews, in which case [[relatedMediaReview]] would commonly be used on a
-     * [[ClaimReview]], while [[relatedClaimReview]] would be used on
-     * [[MediaReview]].
-     *
-     * @var Review
-     */
-    public $associatedClaimReview;
 }

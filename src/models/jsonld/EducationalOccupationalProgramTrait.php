@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for EducationalOccupationalProgram.
  *
  * @author    nystudio107
@@ -22,127 +22,27 @@ namespace nystudio107\seomatic\models\jsonld;
 trait EducationalOccupationalProgramTrait
 {
     /**
-     * The date at which the program stops collecting applications for the next
-     * enrollment cycle.
-     *
-     * @var Date
-     */
-    public $applicationDeadline;
-
-    /**
      * The expected length of time to complete the program if attending full-time.
      *
-     * @var Duration
+     * @var array|Duration|Duration[]
      */
     public $timeToComplete;
 
     /**
-     * The time of day the program normally runs. For example, "evenings".
+     * The end date and time of the item (in [ISO 8601 date
+     * format](http://en.wikipedia.org/wiki/ISO_8601)).
      *
-     * @var string|Text
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $timeOfDay;
+    public $endDate;
 
     /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller.
+     * The date at which the program stops collecting applications for the next
+     * enrollment cycle.
      *
-     * @var Organization|Person
+     * @var array|Date|Date[]
      */
-    public $provider;
-
-    /**
-     * The number of times terms of study are offered per year. Semesters and
-     * quarters are common units for term. For example, if the student can only
-     * take 2 semesters for the program in one year, then termsPerYear should be
-     * 2.
-     *
-     * @var float|Number
-     */
-    public $termsPerYear;
-
-    /**
-     * The amount of time in a term as defined by the institution. A term is a
-     * length of time where students take one or more classes. Semesters and
-     * quarters are common units for term.
-     *
-     * @var Duration
-     */
-    public $termDuration;
-
-    /**
-     * A description of the qualification, award, certificate, diploma or other
-     * occupational credential awarded as a consequence of successful completion
-     * of this course or program.
-     *
-     * @var string|EducationalOccupationalCredential|Text|URL
-     */
-    public $occupationalCredentialAwarded;
-
-    /**
-     * A financial aid type or program which students may use to pay for tuition
-     * or fees associated with the program.
-     *
-     * @var string|DefinedTerm|Text
-     */
-    public $financialAidEligible;
-
-    /**
-     * The expected salary upon completing the training.
-     *
-     * @var MonetaryAmountDistribution
-     */
-    public $salaryUponCompletion;
-
-    /**
-     * A course or class that is one of the learning opportunities that constitute
-     * an educational / occupational program. No information is implied about
-     * whether the course is mandatory or optional; no guarantee is implied about
-     * whether the course will be available to everyone on the program.
-     *
-     * @var Course
-     */
-    public $hasCourse;
-
-    /**
-     * A description of the qualification, award, certificate, diploma or other
-     * educational credential awarded as a consequence of successful completion of
-     * this course or program.
-     *
-     * @var string|URL|EducationalOccupationalCredential|Text
-     */
-    public $educationalCredentialAwarded;
-
-    /**
-     * The number of credits or units a full-time student would be expected to
-     * take in 1 term however 'term' is defined by the institution.
-     *
-     * @var int|Integer|StructuredValue
-     */
-    public $typicalCreditsPerTerm;
-
-    /**
-     * The maximum number of students who may be enrolled in the program.
-     *
-     * @var int|Integer
-     */
-    public $maximumEnrollment;
-
-    /**
-     * The type of educational or occupational program. For example, classroom,
-     * internship, alternance, etc.
-     *
-     * @var string|DefinedTerm|Text
-     */
-    public $programType;
-
-    /**
-     * Prerequisites for enrolling in the program.
-     *
-     * @var string|Text|EducationalOccupationalCredential|Course|AlignmentObject
-     */
-    public $programPrerequisites;
+    public $applicationDeadline;
 
     /**
      * Similar to courseMode, the medium or means of delivery of the program as a
@@ -151,16 +51,26 @@ trait EducationalOccupationalProgramTrait
      * a URL reference to a term from a controlled vocabulary (e.g.
      * https://ceds.ed.gov/element/001311#Asynchronous ).
      *
-     * @var string|Text|URL
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $educationalProgramMode;
 
     /**
-     * The day of the week for which these opening hours are valid.
+     * The type of educational or occupational program. For example, classroom,
+     * internship, alternance, etc.
      *
-     * @var DayOfWeek
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
-    public $dayOfWeek;
+    public $programType;
+
+    /**
+     * A description of the qualification, award, certificate, diploma or other
+     * occupational credential awarded as a consequence of successful completion
+     * of this course or program.
+     *
+     * @var string|array|EducationalOccupationalCredential|EducationalOccupationalCredential[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $occupationalCredentialAwarded;
 
     /**
      * A category describing the job, preferably using a term from a taxonomy such
@@ -172,25 +82,54 @@ trait EducationalOccupationalProgramTrait
      * textual label and formal code provided as a literal may be assumed to be
      * from O*NET-SOC.
      *
-     * @var string|Text|CategoryCode
+     * @var string|array|Text|Text[]|array|CategoryCode|CategoryCode[]
      */
     public $occupationalCategory;
 
     /**
-     * The start date and time of the item (in [ISO 8601 date
-     * format](http://en.wikipedia.org/wiki/ISO_8601)).
+     * The maximum number of students who may be enrolled in the program.
      *
-     * @var DateTime|Date
+     * @var int|array|Integer|Integer[]
      */
-    public $startDate;
+    public $maximumEnrollment;
 
     /**
-     * The number of credits or units awarded by a Course or required to complete
-     * an EducationalOccupationalProgram.
+     * The number of times terms of study are offered per year. Semesters and
+     * quarters are common units for term. For example, if the student can only
+     * take 2 semesters for the program in one year, then termsPerYear should be
+     * 2.
      *
-     * @var int|StructuredValue|Integer
+     * @var float|array|Number|Number[]
      */
-    public $numberOfCredits;
+    public $termsPerYear;
+
+    /**
+     * A course or class that is one of the learning opportunities that constitute
+     * an educational / occupational program. No information is implied about
+     * whether the course is mandatory or optional; no guarantee is implied about
+     * whether the course will be available to everyone on the program.
+     *
+     * @var array|Course|Course[]
+     */
+    public $hasCourse;
+
+    /**
+     * The amount of time in a term as defined by the institution. A term is a
+     * length of time where students take one or more classes. Semesters and
+     * quarters are common units for term.
+     *
+     * @var array|Duration|Duration[]
+     */
+    public $termDuration;
+
+    /**
+     * A description of the qualification, award, certificate, diploma or other
+     * educational credential awarded as a consequence of successful completion of
+     * this course or program.
+     *
+     * @var string|array|URL|URL[]|array|EducationalOccupationalCredential|EducationalOccupationalCredential[]|array|Text|Text[]
+     */
+    public $educationalCredentialAwarded;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
@@ -202,30 +141,91 @@ trait EducationalOccupationalProgramTrait
      * such as Product or a subtype of Product, can clarify the nature of the
      * offer.
      *
-     * @var Demand|Offer
+     * @var array|Demand|Demand[]|array|Offer|Offer[]
      */
     public $offers;
 
     /**
-     * The estimated salary earned while in the program.
+     * Prerequisites for enrolling in the program.
      *
-     * @var MonetaryAmountDistribution
+     * @var string|array|EducationalOccupationalCredential|EducationalOccupationalCredential[]|array|Course|Course[]|array|AlignmentObject|AlignmentObject[]|array|Text|Text[]
      */
-    public $trainingSalary;
-
-    /**
-     * The end date and time of the item (in [ISO 8601 date
-     * format](http://en.wikipedia.org/wiki/ISO_8601)).
-     *
-     * @var DateTime|Date
-     */
-    public $endDate;
+    public $programPrerequisites;
 
     /**
      * The date at which the program begins collecting applications for the next
      * enrollment cycle.
      *
-     * @var Date
+     * @var array|Date|Date[]
      */
     public $applicationStartDate;
+
+    /**
+     * The expected salary upon completing the training.
+     *
+     * @var array|MonetaryAmountDistribution|MonetaryAmountDistribution[]
+     */
+    public $salaryUponCompletion;
+
+    /**
+     * The estimated salary earned while in the program.
+     *
+     * @var array|MonetaryAmountDistribution|MonetaryAmountDistribution[]
+     */
+    public $trainingSalary;
+
+    /**
+     * The service provider, service operator, or service performer; the goods
+     * producer. Another party (a seller) may offer those services or goods on
+     * behalf of the provider. A provider may also serve as the seller.
+     *
+     * @var array|Person|Person[]|array|Organization|Organization[]
+     */
+    public $provider;
+
+    /**
+     * The start date and time of the item (in [ISO 8601 date
+     * format](http://en.wikipedia.org/wiki/ISO_8601)).
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $startDate;
+
+    /**
+     * The day of the week for which these opening hours are valid.
+     *
+     * @var array|DayOfWeek|DayOfWeek[]
+     */
+    public $dayOfWeek;
+
+    /**
+     * The time of day the program normally runs. For example, "evenings".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $timeOfDay;
+
+    /**
+     * The number of credits or units a full-time student would be expected to
+     * take in 1 term however 'term' is defined by the institution.
+     *
+     * @var int|array|Integer|Integer[]|array|StructuredValue|StructuredValue[]
+     */
+    public $typicalCreditsPerTerm;
+
+    /**
+     * A financial aid type or program which students may use to pay for tuition
+     * or fees associated with the program.
+     *
+     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     */
+    public $financialAidEligible;
+
+    /**
+     * The number of credits or units awarded by a Course or required to complete
+     * an EducationalOccupationalProgram.
+     *
+     * @var int|array|Integer|Integer[]|array|StructuredValue|StructuredValue[]
+     */
+    public $numberOfCredits;
 }

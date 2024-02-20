@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for WorkBasedProgram.
  *
  * @author    nystudio107
@@ -31,14 +31,14 @@ trait WorkBasedProgramTrait
      * textual label and formal code provided as a literal may be assumed to be
      * from O*NET-SOC.
      *
-     * @var string|Text|CategoryCode
+     * @var string|array|Text|Text[]|array|CategoryCode|CategoryCode[]
      */
     public $occupationalCategory;
 
     /**
      * The estimated salary earned while in the program.
      *
-     * @var MonetaryAmountDistribution
+     * @var array|MonetaryAmountDistribution|MonetaryAmountDistribution[]
      */
     public $trainingSalary;
 }

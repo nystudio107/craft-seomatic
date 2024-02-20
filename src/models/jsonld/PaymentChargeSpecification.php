@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * PaymentChargeSpecification - The costs of settling the payment using a particular payment method.
  *
  * @author    nystudio107
@@ -73,29 +73,29 @@ class PaymentChargeSpecification extends MetaJsonLd implements PaymentChargeSpec
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'appliesToDeliveryMethod' => ['DeliveryMethod'],
-            'appliesToPaymentMethod' => ['PaymentMethod'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'eligibleQuantity' => ['QuantitativeValue'],
-            'eligibleTransactionVolume' => ['PriceSpecification'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'maxPrice' => ['Number'],
-            'minPrice' => ['Number'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'price' => ['Text', 'Number'],
-            'priceCurrency' => ['Text'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
-            'validFrom' => ['Date', 'DateTime'],
-            'validThrough' => ['Date', 'DateTime'],
-            'valueAddedTaxIncluded' => ['Boolean'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'appliesToDeliveryMethod' => ['array', 'DeliveryMethod', 'DeliveryMethod[]'],
+            'appliesToPaymentMethod' => ['array', 'PaymentMethod', 'PaymentMethod[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'eligibleQuantity' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'eligibleTransactionVolume' => ['array', 'PriceSpecification', 'PriceSpecification[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'maxPrice' => ['array', 'Number', 'Number[]'],
+            'minPrice' => ['array', 'Number', 'Number[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'price' => ['array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'priceCurrency' => ['array', 'Text', 'Text[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'validFrom' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'validThrough' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'valueAddedTaxIncluded' => ['array', 'Boolean', 'Boolean[]'],
         ];
     }
 
@@ -106,7 +106,7 @@ class PaymentChargeSpecification extends MetaJsonLd implements PaymentChargeSpec
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'appliesToDeliveryMethod' => 'The delivery method(s) to which the delivery charge or payment charge specification applies.',
             'appliesToPaymentMethod' => 'The payment method(s) to which the payment charge specification applies.',

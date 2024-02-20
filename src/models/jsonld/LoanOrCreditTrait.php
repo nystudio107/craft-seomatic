@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for LoanOrCredit.
  *
  * @author    nystudio107
@@ -22,19 +22,28 @@ namespace nystudio107\seomatic\models\jsonld;
 trait LoanOrCreditTrait
 {
     /**
-     * Assets required to secure loan or credit repayments. It may take form of
-     * third party pledge, goods, financial instruments (cash, securities, etc.)
+     * The amount of money.
      *
-     * @var string|Thing|Text
+     * @var float|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]
      */
-    public $requiredCollateral;
+    public $amount;
 
     /**
-     * The type of a loan or credit.
+     * The only way you get the money back in the event of default is the
+     * security. Recourse is where you still have the opportunity to go back to
+     * the borrower for the rest of the money.
      *
-     * @var string|URL|Text
+     * @var bool|array|Boolean|Boolean[]
      */
-    public $loanType;
+    public $recourseLoan;
+
+    /**
+     * Whether the terms for payment of interest can be renegotiated during the
+     * life of the loan.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $renegotiableLoan;
 
     /**
      * The currency in which the monetary amount is expressed.  Use standard
@@ -45,55 +54,46 @@ trait LoanOrCreditTrait
      * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
      * (LETS) and other currency types, e.g. "Ithaca HOUR".
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $currency;
-
-    /**
-     * Whether the terms for payment of interest can be renegotiated during the
-     * life of the loan.
-     *
-     * @var bool|Boolean
-     */
-    public $renegotiableLoan;
-
-    /**
-     * The period of time after any due date that the borrower has to fulfil its
-     * obligations before a default (failure to pay) is deemed to have occurred.
-     *
-     * @var Duration
-     */
-    public $gracePeriod;
-
-    /**
-     * The duration of the loan or credit agreement.
-     *
-     * @var QuantitativeValue
-     */
-    public $loanTerm;
-
-    /**
-     * The amount of money.
-     *
-     * @var float|MonetaryAmount|Number
-     */
-    public $amount;
 
     /**
      * A form of paying back money previously borrowed from a lender. Repayment
      * usually takes the form of periodic payments that normally include part
      * principal plus interest in each payment.
      *
-     * @var RepaymentSpecification
+     * @var array|RepaymentSpecification|RepaymentSpecification[]
      */
     public $loanRepaymentForm;
 
     /**
-     * The only way you get the money back in the event of default is the
-     * security. Recourse is where you still have the opportunity to go back to
-     * the borrower for the rest of the money.
+     * The duration of the loan or credit agreement.
      *
-     * @var bool|Boolean
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $recourseLoan;
+    public $loanTerm;
+
+    /**
+     * Assets required to secure loan or credit repayments. It may take form of
+     * third party pledge, goods, financial instruments (cash, securities, etc.)
+     *
+     * @var string|array|Text|Text[]|array|Thing|Thing[]
+     */
+    public $requiredCollateral;
+
+    /**
+     * The period of time after any due date that the borrower has to fulfil its
+     * obligations before a default (failure to pay) is deemed to have occurred.
+     *
+     * @var array|Duration|Duration[]
+     */
+    public $gracePeriod;
+
+    /**
+     * The type of a loan or credit.
+     *
+     * @var string|array|URL|URL[]|array|Text|Text[]
+     */
+    public $loanType;
 }

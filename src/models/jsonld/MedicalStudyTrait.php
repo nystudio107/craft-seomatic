@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MedicalStudy.
  *
  * @author    nystudio107
@@ -25,29 +25,29 @@ trait MedicalStudyTrait
      * A subject of the study, i.e. one of the medical conditions, therapies,
      * devices, drugs, etc. investigated by the study.
      *
-     * @var MedicalEntity
+     * @var array|MedicalEntity|MedicalEntity[]
      */
     public $studySubject;
-
-    /**
-     * The location in which the study is taking/took place.
-     *
-     * @var AdministrativeArea
-     */
-    public $studyLocation;
 
     /**
      * Specifying the health condition(s) of a patient, medical study, or other
      * target audience.
      *
-     * @var MedicalCondition
+     * @var array|MedicalCondition|MedicalCondition[]
      */
     public $healthCondition;
 
     /**
+     * The location in which the study is taking/took place.
+     *
+     * @var array|AdministrativeArea|AdministrativeArea[]
+     */
+    public $studyLocation;
+
+    /**
      * The status of the study (enumerated).
      *
-     * @var string|MedicalStudyStatus|Text|EventStatusType
+     * @var string|array|MedicalStudyStatus|MedicalStudyStatus[]|array|EventStatusType|EventStatusType[]|array|Text|Text[]
      */
     public $status;
 
@@ -56,7 +56,7 @@ trait MedicalStudyTrait
      * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
      * sponsor of an event.
      *
-     * @var Organization|Person
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $sponsor;
 }

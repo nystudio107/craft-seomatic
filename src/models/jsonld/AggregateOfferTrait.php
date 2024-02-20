@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for AggregateOffer.
  *
  * @author    nystudio107
@@ -28,16 +28,9 @@ trait AggregateOfferTrait
      * STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using
      * these symbols as a readability separator.
      *
-     * @var float|string|Number|Text
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
      */
     public $highPrice;
-
-    /**
-     * The number of offers for the product.
-     *
-     * @var int|Integer
-     */
-    public $offerCount;
 
     /**
      * The lowest price of all offers available.  Usage guidelines:  * Use values
@@ -46,7 +39,7 @@ trait AggregateOfferTrait
      * STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using
      * these symbols as a readability separator.
      *
-     * @var float|string|Number|Text
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
      */
     public $lowPrice;
 
@@ -60,7 +53,14 @@ trait AggregateOfferTrait
      * such as Product or a subtype of Product, can clarify the nature of the
      * offer.
      *
-     * @var Demand|Offer
+     * @var array|Demand|Demand[]|array|Offer|Offer[]
      */
     public $offers;
+
+    /**
+     * The number of offers for the product.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $offerCount;
 }

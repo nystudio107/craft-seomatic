@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MerchantReturnPolicy.
  *
  * @author    nystudio107
@@ -22,18 +22,36 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MerchantReturnPolicyTrait
 {
     /**
-     * A refund type, from an enumerated list.
+     * Specifies an applicable return policy (from an enumeration).
      *
-     * @var RefundTypeEnumeration
+     * @var array|MerchantReturnEnumeration|MerchantReturnEnumeration[]
      */
-    public $refundType;
+    public $returnPolicyCategory;
 
     /**
-     * The type of return fees if the product is returned due to customer remorse.
+     * Amount of shipping costs for defect product returns. Applicable when
+     * property [[itemDefectReturnFees]] equals [[ReturnShippingFees]].
      *
-     * @var ReturnFeesEnumeration
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
-    public $customerRemorseReturnFees;
+    public $itemDefectReturnShippingFeesAmount;
+
+    /**
+     * A predefined value from OfferItemCondition specifying the condition of the
+     * product or service, or the products or services included in the offer. Also
+     * used for product return policies to specify the condition of products
+     * accepted for returns.
+     *
+     * @var array|OfferItemCondition|OfferItemCondition[]
+     */
+    public $itemCondition;
+
+    /**
+     * The type of return fees for returns of defect products.
+     *
+     * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
+     */
+    public $itemDefectReturnFees;
 
     /**
      * A property-value pair representing an additional characteristic of the
@@ -45,145 +63,57 @@ trait MerchantReturnPolicyTrait
      * provided using those properties, rather than using the generic
      * property/value mechanism.
      *
-     * @var PropertyValue
+     * @var array|PropertyValue|PropertyValue[]
      */
     public $additionalProperty;
 
     /**
-     * The method (from an enumeration) by which the customer obtains a return
-     * shipping label for a defect product.
+     * The type of return fees for purchased products (for any return reason).
      *
-     * @var ReturnLabelSourceEnumeration
+     * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
      */
-    public $itemDefectReturnLabelSource;
-
-    /**
-     * Are in-store returns offered? (For more advanced return methods use the
-     * [[returnMethod]] property.)
-     *
-     * @var bool|Boolean
-     */
-    public $inStoreReturnsOffered;
-
-    /**
-     * A predefined value from OfferItemCondition specifying the condition of the
-     * product or service, or the products or services included in the offer. Also
-     * used for product return policies to specify the condition of products
-     * accepted for returns.
-     *
-     * @var OfferItemCondition
-     */
-    public $itemCondition;
+    public $returnFees;
 
     /**
      * Use [[MonetaryAmount]] to specify a fixed restocking fee for product
      * returns, or use [[Number]] to specify a percentage of the product price
      * paid by the customer.
      *
-     * @var float|MonetaryAmount|Number
+     * @var float|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]
      */
     public $restockingFee;
-
-    /**
-     * Specifies an applicable return policy (from an enumeration).
-     *
-     * @var MerchantReturnEnumeration
-     */
-    public $returnPolicyCategory;
-
-    /**
-     * The method (from an enumeration) by which the customer obtains a return
-     * shipping label for a product returned for any reason.
-     *
-     * @var ReturnLabelSourceEnumeration
-     */
-    public $returnLabelSource;
-
-    /**
-     * A country where a particular merchant return policy applies to, for example
-     * the two-letter ISO 3166-1 alpha-2 country code.
-     *
-     * @var string|Country|Text
-     */
-    public $applicableCountry;
-
-    /**
-     * The type of return method offered, specified from an enumeration.
-     *
-     * @var ReturnMethodEnumeration
-     */
-    public $returnMethod;
 
     /**
      * Amount of shipping costs for product returns (for any reason). Applicable
      * when property [[returnFees]] equals [[ReturnShippingFees]].
      *
-     * @var MonetaryAmount
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
     public $returnShippingFeesAmount;
 
     /**
-     * Amount of shipping costs for defect product returns. Applicable when
-     * property [[itemDefectReturnFees]] equals [[ReturnShippingFees]].
+     * The method (from an enumeration) by which the customer obtains a return
+     * shipping label for a product returned due to customer remorse.
      *
-     * @var MonetaryAmount
+     * @var array|ReturnLabelSourceEnumeration|ReturnLabelSourceEnumeration[]
      */
-    public $itemDefectReturnShippingFeesAmount;
-
-    /**
-     * Seasonal override of a return policy.
-     *
-     * @var MerchantReturnPolicySeasonalOverride
-     */
-    public $returnPolicySeasonalOverride;
+    public $customerRemorseReturnLabelSource;
 
     /**
      * The amount of shipping costs if a product is returned due to customer
      * remorse. Applicable when property [[customerRemorseReturnFees]] equals
      * [[ReturnShippingFees]].
      *
-     * @var MonetaryAmount
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
     public $customerRemorseReturnShippingFeesAmount;
 
     /**
-     * The type of return fees for purchased products (for any return reason).
+     * The type of return fees if the product is returned due to customer remorse.
      *
-     * @var ReturnFeesEnumeration
+     * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
      */
-    public $returnFees;
-
-    /**
-     * The method (from an enumeration) by which the customer obtains a return
-     * shipping label for a product returned due to customer remorse.
-     *
-     * @var ReturnLabelSourceEnumeration
-     */
-    public $customerRemorseReturnLabelSource;
-
-    /**
-     * Specifies a Web page or service by URL, for product returns.
-     *
-     * @var URL
-     */
-    public $merchantReturnLink;
-
-    /**
-     * The type of return fees for returns of defect products.
-     *
-     * @var ReturnFeesEnumeration
-     */
-    public $itemDefectReturnFees;
-
-    /**
-     * Specifies either a fixed return date or the number of days (from the
-     * delivery date) that a product can be returned. Used when the
-     * [[returnPolicyCategory]] property is specified as
-     * [[MerchantReturnFiniteReturnWindow]].
-     *
-     * @var int|DateTime|Integer|Date
-     */
-    public $merchantReturnDays;
+    public $customerRemorseReturnFees;
 
     /**
      * The country where the product has to be sent to for returns, for example
@@ -193,7 +123,77 @@ trait MerchantReturnPolicyTrait
      * different from the country where the product was originally shipped from or
      * sent to.
      *
-     * @var string|Country|Text
+     * @var string|array|Text|Text[]|array|Country|Country[]
      */
     public $returnPolicyCountry;
+
+    /**
+     * The type of return method offered, specified from an enumeration.
+     *
+     * @var array|ReturnMethodEnumeration|ReturnMethodEnumeration[]
+     */
+    public $returnMethod;
+
+    /**
+     * A refund type, from an enumerated list.
+     *
+     * @var array|RefundTypeEnumeration|RefundTypeEnumeration[]
+     */
+    public $refundType;
+
+    /**
+     * Seasonal override of a return policy.
+     *
+     * @var array|MerchantReturnPolicySeasonalOverride|MerchantReturnPolicySeasonalOverride[]
+     */
+    public $returnPolicySeasonalOverride;
+
+    /**
+     * The method (from an enumeration) by which the customer obtains a return
+     * shipping label for a product returned for any reason.
+     *
+     * @var array|ReturnLabelSourceEnumeration|ReturnLabelSourceEnumeration[]
+     */
+    public $returnLabelSource;
+
+    /**
+     * Specifies either a fixed return date or the number of days (from the
+     * delivery date) that a product can be returned. Used when the
+     * [[returnPolicyCategory]] property is specified as
+     * [[MerchantReturnFiniteReturnWindow]].
+     *
+     * @var int|array|Integer|Integer[]|array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $merchantReturnDays;
+
+    /**
+     * Specifies a Web page or service by URL, for product returns.
+     *
+     * @var array|URL|URL[]
+     */
+    public $merchantReturnLink;
+
+    /**
+     * Are in-store returns offered? (For more advanced return methods use the
+     * [[returnMethod]] property.)
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $inStoreReturnsOffered;
+
+    /**
+     * The method (from an enumeration) by which the customer obtains a return
+     * shipping label for a defect product.
+     *
+     * @var array|ReturnLabelSourceEnumeration|ReturnLabelSourceEnumeration[]
+     */
+    public $itemDefectReturnLabelSource;
+
+    /**
+     * A country where a particular merchant return policy applies to, for example
+     * the two-letter ISO 3166-1 alpha-2 country code.
+     *
+     * @var string|array|Text|Text[]|array|Country|Country[]
+     */
+    public $applicableCountry;
 }

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Service.
  *
  * @author    nystudio107
@@ -22,11 +22,62 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ServiceTrait
 {
     /**
-     * The geographic area where the service is provided.
+     * Indicates an OfferCatalog listing for this Organization, Person, or
+     * Service.
      *
-     * @var AdministrativeArea|Place|GeoShape
+     * @var array|OfferCatalog|OfferCatalog[]
      */
-    public $serviceArea;
+    public $hasOfferCatalog;
+
+    /**
+     * A pointer to another, somehow related product (or multiple products).
+     *
+     * @var array|Product|Product[]|array|Service|Service[]
+     */
+    public $isRelatedTo;
+
+    /**
+     * A pointer to another, functionally similar product (or multiple products).
+     *
+     * @var array|Product|Product[]|array|Service|Service[]
+     */
+    public $isSimilarTo;
+
+    /**
+     * A slogan or motto associated with the item.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $slogan;
+
+    /**
+     * An award won by or for this item.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $award;
+
+    /**
+     * A review of the item.
+     *
+     * @var array|Review|Review[]
+     */
+    public $review;
+
+    /**
+     * Human-readable terms of service documentation.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $termsOfService;
+
+    /**
+     * The brand(s) associated with a product or service, or the brand(s)
+     * maintained by an organization or business person.
+     *
+     * @var array|Organization|Organization[]|array|Brand|Brand[]
+     */
+    public $brand;
 
     /**
      * An entity that arranges for an exchange between a buyer and a seller.  In
@@ -34,164 +85,30 @@ trait ServiceTrait
      * service involved in an exchange.  If it is not clear whether an entity is a
      * broker, seller, or buyer, the latter two terms are preferred.
      *
-     * @var Person|Organization
+     * @var array|Person|Person[]|array|Organization|Organization[]
      */
     public $broker;
 
     /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller.
-     *
-     * @var Organization|Person
-     */
-    public $provider;
-
-    /**
-     * The geographic area where a service or offered item is provided.
-     *
-     * @var string|Text|Place|GeoShape|AdministrativeArea
-     */
-    public $areaServed;
-
-    /**
-     * A slogan or motto associated with the item.
-     *
-     * @var string|Text
-     */
-    public $slogan;
-
-    /**
-     * An award won by or for this item.
-     *
-     * @var string|Text
-     */
-    public $award;
-
-    /**
-     * Human-readable terms of service documentation.
-     *
-     * @var string|URL|Text
-     */
-    public $termsOfService;
-
-    /**
-     * A review of the item.
-     *
-     * @var Review
-     */
-    public $review;
-
-    /**
-     * A means of accessing the service (e.g. a phone bank, a web site, a
-     * location, etc.).
-     *
-     * @var ServiceChannel
-     */
-    public $availableChannel;
-
-    /**
-     * A pointer to another, somehow related product (or multiple products).
-     *
-     * @var Product|Service
-     */
-    public $isRelatedTo;
-
-    /**
-     * The audience eligible for this service.
-     *
-     * @var Audience
-     */
-    public $serviceAudience;
-
-    /**
-     * A pointer to another, functionally similar product (or multiple products).
-     *
-     * @var Product|Service
-     */
-    public $isSimilarTo;
-
-    /**
-     * An intended audience, i.e. a group for whom something was created.
-     *
-     * @var Audience
-     */
-    public $audience;
-
-    /**
      * An associated logo.
      *
-     * @var ImageObject|URL
+     * @var array|URL|URL[]|array|ImageObject|ImageObject[]
      */
     public $logo;
 
     /**
      * Indicates the mobility of a provided service (e.g. 'static', 'dynamic').
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $providerMobility;
 
     /**
-     * The hours during which this service or contact is available.
+     * The geographic area where a service or offered item is provided.
      *
-     * @var OpeningHoursSpecification
+     * @var string|array|Text|Text[]|array|Place|Place[]|array|AdministrativeArea|AdministrativeArea[]|array|GeoShape|GeoShape[]
      */
-    public $hoursAvailable;
-
-    /**
-     * The brand(s) associated with a product or service, or the brand(s)
-     * maintained by an organization or business person.
-     *
-     * @var Brand|Organization
-     */
-    public $brand;
-
-    /**
-     * The tangible thing generated by the service, e.g. a passport, permit, etc.
-     *
-     * @var Thing
-     */
-    public $serviceOutput;
-
-    /**
-     * The tangible thing generated by the service, e.g. a passport, permit, etc.
-     *
-     * @var Thing
-     */
-    public $produces;
-
-    /**
-     * Indicates an OfferCatalog listing for this Organization, Person, or
-     * Service.
-     *
-     * @var OfferCatalog
-     */
-    public $hasOfferCatalog;
-
-    /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
-     *
-     * @var string|URL|CategoryCode|Text|Thing|PhysicalActivityCategory
-     */
-    public $category;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
-     *
-     * @var AggregateRating
-     */
-    public $aggregateRating;
-
-    /**
-     * The type of service being offered, e.g. veterans' benefits, emergency
-     * relief, etc.
-     *
-     * @var string|Text|GovernmentBenefitsType
-     */
-    public $serviceType;
+    public $areaServed;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
@@ -203,7 +120,98 @@ trait ServiceTrait
      * such as Product or a subtype of Product, can clarify the nature of the
      * offer.
      *
-     * @var Demand|Offer
+     * @var array|Demand|Demand[]|array|Offer|Offer[]
      */
     public $offers;
+
+    /**
+     * The geographic area where the service is provided.
+     *
+     * @var array|AdministrativeArea|AdministrativeArea[]|array|GeoShape|GeoShape[]|array|Place|Place[]
+     */
+    public $serviceArea;
+
+    /**
+     * An intended audience, i.e. a group for whom something was created.
+     *
+     * @var array|Audience|Audience[]
+     */
+    public $audience;
+
+    /**
+     * A means of accessing the service (e.g. a phone bank, a web site, a
+     * location, etc.).
+     *
+     * @var array|ServiceChannel|ServiceChannel[]
+     */
+    public $availableChannel;
+
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Thing|Thing[]
+     */
+    public $category;
+
+    /**
+     * The hours during which this service or contact is available.
+     *
+     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
+     */
+    public $hoursAvailable;
+
+    /**
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
+     *
+     * @var array|AggregateRating|AggregateRating[]
+     */
+    public $aggregateRating;
+
+    /**
+     * The audience eligible for this service.
+     *
+     * @var array|Audience|Audience[]
+     */
+    public $serviceAudience;
+
+    /**
+     * The tangible thing generated by the service, e.g. a passport, permit, etc.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $serviceOutput;
+
+    /**
+     * The service provider, service operator, or service performer; the goods
+     * producer. Another party (a seller) may offer those services or goods on
+     * behalf of the provider. A provider may also serve as the seller.
+     *
+     * @var array|Person|Person[]|array|Organization|Organization[]
+     */
+    public $provider;
+
+    /**
+     * The tangible thing generated by the service, e.g. a passport, permit, etc.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $produces;
+
+    /**
+     * The type of service being offered, e.g. veterans' benefits, emergency
+     * relief, etc.
+     *
+     * @var string|array|GovernmentBenefitsType|GovernmentBenefitsType[]|array|Text|Text[]
+     */
+    public $serviceType;
+
+    /**
+     * Certification information about a product, organization, service, place, or
+     * person.
+     *
+     * @var array|Certification|Certification[]
+     */
+    public $hasCertification;
 }

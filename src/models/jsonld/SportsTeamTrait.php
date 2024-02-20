@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for SportsTeam.
  *
  * @author    nystudio107
@@ -22,10 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait SportsTeamTrait
 {
     /**
+     * A person that acts in a coaching role for a sports team.
+     *
+     * @var array|Person|Person[]
+     */
+    public $coach;
+
+    /**
      * A person that acts as performing member of a sports team; a player as
      * opposed to a coach.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $athlete;
 
@@ -39,14 +46,7 @@ trait SportsTeamTrait
      * possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text
      * value of "Mixed".
      *
-     * @var string|GenderType|Text
+     * @var string|array|GenderType|GenderType[]|array|Text|Text[]
      */
     public $gender;
-
-    /**
-     * A person that acts in a coaching role for a sports team.
-     *
-     * @var Person
-     */
-    public $coach;
 }

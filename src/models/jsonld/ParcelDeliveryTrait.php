@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ParcelDelivery.
  *
  * @author    nystudio107
@@ -24,88 +24,88 @@ trait ParcelDeliveryTrait
     /**
      * Item(s) being shipped.
      *
-     * @var Product
+     * @var array|Product|Product[]
      */
     public $itemShipped;
 
     /**
+     * New entry added as the package passes through each leg of its journey (from
+     * shipment to final delivery).
+     *
+     * @var array|DeliveryEvent|DeliveryEvent[]
+     */
+    public $deliveryStatus;
+
+    /**
+     * Shipper's address.
+     *
+     * @var array|PostalAddress|PostalAddress[]
+     */
+    public $originAddress;
+
+    /**
+     * Destination address.
+     *
+     * @var array|PostalAddress|PostalAddress[]
+     */
+    public $deliveryAddress;
+
+    /**
+     * Tracking url for the parcel delivery.
+     *
+     * @var array|URL|URL[]
+     */
+    public $trackingUrl;
+
+    /**
+     * Method used for delivery or shipping.
+     *
+     * @var array|DeliveryMethod|DeliveryMethod[]
+     */
+    public $hasDeliveryMethod;
+
+    /**
      * Shipper tracking number.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $trackingNumber;
 
     /**
-     * The latest date the package may arrive.
+     * The overall order the items in this delivery were included in.
      *
-     * @var DateTime|Date
+     * @var array|Order|Order[]
      */
-    public $expectedArrivalUntil;
+    public $partOfOrder;
 
     /**
      * The service provider, service operator, or service performer; the goods
      * producer. Another party (a seller) may offer those services or goods on
      * behalf of the provider. A provider may also serve as the seller.
      *
-     * @var Organization|Person
+     * @var array|Person|Person[]|array|Organization|Organization[]
      */
     public $provider;
-
-    /**
-     * Destination address.
-     *
-     * @var PostalAddress
-     */
-    public $deliveryAddress;
-
-    /**
-     * The earliest date the package may arrive.
-     *
-     * @var Date|DateTime
-     */
-    public $expectedArrivalFrom;
 
     /**
      * 'carrier' is an out-dated term indicating the 'provider' for parcel
      * delivery and flights.
      *
-     * @var Organization
+     * @var array|Organization|Organization[]
      */
     public $carrier;
 
     /**
-     * Shipper's address.
+     * The latest date the package may arrive.
      *
-     * @var PostalAddress
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $originAddress;
+    public $expectedArrivalUntil;
 
     /**
-     * New entry added as the package passes through each leg of its journey (from
-     * shipment to final delivery).
+     * The earliest date the package may arrive.
      *
-     * @var DeliveryEvent
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $deliveryStatus;
-
-    /**
-     * Tracking url for the parcel delivery.
-     *
-     * @var URL
-     */
-    public $trackingUrl;
-
-    /**
-     * The overall order the items in this delivery were included in.
-     *
-     * @var Order
-     */
-    public $partOfOrder;
-
-    /**
-     * Method used for delivery or shipping.
-     *
-     * @var DeliveryMethod
-     */
-    public $hasDeliveryMethod;
+    public $expectedArrivalFrom;
 }

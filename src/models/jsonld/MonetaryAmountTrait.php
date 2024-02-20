@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MonetaryAmount.
  *
  * @author    nystudio107
@@ -22,18 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MonetaryAmountTrait
 {
     /**
-     * The value of the quantitative value or property value node.  * For
-     * [[QuantitativeValue]] and [[MonetaryAmount]], the recommended type for
-     * values is 'Number'. * For [[PropertyValue]], it can be 'Text', 'Number',
-     * 'Boolean', or 'StructuredValue'. * Use values from 0123456789 (Unicode
-     * 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially
-     * similar Unicode symbols. * Use '.' (Unicode 'FULL STOP' (U+002E)) rather
-     * than ',' to indicate a decimal point. Avoid using these symbols as a
-     * readability separator.
+     * The lower value of some characteristic or property.
      *
-     * @var string|bool|float|StructuredValue|Text|Boolean|Number
+     * @var float|array|Number|Number[]
      */
-    public $value;
+    public $minValue;
 
     /**
      * The currency in which the monetary amount is expressed.  Use standard
@@ -44,36 +37,43 @@ trait MonetaryAmountTrait
      * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
      * (LETS) and other currency types, e.g. "Ithaca HOUR".
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $currency;
+
+    /**
+     * The date when the item becomes valid.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $validFrom;
+
+    /**
+     * The upper value of some characteristic or property.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $maxValue;
 
     /**
      * The date after when the item is not valid. For example the end of an offer,
      * salary period, or a period of opening hours.
      *
-     * @var Date|DateTime
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $validThrough;
 
     /**
-     * The upper value of some characteristic or property.
+     * The value of a [[QuantitativeValue]] (including [[Observation]]) or
+     * property value node.  * For [[QuantitativeValue]] and [[MonetaryAmount]],
+     * the recommended type for values is 'Number'. * For [[PropertyValue]], it
+     * can be 'Text', 'Number', 'Boolean', or 'StructuredValue'. * Use values from
+     * 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather
+     * than superficially similar Unicode symbols. * Use '.' (Unicode 'FULL STOP'
+     * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
+     * symbols as a readability separator.
      *
-     * @var float|Number
+     * @var float|string|bool|array|StructuredValue|StructuredValue[]|array|Number|Number[]|array|Text|Text[]|array|Boolean|Boolean[]
      */
-    public $maxValue;
-
-    /**
-     * The date when the item becomes valid.
-     *
-     * @var Date|DateTime
-     */
-    public $validFrom;
-
-    /**
-     * The lower value of some characteristic or property.
-     *
-     * @var float|Number
-     */
-    public $minValue;
+    public $value;
 }

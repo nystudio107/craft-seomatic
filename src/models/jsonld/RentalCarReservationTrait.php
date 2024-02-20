@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for RentalCarReservation.
  *
  * @author    nystudio107
@@ -24,28 +24,28 @@ trait RentalCarReservationTrait
     /**
      * When a taxi will pick up a passenger or a rental car can be picked up.
      *
-     * @var DateTime
+     * @var array|DateTime|DateTime[]
      */
     public $pickupTime;
 
     /**
-     * Where a taxi will pick up a passenger or a rental car can be picked up.
+     * When a rental car can be dropped off.
      *
-     * @var Place
+     * @var array|DateTime|DateTime[]
      */
-    public $pickupLocation;
+    public $dropoffTime;
 
     /**
      * Where a rental car can be dropped off.
      *
-     * @var Place
+     * @var array|Place|Place[]
      */
     public $dropoffLocation;
 
     /**
-     * When a rental car can be dropped off.
+     * Where a taxi will pick up a passenger or a rental car can be picked up.
      *
-     * @var DateTime
+     * @var array|Place|Place[]
      */
-    public $dropoffTime;
+    public $pickupLocation;
 }

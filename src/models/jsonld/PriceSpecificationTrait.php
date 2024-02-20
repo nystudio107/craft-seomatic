@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for PriceSpecification.
  *
  * @author    nystudio107
@@ -22,28 +22,33 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PriceSpecificationTrait
 {
     /**
+     * The highest price if the price is a range.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $maxPrice;
+
+    /**
+     * The currency of the price, or a price component when attached to
+     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
+     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
+     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
+     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
+     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
+     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $priceCurrency;
+
+    /**
      * The interval and unit of measurement of ordering quantities for which the
      * offer or price specification is valid. This allows e.g. specifying that a
      * certain freight charge is valid only for a certain quantity.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $eligibleQuantity;
-
-    /**
-     * Specifies whether the applicable value-added tax (VAT) is included in the
-     * price specification or not.
-     *
-     * @var bool|Boolean
-     */
-    public $valueAddedTaxIncluded;
-
-    /**
-     * The lowest price if the price is a range.
-     *
-     * @var float|Number
-     */
-    public $minPrice;
 
     /**
      * The offer price of a product, or of a price component when attached to
@@ -65,31 +70,16 @@ trait PriceSpecificationTrait
      * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE'
      * (U+0039)) rather than superficially similar Unicode symbols.
      *
-     * @var string|float|Text|Number
+     * @var string|float|array|Text|Text[]|array|Number|Number[]
      */
     public $price;
 
     /**
-     * The date after when the item is not valid. For example the end of an offer,
-     * salary period, or a period of opening hours.
+     * The lowest price if the price is a range.
      *
-     * @var Date|DateTime
+     * @var float|array|Number|Number[]
      */
-    public $validThrough;
-
-    /**
-     * The highest price if the price is a range.
-     *
-     * @var float|Number
-     */
-    public $maxPrice;
-
-    /**
-     * The date when the item becomes valid.
-     *
-     * @var Date|DateTime
-     */
-    public $validFrom;
+    public $minPrice;
 
     /**
      * The transaction volume, in a monetary unit, for which the offer or price
@@ -97,20 +87,30 @@ trait PriceSpecificationTrait
      * express free shipping above a certain order volume, or to limit the
      * acceptance of credit cards to purchases to a certain minimal amount.
      *
-     * @var PriceSpecification
+     * @var array|PriceSpecification|PriceSpecification[]
      */
     public $eligibleTransactionVolume;
 
     /**
-     * The currency of the price, or a price component when attached to
-     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
-     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
-     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
-     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
-     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
-     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     * The date when the item becomes valid.
      *
-     * @var string|Text
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $priceCurrency;
+    public $validFrom;
+
+    /**
+     * The date after when the item is not valid. For example the end of an offer,
+     * salary period, or a period of opening hours.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $validThrough;
+
+    /**
+     * Specifies whether the applicable value-added tax (VAT) is included in the
+     * price specification or not.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $valueAddedTaxIncluded;
 }
