@@ -85,7 +85,7 @@ class MetaBundleSettings extends VarsModel
      */
     public $seoImageTransform = true;
     /**
-     * @var bool The transform mode to use for SEO image transforms
+     * @var string The transform mode to use for SEO image transforms
      */
     public $seoImageTransformMode = 'crop';
     /**
@@ -141,7 +141,7 @@ class MetaBundleSettings extends VarsModel
      */
     public $twitterImageTransform = true;
     /**
-     * @var bool The transform mode to use for Twitter image transforms
+     * @var string The transform mode to use for Twitter image transforms
      */
     public $twitterImageTransformMode = 'crop';
     /**
@@ -189,7 +189,7 @@ class MetaBundleSettings extends VarsModel
      */
     public $ogImageTransform = true;
     /**
-     * @var bool The transform mode to use for OpenGraph image transforms
+     * @var string The transform mode to use for OpenGraph image transforms
      */
     public $ogImageTransformMode = 'crop';
     /**

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for APIReference.
  *
  * @author    nystudio107
@@ -24,35 +24,35 @@ trait APIReferenceTrait
     /**
      * Indicates whether API is managed or unmanaged.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $programmingModel;
 
     /**
-     * Type of app development: phone, Metro style, desktop, XBox, etc.
+     * Library file name, e.g., mscorlib.dll, system.web.dll.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $targetPlatform;
+    public $executableLibraryName;
 
     /**
      * Library file name, e.g., mscorlib.dll, system.web.dll.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $assembly;
 
     /**
-     * Associated product/technology version. E.g., .NET Framework 4.5.
+     * Type of app development: phone, Metro style, desktop, XBox, etc.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $assemblyVersion;
+    public $targetPlatform;
 
     /**
-     * Library file name, e.g., mscorlib.dll, system.web.dll.
+     * Associated product/technology version. E.g., .NET Framework 4.5.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $executableLibraryName;
+    public $assemblyVersion;
 }

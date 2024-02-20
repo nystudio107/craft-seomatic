@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MenuItem.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait MenuItemTrait
     /**
      * Nutrition information about the recipe or menu item.
      *
-     * @var NutritionInformation
+     * @var array|NutritionInformation|NutritionInformation[]
      */
     public $nutrition;
 
@@ -32,7 +32,7 @@ trait MenuItemTrait
      * Indicates a dietary restriction or guideline for which this recipe or menu
      * item is suitable, e.g. diabetic, halal etc.
      *
-     * @var RestrictedDiet
+     * @var array|RestrictedDiet|RestrictedDiet[]
      */
     public $suitableForDiet;
 
@@ -41,7 +41,7 @@ trait MenuItemTrait
      * that can be added to this menu item. Additionally it can be a menu section
      * containing allowed add-on menu items for this menu item.
      *
-     * @var MenuItem|MenuSection
+     * @var array|MenuItem|MenuItem[]|array|MenuSection|MenuSection[]
      */
     public $menuAddOn;
 
@@ -55,7 +55,7 @@ trait MenuItemTrait
      * such as Product or a subtype of Product, can clarify the nature of the
      * offer.
      *
-     * @var Demand|Offer
+     * @var array|Demand|Demand[]|array|Offer|Offer[]
      */
     public $offers;
 }

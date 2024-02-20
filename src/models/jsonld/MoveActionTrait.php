@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MoveAction.
  *
  * @author    nystudio107
@@ -22,18 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MoveActionTrait
 {
     /**
-     * A sub property of location. The final location of the object or the agent
-     * after the action.
-     *
-     * @var Place
-     */
-    public $toLocation;
-
-    /**
      * A sub property of location. The original location of the object or the
      * agent before the action.
      *
-     * @var Place
+     * @var array|Place|Place[]
      */
     public $fromLocation;
+
+    /**
+     * A sub property of location. The final location of the object or the agent
+     * after the action.
+     *
+     * @var array|Place|Place[]
+     */
+    public $toLocation;
 }

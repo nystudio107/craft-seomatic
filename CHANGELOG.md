@@ -1,5 +1,21 @@
 # SEOmatic Changelog
 
+## 5.0.0-beta.5 - 2024.02.20
+### Added
+* Added the ability to generate a [News Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap) for any Section
+* Added an **SEOmatic Debug Toolbar Panel** setting to Plugin Settings → Advanced that lets you control whether the SEOmatic Debug Toolbar panel is added to the Yii2 Debug Toolbar (if it is enabled)
+* Updated to schema.org [v26.0](https://schema.org/docs/releases.html), fixes ([#1420](https://github.com/nystudio107/craft-seomatic/issues/1420))
+
+### Changed
+* Completely revamped the documentation to hopefully make it more accessible & useful (thanks to Matt Stein @ Working Concept)
+* PHPstan code cleanup
+
+### Fixed
+* Fixed an issue that would cause assets in Neo blocks to not appear as images in the sitemap
+* Fixed an issue that would cause assets in SuperTable blocks to not appear as images in the sitemap
+* Fixed an issue with missing classes in `Sitemap` helper
+* Fixed an issue that would cause text in Neo blocks to not get extracted
+
 ## 5.0.0-beta.4 - 2024.02.13
 ### Fixed
 * Fixed a regression where the `robots` tag would be set to `none` for CP requests, which is incorrect, because GraphQL and meta container endpoints are CP requests  ([#1414](https://github.com/nystudio107/craft-seomatic/issues/1414))

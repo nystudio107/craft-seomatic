@@ -18,6 +18,7 @@ use craft\elements\db\TagQuery;
 use craft\elements\MatrixBlock;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
+use craft\models\FieldLayout;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
@@ -145,7 +146,7 @@ class Text
      * Extract concatenated text from all of the tags in the $tagElement and
      * return as a comma-delimited string
      *
-     * @param TagQuery|Tag[] $tags
+     * @param TagQuery|Tag[]|array $tags
      *
      * @return string
      */
@@ -171,7 +172,7 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param MatrixBlockQuery|MatrixBlock[] $blocks
+     * @param MatrixBlockQuery|MatrixBlock[]|array $blocks
      * @param string $fieldHandle
      *
      * @return string
@@ -217,7 +218,7 @@ class Text
      * Extract text from all of the blocks in a Neo field, concatenating it
      * together.
      *
-     * @param NeoBlockQuery|NeoBlock[] $blocks
+     * @param NeoBlockQuery|NeoBlock[]|array $blocks
      * @param string $fieldHandle
      *
      * @return string
@@ -233,17 +234,13 @@ class Text
             $blocks = $blocks->all();
         }
         foreach ($blocks as $block) {
-            try {
-                $neoBlockTypeModel = $block->getType();
-            } catch (InvalidConfigException $e) {
-                $neoBlockTypeModel = null;
-            }
-            // Find any text fields inside of the matrix block
-            if ($neoBlockTypeModel) {
+            $layout = $block->getFieldLayout();
+            // Find any text fields inside of the neo block
+            if ($layout) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fields = $neoBlockTypeModel->getCustomFields();
-
-                foreach ($fields as $field) {
+                $fieldElements = $layout->getCustomFieldElements();
+                foreach ($fieldElements as $fieldElement) {
+                    $field = $fieldElement->getField();
                     /** @var array $fieldClasses */
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
@@ -263,7 +260,7 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param SuperTableBlockQuery|SuperTableBlock[] $blocks
+     * @param SuperTableBlockQuery|SuperTableBlock[]|array $blocks
      * @param string $fieldHandle
      *
      * @return string
@@ -274,7 +271,7 @@ class Text
             return '';
         }
         $result = '';
-        // Iterate through all of the matrix blocks
+        // Iterate through all of the supertable blocks
         if ($blocks instanceof SuperTableBlockQuery) {
             $blocks = $blocks->all();
         }
@@ -287,9 +284,13 @@ class Text
             // Find any text fields inside of the matrix block
             if ($superTableBlockTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fields = $superTableBlockTypeModel->getCustomFields();
-
-                foreach ($fields as $field) {
+                /** @var ?FieldLayout $layout */
+                // The SuperTableBlockType class lacks @mixin FieldLayoutBehavior in its annotations
+                /** @phpstan-ignore-next-line */
+                $layout = $superTableBlockTypeModel->getFieldLayout();
+                $fieldElements = $layout->getCustomFieldElements();
+                foreach ($fieldElements as $fieldElement) {
+                    $field = $fieldElement->getField();
                     /** @var array $fieldClasses */
                     foreach ($fieldClasses as $fieldClassKey) {
                         if ($field instanceof $fieldClassKey) {
@@ -337,9 +338,7 @@ class Text
             return $text;
         }
 
-        $result = is_array($keywords)
-            ? implode(', ', array_slice(array_keys($keywords), 0, $limit))
-            : (string)$keywords;
+        $result = implode(', ', array_slice(array_keys($keywords), 0, $limit));
 
         return self::sanitizeUserInput($result);
     }
@@ -375,9 +374,7 @@ class Text
             return $text;
         }
 
-        $result = is_array($sentences)
-            ? implode(' ', $sentences)
-            : (string)$sentences;
+        $result = implode(' ', $sentences);
 
         return self::sanitizeUserInput($result);
     }
@@ -406,7 +403,7 @@ class Text
         // Change single brackets to parenthesis
         $str = preg_replace('/{/', '(', $str);
         $str = preg_replace('/}/', ')', $str);
-        if (empty($str) || is_array($str)) {
+        if (empty($str)) {
             $str = '';
         }
 

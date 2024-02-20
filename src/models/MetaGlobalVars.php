@@ -83,7 +83,7 @@ class MetaGlobalVars extends InheritableSettingsModel
      */
     public $seoImageDescription;
     /**
-     * @var string The search engine friendly URL that you want the search engines to treat as authoritative.
+     * @var string|object The search engine friendly URL that you want the search engines to treat as authoritative.
      */
     public $canonicalUrl;
     /**

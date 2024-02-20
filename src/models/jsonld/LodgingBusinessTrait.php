@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for LodgingBusiness.
  *
  * @author    nystudio107
@@ -22,40 +22,62 @@ namespace nystudio107\seomatic\models\jsonld;
 trait LodgingBusinessTrait
 {
     /**
-     * The number of rooms (excluding bathrooms and closets) of the accommodation
-     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
-     * The type of room can be put in the unitText property of the
-     * QuantitativeValue.
-     *
-     * @var float|Number|QuantitativeValue
-     */
-    public $numberOfRooms;
-
-    /**
-     * A language someone may use with or at the item, service or place. Please
-     * use one of the language codes from the [IETF BCP 47
-     * standard](http://tools.ietf.org/html/bcp47). See also [[inLanguage]].
-     *
-     * @var string|Text|Language
-     */
-    public $availableLanguage;
-
-    /**
      * An amenity feature (e.g. a characteristic or service) of the Accommodation.
      * This generic property does not make a statement about whether the feature
      * is included in an offer for the main accommodation or available at extra
      * costs.
      *
-     * @var LocationFeatureSpecification
+     * @var array|LocationFeatureSpecification|LocationFeatureSpecification[]
      */
     public $amenityFeature;
 
     /**
      * The latest someone may check out of a lodging establishment.
      *
-     * @var DateTime|Time
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
      */
     public $checkoutTime;
+
+    /**
+     * A language someone may use with or at the item, service or place. Please
+     * use one of the language codes from the [IETF BCP 47
+     * standard](http://tools.ietf.org/html/bcp47). See also [[inLanguage]].
+     *
+     * @var string|array|Language|Language[]|array|Text|Text[]
+     */
+    public $availableLanguage;
+
+    /**
+     * An intended audience, i.e. a group for whom something was created.
+     *
+     * @var array|Audience|Audience[]
+     */
+    public $audience;
+
+    /**
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfRooms;
+
+    /**
+     * The earliest someone may check into a lodging establishment.
+     *
+     * @var array|Time|Time[]|array|DateTime|DateTime[]
+     */
+    public $checkinTime;
+
+    /**
+     * Indicates whether pets are allowed to enter the accommodation or lodging
+     * business. More detailed information can be put in a text value.
+     *
+     * @var bool|string|array|Boolean|Boolean[]|array|Text|Text[]
+     */
+    public $petsAllowed;
 
     /**
      * An official rating for a lodging business or food establishment, e.g. from
@@ -63,29 +85,7 @@ trait LodgingBusinessTrait
      * indicate the rating organization, e.g. as an Organization with name such as
      * (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).
      *
-     * @var Rating
+     * @var array|Rating|Rating[]
      */
     public $starRating;
-
-    /**
-     * An intended audience, i.e. a group for whom something was created.
-     *
-     * @var Audience
-     */
-    public $audience;
-
-    /**
-     * Indicates whether pets are allowed to enter the accommodation or lodging
-     * business. More detailed information can be put in a text value.
-     *
-     * @var string|bool|Text|Boolean
-     */
-    public $petsAllowed;
-
-    /**
-     * The earliest someone may check into a lodging establishment.
-     *
-     * @var DateTime|Time
-     */
-    public $checkinTime;
 }

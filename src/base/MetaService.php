@@ -13,8 +13,6 @@ namespace nystudio107\seomatic\base;
 
 use craft\base\Component;
 
-use nystudio107\seomatic\Seomatic;
-
 /**
  * @author    nystudio107
  * @package   Seomatic
@@ -35,6 +33,7 @@ abstract class MetaService extends Component implements MetaServiceInterface
      */
     public function get(string $key, string $handle = '')
     {
+        return null;
     }
 
     /**
@@ -42,6 +41,9 @@ abstract class MetaService extends Component implements MetaServiceInterface
      */
     public function create(array $config = [], $add = true)
     {
+        // The non-abstract classes always return a MetaItem
+        /** @phpstan-ignore-next-line */
+        return null;
     }
 
     /**
@@ -49,6 +51,7 @@ abstract class MetaService extends Component implements MetaServiceInterface
      */
     public function add($metaItem, string $handle = '')
     {
+        return null;
     }
 
     /**
@@ -56,6 +59,7 @@ abstract class MetaService extends Component implements MetaServiceInterface
      */
     public function render()
     {
+        return null;
     }
 
     /**
@@ -63,5 +67,6 @@ abstract class MetaService extends Component implements MetaServiceInterface
      */
     public function container(string $handle = '')
     {
+        return null;
     }
 }

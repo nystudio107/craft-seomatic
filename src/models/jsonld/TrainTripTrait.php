@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for TrainTrip.
  *
  * @author    nystudio107
@@ -22,44 +22,44 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TrainTripTrait
 {
     /**
-     * The platform where the train arrives.
+     * The station from which the train departs.
      *
-     * @var string|Text
+     * @var array|TrainStation|TrainStation[]
      */
-    public $arrivalPlatform;
-
-    /**
-     * The platform from which the train departs.
-     *
-     * @var string|Text
-     */
-    public $departurePlatform;
-
-    /**
-     * The station where the train trip ends.
-     *
-     * @var TrainStation
-     */
-    public $arrivalStation;
-
-    /**
-     * The name of the train (e.g. The Orient Express).
-     *
-     * @var string|Text
-     */
-    public $trainName;
+    public $departureStation;
 
     /**
      * The unique identifier for the train.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $trainNumber;
 
     /**
-     * The station from which the train departs.
+     * The station where the train trip ends.
      *
-     * @var TrainStation
+     * @var array|TrainStation|TrainStation[]
      */
-    public $departureStation;
+    public $arrivalStation;
+
+    /**
+     * The platform where the train arrives.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $arrivalPlatform;
+
+    /**
+     * The name of the train (e.g. The Orient Express).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $trainName;
+
+    /**
+     * The platform from which the train departs.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $departurePlatform;
 }

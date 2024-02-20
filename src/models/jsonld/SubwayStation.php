@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * SubwayStation - A subway station.
  *
  * @author    nystudio107
@@ -72,64 +72,65 @@ class SubwayStation extends MetaJsonLd implements SubwayStationInterface, CivicS
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalProperty' => ['PropertyValue'],
-            'additionalType' => ['URL'],
-            'address' => ['Text', 'PostalAddress'],
-            'aggregateRating' => ['AggregateRating'],
-            'alternateName' => ['Text'],
-            'amenityFeature' => ['LocationFeatureSpecification'],
-            'branchCode' => ['Text'],
-            'containedIn' => ['Place'],
-            'containedInPlace' => ['Place'],
-            'containsPlace' => ['Place'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'event' => ['Event'],
-            'events' => ['Event'],
-            'faxNumber' => ['Text'],
-            'geo' => ['GeoCoordinates', 'GeoShape'],
-            'geoContains' => ['Place', 'GeospatialGeometry'],
-            'geoCoveredBy' => ['GeospatialGeometry', 'Place'],
-            'geoCovers' => ['GeospatialGeometry', 'Place'],
-            'geoCrosses' => ['GeospatialGeometry', 'Place'],
-            'geoDisjoint' => ['GeospatialGeometry', 'Place'],
-            'geoEquals' => ['GeospatialGeometry', 'Place'],
-            'geoIntersects' => ['GeospatialGeometry', 'Place'],
-            'geoOverlaps' => ['GeospatialGeometry', 'Place'],
-            'geoTouches' => ['GeospatialGeometry', 'Place'],
-            'geoWithin' => ['GeospatialGeometry', 'Place'],
-            'globalLocationNumber' => ['Text'],
-            'hasDriveThroughService' => ['Boolean'],
-            'hasMap' => ['URL', 'Map'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'isAccessibleForFree' => ['Boolean'],
-            'isicV4' => ['Text'],
-            'keywords' => ['URL', 'DefinedTerm', 'Text'],
-            'latitude' => ['Number', 'Text'],
-            'logo' => ['ImageObject', 'URL'],
-            'longitude' => ['Text', 'Number'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'map' => ['URL'],
-            'maps' => ['URL'],
-            'maximumAttendeeCapacity' => ['Integer'],
-            'name' => ['Text'],
-            'openingHours' => ['Text'],
-            'openingHoursSpecification' => ['OpeningHoursSpecification'],
-            'photo' => ['Photograph', 'ImageObject'],
-            'photos' => ['ImageObject', 'Photograph'],
-            'potentialAction' => ['Action'],
-            'publicAccess' => ['Boolean'],
-            'review' => ['Review'],
-            'reviews' => ['Review'],
-            'sameAs' => ['URL'],
-            'slogan' => ['Text'],
-            'smokingAllowed' => ['Boolean'],
-            'specialOpeningHoursSpecification' => ['OpeningHoursSpecification'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'telephone' => ['Text'],
-            'tourBookingPage' => ['URL'],
-            'url' => ['URL'],
+            'additionalProperty' => ['array', 'PropertyValue', 'PropertyValue[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'address' => ['array', 'Text', 'Text[]', 'array', 'PostalAddress', 'PostalAddress[]'],
+            'aggregateRating' => ['array', 'AggregateRating', 'AggregateRating[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'amenityFeature' => ['array', 'LocationFeatureSpecification', 'LocationFeatureSpecification[]'],
+            'branchCode' => ['array', 'Text', 'Text[]'],
+            'containedIn' => ['array', 'Place', 'Place[]'],
+            'containedInPlace' => ['array', 'Place', 'Place[]'],
+            'containsPlace' => ['array', 'Place', 'Place[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'event' => ['array', 'Event', 'Event[]'],
+            'events' => ['array', 'Event', 'Event[]'],
+            'faxNumber' => ['array', 'Text', 'Text[]'],
+            'geo' => ['array', 'GeoShape', 'GeoShape[]', 'array', 'GeoCoordinates', 'GeoCoordinates[]'],
+            'geoContains' => ['array', 'GeospatialGeometry', 'GeospatialGeometry[]', 'array', 'Place', 'Place[]'],
+            'geoCoveredBy' => ['array', 'Place', 'Place[]', 'array', 'GeospatialGeometry', 'GeospatialGeometry[]'],
+            'geoCovers' => ['array', 'GeospatialGeometry', 'GeospatialGeometry[]', 'array', 'Place', 'Place[]'],
+            'geoCrosses' => ['array', 'GeospatialGeometry', 'GeospatialGeometry[]', 'array', 'Place', 'Place[]'],
+            'geoDisjoint' => ['array', 'GeospatialGeometry', 'GeospatialGeometry[]', 'array', 'Place', 'Place[]'],
+            'geoEquals' => ['array', 'Place', 'Place[]', 'array', 'GeospatialGeometry', 'GeospatialGeometry[]'],
+            'geoIntersects' => ['array', 'Place', 'Place[]', 'array', 'GeospatialGeometry', 'GeospatialGeometry[]'],
+            'geoOverlaps' => ['array', 'Place', 'Place[]', 'array', 'GeospatialGeometry', 'GeospatialGeometry[]'],
+            'geoTouches' => ['array', 'Place', 'Place[]', 'array', 'GeospatialGeometry', 'GeospatialGeometry[]'],
+            'geoWithin' => ['array', 'Place', 'Place[]', 'array', 'GeospatialGeometry', 'GeospatialGeometry[]'],
+            'globalLocationNumber' => ['array', 'Text', 'Text[]'],
+            'hasCertification' => ['array', 'Certification', 'Certification[]'],
+            'hasDriveThroughService' => ['array', 'Boolean', 'Boolean[]'],
+            'hasMap' => ['array', 'Map', 'Map[]', 'array', 'URL', 'URL[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'isAccessibleForFree' => ['array', 'Boolean', 'Boolean[]'],
+            'isicV4' => ['array', 'Text', 'Text[]'],
+            'keywords' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'latitude' => ['array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'logo' => ['array', 'URL', 'URL[]', 'array', 'ImageObject', 'ImageObject[]'],
+            'longitude' => ['array', 'Number', 'Number[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'map' => ['array', 'URL', 'URL[]'],
+            'maps' => ['array', 'URL', 'URL[]'],
+            'maximumAttendeeCapacity' => ['array', 'Integer', 'Integer[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'openingHours' => ['array', 'Text', 'Text[]'],
+            'openingHoursSpecification' => ['array', 'OpeningHoursSpecification', 'OpeningHoursSpecification[]'],
+            'photo' => ['array', 'Photograph', 'Photograph[]', 'array', 'ImageObject', 'ImageObject[]'],
+            'photos' => ['array', 'Photograph', 'Photograph[]', 'array', 'ImageObject', 'ImageObject[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'publicAccess' => ['array', 'Boolean', 'Boolean[]'],
+            'review' => ['array', 'Review', 'Review[]'],
+            'reviews' => ['array', 'Review', 'Review[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'slogan' => ['array', 'Text', 'Text[]'],
+            'smokingAllowed' => ['array', 'Boolean', 'Boolean[]'],
+            'specialOpeningHoursSpecification' => ['array', 'OpeningHoursSpecification', 'OpeningHoursSpecification[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'telephone' => ['array', 'Text', 'Text[]'],
+            'tourBookingPage' => ['array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -141,7 +142,7 @@ class SubwayStation extends MetaJsonLd implements SubwayStationInterface, CivicS
     {
         return [
             'additionalProperty' => 'A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.  Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism. ',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'address' => 'Physical address of the item.',
             'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
             'alternateName' => 'An alias for the item.',
@@ -167,6 +168,7 @@ class SubwayStation extends MetaJsonLd implements SubwayStationInterface, CivicS
             'geoTouches' => 'Represents spatial relations in which two geometries (or the places they represent) touch: "they have at least one boundary point in common, but no interior points." (A symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).)',
             'geoWithin' => 'Represents a relationship between two geometries (or the places they represent), relating a geometry to one that contains it, i.e. it is inside (i.e. within) its interior. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).',
             'globalLocationNumber' => 'The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+            'hasCertification' => 'Certification information about a product, organization, service, place, or person.',
             'hasDriveThroughService' => 'Indicates whether some facility (e.g. [[FoodEstablishment]], [[CovidTestingFacility]]) offers a service that can be used by driving through in a car. In the case of [[CovidTestingFacility]] such facilities could potentially help with social distancing from other potentially-infected users.',
             'hasMap' => 'A URL to a map of the place.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
@@ -187,7 +189,7 @@ class SubwayStation extends MetaJsonLd implements SubwayStationInterface, CivicS
             'photo' => 'A photograph of this place.',
             'photos' => 'Photographs of this place.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
-            'publicAccess' => 'A flag to signal that the [[Place]] is open to public visitors.  If this property is omitted there is no assumed default boolean value',
+            'publicAccess' => 'A flag to signal that the [[Place]] is open to public visitors.  If this property is omitted there is no assumed default boolean value.',
             'review' => 'A review of the item.',
             'reviews' => 'Review of the item.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',

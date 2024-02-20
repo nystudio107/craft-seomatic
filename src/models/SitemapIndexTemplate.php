@@ -131,7 +131,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
         $groupId = $params['groupId'];
         $siteId = $params['siteId'];
         if (Seomatic::$settings->siteGroupsSeparate) {
-            /** @var SiteGroup $siteGroup */
+            /** @var SiteGroup|null $siteGroup */
             $siteGroup = Craft::$app->getSites()->getGroupById($groupId);
             if ($siteGroup === null) {
                 throw new NotFoundHttpException(Craft::t('seomatic', 'Sitemap.xml not found for groupId {groupId}', [
@@ -163,7 +163,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             // One sitemap entry for each MeteBundle
             $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
             Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
-            /** @var  $metaBundle MetaBundle */
+            /** @var MetaBundle $metaBundle */
             foreach ($metaBundles as $metaBundle) {
                 $sitemapUrls = $metaBundle->metaSitemapVars->sitemapUrls;
                 // Check to see if robots is `none` or `no index`
@@ -187,6 +187,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                     );
                     // Get all of the elements for this meta bundle type
                     $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+                    $totalElements = 0;
                     if ($seoElement !== null) {
                         // Ensure `null` so that the resulting element query is correct
                         if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {

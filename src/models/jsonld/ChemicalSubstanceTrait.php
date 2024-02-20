@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ChemicalSubstance.
  *
  * @author    nystudio107
@@ -22,16 +22,9 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ChemicalSubstanceTrait
 {
     /**
-     * A role played by the BioChemEntity within a chemical context.
-     *
-     * @var DefinedTerm
-     */
-    public $chemicalRole;
-
-    /**
      * Intended use of the BioChemEntity by humans.
      *
-     * @var DefinedTerm
+     * @var array|DefinedTerm|DefinedTerm[]
      */
     public $potentialUse;
 
@@ -39,7 +32,14 @@ trait ChemicalSubstanceTrait
      * The chemical composition describes the identity and relative ratio of the
      * chemical elements that make up the substance.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $chemicalComposition;
+
+    /**
+     * A role played by the BioChemEntity within a chemical context.
+     *
+     * @var array|DefinedTerm|DefinedTerm[]
+     */
+    public $chemicalRole;
 }

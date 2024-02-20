@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * PreOrderAction - An agent orders a (not yet released) object/product/service to be
  * delivered/sent.
  *
@@ -73,33 +73,33 @@ class PreOrderAction extends MetaJsonLd implements PreOrderActionInterface, Trad
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'actionStatus' => ['ActionStatusType'],
-            'additionalType' => ['URL'],
-            'agent' => ['Organization', 'Person'],
-            'alternateName' => ['Text'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'endTime' => ['DateTime', 'Time'],
-            'error' => ['Thing'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'instrument' => ['Thing'],
-            'location' => ['Place', 'Text', 'VirtualLocation', 'PostalAddress'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'object' => ['Thing'],
-            'participant' => ['Organization', 'Person'],
-            'potentialAction' => ['Action'],
-            'price' => ['Text', 'Number'],
-            'priceCurrency' => ['Text'],
-            'priceSpecification' => ['PriceSpecification'],
-            'provider' => ['Organization', 'Person'],
-            'result' => ['Thing'],
-            'sameAs' => ['URL'],
-            'startTime' => ['Time', 'DateTime'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'target' => ['URL', 'EntryPoint'],
-            'url' => ['URL'],
+            'actionStatus' => ['array', 'ActionStatusType', 'ActionStatusType[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'agent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'endTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'error' => ['array', 'Thing', 'Thing[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'instrument' => ['array', 'Thing', 'Thing[]'],
+            'location' => ['array', 'PostalAddress', 'PostalAddress[]', 'array', 'VirtualLocation', 'VirtualLocation[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'object' => ['array', 'Thing', 'Thing[]'],
+            'participant' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'price' => ['array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'priceCurrency' => ['array', 'Text', 'Text[]'],
+            'priceSpecification' => ['array', 'PriceSpecification', 'PriceSpecification[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'result' => ['array', 'Thing', 'Thing[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'startTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'target' => ['array', 'EntryPoint', 'EntryPoint[]', 'array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -111,7 +111,7 @@ class PreOrderAction extends MetaJsonLd implements PreOrderActionInterface, Trad
     {
         return [
             'actionStatus' => 'Indicates the current disposition of the Action.',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'agent' => 'The direct performer or driver of the action (animate or inanimate). E.g. *John* wrote a book.',
             'alternateName' => 'An alias for the item.',
             'description' => 'A description of the item.',

@@ -17,6 +17,7 @@ use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\errors\SiteNotFoundException;
 use craft\events\RegisterUrlRulesEvent;
+use craft\models\Section;
 use craft\web\UrlManager;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
@@ -150,7 +151,6 @@ class Sitemaps extends Component implements SitemapInterface
         ];
         // Add all of the frontend container routes
         foreach ($this->sitemapTemplateContainer->data as $sitemapTemplate) {
-            /** @var $sitemapTemplate FrontendTemplate */
             $rules = array_merge(
                 $rules,
                 $sitemapTemplate->routeRules()
@@ -172,6 +172,7 @@ class Sitemaps extends Component implements SitemapInterface
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
         if ($seoElement) {
             if (!empty($seoElement::typeMenuFromHandle($metaBundle->sourceHandle))) {
+                /** @var Section|null $section */
                 $section = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
                 if ($section !== null) {
                     $entryTypes = $section->getEntryTypes();
@@ -227,6 +228,8 @@ class Sitemaps extends Component implements SitemapInterface
         if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live' && Seomatic::$settings->submitSitemaps) {
             // Submit the sitemap to each search engine
             $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
+            // Array is currently empty, but leave the code in place in case submission urls return
+            /** @phpstan-ignore-next-line */
             foreach ($searchEngineUrls as &$url) {
                 $groups = Craft::$app->getSites()->getAllGroups();
                 foreach ($groups as $group) {
@@ -304,6 +307,8 @@ class Sitemaps extends Component implements SitemapInterface
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
             // Submit the sitemap to each search engine
             $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
+            // Array is currently empty, but leave the code in place in case submission urls return
+            /** @phpstan-ignore-next-line */
             foreach ($searchEngineUrls as &$url) {
                 $sitemapUrl = $this->sitemapUrlForBundle($sourceBundleType, $sourceHandle, $sourceSiteId);
                 if (!empty($sitemapUrl)) {
@@ -382,6 +387,8 @@ class Sitemaps extends Component implements SitemapInterface
         if (Seomatic::$settings->sitemapsEnabled && Seomatic::$environment === 'live' && Seomatic::$settings->submitSitemaps) {
             // Submit the sitemap to each search engine
             $searchEngineUrls = self::SEARCH_ENGINE_SUBMISSION_URLS;
+            // Array is currently empty, but leave the code in place in case submission urls return
+            /** @phpstan-ignore-next-line */
             foreach ($searchEngineUrls as &$url) {
                 $sitemapUrl = $this->sitemapCustomUrlForSiteId($siteId);
                 if (!empty($sitemapUrl)) {
@@ -498,11 +505,11 @@ class Sitemaps extends Component implements SitemapInterface
      * Invalidate the sitemap cache passed in $handle
      *
      * @param string $handle
-     * @param int $siteId
+     * @param int|null $siteId
      * @param string $type
      * @param bool $invalidateCache
      */
-    public function invalidateSitemapCache(string $handle, int $siteId, string $type, bool $invalidateCache = true)
+    public function invalidateSitemapCache(string $handle, ?int $siteId, string $type, bool $invalidateCache = true)
     {
         // Since we want a stale-while-revalidate pattern, only invalidate the cache if we're asked to
         if ($invalidateCache) {

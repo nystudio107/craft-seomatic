@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * ActionAccessSpecification - A set of requirements that must be fulfilled in order to perform an Action.
  *
  * @author    nystudio107
@@ -71,25 +71,25 @@ class ActionAccessSpecification extends MetaJsonLd implements ActionAccessSpecif
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'availabilityEnds' => ['DateTime', 'Time', 'Date'],
-            'availabilityStarts' => ['Date', 'Time', 'DateTime'],
-            'category' => ['URL', 'CategoryCode', 'Text', 'Thing', 'PhysicalActivityCategory'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'eligibleRegion' => ['Place', 'Text', 'GeoShape'],
-            'expectsAcceptanceOf' => ['Offer'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'ineligibleRegion' => ['Place', 'GeoShape', 'Text'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'requiresSubscription' => ['MediaSubscription', 'Boolean'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'availabilityEnds' => ['array', 'Time', 'Time[]', 'array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'availabilityStarts' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
+            'category' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Thing', 'Thing[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'eligibleRegion' => ['array', 'GeoShape', 'GeoShape[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
+            'expectsAcceptanceOf' => ['array', 'Offer', 'Offer[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'ineligibleRegion' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'GeoShape', 'GeoShape[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'requiresSubscription' => ['array', 'MediaSubscription', 'MediaSubscription[]', 'array', 'Boolean', 'Boolean[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -100,7 +100,7 @@ class ActionAccessSpecification extends MetaJsonLd implements ActionAccessSpecif
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'availabilityEnds' => 'The end of the availability of the product or service included in the offer.',
             'availabilityStarts' => 'The beginning of the availability of the product or service included in the offer.',

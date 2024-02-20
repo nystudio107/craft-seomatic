@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for SpecialAnnouncement.
  *
  * @author    nystudio107
@@ -22,73 +22,39 @@ namespace nystudio107\seomatic\models\jsonld;
 trait SpecialAnnouncementTrait
 {
     /**
-     * Statistical information about the spread of a disease, either as
-     * [[WebContent]], or   described directly as a [[Dataset]], or the specific
-     * [[Observation]]s in the dataset. When a [[WebContent]] URL is   provided,
-     * the page indicated might also contain more such markup.
-     *
-     * @var WebContent|Observation|Dataset|URL
-     */
-    public $diseaseSpreadStatistics;
-
-    /**
-     * Information about public transport closures.
-     *
-     * @var WebContent|URL
-     */
-    public $publicTransportClosuresInfo;
-
-    /**
-     * governmentBenefitsInfo provides information about government benefits
-     * associated with a SpecialAnnouncement.
-     *
-     * @var GovernmentService
-     */
-    public $governmentBenefitsInfo;
-
-    /**
      * Guidelines about quarantine rules, e.g. in the context of a pandemic.
      *
-     * @var URL|WebContent
+     * @var array|WebContent|WebContent[]|array|URL|URL[]
      */
     public $quarantineGuidelines;
 
     /**
-     * Information about travel bans, e.g. in the context of a pandemic.
+     * Information about public transport closures.
      *
-     * @var URL|WebContent
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
      */
-    public $travelBans;
-
-    /**
-     * The URL for a feed, e.g. associated with a podcast series, blog, or series
-     * of date-stamped updates. This is usually RSS or Atom.
-     *
-     * @var DataFeed|URL
-     */
-    public $webFeed;
-
-    /**
-     * Information about disease prevention.
-     *
-     * @var WebContent|URL
-     */
-    public $diseasePreventionInfo;
+    public $publicTransportClosuresInfo;
 
     /**
      * Publication date of an online listing.
      *
-     * @var DateTime|Date
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $datePosted;
 
     /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
+     * Information about disease prevention.
      *
-     * @var string|URL|CategoryCode|Text|Thing|PhysicalActivityCategory
+     * @var array|WebContent|WebContent[]|array|URL|URL[]
      */
-    public $category;
+    public $diseasePreventionInfo;
+
+    /**
+     * Information about travel bans, e.g. in the context of a pandemic.
+     *
+     * @var array|WebContent|WebContent[]|array|URL|URL[]
+     */
+    public $travelBans;
 
     /**
      * Indicates a specific [[CivicStructure]] or [[LocalBusiness]] associated
@@ -96,31 +62,65 @@ trait SpecialAnnouncementTrait
      * business with special opening hours. For a larger geographic region like a
      * quarantine of an entire region, use [[spatialCoverage]].
      *
-     * @var CivicStructure|LocalBusiness
+     * @var array|CivicStructure|CivicStructure[]|array|LocalBusiness|LocalBusiness[]
      */
     public $announcementLocation;
 
     /**
-     * Information about school closures.
+     * governmentBenefitsInfo provides information about government benefits
+     * associated with a SpecialAnnouncement.
      *
-     * @var WebContent|URL
+     * @var array|GovernmentService|GovernmentService[]
      */
-    public $schoolClosuresInfo;
+    public $governmentBenefitsInfo;
 
     /**
      * Indicates a page with news updates and guidelines. This could often be (but
      * is not required to be) the main page containing [[SpecialAnnouncement]]
      * markup on a site.
      *
-     * @var WebContent|URL
+     * @var array|WebContent|WebContent[]|array|URL|URL[]
      */
     public $newsUpdatesAndGuidelines;
+
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Thing|Thing[]
+     */
+    public $category;
+
+    /**
+     * Information about school closures.
+     *
+     * @var array|WebContent|WebContent[]|array|URL|URL[]
+     */
+    public $schoolClosuresInfo;
+
+    /**
+     * The URL for a feed, e.g. associated with a podcast series, blog, or series
+     * of date-stamped updates. This is usually RSS or Atom.
+     *
+     * @var array|DataFeed|DataFeed[]|array|URL|URL[]
+     */
+    public $webFeed;
+
+    /**
+     * Statistical information about the spread of a disease, either as
+     * [[WebContent]], or   described directly as a [[Dataset]], or the specific
+     * [[Observation]]s in the dataset. When a [[WebContent]] URL is   provided,
+     * the page indicated might also contain more such markup.
+     *
+     * @var array|URL|URL[]|array|Dataset|Dataset[]|array|Observation|Observation[]|array|WebContent|WebContent[]
+     */
+    public $diseaseSpreadStatistics;
 
     /**
      * Information about getting tested (for a [[MedicalCondition]]), e.g. in the
      * context of a pandemic.
      *
-     * @var WebContent|URL
+     * @var array|WebContent|WebContent[]|array|URL|URL[]
      */
     public $gettingTestedInfo;
 }

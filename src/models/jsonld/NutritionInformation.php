@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * NutritionInformation - Nutritional information about the recipe.
  *
  * @author    nystudio107
@@ -72,30 +72,30 @@ class NutritionInformation extends MetaJsonLd implements NutritionInformationInt
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'calories' => ['Energy'],
-            'carbohydrateContent' => ['Mass'],
-            'cholesterolContent' => ['Mass'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'fatContent' => ['Mass'],
-            'fiberContent' => ['Mass'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'proteinContent' => ['Mass'],
-            'sameAs' => ['URL'],
-            'saturatedFatContent' => ['Mass'],
-            'servingSize' => ['Text'],
-            'sodiumContent' => ['Mass'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'sugarContent' => ['Mass'],
-            'transFatContent' => ['Mass'],
-            'unsaturatedFatContent' => ['Mass'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'calories' => ['array', 'Energy', 'Energy[]'],
+            'carbohydrateContent' => ['array', 'Mass', 'Mass[]'],
+            'cholesterolContent' => ['array', 'Mass', 'Mass[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'fatContent' => ['array', 'Mass', 'Mass[]'],
+            'fiberContent' => ['array', 'Mass', 'Mass[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'proteinContent' => ['array', 'Mass', 'Mass[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'saturatedFatContent' => ['array', 'Mass', 'Mass[]'],
+            'servingSize' => ['array', 'Text', 'Text[]'],
+            'sodiumContent' => ['array', 'Mass', 'Mass[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'sugarContent' => ['array', 'Mass', 'Mass[]'],
+            'transFatContent' => ['array', 'Mass', 'Mass[]'],
+            'unsaturatedFatContent' => ['array', 'Mass', 'Mass[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -106,7 +106,7 @@ class NutritionInformation extends MetaJsonLd implements NutritionInformationInt
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'calories' => 'The number of calories.',
             'carbohydrateContent' => 'The number of grams of carbohydrates.',

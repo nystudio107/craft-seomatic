@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Demand - A demand entity represents the public, not necessarily binding, not
  * necessarily exclusive, announcement by an organization or person to seek a
  * certain type of goods or services. For describing demand using this type,
@@ -74,52 +74,52 @@ class Demand extends MetaJsonLd implements DemandInterface, IntangibleInterface,
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'acceptedPaymentMethod' => ['PaymentMethod', 'LoanOrCredit'],
-            'additionalType' => ['URL'],
-            'advanceBookingRequirement' => ['QuantitativeValue'],
-            'alternateName' => ['Text'],
-            'areaServed' => ['Text', 'Place', 'GeoShape', 'AdministrativeArea'],
-            'asin' => ['Text', 'URL'],
-            'availability' => ['ItemAvailability'],
-            'availabilityEnds' => ['DateTime', 'Time', 'Date'],
-            'availabilityStarts' => ['Date', 'Time', 'DateTime'],
-            'availableAtOrFrom' => ['Place'],
-            'availableDeliveryMethod' => ['DeliveryMethod'],
-            'businessFunction' => ['BusinessFunction'],
-            'deliveryLeadTime' => ['QuantitativeValue'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'eligibleCustomerType' => ['BusinessEntityType'],
-            'eligibleDuration' => ['QuantitativeValue'],
-            'eligibleQuantity' => ['QuantitativeValue'],
-            'eligibleRegion' => ['Place', 'Text', 'GeoShape'],
-            'eligibleTransactionVolume' => ['PriceSpecification'],
-            'gtin' => ['Text', 'URL'],
-            'gtin12' => ['Text'],
-            'gtin13' => ['Text'],
-            'gtin14' => ['Text'],
-            'gtin8' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'includesObject' => ['TypeAndQuantityNode'],
-            'ineligibleRegion' => ['Place', 'GeoShape', 'Text'],
-            'inventoryLevel' => ['QuantitativeValue'],
-            'itemCondition' => ['OfferItemCondition'],
-            'itemOffered' => ['Product', 'Service', 'MenuItem', 'CreativeWork', 'Event', 'AggregateOffer', 'Trip'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'mpn' => ['Text'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'priceSpecification' => ['PriceSpecification'],
-            'sameAs' => ['URL'],
-            'seller' => ['Organization', 'Person'],
-            'serialNumber' => ['Text'],
-            'sku' => ['Text'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
-            'validFrom' => ['Date', 'DateTime'],
-            'validThrough' => ['Date', 'DateTime'],
-            'warranty' => ['WarrantyPromise'],
+            'acceptedPaymentMethod' => ['array', 'LoanOrCredit', 'LoanOrCredit[]', 'array', 'PaymentMethod', 'PaymentMethod[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'advanceBookingRequirement' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'areaServed' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]'],
+            'asin' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
+            'availability' => ['array', 'ItemAvailability', 'ItemAvailability[]'],
+            'availabilityEnds' => ['array', 'Time', 'Time[]', 'array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'availabilityStarts' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
+            'availableAtOrFrom' => ['array', 'Place', 'Place[]'],
+            'availableDeliveryMethod' => ['array', 'DeliveryMethod', 'DeliveryMethod[]'],
+            'businessFunction' => ['array', 'BusinessFunction', 'BusinessFunction[]'],
+            'deliveryLeadTime' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'eligibleCustomerType' => ['array', 'BusinessEntityType', 'BusinessEntityType[]'],
+            'eligibleDuration' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'eligibleQuantity' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'eligibleRegion' => ['array', 'GeoShape', 'GeoShape[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
+            'eligibleTransactionVolume' => ['array', 'PriceSpecification', 'PriceSpecification[]'],
+            'gtin' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'gtin12' => ['array', 'Text', 'Text[]'],
+            'gtin13' => ['array', 'Text', 'Text[]'],
+            'gtin14' => ['array', 'Text', 'Text[]'],
+            'gtin8' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'includesObject' => ['array', 'TypeAndQuantityNode', 'TypeAndQuantityNode[]'],
+            'ineligibleRegion' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'GeoShape', 'GeoShape[]'],
+            'inventoryLevel' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'itemCondition' => ['array', 'OfferItemCondition', 'OfferItemCondition[]'],
+            'itemOffered' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Trip', 'Trip[]', 'array', 'MenuItem', 'MenuItem[]', 'array', 'Event', 'Event[]', 'array', 'Product', 'Product[]', 'array', 'AggregateOffer', 'AggregateOffer[]', 'array', 'Service', 'Service[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mpn' => ['array', 'Text', 'Text[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'priceSpecification' => ['array', 'PriceSpecification', 'PriceSpecification[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'seller' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'serialNumber' => ['array', 'Text', 'Text[]'],
+            'sku' => ['array', 'Text', 'Text[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'validFrom' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'validThrough' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'warranty' => ['array', 'WarrantyPromise', 'WarrantyPromise[]'],
         ];
     }
 
@@ -131,7 +131,7 @@ class Demand extends MetaJsonLd implements DemandInterface, IntangibleInterface,
     {
         return [
             'acceptedPaymentMethod' => 'The payment method(s) accepted by seller for this offer.',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'advanceBookingRequirement' => 'The amount of time that is required between accepting the offer and the actual usage of the resource or service.',
             'alternateName' => 'An alias for the item.',
             'areaServed' => 'The geographic area where a service or offered item is provided.',

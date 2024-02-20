@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * EducationalOccupationalProgram - A program offered by an institution which determines the learning progress
  * to achieve an outcome, usually a credential like a degree or certificate.
  * This would define a discrete set of opportunities (e.g., job, courses) that
@@ -76,42 +76,42 @@ class EducationalOccupationalProgram extends MetaJsonLd implements EducationalOc
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'applicationDeadline' => ['Date'],
-            'applicationStartDate' => ['Date'],
-            'dayOfWeek' => ['DayOfWeek'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'educationalCredentialAwarded' => ['URL', 'EducationalOccupationalCredential', 'Text'],
-            'educationalProgramMode' => ['Text', 'URL'],
-            'endDate' => ['DateTime', 'Date'],
-            'financialAidEligible' => ['DefinedTerm', 'Text'],
-            'hasCourse' => ['Course'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'maximumEnrollment' => ['Integer'],
-            'name' => ['Text'],
-            'numberOfCredits' => ['StructuredValue', 'Integer'],
-            'occupationalCategory' => ['Text', 'CategoryCode'],
-            'occupationalCredentialAwarded' => ['EducationalOccupationalCredential', 'Text', 'URL'],
-            'offers' => ['Demand', 'Offer'],
-            'potentialAction' => ['Action'],
-            'programPrerequisites' => ['Text', 'EducationalOccupationalCredential', 'Course', 'AlignmentObject'],
-            'programType' => ['DefinedTerm', 'Text'],
-            'provider' => ['Organization', 'Person'],
-            'salaryUponCompletion' => ['MonetaryAmountDistribution'],
-            'sameAs' => ['URL'],
-            'startDate' => ['DateTime', 'Date'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'termDuration' => ['Duration'],
-            'termsPerYear' => ['Number'],
-            'timeOfDay' => ['Text'],
-            'timeToComplete' => ['Duration'],
-            'trainingSalary' => ['MonetaryAmountDistribution'],
-            'typicalCreditsPerTerm' => ['Integer', 'StructuredValue'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'applicationDeadline' => ['array', 'Date', 'Date[]'],
+            'applicationStartDate' => ['array', 'Date', 'Date[]'],
+            'dayOfWeek' => ['array', 'DayOfWeek', 'DayOfWeek[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'educationalCredentialAwarded' => ['array', 'URL', 'URL[]', 'array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]'],
+            'educationalProgramMode' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'endDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'financialAidEligible' => ['array', 'Text', 'Text[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'hasCourse' => ['array', 'Course', 'Course[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'maximumEnrollment' => ['array', 'Integer', 'Integer[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'numberOfCredits' => ['array', 'Integer', 'Integer[]', 'array', 'StructuredValue', 'StructuredValue[]'],
+            'occupationalCategory' => ['array', 'Text', 'Text[]', 'array', 'CategoryCode', 'CategoryCode[]'],
+            'occupationalCredentialAwarded' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'programPrerequisites' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Course', 'Course[]', 'array', 'AlignmentObject', 'AlignmentObject[]', 'array', 'Text', 'Text[]'],
+            'programType' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'salaryUponCompletion' => ['array', 'MonetaryAmountDistribution', 'MonetaryAmountDistribution[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'startDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'termDuration' => ['array', 'Duration', 'Duration[]'],
+            'termsPerYear' => ['array', 'Number', 'Number[]'],
+            'timeOfDay' => ['array', 'Text', 'Text[]'],
+            'timeToComplete' => ['array', 'Duration', 'Duration[]'],
+            'trainingSalary' => ['array', 'MonetaryAmountDistribution', 'MonetaryAmountDistribution[]'],
+            'typicalCreditsPerTerm' => ['array', 'Integer', 'Integer[]', 'array', 'StructuredValue', 'StructuredValue[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -122,7 +122,7 @@ class EducationalOccupationalProgram extends MetaJsonLd implements EducationalOc
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'applicationDeadline' => 'The date at which the program stops collecting applications for the next enrollment cycle.',
             'applicationStartDate' => 'The date at which the program begins collecting applications for the next enrollment cycle.',

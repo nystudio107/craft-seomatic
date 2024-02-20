@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Order - An order is a confirmation of a transaction (a receipt), which can contain
  * multiple line items, each represented by an Offer that has been accepted by
  * the customer.
@@ -73,40 +73,40 @@ class Order extends MetaJsonLd implements OrderInterface, IntangibleInterface, T
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'acceptedOffer' => ['Offer'],
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'billingAddress' => ['PostalAddress'],
-            'broker' => ['Person', 'Organization'],
-            'confirmationNumber' => ['Text'],
-            'customer' => ['Organization', 'Person'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'discount' => ['Number', 'Text'],
-            'discountCode' => ['Text'],
-            'discountCurrency' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'isGift' => ['Boolean'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'merchant' => ['Organization', 'Person'],
-            'name' => ['Text'],
-            'orderDate' => ['DateTime', 'Date'],
-            'orderDelivery' => ['ParcelDelivery'],
-            'orderNumber' => ['Text'],
-            'orderStatus' => ['OrderStatus'],
-            'orderedItem' => ['Product', 'Service', 'OrderItem'],
-            'partOfInvoice' => ['Invoice'],
-            'paymentDue' => ['DateTime'],
-            'paymentDueDate' => ['Date', 'DateTime'],
-            'paymentMethod' => ['PaymentMethod'],
-            'paymentMethodId' => ['Text'],
-            'paymentUrl' => ['URL'],
-            'potentialAction' => ['Action'],
-            'sameAs' => ['URL'],
-            'seller' => ['Organization', 'Person'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
+            'acceptedOffer' => ['array', 'Offer', 'Offer[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'billingAddress' => ['array', 'PostalAddress', 'PostalAddress[]'],
+            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'confirmationNumber' => ['array', 'Text', 'Text[]'],
+            'customer' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'discount' => ['array', 'Number', 'Number[]', 'array', 'Text', 'Text[]'],
+            'discountCode' => ['array', 'Text', 'Text[]'],
+            'discountCurrency' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'isGift' => ['array', 'Boolean', 'Boolean[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'merchant' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'orderDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'orderDelivery' => ['array', 'ParcelDelivery', 'ParcelDelivery[]'],
+            'orderNumber' => ['array', 'Text', 'Text[]'],
+            'orderStatus' => ['array', 'OrderStatus', 'OrderStatus[]'],
+            'orderedItem' => ['array', 'Product', 'Product[]', 'array', 'OrderItem', 'OrderItem[]', 'array', 'Service', 'Service[]'],
+            'partOfInvoice' => ['array', 'Invoice', 'Invoice[]'],
+            'paymentDue' => ['array', 'DateTime', 'DateTime[]'],
+            'paymentDueDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'paymentMethod' => ['array', 'PaymentMethod', 'PaymentMethod[]'],
+            'paymentMethodId' => ['array', 'Text', 'Text[]'],
+            'paymentUrl' => ['array', 'URL', 'URL[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'seller' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -118,7 +118,7 @@ class Order extends MetaJsonLd implements OrderInterface, IntangibleInterface, T
     {
         return [
             'acceptedOffer' => 'The offer(s) -- e.g., product, quantity and price combinations -- included in the order.',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'billingAddress' => 'The billing address for the order.',
             'broker' => 'An entity that arranges for an exchange between a buyer and a seller.  In most cases a broker never acquires or releases ownership of a product or service involved in an exchange.  If it is not clear whether an entity is a broker, seller, or buyer, the latter two terms are preferred.',

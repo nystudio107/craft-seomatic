@@ -12,13 +12,14 @@
 namespace nystudio107\seomatic\helpers;
 
 use Craft;
+use craft\base\ElementInterface;
 use craft\elements\Asset;
 use craft\elements\db\ElementQuery;
 use craft\elements\ElementCollection;
 use craft\fs\Local;
 use craft\helpers\StringHelper;
 use craft\models\ImageTransform as ImageTransformModel;
-use Exception;
+use DateTime;
 use nystudio107\seomatic\helpers\Environment as EnvironmentHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\base\InvalidConfigException;
@@ -114,7 +115,7 @@ class ImageTransform
             $transformMode = $transform->mode ?? 'crop';
         }
         if ($transform !== null) {
-            $transform->mode = $transformMode ?? $transform->mode;
+            $transform->mode = $transformMode;
         }
         $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
         if (($asset !== null) && ($asset instanceof Asset)) {
@@ -133,7 +134,7 @@ class ImageTransform
             // If we're not in local dev, tell it to generate the transform immediately so that
             // urls like `actions/assets/generate-transform` don't get cached
             $generateNow = Seomatic::$environment === EnvironmentHelper::SEOMATIC_DEV_ENV ? null : true;
-            if ($volume instanceof Local) {
+            if ($volume->getFs() instanceof Local) {
                 // Preflight to ensure that the source asset actually exists to avoid Craft hanging
                 if (!$volume->fileExists($asset->getPath())) {
                     $generateNow = false;
@@ -147,19 +148,19 @@ class ImageTransform
                 }
             }
             try {
-                $url = $assets->getAssetUrl($asset, $transform, $generateNow);
-            } catch (Exception $e) {
-                $url = $asset->getUrl();
+                $url = $asset->getUrl($transform, $generateNow);
+            } catch (InvalidConfigException $e) {
+                $url = null;
             }
             if ($url === null) {
                 $url = '';
             }
             // If we have a url, add an `mtime` param to cache bust
             if (!empty($url) && empty(parse_url($url, PHP_URL_QUERY))) {
-                $now = new \DateTime();
+                $now = new DateTime();
                 $newestChange = max($asset->dateModified, $asset->dateUpdated);
                 $url = UrlHelper::url($url, [
-                    'mtime' => $newestChange->getTimestamp() ?? $now->getTimestamp(),
+                    'mtime' => $newestChange->getTimestamp(),
                 ]);
             }
         }
@@ -192,11 +193,12 @@ class ImageTransform
             $transform->mode = $transformMode ?? $transform->mode;
         }
         $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
-        if (($asset !== null) && ($asset instanceof Asset)) {
-            $width = (string)$asset->getWidth($transform);
+        if ($asset instanceof Asset) {
+            $width = $asset->getWidth($transform);
             if ($width === null) {
                 $width = '';
             }
+            $width = (string)$width;
         }
 
         return $width;
@@ -223,11 +225,12 @@ class ImageTransform
             $transform->mode = $transformMode ?? $transform->mode;
         }
         $asset = self::assetFromAssetOrIdOrQuery($asset, $siteId);
-        if (($asset !== null) && ($asset instanceof Asset)) {
-            $height = (string)$asset->getHeight($transform);
+        if ($asset instanceof Asset) {
+            $height = $asset->getHeight($transform);
             if ($height === null) {
                 $height = '';
             }
+            $height = (string)$height;
         }
 
         return $height;
@@ -254,9 +257,7 @@ class ImageTransform
                 }
             } else {
                 $assetId = $assetIds;
-                if (!empty($assetId)) {
-                    $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
-                }
+                $assets[] = $elements->getElementById((int)$assetId, Asset::class, $siteId);
             }
         }
 
@@ -272,7 +273,7 @@ class ImageTransform
      * @param int|array|ElementCollection|Asset|ElementQuery $asset the Asset or Asset ID or ElementQuery
      * @param int|null $siteId
      *
-     * @return Asset|null
+     * @return Asset|array|ElementInterface|null
      */
     protected static function assetFromAssetOrIdOrQuery($asset, $siteId = null)
     {

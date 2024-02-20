@@ -50,7 +50,7 @@ class MetaLink extends MetaItem
      */
     public $href;
     /**
-     * @var string
+     * @var string|array
      */
     public $hreflang;
     /**
