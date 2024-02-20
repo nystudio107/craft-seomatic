@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.42 - 2024.02.20
+### Fixed
+* Fixed an issue where an exception could be thrown due to a bad commit
+
 ## 4.0.41 - 2024.02.20
 ### Added
 * Added the ability to generate a [News Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap) for any Section
@@ -7,7 +11,7 @@
 * Updated to schema.org [v26.0](https://schema.org/docs/releases.html), fixes ([#1420](https://github.com/nystudio107/craft-seomatic/issues/1420))
 
 ### Changed
-* Completely revamped the documentation to hopefully make it more accessible & useful (thanks to Matt Stein @ Working Concept)
+* Completely revamped the documentation to hopefully make it more accessible & useful (thanks to Matt Stein @ Adjacent)
 * PHPstan code cleanup
 
 ### Fixed
