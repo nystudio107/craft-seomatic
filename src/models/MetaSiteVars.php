@@ -12,13 +12,13 @@
 namespace nystudio107\seomatic\models;
 
 use Craft;
+use craft\errors\SiteNotFoundException;
 use craft\helpers\DateTimeHelper;
 use craft\validators\ArrayValidator;
 use craft\validators\DateTimeValidator;
 use DateTime;
 use nystudio107\seomatic\base\VarsModel;
 use nystudio107\seomatic\helpers\Json as JsonHelper;
-use yii\web\ServerErrorHttpException;
 use function is_array;
 use function is_string;
 
@@ -46,11 +46,11 @@ class MetaSiteVars extends VarsModel
     // Public Properties
     // =========================================================================
     /**
-     * @var Entity
+     * @var Entity|array|null
      */
     public $identity;
     /**
-     * @var Entity
+     * @var Entity|array|null
      */
     public $creator;
     /**
@@ -86,7 +86,7 @@ class MetaSiteVars extends VarsModel
      */
     public $sameAsLinks = [];
     /**
-     * @var array Google Site Links search target
+     * @var string Google Site Links search target
      */
     public $siteLinksSearchTarget = '';
     /**
@@ -136,16 +136,18 @@ class MetaSiteVars extends VarsModel
         // Set some default values
         if (empty($this->siteName)) {
             try {
-                $info = Craft::$app->getInfo();
-            } catch (ServerErrorHttpException $e) {
-                $info = null;
+                $currentSite = Craft::$app->getSites()->getCurrentSite();
+            } catch (SiteNotFoundException $e) {
+                $currentSite = null;
             }
-            $currentSite = Craft::$app->getSites()->getCurrentSite();
-            $siteName = Craft::t('site', $currentSite->getName());
-            if (is_array($siteName)) {
-                $siteName = reset($siteName);
+            if ($currentSite) {
+                /** @var string|array $siteName */
+                $siteName = Craft::t('site', $currentSite->getName());
+                if (is_array($siteName)) {
+                    $siteName = reset($siteName);
+                }
             }
-            $this->siteName = $siteName ?? $info->name;
+            $this->siteName = $siteName ?? Craft::$app->getSystemName();
         }
     }
 
@@ -231,11 +233,11 @@ class MetaSiteVars extends VarsModel
             $this->facebookAppId = (string)$this->facebookAppId;
         }
         // Identity
-        if ($this->identity !== null && is_array($this->identity)) {
+        if (is_array($this->identity)) {
             $this->identity = new Entity($this->identity);
         }
         // Creator
-        if ($this->creator !== null && is_array($this->creator)) {
+        if (is_array($this->creator)) {
             $this->creator = new Entity($this->creator);
         }
     }

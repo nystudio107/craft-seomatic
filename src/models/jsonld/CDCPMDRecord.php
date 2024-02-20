@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * CDCPMDRecord - A CDCPMDRecord is a data structure representing a record in a CDC tabular
  * data format       used for hospital data reporting. See
  * [documentation](/docs/cdc-covid.html) for details, and the linked CDC
@@ -76,35 +76,35 @@ class CDCPMDRecord extends MetaJsonLd implements CDCPMDRecordInterface, Structur
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'cvdCollectionDate' => ['DateTime', 'Text'],
-            'cvdFacilityCounty' => ['Text'],
-            'cvdFacilityId' => ['Text'],
-            'cvdNumBeds' => ['Number'],
-            'cvdNumBedsOcc' => ['Number'],
-            'cvdNumC19Died' => ['Number'],
-            'cvdNumC19HOPats' => ['Number'],
-            'cvdNumC19HospPats' => ['Number'],
-            'cvdNumC19MechVentPats' => ['Number'],
-            'cvdNumC19OFMechVentPats' => ['Number'],
-            'cvdNumC19OverflowPats' => ['Number'],
-            'cvdNumICUBeds' => ['Number'],
-            'cvdNumICUBedsOcc' => ['Number'],
-            'cvdNumTotBeds' => ['Number'],
-            'cvdNumVent' => ['Number'],
-            'cvdNumVentUse' => ['Number'],
-            'datePosted' => ['DateTime', 'Date'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'cvdCollectionDate' => ['array', 'DateTime', 'DateTime[]', 'array', 'Text', 'Text[]'],
+            'cvdFacilityCounty' => ['array', 'Text', 'Text[]'],
+            'cvdFacilityId' => ['array', 'Text', 'Text[]'],
+            'cvdNumBeds' => ['array', 'Number', 'Number[]'],
+            'cvdNumBedsOcc' => ['array', 'Number', 'Number[]'],
+            'cvdNumC19Died' => ['array', 'Number', 'Number[]'],
+            'cvdNumC19HOPats' => ['array', 'Number', 'Number[]'],
+            'cvdNumC19HospPats' => ['array', 'Number', 'Number[]'],
+            'cvdNumC19MechVentPats' => ['array', 'Number', 'Number[]'],
+            'cvdNumC19OFMechVentPats' => ['array', 'Number', 'Number[]'],
+            'cvdNumC19OverflowPats' => ['array', 'Number', 'Number[]'],
+            'cvdNumICUBeds' => ['array', 'Number', 'Number[]'],
+            'cvdNumICUBedsOcc' => ['array', 'Number', 'Number[]'],
+            'cvdNumTotBeds' => ['array', 'Number', 'Number[]'],
+            'cvdNumVent' => ['array', 'Number', 'Number[]'],
+            'cvdNumVentUse' => ['array', 'Number', 'Number[]'],
+            'datePosted' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -115,7 +115,7 @@ class CDCPMDRecord extends MetaJsonLd implements CDCPMDRecordInterface, Structur
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'cvdCollectionDate' => 'collectiondate - Date for which patient counts are reported.',
             'cvdFacilityCounty' => 'Name of the County of the NHSN facility that this data record applies to. Use [[cvdFacilityId]] to identify the facility. To provide other details, [[healthcareReportingData]] can be used on a [[Hospital]] entry.',

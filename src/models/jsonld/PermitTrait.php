@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Permit.
  *
  * @author    nystudio107
@@ -22,51 +22,54 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PermitTrait
 {
     /**
-     * The target audience for this permit.
+     * The organization issuing the item, for example a [[Permit]], [[Ticket]], or
+     * [[Certification]].
      *
-     * @var Audience
-     */
-    public $permitAudience;
-
-    /**
-     * The organization issuing the ticket or permit.
-     *
-     * @var Organization
+     * @var array|Organization|Organization[]
      */
     public $issuedBy;
 
     /**
-     * The date when the item is no longer valid.
+     * The geographic area where the item is valid. Applies for example to a
+     * [[Permit]], a [[Certification]], or an
+     * [[EducationalOccupationalCredential]].
      *
-     * @var Date
-     */
-    public $validUntil;
-
-    /**
-     * The duration of validity of a permit or similar thing.
-     *
-     * @var Duration
-     */
-    public $validFor;
-
-    /**
-     * The geographic area where a permit or similar thing is valid.
-     *
-     * @var AdministrativeArea
+     * @var array|AdministrativeArea|AdministrativeArea[]
      */
     public $validIn;
 
     /**
      * The date when the item becomes valid.
      *
-     * @var Date|DateTime
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $validFrom;
 
     /**
+     * The date when the item is no longer valid.
+     *
+     * @var array|Date|Date[]
+     */
+    public $validUntil;
+
+    /**
+     * The target audience for this permit.
+     *
+     * @var array|Audience|Audience[]
+     */
+    public $permitAudience;
+
+    /**
+     * The duration of validity of a permit or similar thing.
+     *
+     * @var array|Duration|Duration[]
+     */
+    public $validFor;
+
+    /**
      * The service through which the permit was granted.
      *
-     * @var Service
+     * @var array|Service|Service[]
      */
     public $issuedThrough;
 }

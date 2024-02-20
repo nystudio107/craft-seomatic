@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for TypeAndQuantityNode.
  *
  * @author    nystudio107
@@ -22,42 +22,42 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TypeAndQuantityNodeTrait
 {
     /**
+     * The product that this structured value is referring to.
+     *
+     * @var array|Product|Product[]|array|Service|Service[]
+     */
+    public $typeOfGood;
+
+    /**
      * The quantity of the goods included in the offer.
      *
-     * @var float|Number
+     * @var float|array|Number|Number[]
      */
     public $amountOfThisGood;
 
     /**
-     * The business function (e.g. sell, lease, repair, dispose) of the offer or
-     * component of a bundle (TypeAndQuantityNode). The default is
-     * http://purl.org/goodrelations/v1#Sell.
+     * A string or text indicating the unit of measurement. Useful if you cannot
+     * provide a standard unit code for <a href='unitCode'>unitCode</a>.
      *
-     * @var BusinessFunction
+     * @var string|array|Text|Text[]
      */
-    public $businessFunction;
+    public $unitText;
 
     /**
      * The unit of measurement given using the UN/CEFACT Common Code (3
      * characters) or a URL. Other codes than the UN/CEFACT Common Code may be
      * used with a prefix followed by a colon.
      *
-     * @var string|Text|URL
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $unitCode;
 
     /**
-     * A string or text indicating the unit of measurement. Useful if you cannot
-     * provide a standard unit code for <a href='unitCode'>unitCode</a>.
+     * The business function (e.g. sell, lease, repair, dispose) of the offer or
+     * component of a bundle (TypeAndQuantityNode). The default is
+     * http://purl.org/goodrelations/v1#Sell.
      *
-     * @var string|Text
+     * @var array|BusinessFunction|BusinessFunction[]
      */
-    public $unitText;
-
-    /**
-     * The product that this structured value is referring to.
-     *
-     * @var Product|Service
-     */
-    public $typeOfGood;
+    public $businessFunction;
 }

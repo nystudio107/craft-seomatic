@@ -167,7 +167,7 @@ class Entity extends VarsModel
     public $organizationFoundingLocation;
 
     /**
-     * @var array Only for entities of the type Organization, an array of
+     * @var array|null Only for entities of the type Organization, an array of
      *      contact points for the organization.
      *      [Learn More](https://developers.google.com/search/docs/guides/enhance-site#provide-business-contact-markup)
      */

@@ -29,7 +29,6 @@ use nystudio107\seomatic\seoelements\SeoEntry;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\MetaContainers;
 use ReflectionClass;
-use ReflectionException;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
 use yii\db\Schema;
@@ -205,15 +204,8 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $elementName = '';
             /** @var Element $element */
             if ($element !== null) {
-                try {
-                    $reflector = new ReflectionClass($element);
-                } catch (ReflectionException $e) {
-                    $reflector = null;
-                    Craft::error($e->getMessage(), __METHOD__);
-                }
-                if ($reflector) {
-                    $elementName = strtolower($reflector->getShortName());
-                }
+                $reflector = new ReflectionClass($element);
+                $elementName = strtolower($reflector->getShortName());
             }
             // Handle the pull fields
             if (!empty($config['metaGlobalVars']) && !empty($config['metaBundleSettings'])) {
@@ -408,7 +400,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                     Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
                     $variables = [
                         'previewTypes' => [
-                            $this->elementDisplayPreviewType ?? '',
+                            $this->elementDisplayPreviewType,
                         ],
                         'previewElementId' => $element->id,
                     ];

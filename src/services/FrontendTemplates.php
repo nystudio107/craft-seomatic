@@ -56,7 +56,7 @@ class FrontendTemplates extends Component
     // =========================================================================
 
     /**
-     * @var FrontendTemplateContainer
+     * @var FrontendTemplateContainer|null
      */
     public $frontendTemplateContainer;
 
@@ -139,7 +139,6 @@ class FrontendTemplates extends Component
         $rules = [];
         foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
             if ($frontendTemplate->include) {
-                /** @var $frontendTemplate EditableTemplate */
                 $rules = array_merge(
                     $rules,
                     $frontendTemplate->routeRules()
@@ -185,7 +184,7 @@ class FrontendTemplates extends Component
                 );
                 $html = '';
                 if (!empty($this->frontendTemplateContainer->data[$template])) {
-                    /** @var $frontendTemplate EditableTemplate */
+                    /** @var EditableTemplate $frontendTemplate */
                     $frontendTemplate = $this->frontendTemplateContainer->data[$template];
                     // Special-case for the Robots.text template, to upgrade it
                     if ($template === FrontendTemplates::ROBOTS_TXT_HANDLE) {
@@ -219,7 +218,6 @@ class FrontendTemplates extends Component
     {
         $frontendTemplate = null;
         if (!empty($this->frontendTemplateContainer) && !empty($this->frontendTemplateContainer->data)) {
-            /** @var  $frontendTemplate EditableTemplate */
             foreach ($this->frontendTemplateContainer->data as $frontendTemplate) {
                 if ($key === $frontendTemplate->handle) {
                     return $frontendTemplate;

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for CreativeWorkSeason.
  *
  * @author    nystudio107
@@ -22,25 +22,40 @@ namespace nystudio107\seomatic\models\jsonld;
 trait CreativeWorkSeasonTrait
 {
     /**
-     * Position of the season within an ordered group of seasons.
+     * The end date and time of the item (in [ISO 8601 date
+     * format](http://en.wikipedia.org/wiki/ISO_8601)).
      *
-     * @var string|int|Text|Integer
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $seasonNumber;
+    public $endDate;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
+     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
-    public $actor;
+    public $director;
+
+    /**
+     * An episode of a TV/radio series or season.
+     *
+     * @var array|Episode|Episode[]
+     */
+    public $episodes;
+
+    /**
+     * An episode of a TV, radio or game media within a series or season.
+     *
+     * @var array|Episode|Episode[]
+     */
+    public $episode;
 
     /**
      * The trailer of a movie or TV/radio series, season, episode, etc.
      *
-     * @var VideoObject
+     * @var array|VideoObject|VideoObject[]
      */
     public $trailer;
 
@@ -48,60 +63,45 @@ trait CreativeWorkSeasonTrait
      * The production company or studio responsible for the item, e.g. series,
      * video game, episode etc.
      *
-     * @var Organization
+     * @var array|Organization|Organization[]
      */
     public $productionCompany;
 
     /**
-     * An episode of a TV/radio series or season.
-     *
-     * @var Episode
-     */
-    public $episodes;
-
-    /**
      * The series to which this episode or season belongs.
      *
-     * @var CreativeWorkSeries
+     * @var array|CreativeWorkSeries|CreativeWorkSeries[]
      */
     public $partOfSeries;
 
     /**
-     * An episode of a TV, radio or game media within a series or season.
+     * The number of episodes in this season or series.
      *
-     * @var Episode
+     * @var int|array|Integer|Integer[]
      */
-    public $episode;
+    public $numberOfEpisodes;
 
     /**
-     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip.
+     * Position of the season within an ordered group of seasons.
      *
-     * @var Person
+     * @var string|int|array|Text|Text[]|array|Integer|Integer[]
      */
-    public $director;
+    public $seasonNumber;
 
     /**
      * The start date and time of the item (in [ISO 8601 date
      * format](http://en.wikipedia.org/wiki/ISO_8601)).
      *
-     * @var DateTime|Date
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $startDate;
 
     /**
-     * The number of episodes in this season or series.
+     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip.
      *
-     * @var int|Integer
+     * @var array|Person|Person[]
      */
-    public $numberOfEpisodes;
-
-    /**
-     * The end date and time of the item (in [ISO 8601 date
-     * format](http://en.wikipedia.org/wiki/ISO_8601)).
-     *
-     * @var DateTime|Date
-     */
-    public $endDate;
+    public $actor;
 }

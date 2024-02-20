@@ -14,7 +14,6 @@ namespace nystudio107\seomatic\models;
 use Craft;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
-
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 
@@ -105,6 +104,7 @@ class MetaLinkContainer extends MetaContainer
     {
         parent::normalizeContainerData();
 
+        /** @var array $config */
         foreach ($this->data as $key => $config) {
             $config['key'] = $key;
             $this->data[$key] = MetaLink::create($key, $config);

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * MerchantReturnPolicy - A MerchantReturnPolicy provides information about product return policies
  * associated with an [[Organization]], [[Product]], or [[Offer]].
  *
@@ -72,39 +72,39 @@ class MerchantReturnPolicy extends MetaJsonLd implements MerchantReturnPolicyInt
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalProperty' => ['PropertyValue'],
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'applicableCountry' => ['Country', 'Text'],
-            'customerRemorseReturnFees' => ['ReturnFeesEnumeration'],
-            'customerRemorseReturnLabelSource' => ['ReturnLabelSourceEnumeration'],
-            'customerRemorseReturnShippingFeesAmount' => ['MonetaryAmount'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'inStoreReturnsOffered' => ['Boolean'],
-            'itemCondition' => ['OfferItemCondition'],
-            'itemDefectReturnFees' => ['ReturnFeesEnumeration'],
-            'itemDefectReturnLabelSource' => ['ReturnLabelSourceEnumeration'],
-            'itemDefectReturnShippingFeesAmount' => ['MonetaryAmount'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'merchantReturnDays' => ['DateTime', 'Integer', 'Date'],
-            'merchantReturnLink' => ['URL'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'refundType' => ['RefundTypeEnumeration'],
-            'restockingFee' => ['MonetaryAmount', 'Number'],
-            'returnFees' => ['ReturnFeesEnumeration'],
-            'returnLabelSource' => ['ReturnLabelSourceEnumeration'],
-            'returnMethod' => ['ReturnMethodEnumeration'],
-            'returnPolicyCategory' => ['MerchantReturnEnumeration'],
-            'returnPolicyCountry' => ['Country', 'Text'],
-            'returnPolicySeasonalOverride' => ['MerchantReturnPolicySeasonalOverride'],
-            'returnShippingFeesAmount' => ['MonetaryAmount'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
+            'additionalProperty' => ['array', 'PropertyValue', 'PropertyValue[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'applicableCountry' => ['array', 'Text', 'Text[]', 'array', 'Country', 'Country[]'],
+            'customerRemorseReturnFees' => ['array', 'ReturnFeesEnumeration', 'ReturnFeesEnumeration[]'],
+            'customerRemorseReturnLabelSource' => ['array', 'ReturnLabelSourceEnumeration', 'ReturnLabelSourceEnumeration[]'],
+            'customerRemorseReturnShippingFeesAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'inStoreReturnsOffered' => ['array', 'Boolean', 'Boolean[]'],
+            'itemCondition' => ['array', 'OfferItemCondition', 'OfferItemCondition[]'],
+            'itemDefectReturnFees' => ['array', 'ReturnFeesEnumeration', 'ReturnFeesEnumeration[]'],
+            'itemDefectReturnLabelSource' => ['array', 'ReturnLabelSourceEnumeration', 'ReturnLabelSourceEnumeration[]'],
+            'itemDefectReturnShippingFeesAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'merchantReturnDays' => ['array', 'Integer', 'Integer[]', 'array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'merchantReturnLink' => ['array', 'URL', 'URL[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'refundType' => ['array', 'RefundTypeEnumeration', 'RefundTypeEnumeration[]'],
+            'restockingFee' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
+            'returnFees' => ['array', 'ReturnFeesEnumeration', 'ReturnFeesEnumeration[]'],
+            'returnLabelSource' => ['array', 'ReturnLabelSourceEnumeration', 'ReturnLabelSourceEnumeration[]'],
+            'returnMethod' => ['array', 'ReturnMethodEnumeration', 'ReturnMethodEnumeration[]'],
+            'returnPolicyCategory' => ['array', 'MerchantReturnEnumeration', 'MerchantReturnEnumeration[]'],
+            'returnPolicyCountry' => ['array', 'Text', 'Text[]', 'array', 'Country', 'Country[]'],
+            'returnPolicySeasonalOverride' => ['array', 'MerchantReturnPolicySeasonalOverride', 'MerchantReturnPolicySeasonalOverride[]'],
+            'returnShippingFeesAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -116,7 +116,7 @@ class MerchantReturnPolicy extends MetaJsonLd implements MerchantReturnPolicyInt
     {
         return [
             'additionalProperty' => 'A property-value pair representing an additional characteristic of the entity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.  Note: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism. ',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'applicableCountry' => 'A country where a particular merchant return policy applies to, for example the two-letter ISO 3166-1 alpha-2 country code.',
             'customerRemorseReturnFees' => 'The type of return fees if the product is returned due to customer remorse.',

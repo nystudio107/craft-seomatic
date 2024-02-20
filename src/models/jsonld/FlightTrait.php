@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Flight.
  *
  * @author    nystudio107
@@ -22,112 +22,112 @@ namespace nystudio107\seomatic\models\jsonld;
 trait FlightTrait
 {
     /**
-     * An entity which offers (sells / leases / lends / loans) the services /
-     * goods.  A seller may also be a provider.
+     * The airport where the flight terminates.
      *
-     * @var Organization|Person
+     * @var array|Airport|Airport[]
      */
-    public $seller;
+    public $arrivalAirport;
+
+    /**
+     * Description of the meals that will be provided or available for purchase.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $mealService;
+
+    /**
+     * The kind of aircraft (e.g., "Boeing 747").
+     *
+     * @var string|array|Vehicle|Vehicle[]|array|Text|Text[]
+     */
+    public $aircraft;
+
+    /**
+     * Identifier of the flight's arrival gate.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $arrivalGate;
+
+    /**
+     * The time when a passenger can check into the flight online.
+     *
+     * @var array|DateTime|DateTime[]
+     */
+    public $webCheckinTime;
+
+    /**
+     * Identifier of the flight's arrival terminal.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $arrivalTerminal;
+
+    /**
+     * The estimated time the flight will take.
+     *
+     * @var string|array|Duration|Duration[]|array|Text|Text[]
+     */
+    public $estimatedFlightDuration;
+
+    /**
+     * Identifier of the flight's departure terminal.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $departureTerminal;
 
     /**
      * The type of boarding policy used by the airline (e.g. zone-based or
      * group-based).
      *
-     * @var BoardingPolicyType
+     * @var array|BoardingPolicyType|BoardingPolicyType[]
      */
     public $boardingPolicy;
 
     /**
-     * The time when a passenger can check into the flight online.
+     * Identifier of the flight's departure gate.
      *
-     * @var DateTime
+     * @var string|array|Text|Text[]
      */
-    public $webCheckinTime;
+    public $departureGate;
 
     /**
-     * The airport where the flight terminates.
+     * An entity which offers (sells / leases / lends / loans) the services /
+     * goods.  A seller may also be a provider.
      *
-     * @var Airport
+     * @var array|Person|Person[]|array|Organization|Organization[]
      */
-    public $arrivalAirport;
-
-    /**
-     * The estimated time the flight will take.
-     *
-     * @var string|Duration|Text
-     */
-    public $estimatedFlightDuration;
+    public $seller;
 
     /**
      * 'carrier' is an out-dated term indicating the 'provider' for parcel
      * delivery and flights.
      *
-     * @var Organization
+     * @var array|Organization|Organization[]
      */
     public $carrier;
 
     /**
-     * The airport where the flight originates.
-     *
-     * @var Airport
-     */
-    public $departureAirport;
-
-    /**
-     * Description of the meals that will be provided or available for purchase.
-     *
-     * @var string|Text
-     */
-    public $mealService;
-
-    /**
      * The distance of the flight.
      *
-     * @var string|Text|Distance
+     * @var string|array|Distance|Distance[]|array|Text|Text[]
      */
     public $flightDistance;
 
     /**
-     * Identifier of the flight's departure gate.
+     * The airport where the flight originates.
      *
-     * @var string|Text
+     * @var array|Airport|Airport[]
      */
-    public $departureGate;
-
-    /**
-     * Identifier of the flight's departure terminal.
-     *
-     * @var string|Text
-     */
-    public $departureTerminal;
-
-    /**
-     * Identifier of the flight's arrival terminal.
-     *
-     * @var string|Text
-     */
-    public $arrivalTerminal;
+    public $departureAirport;
 
     /**
      * The unique identifier for a flight including the airline IATA code. For
      * example, if describing United flight 110, where the IATA code for United is
      * 'UA', the flightNumber is 'UA110'.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $flightNumber;
-
-    /**
-     * Identifier of the flight's arrival gate.
-     *
-     * @var string|Text
-     */
-    public $arrivalGate;
-
-    /**
-     * The kind of aircraft (e.g., "Boeing 747").
-     *
-     * @var string|Text|Vehicle
-     */
-    public $aircraft;
 }

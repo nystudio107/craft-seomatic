@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for WebPage.
  *
  * @author    nystudio107
@@ -22,65 +22,72 @@ namespace nystudio107\seomatic\models\jsonld;
 trait WebPageTrait
 {
     /**
-     * One of the more significant URLs on the page. Typically, these are the
-     * non-navigation links that are clicked on the most.
-     *
-     * @var URL
-     */
-    public $significantLink;
-
-    /**
      * One of the domain specialities to which this web page's content applies.
      *
-     * @var Specialty
+     * @var array|Specialty|Specialty[]
      */
     public $specialty;
-
-    /**
-     * People or organizations that have reviewed the content on this web page for
-     * accuracy and/or completeness.
-     *
-     * @var Organization|Person
-     */
-    public $reviewedBy;
-
-    /**
-     * Date on which the content on this web page was last reviewed for accuracy
-     * and/or completeness.
-     *
-     * @var Date
-     */
-    public $lastReviewed;
-
-    /**
-     * A link related to this web page, for example to other related web pages.
-     *
-     * @var URL
-     */
-    public $relatedLink;
 
     /**
      * A set of links that can help a user understand and navigate a website
      * hierarchy.
      *
-     * @var string|BreadcrumbList|Text
+     * @var string|array|BreadcrumbList|BreadcrumbList[]|array|Text|Text[]
      */
     public $breadcrumb;
+
+    /**
+     * Date on which the content on this web page was last reviewed for accuracy
+     * and/or completeness.
+     *
+     * @var array|Date|Date[]
+     */
+    public $lastReviewed;
+
+    /**
+     * Indicates if this web page element is the main subject of the page.
+     *
+     * @var array|WebPageElement|WebPageElement[]
+     */
+    public $mainContentOfPage;
 
     /**
      * The most significant URLs on the page. Typically, these are the
      * non-navigation links that are clicked on the most.
      *
-     * @var URL
+     * @var array|URL|URL[]
      */
     public $significantLinks;
 
     /**
-     * Indicates if this web page element is the main subject of the page.
+     * People or organizations that have reviewed the content on this web page for
+     * accuracy and/or completeness.
      *
-     * @var WebPageElement
+     * @var array|Person|Person[]|array|Organization|Organization[]
      */
-    public $mainContentOfPage;
+    public $reviewedBy;
+
+    /**
+     * A link related to this web page, for example to other related web pages.
+     *
+     * @var array|URL|URL[]
+     */
+    public $relatedLink;
+
+    /**
+     * Indicates the main image on the page.
+     *
+     * @var array|ImageObject|ImageObject[]
+     */
+    public $primaryImageOfPage;
+
+    /**
+     * One of the more significant URLs on the page. Typically, these are the
+     * non-navigation links that are clicked on the most.
+     *
+     * @var array|URL|URL[]
+     */
+    public $significantLink;
 
     /**
      * Indicates sections of a Web page that are particularly 'speakable' in the
@@ -102,14 +109,7 @@ trait WebPageTrait
      * [[SpeakableSpecification]]  which is defined to be a possible value of the
      * *speakable* property.
      *
-     * @var SpeakableSpecification|URL
+     * @var array|URL|URL[]|array|SpeakableSpecification|SpeakableSpecification[]
      */
     public $speakable;
-
-    /**
-     * Indicates the main image on the page.
-     *
-     * @var ImageObject
-     */
-    public $primaryImageOfPage;
 }

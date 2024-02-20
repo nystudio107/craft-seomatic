@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Article.
  *
  * @author    nystudio107
@@ -22,33 +22,59 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ArticleTrait
 {
     /**
-     * The page on which the work ends; for example "138" or "xvi".
+     * For an [[Article]], typically a [[NewsArticle]], the backstory property
+     * provides a textual summary giving a brief explanation of why and how an
+     * article was created. In a journalistic setting this could include
+     * information about reporting process, methods, interviews, data sources,
+     * etc.
      *
-     * @var int|string|Integer|Text
+     * @var string|array|Text|Text[]|array|CreativeWork|CreativeWork[]
      */
-    public $pageEnd;
+    public $backstory;
+
+    /**
+     * Any description of pages that is not separated into pageStart and pageEnd;
+     * for example, "1-6, 9, 55" or "10-12, 46-49".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $pagination;
 
     /**
      * The number of words in the text of the Article.
      *
-     * @var int|Integer
+     * @var int|array|Integer|Integer[]
      */
     public $wordCount;
+
+    /**
+     * The page on which the work starts; for example "135" or "xiii".
+     *
+     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
+     */
+    public $pageStart;
 
     /**
      * Articles may belong to one or more 'sections' in a magazine or newspaper,
      * such as Sports, Lifestyle, etc.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $articleSection;
 
     /**
      * The actual body of the article.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $articleBody;
+
+    /**
+     * The page on which the work ends; for example "138" or "xvi".
+     *
+     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
+     */
+    public $pageEnd;
 
     /**
      * Indicates sections of a Web page that are particularly 'speakable' in the
@@ -70,33 +96,7 @@ trait ArticleTrait
      * [[SpeakableSpecification]]  which is defined to be a possible value of the
      * *speakable* property.
      *
-     * @var SpeakableSpecification|URL
+     * @var array|URL|URL[]|array|SpeakableSpecification|SpeakableSpecification[]
      */
     public $speakable;
-
-    /**
-     * For an [[Article]], typically a [[NewsArticle]], the backstory property
-     * provides a textual summary giving a brief explanation of why and how an
-     * article was created. In a journalistic setting this could include
-     * information about reporting process, methods, interviews, data sources,
-     * etc.
-     *
-     * @var string|CreativeWork|Text
-     */
-    public $backstory;
-
-    /**
-     * Any description of pages that is not separated into pageStart and pageEnd;
-     * for example, "1-6, 9, 55" or "10-12, 46-49".
-     *
-     * @var string|Text
-     */
-    public $pagination;
-
-    /**
-     * The page on which the work starts; for example "135" or "xiii".
-     *
-     * @var int|string|Integer|Text
-     */
-    public $pageStart;
 }

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for SuperficialAnatomy.
  *
  * @author    nystudio107
@@ -22,41 +22,41 @@ namespace nystudio107\seomatic\models\jsonld;
 trait SuperficialAnatomyTrait
 {
     /**
-     * Anatomical systems or structures that relate to the superficial anatomy.
+     * A medical therapy related to this anatomy.
      *
-     * @var AnatomicalSystem|AnatomicalStructure
+     * @var array|MedicalTherapy|MedicalTherapy[]
      */
-    public $relatedAnatomy;
-
-    /**
-     * If applicable, a description of the pathophysiology associated with the
-     * anatomical system, including potential abnormal changes in the mechanical,
-     * physical, and biochemical functions of the system.
-     *
-     * @var string|Text
-     */
-    public $associatedPathophysiology;
+    public $relatedTherapy;
 
     /**
      * The significance associated with the superficial anatomy; as an example,
      * how characteristics of the superficial anatomy can suggest underlying
      * medical conditions or courses of treatment.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $significance;
 
     /**
-     * A medical therapy related to this anatomy.
+     * Anatomical systems or structures that relate to the superficial anatomy.
      *
-     * @var MedicalTherapy
+     * @var array|AnatomicalSystem|AnatomicalSystem[]|array|AnatomicalStructure|AnatomicalStructure[]
      */
-    public $relatedTherapy;
+    public $relatedAnatomy;
 
     /**
      * A medical condition associated with this anatomy.
      *
-     * @var MedicalCondition
+     * @var array|MedicalCondition|MedicalCondition[]
      */
     public $relatedCondition;
+
+    /**
+     * If applicable, a description of the pathophysiology associated with the
+     * anatomical system, including potential abnormal changes in the mechanical,
+     * physical, and biochemical functions of the system.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $associatedPathophysiology;
 }

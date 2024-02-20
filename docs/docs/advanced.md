@@ -1,24 +1,31 @@
 ---
 title: Advanced Usage
-description: Advanced Usage documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 3.
+description: Advanced Usage documentation for the SEOmatic plugin. The SEOmatic plugin facilitates modern SEO best practices & implementation for Craft CMS 4.
 ---
+
 # Advanced Usage
+
+Using the debug toolbar, managing config settings, events for PHP developers, bundle / container settings, and using the headless SPA API.
 
 ## Debug Toolbar
 
-SEOmatic included a debug panel for the [Yii2 Debug Toolbar](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar) that allows you to inspect & debug your SEO data.
+SEOmatic includes a debug panel for the [Yii2 Debug Toolbar](https://nystudio107.com/blog/profiling-your-website-with-craft-cms-3s-debug-toolbar) that allows you to inspect and debug your SEO data.
 
-![Screenshot](./resources/screenshots/seomatic-yii2-debug-toolbar.png)
+![Screenshot of Craft’s debug toolbar with an SEOmatic section at the far right](./resources/screenshots/seomatic-yii2-debug-toolbar.png)
 
 The debug panel displays debug information about the tags SEOmatic generates, as well as the variables it uses to do so.
 
 You can view the **Combined** composed SEO data, or the discrete SEO data coming from the layered **Entry SEO**, **Content SEO**, and **Global SEO** settings.
 
+The SEOmatic Debug Toolbar panel provides valuable debugging information if you have the Yii2 Debug Toolbar enabled, but it does add some overhead as well.
+
+If you're doing performance profiling, you can keep the Yii2 Debug Toolbar enabled, but disable the SEOmatic panel via **Plugin Settings → Advanced → SEOmatic Debug Toolbar Panel**.
+
 ### Tags
 
 Tags are objects that represent rendered HTML tags the in the webpage. Tags are grouped together into containers for organizational purposes.
 
-![Screenshot](./resources/screenshots/seomatic-debug-tags.png)
+![Screenshot of the expanded debug toolbar open to the SEOmatic section, which has tabs for Tags and Variables, a visualization of the SEO cascade, and a listing of meta tag properties and how they’re rendered](./resources/screenshots/seomatic-debug-tags.png)
 
 You can inspect the **Properties** of the tags in each container, as well as the corresponding **Parsed Properties** after they have been rendered as Twig.
 
@@ -47,7 +54,7 @@ Tag property example:
 
 Variables are used throughout SEOmatic when rendering tags, or controlling how tags are rendered. Tag properties often reference these variables via Twig expressions.
 
-![Screenshot](./resources/screenshots/seomatic-debug-variables.png)
+![Screenshot of the SEOmatic debug toolbar section examining meta global vars, where the title text includes Twig usage tips](./resources/screenshots/seomatic-debug-variables.png)
 
 You can inspect the **Properties** of the variables, as well as the corresponding **Parsed Properties** after they have been rendered as Twig.
 
@@ -56,6 +63,7 @@ You can expand and sub-properties of nested properties by clicking on them.
 When hovering the cursor over any property, a clipboard icon will appear that when clicked on copies to the clipboard example code of how to get/set values for that particular property via Twig.
 
 Variable example:
+
 ```twig
 {#-- Get the value --#}
 {% set value = seomatic.meta.seoImage %}
@@ -67,13 +75,11 @@ Variable example:
 
 SEOmatic supports the standard `config.php` multi-environment friendly config file for the plugin settings. Just copy the `config.php` to your Craft `config/` directory as `seomatic.php` and you can configure the settings in a multi-environment friendly way.
 
-These are the same settings that are configured in the **Plugin Settings** in the Control Panel.
+These are the same settings that are configured in the **Plugin Settings** in the control panel.
 
 ## Events
 
 ### IncludeContainerEvent
-
-    const EVENT_INCLUDE_CONTAINER = 'includeContainer';
 
 The event that is triggered when a container is about to be included.
 
@@ -81,14 +87,17 @@ The event that is triggered when a container is about to be included.
 use nystudio107\seomatic\events\IncludeContainerEvent;
 use nystudio107\seomatic\base\Container;
 use yii\base\Event;
-Event::on(Container::class, Container::EVENT_INCLUDE_CONTAINER, function(IncludeContainerEvent $e) {
-    $e->include = false;
-});
+
+Event::on(
+    Container::class,
+    Container::EVENT_INCLUDE_CONTAINER,
+    function(IncludeContainerEvent $event) {
+        $event->include = false;
+    }
+);
 ```
 
 ### InvalidateContainerCachesEvent
-
-    const EVENT_INVALIDATE_CONTAINER_CACHES = 'invalidateContainerCaches';
 
 The event that is triggered when SEOmatic is about to clear its meta container caches
 
@@ -96,29 +105,35 @@ The event that is triggered when SEOmatic is about to clear its meta container c
 use nystudio107\seomatic\events\InvalidateContainerCachesEvent;
 use nystudio107\seomatic\services\MetaContainers;
 use yii\base\Event;
-Event::on(MetaContainers::class, MetaContainers::EVENT_INVALIDATE_CONTAINER_CACHES, function(InvalidateContainerCachesEvent $e) {
-    // Container caches are about to be cleared
-});
+
+Event::on(
+    MetaContainers::class,
+    MetaContainers::EVENT_INVALIDATE_CONTAINER_CACHES,
+    function(InvalidateContainerCachesEvent $event) {
+        // Container caches are about to be cleared
+    }
+);
 ```
 
 ### IncludeSitemapEntryEvent
 
-    const EVENT_INCLUDE_SITEMAP_ENTRY = 'IncludeSitemapEntryEvent';
-
 The event that is triggered when an entry is about to be included in a sitemap.
 
 ```php
-    use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
-    use nystudio107\seomatic\helpers\Sitemap;
-    use yii\base\Event;
-    Event::on(Sitemap::class, Sitemap::EVENT_INCLUDE_SITEMAP_ENTRY, function(IncludeSitemapEntryEvent $e) {
-        $e->include = false;
-    });
+use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
+use nystudio107\seomatic\helpers\Sitemap;
+use yii\base\Event;
+
+Event::on(
+    Sitemap::class,
+    Sitemap::EVENT_INCLUDE_SITEMAP_ENTRY,
+    function(IncludeSitemapEntryEvent $event) {
+        $event->include = false;
+    }
+);
 ```
 
 ### RegisterSitemapUrlsEvent
-
-    const EVENT_REGISTER_SITEMAP_URLS = 'registerSitemapUrls';
 
 The event that is triggered when registering additional URLs for a sitemap.
 
@@ -126,19 +141,22 @@ The event that is triggered when registering additional URLs for a sitemap.
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
 use yii\base\Event;
-Event::on(SitemapCustomTemplate::class, SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS, function(RegisterSitemapUrlsEvent $e) {
-    $e->sitemaps[] = [
-        'loc' => $url,
-        'changefreq' => $changeFreq,
-        'priority' => $priority,
-        'lastmod' => $lastMod,
-    ];
-});
+
+Event::on(
+    SitemapCustomTemplate::class,
+    SitemapCustomTemplate::EVENT_REGISTER_SITEMAP_URLS,
+    function(RegisterSitemapUrlsEvent $event) {
+        $event->sitemaps[] = [
+            'loc' => $url,
+            'changefreq' => $changeFreq,
+            'priority' => $priority,
+            'lastmod' => $lastMod,
+        ];
+    }
+);
 ```
 
 ### RegisterSitemapsEvent
-
-    const EVENT_REGISTER_SITEMAPS = 'registerSitemaps';
 
 The event that is triggered when registering additional sitemaps for the sitemap index.
 
@@ -146,17 +164,20 @@ The event that is triggered when registering additional sitemaps for the sitemap
 use nystudio107\seomatic\events\RegisterSitemapsEvent;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use yii\base\Event;
-Event::on(SitemapIndexTemplate::class, SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS, function(RegisterSitemapsEvent $e) {
-    $e->sitemaps[] = [
-        'loc' => $url,
-        'lastmod' => $lastMod,
-    ];
-});
+
+Event::on(
+    SitemapIndexTemplate::class,
+    SitemapIndexTemplate::EVENT_REGISTER_SITEMAPS,
+    function(RegisterSitemapsEvent $event) {
+        $event->sitemaps[] = [
+            'loc' => $url,
+            'lastmod' => $lastMod,
+        ];
+    }
+);
 ```
 
 ### RegisterComponentTypesEvent
-
-    const EVENT_REGISTER_SEO_ELEMENT_TYPES = 'registerSeoElementTypes';
 
 The event that is triggered when registering SeoElement types
 
@@ -167,7 +188,8 @@ use nystudio107\seomatic\services\SeoElements;
 use craft\events\RegisterComponentTypesEvent;
 use yii\base\Event;
 
-Event::on(SeoElements::class,
+Event::on(
+    SeoElements::class,
     SeoElements::EVENT_REGISTER_SEO_ELEMENT_TYPES,
     function(RegisterComponentTypesEvent $event) {
         $event->types[] = MySeoElement::class;
@@ -177,24 +199,31 @@ Event::on(SeoElements::class,
 
 ### AddDynamicMetaEvent
 
-    const EVENT_ADD_DYNAMIC_META = 'addDynamicMeta';
-
 The event that is triggered when SEOmatic has included the standard meta containers, and gives your plugin/module the chance to add whatever custom dynamic meta items you like
 
 ```php
 use nystudio107\seomatic\events\AddDynamicMetaEvent;
 use nystudio107\seomatic\helpers\DynamicMeta;
 use yii\base\Event;
-Event::on(DynamicMeta::class, DynamicMeta::EVENT_ADD_DYNAMIC_META, function(AddDynamicMetaEvent $e) {
-    // Add whatever dynamic meta items to the containers as you like
-});
+use nystudio107\seomatic\Seomatic;
+
+Event::on(
+    DynamicMeta::class,
+    DynamicMeta::EVENT_ADD_DYNAMIC_META,
+    function(AddDynamicMetaEvent $event) {
+        // Add whatever dynamic meta items to the containers as you like
+        Seomatic::$plugin->getMetaContainers()
+          ->metaGlobalVars
+          ->seoDescription = "This description overrides any others!";
+    }
+);
 ```
 
 ## Meta Bundle / Container Settings
 
-The directory `vendor/nystudio107/seomatic/src/seomatic-config` contains a number of files that are used when initially configuring SEOmatic.
+The [`vendor/nystudio107/seomatic/src/seomatic-config`](https://github.com/nystudio107/craft-seomatic/tree/develop-v4/src/seomatic-config) directory contains a number of files that are used when initially configuring SEOmatic.
 
-![Screenshot](./resources/screenshots/seomatic-seomatic-config.png)
+![Screenshot of a Finder window displaying the contents of the seomatic-config directory, whose visible top-level folders are categorymeta, entrymeta, and globalmeta](./resources/screenshots/seomatic-seomatic-config.png)
 
 You can copy this entire directory to your Craft `config/` directory, and customize the files to your heart’s content. SEOmatic will first look in the `config/` directory for any given file, and then fall back on its own internal `seomatic-config` files.
 
@@ -204,7 +233,7 @@ You can bump the `Bundle.php`'s `bundleVersion` setting if you want it to re-rea
 
 ## Headless SPA API
 
-SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the metadata via a frontend framework like VueJS or React.
+SEOmatic allows you to fetch the meta information for any page via a controller API endpoint, so you can render the metadata via a front-end framework like VueJS or React.
 
 ### GraphQL Query support
 
@@ -217,12 +246,12 @@ You must as least pass in the URI you want metadata for:
 ```graphql
 {
   seomatic (uri: "/") {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
-      metaSiteVarsContainer
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaScriptContainer
+    metaJsonLdContainer
+    metaSiteVarsContainer
   }
 }
 ```
@@ -232,12 +261,12 @@ You must as least pass in the URI you want metadata for:
 ```graphql
 {
   seomatic (uri: "/", siteId: 2) {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
-      metaSiteVarsContainer
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaScriptContainer
+    metaJsonLdContainer
+    metaSiteVarsContainer
   }
 }
 ```
@@ -247,12 +276,12 @@ You must as least pass in the URI you want metadata for:
 ```graphql
 {
   seomatic (uri: "/", site: "french") {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
-      metaSiteVarsContainer
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaScriptContainer
+    metaJsonLdContainer
+    metaSiteVarsContainer
   }
 }
 ```
@@ -262,12 +291,12 @@ You must as least pass in the URI you want metadata for:
 ```graphql
 {
   seomatic (uri: "/", asArray: true) {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
-      metaSiteVarsContainer
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaScriptContainer
+    metaJsonLdContainer
+    metaSiteVarsContainer
   }
 }
 ```
@@ -280,12 +309,12 @@ This is useful if you’re using Next.js, Nuxt.js, Gatsby, Gridsome, or anything
 ```graphql
 {
   seomatic (uri: "/", environment: staging) {
-      metaTitleContainer
-      metaTagContainer
-      metaLinkContainer
-      metaScriptContainer
-      metaJsonLdContainer
-      metaSiteVarsContainer
+    metaTitleContainer
+    metaTagContainer
+    metaLinkContainer
+    metaScriptContainer
+    metaJsonLdContainer
+    metaSiteVarsContainer
   }
 }
 ```
@@ -295,7 +324,7 @@ This is useful if you are using a single Craft CMS instance to render metadata f
 
 Valid values are `local` for local development, `staging` for staging, and `live` for live production.
 
-![Screenshot](./resources/screenshots/seomatic-craftql-query.png)
+![Screenshot of CraftQL for some reason demonstrating a GraphQL query](./resources/screenshots/seomatic-craftql-query.png)
 
 #### Piggybacking GraphQL queries
 
@@ -343,9 +372,9 @@ Craft CMS GraphQL:
 
 ### Frontend Templates GraphQL queries
 
-SEOmatic an provide you with the frontend templates such as `robots.txt`, `humans.txt`, etc. as well:
+SEOmatic an provide you with the front-end templates such as `robots.txt`, `humans.txt`, etc. as well:
 
-![Screenshot](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
+![Screenshot of Craft’s GraphQL explorer querying SEOmatic’s `frontendTemplates`](./resources/screenshots/seomatic-graphql-frontendtemplates-query.png)
 
 ```graphql
 {
@@ -366,13 +395,13 @@ Arguments:
 
 `site:` String - Optional - The site handle to resolve the sitemap for.
 
-`type:` String - The frontend container type, which can be `robots`, `humans`, `security`, or `ads`
+`type:` String - The front-end container type, which can be `robots`, `humans`, `security`, or `ads`
 
 #### Sitemap GraphQL queries
 
 SEOmatic can provide you with the sitemap data via GraphQL as well.
 
-![Screenshot](./resources/screenshots/seomatic-graphql-sitemaps-query.png)
+![Screenshot of Craft’s GraphQL explorer querying SEOmatic’s `sitemapIndexes`, `sitemaps`, and `sitemapStyles`](./resources/screenshots/seomatic-graphql-sitemaps-query.png)
 
 SEOmatic allows you to query for `sitemapIndexes`:
 
@@ -427,7 +456,7 @@ SEOmatic also allows you to query for `sitemapStyles`:
 ```graphql
 {
   seomatic {
-      sitemapStyles {
+    sitemapStyles {
       filename
       contents
     }
@@ -439,7 +468,9 @@ This returns the [XSL stylesheet](https://www.w3.org/Style/XSL/WhatIsXSL.html) t
 
 ### Meta Container API Endpoints
 
-**N.B.:** Anonymous access to the Meta Container endpoints are disabled by default; you’ll need to enable them in SEOmatic → Plugin Settings → Endpoints
+::: tip
+Anonymous access to the Meta Container endpoints are disabled by default; enable them in **SEOmatic** → **Plugin Settings** → **Endpoints**.
+:::
 
 To get all of the meta containers for a given URI, the controller action is:
 
@@ -474,287 +505,290 @@ Should you wish to have the items in the meta containers return as an array of d
 ```
 
 Which will return the data in array form:
+
+::: details Expand Result
 ```json
 {
-    "MetaTitleContainer": {
-        "title": {
-            "title": "[devMode] Craft3 | Homepage"
-        }
+  "MetaTitleContainer": {
+    "title": {
+      "title": "[devMode] Craft3 | Homepage"
+    }
+  },
+  "MetaTagContainer": {
+    "generator": {
+      "content": "SEOmatic",
+      "name": "generator"
     },
-    "MetaTagContainer": {
-        "generator": {
-            "content": "SEOmatic",
-            "name": "generator"
-        },
-        "referrer": {
-            "content": "no-referrer-when-downgrade",
-            "name": "referrer"
-        },
-        "robots": {
-            "content": "all",
-            "name": "robots"
-        }
+    "referrer": {
+      "content": "no-referrer-when-downgrade",
+      "name": "referrer"
     },
-    "MetaLinkContainer": {
-        "canonical": {
-            "href": "http://craft3.test/",
-            "rel": "canonical"
-        },
-        "author": {
-            "href": "/humans.txt",
-            "rel": "author",
-            "type": "text/plain"
-        },
-        "alternate": {
-            "href": "http://craft3.test/",
-            "hreflang": "es",
-            "rel": "alternate"
-        }
+    "robots": {
+      "content": "all",
+      "name": "robots"
+    }
+  },
+  "MetaLinkContainer": {
+    "canonical": {
+      "href": "http://craft3.test/",
+      "rel": "canonical"
     },
-    "MetaScriptContainer": [],
-    "MetaJsonLdContainer": {
-        "WebPage": {
-            "@context": "http://schema.org",
-            "@type": "WebPage",
-            "image": {
-                "@type": "ImageObject",
-                "height": "804",
-                "width": "1200"
-            },
-            "inLanguage": "en-us",
-            "mainEntityOfPage": "http://craft3.test/",
-            "name": "Homepage",
-            "url": "http://craft3.test/"
-        },
-        "BreadcrumbList": {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            "description": "Breadcrumbs list",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "name": "Homepage",
-                    "item": "http://craft3.test/",
-                    "position": 1
-                }
-            ],
-            "name": "Breadcrumbs"
-        }
+    "author": {
+      "href": "/humans.txt",
+      "rel": "author",
+      "type": "text/plain"
     },
-    "MetaSiteVarsContainer": {
-        "siteName": "woof",
-        "identity": {
-            "siteType": "Organization",
-            "siteSubType": "LocalBusiness",
-            "siteSpecificType": "none",
-            "computedType": "LocalBusiness",
-            "genericName": "",
-            "genericAlternateName": "",
-            "genericDescription": "",
-            "genericUrl": "$HOME",
-            "genericImage": null,
-            "genericImageWidth": "229",
-            "genericImageHeight": "220",
-            "genericImageIds": [
-                "25"
-            ],
-            "genericTelephone": "",
-            "genericEmail": "",
-            "genericStreetAddress": "",
-            "genericAddressLocality": "",
-            "genericAddressRegion": "",
-            "genericPostalCode": "",
-            "genericAddressCountry": "",
-            "genericGeoLatitude": "",
-            "genericGeoLongitude": "",
-            "personGender": "Male",
-            "personBirthPlace": "",
-            "organizationDuns": "",
-            "organizationFounder": "",
-            "organizationFoundingDate": "",
-            "organizationFoundingLocation": "",
-            "organizationContactPoints": "",
-            "corporationTickerSymbol": "",
-            "localBusinessPriceRange": "$",
-            "localBusinessOpeningHours": [
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                }
-            ],
-            "restaurantServesCuisine": "",
-            "restaurantMenuUrl": "",
-            "restaurantReservationsUrl": ""
-        },
-        "creator": {
-            "siteType": "Organization",
-            "siteSubType": "LocalBusiness",
-            "siteSpecificType": "none",
-            "computedType": "LocalBusiness",
-            "genericName": "",
-            "genericAlternateName": "",
-            "genericDescription": "",
-            "genericUrl": "",
-            "genericImage": null,
-            "genericImageWidth": "1340",
-            "genericImageHeight": "596",
-            "genericImageIds": [
-                "24"
-            ],
-            "genericTelephone": "",
-            "genericEmail": "",
-            "genericStreetAddress": "",
-            "genericAddressLocality": "",
-            "genericAddressRegion": "",
-            "genericPostalCode": "",
-            "genericAddressCountry": "",
-            "genericGeoLatitude": "",
-            "genericGeoLongitude": "",
-            "personGender": "Male",
-            "personBirthPlace": "",
-            "organizationDuns": "",
-            "organizationFounder": "",
-            "organizationFoundingDate": "",
-            "organizationFoundingLocation": "",
-            "organizationContactPoints": "",
-            "corporationTickerSymbol": "",
-            "localBusinessPriceRange": "$",
-            "localBusinessOpeningHours": [
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                },
-                {
-                    "open": null,
-                    "close": null
-                }
-            ],
-            "restaurantServesCuisine": "",
-            "restaurantMenuUrl": "",
-            "restaurantReservationsUrl": ""
-        },
-        "twitterHandle": "",
-        "facebookProfileId": "",
-        "facebookAppId": "",
-        "googleSiteVerification": "",
-        "bingSiteVerification": "",
-        "pinterestSiteVerification": "",
-        "sameAsLinks": {
-            "twitter": {
-                "siteName": "Twitter",
-                "handle": "twitter",
-                "url": ""
-            },
-            "facebook": {
-                "siteName": "Facebook",
-                "handle": "facebook",
-                "url": ""
-            },
-            "wikipedia": {
-                "siteName": "Wikipedia",
-                "handle": "wikipedia",
-                "url": ""
-            },
-            "linkedin": {
-                "siteName": "LinkedIn",
-                "handle": "linkedin",
-                "url": ""
-            },
-            "googleplus": {
-                "siteName": "Google+",
-                "handle": "googleplus",
-                "url": ""
-            },
-            "youtube": {
-                "siteName": "YouTube",
-                "handle": "youtube",
-                "url": ""
-            },
-            "instagram": {
-                "siteName": "Instagram",
-                "handle": "instagram",
-                "url": ""
-            },
-            "pinterest": {
-                "siteName": "Pinterest",
-                "handle": "pinterest",
-                "url": ""
-            },
-            "github": {
-                "siteName": "GitHub",
-                "handle": "github",
-                "url": ""
-            },
-            "vimeo": {
-                "siteName": "Vimeo",
-                "handle": "vimeo",
-                "url": ""
-            }
-        },
-        "siteLinksSearchTarget": "",
-        "siteLinksQueryInput": "",
-        "referrer": "no-referrer-when-downgrade",
-        "additionalSitemapUrls": [],
-        "additionalSitemapUrlsDateUpdated": null,
-        "additionalSitemaps": []
+    "alternate": {
+      "href": "http://craft3.test/",
+      "hreflang": "es",
+      "rel": "alternate"
+    }
+  },
+  "MetaScriptContainer": [],
+  "MetaJsonLdContainer": {
+    "WebPage": {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "image": {
+        "@type": "ImageObject",
+        "height": "804",
+        "width": "1200"
+      },
+      "inLanguage": "en-us",
+      "mainEntityOfPage": "http://craft3.test/",
+      "name": "Homepage",
+      "url": "http://craft3.test/"
     },
-    "FrontendTemplateContainer": [
+    "BreadcrumbList": {
+      "@context": "http://schema.org",
+      "@type": "BreadcrumbList",
+      "description": "Breadcrumbs list",
+      "itemListElement": [
         {
-          "humans": "/* TEAM */\n\nCreator: nystudio107\nURL: https://nystudio107.com/\nDescription: We do technology-based consulting, branding, design, and development. Making the web better one site at a time, with a focus on performance, usability & SEO\n\n/* THANKS */\n\nCraft CMS - https://craftcms.com\nPixel & Tonic - https://pixelandtonic.com\n\n/* SITE */\n\nStandards: HTML5, CSS3\nComponents: Craft CMS 3, Yii2, PHP, JavaScript, SEOmatic\n"
+          "@type": "ListItem",
+          "name": "Homepage",
+          "item": "http://craft3.test/",
+          "position": 1
+        }
+      ],
+      "name": "Breadcrumbs"
+    }
+  },
+  "MetaSiteVarsContainer": {
+    "siteName": "woof",
+    "identity": {
+      "siteType": "Organization",
+      "siteSubType": "LocalBusiness",
+      "siteSpecificType": "none",
+      "computedType": "LocalBusiness",
+      "genericName": "",
+      "genericAlternateName": "",
+      "genericDescription": "",
+      "genericUrl": "$HOME",
+      "genericImage": null,
+      "genericImageWidth": "229",
+      "genericImageHeight": "220",
+      "genericImageIds": [
+        "25"
+      ],
+      "genericTelephone": "",
+      "genericEmail": "",
+      "genericStreetAddress": "",
+      "genericAddressLocality": "",
+      "genericAddressRegion": "",
+      "genericPostalCode": "",
+      "genericAddressCountry": "",
+      "genericGeoLatitude": "",
+      "genericGeoLongitude": "",
+      "personGender": "Male",
+      "personBirthPlace": "",
+      "organizationDuns": "",
+      "organizationFounder": "",
+      "organizationFoundingDate": "",
+      "organizationFoundingLocation": "",
+      "organizationContactPoints": "",
+      "corporationTickerSymbol": "",
+      "localBusinessPriceRange": "$",
+      "localBusinessOpeningHours": [
+        {
+          "open": null,
+          "close": null
         },
         {
-          "robots": "# robots.txt for http://localhost:8000/\n\nsitemap: http://localhost:8000/sitemaps-1-sitemap.xml\nsitemap: http://localhost:8000/es/sitemaps-1-sitemap.xml\n\n# local - disallow all\n\nUser-agent: *\nDisallow: /\n\n"
+          "open": null,
+          "close": null
         },
         {
-          "ads": "# ads.txt file for http://localhost:8000/\n# More info: https://support.google.com/admanager/answer/7441288?hl=en\nhttp://localhost:8000/,123,DIRECT\n"
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
         }
-    ]
+      ],
+      "restaurantServesCuisine": "",
+      "restaurantMenuUrl": "",
+      "restaurantReservationsUrl": ""
+    },
+    "creator": {
+      "siteType": "Organization",
+      "siteSubType": "LocalBusiness",
+      "siteSpecificType": "none",
+      "computedType": "LocalBusiness",
+      "genericName": "",
+      "genericAlternateName": "",
+      "genericDescription": "",
+      "genericUrl": "",
+      "genericImage": null,
+      "genericImageWidth": "1340",
+      "genericImageHeight": "596",
+      "genericImageIds": [
+        "24"
+      ],
+      "genericTelephone": "",
+      "genericEmail": "",
+      "genericStreetAddress": "",
+      "genericAddressLocality": "",
+      "genericAddressRegion": "",
+      "genericPostalCode": "",
+      "genericAddressCountry": "",
+      "genericGeoLatitude": "",
+      "genericGeoLongitude": "",
+      "personGender": "Male",
+      "personBirthPlace": "",
+      "organizationDuns": "",
+      "organizationFounder": "",
+      "organizationFoundingDate": "",
+      "organizationFoundingLocation": "",
+      "organizationContactPoints": "",
+      "corporationTickerSymbol": "",
+      "localBusinessPriceRange": "$",
+      "localBusinessOpeningHours": [
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        },
+        {
+          "open": null,
+          "close": null
+        }
+      ],
+      "restaurantServesCuisine": "",
+      "restaurantMenuUrl": "",
+      "restaurantReservationsUrl": ""
+    },
+    "twitterHandle": "",
+    "facebookProfileId": "",
+    "facebookAppId": "",
+    "googleSiteVerification": "",
+    "bingSiteVerification": "",
+    "pinterestSiteVerification": "",
+    "sameAsLinks": {
+      "twitter": {
+        "siteName": "Twitter",
+        "handle": "twitter",
+        "url": ""
+      },
+      "facebook": {
+        "siteName": "Facebook",
+        "handle": "facebook",
+        "url": ""
+      },
+      "wikipedia": {
+        "siteName": "Wikipedia",
+        "handle": "wikipedia",
+        "url": ""
+      },
+      "linkedin": {
+        "siteName": "LinkedIn",
+        "handle": "linkedin",
+        "url": ""
+      },
+      "googleplus": {
+        "siteName": "Google+",
+        "handle": "googleplus",
+        "url": ""
+      },
+      "youtube": {
+        "siteName": "YouTube",
+        "handle": "youtube",
+        "url": ""
+      },
+      "instagram": {
+        "siteName": "Instagram",
+        "handle": "instagram",
+        "url": ""
+      },
+      "pinterest": {
+        "siteName": "Pinterest",
+        "handle": "pinterest",
+        "url": ""
+      },
+      "github": {
+        "siteName": "GitHub",
+        "handle": "github",
+        "url": ""
+      },
+      "vimeo": {
+        "siteName": "Vimeo",
+        "handle": "vimeo",
+        "url": ""
+      }
+    },
+    "siteLinksSearchTarget": "",
+    "siteLinksQueryInput": "",
+    "referrer": "no-referrer-when-downgrade",
+    "additionalSitemapUrls": [],
+    "additionalSitemapUrlsDateUpdated": null,
+    "additionalSitemaps": []
+  },
+  "FrontendTemplateContainer": [
+    {
+      "humans": "/* TEAM */\n\nCreator: nystudio107\nURL: https://nystudio107.com/\nDescription: We do technology-based consulting, branding, design, and development. Making the web better one site at a time, with a focus on performance, usability & SEO\n\n/* THANKS */\n\nCraft CMS - https://craftcms.com\nPixel & Tonic - https://pixelandtonic.com\n\n/* SITE */\n\nStandards: HTML5, CSS3\nComponents: Craft CMS 3, Yii2, PHP, JavaScript, SEOmatic\n"
+    },
+    {
+      "robots": "# robots.txt for http://localhost:8000/\n\nsitemap: http://localhost:8000/sitemaps-1-sitemap.xml\nsitemap: http://localhost:8000/es/sitemaps-1-sitemap.xml\n\n# local - disallow all\n\nUser-agent: *\nDisallow: /\n\n"
+    },
+    {
+      "ads": "# ads.txt file for http://localhost:8000/\n# More info: https://support.google.com/admanager/answer/7441288?hl=en\nhttp://localhost:8000/,123,DIRECT\n"
+    }
+  ]
 }
 ```
+:::
 
 You can also request individual meta containers.
 
@@ -765,9 +799,10 @@ Title container:
 ```
 
 ...will return just the Title container:
+
 ```json
 {
-    "MetaTitleContainer": "<title>[devMode] Craft3 | Homepage</title>"
+  "MetaTitleContainer": "<title>[devMode] Craft3 | Homepage</title>"
 }
 ```
 
@@ -778,10 +813,11 @@ Tag container:
 ```
 
 ...will return just the Tag container:
+
 ```json
 {
-     "MetaTagContainer": "<meta name=\"generator\" content=\"SEOmatic\"><meta name=\"referrer\" content=\"no-referrer-when-downgrade\"><meta name=\"robots\" content=\"all\">"
- }
+  "MetaTagContainer": "<meta name=\"generator\" content=\"SEOmatic\"><meta name=\"referrer\" content=\"no-referrer-when-downgrade\"><meta name=\"robots\" content=\"all\">"
+}
 ```
 
 Script container:
@@ -793,7 +829,7 @@ Script container:
 ...will return just the Script container:
 ```json
 {
-    "MetaScriptContainer": ""
+  "MetaScriptContainer": ""
 }
 ```
 
@@ -804,9 +840,10 @@ Link container:
 ```
 
 ...will return just the Link container:
+
 ```json
 {
-    "MetaLinkContainer": "<link href=\"http://craft3.test/\" rel=\"canonical\"><link type=\"text/plain\" href=\"/humans.txt\" rel=\"author\"><link href=\"http://craft3.test/\" rel=\"alternate\" hreflang=\"es\">"
+  "MetaLinkContainer": "<link href=\"http://craft3.test/\" rel=\"canonical\"><link type=\"text/plain\" href=\"/humans.txt\" rel=\"author\"><link href=\"http://craft3.test/\" rel=\"alternate\" hreflang=\"es\">"
 }
 ```
 
@@ -819,7 +856,7 @@ JSON-LD container:
 ...will return just the JSON-LD container:
 ```json
 {
-    "MetaJsonLdContainer": "<script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"WebPage\",\"image\":{\"@type\":\"ImageObject\",\"height\":\"804\",\"width\":\"1200\"},\"inLanguage\":\"en-us\",\"mainEntityOfPage\":\"http://craft3.test/\",\"name\":\"Homepage\",\"url\":\"http://craft3.test/\"}</script><script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"BreadcrumbList\",\"description\":\"Breadcrumbs list\",\"itemListElement\":[{\"@type\":\"ListItem\",\"item\":{\"@id\":\"http://craft3.test/\",\"name\":\"Homepage\"},\"position\":1}],\"name\":\"Breadcrumbs\"}</script>"
+  "MetaJsonLdContainer": "<script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"WebPage\",\"image\":{\"@type\":\"ImageObject\",\"height\":\"804\",\"width\":\"1200\"},\"inLanguage\":\"en-us\",\"mainEntityOfPage\":\"http://craft3.test/\",\"name\":\"Homepage\",\"url\":\"http://craft3.test/\"}</script><script type=\"application/ld+json\">{\"@context\":\"http://schema.org\",\"@type\":\"BreadcrumbList\",\"description\":\"Breadcrumbs list\",\"itemListElement\":[{\"@type\":\"ListItem\",\"item\":{\"@id\":\"http://craft3.test/\",\"name\":\"Homepage\"},\"position\":1}],\"name\":\"Breadcrumbs\"}</script>"
 }
 ```
 
@@ -832,7 +869,7 @@ SiteVars container:
 ...will return just the MetaSiteVars container:
 ```json
 {
-    "MetaSiteVarsContainer": "{\"siteName\":\"woof\",\"identity\":{\"siteType\":\"Organization\",\"siteSubType\":\"LocalBusiness\",\"siteSpecificType\":\"none\",\"computedType\":\"LocalBusiness\",\"genericName\":\"\",\"genericAlternateName\":\"\",\"genericDescription\":\"\",\"genericUrl\":\"$HOME\",\"genericImage\":null,\"genericImageWidth\":\"229\",\"genericImageHeight\":\"220\",\"genericImageIds\":[\"25\"],\"genericTelephone\":\"\",\"genericEmail\":\"\",\"genericStreetAddress\":\"\",\"genericAddressLocality\":\"\",\"genericAddressRegion\":\"\",\"genericPostalCode\":\"\",\"genericAddressCountry\":\"\",\"genericGeoLatitude\":\"\",\"genericGeoLongitude\":\"\",\"personGender\":\"Male\",\"personBirthPlace\":\"\",\"organizationDuns\":\"\",\"organizationFounder\":\"\",\"organizationFoundingDate\":\"\",\"organizationFoundingLocation\":\"\",\"organizationContactPoints\":\"\",\"corporationTickerSymbol\":\"\",\"localBusinessPriceRange\":\"$\",\"localBusinessOpeningHours\":[{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null}],\"restaurantServesCuisine\":\"\",\"restaurantMenuUrl\":\"\",\"restaurantReservationsUrl\":\"\"},\"creator\":{\"siteType\":\"Organization\",\"siteSubType\":\"LocalBusiness\",\"siteSpecificType\":\"none\",\"computedType\":\"LocalBusiness\",\"genericName\":\"\",\"genericAlternateName\":\"\",\"genericDescription\":\"\",\"genericUrl\":\"\",\"genericImage\":null,\"genericImageWidth\":\"1340\",\"genericImageHeight\":\"596\",\"genericImageIds\":[\"24\"],\"genericTelephone\":\"\",\"genericEmail\":\"\",\"genericStreetAddress\":\"\",\"genericAddressLocality\":\"\",\"genericAddressRegion\":\"\",\"genericPostalCode\":\"\",\"genericAddressCountry\":\"\",\"genericGeoLatitude\":\"\",\"genericGeoLongitude\":\"\",\"personGender\":\"Male\",\"personBirthPlace\":\"\",\"organizationDuns\":\"\",\"organizationFounder\":\"\",\"organizationFoundingDate\":\"\",\"organizationFoundingLocation\":\"\",\"organizationContactPoints\":\"\",\"corporationTickerSymbol\":\"\",\"localBusinessPriceRange\":\"$\",\"localBusinessOpeningHours\":[{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null}],\"restaurantServesCuisine\":\"\",\"restaurantMenuUrl\":\"\",\"restaurantReservationsUrl\":\"\"},\"twitterHandle\":\"\",\"facebookProfileId\":\"\",\"facebookAppId\":\"\",\"googleSiteVerification\":\"\",\"bingSiteVerification\":\"\",\"pinterestSiteVerification\":\"\",\"sameAsLinks\":{\"twitter\":{\"siteName\":\"Twitter\",\"handle\":\"twitter\",\"url\":\"\"},\"facebook\":{\"siteName\":\"Facebook\",\"handle\":\"facebook\",\"url\":\"\"},\"wikipedia\":{\"siteName\":\"Wikipedia\",\"handle\":\"wikipedia\",\"url\":\"\"},\"linkedin\":{\"siteName\":\"LinkedIn\",\"handle\":\"linkedin\",\"url\":\"\"},\"googleplus\":{\"siteName\":\"Google+\",\"handle\":\"googleplus\",\"url\":\"\"},\"youtube\":{\"siteName\":\"YouTube\",\"handle\":\"youtube\",\"url\":\"\"},\"instagram\":{\"siteName\":\"Instagram\",\"handle\":\"instagram\",\"url\":\"\"},\"pinterest\":{\"siteName\":\"Pinterest\",\"handle\":\"pinterest\",\"url\":\"\"},\"github\":{\"siteName\":\"GitHub\",\"handle\":\"github\",\"url\":\"\"},\"vimeo\":{\"siteName\":\"Vimeo\",\"handle\":\"vimeo\",\"url\":\"\"}},\"siteLinksSearchTarget\":\"\",\"siteLinksQueryInput\":\"\",\"referrer\":\"no-referrer-when-downgrade\",\"additionalSitemapUrls\":[],\"additionalSitemapUrlsDateUpdated\":null,\"additionalSitemaps\":[]}"
+  "MetaSiteVarsContainer": "{\"siteName\":\"woof\",\"identity\":{\"siteType\":\"Organization\",\"siteSubType\":\"LocalBusiness\",\"siteSpecificType\":\"none\",\"computedType\":\"LocalBusiness\",\"genericName\":\"\",\"genericAlternateName\":\"\",\"genericDescription\":\"\",\"genericUrl\":\"$HOME\",\"genericImage\":null,\"genericImageWidth\":\"229\",\"genericImageHeight\":\"220\",\"genericImageIds\":[\"25\"],\"genericTelephone\":\"\",\"genericEmail\":\"\",\"genericStreetAddress\":\"\",\"genericAddressLocality\":\"\",\"genericAddressRegion\":\"\",\"genericPostalCode\":\"\",\"genericAddressCountry\":\"\",\"genericGeoLatitude\":\"\",\"genericGeoLongitude\":\"\",\"personGender\":\"Male\",\"personBirthPlace\":\"\",\"organizationDuns\":\"\",\"organizationFounder\":\"\",\"organizationFoundingDate\":\"\",\"organizationFoundingLocation\":\"\",\"organizationContactPoints\":\"\",\"corporationTickerSymbol\":\"\",\"localBusinessPriceRange\":\"$\",\"localBusinessOpeningHours\":[{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null}],\"restaurantServesCuisine\":\"\",\"restaurantMenuUrl\":\"\",\"restaurantReservationsUrl\":\"\"},\"creator\":{\"siteType\":\"Organization\",\"siteSubType\":\"LocalBusiness\",\"siteSpecificType\":\"none\",\"computedType\":\"LocalBusiness\",\"genericName\":\"\",\"genericAlternateName\":\"\",\"genericDescription\":\"\",\"genericUrl\":\"\",\"genericImage\":null,\"genericImageWidth\":\"1340\",\"genericImageHeight\":\"596\",\"genericImageIds\":[\"24\"],\"genericTelephone\":\"\",\"genericEmail\":\"\",\"genericStreetAddress\":\"\",\"genericAddressLocality\":\"\",\"genericAddressRegion\":\"\",\"genericPostalCode\":\"\",\"genericAddressCountry\":\"\",\"genericGeoLatitude\":\"\",\"genericGeoLongitude\":\"\",\"personGender\":\"Male\",\"personBirthPlace\":\"\",\"organizationDuns\":\"\",\"organizationFounder\":\"\",\"organizationFoundingDate\":\"\",\"organizationFoundingLocation\":\"\",\"organizationContactPoints\":\"\",\"corporationTickerSymbol\":\"\",\"localBusinessPriceRange\":\"$\",\"localBusinessOpeningHours\":[{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null},{\"open\":null,\"close\":null}],\"restaurantServesCuisine\":\"\",\"restaurantMenuUrl\":\"\",\"restaurantReservationsUrl\":\"\"},\"twitterHandle\":\"\",\"facebookProfileId\":\"\",\"facebookAppId\":\"\",\"googleSiteVerification\":\"\",\"bingSiteVerification\":\"\",\"pinterestSiteVerification\":\"\",\"sameAsLinks\":{\"twitter\":{\"siteName\":\"Twitter\",\"handle\":\"twitter\",\"url\":\"\"},\"facebook\":{\"siteName\":\"Facebook\",\"handle\":\"facebook\",\"url\":\"\"},\"wikipedia\":{\"siteName\":\"Wikipedia\",\"handle\":\"wikipedia\",\"url\":\"\"},\"linkedin\":{\"siteName\":\"LinkedIn\",\"handle\":\"linkedin\",\"url\":\"\"},\"googleplus\":{\"siteName\":\"Google+\",\"handle\":\"googleplus\",\"url\":\"\"},\"youtube\":{\"siteName\":\"YouTube\",\"handle\":\"youtube\",\"url\":\"\"},\"instagram\":{\"siteName\":\"Instagram\",\"handle\":\"instagram\",\"url\":\"\"},\"pinterest\":{\"siteName\":\"Pinterest\",\"handle\":\"pinterest\",\"url\":\"\"},\"github\":{\"siteName\":\"GitHub\",\"handle\":\"github\",\"url\":\"\"},\"vimeo\":{\"siteName\":\"Vimeo\",\"handle\":\"vimeo\",\"url\":\"\"}},\"siteLinksSearchTarget\":\"\",\"siteLinksQueryInput\":\"\",\"referrer\":\"no-referrer-when-downgrade\",\"additionalSitemapUrls\":[],\"additionalSitemapUrlsDateUpdated\":null,\"additionalSitemaps\":[]}"
 }
 ```
 
@@ -843,17 +880,20 @@ Frontend Templates container:
 ```
 
 ...will return just the Frontend Templates container:
+
 ```json
 {
-    "FrontendTemplateContainer": "[{\"humans\":\"/* TEAM */\\n\\nCreator: nystudio107\\nURL: https://nystudio107.com/\\nDescription: We do technology-based consulting, branding, design, and development. Making the web better one site at a time, with a focus on performance, usability & SEO\\n\\n/* THANKS */\\n\\nCraft CMS - https://craftcms.com\\nPixel & Tonic - https://pixelandtonic.com\\n\\n/* SITE */\\n\\nStandards: HTML5, CSS3\\nComponents: Craft CMS 3, Yii2, PHP, JavaScript, SEOmatic\\n\"},{\"robots\":\"# robots.txt for http://localhost:8000/\\n\\nsitemap: http://localhost:8000/sitemaps-1-sitemap.xml\\nsitemap: http://localhost:8000/es/sitemaps-1-sitemap.xml\\n\\n# local - disallow all\\n\\nUser-agent: *\\nDisallow: /\\n\\n\"},{\"ads\":\"# ads.txt file for http://localhost:8000/\\n# More info: https://support.google.com/admanager/answer/7441288?hl=en\\nhttp://localhost:8000/,123,DIRECT\\n\"}]"
+  "FrontendTemplateContainer": "[{\"humans\":\"/* TEAM */\\n\\nCreator: nystudio107\\nURL: https://nystudio107.com/\\nDescription: We do technology-based consulting, branding, design, and development. Making the web better one site at a time, with a focus on performance, usability & SEO\\n\\n/* THANKS */\\n\\nCraft CMS - https://craftcms.com\\nPixel & Tonic - https://pixelandtonic.com\\n\\n/* SITE */\\n\\nStandards: HTML5, CSS3\\nComponents: Craft CMS 3, Yii2, PHP, JavaScript, SEOmatic\\n\"},{\"robots\":\"# robots.txt for http://localhost:8000/\\n\\nsitemap: http://localhost:8000/sitemaps-1-sitemap.xml\\nsitemap: http://localhost:8000/es/sitemaps-1-sitemap.xml\\n\\n# local - disallow all\\n\\nUser-agent: *\\nDisallow: /\\n\\n\"},{\"ads\":\"# ads.txt file for http://localhost:8000/\\n# More info: https://support.google.com/admanager/answer/7441288?hl=en\\nhttp://localhost:8000/,123,DIRECT\\n\"}]"
 }
 ```
 
 All of the individual container controller API endpoints also accept the `&asArray=true` parameter if you’d like the data in array form.
- 
+
 ### Schema.org API Endpoints
 
-**N.B.:** Anonymous access to the Schema.org JSON-LD endpoints are disabled by default; you’ll need to enable them in SEOmatic → Plugin Settings → Endpoints
+::: tip
+Anonymous access to the Schema.org JSON-LD endpoints are disabled by default; enable them in **SEOmatic** → **Plugin Settings** → **Endpoints**.
+:::
 
 To get a key-value array of a given [Schema.org](http://schema.org/docs/full.html) type:
 
@@ -878,7 +918,8 @@ You can narrow this down to a specific sub-type list by passing in a `path` of s
 /actions/seomatic/json-ld/get-type-array?path=CreativeWork.Article
 ```
 ...this would output all of the sub-types of `Article`:
-```
+
+```json
 {
   "AdvertiserContentArticle": "AdvertiserContentArticle",
   "NewsArticle": {
@@ -904,5 +945,3 @@ You can narrow this down to a specific sub-type list by passing in a `path` of s
   }
 }
 ```
-
-Brought to you by [nystudio107](https://nystudio107.com/)

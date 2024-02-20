@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ProductGroup.
  *
  * @author    nystudio107
@@ -27,22 +27,22 @@ trait ProductGroupTrait
      * can be referenced by their short name e.g. "color"; terms defined elsewhere
      * can be referenced with their URIs.
      *
-     * @var string|Text|DefinedTerm
+     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
      */
     public $variesBy;
+
+    /**
+     * Indicates a textual identifier for a ProductGroup.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $productGroupID;
 
     /**
      * Indicates a [[Product]] that is a member of this [[ProductGroup]] (or
      * [[ProductModel]]).
      *
-     * @var Product
+     * @var array|Product|Product[]
      */
     public $hasVariant;
-
-    /**
-     * Indicates a textual identifier for a ProductGroup.
-     *
-     * @var string|Text
-     */
-    public $productGroupID;
 }

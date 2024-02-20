@@ -41,7 +41,7 @@ class Title extends MetaService
      */
     public function get(string $key = 'title', string $handle = self::GENERAL_HANDLE)
     {
-        /** @var  $metaItem MetaTitle */
+        /** @var MetaTitle $metaItem */
         $metaItem = Seomatic::$plugin->metaContainers->getMetaItemByKey($key, MetaTitleContainer::CONTAINER_TYPE);
 
         return $metaItem;

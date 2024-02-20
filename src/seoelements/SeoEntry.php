@@ -19,8 +19,6 @@ use craft\elements\Entry;
 use craft\events\DefineHtmlEvent;
 use craft\events\SectionEvent;
 use craft\gql\interfaces\elements\Entry as EntryInterface;
-use craft\models\EntryDraft;
-use craft\models\EntryVersion;
 use craft\models\Section;
 use craft\models\Site;
 use craft\services\Sections;
@@ -48,9 +46,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     public const META_BUNDLE_TYPE = 'section';
     public const ELEMENT_CLASSES = [
         Entry::class,
-        EntryDraft::class,
-        EntryVersion::class,
-    ];
+        1, ];
     public const REQUIRED_PLUGIN_HANDLE = null;
     public const CONFIG_FILE_PATH = 'entrymeta/Bundle';
 
@@ -193,7 +189,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
                 );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $entry Entry */
+                /** @var Entry $entry */
                 $entry = $event->sender ?? null;
                 if ($entry !== null && $entry->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);

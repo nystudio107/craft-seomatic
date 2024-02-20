@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Trip.
  *
  * @author    nystudio107
@@ -22,52 +22,35 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TripTrait
 {
     /**
-     * The expected departure time.
+     * The location of origin of the trip, prior to any destination(s).
      *
-     * @var Time|DateTime
+     * @var array|Place|Place[]
      */
-    public $departureTime;
+    public $tripOrigin;
+
+    /**
+     * The expected arrival time.
+     *
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
+     */
+    public $arrivalTime;
 
     /**
      * Destination(s) ( [[Place]] ) that make up a trip. For a trip where
      * destination order is important use [[ItemList]] to specify that order (see
      * examples).
      *
-     * @var ItemList|Place
+     * @var array|Place|Place[]|array|ItemList|ItemList[]
      */
     public $itinerary;
-
-    /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller.
-     *
-     * @var Organization|Person
-     */
-    public $provider;
 
     /**
      * Identifies that this [[Trip]] is a subTrip of another Trip.  For example
      * Day 1, Day 2, etc. of a multi-day trip.
      *
-     * @var Trip
+     * @var array|Trip|Trip[]
      */
     public $partOfTrip;
-
-    /**
-     * The expected arrival time.
-     *
-     * @var DateTime|Time
-     */
-    public $arrivalTime;
-
-    /**
-     * Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1,
-     * Day 2, etc. of a multi-day trip.
-     *
-     * @var Trip
-     */
-    public $subTrip;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
@@ -79,7 +62,31 @@ trait TripTrait
      * such as Product or a subtype of Product, can clarify the nature of the
      * offer.
      *
-     * @var Demand|Offer
+     * @var array|Demand|Demand[]|array|Offer|Offer[]
      */
     public $offers;
+
+    /**
+     * The expected departure time.
+     *
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
+     */
+    public $departureTime;
+
+    /**
+     * Identifies a [[Trip]] that is a subTrip of this Trip.  For example Day 1,
+     * Day 2, etc. of a multi-day trip.
+     *
+     * @var array|Trip|Trip[]
+     */
+    public $subTrip;
+
+    /**
+     * The service provider, service operator, or service performer; the goods
+     * producer. Another party (a seller) may offer those services or goods on
+     * behalf of the provider. A provider may also serve as the seller.
+     *
+     * @var array|Person|Person[]|array|Organization|Organization[]
+     */
+    public $provider;
 }

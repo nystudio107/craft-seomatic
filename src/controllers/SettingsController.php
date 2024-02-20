@@ -13,8 +13,8 @@ use Craft;
 use craft\elements\Asset;
 use craft\errors\MissingComponentException;
 use craft\helpers\UrlHelper;
-use craft\models\Site;
 use craft\web\Controller;
+use craft\web\UrlManager;
 use DateTime;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
@@ -221,7 +221,7 @@ class SettingsController extends Controller
      *
      * @param string $subSection
      * @param string|null $siteHandle
-     * @param null $loadFromSiteHandle
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -341,7 +341,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * @return Response
+     * @return Response|null
      * @throws BadRequestHttpException
      * @throws MissingComponentException
      */
@@ -412,7 +412,9 @@ class SettingsController extends Controller
                 Craft::error(print_r($metaBundle->metaGlobalVars->getErrors(), true), __METHOD__);
                 Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save settings due to a Twig error."));
                 // Send the redirect back to the template
-                Craft::$app->getUrlManager()->setRouteParams([
+                /** @var UrlManager $urlManager */
+                $urlManager = Craft::$app->getUrlManager();
+                $urlManager->setRouteParams([
                     'editedMetaBundle' => $metaBundle,
                 ]);
 
@@ -490,8 +492,8 @@ class SettingsController extends Controller
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param string|null $siteHandle
-     * @param int|null $typeId
-     * @param null $loadFromSiteHandle
+     * @param string|int|null $typeId
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -682,8 +684,8 @@ class SettingsController extends Controller
      * Site settings
      *
      * @param string $subSection
-     * @param string $siteHandle
-     * @param null $loadFromSiteHandle
+     * @param string|null $siteHandle
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -879,8 +881,8 @@ class SettingsController extends Controller
      * Tracking settings
      *
      * @param string $subSection
-     * @param string $siteHandle
-     * @param null $loadFromSiteHandle
+     * @param string|null $siteHandle
+     * @param string|null $loadFromSiteHandle
      *
      * @return Response The rendered result
      * @throws NotFoundHttpException
@@ -963,7 +965,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * @return Response
+     * @return Response|null
      * @throws BadRequestHttpException
      * @throws MissingComponentException
      */
@@ -985,7 +987,7 @@ class SettingsController extends Controller
                 foreach ($metaBundle->metaContainers as $metaContainer) {
                     if ($metaContainer::CONTAINER_TYPE === MetaScriptContainer::CONTAINER_TYPE) {
                         $data = $metaContainer->getData($scriptHandle);
-                        /** @var MetaScript $data */
+                        /** @var MetaScript|null $data */
                         if ($data) {
                             /** @var array $scriptData */
                             foreach ($scriptData as $key => $value) {
@@ -1007,7 +1009,9 @@ class SettingsController extends Controller
             if ($hasErrors) {
                 Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save tracking settings due to a Twig error."));
                 // Send the redirect back to the template
-                Craft::$app->getUrlManager()->setRouteParams([
+                /** @var UrlManager $urlManager */
+                $urlManager = Craft::$app->getUrlManager();
+                $urlManager->setRouteParams([
                     'editedMetaBundle' => $metaBundle,
                 ]);
 
@@ -1055,8 +1059,10 @@ class SettingsController extends Controller
         if (!Craft::$app->getPlugins()->savePluginSettings($plugin, $settings)) {
             Craft::$app->getSession()->setError(Craft::t('app', "Couldn't save plugin settings."));
 
-            // Send the plugin back to the template
-            Craft::$app->getUrlManager()->setRouteParams([
+            // Send the redirect back to the template
+            /** @var UrlManager $urlManager */
+            $urlManager = Craft::$app->getUrlManager();
+            $urlManager->setRouteParams([
                 'plugin' => $plugin,
             ]);
 
@@ -1075,7 +1081,7 @@ class SettingsController extends Controller
     /**
      * Return a siteId from a siteHandle
      *
-     * @param string $siteHandle
+     * @param string|null $siteHandle
      *
      * @return int|null
      * @throws NotFoundHttpException
@@ -1097,10 +1103,11 @@ class SettingsController extends Controller
     }
 
     /**
-     * @param string $siteHandle
-     * @param        $siteId
-     * @param        $variables
-     *
+     * @param $siteHandle
+     * @param $siteId
+     * @param array $variables
+     * @param $element
+     * @return void
      * @throws ForbiddenHttpException
      */
     protected function setMultiSiteVariables($siteHandle, &$siteId, array &$variables, $element = null)
@@ -1112,7 +1119,6 @@ class SettingsController extends Controller
             $variables['enabledSiteIds'] = [];
             $variables['siteIds'] = [];
 
-            /** @var Site $site */
             foreach ($sites->getEditableSiteIds() as $editableSiteId) {
                 $variables['enabledSiteIds'][] = $editableSiteId;
                 $variables['siteIds'][] = $editableSiteId;

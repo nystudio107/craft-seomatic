@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for RadioSeries.
  *
  * @author    nystudio107
@@ -22,47 +22,46 @@ namespace nystudio107\seomatic\models\jsonld;
 trait RadioSeriesTrait
 {
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
-     * associated with individual items or with a series, episode, clip.
+     * A season in a media series.
      *
-     * @var Person
+     * @var array|CreativeWorkSeason|CreativeWorkSeason[]
      */
-    public $actors;
+    public $seasons;
 
     /**
-     * A season that is part of the media series.
+     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip.
      *
-     * @var CreativeWorkSeason
+     * @var array|Person|Person[]
      */
-    public $containsSeason;
+    public $director;
 
     /**
      * The number of seasons in this series.
      *
-     * @var int|Integer
+     * @var int|array|Integer|Integer[]
      */
     public $numberOfSeasons;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
+     * An episode of a TV/radio series or season.
      *
-     * @var Person
+     * @var array|Episode|Episode[]
      */
-    public $actor;
+    public $episodes;
 
     /**
-     * A season in a media series.
+     * An episode of a TV, radio or game media within a series or season.
      *
-     * @var URL|CreativeWorkSeason
+     * @var array|Episode|Episode[]
      */
-    public $season;
+    public $episode;
 
     /**
      * The trailer of a movie or TV/radio series, season, episode, etc.
      *
-     * @var VideoObject
+     * @var array|VideoObject|VideoObject[]
      */
     public $trailer;
 
@@ -70,59 +69,60 @@ trait RadioSeriesTrait
      * The production company or studio responsible for the item, e.g. series,
      * video game, episode etc.
      *
-     * @var Organization
+     * @var array|Organization|Organization[]
      */
     public $productionCompany;
-
-    /**
-     * An episode of a TV/radio series or season.
-     *
-     * @var Episode
-     */
-    public $episodes;
-
-    /**
-     * A season in a media series.
-     *
-     * @var CreativeWorkSeason
-     */
-    public $seasons;
-
-    /**
-     * An episode of a TV, radio or game media within a series or season.
-     *
-     * @var Episode
-     */
-    public $episode;
-
-    /**
-     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip.
-     *
-     * @var Person
-     */
-    public $director;
-
-    /**
-     * The number of episodes in this season or series.
-     *
-     * @var int|Integer
-     */
-    public $numberOfEpisodes;
 
     /**
      * A director of e.g. TV, radio, movie, video games etc. content. Directors
      * can be associated with individual items or with a series, episode, clip.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $directors;
 
     /**
+     * A season in a media series.
+     *
+     * @var array|URL|URL[]|array|CreativeWorkSeason|CreativeWorkSeason[]
+     */
+    public $season;
+
+    /**
+     * The number of episodes in this season or series.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $numberOfEpisodes;
+
+    /**
+     * A season that is part of the media series.
+     *
+     * @var array|CreativeWorkSeason|CreativeWorkSeason[]
+     */
+    public $containsSeason;
+
+    /**
+     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
+     * associated with individual items or with a series, episode, clip.
+     *
+     * @var array|Person|Person[]
+     */
+    public $actors;
+
+    /**
+     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
+     * Actors can be associated with individual items or with a series, episode,
+     * clip.
+     *
+     * @var array|Person|Person[]
+     */
+    public $actor;
+
+    /**
      * The composer of the soundtrack.
      *
-     * @var MusicGroup|Person
+     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
      */
     public $musicBy;
 }

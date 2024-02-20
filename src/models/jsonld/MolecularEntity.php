@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * MolecularEntity - Any constitutionally or isotopically distinct atom, molecule, ion, ion
  * pair, radical, radical ion, complex, conformer etc., identifiable as a
  * separately distinguishable entity.
@@ -73,40 +73,40 @@ class MolecularEntity extends MetaJsonLd implements MolecularEntityInterface, Bi
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'associatedDisease' => ['MedicalCondition', 'URL', 'PropertyValue'],
-            'bioChemInteraction' => ['BioChemEntity'],
-            'bioChemSimilarity' => ['BioChemEntity'],
-            'biologicalRole' => ['DefinedTerm'],
-            'chemicalRole' => ['DefinedTerm'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'funding' => ['Grant'],
-            'hasBioChemEntityPart' => ['BioChemEntity'],
-            'hasMolecularFunction' => ['URL', 'DefinedTerm', 'PropertyValue'],
-            'hasRepresentation' => ['Text', 'URL', 'PropertyValue'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'inChI' => ['Text'],
-            'inChIKey' => ['Text'],
-            'isEncodedByBioChemEntity' => ['Gene'],
-            'isInvolvedInBiologicalProcess' => ['DefinedTerm', 'PropertyValue', 'URL'],
-            'isLocatedInSubcellularLocation' => ['URL', 'DefinedTerm', 'PropertyValue'],
-            'isPartOfBioChemEntity' => ['BioChemEntity'],
-            'iupacName' => ['Text'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'molecularFormula' => ['Text'],
-            'molecularWeight' => ['QuantitativeValue', 'Text'],
-            'monoisotopicMolecularWeight' => ['Text', 'QuantitativeValue'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'potentialUse' => ['DefinedTerm'],
-            'sameAs' => ['URL'],
-            'smiles' => ['Text'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'taxonomicRange' => ['URL', 'DefinedTerm', 'Text', 'Taxon'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'associatedDisease' => ['array', 'MedicalCondition', 'MedicalCondition[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'bioChemInteraction' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'bioChemSimilarity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'biologicalRole' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
+            'chemicalRole' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'funding' => ['array', 'Grant', 'Grant[]'],
+            'hasBioChemEntityPart' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'hasMolecularFunction' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'hasRepresentation' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'inChI' => ['array', 'Text', 'Text[]'],
+            'inChIKey' => ['array', 'Text', 'Text[]'],
+            'isEncodedByBioChemEntity' => ['array', 'Gene', 'Gene[]'],
+            'isInvolvedInBiologicalProcess' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
+            'isLocatedInSubcellularLocation' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'isPartOfBioChemEntity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'iupacName' => ['array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'molecularFormula' => ['array', 'Text', 'Text[]'],
+            'molecularWeight' => ['array', 'Text', 'Text[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'monoisotopicMolecularWeight' => ['array', 'Text', 'Text[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'potentialUse' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'smiles' => ['array', 'Text', 'Text[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'taxonomicRange' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Taxon', 'Taxon[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -117,7 +117,7 @@ class MolecularEntity extends MetaJsonLd implements MolecularEntityInterface, Bi
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'associatedDisease' => 'Disease associated to this BioChemEntity. Such disease can be a MedicalCondition or a URL. If you want to add an evidence supporting the association, please use PropertyValue.',
             'bioChemInteraction' => 'A BioChemEntity that is known to interact with this item.',

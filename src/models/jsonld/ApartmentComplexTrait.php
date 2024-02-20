@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ApartmentComplex.
  *
  * @author    nystudio107
@@ -22,11 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ApartmentComplexTrait
 {
     /**
+     * Indicates the total (available plus unavailable) number of accommodation
+     * units in an [[ApartmentComplex]], or the number of accommodation units for
+     * a specific [[FloorPlan]] (within its specific [[ApartmentComplex]]). See
+     * also [[numberOfAvailableAccommodationUnits]].
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfAccommodationUnits;
+
+    /**
      * A page providing information on how to book a tour of some [[Place]], such
      * as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting,
      * as well as other kinds of tours as appropriate.
      *
-     * @var URL
+     * @var array|URL|URL[]
      */
     public $tourBookingPage;
 
@@ -34,7 +44,7 @@ trait ApartmentComplexTrait
      * The total integer number of bedrooms in a some [[Accommodation]],
      * [[ApartmentComplex]] or [[FloorPlan]].
      *
-     * @var float|Number|QuantitativeValue
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $numberOfBedrooms;
 
@@ -44,25 +54,15 @@ trait ApartmentComplexTrait
      * [[FloorPlan]] (within its specific [[ApartmentComplex]]). See also
      * [[numberOfAccommodationUnits]].
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $numberOfAvailableAccommodationUnits;
-
-    /**
-     * Indicates the total (available plus unavailable) number of accommodation
-     * units in an [[ApartmentComplex]], or the number of accommodation units for
-     * a specific [[FloorPlan]] (within its specific [[ApartmentComplex]]). See
-     * also [[numberOfAvailableAccommodationUnits]].
-     *
-     * @var QuantitativeValue
-     */
-    public $numberOfAccommodationUnits;
 
     /**
      * Indicates whether pets are allowed to enter the accommodation or lodging
      * business. More detailed information can be put in a text value.
      *
-     * @var string|bool|Text|Boolean
+     * @var bool|string|array|Boolean|Boolean[]|array|Text|Text[]
      */
     public $petsAllowed;
 }

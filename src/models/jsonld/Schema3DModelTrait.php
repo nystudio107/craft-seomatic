@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Schema3DModel.
  *
  * @author    nystudio107
@@ -25,7 +25,7 @@ trait Schema3DModelTrait
      * Whether the 3DModel allows resizing. For example, room layout applications
      * often do not allow 3DModel elements to be resized to reflect reality.
      *
-     * @var bool|Boolean
+     * @var bool|array|Boolean|Boolean[]
      */
     public $isResizable;
 }

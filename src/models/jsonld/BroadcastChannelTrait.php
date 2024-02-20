@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for BroadcastChannel.
  *
  * @author    nystudio107
@@ -22,24 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BroadcastChannelTrait
 {
     /**
-     * The unique address by which the BroadcastService can be identified in a
-     * provider lineup. In US, this is typically a number.
+     * The CableOrSatelliteService offering the channel.
      *
-     * @var string|Text
+     * @var array|CableOrSatelliteService|CableOrSatelliteService[]
      */
-    public $broadcastChannelId;
-
-    /**
-     * The BroadcastService offered on this channel.
-     *
-     * @var BroadcastService
-     */
-    public $providesBroadcastService;
+    public $inBroadcastLineup;
 
     /**
      * Genre of the creative work, broadcast channel or group.
      *
-     * @var string|Text|URL
+     * @var string|array|URL|URL[]|array|Text|Text[]
      */
     public $genre;
 
@@ -47,23 +39,31 @@ trait BroadcastChannelTrait
      * The type of service required to have access to the channel (e.g. Standard
      * or Premium).
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $broadcastServiceTier;
-
-    /**
-     * The CableOrSatelliteService offering the channel.
-     *
-     * @var CableOrSatelliteService
-     */
-    public $inBroadcastLineup;
 
     /**
      * The frequency used for over-the-air broadcasts. Numeric values or simple
      * ranges, e.g. 87-99. In addition a shortcut idiom is supported for
      * frequences of AM and FM radio channels, e.g. "87 FM".
      *
-     * @var string|Text|BroadcastFrequencySpecification
+     * @var string|array|BroadcastFrequencySpecification|BroadcastFrequencySpecification[]|array|Text|Text[]
      */
     public $broadcastFrequency;
+
+    /**
+     * The unique address by which the BroadcastService can be identified in a
+     * provider lineup. In US, this is typically a number.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $broadcastChannelId;
+
+    /**
+     * The BroadcastService offered on this channel.
+     *
+     * @var array|BroadcastService|BroadcastService[]
+     */
+    public $providesBroadcastService;
 }

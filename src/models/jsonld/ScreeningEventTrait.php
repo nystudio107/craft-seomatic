@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ScreeningEvent.
  *
  * @author    nystudio107
@@ -22,10 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ScreeningEventTrait
 {
     /**
+     * The movie presented during this event.
+     *
+     * @var array|Movie|Movie[]
+     */
+    public $workPresented;
+
+    /**
      * Languages in which subtitles/captions are available, in [IETF BCP 47
      * standard format](http://tools.ietf.org/html/bcp47).
      *
-     * @var string|Language|Text
+     * @var string|array|Text|Text[]|array|Language|Language[]
      */
     public $subtitleLanguage;
 
@@ -33,14 +40,7 @@ trait ScreeningEventTrait
      * The type of screening or video broadcast used (e.g. IMAX, 3D, SD, HD,
      * etc.).
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $videoFormat;
-
-    /**
-     * The movie presented during this event.
-     *
-     * @var Movie
-     */
-    public $workPresented;
 }

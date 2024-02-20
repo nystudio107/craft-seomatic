@@ -71,9 +71,9 @@ class SeoElements extends Component
     // =========================================================================
 
     /**
-     * @var SeoElementInterface[] indexed by [sourceType]
+     * @var class-string<SeoElementInterface>[] indexed by [sourceType]
      */
-    protected $seoElements;
+    protected array $seoElements = [];
 
     // Public Methods
     // =========================================================================
@@ -89,13 +89,16 @@ class SeoElements extends Component
             return null;
         }
         $seoElements = $this->getAllSeoElementTypes();
-        return $seoElements[$metaBundleType] ?? null;
+        /** @var SeoElementInterface $seoElement */
+        $seoElement = $seoElements[$metaBundleType] ?? null;
+
+        return $seoElement;
     }
 
     /**
      * Returns all available field type classes.
      *
-     * @return string[] The available field type classes
+     * @return class-string<SeoElementInterface>[] The available field type classes
      */
     public function getAllSeoElementTypes(bool $useCache = true): array
     {
@@ -114,7 +117,7 @@ class SeoElements extends Component
         ]);
         $this->trigger(self::EVENT_REGISTER_SEO_ELEMENT_TYPES, $event);
         // Index the array by META_BUNDLE_TYPE
-        /** @var SeoElementInterface $seoElement */
+        /** @var class-string<SeoElementInterface> $seoElement */
         foreach ($event->types as $seoElement) {
             $requiredPlugin = $seoElement::getRequiredPluginHandle();
             if ($requiredPlugin === null || Craft::$app->getPlugins()->getPlugin($requiredPlugin)) {
@@ -136,8 +139,8 @@ class SeoElements extends Component
     public function getMetaBundleTypeFromElement(ElementInterface $element)
     {
         $seoElements = $this->getAllSeoElementTypes();
+        /** @var SeoElementInterface $seoElement */
         foreach ($seoElements as $metaBundleType => $seoElement) {
-            /** @var SeoElementInterface $seoElement */
             foreach ($seoElement::getElementClasses() as $elementClass) {
                 if ($element instanceof $elementClass) {
                     return $metaBundleType;

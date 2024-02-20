@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ComicIssue.
  *
  * @author    nystudio107
@@ -22,50 +22,50 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ComicIssueTrait
 {
     /**
+     * A description of the variant cover         for the issue, if the issue is a
+     * variant printing. For example, "Bryan Hitch         Variant Cover" or "2nd
+     * Printing Variant".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $variantCover;
+
+    /**
      * The individual who traces over the pencil drawings in ink after pencils are
      * complete.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $inker;
+
+    /**
+     * The individual who draws the primary narrative artwork.
+     *
+     * @var array|Person|Person[]
+     */
+    public $penciler;
 
     /**
      * The individual who adds lettering, including speech balloons and sound
      * effects, to artwork.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $letterer;
-
-    /**
-     * The individual who draws the primary narrative artwork.
-     *
-     * @var Person
-     */
-    public $penciler;
-
-    /**
-     * A description of the variant cover         for the issue, if the issue is a
-     * variant printing. For example, "Bryan Hitch         Variant Cover" or "2nd
-     * Printing Variant".
-     *
-     * @var string|Text
-     */
-    public $variantCover;
 
     /**
      * The primary artist for a work         in a medium other than pencils or
      * digital line art--for example, if the         primary artwork is done in
      * watercolors or digital paints.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $artist;
 
     /**
      * The individual who adds color to inked drawings.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $colorist;
 }

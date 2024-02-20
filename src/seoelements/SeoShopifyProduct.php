@@ -137,7 +137,7 @@ class SeoShopifyProduct implements SeoElementInterface
                 );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $product Product */
+                /** @var Product $product */
                 $product = $event->sender ?? null;
                 if ($product !== null && $product->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
@@ -248,7 +248,7 @@ class SeoShopifyProduct implements SeoElementInterface
      *
      * @param int $sourceId
      *
-     * @return null
+     * @return ProductType|null
      */
     public static function sourceModelFromId(int $sourceId)
     {
@@ -260,7 +260,7 @@ class SeoShopifyProduct implements SeoElementInterface
      *
      * @param string $sourceHandle
      *
-     * @return null
+     * @return ProductType|null
      */
     public static function sourceModelFromHandle(string $sourceHandle)
     {

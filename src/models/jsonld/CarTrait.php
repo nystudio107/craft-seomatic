@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Car.
  *
  * @author    nystudio107
@@ -30,7 +30,7 @@ trait CarTrait
      * [[valueReference]] * Note 3: Note that you can use [[minValue]] and
      * [[maxValue]] to indicate ranges.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $roofLoad;
 
@@ -39,7 +39,7 @@ trait CarTrait
      * companies, for classifying vehicles. ACRISS stands for Association of Car
      * Rental Industry Systems and Standards.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $acrissCode;
 }

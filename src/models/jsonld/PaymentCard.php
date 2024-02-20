@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * PaymentCard - A payment method using a credit, debit, store or other card to associate
  * the payment with an account.
  *
@@ -22,15 +22,15 @@ use nystudio107\seomatic\models\MetaJsonLd;
  * @package   Seomatic
  * @see       https://schema.org/PaymentCard
  */
-class PaymentCard extends MetaJsonLd implements PaymentCardInterface, PaymentMethodInterface, EnumerationInterface, IntangibleInterface, ThingInterface, FinancialProductInterface, ServiceInterface
+class PaymentCard extends MetaJsonLd implements PaymentCardInterface, FinancialProductInterface, ServiceInterface, IntangibleInterface, ThingInterface, PaymentMethodInterface, EnumerationInterface
 {
     use PaymentCardTrait;
-    use PaymentMethodTrait;
-    use EnumerationTrait;
-    use IntangibleTrait;
-    use ThingTrait;
     use FinancialProductTrait;
     use ServiceTrait;
+    use IntangibleTrait;
+    use ThingTrait;
+    use PaymentMethodTrait;
+    use EnumerationTrait;
 
     /**
      * The Schema.org Type Name
@@ -51,7 +51,7 @@ class PaymentCard extends MetaJsonLd implements PaymentCardInterface, PaymentMet
      *
      * @var string
      */
-    public static string $schemaTypeExtends = 'PaymentMethod';
+    public static string $schemaTypeExtends = 'FinancialProduct';
 
     /**
      * The Schema.org Type Description
@@ -76,50 +76,51 @@ class PaymentCard extends MetaJsonLd implements PaymentCardInterface, PaymentMet
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'aggregateRating' => ['AggregateRating'],
-            'alternateName' => ['Text'],
-            'annualPercentageRate' => ['Number', 'QuantitativeValue'],
-            'areaServed' => ['Text', 'Place', 'GeoShape', 'AdministrativeArea'],
-            'audience' => ['Audience'],
-            'availableChannel' => ['ServiceChannel'],
-            'award' => ['Text'],
-            'brand' => ['Brand', 'Organization'],
-            'broker' => ['Person', 'Organization'],
-            'cashBack' => ['Boolean', 'Number'],
-            'category' => ['URL', 'CategoryCode', 'Text', 'Thing', 'PhysicalActivityCategory'],
-            'contactlessPayment' => ['Boolean'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'feesAndCommissionsSpecification' => ['URL', 'Text'],
-            'floorLimit' => ['MonetaryAmount'],
-            'hasOfferCatalog' => ['OfferCatalog'],
-            'hoursAvailable' => ['OpeningHoursSpecification'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'interestRate' => ['Number', 'QuantitativeValue'],
-            'isRelatedTo' => ['Product', 'Service'],
-            'isSimilarTo' => ['Product', 'Service'],
-            'logo' => ['ImageObject', 'URL'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'monthlyMinimumRepaymentAmount' => ['Number', 'MonetaryAmount'],
-            'name' => ['Text'],
-            'offers' => ['Demand', 'Offer'],
-            'potentialAction' => ['Action'],
-            'produces' => ['Thing'],
-            'provider' => ['Organization', 'Person'],
-            'providerMobility' => ['Text'],
-            'review' => ['Review'],
-            'sameAs' => ['URL'],
-            'serviceArea' => ['AdministrativeArea', 'Place', 'GeoShape'],
-            'serviceAudience' => ['Audience'],
-            'serviceOutput' => ['Thing'],
-            'serviceType' => ['Text', 'GovernmentBenefitsType'],
-            'slogan' => ['Text'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'supersededBy' => ['Class', 'Property', 'Enumeration'],
-            'termsOfService' => ['URL', 'Text'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'aggregateRating' => ['array', 'AggregateRating', 'AggregateRating[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'annualPercentageRate' => ['array', 'Number', 'Number[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'areaServed' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]'],
+            'audience' => ['array', 'Audience', 'Audience[]'],
+            'availableChannel' => ['array', 'ServiceChannel', 'ServiceChannel[]'],
+            'award' => ['array', 'Text', 'Text[]'],
+            'brand' => ['array', 'Organization', 'Organization[]', 'array', 'Brand', 'Brand[]'],
+            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'cashBack' => ['array', 'Number', 'Number[]', 'array', 'Boolean', 'Boolean[]'],
+            'category' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Thing', 'Thing[]'],
+            'contactlessPayment' => ['array', 'Boolean', 'Boolean[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'feesAndCommissionsSpecification' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
+            'floorLimit' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'hasCertification' => ['array', 'Certification', 'Certification[]'],
+            'hasOfferCatalog' => ['array', 'OfferCatalog', 'OfferCatalog[]'],
+            'hoursAvailable' => ['array', 'OpeningHoursSpecification', 'OpeningHoursSpecification[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'interestRate' => ['array', 'Number', 'Number[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'isRelatedTo' => ['array', 'Product', 'Product[]', 'array', 'Service', 'Service[]'],
+            'isSimilarTo' => ['array', 'Product', 'Product[]', 'array', 'Service', 'Service[]'],
+            'logo' => ['array', 'URL', 'URL[]', 'array', 'ImageObject', 'ImageObject[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'monthlyMinimumRepaymentAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'produces' => ['array', 'Thing', 'Thing[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'providerMobility' => ['array', 'Text', 'Text[]'],
+            'review' => ['array', 'Review', 'Review[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'serviceArea' => ['array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]', 'array', 'Place', 'Place[]'],
+            'serviceAudience' => ['array', 'Audience', 'Audience[]'],
+            'serviceOutput' => ['array', 'Thing', 'Thing[]'],
+            'serviceType' => ['array', 'GovernmentBenefitsType', 'GovernmentBenefitsType[]', 'array', 'Text', 'Text[]'],
+            'slogan' => ['array', 'Text', 'Text[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'supersededBy' => ['array', 'SchemaClass', 'SchemaClass[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'Property', 'Property[]'],
+            'termsOfService' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -130,7 +131,7 @@ class PaymentCard extends MetaJsonLd implements PaymentCardInterface, PaymentMet
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
             'alternateName' => 'An alias for the item.',
             'annualPercentageRate' => 'The annual rate that is charged for borrowing (or made by investing), expressed as a single percentage number that represents the actual yearly cost of funds over the term of a loan. This includes any fees or additional costs associated with the transaction.',
@@ -147,6 +148,7 @@ class PaymentCard extends MetaJsonLd implements PaymentCardInterface, PaymentMet
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'feesAndCommissionsSpecification' => 'Description of fees, commissions, and other terms applied either to a class of financial product, or by a financial service organization.',
             'floorLimit' => 'A floor limit is the amount of money above which credit card transactions must be authorized.',
+            'hasCertification' => 'Certification information about a product, organization, service, place, or person.',
             'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
             'hoursAvailable' => 'The hours during which this service or contact is available.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',

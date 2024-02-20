@@ -17,7 +17,6 @@ use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\base\Plugin;
 use craft\elements\Entry;
-use craft\elements\User;
 use craft\errors\SiteNotFoundException;
 use craft\events\DefineGqlTypeFieldsEvent;
 use craft\events\ElementEvent;
@@ -113,7 +112,7 @@ class Seomatic extends Plugin
     // =========================================================================
 
     /**
-     * @var null|Seomatic
+     * @var ?Seomatic
      */
     public static ?Seomatic $plugin;
 
@@ -228,7 +227,9 @@ class Seomatic extends Plugin
             $this->controllerNamespace = 'nystudio107\seomatic\console\controllers';
         }
         // Initialize properties
-        self::$settings = self::$plugin->getSettings();
+        /** @var Settings $settings */
+        $settings = self::$plugin->getSettings();
+        self::$settings = $settings;
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
         self::$cacheDuration = self::$devMode
@@ -313,9 +314,12 @@ class Seomatic extends Plugin
             $gql->invalidateCaches();
         }
         // If the FastCGI Cache Bust plugin is installed, clear its caches too
+        /** @var ?FastcgiCacheBust $plugin */
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
         if ($plugin !== null) {
-            FastcgiCacheBust::$plugin->cache->clearAll();
+            // FastcgiCacheBust has an error in its PHPdoc
+            /** @phpstan-ignore-next-line */
+            $plugin->cache->clearAll();
         }
     }
 
@@ -338,7 +342,6 @@ class Seomatic extends Plugin
     {
         $subNavs = [];
         $navItem = parent::getCpNavItem();
-        /** @var User $currentUser */
         $request = Craft::$app->getRequest();
         $siteSuffix = '';
         if ($request->getSegment(1) === 'seomatic') {
@@ -525,7 +528,7 @@ class Seomatic extends Plugin
                     'Element::EVENT_AFTER_PROPAGATE',
                     __METHOD__
                 );
-                /** @var  $element Element */
+                /** @var Element $element */
                 $element = $event->sender;
                 self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
@@ -545,7 +548,7 @@ class Seomatic extends Plugin
                     'Elements::EVENT_AFTER_DELETE_ELEMENT',
                     __METHOD__
                 );
-                /** @var  $element Element */
+                /** @var Element $element */
                 $element = $event->element;
                 self::$plugin->metaBundles->invalidateMetaBundleByElement(
                     $element,
@@ -582,7 +585,7 @@ class Seomatic extends Plugin
             BaseApplication::EVENT_BEFORE_REQUEST,
             static function() {
                 /** @var Module|null $debugModule */
-                $debugModule = Craft::$app->getModule('debug');
+                $debugModule = Seomatic::$settings->enableDebugToolbarPanel ? Craft::$app->getModule('debug') : null;
 
                 if ($debugModule) {
                     $debugModule->panels['seomatic'] = new SeomaticPanel([

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MedicalProcedure.
  *
  * @author    nystudio107
@@ -22,45 +22,45 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MedicalProcedureTrait
 {
     /**
-     * How the procedure is performed.
-     *
-     * @var string|Text
-     */
-    public $howPerformed;
-
-    /**
      * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
      *
-     * @var MedicalProcedureType
+     * @var array|MedicalProcedureType|MedicalProcedureType[]
      */
     public $procedureType;
 
     /**
+     * Typical or recommended followup care after the procedure is performed.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $followup;
+
+    /**
      * The status of the study (enumerated).
      *
-     * @var string|MedicalStudyStatus|Text|EventStatusType
+     * @var string|array|MedicalStudyStatus|MedicalStudyStatus[]|array|EventStatusType|EventStatusType[]|array|Text|Text[]
      */
     public $status;
 
     /**
-     * Location in the body of the anatomical structure.
+     * How the procedure is performed.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $bodyLocation;
+    public $howPerformed;
 
     /**
-     * Typical or recommended followup care after the procedure is performed.
+     * Location in the body of the anatomical structure.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $followup;
+    public $bodyLocation;
 
     /**
      * Typical preparation that a patient must undergo before having the procedure
      * performed.
      *
-     * @var string|Text|MedicalEntity
+     * @var string|array|MedicalEntity|MedicalEntity[]|array|Text|Text[]
      */
     public $preparation;
 }

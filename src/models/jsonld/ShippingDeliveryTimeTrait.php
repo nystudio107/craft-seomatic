@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ShippingDeliveryTime.
  *
  * @author    nystudio107
@@ -21,6 +21,26 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait ShippingDeliveryTimeTrait
 {
+    /**
+     * The typical delay between the receipt of the order and the goods either
+     * leaving the warehouse or being prepared for pickup, in case the delivery
+     * method is on site pickup. Typical properties: minValue, maxValue, unitCode
+     * (d for DAY).  This is by common convention assumed to mean business days
+     * (if a unitCode is used, coded as "d"), i.e. only counting days when the
+     * business normally operates.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $handlingTime;
+
+    /**
+     * Days of the week when the merchant typically operates, indicated via
+     * opening hours markup.
+     *
+     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
+     */
+    public $businessDays;
+
     /**
      * Order cutoff time allows merchants to describe the time after which they
      * will no longer process orders received on that day. For orders processed
@@ -31,7 +51,7 @@ trait ShippingDeliveryTimeTrait
      * Eastern Standard Time (EST) which is 5 hours behind Coordinated Universal
      * Time (UTC).
      *
-     * @var Time
+     * @var array|Time|Time[]
      */
     public $cutoffTime;
 
@@ -40,27 +60,7 @@ trait ShippingDeliveryTimeTrait
      * the final customer. Typical properties: minValue, maxValue, unitCode (d for
      * DAY).
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $transitTime;
-
-    /**
-     * The typical delay between the receipt of the order and the goods either
-     * leaving the warehouse or being prepared for pickup, in case the delivery
-     * method is on site pickup. Typical properties: minValue, maxValue, unitCode
-     * (d for DAY).  This is by common convention assumed to mean business days
-     * (if a unitCode is used, coded as "d"), i.e. only counting days when the
-     * business normally operates.
-     *
-     * @var QuantitativeValue
-     */
-    public $handlingTime;
-
-    /**
-     * Days of the week when the merchant typically operates, indicated via
-     * opening hours markup.
-     *
-     * @var OpeningHoursSpecification
-     */
-    public $businessDays;
 }

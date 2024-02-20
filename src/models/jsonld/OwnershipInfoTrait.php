@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for OwnershipInfo.
  *
  * @author    nystudio107
@@ -24,28 +24,28 @@ trait OwnershipInfoTrait
     /**
      * The date and time of giving up ownership on the product.
      *
-     * @var DateTime
+     * @var array|DateTime|DateTime[]
      */
     public $ownedThrough;
 
     /**
      * The date and time of obtaining the product.
      *
-     * @var DateTime
+     * @var array|DateTime|DateTime[]
      */
     public $ownedFrom;
 
     /**
      * The organization or person from which the product was acquired.
      *
-     * @var Person|Organization
+     * @var array|Person|Person[]|array|Organization|Organization[]
      */
     public $acquiredFrom;
 
     /**
      * The product that this structured value is referring to.
      *
-     * @var Product|Service
+     * @var array|Product|Product[]|array|Service|Service[]
      */
     public $typeOfGood;
 }
