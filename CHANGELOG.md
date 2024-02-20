@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.0.41 - UNRELEASED
+## 4.0.41 - 2024.02.20
 ### Added
 * Added the ability to generate a [News Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap) for any Section
 * Added an **SEOmatic Debug Toolbar Panel** setting to Plugin Settings → Advanced that lets you control whether the SEOmatic Debug Toolbar panel is added to the Yii2 Debug Toolbar (if it is enabled)
