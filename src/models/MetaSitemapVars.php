@@ -23,7 +23,6 @@ use nystudio107\seomatic\base\InheritableSettingsModel;
  */
 class MetaSitemapVars extends InheritableSettingsModel
 {
-
     // Public Properties
     // =========================================================================
 

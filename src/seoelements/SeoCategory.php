@@ -243,8 +243,7 @@ class SeoCategory implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    )
-    {
+    ) {
         return Category::find()
             ->id($elementId)
             ->siteId($siteId)

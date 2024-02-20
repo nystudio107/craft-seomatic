@@ -120,8 +120,7 @@ class Field
         string      $fieldClassKey,
         FieldLayout $layout,
         bool        $keysOnly = true,
-    ): array
-    {
+    ): array {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
@@ -164,8 +163,7 @@ class Field
         Element $element,
         string  $fieldClassKey,
         bool    $keysOnly = true,
-    ): array
-    {
+    ): array {
         $foundFields = [];
         $layout = $element->getFieldLayout();
         if ($layout !== null) {
@@ -276,8 +274,7 @@ class Field
         string $sourceHandle,
         string $fieldClassKey,
         bool   $keysOnly = true,
-    ): array
-    {
+    ): array {
         $foundFields = [];
         $layouts = [];
         // Get the layouts

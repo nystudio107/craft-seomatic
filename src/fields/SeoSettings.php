@@ -435,8 +435,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         Element $element,
         string  $groupName,
         array   &$variables,
-    )
-    {
+    ) {
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
             FieldHelper::fieldsOfTypeFromElement(

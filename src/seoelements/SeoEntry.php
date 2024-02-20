@@ -19,8 +19,6 @@ use craft\elements\Entry;
 use craft\events\DefineHtmlEvent;
 use craft\events\SectionEvent;
 use craft\gql\interfaces\elements\Entry as EntryInterface;
-use craft\models\EntryDraft;
-use craft\models\EntryVersion;
 use craft\models\Section;
 use craft\models\Site;
 use craft\services\Sections;
@@ -48,7 +46,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     public const META_BUNDLE_TYPE = 'section';
     public const ELEMENT_CLASSES = [
         Entry::class,
-        1];
+        1, ];
     public const REQUIRED_PLUGIN_HANDLE = null;
     public const CONFIG_FILE_PATH = 'entrymeta/Bundle';
 
@@ -245,8 +243,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    )
-    {
+    ) {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)

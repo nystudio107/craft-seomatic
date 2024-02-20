@@ -267,8 +267,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    )
-    {
+    ) {
         return Event::find()
             ->id($elementId)
             ->siteId($siteId)
