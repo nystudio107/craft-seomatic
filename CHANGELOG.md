@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.42 - 2024.02.20
+### Fixed
+* Fixed an issue where an exception could be thrown due to a bad commit
+
 ## 4.0.41 - 2024.02.20
 ### Added
 * Added the ability to generate a [News Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap) for any Section
