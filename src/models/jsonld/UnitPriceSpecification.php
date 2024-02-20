@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * UnitPriceSpecification - The price asked for a given offer by the respective organization or person.
  *
  * @author    nystudio107
@@ -73,35 +73,35 @@ class UnitPriceSpecification extends MetaJsonLd implements UnitPriceSpecificatio
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'billingDuration' => ['Number', 'QuantitativeValue', 'Duration'],
-            'billingIncrement' => ['Number'],
-            'billingStart' => ['Number'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'eligibleQuantity' => ['QuantitativeValue'],
-            'eligibleTransactionVolume' => ['PriceSpecification'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'maxPrice' => ['Number'],
-            'minPrice' => ['Number'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'price' => ['Text', 'Number'],
-            'priceComponentType' => ['PriceComponentTypeEnumeration'],
-            'priceCurrency' => ['Text'],
-            'priceType' => ['Text', 'PriceTypeEnumeration'],
-            'referenceQuantity' => ['QuantitativeValue'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'unitCode' => ['Text', 'URL'],
-            'unitText' => ['Text'],
-            'url' => ['URL'],
-            'validFrom' => ['Date', 'DateTime'],
-            'validThrough' => ['Date', 'DateTime'],
-            'valueAddedTaxIncluded' => ['Boolean'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'billingDuration' => ['array', 'Duration', 'Duration[]', 'array', 'Number', 'Number[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'billingIncrement' => ['array', 'Number', 'Number[]'],
+            'billingStart' => ['array', 'Number', 'Number[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'eligibleQuantity' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'eligibleTransactionVolume' => ['array', 'PriceSpecification', 'PriceSpecification[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'maxPrice' => ['array', 'Number', 'Number[]'],
+            'minPrice' => ['array', 'Number', 'Number[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'price' => ['array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'priceComponentType' => ['array', 'PriceComponentTypeEnumeration', 'PriceComponentTypeEnumeration[]'],
+            'priceCurrency' => ['array', 'Text', 'Text[]'],
+            'priceType' => ['array', 'PriceTypeEnumeration', 'PriceTypeEnumeration[]', 'array', 'Text', 'Text[]'],
+            'referenceQuantity' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'unitCode' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'unitText' => ['array', 'Text', 'Text[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'validFrom' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'validThrough' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'valueAddedTaxIncluded' => ['array', 'Boolean', 'Boolean[]'],
         ];
     }
 
@@ -112,7 +112,7 @@ class UnitPriceSpecification extends MetaJsonLd implements UnitPriceSpecificatio
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'billingDuration' => 'Specifies for how long this price (or price component) will be billed. Can be used, for example, to model the contractual duration of a subscription or payment plan. Type can be either a Duration or a Number (in which case the unit of measurement, for example month, is specified by the unitCode property).',
             'billingIncrement' => 'This property specifies the minimal quantity and rounding increment that will be the basis for the billing. The unit of measurement is specified by the unitCode property.',

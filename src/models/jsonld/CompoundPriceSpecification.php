@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * CompoundPriceSpecification - A compound price specification is one that bundles multiple prices that all
  * apply in combination for different dimensions of consumption. Use the name
  * property of the attached unit price specification for indicating the
@@ -76,29 +76,29 @@ class CompoundPriceSpecification extends MetaJsonLd implements CompoundPriceSpec
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'eligibleQuantity' => ['QuantitativeValue'],
-            'eligibleTransactionVolume' => ['PriceSpecification'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'maxPrice' => ['Number'],
-            'minPrice' => ['Number'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'price' => ['Text', 'Number'],
-            'priceComponent' => ['UnitPriceSpecification'],
-            'priceCurrency' => ['Text'],
-            'priceType' => ['Text', 'PriceTypeEnumeration'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
-            'validFrom' => ['Date', 'DateTime'],
-            'validThrough' => ['Date', 'DateTime'],
-            'valueAddedTaxIncluded' => ['Boolean'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'eligibleQuantity' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'eligibleTransactionVolume' => ['array', 'PriceSpecification', 'PriceSpecification[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'maxPrice' => ['array', 'Number', 'Number[]'],
+            'minPrice' => ['array', 'Number', 'Number[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'price' => ['array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'priceComponent' => ['array', 'UnitPriceSpecification', 'UnitPriceSpecification[]'],
+            'priceCurrency' => ['array', 'Text', 'Text[]'],
+            'priceType' => ['array', 'PriceTypeEnumeration', 'PriceTypeEnumeration[]', 'array', 'Text', 'Text[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'validFrom' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'validThrough' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'valueAddedTaxIncluded' => ['array', 'Boolean', 'Boolean[]'],
         ];
     }
 
@@ -109,7 +109,7 @@ class CompoundPriceSpecification extends MetaJsonLd implements CompoundPriceSpec
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',

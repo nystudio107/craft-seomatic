@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * CourseInstance - An instance of a [[Course]] which is distinct from other instances because
  * it is offered at a different time or location or through different media or
  * modes of study or to a specific section of students.
@@ -73,62 +73,63 @@ class CourseInstance extends MetaJsonLd implements CourseInstanceInterface, Even
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'about' => ['Thing'],
-            'actor' => ['Person'],
-            'additionalType' => ['URL'],
-            'aggregateRating' => ['AggregateRating'],
-            'alternateName' => ['Text'],
-            'attendee' => ['Organization', 'Person'],
-            'attendees' => ['Organization', 'Person'],
-            'audience' => ['Audience'],
-            'composer' => ['Organization', 'Person'],
-            'contributor' => ['Organization', 'Person'],
-            'courseMode' => ['Text', 'URL'],
-            'courseWorkload' => ['Text'],
-            'description' => ['Text'],
-            'director' => ['Person'],
-            'disambiguatingDescription' => ['Text'],
-            'doorTime' => ['Time', 'DateTime'],
-            'duration' => ['Duration'],
-            'endDate' => ['DateTime', 'Date'],
-            'eventAttendanceMode' => ['EventAttendanceModeEnumeration'],
-            'eventSchedule' => ['Schedule'],
-            'eventStatus' => ['EventStatusType'],
-            'funder' => ['Organization', 'Person'],
-            'funding' => ['Grant'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'inLanguage' => ['Text', 'Language'],
-            'instructor' => ['Person'],
-            'isAccessibleForFree' => ['Boolean'],
-            'keywords' => ['URL', 'DefinedTerm', 'Text'],
-            'location' => ['Place', 'Text', 'VirtualLocation', 'PostalAddress'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'maximumAttendeeCapacity' => ['Integer'],
-            'maximumPhysicalAttendeeCapacity' => ['Integer'],
-            'maximumVirtualAttendeeCapacity' => ['Integer'],
-            'name' => ['Text'],
-            'offers' => ['Demand', 'Offer'],
-            'organizer' => ['Organization', 'Person'],
-            'performer' => ['Person', 'Organization'],
-            'performers' => ['Person', 'Organization'],
-            'potentialAction' => ['Action'],
-            'previousStartDate' => ['Date'],
-            'recordedIn' => ['CreativeWork'],
-            'remainingAttendeeCapacity' => ['Integer'],
-            'review' => ['Review'],
-            'sameAs' => ['URL'],
-            'sponsor' => ['Organization', 'Person'],
-            'startDate' => ['DateTime', 'Date'],
-            'subEvent' => ['Event'],
-            'subEvents' => ['Event'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'superEvent' => ['Event'],
-            'translator' => ['Organization', 'Person'],
-            'typicalAgeRange' => ['Text'],
-            'url' => ['URL'],
-            'workFeatured' => ['CreativeWork'],
-            'workPerformed' => ['CreativeWork'],
+            'about' => ['array', 'Thing', 'Thing[]'],
+            'actor' => ['array', 'Person', 'Person[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'aggregateRating' => ['array', 'AggregateRating', 'AggregateRating[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'attendee' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'attendees' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'audience' => ['array', 'Audience', 'Audience[]'],
+            'composer' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'contributor' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'courseMode' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'courseSchedule' => ['array', 'Schedule', 'Schedule[]'],
+            'courseWorkload' => ['array', 'Text', 'Text[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'director' => ['array', 'Person', 'Person[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'doorTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'duration' => ['array', 'Duration', 'Duration[]'],
+            'endDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'eventAttendanceMode' => ['array', 'EventAttendanceModeEnumeration', 'EventAttendanceModeEnumeration[]'],
+            'eventSchedule' => ['array', 'Schedule', 'Schedule[]'],
+            'eventStatus' => ['array', 'EventStatusType', 'EventStatusType[]'],
+            'funder' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'funding' => ['array', 'Grant', 'Grant[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'inLanguage' => ['array', 'Text', 'Text[]', 'array', 'Language', 'Language[]'],
+            'instructor' => ['array', 'Person', 'Person[]'],
+            'isAccessibleForFree' => ['array', 'Boolean', 'Boolean[]'],
+            'keywords' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'location' => ['array', 'PostalAddress', 'PostalAddress[]', 'array', 'VirtualLocation', 'VirtualLocation[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'maximumAttendeeCapacity' => ['array', 'Integer', 'Integer[]'],
+            'maximumPhysicalAttendeeCapacity' => ['array', 'Integer', 'Integer[]'],
+            'maximumVirtualAttendeeCapacity' => ['array', 'Integer', 'Integer[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'organizer' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'performer' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'performers' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'previousStartDate' => ['array', 'Date', 'Date[]'],
+            'recordedIn' => ['array', 'CreativeWork', 'CreativeWork[]'],
+            'remainingAttendeeCapacity' => ['array', 'Integer', 'Integer[]'],
+            'review' => ['array', 'Review', 'Review[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'sponsor' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'startDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'subEvent' => ['array', 'Event', 'Event[]'],
+            'subEvents' => ['array', 'Event', 'Event[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'superEvent' => ['array', 'Event', 'Event[]'],
+            'translator' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'typicalAgeRange' => ['array', 'Text', 'Text[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'workFeatured' => ['array', 'CreativeWork', 'CreativeWork[]'],
+            'workPerformed' => ['array', 'CreativeWork', 'CreativeWork[]'],
         ];
     }
 
@@ -141,7 +142,7 @@ class CourseInstance extends MetaJsonLd implements CourseInstanceInterface, Even
         return [
             'about' => 'The subject matter of the content.',
             'actor' => 'An actor, e.g. in TV, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip.',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
             'alternateName' => 'An alias for the item.',
             'attendee' => 'A person or organization attending the event.',
@@ -150,6 +151,7 @@ class CourseInstance extends MetaJsonLd implements CourseInstanceInterface, Even
             'composer' => 'The person or organization who wrote a composition, or who is the composer of a work performed at some event.',
             'contributor' => 'A secondary contributor to the CreativeWork or Event.',
             'courseMode' => 'The medium or means of delivery of the course instance or the mode of study, either as a text label (e.g. "online", "onsite" or "blended"; "synchronous" or "asynchronous"; "full-time" or "part-time") or as a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous).',
+            'courseSchedule' => 'Represents the length and pace of a course, expressed as a [[Schedule]].',
             'courseWorkload' => 'The amount of work expected of students taking the course, often provided as a figure per week or per month, and may be broken down by type. For example, "2 hours of lectures, 1 hour of lab work and 3 hours of independent study per week".',
             'description' => 'A description of the item.',
             'director' => 'A director of e.g. TV, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip.',
@@ -172,7 +174,7 @@ class CourseInstance extends MetaJsonLd implements CourseInstanceInterface, Even
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'maximumAttendeeCapacity' => 'The total number of individuals that may attend an event or venue.',
             'maximumPhysicalAttendeeCapacity' => 'The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline aspects, in the case of a [[MixedEventAttendanceMode]]). ',
-            'maximumVirtualAttendeeCapacity' => 'The maximum physical attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OnlineEventAttendanceMode]] (or the online aspects, in the case of a [[MixedEventAttendanceMode]]). ',
+            'maximumVirtualAttendeeCapacity' => 'The maximum virtual attendee capacity of an [[Event]] whose [[eventAttendanceMode]] is [[OnlineEventAttendanceMode]] (or the online aspects, in the case of a [[MixedEventAttendanceMode]]). ',
             'name' => 'The name of the item.',
             'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.       ',
             'organizer' => 'An organizer of an Event.',

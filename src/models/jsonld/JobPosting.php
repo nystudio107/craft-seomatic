@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * JobPosting - A listing that describes a job opening in a certain organization.
  *
  * @author    nystudio107
@@ -71,55 +71,55 @@ class JobPosting extends MetaJsonLd implements JobPostingInterface, IntangibleIn
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'applicantLocationRequirements' => ['AdministrativeArea'],
-            'applicationContact' => ['ContactPoint'],
-            'baseSalary' => ['MonetaryAmount', 'Number', 'PriceSpecification'],
-            'benefits' => ['Text'],
-            'datePosted' => ['DateTime', 'Date'],
-            'description' => ['Text'],
-            'directApply' => ['Boolean'],
-            'disambiguatingDescription' => ['Text'],
-            'educationRequirements' => ['EducationalOccupationalCredential', 'Text'],
-            'eligibilityToWorkRequirement' => ['Text'],
-            'employerOverview' => ['Text'],
-            'employmentType' => ['Text'],
-            'employmentUnit' => ['Organization'],
-            'estimatedSalary' => ['MonetaryAmount', 'Number', 'MonetaryAmountDistribution'],
-            'experienceInPlaceOfEducation' => ['Boolean'],
-            'experienceRequirements' => ['OccupationalExperienceRequirements', 'Text'],
-            'hiringOrganization' => ['Organization', 'Person'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'incentiveCompensation' => ['Text'],
-            'incentives' => ['Text'],
-            'industry' => ['DefinedTerm', 'Text'],
-            'jobBenefits' => ['Text'],
-            'jobImmediateStart' => ['Boolean'],
-            'jobLocation' => ['Place'],
-            'jobLocationType' => ['Text'],
-            'jobStartDate' => ['Text', 'Date'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'occupationalCategory' => ['Text', 'CategoryCode'],
-            'physicalRequirement' => ['DefinedTerm', 'Text', 'URL'],
-            'potentialAction' => ['Action'],
-            'qualifications' => ['EducationalOccupationalCredential', 'Text'],
-            'relevantOccupation' => ['Occupation'],
-            'responsibilities' => ['Text'],
-            'salaryCurrency' => ['Text'],
-            'sameAs' => ['URL'],
-            'securityClearanceRequirement' => ['Text', 'URL'],
-            'sensoryRequirement' => ['URL', 'DefinedTerm', 'Text'],
-            'skills' => ['Text', 'DefinedTerm'],
-            'specialCommitments' => ['Text'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'title' => ['Text'],
-            'totalJobOpenings' => ['Integer'],
-            'url' => ['URL'],
-            'validThrough' => ['Date', 'DateTime'],
-            'workHours' => ['Text'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'applicantLocationRequirements' => ['array', 'AdministrativeArea', 'AdministrativeArea[]'],
+            'applicationContact' => ['array', 'ContactPoint', 'ContactPoint[]'],
+            'baseSalary' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
+            'benefits' => ['array', 'Text', 'Text[]'],
+            'datePosted' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'directApply' => ['array', 'Boolean', 'Boolean[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'educationRequirements' => ['array', 'Text', 'Text[]', 'array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]'],
+            'eligibilityToWorkRequirement' => ['array', 'Text', 'Text[]'],
+            'employerOverview' => ['array', 'Text', 'Text[]'],
+            'employmentType' => ['array', 'Text', 'Text[]'],
+            'employmentUnit' => ['array', 'Organization', 'Organization[]'],
+            'estimatedSalary' => ['array', 'MonetaryAmountDistribution', 'MonetaryAmountDistribution[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
+            'experienceInPlaceOfEducation' => ['array', 'Boolean', 'Boolean[]'],
+            'experienceRequirements' => ['array', 'Text', 'Text[]', 'array', 'OccupationalExperienceRequirements', 'OccupationalExperienceRequirements[]'],
+            'hiringOrganization' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'incentiveCompensation' => ['array', 'Text', 'Text[]'],
+            'incentives' => ['array', 'Text', 'Text[]'],
+            'industry' => ['array', 'Text', 'Text[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'jobBenefits' => ['array', 'Text', 'Text[]'],
+            'jobImmediateStart' => ['array', 'Boolean', 'Boolean[]'],
+            'jobLocation' => ['array', 'Place', 'Place[]'],
+            'jobLocationType' => ['array', 'Text', 'Text[]'],
+            'jobStartDate' => ['array', 'Date', 'Date[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'occupationalCategory' => ['array', 'Text', 'Text[]', 'array', 'CategoryCode', 'CategoryCode[]'],
+            'physicalRequirement' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'qualifications' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]'],
+            'relevantOccupation' => ['array', 'Occupation', 'Occupation[]'],
+            'responsibilities' => ['array', 'Text', 'Text[]'],
+            'salaryCurrency' => ['array', 'Text', 'Text[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'securityClearanceRequirement' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'sensoryRequirement' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'skills' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
+            'specialCommitments' => ['array', 'Text', 'Text[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'title' => ['array', 'Text', 'Text[]'],
+            'totalJobOpenings' => ['array', 'Integer', 'Integer[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'validThrough' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'workHours' => ['array', 'Text', 'Text[]'],
         ];
     }
 
@@ -130,7 +130,7 @@ class JobPosting extends MetaJsonLd implements JobPostingInterface, IntangibleIn
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'applicantLocationRequirements' => 'The location(s) applicants can apply from. This is usually used for telecommuting jobs where the applicant does not need to be in a physical office. Note: This should not be used for citizenship or work visa requirements.',
             'applicationContact' => 'Contact details for further information relevant to this job posting.',

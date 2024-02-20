@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * WebAPI - An application programming interface accessible over Web/Internet
  * technologies.
  *
@@ -73,43 +73,44 @@ class WebAPI extends MetaJsonLd implements WebAPIInterface, ServiceInterface, In
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'aggregateRating' => ['AggregateRating'],
-            'alternateName' => ['Text'],
-            'areaServed' => ['Text', 'Place', 'GeoShape', 'AdministrativeArea'],
-            'audience' => ['Audience'],
-            'availableChannel' => ['ServiceChannel'],
-            'award' => ['Text'],
-            'brand' => ['Brand', 'Organization'],
-            'broker' => ['Person', 'Organization'],
-            'category' => ['URL', 'CategoryCode', 'Text', 'Thing', 'PhysicalActivityCategory'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'documentation' => ['URL', 'CreativeWork'],
-            'hasOfferCatalog' => ['OfferCatalog'],
-            'hoursAvailable' => ['OpeningHoursSpecification'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'isRelatedTo' => ['Product', 'Service'],
-            'isSimilarTo' => ['Product', 'Service'],
-            'logo' => ['ImageObject', 'URL'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'offers' => ['Demand', 'Offer'],
-            'potentialAction' => ['Action'],
-            'produces' => ['Thing'],
-            'provider' => ['Organization', 'Person'],
-            'providerMobility' => ['Text'],
-            'review' => ['Review'],
-            'sameAs' => ['URL'],
-            'serviceArea' => ['AdministrativeArea', 'Place', 'GeoShape'],
-            'serviceAudience' => ['Audience'],
-            'serviceOutput' => ['Thing'],
-            'serviceType' => ['Text', 'GovernmentBenefitsType'],
-            'slogan' => ['Text'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'termsOfService' => ['URL', 'Text'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'aggregateRating' => ['array', 'AggregateRating', 'AggregateRating[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'areaServed' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]'],
+            'audience' => ['array', 'Audience', 'Audience[]'],
+            'availableChannel' => ['array', 'ServiceChannel', 'ServiceChannel[]'],
+            'award' => ['array', 'Text', 'Text[]'],
+            'brand' => ['array', 'Organization', 'Organization[]', 'array', 'Brand', 'Brand[]'],
+            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'category' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Thing', 'Thing[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'documentation' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'hasCertification' => ['array', 'Certification', 'Certification[]'],
+            'hasOfferCatalog' => ['array', 'OfferCatalog', 'OfferCatalog[]'],
+            'hoursAvailable' => ['array', 'OpeningHoursSpecification', 'OpeningHoursSpecification[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'isRelatedTo' => ['array', 'Product', 'Product[]', 'array', 'Service', 'Service[]'],
+            'isSimilarTo' => ['array', 'Product', 'Product[]', 'array', 'Service', 'Service[]'],
+            'logo' => ['array', 'URL', 'URL[]', 'array', 'ImageObject', 'ImageObject[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'produces' => ['array', 'Thing', 'Thing[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'providerMobility' => ['array', 'Text', 'Text[]'],
+            'review' => ['array', 'Review', 'Review[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'serviceArea' => ['array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]', 'array', 'Place', 'Place[]'],
+            'serviceAudience' => ['array', 'Audience', 'Audience[]'],
+            'serviceOutput' => ['array', 'Thing', 'Thing[]'],
+            'serviceType' => ['array', 'GovernmentBenefitsType', 'GovernmentBenefitsType[]', 'array', 'Text', 'Text[]'],
+            'slogan' => ['array', 'Text', 'Text[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'termsOfService' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -120,7 +121,7 @@ class WebAPI extends MetaJsonLd implements WebAPIInterface, ServiceInterface, In
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
             'alternateName' => 'An alias for the item.',
             'areaServed' => 'The geographic area where a service or offered item is provided.',
@@ -133,6 +134,7 @@ class WebAPI extends MetaJsonLd implements WebAPIInterface, ServiceInterface, In
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'documentation' => 'Further documentation describing the Web API in more detail.',
+            'hasCertification' => 'Certification information about a product, organization, service, place, or person.',
             'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
             'hoursAvailable' => 'The hours during which this service or contact is available.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',

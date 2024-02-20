@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * OfferShippingDetails - OfferShippingDetails represents information about shipping destinations.
  * Multiple of these entities can be used to represent different shipping
  * rates for different destinations:  One entity for Alaska/Hawaii. A
@@ -79,30 +79,30 @@ class OfferShippingDetails extends MetaJsonLd implements OfferShippingDetailsInt
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'deliveryTime' => ['ShippingDeliveryTime'],
-            'depth' => ['QuantitativeValue', 'Distance'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'doesNotShip' => ['Boolean'],
-            'height' => ['QuantitativeValue', 'Distance'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'sameAs' => ['URL'],
-            'shippingDestination' => ['DefinedRegion'],
-            'shippingLabel' => ['Text'],
-            'shippingOrigin' => ['DefinedRegion'],
-            'shippingRate' => ['MonetaryAmount'],
-            'shippingSettingsLink' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'transitTimeLabel' => ['Text'],
-            'url' => ['URL'],
-            'weight' => ['QuantitativeValue'],
-            'width' => ['Distance', 'QuantitativeValue'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'deliveryTime' => ['array', 'ShippingDeliveryTime', 'ShippingDeliveryTime[]'],
+            'depth' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'doesNotShip' => ['array', 'Boolean', 'Boolean[]'],
+            'height' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'shippingDestination' => ['array', 'DefinedRegion', 'DefinedRegion[]'],
+            'shippingLabel' => ['array', 'Text', 'Text[]'],
+            'shippingOrigin' => ['array', 'DefinedRegion', 'DefinedRegion[]'],
+            'shippingRate' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'shippingSettingsLink' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'transitTimeLabel' => ['array', 'Text', 'Text[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'weight' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'width' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
         ];
     }
 
@@ -113,7 +113,7 @@ class OfferShippingDetails extends MetaJsonLd implements OfferShippingDetailsInt
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'deliveryTime' => 'The total delay between the receipt of the order and the goods reaching the final customer.',
             'depth' => 'The depth of the item.',

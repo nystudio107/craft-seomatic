@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,22 +14,22 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Patient - A patient is any person recipient of health care services.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/Patient
  */
-class Patient extends MetaJsonLd implements PatientInterface, MedicalAudienceInterface, PeopleAudienceInterface, AudienceInterface, IntangibleInterface, ThingInterface, PersonInterface
+class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, ThingInterface, MedicalAudienceInterface, PeopleAudienceInterface, AudienceInterface, IntangibleInterface
 {
     use PatientTrait;
+    use PersonTrait;
+    use ThingTrait;
     use MedicalAudienceTrait;
     use PeopleAudienceTrait;
     use AudienceTrait;
     use IntangibleTrait;
-    use ThingTrait;
-    use PersonTrait;
 
     /**
      * The Schema.org Type Name
@@ -50,7 +50,7 @@ class Patient extends MetaJsonLd implements PatientInterface, MedicalAudienceInt
      *
      * @var string
      */
-    public static $schemaTypeExtends = 'MedicalAudience';
+    public static $schemaTypeExtends = 'Person';
 
     /**
      * The Schema.org Type Description
@@ -75,94 +75,96 @@ class Patient extends MetaJsonLd implements PatientInterface, MedicalAudienceInt
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalName' => ['Text'],
-            'additionalType' => ['URL'],
-            'address' => ['Text', 'PostalAddress'],
-            'affiliation' => ['Organization'],
-            'alternateName' => ['Text'],
-            'alumniOf' => ['Organization', 'EducationalOrganization'],
-            'audienceType' => ['Text'],
-            'award' => ['Text'],
-            'awards' => ['Text'],
-            'birthDate' => ['Date'],
-            'birthPlace' => ['Place'],
-            'brand' => ['Brand', 'Organization'],
-            'callSign' => ['Text'],
-            'children' => ['Person'],
-            'colleague' => ['Person', 'URL'],
-            'colleagues' => ['Person'],
-            'contactPoint' => ['ContactPoint'],
-            'contactPoints' => ['ContactPoint'],
-            'deathDate' => ['Date'],
-            'deathPlace' => ['Place'],
-            'description' => ['Text'],
-            'diagnosis' => ['MedicalCondition'],
-            'disambiguatingDescription' => ['Text'],
-            'drug' => ['Drug'],
-            'duns' => ['Text'],
-            'email' => ['Text'],
-            'familyName' => ['Text'],
-            'faxNumber' => ['Text'],
-            'follows' => ['Person'],
-            'funder' => ['Organization', 'Person'],
-            'funding' => ['Grant'],
-            'gender' => ['GenderType', 'Text'],
-            'geographicArea' => ['AdministrativeArea'],
-            'givenName' => ['Text'],
-            'globalLocationNumber' => ['Text'],
-            'hasCredential' => ['EducationalOccupationalCredential'],
-            'hasOccupation' => ['Occupation'],
-            'hasOfferCatalog' => ['OfferCatalog'],
-            'hasPOS' => ['Place'],
-            'healthCondition' => ['MedicalCondition'],
-            'height' => ['QuantitativeValue', 'Distance'],
-            'homeLocation' => ['ContactPoint', 'Place'],
-            'honorificPrefix' => ['Text'],
-            'honorificSuffix' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'interactionStatistic' => ['InteractionCounter'],
-            'isicV4' => ['Text'],
-            'jobTitle' => ['DefinedTerm', 'Text'],
-            'knows' => ['Person'],
-            'knowsAbout' => ['Thing', 'Text', 'URL'],
-            'knowsLanguage' => ['Text', 'Language'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'makesOffer' => ['Offer'],
-            'memberOf' => ['Organization', 'ProgramMembership'],
-            'naics' => ['Text'],
-            'name' => ['Text'],
-            'nationality' => ['Country'],
-            'netWorth' => ['MonetaryAmount', 'PriceSpecification'],
-            'owns' => ['Product', 'OwnershipInfo'],
-            'parent' => ['Person'],
-            'parents' => ['Person'],
-            'performerIn' => ['Event'],
-            'potentialAction' => ['Action'],
-            'publishingPrinciples' => ['CreativeWork', 'URL'],
-            'relatedTo' => ['Person'],
-            'requiredGender' => ['Text'],
-            'requiredMaxAge' => ['Integer'],
-            'requiredMinAge' => ['Integer'],
-            'sameAs' => ['URL'],
-            'seeks' => ['Demand'],
-            'sibling' => ['Person'],
-            'siblings' => ['Person'],
-            'sponsor' => ['Organization', 'Person'],
-            'spouse' => ['Person'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'suggestedAge' => ['QuantitativeValue'],
-            'suggestedGender' => ['GenderType', 'Text'],
-            'suggestedMaxAge' => ['Number'],
-            'suggestedMeasurement' => ['QuantitativeValue'],
-            'suggestedMinAge' => ['Number'],
-            'taxID' => ['Text'],
-            'telephone' => ['Text'],
-            'url' => ['URL'],
-            'vatID' => ['Text'],
-            'weight' => ['QuantitativeValue'],
-            'workLocation' => ['ContactPoint', 'Place'],
-            'worksFor' => ['Organization'],
+            'additionalName' => ['array', 'Text', 'Text[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'address' => ['array', 'Text', 'Text[]', 'array', 'PostalAddress', 'PostalAddress[]'],
+            'affiliation' => ['array', 'Organization', 'Organization[]'],
+            'agentInteractionStatistic' => ['array', 'InteractionCounter', 'InteractionCounter[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'alumniOf' => ['array', 'Organization', 'Organization[]', 'array', 'EducationalOrganization', 'EducationalOrganization[]'],
+            'audienceType' => ['array', 'Text', 'Text[]'],
+            'award' => ['array', 'Text', 'Text[]'],
+            'awards' => ['array', 'Text', 'Text[]'],
+            'birthDate' => ['array', 'Date', 'Date[]'],
+            'birthPlace' => ['array', 'Place', 'Place[]'],
+            'brand' => ['array', 'Organization', 'Organization[]', 'array', 'Brand', 'Brand[]'],
+            'callSign' => ['array', 'Text', 'Text[]'],
+            'children' => ['array', 'Person', 'Person[]'],
+            'colleague' => ['array', 'URL', 'URL[]', 'array', 'Person', 'Person[]'],
+            'colleagues' => ['array', 'Person', 'Person[]'],
+            'contactPoint' => ['array', 'ContactPoint', 'ContactPoint[]'],
+            'contactPoints' => ['array', 'ContactPoint', 'ContactPoint[]'],
+            'deathDate' => ['array', 'Date', 'Date[]'],
+            'deathPlace' => ['array', 'Place', 'Place[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'diagnosis' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'drug' => ['array', 'Drug', 'Drug[]'],
+            'duns' => ['array', 'Text', 'Text[]'],
+            'email' => ['array', 'Text', 'Text[]'],
+            'familyName' => ['array', 'Text', 'Text[]'],
+            'faxNumber' => ['array', 'Text', 'Text[]'],
+            'follows' => ['array', 'Person', 'Person[]'],
+            'funder' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'funding' => ['array', 'Grant', 'Grant[]'],
+            'gender' => ['array', 'GenderType', 'GenderType[]', 'array', 'Text', 'Text[]'],
+            'geographicArea' => ['array', 'AdministrativeArea', 'AdministrativeArea[]'],
+            'givenName' => ['array', 'Text', 'Text[]'],
+            'globalLocationNumber' => ['array', 'Text', 'Text[]'],
+            'hasCertification' => ['array', 'Certification', 'Certification[]'],
+            'hasCredential' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]'],
+            'hasOccupation' => ['array', 'Occupation', 'Occupation[]'],
+            'hasOfferCatalog' => ['array', 'OfferCatalog', 'OfferCatalog[]'],
+            'hasPOS' => ['array', 'Place', 'Place[]'],
+            'healthCondition' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
+            'height' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
+            'homeLocation' => ['array', 'ContactPoint', 'ContactPoint[]', 'array', 'Place', 'Place[]'],
+            'honorificPrefix' => ['array', 'Text', 'Text[]'],
+            'honorificSuffix' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'interactionStatistic' => ['array', 'InteractionCounter', 'InteractionCounter[]'],
+            'isicV4' => ['array', 'Text', 'Text[]'],
+            'jobTitle' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
+            'knows' => ['array', 'Person', 'Person[]'],
+            'knowsAbout' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'Thing', 'Thing[]'],
+            'knowsLanguage' => ['array', 'Language', 'Language[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'makesOffer' => ['array', 'Offer', 'Offer[]'],
+            'memberOf' => ['array', 'ProgramMembership', 'ProgramMembership[]', 'array', 'Organization', 'Organization[]'],
+            'naics' => ['array', 'Text', 'Text[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'nationality' => ['array', 'Country', 'Country[]'],
+            'netWorth' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'owns' => ['array', 'OwnershipInfo', 'OwnershipInfo[]', 'array', 'Product', 'Product[]'],
+            'parent' => ['array', 'Person', 'Person[]'],
+            'parents' => ['array', 'Person', 'Person[]'],
+            'performerIn' => ['array', 'Event', 'Event[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'publishingPrinciples' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'relatedTo' => ['array', 'Person', 'Person[]'],
+            'requiredGender' => ['array', 'Text', 'Text[]'],
+            'requiredMaxAge' => ['array', 'Integer', 'Integer[]'],
+            'requiredMinAge' => ['array', 'Integer', 'Integer[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'seeks' => ['array', 'Demand', 'Demand[]'],
+            'sibling' => ['array', 'Person', 'Person[]'],
+            'siblings' => ['array', 'Person', 'Person[]'],
+            'sponsor' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'spouse' => ['array', 'Person', 'Person[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'suggestedAge' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'suggestedGender' => ['array', 'GenderType', 'GenderType[]', 'array', 'Text', 'Text[]'],
+            'suggestedMaxAge' => ['array', 'Number', 'Number[]'],
+            'suggestedMeasurement' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'suggestedMinAge' => ['array', 'Number', 'Number[]'],
+            'taxID' => ['array', 'Text', 'Text[]'],
+            'telephone' => ['array', 'Text', 'Text[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'vatID' => ['array', 'Text', 'Text[]'],
+            'weight' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'workLocation' => ['array', 'Place', 'Place[]', 'array', 'ContactPoint', 'ContactPoint[]'],
+            'worksFor' => ['array', 'Organization', 'Organization[]'],
         ];
     }
 
@@ -174,9 +176,10 @@ class Patient extends MetaJsonLd implements PatientInterface, MedicalAudienceInt
     {
         return [
             'additionalName' => 'An additional name for a Person, can be used for a middle name.',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'address' => 'Physical address of the item.',
             'affiliation' => 'An organization that this person is affiliated with. For example, a school/university, a club, or a team.',
+            'agentInteractionStatistic' => 'The number of completed interactions for this entity, in a particular role (the \'agent\'), in a particular action (indicated in the statistic), and in a particular context (i.e. interactionService).',
             'alternateName' => 'An alias for the item.',
             'alumniOf' => 'An organization that the person is an alumni of.',
             'audienceType' => 'The target group associated with a given audience (e.g. veterans, car owners, musicians, etc.).',
@@ -208,6 +211,7 @@ class Patient extends MetaJsonLd implements PatientInterface, MedicalAudienceInt
             'geographicArea' => 'The geographic area associated with the audience.',
             'givenName' => 'Given name. In the U.S., the first name of a Person.',
             'globalLocationNumber' => 'The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
+            'hasCertification' => 'Certification information about a product, organization, service, place, or person.',
             'hasCredential' => 'A credential awarded to the Person or Organization.',
             'hasOccupation' => 'The Person\'s occupation. For past professions, use Role for expressing dates.',
             'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',

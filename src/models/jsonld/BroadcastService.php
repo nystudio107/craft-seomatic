@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * BroadcastService - A delivery service through which content is provided via broadcast over the
  * air or online.
  *
@@ -73,53 +73,54 @@ class BroadcastService extends MetaJsonLd implements BroadcastServiceInterface, 
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'aggregateRating' => ['AggregateRating'],
-            'alternateName' => ['Text'],
-            'area' => ['Place'],
-            'areaServed' => ['Text', 'Place', 'GeoShape', 'AdministrativeArea'],
-            'audience' => ['Audience'],
-            'availableChannel' => ['ServiceChannel'],
-            'award' => ['Text'],
-            'brand' => ['Brand', 'Organization'],
-            'broadcastAffiliateOf' => ['Organization'],
-            'broadcastDisplayName' => ['Text'],
-            'broadcastFrequency' => ['Text', 'BroadcastFrequencySpecification'],
-            'broadcastTimezone' => ['Text'],
-            'broadcaster' => ['Organization'],
-            'broker' => ['Person', 'Organization'],
-            'callSign' => ['Text'],
-            'category' => ['URL', 'CategoryCode', 'Text', 'Thing', 'PhysicalActivityCategory'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'hasBroadcastChannel' => ['BroadcastChannel'],
-            'hasOfferCatalog' => ['OfferCatalog'],
-            'hoursAvailable' => ['OpeningHoursSpecification'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'inLanguage' => ['Text', 'Language'],
-            'isRelatedTo' => ['Product', 'Service'],
-            'isSimilarTo' => ['Product', 'Service'],
-            'logo' => ['ImageObject', 'URL'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'offers' => ['Demand', 'Offer'],
-            'parentService' => ['BroadcastService'],
-            'potentialAction' => ['Action'],
-            'produces' => ['Thing'],
-            'provider' => ['Organization', 'Person'],
-            'providerMobility' => ['Text'],
-            'review' => ['Review'],
-            'sameAs' => ['URL'],
-            'serviceArea' => ['AdministrativeArea', 'Place', 'GeoShape'],
-            'serviceAudience' => ['Audience'],
-            'serviceOutput' => ['Thing'],
-            'serviceType' => ['Text', 'GovernmentBenefitsType'],
-            'slogan' => ['Text'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'termsOfService' => ['URL', 'Text'],
-            'url' => ['URL'],
-            'videoFormat' => ['Text'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'aggregateRating' => ['array', 'AggregateRating', 'AggregateRating[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'area' => ['array', 'Place', 'Place[]'],
+            'areaServed' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]'],
+            'audience' => ['array', 'Audience', 'Audience[]'],
+            'availableChannel' => ['array', 'ServiceChannel', 'ServiceChannel[]'],
+            'award' => ['array', 'Text', 'Text[]'],
+            'brand' => ['array', 'Organization', 'Organization[]', 'array', 'Brand', 'Brand[]'],
+            'broadcastAffiliateOf' => ['array', 'Organization', 'Organization[]'],
+            'broadcastDisplayName' => ['array', 'Text', 'Text[]'],
+            'broadcastFrequency' => ['array', 'BroadcastFrequencySpecification', 'BroadcastFrequencySpecification[]', 'array', 'Text', 'Text[]'],
+            'broadcastTimezone' => ['array', 'Text', 'Text[]'],
+            'broadcaster' => ['array', 'Organization', 'Organization[]'],
+            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'callSign' => ['array', 'Text', 'Text[]'],
+            'category' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Thing', 'Thing[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'hasBroadcastChannel' => ['array', 'BroadcastChannel', 'BroadcastChannel[]'],
+            'hasCertification' => ['array', 'Certification', 'Certification[]'],
+            'hasOfferCatalog' => ['array', 'OfferCatalog', 'OfferCatalog[]'],
+            'hoursAvailable' => ['array', 'OpeningHoursSpecification', 'OpeningHoursSpecification[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'inLanguage' => ['array', 'Text', 'Text[]', 'array', 'Language', 'Language[]'],
+            'isRelatedTo' => ['array', 'Product', 'Product[]', 'array', 'Service', 'Service[]'],
+            'isSimilarTo' => ['array', 'Product', 'Product[]', 'array', 'Service', 'Service[]'],
+            'logo' => ['array', 'URL', 'URL[]', 'array', 'ImageObject', 'ImageObject[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'parentService' => ['array', 'BroadcastService', 'BroadcastService[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'produces' => ['array', 'Thing', 'Thing[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'providerMobility' => ['array', 'Text', 'Text[]'],
+            'review' => ['array', 'Review', 'Review[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'serviceArea' => ['array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]', 'array', 'Place', 'Place[]'],
+            'serviceAudience' => ['array', 'Audience', 'Audience[]'],
+            'serviceOutput' => ['array', 'Thing', 'Thing[]'],
+            'serviceType' => ['array', 'GovernmentBenefitsType', 'GovernmentBenefitsType[]', 'array', 'Text', 'Text[]'],
+            'slogan' => ['array', 'Text', 'Text[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'termsOfService' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'videoFormat' => ['array', 'Text', 'Text[]'],
         ];
     }
 
@@ -130,7 +131,7 @@ class BroadcastService extends MetaJsonLd implements BroadcastServiceInterface, 
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'aggregateRating' => 'The overall rating, based on a collection of reviews or ratings, of the item.',
             'alternateName' => 'An alias for the item.',
             'area' => 'The area within which users can expect to reach the broadcast service.',
@@ -150,6 +151,7 @@ class BroadcastService extends MetaJsonLd implements BroadcastServiceInterface, 
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'hasBroadcastChannel' => 'A broadcast channel of a broadcast service.',
+            'hasCertification' => 'Certification information about a product, organization, service, place, or person.',
             'hasOfferCatalog' => 'Indicates an OfferCatalog listing for this Organization, Person, or Service.',
             'hoursAvailable' => 'The hours during which this service or contact is available.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 3
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * ParcelDelivery - The delivery of a parcel either via the postal service or a commercial
  * service.
  *
@@ -72,30 +72,30 @@ class ParcelDelivery extends MetaJsonLd implements ParcelDeliveryInterface, Inta
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'carrier' => ['Organization'],
-            'deliveryAddress' => ['PostalAddress'],
-            'deliveryStatus' => ['DeliveryEvent'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'expectedArrivalFrom' => ['Date', 'DateTime'],
-            'expectedArrivalUntil' => ['DateTime', 'Date'],
-            'hasDeliveryMethod' => ['DeliveryMethod'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'itemShipped' => ['Product'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'originAddress' => ['PostalAddress'],
-            'partOfOrder' => ['Order'],
-            'potentialAction' => ['Action'],
-            'provider' => ['Organization', 'Person'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'trackingNumber' => ['Text'],
-            'trackingUrl' => ['URL'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'carrier' => ['array', 'Organization', 'Organization[]'],
+            'deliveryAddress' => ['array', 'PostalAddress', 'PostalAddress[]'],
+            'deliveryStatus' => ['array', 'DeliveryEvent', 'DeliveryEvent[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'expectedArrivalFrom' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'expectedArrivalUntil' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'hasDeliveryMethod' => ['array', 'DeliveryMethod', 'DeliveryMethod[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'itemShipped' => ['array', 'Product', 'Product[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'originAddress' => ['array', 'PostalAddress', 'PostalAddress[]'],
+            'partOfOrder' => ['array', 'Order', 'Order[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'trackingNumber' => ['array', 'Text', 'Text[]'],
+            'trackingUrl' => ['array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -106,7 +106,7 @@ class ParcelDelivery extends MetaJsonLd implements ParcelDeliveryInterface, Inta
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'carrier' => '\'carrier\' is an out-dated term indicating the \'provider\' for parcel delivery and flights.',
             'deliveryAddress' => 'Destination address.',
