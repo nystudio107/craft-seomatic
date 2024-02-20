@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for AlignmentObject.
  *
  * @author    nystudio107
@@ -22,39 +22,39 @@ namespace nystudio107\seomatic\models\jsonld;
 trait AlignmentObjectTrait
 {
     /**
-     * The name of a node in an established educational framework.
+     * The framework to which the resource being described is aligned.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $targetName;
+    public $educationalFramework;
+
+    /**
+     * The description of a node in an established educational framework.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $targetDescription;
 
     /**
      * The URL of a node in an established educational framework.
      *
-     * @var URL
+     * @var array|URL|URL[]
      */
     public $targetUrl;
+
+    /**
+     * The name of a node in an established educational framework.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $targetName;
 
     /**
      * A category of alignment between the learning resource and the framework
      * node. Recommended values include: 'requires', 'textComplexity',
      * 'readingLevel', and 'educationalSubject'.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $alignmentType;
-
-    /**
-     * The description of a node in an established educational framework.
-     *
-     * @var string|Text
-     */
-    public $targetDescription;
-
-    /**
-     * The framework to which the resource being described is aligned.
-     *
-     * @var string|Text
-     */
-    public $educationalFramework;
 }

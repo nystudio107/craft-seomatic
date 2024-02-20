@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ShippingRateSettings.
  *
  * @author    nystudio107
@@ -22,44 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ShippingRateSettingsTrait
 {
     /**
-     * indicates (possibly multiple) shipping destinations. These can be defined
-     * in several ways, e.g. postalCode ranges.
-     *
-     * @var DefinedRegion
-     */
-    public $shippingDestination;
-
-    /**
      * Label to match an [[OfferShippingDetails]] with a [[ShippingRateSettings]]
      * (within the context of a [[shippingSettingsLink]] cross-reference).
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $shippingLabel;
-
-    /**
-     * Indicates when shipping to a particular [[shippingDestination]] is not
-     * available.
-     *
-     * @var bool|Boolean
-     */
-    public $doesNotShip;
-
-    /**
-     * A monetary value above (or at) which the shipping rate becomes free.
-     * Intended to be used via an [[OfferShippingDetails]] with
-     * [[shippingSettingsLink]] matching this [[ShippingRateSettings]].
-     *
-     * @var DeliveryChargeSpecification|MonetaryAmount
-     */
-    public $freeShippingThreshold;
 
     /**
      * The shipping rate is the cost of shipping to the specified destination.
      * Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are
      * most appropriate.
      *
-     * @var MonetaryAmount
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
     public $shippingRate;
 
@@ -73,7 +48,32 @@ trait ShippingRateSettingsTrait
      * [[ShippingRateSettings]]), since this property is for use with unlabelled
      * settings.
      *
-     * @var bool|Boolean
+     * @var bool|array|Boolean|Boolean[]
      */
     public $isUnlabelledFallback;
+
+    /**
+     * Indicates when shipping to a particular [[shippingDestination]] is not
+     * available.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $doesNotShip;
+
+    /**
+     * A monetary value above (or at) which the shipping rate becomes free.
+     * Intended to be used via an [[OfferShippingDetails]] with
+     * [[shippingSettingsLink]] matching this [[ShippingRateSettings]].
+     *
+     * @var array|MonetaryAmount|MonetaryAmount[]|array|DeliveryChargeSpecification|DeliveryChargeSpecification[]
+     */
+    public $freeShippingThreshold;
+
+    /**
+     * indicates (possibly multiple) shipping destinations. These can be defined
+     * in several ways, e.g. postalCode ranges.
+     *
+     * @var array|DefinedRegion|DefinedRegion[]
+     */
+    public $shippingDestination;
 }

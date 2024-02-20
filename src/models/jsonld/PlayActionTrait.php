@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for PlayAction.
  *
  * @author    nystudio107
@@ -24,14 +24,14 @@ trait PlayActionTrait
     /**
      * Upcoming or past event associated with this place, organization, or action.
      *
-     * @var Event
+     * @var array|Event|Event[]
      */
     public $event;
 
     /**
      * An intended audience, i.e. a group for whom something was created.
      *
-     * @var Audience
+     * @var array|Audience|Audience[]
      */
     public $audience;
 }

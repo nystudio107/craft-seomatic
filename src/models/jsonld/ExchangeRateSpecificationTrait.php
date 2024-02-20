@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for ExchangeRateSpecification.
  *
  * @author    nystudio107
@@ -30,14 +30,14 @@ trait ExchangeRateSpecificationTrait
      * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
      * (LETS) and other currency types, e.g. "Ithaca HOUR".
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $currency;
 
     /**
      * The current price of a currency.
      *
-     * @var UnitPriceSpecification
+     * @var array|UnitPriceSpecification|UnitPriceSpecification[]
      */
     public $currentExchangeRate;
 
@@ -45,7 +45,7 @@ trait ExchangeRateSpecificationTrait
      * The difference between the price at which a broker or other intermediary
      * buys and sells foreign currency.
      *
-     * @var float|MonetaryAmount|Number
+     * @var float|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]
      */
     public $exchangeRateSpread;
 }

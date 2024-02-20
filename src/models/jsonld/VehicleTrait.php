@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Vehicle.
  *
  * @author    nystudio107
@@ -22,43 +22,26 @@ namespace nystudio107\seomatic\models\jsonld;
 trait VehicleTrait
 {
     /**
-     * Indicates whether the vehicle has been used for special purposes, like
-     * commercial rental, driving school, or as a taxi. The legislation in many
-     * countries requires this information to be revealed when offering a car for
-     * sale.
+     * The date of production of the item, e.g. vehicle.
      *
-     * @var string|CarUsageType|Text
+     * @var array|Date|Date[]
      */
-    public $vehicleSpecialUsage;
+    public $productionDate;
 
     /**
-     * The permitted weight of a trailer attached to the vehicle.  Typical unit
-     * code(s): KGM for kilogram, LBR for pound * Note 1: You can indicate
-     * additional information in the [[name]] of the [[QuantitativeValue]] node. *
-     * Note 2: You may also link to a [[QualitativeValue]] node that provides
-     * additional information using [[valueReference]]. * Note 3: Note that you
-     * can use [[minValue]] and [[maxValue]] to indicate ranges.
+     * Information about the engine or engines of the vehicle.
      *
-     * @var QuantitativeValue
+     * @var array|EngineSpecification|EngineSpecification[]
      */
-    public $trailerWeight;
+    public $vehicleEngine;
 
     /**
-     * The available volume for cargo or luggage. For automobiles, this is usually
-     * the trunk volume.  Typical unit code(s): LTR for liters, FTQ for cubic
-     * foot/feet  Note: You can use [[minValue]] and [[maxValue]] to indicate
-     * ranges.
+     * The drive wheel configuration, i.e. which roadwheels will receive torque
+     * from the vehicle's engine via the drivetrain.
      *
-     * @var QuantitativeValue
+     * @var string|array|DriveWheelConfigurationValue|DriveWheelConfigurationValue[]|array|Text|Text[]
      */
-    public $cargoVolume;
-
-    /**
-     * The position of the steering wheel or similar device (mostly for cars).
-     *
-     * @var SteeringPositionValue
-     */
-    public $steeringPosition;
+    public $driveWheelConfiguration;
 
     /**
      * The amount of fuel consumed for traveling a particular distance or temporal
@@ -72,170 +55,9 @@ trait VehicleTrait
      * traffic"). You can use [[valueReference]] to link the value for the fuel
      * consumption to another value.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $fuelConsumption;
-
-    /**
-     * The release date of a vehicle model (often used to differentiate versions
-     * of the same make and model).
-     *
-     * @var Date
-     */
-    public $modelDate;
-
-    /**
-     * The type of component used for transmitting the power from a rotating power
-     * source to the wheels or other relevant component(s) ("gearbox" for cars).
-     *
-     * @var string|Text|URL|QualitativeValue
-     */
-    public $vehicleTransmission;
-
-    /**
-     * The CO2 emissions in g/km. When used in combination with a
-     * QuantitativeValue, put "g/km" into the unitText property of that value,
-     * since there is no UN/CEFACT Common Code for "g/km".
-     *
-     * @var float|Number
-     */
-    public $emissionsCO2;
-
-    /**
-     * Indicates that the vehicle meets the respective emission standard.
-     *
-     * @var string|Text|URL|QualitativeValue
-     */
-    public $meetsEmissionStandard;
-
-    /**
-     * The permitted weight of passengers and cargo, EXCLUDING the weight of the
-     * empty vehicle.  Typical unit code(s): KGM for kilogram, LBR for pound  *
-     * Note 1: Many databases specify the permitted TOTAL weight instead, which is
-     * the sum of [[weight]] and [[payload]] * Note 2: You can indicate additional
-     * information in the [[name]] of the [[QuantitativeValue]] node. * Note 3:
-     * You may also link to a [[QualitativeValue]] node that provides additional
-     * information using [[valueReference]]. * Note 4: Note that you can use
-     * [[minValue]] and [[maxValue]] to indicate ranges.
-     *
-     * @var QuantitativeValue
-     */
-    public $payload;
-
-    /**
-     * The capacity of the fuel tank or in the case of electric cars, the battery.
-     * If there are multiple components for storage, this should indicate the
-     * total of all storage of the same type.  Typical unit code(s): LTR for
-     * liters, GLL of US gallons, GLI for UK / imperial gallons, AMH for
-     * ampere-hours (for electrical vehicles).
-     *
-     * @var QuantitativeValue
-     */
-    public $fuelCapacity;
-
-    /**
-     * The distance between the centers of the front and rear wheels.  Typical
-     * unit code(s): CMT for centimeters, MTR for meters, INH for inches, FOT for
-     * foot/feet
-     *
-     * @var QuantitativeValue
-     */
-    public $wheelbase;
-
-    /**
-     * The Vehicle Identification Number (VIN) is a unique serial number used by
-     * the automotive industry to identify individual motor vehicles.
-     *
-     * @var string|Text
-     */
-    public $vehicleIdentificationNumber;
-
-    /**
-     * The type or material of the interior of the vehicle (e.g. synthetic fabric,
-     * leather, wood, etc.). While most interior types are characterized by the
-     * material used, an interior type can also be based on vehicle usage or
-     * target audience.
-     *
-     * @var string|Text
-     */
-    public $vehicleInteriorType;
-
-    /**
-     * Information about the engine or engines of the vehicle.
-     *
-     * @var EngineSpecification
-     */
-    public $vehicleEngine;
-
-    /**
-     * The number of doors.  Typical unit code(s): C62
-     *
-     * @var float|Number|QuantitativeValue
-     */
-    public $numberOfDoors;
-
-    /**
-     * The color or color combination of the interior of the vehicle.
-     *
-     * @var string|Text
-     */
-    public $vehicleInteriorColor;
-
-    /**
-     * The drive wheel configuration, i.e. which roadwheels will receive torque
-     * from the vehicle's engine via the drivetrain.
-     *
-     * @var string|Text|DriveWheelConfigurationValue
-     */
-    public $driveWheelConfiguration;
-
-    /**
-     * The number of axles.  Typical unit code(s): C62
-     *
-     * @var float|Number|QuantitativeValue
-     */
-    public $numberOfAxles;
-
-    /**
-     * The number of passengers that can be seated in the vehicle, both in terms
-     * of the physical space available, and in terms of limitations set by law.
-     * Typical unit code(s): C62 for persons.
-     *
-     * @var float|Number|QuantitativeValue
-     */
-    public $vehicleSeatingCapacity;
-
-    /**
-     * The number of owners of the vehicle, including the current one.  Typical
-     * unit code(s): C62
-     *
-     * @var float|QuantitativeValue|Number
-     */
-    public $numberOfPreviousOwners;
-
-    /**
-     * The date the item, e.g. vehicle, was purchased by the current owner.
-     *
-     * @var Date
-     */
-    public $purchaseDate;
-
-    /**
-     * Indicates the design and body style of the vehicle (e.g. station wagon,
-     * hatchback, etc.).
-     *
-     * @var string|URL|QualitativeValue|Text
-     */
-    public $bodyType;
-
-    /**
-     * The type of fuel suitable for the engine or engines of the vehicle. If the
-     * vehicle has only one engine, this property can be attached directly to the
-     * vehicle.
-     *
-     * @var string|URL|QualitativeValue|Text
-     */
-    public $fuelType;
 
     /**
      * The speed range of the vehicle. If the vehicle is powered by an engine, the
@@ -247,40 +69,98 @@ trait VehicleTrait
      * the speed range. You can link to information about how the given value has
      * been determined using the [[valueReference]] property.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $speed;
 
     /**
-     * The total distance travelled by the particular vehicle since its initial
-     * production, as read from its odometer.  Typical unit code(s): KMT for
-     * kilometers, SMI for statute miles
+     * The permitted weight of a trailer attached to the vehicle.  Typical unit
+     * code(s): KGM for kilogram, LBR for pound * Note 1: You can indicate
+     * additional information in the [[name]] of the [[QuantitativeValue]] node. *
+     * Note 2: You may also link to a [[QualitativeValue]] node that provides
+     * additional information using [[valueReference]]. * Note 3: Note that you
+     * can use [[minValue]] and [[maxValue]] to indicate ranges.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $mileageFromOdometer;
+    public $trailerWeight;
 
     /**
-     * The date of production of the item, e.g. vehicle.
+     * Indicates the design and body style of the vehicle (e.g. station wagon,
+     * hatchback, etc.).
      *
-     * @var Date
+     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $productionDate;
+    public $bodyType;
 
     /**
-     * A textual description of known damages, both repaired and unrepaired.
+     * The available volume for cargo or luggage. For automobiles, this is usually
+     * the trunk volume.  Typical unit code(s): LTR for liters, FTQ for cubic
+     * foot/feet  Note: You can use [[minValue]] and [[maxValue]] to indicate
+     * ranges.
      *
-     * @var string|Text
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $knownVehicleDamages;
+    public $cargoVolume;
 
     /**
-     * The date of the first registration of the vehicle with the respective
-     * public authorities.
+     * The CO2 emissions in g/km. When used in combination with a
+     * QuantitativeValue, put "g/km" into the unitText property of that value,
+     * since there is no UN/CEFACT Common Code for "g/km".
      *
-     * @var Date
+     * @var float|array|Number|Number[]
      */
-    public $dateVehicleFirstRegistered;
+    public $emissionsCO2;
+
+    /**
+     * The release date of a vehicle model (often used to differentiate versions
+     * of the same make and model).
+     *
+     * @var array|Date|Date[]
+     */
+    public $modelDate;
+
+    /**
+     * The number of doors.  Typical unit code(s): C62.
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfDoors;
+
+    /**
+     * Indicates whether the vehicle has been used for special purposes, like
+     * commercial rental, driving school, or as a taxi. The legislation in many
+     * countries requires this information to be revealed when offering a car for
+     * sale.
+     *
+     * @var string|array|CarUsageType|CarUsageType[]|array|Text|Text[]
+     */
+    public $vehicleSpecialUsage;
+
+    /**
+     * The type of fuel suitable for the engine or engines of the vehicle. If the
+     * vehicle has only one engine, this property can be attached directly to the
+     * vehicle.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]|array|QualitativeValue|QualitativeValue[]
+     */
+    public $fuelType;
+
+    /**
+     * The number of persons that can be seated (e.g. in a vehicle), both in terms
+     * of the physical space available, and in terms of limitations set by law.
+     * Typical unit code(s): C62 for persons.
+     *
+     * @var float|array|QuantitativeValue|QuantitativeValue[]|array|Number|Number[]
+     */
+    public $seatingCapacity;
+
+    /**
+     * The position of the steering wheel or similar device (mostly for cars).
+     *
+     * @var array|SteeringPositionValue|SteeringPositionValue[]
+     */
+    public $steeringPosition;
 
     /**
      * The permitted total weight of the loaded vehicle, including passengers and
@@ -291,16 +171,168 @@ trait VehicleTrait
      * using [[valueReference]]. * Note 3: Note that you can use [[minValue]] and
      * [[maxValue]] to indicate ranges.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $weightTotal;
 
     /**
+     * The type or material of the interior of the vehicle (e.g. synthetic fabric,
+     * leather, wood, etc.). While most interior types are characterized by the
+     * material used, an interior type can also be based on vehicle usage or
+     * target audience.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $vehicleInteriorType;
+
+    /**
      * The number or type of airbags in the vehicle.
      *
-     * @var float|string|Number|Text
+     * @var string|float|array|Text|Text[]|array|Number|Number[]
      */
     public $numberOfAirbags;
+
+    /**
+     * The distance between the centers of the front and rear wheels.  Typical
+     * unit code(s): CMT for centimeters, MTR for meters, INH for inches, FOT for
+     * foot/feet.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $wheelbase;
+
+    /**
+     * A short text indicating the configuration of the vehicle, e.g. '5dr
+     * hatchback ST 2.5 MT 225 hp' or 'limited edition'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $vehicleConfiguration;
+
+    /**
+     * The capacity of the fuel tank or in the case of electric cars, the battery.
+     * If there are multiple components for storage, this should indicate the
+     * total of all storage of the same type.  Typical unit code(s): LTR for
+     * liters, GLL of US gallons, GLI for UK / imperial gallons, AMH for
+     * ampere-hours (for electrical vehicles).
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $fuelCapacity;
+
+    /**
+     * The color or color combination of the interior of the vehicle.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $vehicleInteriorColor;
+
+    /**
+     * The time needed to accelerate the vehicle from a given start velocity to a
+     * given target velocity.  Typical unit code(s): SEC for seconds  * Note:
+     * There are unfortunately no standard unit codes for seconds/0..100 km/h or
+     * seconds/0..60 mph. Simply use "SEC" for seconds and indicate the velocities
+     * in the [[name]] of the [[QuantitativeValue]], or use [[valueReference]]
+     * with a [[QuantitativeValue]] of 0..60 mph or 0..100 km/h to specify the
+     * reference speeds.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $accelerationTime;
+
+    /**
+     * The number of axles.  Typical unit code(s): C62.
+     *
+     * @var float|array|QuantitativeValue|QuantitativeValue[]|array|Number|Number[]
+     */
+    public $numberOfAxles;
+
+    /**
+     * The total number of forward gears available for the transmission system of
+     * the vehicle.  Typical unit code(s): C62.
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfForwardGears;
+
+    /**
+     * The permitted weight of passengers and cargo, EXCLUDING the weight of the
+     * empty vehicle.  Typical unit code(s): KGM for kilogram, LBR for pound  *
+     * Note 1: Many databases specify the permitted TOTAL weight instead, which is
+     * the sum of [[weight]] and [[payload]] * Note 2: You can indicate additional
+     * information in the [[name]] of the [[QuantitativeValue]] node. * Note 3:
+     * You may also link to a [[QualitativeValue]] node that provides additional
+     * information using [[valueReference]]. * Note 4: Note that you can use
+     * [[minValue]] and [[maxValue]] to indicate ranges.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $payload;
+
+    /**
+     * The release date of a vehicle model (often used to differentiate versions
+     * of the same make and model).
+     *
+     * @var array|Date|Date[]
+     */
+    public $vehicleModelDate;
+
+    /**
+     * Indicates that the vehicle meets the respective emission standard.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]|array|QualitativeValue|QualitativeValue[]
+     */
+    public $meetsEmissionStandard;
+
+    /**
+     * The total distance travelled by the particular vehicle since its initial
+     * production, as read from its odometer.  Typical unit code(s): KMT for
+     * kilometers, SMI for statute miles.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $mileageFromOdometer;
+
+    /**
+     * The number of passengers that can be seated in the vehicle, both in terms
+     * of the physical space available, and in terms of limitations set by law.
+     * Typical unit code(s): C62 for persons.
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $vehicleSeatingCapacity;
+
+    /**
+     * The type of component used for transmitting the power from a rotating power
+     * source to the wheels or other relevant component(s) ("gearbox" for cars).
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]|array|QualitativeValue|QualitativeValue[]
+     */
+    public $vehicleTransmission;
+
+    /**
+     * A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in
+     * broadcasting and radio communications to identify people, radio and TV
+     * stations, or vehicles.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $callSign;
+
+    /**
+     * The date the item, e.g. vehicle, was purchased by the current owner.
+     *
+     * @var array|Date|Date[]
+     */
+    public $purchaseDate;
+
+    /**
+     * The date of the first registration of the vehicle with the respective
+     * public authorities.
+     *
+     * @var array|Date|Date[]
+     */
+    public $dateVehicleFirstRegistered;
 
     /**
      * The distance traveled per unit of fuel used; most commonly miles per gallon
@@ -314,42 +346,16 @@ trait VehicleTrait
      * pattern ("city traffic"). You can use [[valueReference]] to link the value
      * for the fuel economy to another value.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $fuelEfficiency;
 
     /**
-     * The release date of a vehicle model (often used to differentiate versions
-     * of the same make and model).
+     * A textual description of known damages, both repaired and unrepaired.
      *
-     * @var Date
+     * @var string|array|Text|Text[]
      */
-    public $vehicleModelDate;
-
-    /**
-     * The total number of forward gears available for the transmission system of
-     * the vehicle.  Typical unit code(s): C62
-     *
-     * @var float|Number|QuantitativeValue
-     */
-    public $numberOfForwardGears;
-
-    /**
-     * A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in
-     * broadcasting and radio communications to identify people, radio and TV
-     * stations, or vehicles.
-     *
-     * @var string|Text
-     */
-    public $callSign;
-
-    /**
-     * A short text indicating the configuration of the vehicle, e.g. '5dr
-     * hatchback ST 2.5 MT 225 hp' or 'limited edition'.
-     *
-     * @var string|Text
-     */
-    public $vehicleConfiguration;
+    public $knownVehicleDamages;
 
     /**
      * The permitted vertical load (TWR) of a trailer attached to the vehicle.
@@ -361,29 +367,23 @@ trait VehicleTrait
      * [[valueReference]]. * Note 3: Note that you can use [[minValue]] and
      * [[maxValue]] to indicate ranges.
      *
-     * @var QuantitativeValue
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $tongueWeight;
 
     /**
-     * The time needed to accelerate the vehicle from a given start velocity to a
-     * given target velocity.  Typical unit code(s): SEC for seconds  * Note:
-     * There are unfortunately no standard unit codes for seconds/0..100 km/h or
-     * seconds/0..60 mph. Simply use "SEC" for seconds and indicate the velocities
-     * in the [[name]] of the [[QuantitativeValue]], or use [[valueReference]]
-     * with a [[QuantitativeValue]] of 0..60 mph or 0..100 km/h to specify the
-     * reference speeds.
+     * The Vehicle Identification Number (VIN) is a unique serial number used by
+     * the automotive industry to identify individual motor vehicles.
      *
-     * @var QuantitativeValue
+     * @var string|array|Text|Text[]
      */
-    public $accelerationTime;
+    public $vehicleIdentificationNumber;
 
     /**
-     * The number of persons that can be seated (e.g. in a vehicle), both in terms
-     * of the physical space available, and in terms of limitations set by law.
-     * Typical unit code(s): C62 for persons
+     * The number of owners of the vehicle, including the current one.  Typical
+     * unit code(s): C62.
      *
-     * @var float|Number|QuantitativeValue
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $seatingCapacity;
+    public $numberOfPreviousOwners;
 }

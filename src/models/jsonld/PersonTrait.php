@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Person.
  *
  * @author    nystudio107
@@ -22,44 +22,130 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PersonTrait
 {
     /**
-     * A sibling of the person.
+     * An Organization (or ProgramMembership) to which this Person or Organization
+     * belongs.
      *
-     * @var Person
+     * @var array|ProgramMembership|ProgramMembership[]|array|Organization|Organization[]
      */
-    public $sibling;
+    public $memberOf;
 
     /**
-     * The International Standard of Industrial Classification of All Economic
-     * Activities (ISIC), Revision 4 code for a particular organization, business
-     * person, or place.
+     * Indicates an OfferCatalog listing for this Organization, Person, or
+     * Service.
      *
-     * @var string|Text
+     * @var array|OfferCatalog|OfferCatalog[]
      */
-    public $isicV4;
+    public $hasOfferCatalog;
 
     /**
-     * Points-of-Sales operated by the organization or person.
+     * An honorific suffix following a Person's name such as M.D./PhD/MSCSW.
      *
-     * @var Place
+     * @var string|array|Text|Text[]
      */
-    public $hasPOS;
+    public $honorificSuffix;
 
     /**
-     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also
-     * referred to as International Location Number or ILN) of the respective
-     * organization, person, or place. The GLN is a 13-digit number used to
-     * identify parties and physical locations.
+     * Organizations that the person works for.
      *
-     * @var string|Text
+     * @var array|Organization|Organization[]
      */
-    public $globalLocationNumber;
+    public $worksFor;
+
+    /**
+     * Awards won by or for this item.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $awards;
+
+    /**
+     * Nationality of the person.
+     *
+     * @var array|Country|Country[]
+     */
+    public $nationality;
+
+    /**
+     * A colleague of the person.
+     *
+     * @var array|URL|URL[]|array|Person|Person[]
+     */
+    public $colleague;
+
+    /**
+     * Products owned by the organization or person.
+     *
+     * @var array|OwnershipInfo|OwnershipInfo[]|array|Product|Product[]
+     */
+    public $owns;
+
+    /**
+     * An award won by or for this item.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $award;
+
+    /**
+     * A pointer to products or services offered by the organization or person.
+     *
+     * @var array|Offer|Offer[]
+     */
+    public $makesOffer;
 
     /**
      * The person's spouse.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $spouse;
+
+    /**
+     * Points-of-Sales operated by the organization or person.
+     *
+     * @var array|Place|Place[]
+     */
+    public $hasPOS;
+
+    /**
+     * An additional name for a Person, can be used for a middle name.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $additionalName;
+
+    /**
+     * The Dun & Bradstreet DUNS number for identifying an organization or
+     * business person.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $duns;
+
+    /**
+     * The brand(s) associated with a product or service, or the brand(s)
+     * maintained by an organization or business person.
+     *
+     * @var array|Organization|Organization[]|array|Brand|Brand[]
+     */
+    public $brand;
+
+    /**
+     * Of a [[Person]], and less typically of an [[Organization]], to indicate a
+     * known language. We do not distinguish skill levels or
+     * reading/writing/speaking/signing here. Use language codes from the [IETF
+     * BCP 47 standard](http://tools.ietf.org/html/bcp47).
+     *
+     * @var string|array|Language|Language[]|array|Text|Text[]
+     */
+    public $knowsLanguage;
+
+    /**
+     * The height of the item.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]|array|Distance|Distance[]
+     */
+    public $height;
 
     /**
      * Of a [[Person]], and less typically of an [[Organization]], to indicate a
@@ -67,53 +153,9 @@ trait PersonTrait
      * it. We do not distinguish skill levels here, or relate this to educational
      * content, events, objectives or [[JobPosting]] descriptions.
      *
-     * @var string|Thing|Text|URL
+     * @var string|array|Text|Text[]|array|URL|URL[]|array|Thing|Thing[]
      */
     public $knowsAbout;
-
-    /**
-     * A pointer to products or services offered by the organization or person.
-     *
-     * @var Offer
-     */
-    public $makesOffer;
-
-    /**
-     * A colleague of the person.
-     *
-     * @var Person|URL
-     */
-    public $colleague;
-
-    /**
-     * An honorific suffix following a Person's name such as M.D./PhD/MSCSW.
-     *
-     * @var string|Text
-     */
-    public $honorificSuffix;
-
-    /**
-     * Nationality of the person.
-     *
-     * @var Country
-     */
-    public $nationality;
-
-    /**
-     * An organization that this person is affiliated with. For example, a
-     * school/university, a club, or a team.
-     *
-     * @var Organization
-     */
-    public $affiliation;
-
-    /**
-     * An Organization (or ProgramMembership) to which this Person or Organization
-     * belongs.
-     *
-     * @var Organization|ProgramMembership
-     */
-    public $memberOf;
 
     /**
      * The publishingPrinciples property indicates (typically via [[URL]]) a
@@ -126,280 +168,208 @@ trait PersonTrait
      * sometimes related information (e.g. indicating a [[funder]]) can be
      * expressed using schema.org terminology.
      *
-     * @var CreativeWork|URL
+     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
      */
     public $publishingPrinciples;
 
     /**
-     * The height of the item.
+     * A parent of this person.
      *
-     * @var QuantitativeValue|Distance
+     * @var array|Person|Person[]
      */
-    public $height;
+    public $parent;
 
     /**
-     * The most generic bi-directional social/work relation.
+     * A contact location for a person's residence.
      *
-     * @var Person
+     * @var array|ContactPoint|ContactPoint[]|array|Place|Place[]
      */
-    public $knows;
+    public $homeLocation;
 
     /**
-     * The most generic familial relation.
+     * Date of birth.
      *
-     * @var Person
+     * @var array|Date|Date[]
      */
-    public $relatedTo;
-
-    /**
-     * Organizations that the person works for.
-     *
-     * @var Organization
-     */
-    public $worksFor;
-
-    /**
-     * An award won by or for this item.
-     *
-     * @var string|Text
-     */
-    public $award;
-
-    /**
-     * Email address.
-     *
-     * @var string|Text
-     */
-    public $email;
-
-    /**
-     * Given name. In the U.S., the first name of a Person.
-     *
-     * @var string|Text
-     */
-    public $givenName;
-
-    /**
-     * A contact location for a person's place of work.
-     *
-     * @var ContactPoint|Place
-     */
-    public $workLocation;
-
-    /**
-     * A contact point for a person or organization.
-     *
-     * @var ContactPoint
-     */
-    public $contactPoints;
+    public $birthDate;
 
     /**
      * The job title of the person (for example, Financial Manager).
      *
-     * @var string|DefinedTerm|Text
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
     public $jobTitle;
 
     /**
-     * Products owned by the organization or person.
-     *
-     * @var Product|OwnershipInfo
-     */
-    public $owns;
-
-    /**
-     * Awards won by or for this item.
-     *
-     * @var string|Text
-     */
-    public $awards;
-
-    /**
      * A child of the person.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $children;
 
     /**
-     * A parent of this person.
+     * The International Standard of Industrial Classification of All Economic
+     * Activities (ISIC), Revision 4 code for a particular organization, business
+     * person, or place.
      *
-     * @var Person
+     * @var string|array|Text|Text[]
      */
-    public $parent;
+    public $isicV4;
+
+    /**
+     * The telephone number.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $telephone;
+
+    /**
+     * A colleague of the person.
+     *
+     * @var array|Person|Person[]
+     */
+    public $colleagues;
 
     /**
      * A [[Grant]] that directly or indirectly provide funding or sponsorship for
      * this item. See also [[ownershipFundingInfo]].
      *
-     * @var Grant
+     * @var array|Grant|Grant[]
      */
     public $funding;
+
+    /**
+     * Given name. In the U.S., the first name of a Person.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $givenName;
+
+    /**
+     * The weight of the product or person.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $weight;
+
+    /**
+     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US
+     * or the CIF/NIF in Spain.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $taxID;
+
+    /**
+     * Family name. In the U.S., the last name of a Person.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $familyName;
+
+    /**
+     * The North American Industry Classification System (NAICS) code for a
+     * particular organization or business person.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $naics;
+
+    /**
+     * A contact point for a person or organization.
+     *
+     * @var array|ContactPoint|ContactPoint[]
+     */
+    public $contactPoint;
+
+    /**
+     * The place where the person was born.
+     *
+     * @var array|Place|Place[]
+     */
+    public $birthPlace;
+
+    /**
+     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also
+     * referred to as International Location Number or ILN) of the respective
+     * organization, person, or place. The GLN is a 13-digit number used to
+     * identify parties and physical locations.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $globalLocationNumber;
+
+    /**
+     * The most generic bi-directional social/work relation.
+     *
+     * @var array|Person|Person[]
+     */
+    public $knows;
+
+    /**
+     * The total financial value of the person as calculated by subtracting assets
+     * from liabilities.
+     *
+     * @var array|PriceSpecification|PriceSpecification[]|array|MonetaryAmount|MonetaryAmount[]
+     */
+    public $netWorth;
+
+    /**
+     * Email address.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $email;
+
+    /**
+     * A person or organization that supports a thing through a pledge, promise,
+     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
+     * sponsor of an event.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $sponsor;
+
+    /**
+     * The Person's occupation. For past professions, use Role for expressing
+     * dates.
+     *
+     * @var array|Occupation|Occupation[]
+     */
+    public $hasOccupation;
+
+    /**
+     * The number of completed interactions for this entity, in a particular role
+     * (the 'agent'), in a particular action (indicated in the statistic), and in
+     * a particular context (i.e. interactionService).
+     *
+     * @var array|InteractionCounter|InteractionCounter[]
+     */
+    public $agentInteractionStatistic;
+
+    /**
+     * An organization that this person is affiliated with. For example, a
+     * school/university, a club, or a team.
+     *
+     * @var array|Organization|Organization[]
+     */
+    public $affiliation;
+
+    /**
+     * Date of death.
+     *
+     * @var array|Date|Date[]
+     */
+    public $deathDate;
 
     /**
      * The number of interactions for the CreativeWork using the WebSite or
      * SoftwareApplication. The most specific child type of InteractionCounter
      * should be used.
      *
-     * @var InteractionCounter
+     * @var array|InteractionCounter|InteractionCounter[]
      */
     public $interactionStatistic;
-
-    /**
-     * A pointer to products or services sought by the organization or person
-     * (demand).
-     *
-     * @var Demand
-     */
-    public $seeks;
-
-    /**
-     * The weight of the product or person.
-     *
-     * @var QuantitativeValue
-     */
-    public $weight;
-
-    /**
-     * A person or organization that supports (sponsors) something through some
-     * kind of financial contribution.
-     *
-     * @var Organization|Person
-     */
-    public $funder;
-
-    /**
-     * Date of birth.
-     *
-     * @var Date
-     */
-    public $birthDate;
-
-    /**
-     * Date of death.
-     *
-     * @var Date
-     */
-    public $deathDate;
-
-    /**
-     * An additional name for a Person, can be used for a middle name.
-     *
-     * @var string|Text
-     */
-    public $additionalName;
-
-    /**
-     * The Dun & Bradstreet DUNS number for identifying an organization or
-     * business person.
-     *
-     * @var string|Text
-     */
-    public $duns;
-
-    /**
-     * Event that this person is a performer or participant in.
-     *
-     * @var Event
-     */
-    public $performerIn;
-
-    /**
-     * The Value-added Tax ID of the organization or person.
-     *
-     * @var string|Text
-     */
-    public $vatID;
-
-    /**
-     * Of a [[Person]], and less typically of an [[Organization]], to indicate a
-     * known language. We do not distinguish skill levels or
-     * reading/writing/speaking/signing here. Use language codes from the [IETF
-     * BCP 47 standard](http://tools.ietf.org/html/bcp47).
-     *
-     * @var string|Text|Language
-     */
-    public $knowsLanguage;
-
-    /**
-     * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
-     *
-     * @var string|Text
-     */
-    public $honorificPrefix;
-
-    /**
-     * A parents of the person.
-     *
-     * @var Person
-     */
-    public $parents;
-
-    /**
-     * Family name. In the U.S., the last name of a Person.
-     *
-     * @var string|Text
-     */
-    public $familyName;
-
-    /**
-     * A sibling of the person.
-     *
-     * @var Person
-     */
-    public $siblings;
-
-    /**
-     * A credential awarded to the Person or Organization.
-     *
-     * @var EducationalOccupationalCredential
-     */
-    public $hasCredential;
-
-    /**
-     * Physical address of the item.
-     *
-     * @var string|Text|PostalAddress
-     */
-    public $address;
-
-    /**
-     * The brand(s) associated with a product or service, or the brand(s)
-     * maintained by an organization or business person.
-     *
-     * @var Brand|Organization
-     */
-    public $brand;
-
-    /**
-     * The Person's occupation. For past professions, use Role for expressing
-     * dates.
-     *
-     * @var Occupation
-     */
-    public $hasOccupation;
-
-    /**
-     * The total financial value of the person as calculated by subtracting assets
-     * from liabilities.
-     *
-     * @var MonetaryAmount|PriceSpecification
-     */
-    public $netWorth;
-
-    /**
-     * A contact point for a person or organization.
-     *
-     * @var ContactPoint
-     */
-    public $contactPoint;
-
-    /**
-     * A contact location for a person's residence.
-     *
-     * @var ContactPoint|Place
-     */
-    public $homeLocation;
 
     /**
      * Gender of something, typically a [[Person]], but possibly also fictional
@@ -411,98 +381,145 @@ trait PersonTrait
      * possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text
      * value of "Mixed".
      *
-     * @var string|GenderType|Text
+     * @var string|array|GenderType|GenderType[]|array|Text|Text[]
      */
     public $gender;
 
     /**
-     * Indicates an OfferCatalog listing for this Organization, Person, or
-     * Service.
+     * The Value-added Tax ID of the organization or person.
      *
-     * @var OfferCatalog
+     * @var string|array|Text|Text[]
      */
-    public $hasOfferCatalog;
+    public $vatID;
+
+    /**
+     * A parents of the person.
+     *
+     * @var array|Person|Person[]
+     */
+    public $parents;
+
+    /**
+     * A sibling of the person.
+     *
+     * @var array|Person|Person[]
+     */
+    public $siblings;
+
+    /**
+     * A person or organization that supports (sponsors) something through some
+     * kind of financial contribution.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $funder;
+
+    /**
+     * A contact location for a person's place of work.
+     *
+     * @var array|Place|Place[]|array|ContactPoint|ContactPoint[]
+     */
+    public $workLocation;
+
+    /**
+     * A credential awarded to the Person or Organization.
+     *
+     * @var array|EducationalOccupationalCredential|EducationalOccupationalCredential[]
+     */
+    public $hasCredential;
+
+    /**
+     * A pointer to products or services sought by the organization or person
+     * (demand).
+     *
+     * @var array|Demand|Demand[]
+     */
+    public $seeks;
+
+    /**
+     * An organization that the person is an alumni of.
+     *
+     * @var array|Organization|Organization[]|array|EducationalOrganization|EducationalOrganization[]
+     */
+    public $alumniOf;
+
+    /**
+     * A sibling of the person.
+     *
+     * @var array|Person|Person[]
+     */
+    public $sibling;
 
     /**
      * The most generic uni-directional social relation.
      *
-     * @var Person
+     * @var array|Person|Person[]
      */
     public $follows;
 
     /**
-     * The place where the person was born.
+     * The place where the person died.
      *
-     * @var Place
+     * @var array|Place|Place[]
      */
-    public $birthPlace;
+    public $deathPlace;
 
     /**
-     * The fax number.
+     * A contact point for a person or organization.
      *
-     * @var string|Text
+     * @var array|ContactPoint|ContactPoint[]
      */
-    public $faxNumber;
+    public $contactPoints;
 
     /**
-     * The telephone number.
+     * The most generic familial relation.
      *
-     * @var string|Text
+     * @var array|Person|Person[]
      */
-    public $telephone;
-
-    /**
-     * The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US
-     * or the CIF/NIF in Spain.
-     *
-     * @var string|Text
-     */
-    public $taxID;
+    public $relatedTo;
 
     /**
      * A [callsign](https://en.wikipedia.org/wiki/Call_sign), as used in
      * broadcasting and radio communications to identify people, radio and TV
      * stations, or vehicles.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $callSign;
 
     /**
-     * The North American Industry Classification System (NAICS) code for a
-     * particular organization or business person.
+     * Physical address of the item.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]|array|PostalAddress|PostalAddress[]
      */
-    public $naics;
+    public $address;
 
     /**
-     * The place where the person died.
+     * An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
      *
-     * @var Place
+     * @var string|array|Text|Text[]
      */
-    public $deathPlace;
+    public $honorificPrefix;
 
     /**
-     * An organization that the person is an alumni of.
+     * The fax number.
      *
-     * @var Organization|EducationalOrganization
+     * @var string|array|Text|Text[]
      */
-    public $alumniOf;
+    public $faxNumber;
 
     /**
-     * A colleague of the person.
+     * Event that this person is a performer or participant in.
      *
-     * @var Person
+     * @var array|Event|Event[]
      */
-    public $colleagues;
+    public $performerIn;
 
     /**
-     * A person or organization that supports a thing through a pledge, promise,
-     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
-     * sponsor of an event.
+     * Certification information about a product, organization, service, place, or
+     * person.
      *
-     * @var Organization|Person
+     * @var array|Certification|Certification[]
      */
-    public $sponsor;
+    public $hasCertification;
 }

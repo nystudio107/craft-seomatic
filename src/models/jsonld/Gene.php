@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Gene - A discrete unit of inheritance which affects one or more biological traits
  * (Source:
  * [https://en.wikipedia.org/wiki/Gene](https://en.wikipedia.org/wiki/Gene)).
@@ -75,35 +75,35 @@ class Gene extends MetaJsonLd implements GeneInterface, BioChemEntityInterface, 
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'alternativeOf' => ['Gene'],
-            'associatedDisease' => ['MedicalCondition', 'URL', 'PropertyValue'],
-            'bioChemInteraction' => ['BioChemEntity'],
-            'bioChemSimilarity' => ['BioChemEntity'],
-            'biologicalRole' => ['DefinedTerm'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'encodesBioChemEntity' => ['BioChemEntity'],
-            'expressedIn' => ['DefinedTerm', 'BioChemEntity', 'AnatomicalSystem', 'AnatomicalStructure'],
-            'funding' => ['Grant'],
-            'hasBioChemEntityPart' => ['BioChemEntity'],
-            'hasBioPolymerSequence' => ['Text'],
-            'hasMolecularFunction' => ['URL', 'DefinedTerm', 'PropertyValue'],
-            'hasRepresentation' => ['Text', 'URL', 'PropertyValue'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'isEncodedByBioChemEntity' => ['Gene'],
-            'isInvolvedInBiologicalProcess' => ['DefinedTerm', 'PropertyValue', 'URL'],
-            'isLocatedInSubcellularLocation' => ['URL', 'DefinedTerm', 'PropertyValue'],
-            'isPartOfBioChemEntity' => ['BioChemEntity'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'potentialAction' => ['Action'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'taxonomicRange' => ['URL', 'DefinedTerm', 'Text', 'Taxon'],
-            'url' => ['URL'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'alternativeOf' => ['array', 'Gene', 'Gene[]'],
+            'associatedDisease' => ['array', 'MedicalCondition', 'MedicalCondition[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'bioChemInteraction' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'bioChemSimilarity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'biologicalRole' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'encodesBioChemEntity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'expressedIn' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'AnatomicalSystem', 'AnatomicalSystem[]', 'array', 'AnatomicalStructure', 'AnatomicalStructure[]', 'array', 'BioChemEntity', 'BioChemEntity[]'],
+            'funding' => ['array', 'Grant', 'Grant[]'],
+            'hasBioChemEntityPart' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'hasBioPolymerSequence' => ['array', 'Text', 'Text[]'],
+            'hasMolecularFunction' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'hasRepresentation' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'isEncodedByBioChemEntity' => ['array', 'Gene', 'Gene[]'],
+            'isInvolvedInBiologicalProcess' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
+            'isLocatedInSubcellularLocation' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'isPartOfBioChemEntity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'taxonomicRange' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Taxon', 'Taxon[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -114,7 +114,7 @@ class Gene extends MetaJsonLd implements GeneInterface, BioChemEntityInterface, 
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'alternativeOf' => 'Another gene which is a variation of this one.',
             'associatedDisease' => 'Disease associated to this BioChemEntity. Such disease can be a MedicalCondition or a URL. If you want to add an evidence supporting the association, please use PropertyValue.',

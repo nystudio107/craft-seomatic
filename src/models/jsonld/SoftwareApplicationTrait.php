@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for SoftwareApplication.
  *
  * @author    nystudio107
@@ -22,185 +22,185 @@ namespace nystudio107\seomatic\models\jsonld;
 trait SoftwareApplicationTrait
 {
     /**
-     * A link to a screenshot image of the app.
-     *
-     * @var URL|ImageObject
-     */
-    public $screenshot;
-
-    /**
-     * Permission(s) required to run the app (for example, a mobile app may
-     * require full internet access or may run only on wifi).
-     *
-     * @var string|Text
-     */
-    public $permissions;
-
-    /**
-     * Component dependency requirements for application. This includes runtime
-     * environments and shared libraries that are not included in the application
-     * distribution package, but required to run the application (examples:
-     * DirectX, Java or .NET runtime).
-     *
-     * @var string|Text|URL
-     */
-    public $requirements;
-
-    /**
-     * Storage requirements (free space required).
-     *
-     * @var string|URL|Text
-     */
-    public $storageRequirements;
-
-    /**
-     * Component dependency requirements for application. This includes runtime
-     * environments and shared libraries that are not included in the application
-     * distribution package, but required to run the application (examples:
-     * DirectX, Java or .NET runtime).
-     *
-     * @var string|Text|URL
-     */
-    public $softwareRequirements;
-
-    /**
-     * Type of software application, e.g. 'Game, Multimedia'.
-     *
-     * @var string|URL|Text
-     */
-    public $applicationCategory;
-
-    /**
      * Device required to run the application. Used in cases where a specific
      * make/model is required to run the application.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $device;
+    public $availableOnDevice;
 
     /**
-     * Size of the application / package (e.g. 18MB). In the absence of a unit
-     * (MB, KB etc.), KB will be assumed.
+     * If the file can be downloaded, URL to download the binary.
      *
-     * @var string|Text
+     * @var array|URL|URL[]
      */
-    public $fileSize;
+    public $downloadUrl;
 
     /**
-     * Countries for which the application is not supported. You can also provide
-     * the two-letter ISO 3166-1 alpha-2 country code.
+     * Additional content for a software application.
      *
-     * @var string|Text
+     * @var array|SoftwareApplication|SoftwareApplication[]
      */
-    public $countriesNotSupported;
-
-    /**
-     * Operating systems supported (Windows 7, OS X 10.6, Android 1.6).
-     *
-     * @var string|Text
-     */
-    public $operatingSystem;
-
-    /**
-     * Features or modules provided by this application (and possibly required by
-     * other applications).
-     *
-     * @var string|URL|Text
-     */
-    public $featureList;
-
-    /**
-     * The name of the application suite to which the application belongs (e.g.
-     * Excel belongs to Office).
-     *
-     * @var string|Text
-     */
-    public $applicationSuite;
-
-    /**
-     * Subcategory of the application, e.g. 'Arcade Game'.
-     *
-     * @var string|URL|Text
-     */
-    public $applicationSubCategory;
-
-    /**
-     * Description of what changed in this version.
-     *
-     * @var string|Text|URL
-     */
-    public $releaseNotes;
-
-    /**
-     * Software application help.
-     *
-     * @var CreativeWork
-     */
-    public $softwareHelp;
-
-    /**
-     * Supporting data for a SoftwareApplication.
-     *
-     * @var DataFeed
-     */
-    public $supportingData;
+    public $softwareAddOn;
 
     /**
      * Countries for which the application is supported. You can also provide the
      * two-letter ISO 3166-1 alpha-2 country code.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $countriesSupported;
 
     /**
-     * Device required to run the application. Used in cases where a specific
-     * make/model is required to run the application.
+     * Component dependency requirements for application. This includes runtime
+     * environments and shared libraries that are not included in the application
+     * distribution package, but required to run the application (examples:
+     * DirectX, Java or .NET runtime).
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $availableOnDevice;
+    public $softwareRequirements;
 
     /**
      * Version of the software instance.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $softwareVersion;
+
+    /**
+     * Supporting data for a SoftwareApplication.
+     *
+     * @var array|DataFeed|DataFeed[]
+     */
+    public $supportingData;
+
+    /**
+     * Type of software application, e.g. 'Game, Multimedia'.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $applicationCategory;
+
+    /**
+     * Processor architecture required to run the application (e.g. IA64).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $processorRequirements;
+
+    /**
+     * Storage requirements (free space required).
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $storageRequirements;
+
+    /**
+     * Countries for which the application is not supported. You can also provide
+     * the two-letter ISO 3166-1 alpha-2 country code.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $countriesNotSupported;
+
+    /**
+     * Software application help.
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $softwareHelp;
+
+    /**
+     * Size of the application / package (e.g. 18MB). In the absence of a unit
+     * (MB, KB etc.), KB will be assumed.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $fileSize;
+
+    /**
+     * The name of the application suite to which the application belongs (e.g.
+     * Excel belongs to Office).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $applicationSuite;
+
+    /**
+     * Permission(s) required to run the app (for example, a mobile app may
+     * require full internet access or may run only on wifi).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $permissions;
+
+    /**
+     * Minimum memory requirements.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $memoryRequirements;
+
+    /**
+     * Description of what changed in this version.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $releaseNotes;
+
+    /**
+     * Features or modules provided by this application (and possibly required by
+     * other applications).
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $featureList;
+
+    /**
+     * Operating systems supported (Windows 7, OS X 10.6, Android 1.6).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $operatingSystem;
 
     /**
      * URL at which the app may be installed, if different from the URL of the
      * item.
      *
-     * @var URL
+     * @var array|URL|URL[]
      */
     public $installUrl;
 
     /**
-     * Minimum memory requirements.
+     * Device required to run the application. Used in cases where a specific
+     * make/model is required to run the application.
      *
-     * @var string|Text|URL
+     * @var string|array|Text|Text[]
      */
-    public $memoryRequirements;
+    public $device;
 
     /**
-     * Processor architecture required to run the application (e.g. IA64).
+     * A link to a screenshot image of the app.
      *
-     * @var string|Text
+     * @var array|ImageObject|ImageObject[]|array|URL|URL[]
      */
-    public $processorRequirements;
+    public $screenshot;
 
     /**
-     * Additional content for a software application.
+     * Component dependency requirements for application. This includes runtime
+     * environments and shared libraries that are not included in the application
+     * distribution package, but required to run the application (examples:
+     * DirectX, Java or .NET runtime).
      *
-     * @var SoftwareApplication
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $softwareAddOn;
+    public $requirements;
 
     /**
-     * If the file can be downloaded, URL to download the binary.
+     * Subcategory of the application, e.g. 'Arcade Game'.
      *
-     * @var URL
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $downloadUrl;
+    public $applicationSubCategory;
 }

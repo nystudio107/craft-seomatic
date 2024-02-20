@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Vein.
  *
  * @author    nystudio107
@@ -22,25 +22,25 @@ namespace nystudio107\seomatic\models\jsonld;
 trait VeinTrait
 {
     /**
-     * The anatomical or organ system that the vein flows into; a larger structure
-     * that the vein connects to.
+     * The vasculature that the vein drains into.
      *
-     * @var AnatomicalStructure
+     * @var array|Vessel|Vessel[]
      */
-    public $tributary;
+    public $drainsTo;
 
     /**
      * The anatomical or organ system drained by this vessel; generally refers to
      * a specific part of an organ.
      *
-     * @var AnatomicalSystem|AnatomicalStructure
+     * @var array|AnatomicalSystem|AnatomicalSystem[]|array|AnatomicalStructure|AnatomicalStructure[]
      */
     public $regionDrained;
 
     /**
-     * The vasculature that the vein drains into.
+     * The anatomical or organ system that the vein flows into; a larger structure
+     * that the vein connects to.
      *
-     * @var Vessel
+     * @var array|AnatomicalStructure|AnatomicalStructure[]
      */
-    public $drainsTo;
+    public $tributary;
 }

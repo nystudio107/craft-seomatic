@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * ExerciseAction - The act of participating in exertive activity for the purposes of improving
  * health and fitness.
  *
@@ -73,45 +73,45 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'actionStatus' => ['ActionStatusType'],
-            'additionalType' => ['URL'],
-            'agent' => ['Organization', 'Person'],
-            'alternateName' => ['Text'],
-            'audience' => ['Audience'],
-            'course' => ['Place'],
-            'description' => ['Text'],
-            'diet' => ['Diet'],
-            'disambiguatingDescription' => ['Text'],
-            'distance' => ['Distance'],
-            'endTime' => ['DateTime', 'Time'],
-            'error' => ['Thing'],
-            'event' => ['Event'],
-            'exerciseCourse' => ['Place'],
-            'exercisePlan' => ['ExercisePlan'],
-            'exerciseRelatedDiet' => ['Diet'],
-            'exerciseType' => ['Text'],
-            'fromLocation' => ['Place'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'instrument' => ['Thing'],
-            'location' => ['Place', 'Text', 'VirtualLocation', 'PostalAddress'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'object' => ['Thing'],
-            'opponent' => ['Person'],
-            'participant' => ['Organization', 'Person'],
-            'potentialAction' => ['Action'],
-            'provider' => ['Organization', 'Person'],
-            'result' => ['Thing'],
-            'sameAs' => ['URL'],
-            'sportsActivityLocation' => ['SportsActivityLocation'],
-            'sportsEvent' => ['SportsEvent'],
-            'sportsTeam' => ['SportsTeam'],
-            'startTime' => ['Time', 'DateTime'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'target' => ['URL', 'EntryPoint'],
-            'toLocation' => ['Place'],
-            'url' => ['URL'],
+            'actionStatus' => ['array', 'ActionStatusType', 'ActionStatusType[]'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'agent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'audience' => ['array', 'Audience', 'Audience[]'],
+            'course' => ['array', 'Place', 'Place[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'diet' => ['array', 'Diet', 'Diet[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'distance' => ['array', 'Distance', 'Distance[]'],
+            'endTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'error' => ['array', 'Thing', 'Thing[]'],
+            'event' => ['array', 'Event', 'Event[]'],
+            'exerciseCourse' => ['array', 'Place', 'Place[]'],
+            'exercisePlan' => ['array', 'ExercisePlan', 'ExercisePlan[]'],
+            'exerciseRelatedDiet' => ['array', 'Diet', 'Diet[]'],
+            'exerciseType' => ['array', 'Text', 'Text[]'],
+            'fromLocation' => ['array', 'Place', 'Place[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'instrument' => ['array', 'Thing', 'Thing[]'],
+            'location' => ['array', 'PostalAddress', 'PostalAddress[]', 'array', 'VirtualLocation', 'VirtualLocation[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'object' => ['array', 'Thing', 'Thing[]'],
+            'opponent' => ['array', 'Person', 'Person[]'],
+            'participant' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'result' => ['array', 'Thing', 'Thing[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'sportsActivityLocation' => ['array', 'SportsActivityLocation', 'SportsActivityLocation[]'],
+            'sportsEvent' => ['array', 'SportsEvent', 'SportsEvent[]'],
+            'sportsTeam' => ['array', 'SportsTeam', 'SportsTeam[]'],
+            'startTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'target' => ['array', 'EntryPoint', 'EntryPoint[]', 'array', 'URL', 'URL[]'],
+            'toLocation' => ['array', 'Place', 'Place[]'],
+            'url' => ['array', 'URL', 'URL[]'],
         ];
     }
 
@@ -123,7 +123,7 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
     {
         return [
             'actionStatus' => 'Indicates the current disposition of the Action.',
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'agent' => 'The direct performer or driver of the action (animate or inanimate). E.g. *John* wrote a book.',
             'alternateName' => 'An alias for the item.',
             'audience' => 'An intended audience, i.e. a group for whom something was created.',

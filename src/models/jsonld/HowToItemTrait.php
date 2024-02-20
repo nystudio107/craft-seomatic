@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for HowToItem.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait HowToItemTrait
     /**
      * The required quantity of the item(s).
      *
-     * @var string|float|Text|Number|QuantitativeValue
+     * @var float|string|array|QuantitativeValue|QuantitativeValue[]|array|Number|Number[]|array|Text|Text[]
      */
     public $requiredQuantity;
 }

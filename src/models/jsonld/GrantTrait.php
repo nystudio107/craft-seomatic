@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Grant.
  *
  * @author    nystudio107
@@ -22,27 +22,27 @@ namespace nystudio107\seomatic\models\jsonld;
 trait GrantTrait
 {
     /**
-     * Indicates something directly or indirectly funded or sponsored through a
-     * [[Grant]]. See also [[ownershipFundingInfo]].
+     * A person or organization that supports a thing through a pledge, promise,
+     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
+     * sponsor of an event.
      *
-     * @var Organization|BioChemEntity|Event|Person|MedicalEntity|Product|CreativeWork
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $fundedItem;
+    public $sponsor;
 
     /**
      * A person or organization that supports (sponsors) something through some
      * kind of financial contribution.
      *
-     * @var Organization|Person
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $funder;
 
     /**
-     * A person or organization that supports a thing through a pledge, promise,
-     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
-     * sponsor of an event.
+     * Indicates something directly or indirectly funded or sponsored through a
+     * [[Grant]]. See also [[ownershipFundingInfo]].
      *
-     * @var Organization|Person
+     * @var array|BioChemEntity|BioChemEntity[]|array|Person|Person[]|array|CreativeWork|CreativeWork[]|array|Event|Event[]|array|MedicalEntity|MedicalEntity[]|array|Organization|Organization[]|array|Product|Product[]
      */
-    public $sponsor;
+    public $fundedItem;
 }

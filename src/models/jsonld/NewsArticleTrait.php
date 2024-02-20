@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for NewsArticle.
  *
  * @author    nystudio107
@@ -21,38 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait NewsArticleTrait
 {
-    /**
-     * The number of the column in which the NewsArticle appears in the print
-     * edition.
-     *
-     * @var string|Text
-     */
-    public $printColumn;
-
-    /**
-     * The edition of the print product in which the NewsArticle appears.
-     *
-     * @var string|Text
-     */
-    public $printEdition;
-
-    /**
-     * If this NewsArticle appears in print, this field indicates the print
-     * section in which the article appeared.
-     *
-     * @var string|Text
-     */
-    public $printSection;
-
-    /**
-     * If this NewsArticle appears in print, this field indicates the name of the
-     * page on which the article is found. Please note that this field is intended
-     * for the exact page name (e.g. A5, B18).
-     *
-     * @var string|Text
-     */
-    public $printPage;
-
     /**
      * A [dateline](https://en.wikipedia.org/wiki/Dateline) is a brief piece of
      * text included in news articles that describes where and when the story was
@@ -67,7 +35,39 @@ trait NewsArticleTrait
      * 11:43AM Reporting from Washington", "Beijing/Moscow", "QUEZON CITY,
      * Philippines".
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $dateline;
+
+    /**
+     * The number of the column in which the NewsArticle appears in the print
+     * edition.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $printColumn;
+
+    /**
+     * The edition of the print product in which the NewsArticle appears.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $printEdition;
+
+    /**
+     * If this NewsArticle appears in print, this field indicates the print
+     * section in which the article appeared.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $printSection;
+
+    /**
+     * If this NewsArticle appears in print, this field indicates the name of the
+     * page on which the article is found. Please note that this field is intended
+     * for the exact page name (e.g. A5, B18).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $printPage;
 }

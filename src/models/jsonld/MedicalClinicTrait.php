@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for MedicalClinic.
  *
  * @author    nystudio107
@@ -22,16 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MedicalClinicTrait
 {
     /**
-     * A medical specialty of the provider.
-     *
-     * @var MedicalSpecialty
-     */
-    public $medicalSpecialty;
-
-    /**
      * A medical service available from this provider.
      *
-     * @var MedicalTherapy|MedicalTest|MedicalProcedure
+     * @var array|MedicalTest|MedicalTest[]|array|MedicalProcedure|MedicalProcedure[]|array|MedicalTherapy|MedicalTherapy[]
      */
     public $availableService;
+
+    /**
+     * A medical specialty of the provider.
+     *
+     * @var array|MedicalSpecialty|MedicalSpecialty[]
+     */
+    public $medicalSpecialty;
 }

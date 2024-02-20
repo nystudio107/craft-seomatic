@@ -1,12 +1,12 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * GovernmentPermit - A permit issued by a government agency.
  *
  * @author    nystudio107
@@ -72,25 +72,25 @@ class GovernmentPermit extends MetaJsonLd implements GovernmentPermitInterface, 
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'additionalType' => ['URL'],
-            'alternateName' => ['Text'],
-            'description' => ['Text'],
-            'disambiguatingDescription' => ['Text'],
-            'identifier' => ['PropertyValue', 'URL', 'Text'],
-            'image' => ['URL', 'ImageObject'],
-            'issuedBy' => ['Organization'],
-            'issuedThrough' => ['Service'],
-            'mainEntityOfPage' => ['URL', 'CreativeWork'],
-            'name' => ['Text'],
-            'permitAudience' => ['Audience'],
-            'potentialAction' => ['Action'],
-            'sameAs' => ['URL'],
-            'subjectOf' => ['Event', 'CreativeWork'],
-            'url' => ['URL'],
-            'validFor' => ['Duration'],
-            'validFrom' => ['Date', 'DateTime'],
-            'validIn' => ['AdministrativeArea'],
-            'validUntil' => ['Date'],
+            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'alternateName' => ['array', 'Text', 'Text[]'],
+            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+            'issuedBy' => ['array', 'Organization', 'Organization[]'],
+            'issuedThrough' => ['array', 'Service', 'Service[]'],
+            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'name' => ['array', 'Text', 'Text[]'],
+            'permitAudience' => ['array', 'Audience', 'Audience[]'],
+            'potentialAction' => ['array', 'Action', 'Action[]'],
+            'sameAs' => ['array', 'URL', 'URL[]'],
+            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+            'url' => ['array', 'URL', 'URL[]'],
+            'validFor' => ['array', 'Duration', 'Duration[]'],
+            'validFrom' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'validIn' => ['array', 'AdministrativeArea', 'AdministrativeArea[]'],
+            'validUntil' => ['array', 'Date', 'Date[]'],
         ];
     }
 
@@ -101,13 +101,13 @@ class GovernmentPermit extends MetaJsonLd implements GovernmentPermitInterface, 
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. In RDFa syntax, it is better to use the native RDFa syntax - the \'typeof\' attribute - for multiple types. Schema.org tools may have only weaker understanding of extra types, in particular those defined externally.',
+            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
-            'issuedBy' => 'The organization issuing the ticket or permit.',
+            'issuedBy' => 'The organization issuing the item, for example a [[Permit]], [[Ticket]], or [[Certification]].',
             'issuedThrough' => 'The service through which the permit was granted.',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
@@ -118,7 +118,7 @@ class GovernmentPermit extends MetaJsonLd implements GovernmentPermitInterface, 
             'url' => 'URL of the item.',
             'validFor' => 'The duration of validity of a permit or similar thing.',
             'validFrom' => 'The date when the item becomes valid.',
-            'validIn' => 'The geographic area where a permit or similar thing is valid.',
+            'validIn' => 'The geographic area where the item is valid. Applies for example to a [[Permit]], a [[Certification]], or an [[EducationalOccupationalCredential]]. ',
             'validUntil' => 'The date when the item is no longer valid.',
         ];
     }

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for NewsMediaOrganization.
  *
  * @author    nystudio107
@@ -22,69 +22,12 @@ namespace nystudio107\seomatic\models\jsonld;
 trait NewsMediaOrganizationTrait
 {
     /**
-     * For an [[Organization]] (often but not necessarily a
-     * [[NewsMediaOrganization]]), a description of organizational ownership
-     * structure; funding and grants. In a news/media setting, this is with
-     * particular reference to editorial independence.   Note that the [[funder]]
-     * is also available and can be used to make basic funder information
-     * machine-readable.
-     *
-     * @var string|AboutPage|Text|CreativeWork|URL
-     */
-    public $ownershipFundingInfo;
-
-    /**
      * For a [[NewsMediaOrganization]], a statement on coverage priorities,
      * including any public agenda or stance on issues.
      *
-     * @var CreativeWork|URL
+     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
      */
     public $missionCoveragePrioritiesPolicy;
-
-    /**
-     * For a [[NewsMediaOrganization]] or other news-related [[Organization]], a
-     * statement about public engagement activities (for news media, the
-     * newsroom’s), including involving the public - digitally or otherwise --
-     * in coverage decisions, reporting and activities after publication.
-     *
-     * @var CreativeWork|URL
-     */
-    public $actionableFeedbackPolicy;
-
-    /**
-     * For a [[NewsMediaOrganization]] or other news-related [[Organization]], a
-     * statement explaining when authors of articles are not named in bylines.
-     *
-     * @var CreativeWork|URL
-     */
-    public $noBylinesPolicy;
-
-    /**
-     * For a [[NewsMediaOrganization]], a link to the masthead page or a page
-     * listing top editorial management.
-     *
-     * @var URL|CreativeWork
-     */
-    public $masthead;
-
-    /**
-     * For an [[Organization]] (often but not necessarily a
-     * [[NewsMediaOrganization]]), a report on staffing diversity issues. In a
-     * news context this might be for example ASNE or RTDNA (US) reports, or
-     * self-reported.
-     *
-     * @var Article|URL
-     */
-    public $diversityStaffingReport;
-
-    /**
-     * For an [[Organization]] (typically a [[NewsMediaOrganization]]), a
-     * statement about policy on use of unnamed sources and the decision process
-     * required.
-     *
-     * @var CreativeWork|URL
-     */
-    public $unnamedSourcesPolicy;
 
     /**
      * Statement on diversity policy by an [[Organization]] e.g. a
@@ -92,17 +35,38 @@ trait NewsMediaOrganizationTrait
      * describing the newsroom’s diversity policy on both staffing and sources,
      * typically providing staffing data.
      *
-     * @var URL|CreativeWork
+     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
      */
     public $diversityPolicy;
 
     /**
-     * Disclosure about verification and fact-checking processes for a
-     * [[NewsMediaOrganization]] or other fact-checking [[Organization]].
+     * For an [[Organization]] (often but not necessarily a
+     * [[NewsMediaOrganization]]), a description of organizational ownership
+     * structure; funding and grants. In a news/media setting, this is with
+     * particular reference to editorial independence.   Note that the [[funder]]
+     * is also available and can be used to make basic funder information
+     * machine-readable.
      *
-     * @var CreativeWork|URL
+     * @var string|array|AboutPage|AboutPage[]|array|Text|Text[]|array|URL|URL[]|array|CreativeWork|CreativeWork[]
      */
-    public $verificationFactCheckingPolicy;
+    public $ownershipFundingInfo;
+
+    /**
+     * For an [[Organization]] (e.g. [[NewsMediaOrganization]]), a statement
+     * describing (in news media, the newsroom’s) disclosure and correction
+     * policy for errors.
+     *
+     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     */
+    public $correctionsPolicy;
+
+    /**
+     * For a [[NewsMediaOrganization]] or other news-related [[Organization]], a
+     * statement explaining when authors of articles are not named in bylines.
+     *
+     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     */
+    public $noBylinesPolicy;
 
     /**
      * Statement about ethics policy, e.g. of a [[NewsMediaOrganization]]
@@ -112,16 +76,52 @@ trait NewsMediaOrganizationTrait
      * describing the personal, organizational, and corporate standards of
      * behavior expected by the organization.
      *
-     * @var CreativeWork|URL
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
      */
     public $ethicsPolicy;
 
     /**
-     * For an [[Organization]] (e.g. [[NewsMediaOrganization]]), a statement
-     * describing (in news media, the newsroom’s) disclosure and correction
-     * policy for errors.
+     * For a [[NewsMediaOrganization]], a link to the masthead page or a page
+     * listing top editorial management.
      *
-     * @var URL|CreativeWork
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
      */
-    public $correctionsPolicy;
+    public $masthead;
+
+    /**
+     * Disclosure about verification and fact-checking processes for a
+     * [[NewsMediaOrganization]] or other fact-checking [[Organization]].
+     *
+     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     */
+    public $verificationFactCheckingPolicy;
+
+    /**
+     * For an [[Organization]] (typically a [[NewsMediaOrganization]]), a
+     * statement about policy on use of unnamed sources and the decision process
+     * required.
+     *
+     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     */
+    public $unnamedSourcesPolicy;
+
+    /**
+     * For a [[NewsMediaOrganization]] or other news-related [[Organization]], a
+     * statement about public engagement activities (for news media, the
+     * newsroom’s), including involving the public - digitally or otherwise --
+     * in coverage decisions, reporting and activities after publication.
+     *
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
+     */
+    public $actionableFeedbackPolicy;
+
+    /**
+     * For an [[Organization]] (often but not necessarily a
+     * [[NewsMediaOrganization]]), a report on staffing diversity issues. In a
+     * news context this might be for example ASNE or RTDNA (US) reports, or
+     * self-reported.
+     *
+     * @var array|Article|Article[]|array|URL|URL[]
+     */
+    public $diversityStaffingReport;
 }

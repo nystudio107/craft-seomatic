@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Claim.
  *
  * @author    nystudio107
@@ -22,26 +22,26 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ClaimTrait
 {
     /**
-     * For a [[Claim]] interpreted from [[MediaObject]] content     sed to
-     * indicate a claim contained, implied or refined from the content of a
-     * [[MediaObject]].
+     * Indicates the first known occurrence of a [[Claim]] in some
+     * [[CreativeWork]].
      *
-     * @var Organization|Person
+     * @var array|CreativeWork|CreativeWork[]
      */
-    public $claimInterpreter;
+    public $firstAppearance;
 
     /**
      * Indicates an occurrence of a [[Claim]] in some [[CreativeWork]].
      *
-     * @var CreativeWork
+     * @var array|CreativeWork|CreativeWork[]
      */
     public $appearance;
 
     /**
-     * Indicates the first known occurrence of a [[Claim]] in some
-     * [[CreativeWork]].
+     * For a [[Claim]] interpreted from [[MediaObject]] content     sed to
+     * indicate a claim contained, implied or refined from the content of a
+     * [[MediaObject]].
      *
-     * @var CreativeWork
+     * @var array|Person|Person[]|array|Organization|Organization[]
      */
-    public $firstAppearance;
+    public $claimInterpreter;
 }

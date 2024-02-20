@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for Diet.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait DietTrait
 {
     /**
-     * People or organizations that endorse the plan.
+     * Medical expert advice related to the plan.
      *
-     * @var Person|Organization
+     * @var string|array|Text|Text[]
      */
-    public $endorsers;
+    public $expertConsiderations;
 
     /**
      * Nutritional information specific to the dietary plan. May include dietary
@@ -34,28 +34,28 @@ trait DietTrait
      * alterations/deviations from the USDA or other regulatory body's approved
      * dietary guidelines.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $dietFeatures;
 
     /**
-     * Specific physiologic benefits associated to the plan.
+     * People or organizations that endorse the plan.
      *
-     * @var string|Text
+     * @var array|Person|Person[]|array|Organization|Organization[]
      */
-    public $physiologicalBenefits;
-
-    /**
-     * Medical expert advice related to the plan.
-     *
-     * @var string|Text
-     */
-    public $expertConsiderations;
+    public $endorsers;
 
     /**
      * Specific physiologic risks associated to the diet plan.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $risks;
+
+    /**
+     * Specific physiologic benefits associated to the plan.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $physiologicalBenefits;
 }

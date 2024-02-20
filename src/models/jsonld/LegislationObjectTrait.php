@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for LegislationObject.
  *
  * @author    nystudio107
@@ -27,7 +27,7 @@ trait LegislationObjectTrait
      * digitally signed PDF have a "stronger" legal value than the HTML file of
      * the same act.
      *
-     * @var LegalValueLevel
+     * @var array|LegalValueLevel|LegalValueLevel[]
      */
     public $legislationLegalValue;
 }

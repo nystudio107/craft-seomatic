@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for QualitativeValue.
  *
  * @author    nystudio107
@@ -23,11 +23,11 @@ trait QualitativeValueTrait
 {
     /**
      * This ordering relation for qualitative values indicates that the subject is
-     * greater than the object.
+     * lesser than or equal to the object.
      *
-     * @var QualitativeValue
+     * @var array|QualitativeValue|QualitativeValue[]
      */
-    public $greater;
+    public $lesserOrEqual;
 
     /**
      * A property-value pair representing an additional characteristic of the
@@ -39,55 +39,55 @@ trait QualitativeValueTrait
      * provided using those properties, rather than using the generic
      * property/value mechanism.
      *
-     * @var PropertyValue
+     * @var array|PropertyValue|PropertyValue[]
      */
     public $additionalProperty;
 
     /**
-     * A secondary value that provides additional information on the original
-     * value, e.g. a reference temperature or a type of measurement.
-     *
-     * @var string|Enumeration|QualitativeValue|DefinedTerm|StructuredValue|PropertyValue|Text|MeasurementTypeEnumeration|QuantitativeValue
-     */
-    public $valueReference;
-
-    /**
      * This ordering relation for qualitative values indicates that the subject is
-     * equal to the object.
+     * greater than the object.
      *
-     * @var QualitativeValue
+     * @var array|QualitativeValue|QualitativeValue[]
      */
-    public $equal;
-
-    /**
-     * This ordering relation for qualitative values indicates that the subject is
-     * lesser than the object.
-     *
-     * @var QualitativeValue
-     */
-    public $lesser;
+    public $greater;
 
     /**
      * This ordering relation for qualitative values indicates that the subject is
      * greater than or equal to the object.
      *
-     * @var QualitativeValue
+     * @var array|QualitativeValue|QualitativeValue[]
      */
     public $greaterOrEqual;
 
     /**
      * This ordering relation for qualitative values indicates that the subject is
-     * lesser than or equal to the object.
+     * lesser than the object.
      *
-     * @var QualitativeValue
+     * @var array|QualitativeValue|QualitativeValue[]
      */
-    public $lesserOrEqual;
+    public $lesser;
+
+    /**
+     * A secondary value that provides additional information on the original
+     * value, e.g. a reference temperature or a type of measurement.
+     *
+     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]|array|Enumeration|Enumeration[]|array|QuantitativeValue|QuantitativeValue[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementTypeEnumeration|MeasurementTypeEnumeration[]|array|StructuredValue|StructuredValue[]|array|PropertyValue|PropertyValue[]
+     */
+    public $valueReference;
 
     /**
      * This ordering relation for qualitative values indicates that the subject is
      * not equal to the object.
      *
-     * @var QualitativeValue
+     * @var array|QualitativeValue|QualitativeValue[]
      */
     public $nonEqual;
+
+    /**
+     * This ordering relation for qualitative values indicates that the subject is
+     * equal to the object.
+     *
+     * @var array|QualitativeValue|QualitativeValue[]
+     */
+    public $equal;
 }

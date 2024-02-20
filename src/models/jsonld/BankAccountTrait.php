@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for BankAccount.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BankAccountTrait
 {
     /**
-     * A minimum amount that has to be paid in every month.
+     * The type of a bank account.
      *
-     * @var MonetaryAmount
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $accountMinimumInflow;
+    public $bankAccountType;
 
     /**
      * An overdraft is an extension of credit from a lending institution when an
@@ -34,14 +34,14 @@ trait BankAccountTrait
      * withdrawing money even if the account has no funds in it. Basically the
      * bank allows people to borrow a set amount of money.
      *
-     * @var MonetaryAmount
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
     public $accountOverdraftLimit;
 
     /**
-     * The type of a bank account.
+     * A minimum amount that has to be paid in every month.
      *
-     * @var string|Text|URL
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
-    public $bankAccountType;
+    public $accountMinimumInflow;
 }

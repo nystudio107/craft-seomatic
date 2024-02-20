@@ -1,18 +1,18 @@
 <?php
 
 /**
- * SEOmatic plugin for Craft CMS 4
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful, and flexible
  *
  * @link      https://nystudio107.com
- * @copyright Copyright (c) 2023 nystudio107
+ * @copyright Copyright (c) nystudio107
  */
 
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v15.0-release
+ * schema.org version: v26.0-release
  * Trait for LocalBusiness.
  *
  * @author    nystudio107
@@ -24,36 +24,24 @@ trait LocalBusinessTrait
     /**
      * The price range of the business, for example ```$$$```.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $priceRange;
 
     /**
-     * The currency accepted.  Use standard formats: [ISO 4217 currency
-     * format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker
-     * symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
-     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
-     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
-     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
-    public $currenciesAccepted;
+    public $paymentAccepted;
 
     /**
      * The larger organization that this local business is a branch of, if any.
      * Not to be confused with (anatomical) [[branch]].
      *
-     * @var Organization
+     * @var array|Organization|Organization[]
      */
     public $branchOf;
-
-    /**
-     * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-     *
-     * @var string|Text
-     */
-    public $paymentAccepted;
 
     /**
      * The general opening hours for a business. Opening hours can be specified as
@@ -69,7 +57,19 @@ trait LocalBusinessTrait
      * itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all
      * day</time></code>.
      *
-     * @var string|Text
+     * @var string|array|Text|Text[]
      */
     public $openingHours;
+
+    /**
+     * The currency accepted.  Use standard formats: [ISO 4217 currency
+     * format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker
+     * symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
+     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
+     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
+     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $currenciesAccepted;
 }
