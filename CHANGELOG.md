@@ -1,13 +1,13 @@
 # SEOmatic Changelog
 
-## 3.4.72 - 2024.02.20
+## Ad - 2024.02.20
 ### Added
 * Added the ability to generate a [News Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap) for any Section
 * Added an **SEOmatic Debug Toolbar Panel** setting to Plugin Settings → Advanced that lets you control whether the SEOmatic Debug Toolbar panel is added to the Yii2 Debug Toolbar (if it is enabled)
 * Updated to schema.org [v26.0](https://schema.org/docs/releases.html), fixes ([#1420](https://github.com/nystudio107/craft-seomatic/issues/1420))
 
 ### Changed
-* Completely revamped the documentation to hopefully make it more accessible & useful (thanks to Matt Stein @ Working Concept)
+* Completely revamped the documentation to hopefully make it more accessible & useful (thanks to Matt Stein @ Adjacent)
 * PHPstan code cleanup
 
 ### Fixed
