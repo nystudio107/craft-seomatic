@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.43 - UNRELEASED
+### Fixed
+* Fixed an issue where a trailing slash would be added to a paginated URL that uses URL parameters and `addTrailingSlashesToUrls` was `true` in the General config ([#1401](https://github.com/nystudio107/craft-seomatic/issues/1401))
+
 ## 4.0.42 - 2024.02.20
 ### Fixed
 * Fixed an issue where an exception could be thrown due to a bad commit
