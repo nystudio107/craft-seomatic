@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.0.0-beta.6 - UNRELEASED
+### Fixed
+* Fixed an issue where a trailing slash would be added to a paginated URL that uses URL parameters and `addTrailingSlashesToUrls` was `true` in the General config ([#1401](https://github.com/nystudio107/craft-seomatic/issues/1401))
+
 ## 5.0.0-beta.5 - 2024.02.20
 ### Added
 * Added the ability to generate a [News Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap) for any Section
