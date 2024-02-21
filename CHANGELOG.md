@@ -1,6 +1,10 @@
 # SEOmatic Changelog
 
-## Ad - 2024.02.20
+## 3.4.73 - UNRELEASED
+### Fixed
+* Fixed an issue where a trailing slash would be added to a paginated URL that uses URL parameters and `addTrailingSlashesToUrls` was `true` in the General config ([#1401](https://github.com/nystudio107/craft-seomatic/issues/1401))
+
+## 3.4.72 - 2024.02.20
 ### Added
 * Added the ability to generate a [News Sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap) for any Section
 * Added an **SEOmatic Debug Toolbar Panel** setting to Plugin Settings → Advanced that lets you control whether the SEOmatic Debug Toolbar panel is added to the Yii2 Debug Toolbar (if it is enabled)
