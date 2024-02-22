@@ -447,6 +447,14 @@ class Seomatic extends Plugin
                 'url' => 'seomatic/plugin',
             ];
         }
+        // SEOmatic doesn't really have an index page, so if the user can't access any sub nav items, we probably shouldn't show the main sub nav item either
+        if (empty($subNavs)) {
+            return null;
+        }
+        // A single sub nav item is redundant
+        if (count($subNavs) === 1) {
+            $subNavs = [];
+        }
         $navItem = array_merge($navItem, [
             'subnav' => $subNavs,
         ]);
@@ -943,7 +951,7 @@ class Seomatic extends Plugin
     {
         return [
             'seomatic' =>
-                'seomatic/settings/dashboard',
+                '',
             'seomatic/dashboard' =>
                 'seomatic/settings/dashboard',
             'seomatic/dashboard/<siteHandle:{handle}>' =>
