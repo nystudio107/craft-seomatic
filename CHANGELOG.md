@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.73 - UNRELEASED
+### Changed
+* Add `PerplexityBot` to the default `disallow` list in `robots.txt`, as there's no benefit to allowing it to index your site
+
 ### Fixed
 * Fixed an issue where a trailing slash would be added to a paginated URL that uses URL parameters and `addTrailingSlashesToUrls` was `true` in the General config ([#1401](https://github.com/nystudio107/craft-seomatic/issues/1401))
 
