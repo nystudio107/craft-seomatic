@@ -1,0 +1,21 @@
+{# @var currentUser \craft\elements\User #}
+
+{% requirePermission 'accessPlugin-seomatic' %}
+
+{# Redirect the user to the first sub page they can access #}
+{% if currentUser.can('seomatic:dashboard') %}
+    {% redirect cpUrl('seomatic/dashboard') %}
+{% elseif currentUser.can('seomatic:global-meta') %}
+    {% redirect cpUrl('seomatic/global/general') %}
+{% elseif currentUser.can('seomatic:content-meta') %}
+    {% redirect cpUrl('seomatic/content') %}
+{% elseif currentUser.can('seomatic:site-settings') %}
+    {% redirect cpUrl('seomatic/site/identity') %}
+{% elseif currentUser.can('seomatic:tracking-scripts') %}
+    {% redirect cpUrl('seomatic/tracking/gtag') %}
+{% elseif currentUser.can('seomatic:plugin-settings') %}
+    {% redirect cpUrl('seomatic/plugin') %}
+{% else %}
+    {# ...or throw a 403 if they can't access anything at all #}
+    {% exit 403 %}
+{% endif %}
