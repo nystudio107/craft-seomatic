@@ -34,7 +34,7 @@
   "require-dev": {
   },
   "require": {
-    "php": "^8.0.2",
+    "php": "^8.2",
     "craftcms/cms": "^5.0.0-beta.1",
     "nystudio107/craft-plugin-vite": "^5.0.0-beta.1",
     "nystudio107/craft-code-editor": "^1.0.14",
