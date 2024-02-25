@@ -212,8 +212,8 @@ Event::on(
     DynamicMeta::EVENT_ADD_DYNAMIC_META,
     function(AddDynamicMetaEvent $event) {
         // Add whatever dynamic meta items to the containers as you like
-        Seomatic::$plugin->getMetaContainers()
-          ->metaGlobalVars
+        Seomatic::$seomaticVariable
+          ->meta
           ->seoDescription = "This description overrides any others!";
     }
 );
