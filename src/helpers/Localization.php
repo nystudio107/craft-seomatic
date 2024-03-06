@@ -34,9 +34,6 @@ class Localization
     public static function normalizeOgLocaleLanguage(string $language): string
     {
         $language = str_replace('-', '_', $language);
-        if (strlen($language) === 2) {
-            $language = strtolower($language) . '_' . strtoupper($language);
-        }
 
         return $language;
     }
