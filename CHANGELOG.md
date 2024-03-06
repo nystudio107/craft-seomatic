@@ -3,6 +3,7 @@
 ## 5.0.0-beta.6 - UNRELEASED
 ### Changed
 * Add `PerplexityBot` to the default `disallow` list in `robots.txt`, as there's no benefit to allowing it to index your site
+* Allow locales to be in the format `language[_territory]` such that the territory is optional
 
 ### Fixed
 * Fixed an issue where a trailing slash would be added to a paginated URL that uses URL parameters and `addTrailingSlashesToUrls` was `true` in the General config ([#1401](https://github.com/nystudio107/craft-seomatic/issues/1401))
