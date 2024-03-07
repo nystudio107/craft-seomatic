@@ -187,7 +187,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
                 Seomatic::$view->hook('cp.commerce.product.edit.details', static function(&$context) {
                     $html = '';
                     Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                    /** @var  $product Product */
+                    /** @var Product $product */
                     $product = $context[self::getElementRefHandle()] ?? null;
                     if ($product !== null && $product->uri !== null) {
                         Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
@@ -218,7 +218,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
                 );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $product Product */
+                /** @var Product $product */
                 $product = $event->sender ?? null;
                 if ($product !== null && $product->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
@@ -268,7 +268,8 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    ) {
+    )
+    {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)
