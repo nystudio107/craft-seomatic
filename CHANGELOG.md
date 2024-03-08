@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.0.0-beta.6 - UNRELEASED
+## 5.0.0-beta.6 - 2024.03.08
 ### Changed
 * Add `PerplexityBot` to the default `disallow` list in `robots.txt`, as there's no benefit to allowing it to index your site
 * Allow locales to be in the format `language[_territory]` such that the territory is optional
