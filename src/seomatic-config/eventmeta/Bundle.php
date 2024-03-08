@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoEvent;
  */
 
 return [
-    'bundleVersion' => '1.0.2',
+    'bundleVersion' => '1.0.3',
     'sourceBundleType' => SeoEvent::getMetaBundleType(),
     'sourceId' => null,
     'sourceName' => null,

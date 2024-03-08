@@ -49,7 +49,7 @@ return [
                     'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                 ],
                 'contributor' => [
-                    'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#creator',
+                    'id' => '{{ parseEnv(seomatic.site.creator.genericUrl) }}#creator',
                 ],
                 'funder' => [
                     'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
