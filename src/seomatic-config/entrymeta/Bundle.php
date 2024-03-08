@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoEntry;
  */
 
 return [
-    'bundleVersion' => '1.0.30',
+    'bundleVersion' => '1.0.31',
     'sourceBundleType' => SeoEntry::getMetaBundleType(),
     'sourceId' => null,
     'sourceName' => null,
@@ -30,7 +30,7 @@ return [
     'sourceSiteId' => null,
     'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated' => new \DateTime(),
+    'sourceDateUpdated' => new DateTime(),
     'metaGlobalVars' => Config::getConfigFromFile('entrymeta/GlobalVars'),
     'metaSiteVars' => Config::getConfigFromFile('entrymeta/SiteVars'),
     'metaSitemapVars' => Config::getConfigFromFile('entrymeta/SitemapVars'),

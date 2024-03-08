@@ -47,10 +47,10 @@ return [
                     'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#identity',
                 ],
                 'creator' => [
-                    'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#creator',
+                    'id' => '{{ parseEnv(seomatic.site.creator.genericUrl) }}#creator',
                 ],
                 'publisher' => [
-                    'id' => '{{ parseEnv(seomatic.site.identity.genericUrl) }}#creator',
+                    'id' => '{{ parseEnv(seomatic.site.creator.genericUrl) }}#creator',
                 ],
                 'image' => [
                     'type' => 'ImageObject',

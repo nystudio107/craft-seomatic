@@ -50,7 +50,7 @@ class UrlHelper extends CraftUrlHelper
             $url = self::mergeUrlWithPath($siteUrl, $path);
             // Handle trailing slashes properly for generated URLs
             $generalConfig = Craft::$app->getConfig()->getGeneral();
-            if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
+            if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/(.+\?.*)|(\.[^\/]+$)/', $url)) {
                 $url = rtrim($url, '/') . '/';
             }
             if (!$generalConfig->addTrailingSlashesToUrls) {
@@ -151,7 +151,7 @@ class UrlHelper extends CraftUrlHelper
 
         // Handle trailing slashes properly for generated URLs
         $generalConfig = Craft::$app->getConfig()->getGeneral();
-        if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/\.[^\/]+$/', $url)) {
+        if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/(.+\?.*)|(\.[^\/]+$)/', $url)) {
             $url = rtrim($url, '/') . '/';
         }
         if (!$generalConfig->addTrailingSlashesToUrls) {
