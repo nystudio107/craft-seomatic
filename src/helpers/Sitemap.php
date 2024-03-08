@@ -567,7 +567,7 @@ class Sitemap
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
-                        if (!empty($asset[$fieldName]) && !empty($propName)) {
+                        if (!empty($fieldName) && !empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '<image:' . $propName . '>';
                             $lines[] = Html::encode($asset[$fieldName]);
                             $lines[] = '</image:' . $propName . '>';
@@ -585,7 +585,7 @@ class Sitemap
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
                         $fieldName = $row['field'] ?? '';
                         $propName = $row['property'] ?? '';
-                        if (!empty($asset[$fieldName]) && !empty($propName)) {
+                        if (!empty($fieldName) && !empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '<video:' . $propName . '>';
                             $lines[] = Html::encode($asset[$fieldName]);
                             $lines[] = '</video:' . $propName . '>';
