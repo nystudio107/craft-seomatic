@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoShopifyProduct;
  */
 
 return [
-    'bundleVersion' => '1.0.38',
+    'bundleVersion' => '1.0.39',
     'sourceBundleType' => SeoShopifyProduct::getMetaBundleType(),
     'sourceId' => null,
     'sourceName' => null,
