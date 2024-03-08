@@ -5,37 +5,37 @@
 
 {% case "live" %}
 
-# live - don't allow web crawlers to index cpresources/ or vendor/
+    # live - don't allow web crawlers to index cpresources/ or vendor/
 
-User-agent: *
-Disallow: /cpresources/
-Disallow: /vendor/
-Disallow: /.env
-Disallow: /cache/
+    User-agent: *
+    Disallow: /cpresources/
+    Disallow: /vendor/
+    Disallow: /.env
+    Disallow: /cache/
 
 {% case "staging" %}
 
-# staging - disallow all
+    # staging - disallow all
 
-User-agent: *
-Disallow: /
+    User-agent: *
+    Disallow: /
 
 {% case "local" %}
 
-# local - disallow all
+    # local - disallow all
 
-User-agent: *
-Disallow: /
+    User-agent: *
+    Disallow: /
 
 {% default %}
 
-# default - don't allow web crawlers to index cpresources/ or vendor/
+    # default - don't allow web crawlers to index cpresources/ or vendor/
 
-User-agent: *
-Disallow: /cpresources/
-Disallow: /vendor/
-Disallow: /.env
-Disallow: /cache/
+    User-agent: *
+    Disallow: /cpresources/
+    Disallow: /vendor/
+    Disallow: /.env
+    Disallow: /cache/
 
 {% endswitch %}
 
@@ -45,4 +45,8 @@ Disallow: /
 
 # Disallow Google Bard and Vertex AI bots, as there's no benefit to allowing it to index your site
 User-agent: Google-Extended
+Disallow: /
+
+# Disallow Perplexity bot, as there's no benefit to allowing it to index your site
+User-agent: PerplexityBot
 Disallow: /
