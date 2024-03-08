@@ -13,11 +13,9 @@ parameters:
         - src/seoelements/SeoCampaign.php
         - src/seoelements/SeoDigitalProduct.php
         - src/seoelements/SeoEvent.php
-        - src/seoelements/SeoProduct.php
         - src/seoelements/SeoShopifyProduct.php
     ignoreErrors:
     # Until the plugins are ported, exclude their classes
-        - '*craft\\commerce\\*'
         - '*craft\\feedme\\*'
         - '*nystudio107\\fastcgicachebust\\*'
         - '*benf\\neo\\*'

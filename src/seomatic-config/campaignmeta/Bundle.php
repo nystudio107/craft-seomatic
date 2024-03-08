@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoCampaign;
  */
 
 return [
-    'bundleVersion' => '1.0.34',
+    'bundleVersion' => '1.0.35',
     'sourceBundleType' => SeoCampaign::getMetaBundleType(),
     'sourceId' => null,
     'sourceName' => null,
@@ -30,7 +30,7 @@ return [
     'sourceSiteId' => null,
     'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated' => new \DateTime(),
+    'sourceDateUpdated' => new DateTime(),
     'metaGlobalVars' => Config::getConfigFromFile('campaignmeta/GlobalVars'),
     'metaSiteVars' => Config::getConfigFromFile('campaignmeta/SiteVars'),
     'metaSitemapVars' => Config::getConfigFromFile('campaignmeta/SitemapVars'),

@@ -19,7 +19,7 @@ use nystudio107\seomatic\seoelements\SeoShopifyProduct;
  */
 
 return [
-    'bundleVersion' => '1.0.38',
+    'bundleVersion' => '1.0.39',
     'sourceBundleType' => SeoShopifyProduct::getMetaBundleType(),
     'sourceId' => null,
     'sourceName' => null,
@@ -30,7 +30,7 @@ return [
     'sourceSiteId' => null,
     'sourceAltSiteSettings' => [
     ],
-    'sourceDateUpdated' => new \DateTime(),
+    'sourceDateUpdated' => new DateTime(),
     'metaGlobalVars' => Config::getConfigFromFile('shopifyproductmeta/GlobalVars'),
     'metaSiteVars' => Config::getConfigFromFile('shopifyproductmeta/SiteVars'),
     'metaSitemapVars' => Config::getConfigFromFile('shopifyproductmeta/SitemapVars'),
