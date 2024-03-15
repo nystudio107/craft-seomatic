@@ -24,7 +24,10 @@ export default defineConfig({
     algolia: {
       appId: '4PN983E5JW',
       apiKey: '11a4ca78dc541ab3d184c4fa1ce03e44',
-      indexName: 'seomatic'
+      indexName: 'seomatic',
+      searchParameters: {
+        facetFilters: ["version:v4"],
+      },
     },
     lastUpdatedText: 'Last Updated',
     sidebar: [
