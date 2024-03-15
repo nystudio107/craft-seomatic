@@ -357,8 +357,10 @@ class SettingsController extends Controller
         $humansTemplate = $request->getParam('humansTemplate');
         $adsTemplate = $request->getParam('adsTemplate');
         $securityTemplate = $request->getParam('securityTemplate');
-        if (!str_ends_with($securityTemplate, "\n")) {
-            $securityTemplate .= "\n";
+        if (is_array($securityTemplate)) {
+            if (!str_ends_with($securityTemplate['templateString'], "\n")) {
+                $securityTemplate['templateString'] .= "\n";
+            }
         }
         // Set the element type in the template
         $elementName = '';

@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.74 - 2024.03.14
+### Fixed
+* Fixed a regression that would throw an exception when attempting to save the `security.txt` template ([#1435](https://github.com/nystudio107/craft-seomatic/issues/1435))
+
 ## 3.4.73 - 2024.03.08
 ### Changed
 * Add `PerplexityBot` to the default `disallow` list in `robots.txt`, as there's no benefit to allowing it to index your site
