@@ -13,9 +13,9 @@ namespace nystudio107\seomatic\helpers;
 
 use benf\neo\elements\Block as NeoBlock;
 use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
-use craft\elements\db\MatrixBlockQuery;
+use craft\elements\db\EntryQuery;
 use craft\elements\db\TagQuery;
-use craft\elements\MatrixBlock;
+use craft\elements\Entry;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
 use craft\models\FieldLayout;
@@ -116,8 +116,8 @@ class Text
         if (empty($field)) {
             return '';
         }
-        if ($field instanceof MatrixBlockQuery
-            || (is_array($field) && $field[0] instanceof MatrixBlock)) {
+        if ($field instanceof EntryQuery
+            || (is_array($field) && $field[0] instanceof Entry)) {
             $result = self::extractTextFromMatrix($field);
         } elseif ($field instanceof NeoBlockQuery
             || (is_array($field) && $field[0] instanceof NeoBlock)) {
@@ -172,7 +172,7 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param MatrixBlockQuery|MatrixBlock[]|array $blocks
+     * @param EntryQuery|Entry[]|array $blocks
      * @param string $fieldHandle
      *
      * @return string
@@ -184,19 +184,19 @@ class Text
         }
         $result = '';
         // Iterate through all of the matrix blocks
-        if ($blocks instanceof MatrixBlockQuery) {
+        if ($blocks instanceof EntryQuery) {
             $blocks = $blocks->all();
         }
         foreach ($blocks as $block) {
             try {
-                $matrixBlockTypeModel = $block->getType();
+                $matrixEntryTypeModel = $block->getType();
             } catch (InvalidConfigException $e) {
-                $matrixBlockTypeModel = null;
+                $matrixEntryTypeModel = null;
             }
             // Find any text fields inside of the matrix block
-            if ($matrixBlockTypeModel) {
+            if ($matrixEntryTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fields = $matrixBlockTypeModel->getCustomFields();
+                $fields = $matrixEntryTypeModel->getCustomFields();
 
                 foreach ($fields as $field) {
                     /** @var array $fieldClasses */
@@ -286,7 +286,6 @@ class Text
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
                 /** @var ?FieldLayout $layout */
                 // The SuperTableBlockType class lacks @mixin FieldLayoutBehavior in its annotations
-                /** @phpstan-ignore-next-line */
                 $layout = $superTableBlockTypeModel->getFieldLayout();
                 $fieldElements = $layout->getCustomFieldElements();
                 foreach ($fieldElements as $fieldElement) {

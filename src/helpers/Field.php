@@ -18,7 +18,7 @@ use Craft;
 use craft\base\Element;
 use craft\base\Field as BaseField;
 use craft\ckeditor\Field as CKEditorField;
-use craft\elements\MatrixBlock;
+use craft\elements\Entry;
 use craft\elements\User;
 use craft\fields\Assets as AssetsField;
 use craft\fields\Matrix as MatrixField;
@@ -120,7 +120,8 @@ class Field
         string      $fieldClassKey,
         FieldLayout $layout,
         bool        $keysOnly = true,
-    ): array {
+    ): array
+    {
         $foundFields = [];
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
@@ -163,7 +164,8 @@ class Field
         Element $element,
         string  $fieldClassKey,
         bool    $keysOnly = true,
-    ): array {
+    ): array
+    {
         $foundFields = [];
         $layout = $element->getFieldLayout();
         if ($layout !== null) {
@@ -274,7 +276,8 @@ class Field
         string $sourceHandle,
         string $fieldClassKey,
         bool   $keysOnly = true,
-    ): array {
+    ): array
+    {
         $foundFields = [];
         $layouts = [];
         // Get the layouts
@@ -297,30 +300,30 @@ class Field
     }
 
     /**
-     * Return all of the fields in the $matrixBlock of the type $fieldType class
+     * Return all of the fields in the $matrixEntry of the type $fieldType class
      *
-     * @param MatrixBlock $matrixBlock
+     * @param Entry $matrixEntry
      * @param string $fieldType
      * @param bool $keysOnly
      *
      * @return array
      */
-    public static function matrixFieldsOfType(MatrixBlock $matrixBlock, string $fieldType, bool $keysOnly = true): array
+    public static function matrixFieldsOfType(Entry $matrixEntry, string $fieldType, bool $keysOnly = true): array
     {
         $foundFields = [];
 
         try {
-            $matrixBlockTypeModel = $matrixBlock->getType();
+            $matrixEntryTypeModel = $matrixEntry->getType();
         } catch (InvalidConfigException $e) {
-            $matrixBlockTypeModel = null;
+            $matrixEntryTypeModel = null;
         }
-        if ($matrixBlockTypeModel) {
+        if ($matrixEntryTypeModel) {
             // Cache me if you can
-            $memoKey = $fieldType . $matrixBlock->id . ($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldType . $matrixEntry->id . ($keysOnly ? 'keys' : 'nokeys');
             if (!empty(self::$matrixFieldsOfTypeCache[$memoKey])) {
                 return self::$matrixFieldsOfTypeCache[$memoKey];
             }
-            $fields = $matrixBlockTypeModel->getCustomFields();
+            $fields = $matrixEntryTypeModel->getCustomFields();
             /** @var BaseField $field */
             foreach ($fields as $field) {
                 if ($field instanceof $fieldType) {
@@ -403,7 +406,6 @@ class Field
             }
             /** @var ?FieldLayout $layout */
             // The SuperTableBlockType class lacks @mixin FieldLayoutBehavior in its annotations
-            /** @phpstan-ignore-next-line */
             $layout = $superTableBlockTypeModel->getFieldLayout();
             $fieldElements = $layout->getCustomFieldElements();
             foreach ($fieldElements as $fieldElement) {

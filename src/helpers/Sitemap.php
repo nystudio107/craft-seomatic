@@ -9,7 +9,7 @@ use craft\base\Event;
 use craft\console\Application as ConsoleApplication;
 use craft\db\Paginator;
 use craft\elements\Asset;
-use craft\elements\MatrixBlock;
+use craft\elements\Entry;
 use craft\errors\SiteNotFoundException;
 use craft\fields\Assets as AssetsField;
 use craft\queue\Queue;
@@ -324,10 +324,10 @@ class Sitemap
                         );
                         foreach ($blockFields as $blockField) {
                             $blocks = $element[$blockField]->all();
-                            /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
+                            /** @var Entry[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
-                                if ($block instanceof MatrixBlock) {
+                                if ($block instanceof Entry) {
                                     $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
                                 }
                                 if ($block instanceof NeoBlock) {
@@ -368,10 +368,10 @@ class Sitemap
                     );
                     foreach ($blockFields as $blockField) {
                         $blocks = $element[$blockField]->all();
-                        /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
+                        /** @var Entry[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
                         foreach ($blocks as $block) {
                             $assetFields = [];
-                            if ($block instanceof MatrixBlock) {
+                            if ($block instanceof Entry) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
                             }
                             if ($block instanceof SuperTableBlock) {

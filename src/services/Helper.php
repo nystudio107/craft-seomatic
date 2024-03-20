@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\services;
 use Craft;
 use craft\base\Component;
 use craft\elements\Asset;
-use craft\elements\db\MatrixBlockQuery;
+use craft\elements\db\EntryQuery;
 use craft\elements\db\TagQuery;
 use craft\helpers\Template;
 use craft\web\twig\variables\Paginate;
@@ -368,7 +368,7 @@ class Helper extends Component
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param MatrixBlockQuery $matrixQuery
+     * @param EntryQuery $matrixQuery
      * @param string $fieldHandle
      *
      * @return string
@@ -475,7 +475,8 @@ class Helper extends Component
         $transformName = '',
         $siteId = null,
         $transformMode = null,
-    ): string {
+    ): string
+    {
         return ImageTransformHelper::socialTransformWidth($asset, $transformName, $siteId, $transformMode);
     }
 
@@ -495,7 +496,8 @@ class Helper extends Component
         $transformName = '',
         $siteId = null,
         $transformMode = null,
-    ): string {
+    ): string
+    {
         return ImageTransformHelper::socialTransformHeight($asset, $transformName, $siteId, $transformMode);
     }
 
