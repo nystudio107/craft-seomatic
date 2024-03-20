@@ -56,7 +56,8 @@
     "craftcms/ckeditor": "4.0.0-beta.1",
     "craftcms/redactor": "4.0.x-dev",
     "nystudio107/craft-minify": "^5.0.0-beta.1",
-    "putyourlightson/craft-blitz": "^5.0.0-beta.1"
+    "putyourlightson/craft-blitz": "^5.0.0-beta.1",
+    "putyourlightson/craft-campaign": "^3.0.0-beta.1"
   },
   "scripts": {
     "phpstan": "phpstan --ansi --memory-limit=1G",
