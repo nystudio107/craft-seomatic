@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.0.0-beta.8 - UNRELEASED
+### Fixed
+* Convert `MatrixBlock` -> `Entry` and `MatrixBlockQuery` -> `EntryQuery`
+
 ## 5.0.0-beta.7 - 2024.03.14
 ### Fixed
 * Fixed a regression that would throw an exception when attempting to save the `security.txt` template ([#1435](https://github.com/nystudio107/craft-seomatic/issues/1435))
