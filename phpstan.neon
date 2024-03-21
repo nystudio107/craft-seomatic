@@ -7,17 +7,13 @@ parameters:
         - src
     excludePaths:
     # Until the plugins are ported, exclude their integrations
-        - src/integrations/feedme/SeoSettings.php
         - src/integrations/shopify/ProductType.php
         - src/seoelements/SeoDigitalProduct.php
         - src/seoelements/SeoEvent.php
         - src/seoelements/SeoShopifyProduct.php
     ignoreErrors:
     # Until the plugins are ported, exclude their classes
-        - '*craft\\feedme\\*'
         - '*nystudio107\\fastcgicachebust\\*'
         - '*benf\\neo\\*'
-        - '*verbb\\supertable\\*'
-        - '*verbb\\doxter\\*'
         - '*besteadfast\\preparsefield\\*'
         - '*Solspace\\Calendar\\*'
