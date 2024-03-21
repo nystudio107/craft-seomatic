@@ -24,7 +24,6 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
 use Throwable;
-use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use yii\base\Exception;
 use yii\caching\TagDependency;
 use yii\helpers\Html;
@@ -324,7 +323,7 @@ class Sitemap
                         );
                         foreach ($blockFields as $blockField) {
                             $blocks = $element[$blockField]->all();
-                            /** @var Entry[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
+                            /** @var Entry[]|NeoBlock[]|object[] $blocks */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
                                 if ($block instanceof Entry) {
@@ -332,9 +331,6 @@ class Sitemap
                                 }
                                 if ($block instanceof NeoBlock) {
                                     $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
-                                }
-                                if ($block instanceof SuperTableBlock) {
-                                    $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
                                 }
                                 foreach ($assetFields as $assetField) {
                                     foreach ($block[$assetField]->all() as $asset) {
@@ -368,14 +364,11 @@ class Sitemap
                     );
                     foreach ($blockFields as $blockField) {
                         $blocks = $element[$blockField]->all();
-                        /** @var Entry[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
+                        /** @var Entry[]|NeoBlock[]|object[] $blocks */
                         foreach ($blocks as $block) {
                             $assetFields = [];
                             if ($block instanceof Entry) {
                                 $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
-                            }
-                            if ($block instanceof SuperTableBlock) {
-                                $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
                             }
                             if ($block instanceof NeoBlock) {
                                 $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);

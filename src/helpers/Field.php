@@ -32,8 +32,6 @@ use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\MetaBundles;
 use verbb\doxter\fields\Doxter as DoxterField;
-use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
-use verbb\supertable\fields\SuperTableField;
 use yii\base\InvalidConfigException;
 
 /**
@@ -60,7 +58,6 @@ class Field
             RedactorField::class,
             TagsField::class,
             NeoField::class,
-            SuperTableField::class,
             PreparseFieldType::class,
             DoxterField::class,
         ],
@@ -70,7 +67,6 @@ class Field
         self::BLOCK_FIELD_CLASS_KEY => [
             MatrixField::class,
             NeoField::class,
-            SuperTableField::class,
         ],
         self::SEO_SETTINGS_CLASS_KEY => [
             SeoSettingsField::class,
@@ -97,11 +93,6 @@ class Field
      * @var array Memoization cache
      */
     public static $neoFieldsOfTypeCache = [];
-
-    /**
-     * @var array Memoization cache
-     */
-    public static $superTableFieldsOfTypeCache = [];
 
     // Static Methods
     // =========================================================================
@@ -375,51 +366,6 @@ class Field
             }
             // Cache for future use
             self::$neoFieldsOfTypeCache[$memoKey] = $foundFields;
-        }
-
-        return $foundFields;
-    }
-
-    /**
-     * Return all of the fields in the $superTableBlock of the type $fieldType class
-     *
-     * @param SuperTableBlock $superTableBlock
-     * @param string $fieldType
-     * @param bool $keysOnly
-     *
-     * @return array
-     */
-    public static function superTableFieldsOfType(SuperTableBlock $superTableBlock, string $fieldType, bool $keysOnly = true): array
-    {
-        $foundFields = [];
-
-        try {
-            $superTableBlockTypeModel = $superTableBlock->getType();
-        } catch (InvalidConfigException $e) {
-            $superTableBlockTypeModel = null;
-        }
-        if ($superTableBlockTypeModel) {
-            // Cache me if you can
-            $memoKey = $fieldType . $superTableBlock->id . ($keysOnly ? 'keys' : 'nokeys');
-            if (!empty(self::$superTableFieldsOfTypeCache[$memoKey])) {
-                return self::$superTableFieldsOfTypeCache[$memoKey];
-            }
-            /** @var ?FieldLayout $layout */
-            // The SuperTableBlockType class lacks @mixin FieldLayoutBehavior in its annotations
-            $layout = $superTableBlockTypeModel->getFieldLayout();
-            $fieldElements = $layout->getCustomFieldElements();
-            foreach ($fieldElements as $fieldElement) {
-                $field = $fieldElement->getField();
-                if ($field instanceof $fieldType) {
-                    $foundFields[$field->handle] = $field->name;
-                }
-            }
-            // Return only the keys if asked
-            if ($keysOnly) {
-                $foundFields = array_keys($foundFields);
-            }
-            // Cache for future use
-            self::$superTableFieldsOfTypeCache[$memoKey] = $foundFields;
         }
 
         return $foundFields;
