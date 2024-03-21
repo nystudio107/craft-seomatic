@@ -7,13 +7,9 @@ parameters:
         - src
     excludePaths:
     # Until the plugins are ported, exclude their integrations
-        - src/integrations/shopify/ProductType.php
-        - src/seoelements/SeoDigitalProduct.php
         - src/seoelements/SeoEvent.php
-        - src/seoelements/SeoShopifyProduct.php
     ignoreErrors:
     # Until the plugins are ported, exclude their classes
         - '*nystudio107\\fastcgicachebust\\*'
-        - '*benf\\neo\\*'
         - '*besteadfast\\preparsefield\\*'
         - '*Solspace\\Calendar\\*'
