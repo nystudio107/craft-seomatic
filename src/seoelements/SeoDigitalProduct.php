@@ -184,7 +184,7 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
                 );
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var  $product Product */
+                /** @var Product $product */
                 $product = $event->sender ?? null;
                 if ($product !== null && $product->uri !== null) {
                     Seomatic::$plugin->metaContainers->previewMetaContainers($product->uri, $product->siteId, true);
@@ -234,7 +234,8 @@ class SeoDigitalProduct implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    ) {
+    )
+    {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)
