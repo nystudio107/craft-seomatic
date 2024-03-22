@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.0.0-beta.8 - UNRELEASED
+## 5.0.0-beta.8 - 2024.03.22
 ### Changed
 * Remove support for SuperTable, since in Craft 5 they are converted to Matrix entries https://verbb.io/blog/craft-5-plugin-update#super-table
 
