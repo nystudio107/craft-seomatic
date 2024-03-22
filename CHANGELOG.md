@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.45 - UNRELEASED
+### Fixed
+* Addressed an issue where if SEOmatic was set to extract text or keywords from a relation field that was eager loaded, it would extract the serialized value of the field instead of the actual text ([#1415](https://github.com/nystudio107/craft-seomatic/issues/1415))
+
 ## 4.0.44 - 2024.03.14
 ### Fixed
 * Fixed a regression that would throw an exception when attempting to save the `security.txt` template ([#1435](https://github.com/nystudio107/craft-seomatic/issues/1435))
