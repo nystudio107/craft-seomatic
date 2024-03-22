@@ -11,23 +11,22 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use ArrayAccess;
 use benf\neo\elements\Block as NeoBlock;
 use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
-use craft\elements\db\MatrixBlockQuery;
+use craft\elements\db\EntryQuery;
 use craft\elements\db\TagQuery;
-use craft\elements\MatrixBlock;
+use craft\elements\Entry;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
-use craft\models\FieldLayout;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
 use Stringy\Stringy;
+use Traversable;
 use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
-use verbb\supertable\elements\db\SuperTableBlockQuery;
-use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use yii\base\InvalidConfigException;
 use function array_slice;
 use function function_exists;
@@ -116,22 +115,19 @@ class Text
         if (empty($field)) {
             return '';
         }
-        if ($field instanceof MatrixBlockQuery
-            || (is_array($field) && $field[0] instanceof MatrixBlock)) {
+        if ($field instanceof EntryQuery
+            || (self::isArrayLike($field) && $field[0] instanceof Entry)) {
             $result = self::extractTextFromMatrix($field);
         } elseif ($field instanceof NeoBlockQuery
-            || (is_array($field) && $field[0] instanceof NeoBlock)) {
+            || (self::isArrayLike($field) && $field[0] instanceof NeoBlock)) {
             $result = self::extractTextFromNeo($field);
-        } elseif ($field instanceof SuperTableBlockQuery
-            || (is_array($field) && $field[0] instanceof SuperTableBlock)) {
-            $result = self::extractTextFromSuperTable($field);
         } elseif ($field instanceof TagQuery
-            || (is_array($field) && $field[0] instanceof Tag)) {
+            || (self::isArrayLike($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
         } elseif ($field instanceof DoxterData) {
             $result = self::smartStripTags(Doxter::$plugin->getService()->parseMarkdown($field->getRaw()));
         } else {
-            if (is_array($field)) {
+            if (self::isArrayLike($field)) {
                 $result = self::smartStripTags((string)$field[0]);
             } else {
                 $result = self::smartStripTags((string)$field);
@@ -172,7 +168,7 @@ class Text
      * Extract text from all of the blocks in a matrix field, concatenating it
      * together.
      *
-     * @param MatrixBlockQuery|MatrixBlock[]|array $blocks
+     * @param EntryQuery|Entry[]|array $blocks
      * @param string $fieldHandle
      *
      * @return string
@@ -184,19 +180,19 @@ class Text
         }
         $result = '';
         // Iterate through all of the matrix blocks
-        if ($blocks instanceof MatrixBlockQuery) {
+        if ($blocks instanceof EntryQuery) {
             $blocks = $blocks->all();
         }
         foreach ($blocks as $block) {
             try {
-                $matrixBlockTypeModel = $block->getType();
+                $matrixEntryTypeModel = $block->getType();
             } catch (InvalidConfigException $e) {
-                $matrixBlockTypeModel = null;
+                $matrixEntryTypeModel = null;
             }
             // Find any text fields inside of the matrix block
-            if ($matrixBlockTypeModel) {
+            if ($matrixEntryTypeModel) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fields = $matrixBlockTypeModel->getCustomFields();
+                $fields = $matrixEntryTypeModel->getCustomFields();
 
                 foreach ($fields as $field) {
                     /** @var array $fieldClasses */
@@ -238,56 +234,6 @@ class Text
             // Find any text fields inside of the neo block
             if ($layout) {
                 $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                $fieldElements = $layout->getCustomFieldElements();
-                foreach ($fieldElements as $fieldElement) {
-                    $field = $fieldElement->getField();
-                    /** @var array $fieldClasses */
-                    foreach ($fieldClasses as $fieldClassKey) {
-                        if ($field instanceof $fieldClassKey) {
-                            if ($field->handle === $fieldHandle || empty($fieldHandle)) {
-                                $result .= self::extractTextFromField($block[$field->handle]) . ' ';
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Extract text from all of the blocks in a matrix field, concatenating it
-     * together.
-     *
-     * @param SuperTableBlockQuery|SuperTableBlock[]|array $blocks
-     * @param string $fieldHandle
-     *
-     * @return string
-     */
-    public static function extractTextFromSuperTable($blocks, $fieldHandle = ''): string
-    {
-        if (empty($blocks)) {
-            return '';
-        }
-        $result = '';
-        // Iterate through all of the supertable blocks
-        if ($blocks instanceof SuperTableBlockQuery) {
-            $blocks = $blocks->all();
-        }
-        foreach ($blocks as $block) {
-            try {
-                $superTableBlockTypeModel = $block->getType();
-            } catch (InvalidConfigException $e) {
-                $superTableBlockTypeModel = null;
-            }
-            // Find any text fields inside of the matrix block
-            if ($superTableBlockTypeModel) {
-                $fieldClasses = FieldHelper::FIELD_CLASSES[FieldHelper::TEXT_FIELD_CLASS_KEY];
-                /** @var ?FieldLayout $layout */
-                // The SuperTableBlockType class lacks @mixin FieldLayoutBehavior in its annotations
-                /** @phpstan-ignore-next-line */
-                $layout = $superTableBlockTypeModel->getFieldLayout();
                 $fieldElements = $layout->getCustomFieldElements();
                 foreach ($fieldElements as $fieldElement) {
                     $field = $fieldElement->getField();
@@ -455,6 +401,17 @@ class Text
         $text = html_entity_decode($text);
 
         return $text;
+    }
+
+    /**
+     * Is $var an array or array-like object?
+     *
+     * @param $var
+     * @return bool
+     */
+    public static function isArrayLike($var): bool
+    {
+        return is_array($var) || ($var instanceof ArrayAccess && $var instanceof Traversable);
     }
 
     // Protected Static Methods

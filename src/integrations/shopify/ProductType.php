@@ -64,7 +64,7 @@ class ProductType extends Model
     /**
      * Returns the product types's site-specific settings.
      *
-     * @return ProductTypeSite[]
+     * @return Section_SiteSettings[]
      */
     public function getSiteSettings(): array
     {
@@ -89,13 +89,15 @@ class ProductType extends Model
     }
 
     /**
-     * @return FieldLayout
+     * @return ?FieldLayout
      */
-    public function getProductFieldLayout(): FieldLayout
+    public function getProductFieldLayout(): ?FieldLayout
     {
         $shopifyProducts = ShopifyPlugin::getInstance();
         if ($shopifyProducts !== null) {
             return $shopifyProducts->getSettings()->getProductFieldLayout();
         }
+
+        return null;
     }
 }

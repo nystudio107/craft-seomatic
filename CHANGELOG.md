@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 5.0.0-beta.8 - 2024.03.22
+### Changed
+* Remove support for SuperTable, since in Craft 5 they are converted to Matrix entries https://verbb.io/blog/craft-5-plugin-update#super-table
+
+### Fixed
+* Convert `MatrixBlock` -> `Entry` and `MatrixBlockQuery` -> `EntryQuery`
+* Addressed an issue where if SEOmatic was set to extract text or keywords from a relation field that was eager loaded, it would extract the serialized value of the field instead of the actual text ([#1415](https://github.com/nystudio107/craft-seomatic/issues/1415))
+
 ## 5.0.0-beta.7 - 2024.03.14
 ### Fixed
 * Fixed a regression that would throw an exception when attempting to save the `security.txt` template ([#1435](https://github.com/nystudio107/craft-seomatic/issues/1435))
