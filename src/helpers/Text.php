@@ -11,6 +11,7 @@
 
 namespace nystudio107\seomatic\helpers;
 
+use ArrayAccess;
 use benf\neo\elements\Block as NeoBlock;
 use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
 use craft\elements\db\EntryQuery;
@@ -23,6 +24,7 @@ use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
 use Stringy\Stringy;
+use Traversable;
 use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
 use yii\base\InvalidConfigException;
@@ -114,18 +116,18 @@ class Text
             return '';
         }
         if ($field instanceof EntryQuery
-            || (is_array($field) && $field[0] instanceof Entry)) {
+            || (self::isArrayLike($field) && $field[0] instanceof Entry)) {
             $result = self::extractTextFromMatrix($field);
         } elseif ($field instanceof NeoBlockQuery
-            || (is_array($field) && $field[0] instanceof NeoBlock)) {
+            || (self::isArrayLike($field) && $field[0] instanceof NeoBlock)) {
             $result = self::extractTextFromNeo($field);
         } elseif ($field instanceof TagQuery
-            || (is_array($field) && $field[0] instanceof Tag)) {
+            || (self::isArrayLike($field) && $field[0] instanceof Tag)) {
             $result = self::extractTextFromTags($field);
         } elseif ($field instanceof DoxterData) {
             $result = self::smartStripTags(Doxter::$plugin->getService()->parseMarkdown($field->getRaw()));
         } else {
-            if (is_array($field)) {
+            if (self::isArrayLike($field)) {
                 $result = self::smartStripTags((string)$field[0]);
             } else {
                 $result = self::smartStripTags((string)$field);
@@ -399,6 +401,17 @@ class Text
         $text = html_entity_decode($text);
 
         return $text;
+    }
+
+    /**
+     * Is $var an array or array-like object?
+     *
+     * @param $var
+     * @return bool
+     */
+    public static function isArrayLike($var): bool
+    {
+        return is_array($var) || ($var instanceof ArrayAccess && $var instanceof Traversable);
     }
 
     // Protected Static Methods
