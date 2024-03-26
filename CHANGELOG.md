@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.0.0-beta.9 - UNRELEASED
+### Fixed
+* Fixed a regression in `extractTextFromField` that could cause it to not render properly by being more explicit, looking only for arrays or `Collections` in `isArrayLike()` ([#1441](https://github.com/nystudio107/craft-seomatic/issues/1441))
+
 ## 5.0.0-beta.8 - 2024.03.22
 ### Changed
 * Remove support for SuperTable, since in Craft 5 they are converted to Matrix entries https://verbb.io/blog/craft-5-plugin-update#super-table
