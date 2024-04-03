@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.75 - UNRELEASED
+### Fixed
+* Fixed an issue where the `typeId` coming in from editing the Content SEO settings was a string, when it needed to be cast to an integer ([#1442](https://github.com/nystudio107/craft-seomatic/issues/1442)) ([#1368](https://github.com/nystudio107/craft-seomatic/issues/1368))
+
 ## 3.4.74 - 2024.03.14
 ### Fixed
 * Fixed a regression that would throw an exception when attempting to save the `security.txt` template ([#1435](https://github.com/nystudio107/craft-seomatic/issues/1435))
