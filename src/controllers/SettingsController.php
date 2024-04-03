@@ -645,6 +645,9 @@ class SettingsController extends Controller
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
+        if (is_string($typeId)) {
+            $typeId = (int)$typeId;
+        }
         // Set the element type in the template
         $elementName = '';
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
