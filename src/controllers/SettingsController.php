@@ -515,7 +515,7 @@ class SettingsController extends Controller
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
         $siteId = $this->getSiteIdFromHandle($siteHandle);
-        if ($typeId !== null && is_string($typeId)) {
+        if (is_string($typeId)) {
             $typeId = (int)$typeId;
         }
         // Get the (entry) type menu
@@ -644,6 +644,9 @@ class SettingsController extends Controller
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
+        if (is_string($typeId)) {
+            $typeId = (int)$typeId;
+        }
         // Set the element type in the template
         $elementName = '';
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
