@@ -4,6 +4,7 @@
 ### Fixed
 * Fixed a regression in `extractTextFromField` that could cause it to not render properly by being more explicit, looking only for arrays or `Collections` in `isArrayLike()` ([#1441](https://github.com/nystudio107/craft-seomatic/issues/1441))
 * Fixed an issue where the `typeId` coming in from editing the Content SEO settings was a string, when it needed to be cast to an integer ([#1442](https://github.com/nystudio107/craft-seomatic/issues/1442)) ([#1368](https://github.com/nystudio107/craft-seomatic/issues/1368))
+* Fixed an issue where the **Copy Settings From** menu didn't work correctly for multiple entry types ([#1368](https://github.com/nystudio107/craft-seomatic/issues/1368))
 
 ## 4.0.45 - 2024.03.22
 ### Fixed
