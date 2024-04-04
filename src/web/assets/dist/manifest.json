@@ -1,9 +1,11 @@
 {
   "__plugin-vue2_normalizer-DEoWBRzu.js": {
-    "file": "assets/_plugin-vue2_normalizer-DEoWBRzu.js"
+    "file": "assets/_plugin-vue2_normalizer-DEoWBRzu.js",
+    "name": "_plugin-vue2_normalizer"
   },
   "src/js/content-seo.js": {
     "file": "assets/content-seo-Crtn_fTt.js",
+    "name": "content-seo",
     "src": "src/js/content-seo.js",
     "isEntry": true,
     "imports": [
@@ -14,7 +16,8 @@
     ]
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard-C1F2lITe.js",
+    "file": "assets/dashboard-BkqHlewI.js",
+    "name": "dashboard",
     "src": "src/js/dashboard.js",
     "isEntry": true,
     "imports": [
@@ -22,7 +25,8 @@
     ]
   },
   "src/js/seomatic-meta.js": {
-    "file": "assets/seomatic-meta-tCUGkMBI.js",
+    "file": "assets/seomatic-meta-D9Dn0O2U.js",
+    "name": "seomatic-meta",
     "src": "src/js/seomatic-meta.js",
     "isEntry": true,
     "imports": [
@@ -34,6 +38,7 @@
   },
   "src/js/seomatic.js": {
     "file": "assets/seomatic-BObJzj2X.js",
+    "name": "seomatic",
     "src": "src/js/seomatic.js",
     "isEntry": true,
     "css": [
