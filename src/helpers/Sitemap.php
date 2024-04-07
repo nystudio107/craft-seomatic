@@ -527,9 +527,10 @@ class Sitemap
         if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
             switch ($asset->kind) {
                 case 'image':
+                    $transform = Craft::$app->getAssetTransforms()->getTransformByHandle($metaBundle->metaSitemapVars->sitemapAssetTransform);
                     $lines[] = '<image:image>';
                     $lines[] = '<image:loc>';
-                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl($transform, true)));
                     $lines[] = '</image:loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
