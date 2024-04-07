@@ -29,6 +29,12 @@
         {% include "seomatic/settings/_includes/fields/_sitemapAssets.twig" %}
     {% endif %}
 
+    {# ############## Sitemap Asset Transform ############## #}
+
+    {% if field is not defined or 'sitemapAssetTransform' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapAssetTransform.twig" %}
+    {% endif %}
+
     {# ############## Sitemap Files ############## #}
 
     {% if field is not defined or 'sitemapFiles' in field.sitemapEnabledFields %}
