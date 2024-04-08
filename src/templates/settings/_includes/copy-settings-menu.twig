@@ -37,7 +37,7 @@
                                 {% endif %}
                                 {% set url = url(baseUrl ~ currentSiteHandle, {
                                     'loadFromSiteHandle': site.handle,
-                                    'typeId': currentTypeId,
+                                    'typeId': currentTypeId ?? null,
                                 }) %}
                                 {% if status == "enabled" %}
                                     <a href="{{ url }}">
