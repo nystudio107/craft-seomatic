@@ -21,7 +21,7 @@
             {% set assetTransforms = {
                 null: "none"
             } %}
-            {% set transforms = craft.app.assetTransforms.getAllTransforms() %}
+            {% set transforms = craft.app.imageTransforms.getAllTransforms() %}
             {% for transform in transforms %}
                 {% set assetTransforms = assetTransforms | merge({
                     (transform.handle): transform.name
