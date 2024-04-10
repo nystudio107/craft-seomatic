@@ -1,7 +1,8 @@
 # SEOmatic Changelog
 
-## 5.0.0 - UNRELEASED
+## 5.0.0 - 2024.04.10
 ### Added
+* Stable release for Craft 5
 * Added the ability to choose the Asset Transform to apply to images in the sitemap ([#1407](https://github.com/nystudio107/craft-seomatic/issues/1407))
 
 ### Fixed
