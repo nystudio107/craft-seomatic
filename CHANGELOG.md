@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.48 - 2024.04.10
+### Added
+* Ensure that `getTransformByHandle()` is passed a string
+
 ## 4.0.47 - 2024.04.10
 ### Added
 * Fix regression of `getAssetTransforms()` -> `getImageTransforms()`
