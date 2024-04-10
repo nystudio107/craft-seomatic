@@ -11,7 +11,6 @@
 
 namespace nystudio107\seomatic\helpers;
 
-use ArrayAccess;
 use benf\neo\elements\Block as NeoBlock;
 use benf\neo\elements\db\BlockQuery as NeoBlockQuery;
 use craft\elements\db\MatrixBlockQuery;
@@ -20,12 +19,12 @@ use craft\elements\MatrixBlock;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
 use craft\models\FieldLayout;
+use Illuminate\Support\Collection;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
 use Stringy\Stringy;
-use Traversable;
 use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
 use verbb\supertable\elements\db\SuperTableBlockQuery;
@@ -467,7 +466,7 @@ class Text
      */
     public static function isArrayLike($var): bool
     {
-        return is_array($var) || ($var instanceof ArrayAccess && $var instanceof Traversable);
+        return is_array($var) || ($var instanceof Collection);
     }
 
     // Protected Static Methods
