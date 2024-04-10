@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.0.1 - 2024.04.10
+### Added
+* Fix regression of `getAssetTransforms()` -> `getImageTransforms()`
+
 ## 5.0.0 - 2024.04.10
 ### Added
 * Stable release for Craft 5
