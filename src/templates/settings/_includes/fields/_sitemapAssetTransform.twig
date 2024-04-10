@@ -1,0 +1,49 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapAssetTransform", "metaSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapAssetTransform"),
+    'fieldLabel': "Sitemap Asset Transform"|t("seomatic"),
+    'settingName': 'sitemapAssetTransform',
+    'labelFor': 'metaSitemapVars-sitemapAssetTransform',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro sitemapAssetTransformField(metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
+        <div class="instructions">
+            {{ "The Asset Transform that should be applied to images before they are added to the sitemap."|t("seomatic")|md }}
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+            {% set assetTransforms = {
+                null: "none"
+            } %}
+            {% set transforms = craft.app.imageTransforms.getAllTransforms() %}
+            {% for transform in transforms %}
+                {% set assetTransforms = assetTransforms | merge({
+                    (transform.handle): transform.name
+                }) %}
+            {% endfor %}
+            {{ forms.selectField({
+                id: "sitemapAssetTransform" ~ suffix,
+                name: "sitemapAssetTransform",
+                options: assetTransforms,
+                value: metaSitemapVars.sitemapAssetTransform,
+                errors: metaSitemapVars.getErrors("sitemapAssetTransform"),
+                disabled: disabled,
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% block inheritedValues %}
+        {{ _self.sitemapAssetTransformField(inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.sitemapAssetTransformField(metaSitemapVars) }}
+    {% endblock %}
+{% endembed %}

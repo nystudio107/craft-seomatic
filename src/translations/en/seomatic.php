@@ -523,4 +523,7 @@ return [
     'News Publication Name' => 'News Publication Name',
     'News Sitemap' => 'News Sitemap',
     'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.' => 'The name of the news publication. It must exactly match the name as it appears on your articles on [news.google.com](https://news.google.com), omitting anything in parentheses.',
+    'The Asset Transform that should be applied to images before they are added to the sitemap.' => 'The Asset Transform that should be applied to images before they are added to the sitemap.',
+    'Asset Transform for Images' => 'Asset Transform for Images',
+    'Sitemap Asset Transform' => 'Sitemap Asset Transform'
 ];
