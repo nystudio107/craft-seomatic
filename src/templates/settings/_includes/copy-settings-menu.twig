@@ -37,11 +37,12 @@
                                 {% endif %}
                                 {% set url = url(baseUrl ~ currentSiteHandle, {
                                     'loadFromSiteHandle': site.handle,
+                                    'typeId': currentTypeId ?? null,
                                 }) %}
                                 {% if status == "enabled" %}
-                                <a href="{{ url }}">
-                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
-                                </a>
+                                    <a href="{{ url }}">
+                                        <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                    </a>
                                 {% else %}
                                     <div style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
                                         <div class="status {{ status }}"></div>{{ site.name|t('site') }}

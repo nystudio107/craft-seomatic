@@ -520,4 +520,7 @@ return [
     'Head - in the <head> tag' => 'Head - in the <head> tag',
     'Additional attributes to add to the `<script>` tag' => 'Additional attributes to add to the `<script>` tag',
     'Body Begin - after the <body> tag ' => 'Body Begin - after the <body> tag ',
+    'The Asset Transform that should be applied to images before they are added to the sitemap.' => 'The Asset Transform that should be applied to images before they are added to the sitemap.',
+    'Asset Transform for Images' => 'Asset Transform for Images',
+    'Sitemap Asset Transform' => 'Sitemap Asset Transform'
 ];
