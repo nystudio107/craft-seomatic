@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.0.47 - 2024.04.10
+### Added
+* Fix regression of `getAssetTransforms()` -> `getImageTransforms()`
+
 ## 4.0.46 - 2024.04.10
 ### Added
 * Added the ability to choose the Asset Transform to apply to images in the sitemap ([#1407](https://github.com/nystudio107/craft-seomatic/issues/1407))
