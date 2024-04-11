@@ -559,7 +559,7 @@ class Sitemap
         if ((bool)$asset->enabledForSite && $asset->getUrl() !== null) {
             switch ($asset->kind) {
                 case 'image':
-                    $transform = Craft::$app->getAssetTransforms()->getTransformByHandle($metaBundle->metaSitemapVars->sitemapAssetTransform);
+                    $transform = Craft::$app->getAssetTransforms()->getTransformByHandle($metaBundle->metaSitemapVars->sitemapAssetTransform ?? '');
                     $lines[] = '<image:image>';
                     $lines[] = '<image:loc>';
                     $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl($transform, true)));
