@@ -49,6 +49,7 @@
     "codeception/module-phpbrowser": "^3.0.0",
     "codeception/module-rest": "^3.3.2",
     "codeception/module-yii2": "^1.1.9",
+    "vlucas/phpdotenv": "^5.4.0",
     "craftcms/commerce": "^5.0.0-beta.1",
     "craftcms/ecs": "dev-main",
     "craftcms/phpstan": "dev-main",
