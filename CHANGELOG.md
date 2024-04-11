@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.76 - 2024.04.11
+### Added
+* Ensure that `getTransformByHandle()` is passed a string
+
 ## 3.4.75 - 2024.04.10
 ### Added
 * Added the ability to choose the Asset Transform to apply to images in the sitemap ([#1407](https://github.com/nystudio107/craft-seomatic/issues/1407))
