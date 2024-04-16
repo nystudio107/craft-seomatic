@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.0.3 - UNRELEASED
+### Fixed
+* Fixed an issue where the down and up arrows were reversed for sorting purposes
+
 ## 5.0.2 - 2024.04.10
 ### Added
 * Ensure that `getTransformByHandle()` is passed a string
