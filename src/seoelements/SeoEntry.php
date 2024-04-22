@@ -407,7 +407,21 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
     public static function sourceIdFromElement(ElementInterface $element)
     {
         /** @var Entry $element */
-        return $element->sectionId;
+        $sourceId = $element->sectionId;
+        // If we have no sourceId, this could be a nested Matrix block element, so traverse to find the
+        // ultimate parent sourceId for the section that contains the root element
+        if ($sourceId === null) {
+            try {
+                $parentElement = $element->getPrimaryOwner();
+            } catch (InvalidConfigException $e) {
+                $parentElement = null;
+            }
+            if ($parentElement) {
+                $sourceId = self::sourceIdFromElement($parentElement);
+            }
+        }
+
+        return $sourceId;
     }
 
     /**

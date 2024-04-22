@@ -3,6 +3,7 @@
 ## 5.0.3 - UNRELEASED
 ### Fixed
 * Fixed an issue where the down and up arrows were reversed for sorting purposes
+* Fixed an issue where nested Matrix entries that have URLs would throw an exception ([#1456](https://github.com/nystudio107/craft-seomatic/issues/1456))
 
 ## 5.0.2 - 2024.04.10
 ### Added
