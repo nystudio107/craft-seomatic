@@ -17,10 +17,6 @@
     {{ seomatic.vite.register('src/js/dashboard.js', false, tagOptions, tagOptions) }}
 {% endblock %}
 
-{% block contextMenu %}
-    {% include "seomatic/settings/_includes/sites-menu.twig" %}
-{% endblock %}
-
 {%- macro setupGradeColor(setupGrades, score) -%}
     {% apply spaceless %}
         {% set color = setupGrades[0].color %}

@@ -13,9 +13,11 @@ use Craft;
 use craft\elements\Asset;
 use craft\errors\MissingComponentException;
 use craft\helpers\UrlHelper;
+use craft\models\Site;
 use craft\web\Controller;
 use craft\web\UrlManager;
 use DateTime;
+use Illuminate\Support\Collection;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
 use nystudio107\seomatic\helpers\ArrayHelper;
@@ -211,6 +213,7 @@ class SettingsController extends Controller
             $stat = round(($stat / $numFields) * 100);
             $variables['siteSetupStat'] = $stat;
         }
+        $this->setCrumbVariables($variables);
 
         // Render the template
         return $this->renderTemplate('seomatic/dashboard/index', $variables);
@@ -335,6 +338,8 @@ class SettingsController extends Controller
             MetaBundles::GLOBAL_META_BUNDLE,
             (int)$variables['currentSiteId']
         );
+
+        $this->setCrumbVariables($variables);
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/global/' . $subSection, $variables);
@@ -481,6 +486,7 @@ class SettingsController extends Controller
         ];
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
         $variables['controllerHandle'] = 'content';
+        $this->setCrumbVariables($variables);
         $variables['selectedSubnavItem'] = 'content';
         $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
         Seomatic::$plugin->metaBundles->deleteVestigialMetaBundles($metaBundles);
@@ -590,11 +596,12 @@ class SettingsController extends Controller
             ],
             [
                 'label' => $metaBundle->sourceName . ' · ' . $subSectionTitle,
-                'url' => UrlHelper::cpUrl("seomatic/edit-content/${subSection}/${sourceBundleType}/${sourceHandle}"),
+                'url' => UrlHelper::cpUrl("seomatic/edit-content/{$subSection}/{$sourceBundleType}/{$sourceHandle}"),
             ],
         ];
         $variables['selectedSubnavItem'] = 'content';
-        $variables['controllerHandle'] = "edit-content/${subSection}/${sourceBundleType}/${sourceHandle}";
+        $variables['controllerHandle'] = "edit-content/{$subSection}/{$sourceBundleType}/{$sourceHandle}";
+        $this->setCrumbVariables($variables);
         // Image selectors
         $variables['currentSubSection'] = $subSection;
         $bundleSettings = $metaBundle->metaBundleSettings;
@@ -771,6 +778,7 @@ class SettingsController extends Controller
             );
         }
         $variables['elementType'] = Asset::class;
+        $this->setCrumbVariables($variables);
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/site/' . $subSection, $variables);
@@ -966,6 +974,7 @@ class SettingsController extends Controller
             ],
         ];
         $variables['selectedSubnavItem'] = 'tracking';
+        $this->setCrumbVariables($variables);
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/tracking/_edit', $variables);
@@ -1152,8 +1161,86 @@ class SettingsController extends Controller
             Craft::$app->getIsMultiSite() &&
             count($variables['enabledSiteIds'])
         );
+    }
 
+    /**
+     * @param array $variables
+     * @return void
+     */
+    protected function setCrumbVariables(array &$variables)
+    {
+        $sites = Craft::$app->getSites();
         if ($variables['showSites']) {
+            $siteCrumbItems = [];
+            $siteGroups = Craft::$app->getSites()->getAllGroups();
+            $crumbSites = Collection::make($sites->getAllSites())
+                ->map(fn(Site|array $site) => $site instanceof Site ? ['site' => $site] : $site)
+                ->keyBy(fn(array $site) => $site['site']->id)
+                ->all();
+
+            foreach ($siteGroups as $siteGroup) {
+                $groupSites = $siteGroup->getSites();
+
+                if (empty($groupSites)) {
+                    continue;
+                }
+
+                $groupSiteItems = array_map(fn(Site $site) => [
+                    'status' => $crumbSites[$site->id]['status'] ?? null,
+                    'label' => Craft::t('site', $site->name),
+                    'url' => UrlHelper::cpUrl("seomatic/{$variables['controllerHandle']}/$site->handle"),
+                    'hidden' => !isset($crumbSites[$site->id]),
+                    'selected' => $site->id === $variables['currentSiteId'],
+                    'attributes' => [
+                        'data' => [
+                            'site-id' => $site->id,
+                        ],
+                    ],
+                ], $groupSites);
+
+                if (count($siteGroups) > 1) {
+                    $siteCrumbItems[] = [
+                        'heading' => Craft::t('site', $siteGroup->name),
+                        'items' => $groupSiteItems,
+                        'hidden' => !ArrayHelper::contains($groupSiteItems, fn(array $item) => !$item['hidden']),
+                    ];
+                } else {
+                    array_push($siteCrumbItems, ...$groupSiteItems);
+                }
+            }
+
+            if (array_key_exists('crumbs', $variables)) {
+                $variables['crumbs'] = [
+                    [
+                        'id' => 'language-menu',
+                        'icon' => 'world',
+                        'label' => Craft::t(
+                            'site',
+                            $sites->getSiteById((int)$variables['currentSiteId'])->name
+                        ),
+                        'menu' => [
+                            'items' => $siteCrumbItems,
+                            'label' => Craft::t('site', 'Select site'),
+                        ],
+                    ],
+                    ...$variables['crumbs'],
+                ];
+            } else {
+                $variables['crumbs'] = [
+                    [
+                        'id' => 'language-menu',
+                        'icon' => 'world',
+                        'label' => Craft::t(
+                            'site',
+                            $sites->getSiteById((int)$variables['currentSiteId'])->name
+                        ),
+                        'menu' => [
+                            'items' => $siteCrumbItems,
+                            'label' => Craft::t('site', 'Select site'),
+                        ],
+                    ],
+                ];
+            }
             $variables['sitesMenuLabel'] = Craft::t(
                 'site',
                 $sites->getSiteById((int)$variables['currentSiteId'])->name
