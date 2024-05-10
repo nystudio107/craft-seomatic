@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 5.0.3 - UNRELEASED
+### Changed
+* Changed the location of the site selection menu to match Craft styling
+
 ### Fixed
 * Fixed an issue where the down and up arrows were reversed for sorting purposes
 * Fixed an issue where nested Matrix entries that have URLs would throw an exception ([#1456](https://github.com/nystudio107/craft-seomatic/issues/1456))
