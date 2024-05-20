@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.4.77 - UNRELEASED
+## 3.4.77 - 2024.05.20
 ### Fixed
 * Fixed an issue where the down and up arrows were reversed for sorting purposes
 
