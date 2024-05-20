@@ -6,10 +6,6 @@
 {% extends 'seomatic/_layouts/seomatic-cp.twig' %}
 {% import '_includes/forms' as forms %}
 
-{% block contextMenu %}
-    {% include "seomatic/settings/_includes/sites-menu.twig" %}
-{% endblock %}
-
 {% block head %}
     {{ parent() }}
     {% set tagOptions = {

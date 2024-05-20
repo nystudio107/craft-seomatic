@@ -19,6 +19,7 @@ use craft\elements\Entry;
 use craft\events\DefineHtmlEvent;
 use craft\events\SectionEvent;
 use craft\gql\interfaces\elements\Entry as EntryInterface;
+use craft\helpers\ElementHelper;
 use craft\models\Section;
 use craft\models\Site;
 use craft\services\Entries;
@@ -406,8 +407,21 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function sourceIdFromElement(ElementInterface $element)
     {
-        /** @var Entry $element */
-        return $element->sectionId;
+        // Get the root element so we handle nested matrix entries
+        $rootElement = ElementHelper::rootElement($element);
+        if ($rootElement instanceof Entry) {
+            return $rootElement->sectionId;
+        }
+        // If the root element isn't an entry, handle that case too
+        $sourceBundleType = Seomatic::$plugin->seoElements->getMetaBundleTypeFromElement($rootElement);
+        if ($sourceBundleType !== null) {
+            $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
+            if ($seoElement !== null) {
+                return $seoElement::sourceIdFromElement($rootElement);
+            }
+        }
+
+        return null;
     }
 
     /**

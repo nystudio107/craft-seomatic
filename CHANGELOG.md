@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 5.0.3 - 2024.05.20
+### Changed
+* Changed the location of the site selection menu to match Craft styling ([#1467](https://github.com/nystudio107/craft-seomatic/pull/1467))
+
+### Fixed
+* Fixed an issue where the down and up arrows were reversed for sorting purposes
+* Fixed an issue where nested Matrix entries that have URLs would throw an exception ([#1456](https://github.com/nystudio107/craft-seomatic/issues/1456))
+
 ## 5.0.2 - 2024.04.10
 ### Added
 * Ensure that `getTransformByHandle()` is passed a string
