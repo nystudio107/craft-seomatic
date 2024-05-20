@@ -1,8 +1,8 @@
 # SEOmatic Changelog
 
-## 5.0.3 - UNRELEASED
+## 5.0.3 - 2024.05.20
 ### Changed
-* Changed the location of the site selection menu to match Craft styling
+* Changed the location of the site selection menu to match Craft styling ([#1467](https://github.com/nystudio107/craft-seomatic/pull/1467))
 
 ### Fixed
 * Fixed an issue where the down and up arrows were reversed for sorting purposes
