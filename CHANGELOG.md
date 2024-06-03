@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.0.4 - UNRELEASED
+### Fixed
+* Fixed an issue that could cause an exception to be thrown if the selected asset for the Creator or Identity brand image was deleted ([#1472](https://github.com/nystudio107/craft-seomatic/issues/1472))
+
 ## 5.0.3 - 2024.05.20
 ### Changed
 * Changed the location of the site selection menu to match Craft styling ([#1467](https://github.com/nystudio107/craft-seomatic/pull/1467))
