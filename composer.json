@@ -59,6 +59,7 @@
     "craftcms/feed-me": "^6.0.0",
     "craftcms/redactor": "^4.0.0",
     "craftcms/shopify": "^5.0.0",
+    "nystudio107/craft-fastcgicachebust": "^5.0.0",
     "nystudio107/craft-minify": "^5.0.0",
     "putyourlightson/craft-blitz": "^5.0.0",
     "putyourlightson/craft-campaign": "^3.0.0",
