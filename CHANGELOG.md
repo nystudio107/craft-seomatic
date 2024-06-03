@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.4.78 - UNRELEASED
+### Fixed
+* Fixed an issue that could cause an exception to be thrown if the selected asset for the Creator or Identity brand image was deleted ([#1472](https://github.com/nystudio107/craft-seomatic/issues/1472))
+
 ## 3.4.77 - 2024.05.20
 ### Fixed
 * Fixed an issue where the down and up arrows were reversed for sorting purposes
