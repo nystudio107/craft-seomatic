@@ -3,6 +3,7 @@
 ## 3.4.78 - UNRELEASED
 ### Fixed
 * Fixed an issue that could cause an exception to be thrown if the selected asset for the Creator or Identity brand image was deleted ([#1472](https://github.com/nystudio107/craft-seomatic/issues/1472))
+* Fixed an issue where the SEO preview for SEO Settings fields and the sidebar wouldn't be displayed correctly for drafts ([#1449](https://github.com/nystudio107/craft-seomatic/issues/1449))
 
 ## 3.4.77 - 2024.05.20
 ### Fixed
