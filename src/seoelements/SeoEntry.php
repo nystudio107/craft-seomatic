@@ -192,7 +192,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
                 /** @var Entry $entry */
                 $entry = $event->sender ?? null;
                 if ($entry !== null && $entry->uri !== null) {
-                    Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true);
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($entry->uri, $entry->siteId, true, true, $entry);
                     // Render our preview sidebar template
                     if (Seomatic::$settings->displayPreviewSidebar && Seomatic::$matchedElement) {
                         $html .= PluginTemplate::renderPluginTemplate('_sidebars/entry-preview.twig');
@@ -243,8 +243,7 @@ class SeoEntry implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    )
-    {
+    ) {
         return Entry::find()
             ->section($metaBundle->sourceHandle)
             ->id($elementId)
