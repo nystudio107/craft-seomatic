@@ -14,9 +14,11 @@ namespace nystudio107\seomatic\services;
 use Craft;
 use craft\base\Component;
 use craft\base\Element;
+use craft\base\ElementInterface;
 use craft\commerce\Plugin as CommercePlugin;
 use craft\console\Application as ConsoleApplication;
 use craft\elements\GlobalSet;
+use craft\helpers\ElementHelper;
 use craft\web\UrlManager;
 use nystudio107\seomatic\base\MetaContainer;
 use nystudio107\seomatic\base\MetaItem;
@@ -287,10 +289,11 @@ class MetaContainers extends Component
      *                                 should be factored into the preview
      */
     public function previewMetaContainers(
-        string $uri = '',
-        int    $siteId = null,
-        bool   $parseVariables = false,
-        bool   $includeElement = true
+        string            $uri = '',
+        int               $siteId = null,
+        bool              $parseVariables = false,
+        bool              $includeElement = true,
+        ?ElementInterface $element = null
     ) {
         // If we've already previewed the containers for this request, there's no need to do it again
         if (Seomatic::$previewingMetaContainers && !Seomatic::$headlessRequest) {
@@ -303,7 +306,7 @@ class MetaContainers extends Component
         }
         Seomatic::$previewingMetaContainers = true;
         $this->includeMatchedElement = $includeElement;
-        $this->loadMetaContainers($uri, $siteId);
+        $this->loadMetaContainers($uri, $siteId, $element);
         // Load in the right globals
         $twig = Craft::$app->getView()->getTwig();
         $globalSets = GlobalSet::findAll([
@@ -355,14 +358,19 @@ class MetaContainers extends Component
      *
      * @param string|null $uri
      * @param int|null $siteId
+     * @param ElementInterface|null $element
      */
-    public function loadMetaContainers(?string $uri = '', ?int $siteId = null)
+    public function loadMetaContainers(?string $uri = '', int $siteId = null, ?ElementInterface $element = null)
     {
         Craft::beginProfile('MetaContainers::loadMetaContainers', __METHOD__);
         // Avoid recursion
         if (!Seomatic::$loadingMetaContainers) {
             Seomatic::$loadingMetaContainers = true;
             $this->setMatchedElement($uri, $siteId);
+            // If this is a draft or revision we're previewing, swap it in so they see the draft preview image & data
+            if ($element && ElementHelper::isDraftOrRevision($element)) {
+                Seomatic::setMatchedElement($element);
+            }
             // Get the cache tag for the matched meta bundle
             $metaBundle = $this->getMatchedMetaBundle();
             $metaBundleSourceId = '';
