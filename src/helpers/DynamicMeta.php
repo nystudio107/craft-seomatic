@@ -131,6 +131,13 @@ class DynamicMeta
                     'href' => $url,
                 ]);
             }
+            // If this page is paginated, we need to factor that into the cache key
+            // We also need to re-add the hreflangs
+            if (Seomatic::$plugin->metaContainers->paginationPage !== '1') {
+                if (Seomatic::$settings->addHrefLang && Seomatic::$settings->addPaginatedHreflang) {
+                    self::addMetaLinkHrefLang();
+                }
+            }
         }
     }
 
