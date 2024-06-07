@@ -211,13 +211,6 @@ class MetaContainers extends Component
     public function includeMetaContainers()
     {
         Craft::beginProfile('MetaContainers::includeMetaContainers', __METHOD__);
-        // If this page is paginated, we need to factor that into the cache key
-        // We also need to re-add the hreflangs
-        if ($this->paginationPage !== '1') {
-            if (Seomatic::$settings->addHrefLang && Seomatic::$settings->addPaginatedHreflang) {
-                DynamicMetaHelper::addMetaLinkHrefLang();
-            }
-        }
         // Fire an 'metaBundleDebugData' event
         if ($this->hasEventHandlers(self::EVENT_METABUNDLE_DEBUG_DATA)) {
             $metaBundle = new MetaBundle([
