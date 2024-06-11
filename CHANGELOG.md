@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.4.78 - UNRELEASED
+### Added
+* Added a setting in Plugin Settings -> Tags to specify which site should be used as the `x-default` for `hreflang` tags ([1162](https://github.com/nystudio107/craft-seomatic/issues/1162))
+
 ### Changed
 * Moved where paginated `hreflang` tags are added for paginated pages, so that they can be overriden via Twig templating code. They are now added inside of `seomatic.helper.paginate()`
 
