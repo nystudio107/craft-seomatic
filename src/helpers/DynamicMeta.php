@@ -640,6 +640,7 @@ class DynamicMeta
             $hreflangLanguage = $language;
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
+            $primary = Seomatic::$settings->xDefaultSite == 0 ? $site->primary : Seomatic::$settings->xDefaultSite == $site->id;
             if ($includeUrl) {
                 $localizedUrls[] = [
                     'id' => $site->id,
@@ -647,7 +648,7 @@ class DynamicMeta
                     'ogLanguage' => $ogLanguage,
                     'hreflangLanguage' => $hreflangLanguage,
                     'url' => $url,
-                    'primary' => $site->primary,
+                    'primary' => $primary,
                     'current' => $thisSite->id === $site->id,
                 ];
             }

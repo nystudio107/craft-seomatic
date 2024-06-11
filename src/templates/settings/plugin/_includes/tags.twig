@@ -20,19 +20,35 @@
             id: "addXDefaultHrefLang",
             name: "addXDefaultHrefLang",
             on: settings.addXDefaultHrefLang,
+            toggle: ".x-default-wrapper",
             warning: configWarning("addXDefaultHrefLang", "seomatic"),
             errors: settings.getErrors("addXDefaultHrefLang"),
         }) }}
 
-        {{ forms.lightswitchField({
-            label: "Include Paginated `hreflang` Tags"|t("seomatic")|md,
-            instructions: "Controls whether SEOmatic will automatically include `hreflang` tags on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)"|t("seomatic"),
-            id: "addPaginatedHreflang",
-            name: "addPaginatedHreflang",
-            on: settings.addPaginatedHreflang,
-            warning: configWarning("addPaginatedHreflang", "seomatic"),
-            errors: settings.getErrors("addPaginatedHreflang"),
-        }) }}
+        <div class="x-default-wrapper {% if not settings.addXDefaultHrefLang %} hidden{% endif %}">
+            {{ forms.selectField({
+                label: "`x-default` site"|md|t("seomatic"),
+                instructions: "Which site should be used as the `x-default` for the `hreflang` tag (default is the Primary site in Craft)."|md|t("seomatic"),
+                id: "xDefaultSite",
+                name: "xDefaultSite",
+                value: settings.xDefaultSite,
+                options: {
+                    0: "Primary"|t("seomatic"),
+                } | merge(sites),
+                warning: configWarning("xDefaultSite", "seomatic"),
+                errors: settings.getErrors("xDefaultSite"),
+            }) }}
+
+            {{ forms.lightswitchField({
+                label: "Include Paginated `hreflang` Tags"|t("seomatic")|md,
+                instructions: "Controls whether SEOmatic will use `hreflang` tags that point to the paginated page rather than the root page on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)"|t("seomatic"),
+                id: "addPaginatedHreflang",
+                name: "addPaginatedHreflang",
+                on: settings.addPaginatedHreflang,
+                warning: configWarning("addPaginatedHreflang", "seomatic"),
+                errors: settings.getErrors("addPaginatedHreflang"),
+            }) }}
+        </div>
 
         {{ forms.lightswitchField({
             label: "Generator Enabled"|t("seomatic"),

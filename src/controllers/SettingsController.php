@@ -882,6 +882,8 @@ class SettingsController extends Controller
         ];
         $variables['selectedSubnavItem'] = 'plugin';
         $variables['settings'] = Seomatic::$settings;
+        $sites = ArrayHelper::map(Craft::$app->getSites()->getAllSites(), 'id', 'name');
+        $variables['sites'] = $sites;
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/plugin/_edit', $variables);
