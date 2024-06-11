@@ -109,6 +109,9 @@ return [
     // Whether to dynamically include the `x-default` hreflang tags
     'addXDefaultHrefLang' => true,
 
+    // The site to use for the `x-default` hreflang tag (0 defaults to the Primary site)
+    'xDefaultSite' => 0,
+
     // Whether to dynamically include hreflang tags on paginated pages
     'addPaginatedHreflang' => true,
 
@@ -162,7 +165,7 @@ return [
 
     // Determines whether the SEOmatic debug toolbar panel should be added to the Yii2 debug toolbar
     'enableDebugToolbarPanel' => true,
-    
+
     // SeoElementInterface[] The default SeoElement type classes
     'defaultSeoElementTypes' => [
     ],
