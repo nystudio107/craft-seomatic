@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.0.4 - UNRELEASED
+## 5.0.4 - 2024.05.13
 ### Added
 * Added a setting in Plugin Settings -> Tags to specify which site should be used as the `x-default` for `hreflang` tags ([1162](https://github.com/nystudio107/craft-seomatic/issues/1162))
 
