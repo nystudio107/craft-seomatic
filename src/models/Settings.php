@@ -160,6 +160,11 @@ class Settings extends VarsModel
     public $addXDefaultHrefLang = true;
 
     /**
+     * @var int The site to use for the `x-default` hreflang tag (0 defaults to the Primary site)
+     */
+    public $xDefaultSite = 0;
+
+    /**
      * @var bool Whether to dynamically include hreflang tags on paginated pages
      */
     public $addPaginatedHreflang = true;
@@ -290,6 +295,8 @@ class Settings extends VarsModel
                 ],
                 'boolean',
             ],
+            ['xDefaultSite', 'integer'],
+            ['xDefaultSite', 'default', 'value' => 0],
             ['cspNonce', 'string'],
             ['cspNonce', 'in', 'range' => [
                 '',

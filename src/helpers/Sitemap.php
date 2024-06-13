@@ -446,8 +446,6 @@ class Sitemap
         /** @var FastcgiCacheBust $plugin */
         $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
         if ($plugin !== null) {
-            // FastcgiCacheBust has an error in its PHPdoc
-            /** @phpstan-ignore-next-line */
             $plugin->cache->clearAll();
         }
     }

@@ -260,7 +260,7 @@ class ImageTransform
             }
         }
 
-        return $assets;
+        return array_filter($assets);
     }
 
     // Protected Static Methods
