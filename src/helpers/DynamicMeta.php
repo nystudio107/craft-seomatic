@@ -132,6 +132,13 @@ class DynamicMeta
                     'href' => $url,
                 ]);
             }
+            // If this page is paginated, we need to factor that into the cache key
+            // We also need to re-add the hreflangs
+            if (Seomatic::$plugin->metaContainers->paginationPage !== '1') {
+                if (Seomatic::$settings->addHrefLang && Seomatic::$settings->addPaginatedHreflang) {
+                    self::addMetaLinkHrefLang();
+                }
+            }
         }
     }
 
@@ -635,6 +642,7 @@ class DynamicMeta
             $hreflangLanguage = $language;
             $hreflangLanguage = strtolower($hreflangLanguage);
             $hreflangLanguage = str_replace('_', '-', $hreflangLanguage);
+            $primary = Seomatic::$settings->xDefaultSite == 0 ? $site->primary : Seomatic::$settings->xDefaultSite == $site->id;
             if ($includeUrl) {
                 $localizedUrls[] = [
                     'id' => $site->id,
@@ -642,7 +650,7 @@ class DynamicMeta
                     'ogLanguage' => $ogLanguage,
                     'hreflangLanguage' => $hreflangLanguage,
                     'url' => $url,
-                    'primary' => $site->primary,
+                    'primary' => $primary,
                     'current' => $thisSite->id === $site->id,
                 ];
             }

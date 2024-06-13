@@ -887,6 +887,8 @@ class SettingsController extends Controller
         ];
         $variables['selectedSubnavItem'] = 'plugin';
         $variables['settings'] = Seomatic::$settings;
+        $sites = ArrayHelper::map(Craft::$app->getSites()->getAllSites(), 'id', 'name');
+        $variables['sites'] = $sites;
 
         // Render the template
         return $this->renderTemplate('seomatic/settings/plugin/_edit', $variables);
@@ -1174,7 +1176,7 @@ class SettingsController extends Controller
             $siteCrumbItems = [];
             $siteGroups = Craft::$app->getSites()->getAllGroups();
             $crumbSites = Collection::make($sites->getAllSites())
-                ->map(fn(Site|array $site) => $site instanceof Site ? ['site' => $site] : $site)
+                ->map(fn(Site $site) => ['site' => $site])
                 ->keyBy(fn(array $site) => $site['site']->id)
                 ->all();
 
@@ -1186,7 +1188,7 @@ class SettingsController extends Controller
                 }
 
                 $groupSiteItems = array_map(fn(Site $site) => [
-                    'status' => $crumbSites[$site->id]['status'] ?? null,
+                    'status' => $crumbSites[$site->id]['site']->status ?? null,
                     'label' => Craft::t('site', $site->name),
                     'url' => UrlHelper::cpUrl("seomatic/{$variables['controllerHandle']}/$site->handle"),
                     'hidden' => !isset($crumbSites[$site->id]),

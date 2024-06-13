@@ -368,7 +368,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
         $variables['parentBundles'] = [];
         // Preview the containers so the preview is correct in the field
         if ($element !== null && $element->uri !== null) {
-            Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true);
+            Seomatic::$plugin->metaContainers->previewMetaContainers($element->uri, $element->siteId, true, true, $element);
             $contentMeta = Seomatic::$plugin->metaBundles->getContentMetaBundleForElement($element);
             $globalMeta = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($element->siteId);
             $variables['parentBundles'] = [$contentMeta, $globalMeta];
@@ -413,7 +413,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
             $html = $cache->getOrSet(
                 self::CACHE_KEY . $cacheKey,
                 function() use ($uri, $siteId, $element) {
-                    Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true);
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($uri, $siteId, true, true, $element);
                     $variables = [
                         'previewTypes' => [
                             $this->elementDisplayPreviewType,

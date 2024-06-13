@@ -10,6 +10,4 @@ parameters:
         - src/seoelements/SeoEvent.php
     ignoreErrors:
     # Until the plugins are ported, exclude their classes
-        - '*nystudio107\\fastcgicachebust\\*'
         - '*besteadfast\\preparsefield\\*'
-        - '*Solspace\\Calendar\\*'
