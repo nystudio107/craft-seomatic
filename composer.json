@@ -63,7 +63,7 @@
     "vlucas/phpdotenv": "^3.0"
   },
   "scripts": {
-    "phpstan": "phpstan --ansi --memory-limit=1G",
+    "phpstan": "phpstan --ansi --memory-limit=2G",
     "check-cs": "ecs check --ansi",
     "fix-cs": "ecs check --fix --ansi",
     "test": "codecept run unit --coverage-xml"
