@@ -28,6 +28,7 @@ use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\Seomatic;
 use Solspace\Calendar\Bundles\GraphQL\Interfaces\EventInterface;
 use Solspace\Calendar\Calendar as CalendarPlugin;
+use Solspace\Calendar\Elements\Db\EventQuery;
 use Solspace\Calendar\Elements\Event;
 use Solspace\Calendar\Events\DeleteModelEvent;
 use Solspace\Calendar\Events\SaveModelEvent;
@@ -228,7 +229,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function getElementRefHandle(): string
     {
-        return Event::refHandle() ?? 'event';
+        return Event::refHandle();
     }
 
     /**
@@ -240,7 +241,9 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
      */
     public static function sitemapElementsQuery(MetaBundle $metaBundle): ElementQueryInterface
     {
-        $query = Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        $query
             ->setCalendar($metaBundle->sourceHandle)
             ->setLoadOccurrences(false)
             ->siteId((int)$metaBundle->sourceSiteId)
@@ -283,11 +286,14 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     public static function previewUri(string $sourceHandle, $siteId)
     {
         $uri = null;
-        $element = Event::find()
+        /** @var EventQuery $query */
+        $query = Event::find();
+        $element = $query
             ->setCalendar($sourceHandle)
             ->siteId($siteId)
             ->one();
         if ($element) {
+            /** @var ElementInterface $element */
             $uri = $element->uri;
         }
 
@@ -382,6 +388,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
     public static function mostRecentElement(Model $sourceModel, int $sourceSiteId)
     {
         /** @var CalendarModel $sourceModel */
+        /** @phpstan-ignore-next-line */
         return Event::find()
             ->setCalendar($sourceModel->handle)
             ->siteId($sourceSiteId)
