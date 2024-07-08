@@ -12,12 +12,12 @@
 namespace nystudio107\seomatic\models;
 
 use Craft;
-use craft\queue\QueueInterface;
+use craft\console\Application as ConsoleApplication;
+use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\base\FrontendTemplate;
 use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\helpers\SiteHelper;
 use nystudio107\seomatic\helpers\Sitemap;
-use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 use yii\web\NotFoundHttpException;
@@ -106,11 +106,12 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $type = $params['type'];
         $handle = $params['handle'];
         $siteId = $params['siteId'];
+        $page = $params['page'] ?? 0;
+
         // If $throwException === false it means we're trying to regenerate the sitemap due to an invalidation
         // rather than a request for the actual sitemap, so don't try to run the queue immediately
         $throwException = $params['throwException'] ?? true;
-        // Only regenerate the sitemap via queue job if it's via an invalidation of the sitemap cache
-        $immediately = $params['immediately'] ?? $throwException;
+
         $request = Craft::$app->getRequest();
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
         // If it doesn't exist, throw a 404
@@ -148,68 +149,58 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         }
 
         $cache = Craft::$app->getCache();
-        $uniqueKey = $groupId . $type . $handle . $siteId;
+        $pageCacheSuffix = 's' . (int)$metaBundle->metaSitemapVars->sitemapPageSize . 'p' . $page;
+
+        $uniqueKey = $groupId . $type . $handle . $siteId . $pageCacheSuffix;
         $cacheKey = self::CACHE_KEY . $uniqueKey;
-        $queueJobCacheKey = self::QUEUE_JOB_CACHE_KEY . $uniqueKey;
         $result = $cache->get($cacheKey);
+
         // If the sitemap isn't cached, start a job to create it
         // Even if it is cached, if $throwException === false we should regenerate it, as it is part of
         // an invalidation
         if ($result === false || $throwException === false) {
-            $queue = Craft::$app->getQueue();
-            // If there's an existing queue job, release it so queue jobs don't stack
-            $existingJobId = $cache->get($queueJobCacheKey);
-            // Make sure the queue uses the Craft web interface
-            if ($existingJobId && $queue instanceof QueueInterface) {
-                $queue->release($existingJobId);
-                $cache->delete($queueJobCacheKey);
-            }
-            // See if we should regenerate this sitemap immediately, or via queue job
-            if ($immediately) {
-                Sitemap::generateSitemap([
-                    'groupId' => $groupId,
-                    'type' => $type,
-                    'handle' => $handle,
-                    'siteId' => $siteId,
-                    'queueJobCacheKey' => $queueJobCacheKey,
-                ]);
-            } else {
-                // Push a new queue job
-                $jobId = $queue->push(new GenerateSitemap([
-                    'groupId' => $groupId,
-                    'type' => $type,
-                    'handle' => $handle,
-                    'siteId' => $siteId,
-                    'queueJobCacheKey' => $queueJobCacheKey,
-                ]));
+            $sitemap = Sitemap::generateSitemap([
+                'groupId' => $groupId,
+                'type' => $type,
+                'handle' => $handle,
+                'siteId' => $siteId,
+                'page' => $page
+            ]);
 
-                // Stash the queue job id in the cache for future reference
-                $cacheDuration = 3600;
+            if ($sitemap) {
                 $dependency = new TagDependency([
                     'tags' => [
                         self::GLOBAL_SITEMAP_CACHE_TAG,
-                        self::CACHE_KEY . $uniqueKey,
+                        self::SITEMAP_CACHE_TAG . $handle . $siteId . $pageCacheSuffix,
                     ],
                 ]);
-                $cache->set($queueJobCacheKey, $jobId, $cacheDuration, $dependency);
-                Craft::debug(
-                    Craft::t(
-                        'seomatic',
-                        'Started GenerateSitemap queue job id: {jobId} with cache key {cacheKey}',
-                        [
-                            'jobId' => $jobId,
-                            'cacheKey' => $cacheKey,
-                        ]
-                    ),
-                    __METHOD__
-                );
+
+                $cacheDuration = Seomatic::$devMode
+                    ? Seomatic::DEVMODE_CACHE_DURATION
+                    : null;
+
+                $result = $cache->set($cacheKey, $sitemap, $cacheDuration, $dependency);
+
+                // Output some info if this is a console app
+                if (Craft::$app instanceof ConsoleApplication) {
+                    echo 'Sitemap cache result: ' . print_r($result, true) . ' for cache key: ' . $cacheKey . PHP_EOL;
+                }
+
+                // If the FastCGI Cache Bust plugin is installed, clear its caches too
+                /** @var FastcgiCacheBust $plugin */
+                $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
+                if ($plugin !== null) {
+                    $plugin->cache->clearAll();
+                }
+
+                // Try it again now
+                $sitemap = $cache->get($cacheKey);
+
+                if ($sitemap !== false) {
+                    return $sitemap;
+                }
             }
 
-            // Try it again now
-            $result = $cache->get($cacheKey);
-            if ($result !== false) {
-                return $result;
-            }
             // Return a 503 Service Unavailable an a Retry-After so bots will try back later
             $lines = [];
             $response = Craft::$app->getResponse();
@@ -231,6 +222,10 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             $lines = implode("\r\n", $lines);
 
             return $lines;
+        } else {
+            if (Craft::$app instanceof ConsoleApplication) {
+                echo 'Found in cache' . PHP_EOL;
+            }
         }
 
         return $result;

@@ -7,9 +7,15 @@
             <div class="flex-grow"></div>
             <a href="{{ seomatic.helper.sitemapIndexForSiteId(currentSiteId) }}" class="btn livepreviewbtn"
                rel="noopener" target="_blank">{{ 'View Sitemap Index'|t("seomatic") }}</a>
-            <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId) }}"
-               class="btn livepreviewbtn" rel="noopener"
-               target="_blank">{{ "View #{currentSourceBundleType |capitalize} Sitemap"|t("seomatic") }}</a>
+            {% if metaSitemapVars.sitemapPageSize %}
+                <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId, 1) }}"
+                   class="btn livepreviewbtn" rel="noopener"
+                   target="_blank">{{ "View first page of #{currentSourceBundleType |capitalize} Sitemap"|t("seomatic") }}</a>
+            {% else %}
+                <a href="{{ seomatic.helper.sitemapUrlForBundle(currentSourceBundleType, currentSourceHandle, currentSiteId) }}"
+                   class="btn livepreviewbtn" rel="noopener"
+                   target="_blank">{{ "View #{currentSourceBundleType |capitalize} Sitemap"|t("seomatic") }}</a>
+            {% endif %}
         </div>
     {% endif %}
 
@@ -63,6 +69,12 @@
 
     {% if field is not defined or 'sitemapLimit' in field.sitemapEnabledFields %}
         {% include "seomatic/settings/_includes/fields/_sitemapLimit.twig" %}
+    {% endif %}
+
+    {# ############## Sitemap Page Size ############## #}
+
+    {% if field is not defined or 'sitemapPageSize' in field.sitemapEnabledFields %}
+        {% include "seomatic/settings/_includes/fields/_sitemapPageSize.twig" %}
     {% endif %}
 
     {% namespace "metaSitemapVars" %}

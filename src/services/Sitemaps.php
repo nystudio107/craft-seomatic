@@ -349,7 +349,7 @@ class Sitemaps extends Component implements SitemapInterface
      *
      * @return string
      */
-    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null): string
+    public function sitemapUrlForBundle(string $sourceBundleType, string $sourceHandle, int $siteId = null, int $page = null): string
     {
         $url = '';
         $sites = Craft::$app->getSites();
@@ -373,7 +373,9 @@ class Sitemaps extends Component implements SitemapInterface
                     . $metaBundle->sourceHandle
                     . '-'
                     . $metaBundle->sourceSiteId
-                    . '-sitemap.xml',
+                    . '-sitemap'
+                    . (!empty($page) ? '-p' . $page : '')
+                    .'.xml',
                     null,
                     null,
                     $siteId
