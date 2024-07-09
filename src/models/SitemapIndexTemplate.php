@@ -180,36 +180,50 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                 if (in_array($metaBundle->sourceSiteId, $groupSiteIds, false)
                     && $sitemapUrls
                     && $robotsEnabled) {
-                    $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
-                        $metaBundle->sourceBundleType,
-                        $metaBundle->sourceHandle,
-                        $metaBundle->sourceSiteId
-                    );
                     // Get all of the elements for this meta bundle type
                     $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
                     $totalElements = 0;
+                    $pageCount = 0;
+
                     if ($seoElement !== null) {
                         // Ensure `null` so that the resulting element query is correct
                         if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
                             $metaBundle->metaSitemapVars->sitemapLimit = null;
                         }
+
                         $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
+
                         if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
                             $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
                         }
+
+                        $pageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
+                        $pageCount = (!empty($pageSize) && $pageSize > 0) ? ceil($totalElements / $pageSize) : 1;
                     }
+
                     // Only add a sitemap to the sitemap index if there's at least 1 element in the resulting sitemap
-                    if ($totalElements > 0) {
-                        $lines[] = '<sitemap>';
-                        $lines[] = '<loc>';
-                        $lines[] = Html::encode($sitemapUrl);
-                        $lines[] = '</loc>';
-                        if ($metaBundle->sourceDateUpdated !== null) {
-                            $lines[] = '<lastmod>';
-                            $lines[] = $metaBundle->sourceDateUpdated->format(DateTime::W3C);
-                            $lines[] = '</lastmod>';
+                    if ($totalElements > 0 && $pageCount > 0) {
+                        for ($page = 1; $page <= $pageCount; $page++) {
+                            $sitemapUrl = Seomatic::$plugin->sitemaps->sitemapUrlForBundle(
+                                $metaBundle->sourceBundleType,
+                                $metaBundle->sourceHandle,
+                                $metaBundle->sourceSiteId,
+                                $pageCount > 1 ? $page : 0 // No paging, if only one page
+                            );
+
+                            $lines[] = '<sitemap>';
+                            $lines[] = '<loc>';
+                            $lines[] = Html::encode($sitemapUrl);
+                            $lines[] = '</loc>';
+
+                            if ($metaBundle->sourceDateUpdated !== null) {
+                                $lines[] = '<lastmod>';
+                                $lines[] = $metaBundle->sourceDateUpdated->format(DateTime::W3C);
+                                $lines[] = '</lastmod>';
+                            }
+                            
+                            $lines[] = '</sitemap>';
                         }
-                        $lines[] = '</sitemap>';
                     }
                 }
             }

@@ -12,21 +12,17 @@ use craft\elements\Asset;
 use craft\elements\MatrixBlock;
 use craft\errors\SiteNotFoundException;
 use craft\fields\Assets as AssetsField;
-use craft\queue\Queue;
 use DateTime;
-use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
-use nystudio107\seomatic\jobs\GenerateSitemap;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
 use nystudio107\seomatic\Seomatic;
 use Throwable;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use yii\base\Exception;
-use yii\caching\TagDependency;
 use yii\helpers\Html;
 use function array_intersect_key;
 use function count;
@@ -56,32 +52,25 @@ class Sitemap
     public const EVENT_INCLUDE_SITEMAP_ENTRY = 'includeSitemapEntry';
 
     /**
+     * @const The number of assets to return in a single paginated query
+     */
+    public const SITEMAP_QUERY_PAGE_SIZE = 100;
+
+    /**
      * Generate a sitemap with the passed in $params
      *
      * @param array $params
-     * @return void
+     * @return string
      * @throws SiteNotFoundException
      */
-    public static function generateSitemap(array $params)
+    public static function generateSitemap(array $params): ?string
     {
-        /** @var Queue $queue */
-        $queue = $params['queue'] ?? null;
-        /** @var GenerateSitemap|null $job */
-        $job = $params['job'] ?? null;
 
-        if (!$job) {
-            $groupId = $params['groupId'];
-            $siteId = $params['siteId'];
-            $handle = $params['handle'];
-            $type = $params['type'];
-            $queueJobCacheKey = $params['queueJobCacheKey'];
-        } else {
-            $groupId = $job->groupId;
-            $siteId = $job->siteId;
-            $handle = $job->handle;
-            $type = $job->type;
-            $queueJobCacheKey = $job->queueJobCacheKey;
-        }
+        $groupId = $params['groupId'];
+        $type = $params['type'];
+        $handle = $params['handle'];
+        $siteId = $params['siteId'];
+        $page = $params['page'];
 
         // Get an array of site ids for this site group
         $groupSiteIds = [];
@@ -108,11 +97,6 @@ class Sitemap
             $groupSiteIds = Craft::$app->getSites()->allSiteIds;
         }
 
-        // Output some info if this is a console app
-        if ($job && Craft::$app instanceof ConsoleApplication) {
-            echo $job->description . PHP_EOL;
-        }
-
         $lines = [];
         // Sitemap index XML header and opening tag
         $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -125,7 +109,7 @@ class Sitemap
         );
         // If it doesn't exist, exit
         if ($metaBundle === null) {
-            return;
+            return null;
         }
         $multiSite = count($metaBundle->sourceAltSiteSettings) > 1;
         $totalElements = null;
@@ -142,47 +126,78 @@ class Sitemap
         }
         $urlsetLine .= '>';
         $lines[] = $urlsetLine;
+
         // Get all of the elements for this meta bundle type
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+
         if ($seoElement !== null) {
             // Ensure `null` so that the resulting element query is correct
             if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
                 $metaBundle->metaSitemapVars->sitemapLimit = null;
             }
+
             $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
             if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
                 $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
             }
         }
+
         // If no elements exist, just exit
         if (!$totalElements) {
-            return;
+            return null;
         }
+
         // Stash the sitemap attributes so they can be modified on a per-entry basis
         $stashedSitemapAttrs = $metaBundle->metaSitemapVars->getAttributes();
         $stashedGlobalVarsAttrs = $metaBundle->metaGlobalVars->getAttributes();
         // Use craft\db\Paginator to paginate the results so we don't exceed any memory limits
         // See batch() and each() discussion here: https://github.com/yiisoft/yii2/issues/8420
         // and here: https://github.com/craftcms/cms/issues/7338
-        $paginator = new Paginator($seoElement::sitemapElementsQuery($metaBundle), [
-            'pageSize' => GenerateSitemap::SITEMAP_QUERY_PAGE_SIZE,
-        ]);
-        $currentElement = 0;
-        // Iterate through the paginated results
-        while ($currentElement < $totalElements) {
+
+        $elementQuery = $seoElement::sitemapElementsQuery($metaBundle);
+
+        // If page provided
+        // Provide just that page
+
+        $sitemapPageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
+
+        $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
+
+        // If this is not a paged sitemap, go through full resultss
+        if (is_null($sitemapPageSize)) {
+            $pagedSitemap = false;
+            $paginator = new Paginator($elementQuery, [
+                'pageSize' => self::SITEMAP_QUERY_PAGE_SIZE,
+            ]);
             $elements = $paginator->getPageResults();
+        } else {
+            $sitemapPage = empty($page) ? 1 : $page;
+            $pagedSitemap = true;
+            $elementQuery->limit($sitemapPageSize);
+            $elementQuery->offset(($sitemapPage - 1) * $sitemapPageSize);
+            $elements = $elementQuery->all();
+            $totalElements = $sitemapPageSize;
+        }
+
+        $currentElement = 1;
+
+        do {
             if (Craft::$app instanceof ConsoleApplication) {
-                echo 'Query ' . $paginator->getCurrentPage() . '/' . $paginator->getTotalPages()
-                    . ' - elements: ' . $paginator->getTotalResults()
-                    . PHP_EOL;
+                if ($pagedSitemap) {
+                    $message = sprintf('Query %d elements',
+                        1,
+                        1,
+                        $totalElements);
+                } else {
+                    $message = sprintf('Query %d / %d - elements: %d',
+                        $paginator->getCurrentPage(),
+                        $paginator->getTotalPages(),
+                        $paginator->getTotalResults());
+                }
+                echo $message . PHP_EOL;
             }
             /** @var Element $element */
             foreach ($elements as $element) {
-                if ($job) {
-                    $job->updateProgress($currentElement++ / $totalElements);
-                } else {
-                    $currentElement++;
-                }
                 // Output some info if this is a console app
                 if (Craft::$app instanceof ConsoleApplication) {
                     echo "Processing element {$currentElement}/{$totalElements} - {$element->title}" . PHP_EOL;
@@ -407,41 +422,25 @@ class Sitemap
                         }
                     }
                 }
+                $currentElement++;
             }
+
+            if ($pagedSitemap) {
+                break;
+            }
+
+            if ($paginator->getCurrentPage() == $paginator->getTotalPages()) {
+                break;
+            }
+
             $paginator->currentPage++;
-        }
+            $elements = $paginator->getPageResults();
+        } while (!empty($elements));
+
         // Sitemap closing tag
         $lines[] = '</urlset>';
 
-        $cache = Craft::$app->getCache();
-        $cacheKey = SitemapTemplate::CACHE_KEY . $groupId . $type . $handle . $siteId;
-        $dependency = new TagDependency([
-            'tags' => [
-                SitemapTemplate::GLOBAL_SITEMAP_CACHE_TAG,
-                SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId,
-            ],
-        ]);
-        $lines = implode('', $lines);
-        // Cache sitemap cache; we use this instead of Seomatic::$cacheDuration because for
-        // Control Panel requests, we set Seomatic::$cacheDuration = 1 so that they are never
-        // cached
-        $cacheDuration = Seomatic::$devMode
-            ? Seomatic::DEVMODE_CACHE_DURATION
-            : null;
-        $result = $cache->set($cacheKey, $lines, $cacheDuration, $dependency);
-        // Remove the queue job id from the cache too
-        $cache->delete($queueJobCacheKey);
-        Craft::debug('Sitemap cache result: ' . print_r($result, true) . ' for cache key: ' . $cacheKey, __METHOD__);
-        // Output some info if this is a console app
-        if (Craft::$app instanceof ConsoleApplication) {
-            echo 'Sitemap cache result: ' . print_r($result, true) . ' for cache key: ' . $cacheKey . PHP_EOL;
-        }
-        // If the FastCGI Cache Bust plugin is installed, clear its caches too
-        /** @var ?FastcgiCacheBust $plugin */
-        $plugin = Craft::$app->getPlugins()->getPlugin('fastcgi-cache-bust');
-        if ($plugin !== null) {
-            $plugin->cache->clearAll();
-        }
+        return implode('', $lines);
     }
 
 
@@ -616,5 +615,9 @@ class Sitemap
                 $lines[] = '</url>';
             }
         }
+    }
+
+    protected static function getElementListSitemap(array $elements) {
+
     }
 }
