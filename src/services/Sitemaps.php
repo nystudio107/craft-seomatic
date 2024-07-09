@@ -375,7 +375,7 @@ class Sitemaps extends Component implements SitemapInterface
                     . $metaBundle->sourceSiteId
                     . '-sitemap'
                     . (!empty($page) ? '-p' . $page : '')
-                    .'.xml',
+                    . '.xml',
                     null,
                     null,
                     $siteId

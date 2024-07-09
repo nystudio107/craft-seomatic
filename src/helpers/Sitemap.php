@@ -65,7 +65,6 @@ class Sitemap
      */
     public static function generateSitemap(array $params): ?string
     {
-
         $groupId = $params['groupId'];
         $type = $params['type'];
         $handle = $params['handle'];
@@ -163,7 +162,7 @@ class Sitemap
 
         $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
 
-        // If this is not a paged sitemap, go through full resultss
+        // If this is not a paged sitemap, go through full results
         if (is_null($sitemapPageSize)) {
             $pagedSitemap = false;
             $paginator = new Paginator($elementQuery, [
@@ -177,6 +176,9 @@ class Sitemap
             $elementQuery->offset(($sitemapPage - 1) * $sitemapPageSize);
             $elements = $elementQuery->all();
             $totalElements = $sitemapPageSize;
+            $paginator = new Paginator($elementQuery, [
+                'pageSize' => $sitemapPageSize,
+            ]);
         }
 
         $currentElement = 1;
@@ -184,10 +186,7 @@ class Sitemap
         do {
             if (Craft::$app instanceof ConsoleApplication) {
                 if ($pagedSitemap) {
-                    $message = sprintf('Query %d elements',
-                        1,
-                        1,
-                        $totalElements);
+                    $message = sprintf('Query %d elements', 1);
                 } else {
                     $message = sprintf('Query %d / %d - elements: %d',
                         $paginator->getCurrentPage(),
@@ -623,7 +622,7 @@ class Sitemap
         }
     }
 
-    protected static function getElementListSitemap(array $elements) {
-
+    protected static function getElementListSitemap(array $elements)
+    {
     }
 }

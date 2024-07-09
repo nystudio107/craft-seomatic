@@ -524,5 +524,5 @@ return [
     'Asset Transform for Images' => 'Asset Transform for Images',
     'Sitemap Asset Transform' => 'Sitemap Asset Transform',
     'Controls whether SEOmatic will use `hreflang` tags that point to the paginated page rather than the root page on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)' => 'Controls whether SEOmatic will use `hreflang` tags that point to the paginated page rather than the root page on paginated pages. [Learn More](https://moz.com/community/q/hreflang-alternate-pagination)',
-    'Primary' => 'Primary'
+    'Primary' => 'Primary',
 ];

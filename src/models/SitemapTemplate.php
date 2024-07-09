@@ -164,7 +164,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 'type' => $type,
                 'handle' => $handle,
                 'siteId' => $siteId,
-                'page' => $page
+                'page' => $page,
             ]);
 
             if ($sitemap) {

@@ -113,18 +113,17 @@ class SitemapController extends Controller
                     $site = Craft::$app->getSites()->getSiteById($metaBundle->sourceSiteId);
                     $sitemap = SitemapTemplate::create();
                     if ($site) {
-                        for ($pageNum  = 1; $pageNum <= $pageCount; $pageNum++) {
+                        for ($pageNum = 1; $pageNum <= $pageCount; $pageNum++) {
                             echo sprintf('Generating page %d of %d' . PHP_EOL, $pageNum, $pageCount);
                             $sitemap->render([
                                 'groupId' => $site->groupId,
                                 'siteId' => $metaBundle->sourceSiteId,
                                 'handle' => $metaBundle->sourceHandle,
                                 'type' => $metaBundle->sourceBundleType,
-                                'page' => $pageNum
+                                'page' => $pageNum,
                             ]);
                         }
-                    // Generate the sitemap so it is in the cache
-
+                        // Generate the sitemap so it is in the cache
                     }
 
                     echo '---' . PHP_EOL;

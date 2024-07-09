@@ -135,7 +135,7 @@ class SitemapController extends Controller
                 'type' => $type,
                 'handle' => $handle,
                 'siteId' => $siteId,
-                'page' => $page
+                'page' => $page,
             ]
         );
         $headers = Craft::$app->response->headers;
