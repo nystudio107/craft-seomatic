@@ -155,12 +155,7 @@ class Sitemap
         // and here: https://github.com/craftcms/cms/issues/7338
 
         $elementQuery = $seoElement::sitemapElementsQuery($metaBundle);
-
-        // If page provided
-        // Provide just that page
-
         $sitemapPageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
-
         $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
 
         // If this is not a paged sitemap, go through full resultss
@@ -184,10 +179,7 @@ class Sitemap
         do {
             if (Craft::$app instanceof ConsoleApplication) {
                 if ($pagedSitemap) {
-                    $message = sprintf('Query %d elements',
-                        1,
-                        1,
-                        $totalElements);
+                    $message = sprintf('Query %d elements', $sitemapPageSize);
                 } else {
                     $message = sprintf('Query %d / %d - elements: %d',
                         $paginator->getCurrentPage(),
