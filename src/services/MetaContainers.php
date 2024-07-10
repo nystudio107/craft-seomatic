@@ -286,7 +286,7 @@ class MetaContainers extends Component
         int               $siteId = null,
         bool              $parseVariables = false,
         bool              $includeElement = true,
-        ?ElementInterface $element = null
+        ?ElementInterface $element = null,
     ) {
         // If we've already previewed the containers for this request, there's no need to do it again
         if (Seomatic::$previewingMetaContainers && !Seomatic::$headlessRequest) {

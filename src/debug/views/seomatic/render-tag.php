@@ -53,8 +53,8 @@ if (is_array($value)) {
                     <?php foreach ($value as $subName => $subValue): ?>
                         <?php $meta['PROPERTY_NAME'] = [$subName]; ?>
                         <?php if ($subName === '__errors') {
-                            continue;
-                        } ?>
+    continue;
+} ?>
                         <tr>
                             <th class="seomatic-property"><?= Html::encode($subName) ?><?= $this->render('render-copy-menu', [
                                     'value' => $subValue ?? '',
