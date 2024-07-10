@@ -268,8 +268,7 @@ class SeoProduct implements SeoElementInterface, GqlSeoElementInterface
         MetaBundle $metaBundle,
         int        $elementId,
         int        $siteId,
-    )
-    {
+    ) {
         return Product::find()
             ->id($elementId)
             ->siteId($siteId)

@@ -64,7 +64,6 @@ class Sitemap
      */
     public static function generateSitemap(array $params): ?string
     {
-
         $groupId = $params['groupId'];
         $type = $params['type'];
         $handle = $params['handle'];
@@ -171,6 +170,9 @@ class Sitemap
             $elementQuery->offset(($sitemapPage - 1) * $sitemapPageSize);
             $elements = $elementQuery->all();
             $totalElements = $sitemapPageSize;
+            $paginator = new Paginator($elementQuery, [
+                'pageSize' => $sitemapPageSize,
+            ]);
         }
 
         $currentElement = 1;
@@ -583,7 +585,7 @@ class Sitemap
         }
     }
 
-    protected static function getElementListSitemap(array $elements) {
-
+    protected static function getElementListSitemap(array $elements)
+    {
     }
 }
