@@ -101,10 +101,11 @@ class SitemapController extends Controller
 
                     $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
                     $elementQuery = $seoElement::sitemapElementsQuery($metaBundle);
-                    $pageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
+                    $pageSize = (int) $metaBundle->metaSitemapVars->sitemapPageSize;
+                    $sitemapLimit = (int) $metaBundle->metaSitemapVars->sitemapLimit;
 
                     if (!empty($pageSize)) {
-                        $total = min($elementQuery->count(), $metaBundle->metaSitemapVars->sitemapLimit);
+                        $total = empty($sitemapLimit) ? $elementQuery->count() : min($elementQuery->count(), $sitemapLimit);
                         $pageCount = ceil($total / $pageSize);
                     } else {
                         $pageCount = 1;
