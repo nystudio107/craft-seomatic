@@ -25,16 +25,6 @@
         }) }}
 
         {{ forms.lightswitchField({
-            label: "Submit Sitemap Changes"|t("seomatic"),
-            instructions: "Should sitemaps be submitted to search engines automatically whenever there are changes?"|t("seomatic"),
-            id: "submitSitemaps",
-            name: "submitSitemaps",
-            on: settings.submitSitemaps,
-            warning: configWarning("submitSitemaps", "seomatic"),
-            errors: settings.getErrors("submitSitemaps"),
-        }) }}
-
-        {{ forms.lightswitchField({
             label: "Exclude Non-Canonical URLs"|t("seomatic"),
             instructions: "Should items where the entry URL doesn't match the canonical URL be excluded?"|t("seomatic"),
             id: "excludeNonCanonicalUrls",
