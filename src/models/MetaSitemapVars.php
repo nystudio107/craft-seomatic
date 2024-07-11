@@ -79,7 +79,7 @@ class MetaSitemapVars extends InheritableSettingsModel
     /**
      * @var null|int
      */
-    public $sitemapPageSize;
+    public $sitemapPageSize = 200;
 
     /**
      * @var null|int
