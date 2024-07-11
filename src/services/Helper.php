@@ -336,9 +336,9 @@ class Helper extends Component
      *
      * @return string
      */
-    public static function sitemapUrlForBundle(string $sourceType, string $sourceHandle, int $siteId = null): string
+    public static function sitemapUrlForBundle(string $sourceType, string $sourceHandle, int $siteId = null, int $page = 0): string
     {
-        return Seomatic::$plugin->sitemaps->sitemapUrlForBundle($sourceType, $sourceHandle, $siteId);
+        return Seomatic::$plugin->sitemaps->sitemapUrlForBundle($sourceType, $sourceHandle, $siteId, $page);
     }
 
     /**
