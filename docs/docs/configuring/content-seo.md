@@ -46,7 +46,7 @@ SEOmatic can automatically include files such as `.pdf`, `.xls`, `.doc` and othe
 
 In addition, SEOmatic can automatically create [Image sitemaps](https://support.google.com/webmasters/answer/178636?hl=en) and [Video sitemaps](https://developers.google.com/webmasters/videosearch/sitemaps) from images & videos in Asset fields or Asset fields in matrix or Neo blocks.
 
-Search engines no longer allow for sitemap submission, but rather will re-crawl your sitemaps on a regular basis to find new pages.
+Search engines no longer accept [sitemap pings](https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping) for content updates, but rather will re-crawl your sitemaps on a regular basis to find new pages.
 
 ### Sitemap Generation
 
