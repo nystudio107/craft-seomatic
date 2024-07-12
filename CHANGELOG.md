@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.1 - UNRELEASED
+### Changed
+* Renamed the **Regenerate Sitemaps Automatically** setting to **Invalidate Sitemap Caches Automatically** for clarity
+
 ## 3.5.0 - 2024.07.12
 ### Added
 * Remove queue generated sitemaps, switch to paginated sitemaps to allow them to be rendered at web response time, but still be managable in size
