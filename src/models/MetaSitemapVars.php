@@ -79,6 +79,11 @@ class MetaSitemapVars extends InheritableSettingsModel
     /**
      * @var null|int
      */
+    public $sitemapPageSize = 500;
+
+    /**
+     * @var null|int
+     */
     public $structureDepth;
 
     /**
@@ -150,6 +155,7 @@ class MetaSitemapVars extends InheritableSettingsModel
             [
                 [
                     'sitemapLimit',
+                    'sitemapPageSize',
                 ],
                 'integer',
             ],

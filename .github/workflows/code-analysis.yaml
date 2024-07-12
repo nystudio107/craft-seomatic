@@ -14,12 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         actions:
-          -
-            name: 'PHPStan'
+          - name: 'PHPStan'
             run: composer phpstan
-          -
-            name: 'Coding Standards'
-            run: composer fix-cs
+          - name: 'Coding Standards'
+            run: composer check-cs
     name: ${{ matrix.actions.name }}
     runs-on: ubuntu-latest
     steps:
