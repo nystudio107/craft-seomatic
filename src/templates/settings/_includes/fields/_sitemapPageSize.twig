@@ -1,0 +1,53 @@
+{% set inheritedFrom = seomatic.helper.findInheritableBundle(parentBundles, "sitemapPageSize", "metaSitemapVars") %}
+{% set hasInheritableValues = inheritedFrom is not null %}
+
+{% set additionalVars = {
+    'isInherited': seomatic.helper.isInherited(metaSitemapVars, "sitemapPageSize"),
+    'fieldLabel': "Sitemap Page Size"|t("seomatic"),
+    'settingName': 'sitemapPageSize',
+    'labelFor': 'metaSitemapVars-sitemapPageSize',
+    'overrideNamespace': 'metaSitemapVars'
+} %}
+
+{% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
+    {% macro sitemapPageSizeField(sitemapPageSizeOptions, metaSitemapVars, suffix) %}
+        {% set disabled = suffix|length > 0 %}
+        <div class="instructions">
+            <p>
+                {{ "Controls how many entries will there be per page in this sitemap. If there are more entries than this in the sitemap, they will be paginated in additional sitemap indexes."|t("seomatic") }}
+            </p>
+        </div>
+
+        {% import "_includes/forms" as forms %}
+        {% namespace "metaSitemapVars" %}
+            {{ forms.selectField({
+                id: "sitemapPageSize" ~ suffix,
+                name: "sitemapPageSize",
+                options: sitemapPageSizeOptions,
+                value: metaSitemapVars.sitemapPageSize,
+                errors: metaSitemapVars.getErrors("sitemapPageSize"),
+                disabled: disabled,
+            }) }}
+
+        {% endnamespace %}
+    {% endmacro %}
+
+    {% set sitemapPageSizeOptions = {
+        (null): "Single page",
+        "1000": "1000",
+        "500": "500",
+        "200": "200",
+        "100": "100",
+        "50": "50",
+        "10": "10",
+        "5": "5",
+    } %}
+
+    {% block inheritedValues %}
+        {{ _self.sitemapPageSizeField(sitemapPageSizeOptions, inheritedFrom.metaSitemapVars ?? metaSitemapVars, "-inherited") }}
+    {% endblock %}
+
+    {% block field %}
+        {{ _self.sitemapPageSizeField(sitemapPageSizeOptions, metaSitemapVars, "") }}
+    {% endblock %}
+{% endembed %}

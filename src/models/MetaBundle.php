@@ -272,6 +272,7 @@ class MetaBundle extends FluentModel
                 ],
                 'number',
                 'min' => 1,
+                'skipOnEmpty' => true,
             ],
             [
                 [

@@ -40,21 +40,19 @@ SEOmatic automatically creates a sitemap index for each of your Site Groups. Thi
 
 Instead of one massive sitemap that must be updated any time anything changes, only the sitemap for the Section, Category Group, or Commerce Product Type will be updated when something changes in it.
 
+Additionally, sitemaps are paginated according to the **Sitemap Page Size** setting (which defaults to `500` per page), to allow for a large number of entries in the sitemaps without hurting performance.
+
 SEOmatic can automatically include files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix or Neo blocks.
 
 In addition, SEOmatic can automatically create [Image sitemaps](https://support.google.com/webmasters/answer/178636?hl=en) and [Video sitemaps](https://developers.google.com/webmasters/videosearch/sitemaps) from images & videos in Asset fields or Asset fields in matrix or Neo blocks.
 
-Sitemap Indexes are automatically submitted to search engines whenever a new Section, Category Group, or Commerce Product Type is added.
-
-Section Sitemaps are automatically submitted to search engines whenever a new Element in that Section, Category Group, or Commerce Product Type is added.
+Search engines no longer allow for sitemap submission via, but rather will re-crawl your sitemaps on a regular basis to find new pages.
 
 ### Sitemap Generation
 
-Because XML sitemaps can be time-intensive to generate with a growing number of entries, SEOmatic creates your sitemaps via a queue job and caches the result. The cache is automatically broken whenever something in that sitemap is changed, and a new queue job is created to regenerate it.
+SEOmatic generates sitemaps on-demmand when requested on the frontend, and then caches the sitemap for future requests so they are fast.
 
-If `runQueueAutomatically` is set to `false` in [General Config Settings](https://craftcms.com/docs/5.x/reference/config/general.html#runqueueautomatically) the Queue job to create the sitemap will not be run during the http request for the sitemap. You’ll need to run it manually via whatever means you use to run the Queue.
-
-Normally SEOmatic will regenerate the sitemap for a Section, Category Group, or Product any time you save an element. However, if you are importing a large number of elements, or prefer to regenerate the sitemap manually you can set disable the **Regenerate Sitemaps Automatically** option in SEOmatic’s Plugin Settings.
+Normally SEOmatic will invalidate the cache for a sitemap for a Section, Category Group, or Product any time you save an element. However,  if you prefer to regenerate the sitemap manually you can set disable the **Regenerate Sitemaps Automatically** option in SEOmatic’s Plugin Settings.
 
 ![Screenshot of a console running the following command to generate a blog sitemap: `./craft seomatic/sitemap/generate --siteId=1 --handle=blog`](../resources/screenshots/seomatic-sitemap-console-command.png)
 

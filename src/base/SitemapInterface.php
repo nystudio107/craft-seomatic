@@ -21,5 +21,5 @@ interface SitemapInterface
     // Constants
     // =========================================================================
 
-    public const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap';
+    public const GLOBAL_SITEMAP_CACHE_TAG = 'seomatic_sitemap_v2';
 }
