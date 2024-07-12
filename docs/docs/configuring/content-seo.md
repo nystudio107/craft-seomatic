@@ -52,7 +52,7 @@ Search engines no longer allow for sitemap submission, but rather will re-crawl 
 
 SEOmatic generates sitemaps on demand when requested on the frontend, and then caches the sitemap for future requests so they are fast.
 
-Normally SEOmatic will invalidate the cache for a sitemap for a Section, Category Group, or Product any time you save an element. However,  if you prefer to regenerate the sitemap manually you can set disable the **Regenerate Sitemaps Automatically** option in SEOmatic’s Plugin Settings.
+Normally SEOmatic will invalidate the cache for a sitemap for a Section, Category Group, or Product any time you save an element. However,  if you prefer to regenerate the sitemap manually you can disable the **Regenerate Sitemaps Automatically** option in SEOmatic’s Plugin Settings.
 
 ![Screenshot of a console running the following command to generate a blog sitemap: `./craft seomatic/sitemap/generate --siteId=1 --handle=blog`](../resources/screenshots/seomatic-sitemap-console-command.png)
 
