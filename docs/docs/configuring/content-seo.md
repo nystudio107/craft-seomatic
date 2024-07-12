@@ -46,13 +46,13 @@ SEOmatic can automatically include files such as `.pdf`, `.xls`, `.doc` and othe
 
 In addition, SEOmatic can automatically create [Image sitemaps](https://support.google.com/webmasters/answer/178636?hl=en) and [Video sitemaps](https://developers.google.com/webmasters/videosearch/sitemaps) from images & videos in Asset fields or Asset fields in matrix or Neo blocks.
 
-Search engines no longer allow for sitemap submission via, but rather will re-crawl your sitemaps on a regular basis to find new pages.
+Search engines no longer accept [sitemap pings](https://developers.google.com/search/blog/2023/06/sitemaps-lastmod-ping) for content updates, but rather will re-crawl your sitemaps on a regular basis to find new pages.
 
 ### Sitemap Generation
 
-SEOmatic generates sitemaps on-demmand when requested on the frontend, and then caches the sitemap for future requests so they are fast.
+SEOmatic generates sitemaps on demmand when requested on the frontend, and then caches the sitemap for future requests so they are fast.
 
-Normally SEOmatic will invalidate the cache for a sitemap for a Section, Category Group, or Product any time you save an element. However,  if you prefer to regenerate the sitemap manually you can set disable the **Regenerate Sitemaps Automatically** option in SEOmatic’s Plugin Settings.
+Normally SEOmatic will invalidate the cache for a sitemap for a Section, Category Group, or Product any time you save an element. However,  if you prefer to regenerate the sitemap manually you can disable the **Regenerate Sitemaps Automatically** option in SEOmatic’s Plugin Settings.
 
 ![Screenshot of a console running the following command to generate a blog sitemap: `./craft seomatic/sitemap/generate --siteId=1 --handle=blog`](../resources/screenshots/seomatic-sitemap-console-command.png)
 
