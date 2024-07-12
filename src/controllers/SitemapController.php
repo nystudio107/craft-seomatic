@@ -120,8 +120,14 @@ class SitemapController extends Controller
      *
      * @return Response
      */
-    public function actionSitemap(int $groupId, string $type, string $handle, int $siteId): Response
+    public function actionSitemap(int $groupId, string $type, string $handle, int $siteId, string $file): Response
     {
+        $page = null;
+
+        if (preg_match('/sitemap-p([\d]+)\.xml/i', $file, $matches)) {
+            $page = $matches[1];
+        }
+
         $xml = Seomatic::$plugin->sitemaps->renderTemplate(
             Sitemaps::SEOMATIC_SITEMAP_CONTAINER,
             [
@@ -129,6 +135,7 @@ class SitemapController extends Controller
                 'type' => $type,
                 'handle' => $handle,
                 'siteId' => $siteId,
+                'page' => $page,
             ]
         );
         $headers = Craft::$app->response->headers;

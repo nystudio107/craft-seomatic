@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.0 - 2024.07.12
+### Added
+* Remove queue generated sitemaps, switch to paginated sitemaps to allow them to be rendered at web response time, but still be managable in size
+
 ## 3.4.78 - 2024.05.13
 ### Added
 * Added a setting in Plugin Settings -> Tags to specify which site should be used as the `x-default` for `hreflang` tags ([1162](https://github.com/nystudio107/craft-seomatic/issues/1162))
