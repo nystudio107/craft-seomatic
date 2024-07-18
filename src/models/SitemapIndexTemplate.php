@@ -20,6 +20,7 @@ use nystudio107\seomatic\base\SitemapInterface;
 use nystudio107\seomatic\events\RegisterSitemapsEvent;
 use nystudio107\seomatic\events\RegisterSitemapUrlsEvent;
 use nystudio107\seomatic\helpers\MetaValue as MetaValueHelper;
+use nystudio107\seomatic\helpers\Sitemap;
 use nystudio107\seomatic\Seomatic;
 use yii\base\Event;
 use yii\caching\TagDependency;
@@ -191,11 +192,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                             $metaBundle->metaSitemapVars->sitemapLimit = null;
                         }
 
-                        $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
-
-                        if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
-                            $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
-                        }
+                        $totalElements = Sitemap::getTotalElementsInSitemap($seoElement, $metaBundle);
 
                         $pageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
                         $pageCount = (!empty($pageSize) && $pageSize > 0) ? ceil($totalElements / $pageSize) : 1;
