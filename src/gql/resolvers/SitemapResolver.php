@@ -15,9 +15,12 @@ use Craft;
 use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
+use nystudio107\seomatic\helpers\Sitemap;
+use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
+use nystudio107\seomatic\Seomatic;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -50,13 +53,16 @@ class SitemapResolver
             return [];
         }
 
+        $sitemapList = [];
         // If either of the source bundle arguments are present, get the sitemap
         if (!empty($arguments['sourceBundleType']) || !empty($arguments['sourceBundleHandle'])) {
-            $filename = self::createFilenameFromComponents($site->groupId, $arguments['sourceBundleType'] ?? '', $arguments['sourceBundleHandle'] ?? '', $siteId);
+            $filenames = self::createSitemapFilenamesFromComponents($site->groupId, $arguments['sourceBundleType'] ?? '', $arguments['sourceBundleHandle'] ?? '', $siteId);
 
-            return [
-                self::getSitemapItemByFilename($filename),
-            ];
+            foreach ($filenames as $filename) {
+                $sitemapList[] = self::getSitemapItemByFilename($filename);
+            }
+
+            return $sitemapList;
         }
 
         $sitemapIndexItems = [self::getSitemapIndexListEntry($siteId, $site->groupId)];
@@ -143,7 +149,7 @@ class SitemapResolver
      */
     protected static function getSitemapItemByFilename($filename)
     {
-        if (!preg_match('/sitemaps-(?P<groupId>\d+)-(?P<type>[\w\.*]+)-(?P<handle>[\w\.*]+)-(?P<siteId>\d+)/i', $filename, $matches)) {
+        if (!preg_match('/sitemaps-(?P<groupId>\d+)-(?P<type>[\w\.*]+)-(?P<handle>[\w\.*]+)-(?P<siteId>\d+)-sitemap(-p(?P<page>\d+))?/i', $filename, $matches)) {
             return null;
         }
 
@@ -165,8 +171,27 @@ class SitemapResolver
      * @param int $siteId
      * @return string
      */
-    protected static function createFilenameFromComponents(int $groupId, string $bundleType, string $bundleHandle, int $siteId): string
+    protected static function createSitemapFilenamesFromComponents(int $groupId, string $bundleType, string $bundleHandle, int $siteId): array
     {
-        return "sitemaps-$groupId-$bundleType-$bundleHandle-$siteId-sitemap.xml";
+        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($bundleType, $bundleHandle, $siteId);
+        if (!$metaBundle) {
+            return [];
+        }
+
+        $pageSize = $metaBundle->metaSitemapVars->sitemapPageSize ?? null;
+        if (!$pageSize) {
+            return ["sitemaps-$groupId-$bundleType-$bundleHandle-$siteId-sitemap.xml"];
+        }
+
+        $seoElementClass = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+        $totalElements = Sitemap::getTotalElementsInSitemap($seoElementClass, $metaBundle);
+        $pageCount = (!empty($pageSize) && $pageSize > 0) ? ceil($totalElements / $pageSize) : 1;
+
+        $sitemapFilenames = [];
+        for ($page = 1; $page <= $pageCount; $page++) {
+            $sitemapFilenames[] = sprintf('sitemaps-%d-%s-%s-%d-sitemap-p%d.xml', $groupId, $bundleType, $bundleHandle, $siteId, $page);
+        }
+
+        return $sitemapFilenames;
     }
 }
