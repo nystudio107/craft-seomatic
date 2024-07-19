@@ -81,18 +81,16 @@ class SeoElements extends Component
     /**
      * @param null|string $metaBundleType
      *
-     * @return SeoElementInterface|null
+     * @return class-string<SeoElementInterface>|null
      */
-    public function getSeoElementByMetaBundleType($metaBundleType)
+    public function getSeoElementByMetaBundleType($metaBundleType): ?string
     {
         if ($metaBundleType === null) {
             return null;
         }
         $seoElements = $this->getAllSeoElementTypes();
-        /** @var SeoElementInterface $seoElement */
-        $seoElement = $seoElements[$metaBundleType] ?? null;
 
-        return $seoElement;
+        return $seoElements[$metaBundleType] ?? null;
     }
 
     /**
