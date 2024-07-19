@@ -336,7 +336,7 @@ class MetaBundles extends Component
     }
 
     /**
-     * @param SeoElementInterface $seoElement
+     * @param class-string<SeoElementInterface> $seoElement
      * @param Model $sourceModel
      * @param int $sourceSiteId
      * @param MetaBundle|null $baseConfig
