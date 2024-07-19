@@ -443,6 +443,23 @@ class Sitemap
         return implode('', $lines);
     }
 
+    /**
+     * Return the total number of elements in a sitemap, respecting metabundle settings.
+     *
+     * @param SeoElementInterface $seoElementClass
+     * @param MetaBundle $metaBundle
+     * @return int|null
+     */
+    public static function getTotalElementsInSitemap(SeoElementInterface $seoElementClass, MetaBundle $metaBundle)
+    {
+        $totalElements = $seoElementClass::sitemapElementsQuery($metaBundle)->count();
+
+        if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
+            $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
+        }
+
+        return $totalElements;
+    }
 
     /**
      * Combine any per-entry type field settings from $element with the passed in
@@ -615,23 +632,5 @@ class Sitemap
                 $lines[] = '</url>';
             }
         }
-    }
-
-    /**
-     * Return the total number of elements in a sitemap, respecting metabundle settings.
-     *
-     * @param string $seoElementClass
-     * @param MetaBundle $metaBundle
-     * @return int|null
-     */
-    public static function getTotalElementsInSitemap(string $seoElementClass, MetaBundle $metaBundle)
-    {
-        $totalElements = $seoElementClass::sitemapElementsQuery($metaBundle)->count();
-
-        if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
-            $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
-        }
-
-        return $totalElements;
     }
 }
