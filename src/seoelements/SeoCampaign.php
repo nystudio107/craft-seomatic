@@ -446,7 +446,6 @@ class SeoCampaign implements SeoElementInterface
         /** @var Site $site */
         foreach ($sites as $site) {
             $seoElement = self::class;
-            /** @var SeoElementInterface $seoElement */
             Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id);
         }
     }

@@ -414,11 +414,11 @@ class Sitemap
     /**
      * Return the total number of elements in a sitemap, respecting metabundle settings.
      *
-     * @param SeoElementInterface $seoElement
+     * @param class-string<SeoElementInterface> $seoElement
      * @param MetaBundle $metaBundle
      * @return int|null
      */
-    public static function getTotalElementsInSitemap(SeoElementInterface $seoElement, MetaBundle $metaBundle): ?int
+    public static function getTotalElementsInSitemap(string $seoElement, MetaBundle $metaBundle): ?int
     {
         $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
 
