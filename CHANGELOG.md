@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.5.1 - UNRELEASED
+## 3.5.1 - 2024.07.19
 ### Changed
 * Renamed the **Regenerate Sitemaps Automatically** setting to **Invalidate Sitemap Caches Automatically** for clarity
 
