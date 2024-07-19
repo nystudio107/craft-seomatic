@@ -585,7 +585,21 @@ class Sitemap
         }
     }
 
-    protected static function getElementListSitemap(array $elements)
+    /**
+     * Return the total number of elements in a sitemap, respecting metabundle settings.
+     *
+     * @param string $seoElementClass
+     * @param MetaBundle $metaBundle
+     * @return int|null
+     */
+    public static function getTotalElementsInSitemap(string $seoElementClass, MetaBundle $metaBundle)
     {
+        $totalElements = $seoElementClass::sitemapElementsQuery($metaBundle)->count();
+
+        if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
+            $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
+        }
+
+        return $totalElements;
     }
 }
