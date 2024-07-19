@@ -9,7 +9,7 @@ Plugin Settings let you control various SEOmatic settings across all sites/langu
 * **Plugin name** – The name used for the plugin throughout the control panel.
 * **Automatic Render Enabled** – Controls whether SEOmatic automatically renders metadata on your pages. If you turn this off, you will need to manually render the metadata via `seomatic.tag.render()`, `seomatic.link.render()`, etc. Selectively disable rendering via Twig with `{% do seomatic.config.renderEnabled(false) %}`.
 * **Sitemaps Enabled** – Controls whether SEOmatic will automatically render front-end sitemaps for your site.
-* **Regenerate Sitemaps Automatically** – Controls whether sitemaps will automatically be regenerated when entries are saved.
+* **Invalidate Sitemap Caches Automatically** – Controls whether sitemap caches will automatically be invalidated when entries are saved.
 * **Include Homepage in Breadcrumbs** – Should the homepage be included in the generated Breadcrumbs JSON-LD?
 * **Manually Set SEOmatic Environment** – If off, SEOmatic will automatically attempt to determine the current environment. Turn this on to manually set the environment.
 * **Environment** – The server environment, either `live`, `staging`, or `local`. If `devMode` is on, SEOmatic will override this setting to local Development. This setting controls whether certain things render; for instance only in the `live` production environment will Google Analytics and other tracking tags send analytics data. SEOmatic also automatically sets the `robots` tag to `none` for everything but the `live` production environment.
