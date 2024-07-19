@@ -182,13 +182,15 @@ class SitemapResolver
             return ["sitemaps-$groupId-$bundleType-$bundleHandle-$siteId-sitemap.xml"];
         }
 
-        $seoElementClass = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
-        $totalElements = Sitemap::getTotalElementsInSitemap($seoElementClass, $metaBundle);
-        $pageCount = $pageSize > 0 ? ceil($totalElements / $pageSize) : 1;
-
         $sitemapFilenames = [];
-        for ($page = 1; $page <= $pageCount; $page++) {
-            $sitemapFilenames[] = sprintf('sitemaps-%d-%s-%s-%d-sitemap-p%d.xml', $groupId, $bundleType, $bundleHandle, $siteId, $page);
+        $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
+        if ($seoElement) {
+            $totalElements = Sitemap::getTotalElementsInSitemap($seoElement, $metaBundle);
+            $pageCount = $pageSize > 0 ? ceil($totalElements / $pageSize) : 1;
+
+            for ($page = 1; $page <= $pageCount; $page++) {
+                $sitemapFilenames[] = sprintf('sitemaps-%d-%s-%s-%d-sitemap-p%d.xml', $groupId, $bundleType, $bundleHandle, $siteId, $page);
+            }
         }
 
         return $sitemapFilenames;

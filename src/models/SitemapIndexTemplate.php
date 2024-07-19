@@ -192,7 +192,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                             $metaBundle->metaSitemapVars->sitemapLimit = null;
                         }
 
-                        $totalElements = Sitemap::getTotalElementsInSitemap($seoElement::class, $metaBundle);
+                        $totalElements = Sitemap::getTotalElementsInSitemap($seoElement, $metaBundle);
 
                         $pageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
                         $pageCount = (!empty($pageSize) && $pageSize > 0) ? ceil($totalElements / $pageSize) : 1;
