@@ -168,7 +168,7 @@ class SitemapResolver
      * @param string $bundleType
      * @param string $bundleHandle
      * @param int $siteId
-     * @return string
+     * @return array
      */
     protected static function createSitemapFilenamesFromComponents(int $groupId, string $bundleType, string $bundleHandle, int $siteId): array
     {
@@ -184,7 +184,7 @@ class SitemapResolver
 
         $seoElementClass = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
         $totalElements = Sitemap::getTotalElementsInSitemap($seoElementClass, $metaBundle);
-        $pageCount = (!empty($pageSize) && $pageSize > 0) ? ceil($totalElements / $pageSize) : 1;
+        $pageCount = $pageSize > 0 ? ceil($totalElements / $pageSize) : 1;
 
         $sitemapFilenames = [];
         for ($page = 1; $page <= $pageCount; $page++) {

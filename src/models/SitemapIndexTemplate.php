@@ -192,7 +192,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                             $metaBundle->metaSitemapVars->sitemapLimit = null;
                         }
 
-                        $totalElements = Sitemap::getTotalElementsInSitemap($seoElement, $metaBundle);
+                        $totalElements = Sitemap::getTotalElementsInSitemap($seoElement::class, $metaBundle);
 
                         $pageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
                         $pageCount = (!empty($pageSize) && $pageSize > 0) ? ceil($totalElements / $pageSize) : 1;
@@ -218,7 +218,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                                 $lines[] = $metaBundle->sourceDateUpdated->format(DateTime::W3C);
                                 $lines[] = '</lastmod>';
                             }
-                            
+
                             $lines[] = '</sitemap>';
                         }
                     }
