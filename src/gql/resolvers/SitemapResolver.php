@@ -16,7 +16,6 @@ use GraphQL\Type\Definition\ResolveInfo;
 use nystudio107\seomatic\helpers\Gql as GqlHelper;
 use nystudio107\seomatic\helpers\PluginTemplate;
 use nystudio107\seomatic\helpers\Sitemap;
-use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapCustomTemplate;
 use nystudio107\seomatic\models\SitemapIndexTemplate;
 use nystudio107\seomatic\models\SitemapTemplate;
