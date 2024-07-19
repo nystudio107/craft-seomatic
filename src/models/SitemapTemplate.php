@@ -171,6 +171,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                 $dependency = new TagDependency([
                     'tags' => [
                         self::GLOBAL_SITEMAP_CACHE_TAG,
+                        self::SITEMAP_CACHE_TAG . $handle . $siteId,
                         self::SITEMAP_CACHE_TAG . $handle . $siteId . $pageCacheSuffix,
                     ],
                 ]);
