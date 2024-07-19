@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 5.1.1 - 2024.07.19
+### Changed
+* Renamed the **Regenerate Sitemaps Automatically** setting to **Invalidate Sitemap Caches Automatically** for clarity
+
+### Fixed
+* Fixed an issue where getting the sitemaps via GraphQL and meta container endpoint only retrieved the first page since the switch to paginated sitemaps ([#1492](https://github.com/nystudio107/craft-seomatic/issues/1492))
+* Fixed an issue where saving an entry could be slow, because SEOmatic was pointlessly trying to regenerate the sitemap cache (which is no longer a thing with paginated sitemaps) ([#1494](https://github.com/nystudio107/craft-seomatic/issues/1494))
+
 ## 5.1.0 - 2024.07.12
 ### Added
 * Remove queue generated sitemaps, switch to paginated sitemaps to allow them to be rendered at web response time, but still be managable in size
