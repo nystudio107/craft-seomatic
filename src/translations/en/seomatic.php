@@ -163,7 +163,7 @@ return [
     'From Asset Field' => 'From Asset Field',
     'Whether the `ads.txt` template should be rendered' => 'Whether the `ads.txt` template should be rendered',
     '#{varData.title}' => '#{varData.title}',
-    'SEO Preview:' => 'SEO Preview:',
+    'SEO Preview' => 'SEO Preview',
     'Additional Sitemaps' => 'Additional Sitemaps',
     'Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap' => 'Whether the URLs to files such as `.pdf`, `.xls`, `.doc` and other indexable file types in Asset fields or Asset fields in matrix blocks should be included in the sitemap',
     ' Settings' => ' Settings',
