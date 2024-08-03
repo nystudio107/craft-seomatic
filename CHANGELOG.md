@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.2 - UNRELEASED
+### Changed
+* Made the SEO preview sidebar UI more consistent with Craft ([#1497](https://github.com/nystudio107/craft-seomatic/pull/1497))
+
 ## 5.1.1 - 2024.07.19
 ### Changed
 * Renamed the **Regenerate Sitemaps Automatically** setting to **Invalidate Sitemap Caches Automatically** for clarity
