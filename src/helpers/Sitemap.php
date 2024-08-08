@@ -158,7 +158,7 @@ class Sitemap
         $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
 
         // If this is not a paged sitemap, go through full results
-        if (is_null($sitemapPageSize)) {
+        if (empty($sitemapPageSize)) {
             $pagedSitemap = false;
             $paginator = new Paginator($elementQuery, [
                 'pageSize' => self::SITEMAP_QUERY_PAGE_SIZE,
