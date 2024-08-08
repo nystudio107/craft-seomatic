@@ -17,6 +17,7 @@ use craft\errors\SiteNotFoundException;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
+use yii\web\BadRequestHttpException;
 
 /**
  * @author    nystudio107
@@ -78,9 +79,18 @@ class Container
                 = Seomatic::$plugin->metaBundles->getMetaSourceFromElement($element);
         }
         $metaContainers = Seomatic::$plugin->metaContainers;
+        // Cache requests that have a token associated with them separately
+        $token = '';
+        $request = Craft::$app->getRequest();
+        if (!$request->isConsoleRequest) {
+            try {
+                $token = $request->getToken() ?? '';
+            } catch (BadRequestHttpException $e) {
+            }
+        }
         // Get our cache key
         $asArrayKey = $asArray ? 'true' : 'false';
-        $cacheKey = $uri . $siteId . implode($containerKeys) . $asArrayKey . Seomatic::$environment;
+        $cacheKey = $uri . $siteId . implode($containerKeys) . $asArrayKey . Seomatic::$environment . $token;
         // Load the meta containers
         $dependency = new TagDependency([
             'tags' => [
@@ -90,7 +100,6 @@ class Container
                 $metaContainers::METACONTAINER_CACHE_TAG . $cacheKey,
             ],
         ]);
-
         $cache = Craft::$app->getCache();
         $result = $cache->getOrSet(
             self::CACHE_KEY . $cacheKey,
