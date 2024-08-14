@@ -51,6 +51,7 @@ use Throwable;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
+use yii\web\BadRequestHttpException;
 use function is_array;
 use function is_object;
 
@@ -394,8 +395,17 @@ class MetaContainers extends Component
                     Seomatic::$previewingMetaContainers = true;
                 }
             }
+            // Cache requests that have a token associated with them separately
+            $token = '';
+            $request = Craft::$app->getRequest();
+            if (!$request->isConsoleRequest) {
+                try {
+                    $token = $request->getToken() ?? '';
+                } catch (BadRequestHttpException $e) {
+                }
+            }
             // Get our cache key
-            $cacheKey = $uri . $siteId . $paginationPage . $requestPath . $this->getAllowedUrlParams();
+            $cacheKey = $uri . $siteId . $paginationPage . $requestPath . $this->getAllowedUrlParams() . $token;
             // For requests with a status code of >= 400, use one cache key
             if (!$request->isConsoleRequest) {
                 $response = Craft::$app->getResponse();
