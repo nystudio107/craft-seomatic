@@ -9,4 +9,4 @@ parameters:
     # The preparse field namespace changed, and is aliased, but rather than implementing class aliases
     # using PhpStan, just ignore errors from the old namespace
     # ref: https://phpstan.org/user-guide/discovering-symbols#class-aliases
-    #    - '*besteadfast\\preparsefield\\*'
+        - '*besteadfast\\preparsefield\\*'
