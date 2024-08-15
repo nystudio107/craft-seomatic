@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.1.2 - UNRELEASED
+## 4.1.2 - 2024.08.15
 ### Changed
 * Made the SEO preview sidebar UI more consistent with Craft ([#1497](https://github.com/nystudio107/craft-seomatic/pull/1497))
 
