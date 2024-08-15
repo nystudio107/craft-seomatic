@@ -1,5 +1,11 @@
 # SEOmatic Changelog
 
+## 3.5.2 - 2024.08.15
+### Fixed
+* Fixed an issue where GraphQL or Meta Container endpoint requests that had a token set were not being caches separately
+* Also add any `token` to the meta container cache key for regular requests
+* Fixed an issue where using "Single Page" for the **Sitemap Page Size** setting would cause an exception to be thrown when generating the sitemap ([#1498](https://github.com/nystudio107/craft-seomatic/issues/1498))
+
 ## 3.5.1 - 2024.07.19
 ### Changed
 * Renamed the **Regenerate Sitemaps Automatically** setting to **Invalidate Sitemap Caches Automatically** for clarity
