@@ -1,6 +1,7 @@
 actor: Tester
 paths:
   tests: tests
+  output: tests/_output
   log: tests/_output
   data: tests/_data
   support: tests/_support
@@ -29,13 +30,13 @@ modules:
     \craft\test\Craft:
       configFile: 'tests/_craft/config/test.php'
       entryUrl: 'http://testcraft.test/index.php'
-      projectConfig: {}
-      migrations: []
+      projectConfig: { }
+      migrations: [ ]
       plugins:
         seomatic:
           class: '\nystudio107\seomatic\Seomatic'
           handle: seomatic
       cleanup: true
       transaction: true
-      dbSetup: {clean: true, setupCraft: true}
+      dbSetup: { clean: true, setupCraft: true }
       fullMock: false

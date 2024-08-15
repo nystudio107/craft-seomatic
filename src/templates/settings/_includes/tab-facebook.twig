@@ -3,7 +3,7 @@
 
 <fieldset>
     {% if field is not defined or 'seoPreview' in field.facebookEnabledFields %}
-        <h4 class="heading">{{ "SEO Preview:"|t('seomatic') }}</h4>
+        <h4 class="heading">{{ "SEO Preview"|t('seomatic') }}:</h4>
         {% include "seomatic/_includes/facebookPreview.twig" %}
     {% endif %}
 
