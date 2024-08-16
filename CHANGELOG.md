@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.3 - UNRELEASED
+### Changed
+* Make the Content SEO listings better at eliminating duplicates by pruning sections that no longer exist ([#1499](https://github.com/nystudio107/craft-seomatic/issues/1499))
+
 ## 3.5.2 - 2024.08.15
 ### Fixed
 * Fixed an issue where GraphQL or Meta Container endpoint requests that had a token set were not being caches separately
