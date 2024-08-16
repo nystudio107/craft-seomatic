@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+
+## 5.1.3 - UNRELEASED
+### Changed
+* Make the Content SEO listings better at eliminating duplicates by pruning sections that no longer exist ([#1499](https://github.com/nystudio107/craft-seomatic/issues/1499))
+
 ## 5.1.2 - 2024.08.15
 ### Changed
 * Made the SEO preview sidebar UI more consistent with Craft ([#1497](https://github.com/nystudio107/craft-seomatic/pull/1497))
