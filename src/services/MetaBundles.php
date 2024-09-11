@@ -895,7 +895,7 @@ class MetaBundles extends Component
         if ($sourceBundleType && $sourceBundleType !== self::GLOBAL_META_BUNDLE) {
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
             if ($seoElement) {
-                $sourceModel = $seoElement::sourceModelFromHandle($metaBundle->sourceHandle);
+                $sourceModel = $seoElement::sourceModelFromId($metaBundle->sourceId);
                 /** @var Section|CategoryGroup|ProductType|null $sourceModel */
                 if ($sourceModel === null) {
                     $prune = true;
