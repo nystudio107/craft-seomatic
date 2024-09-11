@@ -271,7 +271,6 @@ class MetaBundle extends FluentModel
                     'typeId',
                 ],
                 'number',
-                'min' => 1,
                 'skipOnEmpty' => true,
             ],
             [
