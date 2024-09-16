@@ -73,6 +73,8 @@ class UrlHelper extends CraftUrlHelper
     public static function mergeUrlWithPath(string $url, string $path): string
     {
         $overlap = 0;
+        $url = rtrim($url, '/') . '/';
+        $path = '/' . ltrim($path, '/');
         $urlOffset = strlen($url);
         $pathLength = strlen($path);
         $pathOffset = 0;
