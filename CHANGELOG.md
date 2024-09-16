@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.1.4 - UNRELEASED
+### Fixed
+* Normalize the incoming `url` and `path` so that `mergUrlWithPath()` handles edge-cases properly ([#1512](https://github.com/nystudio107/craft-seomatic/issues/1512))
+
 ## 4.1.3 - 2024.09.10
 ### Changed
 * Make the Content SEO listings better at eliminating duplicates by pruning sections that no longer exist ([#1499](https://github.com/nystudio107/craft-seomatic/issues/1499))
