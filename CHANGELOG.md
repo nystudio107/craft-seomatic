@@ -9,6 +9,7 @@
 ### Changed
 * Make the Content SEO listings better at eliminating duplicates by pruning sections that no longer exist ([#1499](https://github.com/nystudio107/craft-seomatic/issues/1499))
 * Fixed an issue where a section with a `typeId` of `0` wouldn't validate, and thus the changes to the Content SEO settings would not validate & save ([#1510](https://github.com/nystudio107/craft-seomatic/issues/1510))
+* Fixed an issue where the homepage metacontainer cache did not get properly cleared ([#1514](https://github.com/nystudio107/craft-seomatic/issues/1514))
 
 ## 3.5.2 - 2024.08.15
 ### Fixed
