@@ -298,7 +298,7 @@ class ImageTransform
             return self::$cachedAssetsElements[$resolvedAssetId][$resolvedSiteId];
         }
 
-        $asset = Craft::$app->getAssets()->getAssetById($asset, $siteId);
+        $asset = Craft::$app->getAssets()->getAssetById($resolvedAssetId, $siteId);
         self::$cachedAssetsElements[$resolvedAssetId][$resolvedSiteId] = $asset;
 
         return $asset;
