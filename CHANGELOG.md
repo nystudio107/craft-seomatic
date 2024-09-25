@@ -5,6 +5,7 @@
 * Normalize the incoming `url` and `path` so that `mergUrlWithPath()` handles edge-cases properly ([#1512](https://github.com/nystudio107/craft-seomatic/issues/1512))
 * Fixed an issue where the `ads.txt` wasn't renamed properly when requested via GraphQL ([#1513](https://github.com/nystudio107/craft-seomatic/issues/1513))
 * Fixed an issue where the homepage metacontainer cache did not get properly cleared ([#1514](https://github.com/nystudio107/craft-seomatic/issues/1514))
+* Fixed an exception caused by the wrong argument passed to `Asset::getAssetById()` in edge cases ([#1515](https://github.com/nystudio107/craft-seomatic/issues/1515))
 
 ## 5.1.3 - 2024.09.10
 ### Changed
