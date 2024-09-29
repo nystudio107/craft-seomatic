@@ -38,7 +38,7 @@ class FrontendContainerResolver
         $typeMap = [
             'robots' => 'robots.txt',
             'humans' => 'humans.txt',
-            'ads' => 'humans.txt',
+            'ads' => 'ads.txt',
             'security' => 'security.txt',
         ];
 
