@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.5.4 - UNRELEASED
+## 3.5.4 - 2024.09.29
 ### Fixed
 * Normalize the incoming `url` and `path` so that `mergUrlWithPath()` handles edge-cases properly ([#1512](https://github.com/nystudio107/craft-seomatic/issues/1512))
 * Fixed an issue where the `ads.txt` wasn't renamed properly when requested via GraphQL ([#1513](https://github.com/nystudio107/craft-seomatic/issues/1513))
