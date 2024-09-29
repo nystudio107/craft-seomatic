@@ -108,10 +108,6 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $siteId = $params['siteId'];
         $page = $params['page'] ?? 0;
 
-        // If $throwException === false it means we're trying to regenerate the sitemap due to an invalidation
-        // rather than a request for the actual sitemap, so don't try to run the queue immediately
-        $throwException = $params['throwException'] ?? true;
-
         $request = Craft::$app->getRequest();
         $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle($type, $handle, $siteId);
         // If it doesn't exist, throw a 404
@@ -119,10 +115,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             if ($request->isCpRequest || $request->isConsoleRequest) {
                 return '';
             }
-            if ($throwException) {
-                throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
-            }
-            return '';
+            throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
         }
         // Check to see if robots is `none` or `no index`
         $robotsEnabled = true;
@@ -143,9 +136,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
             if ($request->isCpRequest || $request->isConsoleRequest) {
                 return '';
             }
-            if ($throwException) {
-                throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
-            }
+            throw new NotFoundHttpException(Craft::t('seomatic', 'Page not found.'));
         }
 
         $cache = Craft::$app->getCache();
@@ -155,10 +146,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
         $cacheKey = self::CACHE_KEY . $uniqueKey;
         $result = $cache->get($cacheKey);
 
-        // If the sitemap isn't cached, start a job to create it
-        // Even if it is cached, if $throwException === false we should regenerate it, as it is part of
-        // an invalidation
-        if ($result === false || $throwException === false) {
+        // If the sitemap isn't cached, render it immediately
+        if ($result === false) {
             $sitemap = Sitemap::generateSitemap([
                 'groupId' => $groupId,
                 'type' => $type,
@@ -194,35 +183,8 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     $plugin->cache->clearAll();
                 }
 
-                // Try it again now
-                $sitemap = $cache->get($cacheKey);
-
-                if ($sitemap !== false) {
-                    return $sitemap;
-                }
+                return $sitemap;
             }
-
-            // Return a 503 Service Unavailable an a Retry-After so bots will try back later
-            $lines = [];
-            $response = Craft::$app->getResponse();
-            if (!$request->isConsoleRequest && $throwException) {
-                $response->setStatusCode(503);
-                $response->headers->add('Retry-After', '60');
-                $response->headers->add('Cache-Control', 'no-cache, no-store');
-                // Return an empty XML document
-                $lines[] = '<?xml version="1.0" encoding="UTF-8"?>';
-                $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap-empty.xsl"?>';
-                $lines[] = '<!-- ' . Craft::t('seomatic', 'This sitemap has not been generated yet.') . ' -->';
-                $lines[] = '<!-- ' . Craft::t('seomatic', 'If you are seeing this in local dev or an') . ' -->';
-                $lines[] = '<!-- ' . Craft::t('seomatic', 'environment with `devMode` on, caches only') . ' -->';
-                $lines[] = '<!-- ' . Craft::t('seomatic', 'last for 30 seconds in local dev, so it is') . ' -->';
-                $lines[] = '<!-- ' . Craft::t('seomatic', 'normal for the sitemap to not be cached.') . ' -->';
-                $lines[] = '<urlset>';
-                $lines[] = '</urlset>';
-            }
-            $lines = implode("\r\n", $lines);
-
-            return $lines;
         } else {
             if (Craft::$app instanceof ConsoleApplication) {
                 echo 'Found in cache' . PHP_EOL;
