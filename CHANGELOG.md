@@ -1,9 +1,17 @@
 # SEOmatic Changelog
 
+## 4.1.4 - 2024.09.29
+### Fixed
+* Normalize the incoming `url` and `path` so that `mergUrlWithPath()` handles edge-cases properly ([#1512](https://github.com/nystudio107/craft-seomatic/issues/1512))
+* Fixed an issue where the `ads.txt` wasn't renamed properly when requested via GraphQL ([#1513](https://github.com/nystudio107/craft-seomatic/issues/1513))
+* Fixed an exception caused by the wrong argument passed to `Asset::getAssetById()` in edge cases ([#1515](https://github.com/nystudio107/craft-seomatic/issues/1515))
+* Removed vestigial sitemap rendering code in `SitemapTemplate` that had a code path that had a code path that could return a `503` ([#1437](https://github.com/nystudio107/craft-seomatic/issues/1437))
+
 ## 4.1.3 - 2024.09.10
 ### Changed
 * Make the Content SEO listings better at eliminating duplicates by pruning sections that no longer exist ([#1499](https://github.com/nystudio107/craft-seomatic/issues/1499))
 * Fixed an issue where a section with a `typeId` of `0` wouldn't validate, and thus the changes to the Content SEO settings would not validate & save ([#1510](https://github.com/nystudio107/craft-seomatic/issues/1510))
+* Fixed an issue where the homepage metacontainer cache did not get properly cleared ([#1514](https://github.com/nystudio107/craft-seomatic/issues/1514))
 
 ## 4.1.2 - 2024.08.15
 ### Changed
