@@ -67,36 +67,6 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
             handle: 'seoKeywords',
         },
         {
-            label: 'SEO Image Source',
-            handle: 'seoImageSource',
-            default: {
-            type: 'select',
-            options: [
-                {
-                    label: 'From Asset Field',
-                    value: 'fromField',
-                },
-                {
-                    label: 'Custom Image',
-                    value: 'fromAsset',
-                },
-                {
-                    label: 'Custom URL',
-                    value: 'fromUrl',
-                },
-            ],
-        },
-        },
-        {
-            label: 'SEO Asset Field',
-            handle: 'seoImageField',
-        },
-        {
-            label: 'SEO Custom Image',
-            handle: 'seoImageIds',
-            type: 'assets',
-        },
-        {
             label: 'SEO Custom URL',
             handle: 'seoImage',
         },
@@ -158,8 +128,37 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
             handle: 'twitterDescription',
         },
         {
-            label: 'X (Twitter) Image Source',
-            handle: 'twitterImageSource',
+            label: 'X (Twitter) Custom URL',
+            handle: 'twitterImage',
+        },
+        {
+            label: 'X (Twitter) Image Description',
+            handle: 'twitterImageDescription',
+        },
+        {
+            label: 'Facebook Title',
+            handle: 'ogTitle',
+        },
+        {
+            label: 'Facebook Description',
+            handle: 'ogDescription',
+        },
+        {
+            label: 'Facebook Custom URL',
+            handle: 'ogImage',
+        },
+        {
+            label: 'Facebook Image Description',
+            handle: 'ogImageDescription',
+        },
+    ],
+}, {
+    label: 'General Settings',
+    handle: 'metaBundleSettings',
+    fields: [
+        {
+            label: 'SEO Image Source',
+            handle: 'seoImageSource',
             default: {
             type: 'select',
             options: [
@@ -179,29 +178,13 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
         },
         },
         {
-            label: 'X (Twitter) Asset Field',
-            handle: 'twitterImageField',
+            label: 'SEO Asset Field',
+            handle: 'seoImageField',
         },
         {
-            label: 'X (Twitter) Custom Image',
-            handle: 'twitterImageIds',
+            label: 'SEO Custom Image',
+            handle: 'seoImageIds',
             type: 'assets',
-        },
-        {
-            label: 'X (Twitter) Custom URL',
-            handle: 'twitterImage',
-        },
-        {
-            label: 'X (Twitter) Image Description',
-            handle: 'twitterImageDescription',
-        },
-        {
-            label: 'Facebook Title',
-            handle: 'ogTitle',
-        },
-        {
-            label: 'Facebook Description',
-            handle: 'ogDescription',
         },
         {
             label: 'Facebook Image Source',
@@ -234,12 +217,34 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
             type: 'assets',
         },
         {
-            label: 'Facebook Custom URL',
-            handle: 'ogImage',
+            label: 'X (Twitter) Image Source',
+            handle: 'twitterImageSource',
+            default: {
+            type: 'select',
+            options: [
+                {
+                    label: 'From Asset Field',
+                    value: 'fromField',
+                },
+                {
+                    label: 'Custom Image',
+                    value: 'fromAsset',
+                },
+                {
+                    label: 'Custom URL',
+                    value: 'fromUrl',
+                },
+            ],
+        },
         },
         {
-            label: 'Facebook Image Description',
-            handle: 'ogImageDescription',
+            label: 'X (Twitter) Asset Field',
+            handle: 'twitterImageField',
+        },
+        {
+            label: 'X (Twitter) Custom Image',
+            handle: 'twitterImageIds',
+            type: 'assets',
         },
     ],
 }, {
