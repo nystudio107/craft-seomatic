@@ -3,6 +3,7 @@
 ## 5.1.5 - UNRELEASED
 ### Fixed
 * Fixed `togImageField` field typo in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))
+* Fixed a field mapping issue for fields in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))
 
 ## 5.1.4 - 2024.09.29
 ### Fixed
