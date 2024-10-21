@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.1.5 - UNRELEASED
+## 5.1.5 - 2024.10.21
 ### Fixed
 * Fixed `togImageField` field typo in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))
 * Fixed a field mapping issue for fields in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))
