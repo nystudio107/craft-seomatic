@@ -3,7 +3,7 @@ PLUGINDEV_PROJECT_DIR?=/Users/andrew/webdev/sites/plugindev/cms_v${MAJOR_VERSION
 VENDOR?=nystudio107
 PROJECT_PATH?=${VENDOR}/$(shell basename $(CURDIR))
 
-.PHONY: dev release
+.PHONY: dev docs release
 
 # Start up the buildchain dev server
 dev:

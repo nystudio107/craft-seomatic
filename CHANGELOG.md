@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.5.5 - 2024.10.21
+### Fixed
+* Fixed `togImageField` field typo in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))
+* Fixed a field mapping issue for fields in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))
+
 ## 3.5.4 - 2024.09.29
 ### Fixed
 * Normalize the incoming `url` and `path` so that `mergUrlWithPath()` handles edge-cases properly ([#1512](https://github.com/nystudio107/craft-seomatic/issues/1512))
