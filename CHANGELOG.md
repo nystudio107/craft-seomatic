@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.6 - UNRELEASED
+### Changed
+* No longer do a potentially expensive query on page load for sections that have a massive number of entries ([#1526](https://github.com/nystudio107/craft-seomatic/issues/1526))
+
 ## 3.5.5 - 2024.10.21
 ### Fixed
 * Fixed `togImageField` field typo in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))
