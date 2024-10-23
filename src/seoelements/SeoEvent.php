@@ -212,7 +212,7 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         /** @var Site $site */
         foreach ($sites as $site) {
             $seoElement = self::class;
-            Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id);
+            Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id, null, true);
         }
     }
 
