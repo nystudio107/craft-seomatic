@@ -37,6 +37,7 @@ use nystudio107\seomatic\records\MetaBundle as MetaBundleRecord;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\Tag as TagService;
 use Throwable;
+use yii\base\InvalidConfigException;
 use function in_array;
 
 /**
@@ -339,15 +340,17 @@ class MetaBundles extends Component
      * @param class-string<SeoElementInterface> $seoElement
      * @param Model $sourceModel
      * @param int $sourceSiteId
-     * @param MetaBundle|null $baseConfig
-     *
+     * @param null $baseConfig
+     * @param bool $syncConfig
      * @return MetaBundle|null
+     * @throws InvalidConfigException
      */
     public function createMetaBundleFromSeoElement(
         $seoElement,
         $sourceModel,
         int $sourceSiteId,
         $baseConfig = null,
+        $syncConfig = false,
     ) {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
@@ -368,42 +371,44 @@ class MetaBundles extends Component
             // Create a MetaBundle for this site
             $siteSetting = $siteSettings[$sourceSiteId];
             if ($siteSetting->hasUrls && SiteHelper::siteEnabledWithUrls($sourceSiteId)) {
-                // Get the most recent dateUpdated
-                $element = $seoElement::mostRecentElement($sourceModel, $sourceSiteId);
-                /** @var Element|null $element */
-                if ($element) {
-                    $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
-                } else {
-                    $dateUpdated = new DateTime();
-                }
-                // Create a new meta bundle with propagated defaults
-                $metaBundleDefaults = ArrayHelper::merge(
-                    $seoElement::metaBundleConfig($sourceModel),
-                    [
-                        'sourceTemplate' => (string)$siteSetting->template,
-                        'sourceSiteId' => $siteSetting->siteId,
-                        'sourceAltSiteSettings' => $siteSettingsArray,
-                        'sourceDateUpdated' => $dateUpdated,
-                    ]
-                );
-                // The mainEntityOfPage computedType must be set before creating the bundle
-                if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
-                    $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] =
-                        $baseConfig->metaGlobalVars->mainEntityOfPage;
-                }
-                // Merge in any migrated settings from an old Seomatic_Meta Field
-                if ($element !== null) {
-                    /** @var Element $elementFromSite */
-                    $elementFromSite = Craft::$app->getElements()->getElementById($element->id, null, $sourceSiteId);
-                    if ($element instanceof Element) {
-                        $config = MigrationHelper::configFromSeomaticMeta(
-                            $elementFromSite,
-                            MigrationHelper::SECTION_MIGRATION_CONTEXT
-                        );
-                        $metaBundleDefaults = ArrayHelper::merge(
-                            $metaBundleDefaults,
-                            $config
-                        );
+                if ($syncConfig) {
+                    // Get the most recent dateUpdated
+                    $element = $seoElement::mostRecentElement($sourceModel, $sourceSiteId);
+                    /** @var Element|null $element */
+                    if ($element) {
+                        $dateUpdated = $element->dateUpdated ?? $element->dateCreated;
+                    } else {
+                        $dateUpdated = new DateTime();
+                    }
+                    // Create a new meta bundle with propagated defaults
+                    $metaBundleDefaults = ArrayHelper::merge(
+                        $seoElement::metaBundleConfig($sourceModel),
+                        [
+                            'sourceTemplate' => (string)$siteSetting->template,
+                            'sourceSiteId' => $siteSetting->siteId,
+                            'sourceAltSiteSettings' => $siteSettingsArray,
+                            'sourceDateUpdated' => $dateUpdated,
+                        ]
+                    );
+                    // The mainEntityOfPage computedType must be set before creating the bundle
+                    if ($baseConfig !== null && !empty($baseConfig->metaGlobalVars->mainEntityOfPage)) {
+                        $metaBundleDefaults['metaGlobalVars']['mainEntityOfPage'] =
+                            $baseConfig->metaGlobalVars->mainEntityOfPage;
+                    }
+                    // Merge in any migrated settings from an old Seomatic_Meta Field
+                    if ($element !== null) {
+                        /** @var Element $elementFromSite */
+                        $elementFromSite = Craft::$app->getElements()->getElementById($element->id, null, $sourceSiteId);
+                        if ($element instanceof Element) {
+                            $config = MigrationHelper::configFromSeomaticMeta(
+                                $elementFromSite,
+                                MigrationHelper::SECTION_MIGRATION_CONTEXT
+                            );
+                            $metaBundleDefaults = ArrayHelper::merge(
+                                $metaBundleDefaults,
+                                $config
+                            );
+                        }
                     }
                 }
                 $metaBundle = MetaBundle::create($metaBundleDefaults);
