@@ -444,6 +444,7 @@ class SeoCampaign implements SeoElementInterface
     public static function createContentMetaBundle(Model $sourceModel)
     {
         /** @var CampaignTypeModel $sourceModel */
+        $sourceModel->attachBehavior('SEOmaticCampaignBehavior', CampaignBehavior::class);
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var Site $site */
         foreach ($sites as $site) {
