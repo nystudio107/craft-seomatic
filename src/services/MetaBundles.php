@@ -410,12 +410,12 @@ class MetaBundles extends Component
                             );
                         }
                     }
+                    $metaBundle = MetaBundle::create($metaBundleDefaults);
+                    if ($baseConfig !== null) {
+                        $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
+                    }
+                    $this->updateMetaBundle($metaBundle, $sourceSiteId);
                 }
-                $metaBundle = MetaBundle::create($metaBundleDefaults);
-                if ($baseConfig !== null) {
-                    $this->mergeMetaBundleSettings($metaBundle, $baseConfig);
-                }
-                $this->updateMetaBundle($metaBundle, $sourceSiteId);
             }
         }
 
