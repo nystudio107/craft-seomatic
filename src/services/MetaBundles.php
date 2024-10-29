@@ -340,7 +340,7 @@ class MetaBundles extends Component
      * @param class-string<SeoElementInterface> $seoElement
      * @param Model $sourceModel
      * @param int $sourceSiteId
-     * @param null $baseConfig
+     * @param ?MetaBundle $baseConfig
      * @param bool $syncConfig
      * @return MetaBundle|null
      * @throws InvalidConfigException
