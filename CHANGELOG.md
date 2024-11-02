@@ -3,6 +3,7 @@
 ## 5.1.6 - UNRELEASED
 ### Changed
 * No longer do a potentially expensive query on page load for sections that have a massive number of entries ([#1526](https://github.com/nystudio107/craft-seomatic/issues/1526))
+* Improved the display of the Entry Types menu in Content SEO
 
 ### Fixed
 * Fixed an issue where an exception would be thrown if the Campaign plugin was installed first, and then you newly installed SEOmatic ([#1530](https://github.com/nystudio107/craft-seomatic/issues/1530))
