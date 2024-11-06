@@ -20,6 +20,7 @@ use nystudio107\seomatic\helpers\Config;
 return [
     '*' => [
         'siteName' => '',
+        'siteAlternateName' => '',
         'identity' => Config::getConfigFromFile('globalmeta/Identity'),
         'creator' => Config::getConfigFromFile('globalmeta/Creator'),
         'twitterHandle' => '',
