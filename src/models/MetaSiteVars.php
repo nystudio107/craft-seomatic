@@ -36,15 +36,16 @@ class MetaSiteVars extends VarsModel
 
     public const CONTAINER_TYPE = 'MetaSiteVarsContainer';
 
-    // Static Methods
+    // Public Properties
     // =========================================================================
     /**
      * @var string The name of the website
      */
     public $siteName = '';
-
-    // Public Properties
-    // =========================================================================
+    /**
+     * @var string The alternate name of the website
+     */
+    public $siteAlternateName = '';
     /**
      * @var Entity|array|null
      */
@@ -160,6 +161,7 @@ class MetaSiteVars extends VarsModel
             [
                 [
                     'siteName',
+                    'siteAlternateName',
                     'twitterHandle',
                     'facebookProfileId',
                     'facebookAppId',

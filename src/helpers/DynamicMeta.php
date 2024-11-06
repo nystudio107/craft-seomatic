@@ -335,7 +335,7 @@ class DynamicMeta
             if ($mainEntity instanceof WebPage || $mainEntity instanceof WebSite) {
                 /** WebPage $mainEntity */
                 $mainEntity->name = "{{ seomatic.site.siteName }}";
-                $mainEntity->alternateName = "{{ seomatic.site.identity.genericAlternateName }}";
+                $mainEntity->alternateName = "{{ seomatic.site.siteAlternateName }}";
             }
         }
     }
