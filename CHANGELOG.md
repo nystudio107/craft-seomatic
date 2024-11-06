@@ -2,7 +2,7 @@
 
 ## 4.1.6 - UNRELEASED
 ### Added
-* Added the **Site Alternate Name** property to Site Settings, used used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
+* Added the **Site Alternate Name** property to Site Settings, used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
 
 ### Changed
 * No longer do a potentially expensive query on page load for sections that have a massive number of entries ([#1526](https://github.com/nystudio107/craft-seomatic/issues/1526))
