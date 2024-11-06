@@ -4,7 +4,7 @@
 ### Changed
 * No longer do a potentially expensive query on page load for sections that have a massive number of entries ([#1526](https://github.com/nystudio107/craft-seomatic/issues/1526))
 * Improved the display of the Entry Types menu in Content SEO
-* If the current route is the homepage, set the `name` and `alternateName` JSON-LD for the `mainEntityOfPage` to `seomatic.site.siteName` (which is the Craft Site name), rather than the `seomatic.meta.seoTitle` ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
+* If the current route is the homepage, set the `name` and `alternateName` JSON-LD for the `mainEntityOfPage` to `seomatic.site.identity.genericName` and `seomatic.site.identity.genericAlternateName` respectively, rather than the `seomatic.meta.seoTitle` ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
 
 ### Fixed
 * Fixed an issue where an exception would be thrown if the Campaign plugin was installed first, and then you newly installed SEOmatic ([#1530](https://github.com/nystudio107/craft-seomatic/issues/1530))
