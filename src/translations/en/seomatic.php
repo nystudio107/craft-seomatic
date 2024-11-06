@@ -534,5 +534,5 @@ return [
     'The public name of the website; this is appended to the page title by default. This is also used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite.' => 'The public name of the website; this is appended to the page title by default. This is also used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite.',
     'SEO Preview:' => 'SEO Preview:',
     'Controls how many entries will there be per page in this sitemap.' => 'Controls how many entries will there be per page in this sitemap.',
-    'Controls whether sitemaps will automatically be invalidated when entries are saved.' => 'Controls whether sitemaps will automatically be invalidated when entries are saved.'
+    'Controls whether sitemaps will automatically be invalidated when entries are saved.' => 'Controls whether sitemaps will automatically be invalidated when entries are saved.',
 ];
