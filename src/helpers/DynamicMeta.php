@@ -334,7 +334,7 @@ class DynamicMeta
             $mainEntity = Seomatic::$plugin->jsonLd->get('mainEntityOfPage');
             if ($mainEntity instanceof WebPage || $mainEntity instanceof WebSite) {
                 /** WebPage $mainEntity */
-                $mainEntity->name = "{{ seomatic.site.identity.genericName }}";
+                $mainEntity->name = "{{ seomatic.site.siteName }}";
                 $mainEntity->alternateName = "{{ seomatic.site.identity.genericAlternateName }}";
             }
         }
