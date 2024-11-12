@@ -257,6 +257,7 @@ class Field
      * @param string $sourceHandle
      * @param string $fieldClassKey
      * @param bool $keysOnly
+     * @param int|string|null $typeId
      *
      * @return array
      */
@@ -265,6 +266,7 @@ class Field
         string $sourceHandle,
         string $fieldClassKey,
         bool   $keysOnly = true,
+               $typeId = null
     ): array {
         $foundFields = [];
         $layouts = [];
@@ -272,7 +274,7 @@ class Field
         if ($sourceBundleType !== MetaBundles::GLOBAL_META_BUNDLE) {
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
             if ($seoElement !== null) {
-                $layouts = $seoElement::fieldLayouts($sourceHandle);
+                $layouts = $seoElement::fieldLayouts($sourceHandle, $typeId);
             }
         }
         // Iterate through the layouts looking for the fields of the type $fieldType
