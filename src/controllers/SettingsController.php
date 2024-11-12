@@ -615,8 +615,8 @@ class SettingsController extends Controller
         $variables['sourceType'] = $metaBundle->sourceType;
         // Pass in the pull fields
         $groupName = ucfirst($metaBundle->sourceType);
-        $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables);
-        $uri = $this->uriFromSourceBundle($sourceBundleType, $sourceHandle, $siteId);
+        $this->setContentFieldSourceVariables($sourceBundleType, $sourceHandle, $groupName, $variables, $typeId);
+        $uri = $this->uriFromSourceBundle($sourceBundleType, $sourceHandle, $siteId, $typeId);
         // Preview the meta containers
         Seomatic::$plugin->metaContainers->previewMetaContainers(
             $uri,
@@ -1219,12 +1219,14 @@ class SettingsController extends Controller
      * @param string $sourceHandle
      * @param string $groupName
      * @param array $variables
+     * @param int|string|null $typeId
      */
     protected function setContentFieldSourceVariables(
         string $sourceBundleType,
         string $sourceHandle,
         string $groupName,
-        array  &$variables
+        array  &$variables,
+               $typeId = null
     ) {
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
@@ -1232,7 +1234,8 @@ class SettingsController extends Controller
                 $sourceBundleType,
                 $sourceHandle,
                 FieldHelper::TEXT_FIELD_CLASS_KEY,
-                false
+                false,
+                $typeId
             )
         );
         $variables['assetFieldSources'] = array_merge(
@@ -1241,7 +1244,8 @@ class SettingsController extends Controller
                 $sourceBundleType,
                 $sourceHandle,
                 FieldHelper::ASSET_FIELD_CLASS_KEY,
-                false
+                false,
+                $typeId
             )
         );
         $variables['assetVolumeTextFieldSources'] = array_merge(
@@ -1263,13 +1267,15 @@ class SettingsController extends Controller
     }
 
     /**
+     * /**
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param null|int $siteId
+     * @param int|string|null $typeId
      *
      * @return string
      */
-    protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle, $siteId): string
+    protected function uriFromSourceBundle(string $sourceBundleType, string $sourceHandle, $siteId, $typeId): string
     {
         $uri = null;
         // Pick an Element to be used for the preview
@@ -1278,7 +1284,7 @@ class SettingsController extends Controller
         } else {
             $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
             if ($seoElement !== null) {
-                $uri = $seoElement::previewUri($sourceHandle, $siteId);
+                $uri = $seoElement::previewUri($sourceHandle, $siteId, $typeId);
             }
         }
         // Special-case for the __home__ slug, and default to /
