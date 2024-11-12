@@ -12,7 +12,6 @@
 namespace nystudio107\seomatic\base;
 
 use craft\base\ElementInterface;
-
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
 use nystudio107\seomatic\models\MetaBundle;
@@ -74,36 +73,38 @@ interface SeoElementInterface
      * and Element ID
      *
      * @param MetaBundle $metaBundle
-     * @param int        $elementId
-     * @param int        $siteId
+     * @param int $elementId
+     * @param int $siteId
      *
      * @return null|ElementInterface
      */
     public static function sitemapAltElement(
         MetaBundle $metaBundle,
-        int $elementId,
-        int $siteId,
+        int        $elementId,
+        int        $siteId,
     );
 
     /**
      * Return a preview URI for a given $sourceHandle and $siteId
      * This just returns the first element
      *
-     * @param string    $sourceHandle
-     * @param int|null  $siteId
+     * @param string $sourceHandle
+     * @param int|null $siteId
+     * @param int|string|null $typeId
      *
-     * @return string|null
+     * @return ?string
      */
-    public static function previewUri(string $sourceHandle, $siteId);
+    public static function previewUri(string $sourceHandle, $siteId, $typeId = null): ?string;
 
     /**
      * Return an array of FieldLayouts from the $sourceHandle
      *
      * @param string $sourceHandle
+     * @param int|string|null $typeId
      *
      * @return array
      */
-    public static function fieldLayouts(string $sourceHandle): array;
+    public static function fieldLayouts(string $sourceHandle, $typeId = null): array;
 
     /**
      * Return the (entry) type menu as a $id => $name associative array
@@ -136,7 +137,7 @@ interface SeoElementInterface
      * Return the most recently updated Element from a given source model
      *
      * @param Model $sourceModel
-     * @param int   $sourceSiteId
+     * @param int $sourceSiteId
      *
      * @return null|ElementInterface
      */
