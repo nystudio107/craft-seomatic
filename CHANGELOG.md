@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 3.5.6 - 2024.11.12
+### Added
+* Added the **Site Alternate Name** property to Site Settings, used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
+* Added **Letterbox** crop mode for SEO image transforms ([#1337](https://github.com/nystudio107/craft-seomatic/issues/1337))
+
+### Changed
+* No longer do a potentially expensive query on page load for sections that have a massive number of entries ([#1526](https://github.com/nystudio107/craft-seomatic/issues/1526))
+* If the current route is the homepage, set the `name` and `alternateName` JSON-LD for the `mainEntityOfPage` to `seomatic.site.siteName` and `seomatic.site.identity.genericAlternateName` respectively, rather than the `seomatic.meta.seoTitle` ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
+* The SEO preview display in Content SEO will pull an entry from the specific Entry Type rather than just the first entry ([#1535](https://github.com/nystudio107/craft-seomatic/issues/1535))
+* Text and Asset pull sources in Content SEO will now display only fields from the specific Entry Type rather than all fields for that Section ([#1535](https://github.com/nystudio107/craft-seomatic/issues/1535))
+
+### Fixed
+* Fixed an issue where an exception would be thrown if the Campaign plugin was installed first, and then you newly installed SEOmatic ([#1530](https://github.com/nystudio107/craft-seomatic/issues/1530))
+
 ## 3.5.5 - 2024.10.21
 ### Fixed
 * Fixed `togImageField` field typo in the FeedMe integration ([#1520](https://github.com/nystudio107/craft-seomatic/issues/1520))

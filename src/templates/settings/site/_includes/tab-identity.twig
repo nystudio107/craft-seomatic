@@ -4,10 +4,18 @@
 {% namespace "site" %}
     {{ forms.textField({
         label: "Site Name"|t("seomatic"),
-        instructions: "The public name of the website; this is appended to the page title by default."|t("seomatic"),
+        instructions: "The public name of the website; this is appended to the page title by default. This is also used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite."|t("seomatic"),
         id: "siteName",
         name: "siteName",
         value: site.siteName,
+        warning: false,
+    }) }}
+    {{ forms.textField({
+        label: "Site Alternate Name"|t("seomatic"),
+        instructions: "An alternate public name for the website. This is used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite."|t("seomatic"),
+        id: "siteAlternateName",
+        name: "siteAlternateName",
+        value: site.siteAlternateName,
         warning: false,
     }) }}
 {% endnamespace %}
@@ -15,7 +23,7 @@
 {% set entity = site.identity %}
 {% namespace "site[identity]" %}
 
-    {############### Main Entity of Page ###############}
+    {# ############## Main Entity of Page ############## #}
 
     {% include "seomatic/settings/_includes/mainEntityOfPage-partial.twig" with {
         "mainEntityOfPage": entity,

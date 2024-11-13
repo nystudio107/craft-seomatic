@@ -38,11 +38,15 @@ class MetaSiteVars extends VarsModel
 
     // Public Properties
     // =========================================================================
-
     /**
      * @var string The name of the website
      */
     public $siteName = '';
+
+    /**
+     * @var string The alternate name of the website
+     */
+    public $siteAlternateName = '';
 
     /**
      * @var Entity|array
@@ -171,6 +175,7 @@ class MetaSiteVars extends VarsModel
             [
                 [
                     'siteName',
+                    'siteAlternateName',
                     'twitterHandle',
                     'facebookProfileId',
                     'facebookAppId',
