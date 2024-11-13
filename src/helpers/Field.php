@@ -275,7 +275,7 @@ class Field
         string $sourceHandle,
         string $fieldClassKey,
         bool   $keysOnly = true,
-               $typeId = null
+               $typeId = null,
     ): array {
         $foundFields = [];
         $layouts = [];

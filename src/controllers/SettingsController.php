@@ -1222,7 +1222,7 @@ class SettingsController extends Controller
         string $sourceHandle,
         string $groupName,
         array  &$variables,
-               $typeId = null
+               $typeId = null,
     ) {
         $variables['textFieldSources'] = array_merge(
             ['entryGroup' => ['optgroup' => $groupName . ' Fields'], 'title' => 'Title'],
