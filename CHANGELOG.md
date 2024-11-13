@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.1.6 - UNRELEASED
+## 5.1.6 - 2024.11.12
 ### Added
 * Added the **Site Alternate Name** property to Site Settings, used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
 * Added **Letterbox** crop mode for SEO image transforms ([#1337](https://github.com/nystudio107/craft-seomatic/issues/1337))
