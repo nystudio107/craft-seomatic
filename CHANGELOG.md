@@ -9,8 +9,8 @@
 * No longer do a potentially expensive query on page load for sections that have a massive number of entries ([#1526](https://github.com/nystudio107/craft-seomatic/issues/1526))
 * Improved the display of the Entry Types menu in Content SEO
 * If the current route is the homepage, set the `name` and `alternateName` JSON-LD for the `mainEntityOfPage` to `seomatic.site.siteName` and `seomatic.site.siteAlternateName` respectively, rather than the `seomatic.meta.seoTitle` ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
-* The SEO preview display in Content SEO will pull an entry from the specific Entry Type rather than just the first entry ([#1535](https://github.com/nystudio107/craft-seomatic/issues/1535))
-* Text and Asset pull sources in Content SEO will now display only fields from the specific Entry Type rather than all fields for that Section ([#1535](https://github.com/nystudio107/craft-seomatic/issues/1535))
+* The SEO preview display in Content SEO will pull an entry from the specific Entry Type rather than just the first entry. Note: If you have a custom `SeoElement` PHP class, it will require a very minor method signature change to continue working ([#1535](https://github.com/nystudio107/craft-seomatic/issues/1535))
+* Text and Asset pull sources in Content SEO will now display only fields from the specific Entry Type rather than all fields for that Section. Note: If you have a custom `SeoElement` PHP class, it will require a very minor method signature change to continue working ([#1535](https://github.com/nystudio107/craft-seomatic/issues/1535))
 
 ### Fixed
 * Fixed an issue where an exception would be thrown if the Campaign plugin was installed first, and then you newly installed SEOmatic ([#1530](https://github.com/nystudio107/craft-seomatic/issues/1530))
