@@ -255,10 +255,11 @@ class SeoCampaign implements SeoElementInterface
      *
      * @param string $sourceHandle
      * @param int|null $siteId
+     * @param int|string|null $typeId
      *
-     * @return string|null
+     * @return ?string
      */
-    public static function previewUri(string $sourceHandle, $siteId)
+    public static function previewUri(string $sourceHandle, $siteId, $typeId = null): ?string
     {
         $uri = null;
         $element = CampaignElement::find()
@@ -276,10 +277,11 @@ class SeoCampaign implements SeoElementInterface
      * Return an array of FieldLayouts from the $sourceHandle
      *
      * @param string $sourceHandle
+     * @param int|string|null $typeId
      *
      * @return array
      */
-    public static function fieldLayouts(string $sourceHandle): array
+    public static function fieldLayouts(string $sourceHandle, $typeId = null): array
     {
         $layouts = [];
         try {
@@ -442,11 +444,12 @@ class SeoCampaign implements SeoElementInterface
     public static function createContentMetaBundle(Model $sourceModel)
     {
         /** @var CampaignTypeModel $sourceModel */
+        $sourceModel->attachBehavior('SEOmaticCampaignBehavior', CampaignBehavior::class);
         $sites = Craft::$app->getSites()->getAllSites();
         /** @var Site $site */
         foreach ($sites as $site) {
             $seoElement = self::class;
-            Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id);
+            Seomatic::$plugin->metaBundles->createMetaBundleFromSeoElement($seoElement, $sourceModel, $site->id, null, true);
         }
     }
 

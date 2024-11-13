@@ -29,6 +29,8 @@ use nystudio107\seomatic\models\jsonld\LocalBusiness;
 use nystudio107\seomatic\models\jsonld\OpeningHoursSpecification;
 use nystudio107\seomatic\models\jsonld\Organization;
 use nystudio107\seomatic\models\jsonld\Thing;
+use nystudio107\seomatic\models\jsonld\WebPage;
+use nystudio107\seomatic\models\jsonld\WebSite;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\MetaJsonLd;
 use nystudio107\seomatic\models\MetaLink;
@@ -291,6 +293,7 @@ class DynamicMeta
         if (!$request->getIsConsoleRequest()) {
             $response = Craft::$app->getResponse();
             if ($response->statusCode < 400) {
+                self::handleHomepage();
                 self::addMetaJsonLdBreadCrumbs($siteId);
                 if (Seomatic::$settings->addHrefLang) {
                     self::addMetaLinkHrefLang($uri, $siteId);
@@ -316,6 +319,25 @@ class DynamicMeta
             }
         }
         Craft::endProfile('DynamicMeta::addDynamicMetaToContainers', __METHOD__);
+    }
+
+    /**
+     * If this is the homepage, and the MainEntityOfPage is WebPage or a WebSite, set the name
+     * and alternateName so it shows up in SERP as per:
+     * https://developers.google.com/search/docs/appearance/site-names
+     *
+     * @return void
+     */
+    public static function handleHomepage(): void
+    {
+        if (Seomatic::$matchedElement && Seomatic::$matchedElement->uri === '__home__') {
+            $mainEntity = Seomatic::$plugin->jsonLd->get('mainEntityOfPage');
+            if ($mainEntity instanceof WebPage || $mainEntity instanceof WebSite) {
+                /** WebPage $mainEntity */
+                $mainEntity->name = "{{ seomatic.site.siteName }}";
+                $mainEntity->alternateName = "{{ seomatic.site.siteAlternateName }}";
+            }
+        }
     }
 
     /**
