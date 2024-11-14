@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.7 - UNRELEASED
+### Fixed
+* Fixed a parse error if running PHP < `8.0`
+
 ## 3.5.6 - 2024.11.12
 ### Added
 * Added the **Site Alternate Name** property to Site Settings, used in the JSON-LD for the homepage, if the MainEntityOfPage is WebPage or WebSite ([#1482](https://github.com/nystudio107/craft-seomatic/issues/1482))
