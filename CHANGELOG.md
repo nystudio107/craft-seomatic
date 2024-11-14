@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.5.7 - UNRELEASED
+## 3.5.7 - 2024.11.14
 ### Fixed
 * Fixed a parse error if running PHP < `8.0`
 
