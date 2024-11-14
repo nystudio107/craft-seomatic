@@ -350,7 +350,7 @@ class MetaBundles extends Component
         $sourceModel,
         int $sourceSiteId,
         $baseConfig = null,
-        $syncConfig = false,
+        $syncConfig = false
     ) {
         $metaBundle = null;
         // Get the site settings and turn them into arrays
