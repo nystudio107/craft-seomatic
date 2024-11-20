@@ -1,8 +1,9 @@
 # SEOmatic Changelog
 
-## 5.1.7 - UNRELEASED
+## 5.1.7 - 2024.11.20
 ### Fixed
 * Fixed an issue where sites that are not enabled for a given Section were still showing up in the Sites menu in Content SEO ([#1539](https://github.com/nystudio107/craft-seomatic/issues/1539))
+* Fixed an issue where newly created sections would not have Content SEO settings show up for  ([#1544](https://github.com/nystudio107/craft-seomatic/issues/1544))
 
 ## 5.1.6 - 2024.11.12
 ### Added
