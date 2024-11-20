@@ -37,12 +37,12 @@
     ]
   },
   "src/js/seomatic.js": {
-    "file": "assets/seomatic-pGx7eHQv.js",
+    "file": "assets/seomatic-C8AB7bSt.js",
     "name": "seomatic",
     "src": "src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic-CR7hXxYp.css"
+      "assets/seomatic-9d2V52Sp.css"
     ]
   }
 }
