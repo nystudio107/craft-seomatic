@@ -1178,6 +1178,7 @@ class SettingsController extends Controller
             $crumbSites = Collection::make($sites->getAllSites())
                 ->map(fn(Site $site) => ['site' => $site])
                 ->keyBy(fn(array $site) => $site['site']->id)
+                ->filter(fn(array $site) => in_array($site['site']->id, $variables['enabledSiteIds']))
                 ->all();
 
             foreach ($siteGroups as $siteGroup) {
@@ -1283,6 +1284,15 @@ class SettingsController extends Controller
      */
     protected function cullDisabledSites(string $sourceBundleType, string $sourceHandle, array &$variables)
     {
+        $entries = Craft::$app->getEntries();
+        $section = $entries->getSectionByHandle($sourceHandle);
+        $sectionSiteIds = [];
+        if ($section) {
+            $sectionSettings = $entries->getSectionSiteSettings($section->id);
+            foreach ($sectionSettings as $sectionSetting) {
+                $sectionSiteIds[] = $sectionSetting->siteId;
+            }
+        }
         if (isset($variables['enabledSiteIds'])) {
             foreach ($variables['enabledSiteIds'] as $key => $value) {
                 $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
@@ -1290,6 +1300,10 @@ class SettingsController extends Controller
                     $sourceHandle,
                     $value
                 );
+                // Make sure the site exists for this Section
+                if (!in_array($value, $sectionSiteIds, true)) {
+                    unset($variables['enabledSiteIds'][$key]);
+                }
                 if ($metaBundle === null) {
                     unset($variables['enabledSiteIds'][$key]);
                 }
