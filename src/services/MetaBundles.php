@@ -480,7 +480,7 @@ class MetaBundles extends Component
             if ($seoElement !== null) {
                 $sourceModel = $seoElement::sourceModelFromHandle($sourceHandle);
                 if ($sourceModel) {
-                    $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $sourceModel, $sourceSiteId);
+                    $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $sourceModel, $sourceSiteId, null, true);
                 }
             }
         }
@@ -610,7 +610,7 @@ class MetaBundles extends Component
             if ($seoElement !== null) {
                 $sourceModel = $seoElement::sourceModelFromId($sourceId);
                 if ($sourceModel) {
-                    $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $sourceModel, $sourceSiteId);
+                    $metaBundle = $this->createMetaBundleFromSeoElement($seoElement, $sourceModel, $sourceSiteId, null, true);
                 }
             }
         }
