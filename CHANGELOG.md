@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.8 - 2024.11.20
+### Fixed
+* Fixed an issue where newly created sections would not have Content SEO settings show up for them
+
 ## 3.5.7 - 2024.11.14
 ### Fixed
 * Fixed a parse error if running PHP < `8.0`
