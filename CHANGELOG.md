@@ -2,7 +2,7 @@
 
 ## 3.5.8 - 2024.11.20
 ### Fixed
-* Fixed an issue where newly created sections would not have Content SEO settings show up for them
+* Fixed an issue where newly created sections would not have Content SEO settings show up for  ([#1544](https://github.com/nystudio107/craft-seomatic/issues/1544))
 
 ## 3.5.7 - 2024.11.14
 ### Fixed
