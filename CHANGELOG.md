@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.8 - UNRELEASED
+### Changed
+* If an incoming URL has a trailing slash, preserve it for things like the Canonical URL ([#1547](https://github.com/nystudio107/craft-seomatic/issues/1547))
+
 ## 5.1.7 - 2024.11.20
 ### Fixed
 * Fixed an issue where sites that are not enabled for a given Section were still showing up in the Sites menu in Content SEO ([#1539](https://github.com/nystudio107/craft-seomatic/issues/1539))
