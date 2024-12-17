@@ -150,13 +150,17 @@ class UrlHelper extends CraftUrlHelper
         }
         // Ensure that any spaces in the URL are encoded
         $url = str_replace(' ', '%20', $url);
-
+        // If the incoming URL has a trailing slash, respect it by preserving it
+        $preserveTrailingSlash = false;
+        if (str_ends_with($url, '/')) {
+            $preserveTrailingSlash = true;
+        }
         // Handle trailing slashes properly for generated URLs
         $generalConfig = Craft::$app->getConfig()->getGeneral();
         if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/(.+\?.*)|(\.[^\/]+$)/', $url)) {
             $url = rtrim($url, '/') . '/';
         }
-        if (!$generalConfig->addTrailingSlashesToUrls) {
+        if (!$generalConfig->addTrailingSlashesToUrls && !$preserveTrailingSlash) {
             $url = rtrim($url, '/');
         }
 
