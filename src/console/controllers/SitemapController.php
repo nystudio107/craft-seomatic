@@ -9,16 +9,12 @@
 
 namespace nystudio107\seomatic\console\controllers;
 
-use Craft;
-use craft\helpers\App;
-use nystudio107\seomatic\models\MetaBundle;
-use nystudio107\seomatic\models\SitemapTemplate;
-use nystudio107\seomatic\Seomatic;
 use yii\console\Controller;
 
 /**
  * SEOmatic Sitemap command
  *
+ * @deprecated This CLI command is no longer needed because of the paginated sitemap generation
  * @author    nystudio107
  * @package   Seomatic
  * @since     3.0.0
@@ -68,69 +64,7 @@ class SitemapController extends Controller
      */
     public function actionGenerate()
     {
-        echo 'Generating sitemap' . PHP_EOL;
-        if ($this->siteId !== null) {
-            $siteIds[] = $this->siteId;
-        } else {
-            $siteIds = Craft::$app->getSites()->getAllSiteIds();
-            if (!\is_array($siteIds)) {
-                $siteIds = [$siteIds];
-            }
-        }
-        // This might take a while
-        App::maxPowerCaptain();
-        // Process the sitemap generation
-        foreach ($siteIds as $siteId) {
-            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
-            Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
-
-            /** @var MetaBundle $metaBundle */
-            foreach ($metaBundles as $metaBundle) {
-                $process = false;
-                if ($this->handle === null || $this->handle === $metaBundle->sourceHandle) {
-                    $process = true;
-                }
-                if ($metaBundle->metaSitemapVars->sitemapUrls && $process) {
-                    echo 'Generating sitemap for '
-                        . $metaBundle->sourceType
-                        . ' '
-                        . $metaBundle->sourceName
-                        . ', siteId '
-                        . $siteId
-                        . PHP_EOL;
-
-                    $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($metaBundle->sourceBundleType);
-                    $elementQuery = $seoElement::sitemapElementsQuery($metaBundle);
-                    $pageSize = (int) $metaBundle->metaSitemapVars->sitemapPageSize;
-                    $sitemapLimit = (int) $metaBundle->metaSitemapVars->sitemapLimit;
-
-                    if (!empty($pageSize)) {
-                        $total = empty($sitemapLimit) ? $elementQuery->count() : min($elementQuery->count(), $sitemapLimit);
-                        $pageCount = ceil($total / $pageSize);
-                    } else {
-                        $pageCount = 1;
-                    }
-
-                    $site = Craft::$app->getSites()->getSiteById($metaBundle->sourceSiteId);
-                    $sitemap = SitemapTemplate::create();
-                    if ($site) {
-                        for ($pageNum = 1; $pageNum <= $pageCount; $pageNum++) {
-                            echo sprintf('Generating page %d of %d' . PHP_EOL, $pageNum, $pageCount);
-                            $sitemap->render([
-                                'groupId' => $site->groupId,
-                                'siteId' => $metaBundle->sourceSiteId,
-                                'handle' => $metaBundle->sourceHandle,
-                                'type' => $metaBundle->sourceBundleType,
-                                'page' => $pageNum,
-                            ]);
-                        }
-                        // Generate the sitemap so it is in the cache
-                    }
-
-                    echo '---' . PHP_EOL;
-                }
-            }
-        }
+        echo 'This CLI command is no longer needed because of the paginated sitemap generation' . PHP_EOL;
     }
 
     // Protected Methods
