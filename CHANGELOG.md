@@ -3,6 +3,8 @@
 ## 4.1.8 - UNRELEASED
 ### Changed
 * If an incoming URL has a trailing slash, preserve it for things like the Canonical URL ([#1547](https://github.com/nystudio107/craft-seomatic/issues/1547))
+* Deprecate & remove from the UI the **Invalidate Sitemap Caches Automatically** aka `regenerateSitemapsAutomatically` setting, since it is no longer relevant with the paginated sitemaps
+* Deprecate the CLI command `seomatic/sitemap/generate`, since it no longer needed with the paginated sitemaps
 
 ## 4.1.7 - 2024.11.20
 ### Fixed
