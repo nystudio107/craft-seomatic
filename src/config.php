@@ -39,6 +39,7 @@ return [
     // Should SEOmatic render frontend sitemaps?
     'sitemapsEnabled' => true,
 
+    // @deprecated This setting is no longer relevant with the paginated sitemap generation
     // Should sitemaps be regenerated automatically?
     'regenerateSitemapsAutomatically' => true,
 

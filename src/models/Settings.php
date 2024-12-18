@@ -44,6 +44,7 @@ class Settings extends VarsModel
     public bool $sitemapsEnabled = true;
 
     /**
+     * @deprecated This setting is no longer relevant with the paginated sitemap generation
      * @var bool Should sitemaps be regenerated automatically?
      */
     public bool $regenerateSitemapsAutomatically = true;

@@ -52,37 +52,15 @@ Search engines no longer accept [sitemap pings](https://developers.google.com/se
 
 SEOmatic generates sitemaps on demand when requested on the frontend, and then caches the sitemap for future requests so they are fast.
 
-Normally SEOmatic will invalidate the cache for a sitemap for a Section, Category Group, or Product any time you save an element. However,  if you prefer to invalidate the sitemap caches manually you can disable the **Invalidate Sitemap Caches Automatically** option in SEOmatic’s Plugin Settings.
+SEOmatic will automatically invalidate the cache for a sitemap for a Section, Category Group, or Product any time you save an element.
 
-![Screenshot of a console running the following command to generate a blog sitemap: `./craft seomatic/sitemap/generate --siteId=1 --handle=blog`](../resources/screenshots/seomatic-sitemap-console-command.png)
-
-You can then regenerate the sitemap via CLI. This will regenerate all sitemaps:
+Because SEOmatic now paginates sitemaps, they are no longer generated via lengthy queue jobs, and the CLI command to regenerate them:
 
 ```bash
 ./craft seomatic/sitemap/generate
 ```
 
-You can also limit it to a specific Section, Category Group, or Product handle:
-
-```bash
-./craft seomatic/sitemap/generate --handle=blog
-```
-
-...or you can regenerate all sitemaps for a specific `siteId`:
-
-```bash
-./craft seomatic/sitemap/generate --siteId=1
-```
-
-...or both:
-
-```bash
-./craft seomatic/sitemap/generate --handle=blog --siteId=1
-```
-
-::: tip Manually Updating Sitemaps
-If you disable **Invalidate Sitemap Caches Automatically**, sitemaps can _only_ be updated via CLI command, or by clearing SEOmatic’s sitemap caches via **Utilities** → **Clear Caches**.
-:::
+...has been deprecated as well.
 
 ### Additional Sitemaps
 
