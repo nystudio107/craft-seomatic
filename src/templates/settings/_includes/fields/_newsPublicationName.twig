@@ -22,7 +22,7 @@
             {{ forms.textField({
                 id: "newsPublicationName" ~ suffix,
                 name: "newsPublicationName",
-                on: metaSitemapVars.newsPublicationName,
+                value: metaSitemapVars.newsPublicationName,
                 warning: false,
                 errors: metaSitemapVars.getErrors("newsPublicationName"),
                 disabled: disabled,
