@@ -15,16 +15,6 @@
         }) }}
 
         {{ forms.lightswitchField({
-            label: "Invalidate Sitemap Caches Automatically"|t("seomatic"),
-            instructions: "Controls whether sitemap caches will automatically be invalidated when entries are saved."|t("seomatic"),
-            id: "regenerateSitemapsAutomatically",
-            name: "regenerateSitemapsAutomatically",
-            on: settings.regenerateSitemapsAutomatically,
-            warning: configWarning("regenerateSitemapsAutomatically", "seomatic"),
-            errors: settings.getErrors("regenerateSitemapsAutomatically"),
-        }) }}
-
-        {{ forms.lightswitchField({
             label: "Exclude Non-Canonical URLs"|t("seomatic"),
             instructions: "Should items where the entry URL doesn't match the canonical URL be excluded?"|t("seomatic"),
             id: "excludeNonCanonicalUrls",

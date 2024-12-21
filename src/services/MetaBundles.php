@@ -531,14 +531,12 @@ class MetaBundles extends Component
                         $sourceBundleType,
                         $metaBundle->sourceSiteId
                     );
-                    if (Seomatic::$settings->regenerateSitemapsAutomatically) {
-                        Seomatic::$plugin->sitemaps->invalidateSitemapCache(
-                            $metaBundle->sourceHandle,
-                            $metaBundle->sourceSiteId,
-                            $metaBundle->sourceBundleType,
-                            false
-                        );
-                    }
+                    Seomatic::$plugin->sitemaps->invalidateSitemapCache(
+                        $metaBundle->sourceHandle,
+                        $metaBundle->sourceSiteId,
+                        $metaBundle->sourceBundleType,
+                        false
+                    );
                     // Update the meta bundle data
                     $this->updateMetaBundle($metaBundle, $site->id);
                 }
@@ -686,8 +684,7 @@ class MetaBundles extends Component
                     $this->updateMetaBundle($metaBundle, $sourceSiteId);
                     if (
                         $metaBundle->metaSitemapVars->sitemapUrls
-                        && !$element->resaving
-                        && Seomatic::$settings->regenerateSitemapsAutomatically) {
+                        && !$element->resaving) {
                         $sitemapInvalidated = true;
                         Seomatic::$plugin->sitemaps->invalidateSitemapCache(
                             $metaBundle->sourceHandle,
