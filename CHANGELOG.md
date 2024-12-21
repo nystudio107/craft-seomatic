@@ -1,8 +1,17 @@
 # SEOmatic Changelog
 
+## 3.5.9 - 2024.12.21
+### Changed
+* If an incoming URL has a trailing slash, preserve it for things like the Canonical URL ([#1547](https://github.com/nystudio107/craft-seomatic/issues/1547))
+* Deprecate & remove from the UI the **Invalidate Sitemap Caches Automatically** aka `regenerateSitemapsAutomatically` setting, since it is no longer relevant with the paginated sitemaps
+* Deprecate the CLI command `seomatic/sitemap/generate`, since it no longer needed with the paginated sitemaps
+
+### Fixed
+* Fixed an issue where the **News Publication Name** isn't displayed in Content SEO &rarr; Sitemap settings ([#1551](https://github.com/nystudio107/craft-seomatic/issues/1551))
+
 ## 3.5.8 - 2024.11.20
 ### Fixed
-* Fixed an issue where newly created sections would not have Content SEO settings show up for them
+* Fixed an issue where newly created sections would not have Content SEO settings show up for  ([#1544](https://github.com/nystudio107/craft-seomatic/issues/1544))
 
 ## 3.5.7 - 2024.11.14
 ### Fixed
