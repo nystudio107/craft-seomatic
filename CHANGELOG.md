@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.1.9 - UNRELEASED
+### Changed
+* Encode the URI in the `canonical` `link` header ([#1519](https://github.com/nystudio107/craft-seomatic/issues/1519))
+
 ## 4.1.8 - 2024.12.21
 ### Changed
 * If an incoming URL has a trailing slash, preserve it for things like the Canonical URL ([#1547](https://github.com/nystudio107/craft-seomatic/issues/1547))
