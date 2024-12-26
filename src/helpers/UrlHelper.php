@@ -248,8 +248,6 @@ class UrlHelper extends CraftUrlHelper
 
             return $siteUrlOverride[$site->handle] ?? '';
         }
-
-        return '';
     }
 
     /**
