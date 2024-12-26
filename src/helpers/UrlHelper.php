@@ -248,6 +248,29 @@ class UrlHelper extends CraftUrlHelper
 
             return $siteUrlOverride[$site->handle] ?? '';
         }
+
+        return '';
+    }
+
+    /**
+     * Encodes non-alphanumeric characters in a URL, except reserved characters and already-encoded characters.
+     *
+     * @param string $url
+     * @return string
+     * @since 4.13.0
+     */
+    public static function encodeUrl(string $url): string
+    {
+        $parts = preg_split('/([:\/?#\[\]@!$&\'()*+,;=%])/', $url, flags: PREG_SPLIT_DELIM_CAPTURE);
+        $url = '';
+        foreach ($parts as $i => $part) {
+            if ($i % 2 === 0) {
+                $url .= urlencode($part);
+            } else {
+                $url .= $part;
+            }
+        }
+        return $url;
     }
 
     // Protected Methods
