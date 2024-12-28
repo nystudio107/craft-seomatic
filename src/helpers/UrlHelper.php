@@ -160,7 +160,7 @@ class UrlHelper extends CraftUrlHelper
         if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/(.+\?.*)|(\.[^\/]+$)/', $url)) {
             $url = rtrim($url, '/') . '/';
         }
-        if (!$generalConfig->addTrailingSlashesToUrls && !$preserveTrailingSlash) {
+        if (!$generalConfig->addTrailingSlashesToUrls && (!$preserveTrailingSlash || self::urlIsSiteIndex($url))) {
             $url = rtrim($url, '/');
         }
 
@@ -217,6 +217,34 @@ class UrlHelper extends CraftUrlHelper
     public static function urlHasSubDir(string $url): bool
     {
         return !empty(parse_url(trim($url, '/'), PHP_URL_PATH));
+    }
+
+    /**
+     * See if the url is a site index, and if so, strip the trailing slash
+     * ref: https://github.com/craftcms/cms/issues/5675
+     *
+     * @param string $url
+     * @return bool
+     */
+    public static function urlIsSiteIndex(string $url): bool
+    {
+        $sites = Craft::$app->getSites()->getAllSites();
+        $result = false;
+        foreach ($sites as $site) {
+            $sitePath = parse_url(self::siteUrl('/', null, null, $site->id), PHP_URL_PATH);
+            if (!empty($sitePath)) {
+                // Normalizes a URI path by trimming leading/ trailing slashes and removing double slashes
+                $sitePath = '/' . preg_replace('/\/\/+/', '/', trim($sitePath, '/'));
+            }
+            // Normalizes a URI path by trimming leading/ trailing slashes and removing double slashes
+            $url = '/' . preg_replace('/\/\/+/', '/', trim($url, '/'));
+            // See if this url ends with a site prefix, and thus is a site index
+            if (str_ends_with($url, $sitePath)) {
+                $result = true;
+            }
+        }
+
+        return $result;
     }
 
     /**
