@@ -4,6 +4,9 @@
 ### Changed
 * Encode the URI in the `canonical` `link` header ([#1519](https://github.com/nystudio107/craft-seomatic/issues/1519))
 
+### Fixed
+* Add missing `<news>` sitemap entry implementation that didn't make it over to the Craft 5 version of the plugin ([#1551](https://github.com/nystudio107/craft-seomatic/issues/1551))
+
 ## 5.1.8 - 2024.12.21
 ### Changed
 * If an incoming URL has a trailing slash, preserve it for things like the Canonical URL ([#1547](https://github.com/nystudio107/craft-seomatic/issues/1547))
