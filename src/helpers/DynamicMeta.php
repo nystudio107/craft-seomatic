@@ -190,10 +190,12 @@ class DynamicMeta
                     if (is_array($href)) {
                         $headerValue = '';
                         foreach ($href as $hrefVal) {
+                            $hrefVal = UrlHelper::encodeUrl($hrefVal);
                             $headerValue .= ('<' . $hrefVal . '>' . ',');
                         }
                         $headerValue = rtrim($headerValue, ',');
                     } else {
+                        $href = UrlHelper::encodeUrl($href);
                         $headerValue = '<' . $href . '>';
                     }
                     $headerValue .= "; rel='canonical'";
