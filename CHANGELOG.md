@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.1.9 - UNRELEASED
+## 4.1.9 - 2025.01.08
 ### Changed
 * Encode the URI in the `canonical` `link` header ([#1519](https://github.com/nystudio107/craft-seomatic/issues/1519))
 * Ensure that URLs that are a site index URL and have a path prefix strip trailing slashes as appropriate ([#717](https://github.com/nystudio107/craft-seomatic/issues/717)) ([#5675](https://github.com/craftcms/cms/issues/5675))
