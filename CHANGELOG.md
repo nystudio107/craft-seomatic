@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.12 - 2025.01.09
+### Fixed
+* Change default `preg_split()` flags parameter to the default `-1` to further address the platform error in ([#1561](https://github.com/nystudio107/craft-seomatic/pull/1561))
+
 ## 3.5.11 - 2025.01.09
 ### Fixed
 * Fixed a regression that would throw an error on PHP < 8, and also fixed `phpstan` so it will check for platform errors properly going forward ([#1561](https://github.com/nystudio107/craft-seomatic/pull/1561))
