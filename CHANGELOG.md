@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.11 - 2025.01.09
+### Fixed
+* Fixed a regression that would throw an error on PHP < 8, and also fixed `phpstan` so it will check for platform errors properly going forward ([#1561](https://github.com/nystudio107/craft-seomatic/pull/1561))
+
 ## 3.5.10 - 2025.01.08
 ### Changed
 * Encode the URI in the `canonical` `link` header ([#1519](https://github.com/nystudio107/craft-seomatic/issues/1519))

@@ -287,7 +287,7 @@ class UrlHelper extends CraftUrlHelper
      */
     public static function encodeUrl(string $url): string
     {
-        $parts = preg_split('/([:\/?#\[\]@!$&\'()*+,;=%])/', $url, flags: PREG_SPLIT_DELIM_CAPTURE);
+        $parts = preg_split('/([:\/?#\[\]@!$&\'()*+,;=%])/', $url, null, PREG_SPLIT_DELIM_CAPTURE);
         $url = '';
         foreach ($parts as $i => $part) {
             if ($i % 2 === 0) {
