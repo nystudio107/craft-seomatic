@@ -160,7 +160,7 @@ class UrlHelper extends CraftUrlHelper
         if ($generalConfig->addTrailingSlashesToUrls && !preg_match('/(.+\?.*)|(\.[^\/]+$)/', $url)) {
             $url = rtrim($url, '/') . '/';
         }
-        if (!$generalConfig->addTrailingSlashesToUrls && !$preserveTrailingSlash) {
+        if (!$generalConfig->addTrailingSlashesToUrls && (!$preserveTrailingSlash || self::urlIsSiteIndex($url))) {
             $url = rtrim($url, '/');
         }
 
@@ -220,6 +220,34 @@ class UrlHelper extends CraftUrlHelper
     }
 
     /**
+     * See if the url is a site index, and if so, strip the trailing slash
+     * ref: https://github.com/craftcms/cms/issues/5675
+     *
+     * @param string $url
+     * @return bool
+     */
+    public static function urlIsSiteIndex(string $url): bool
+    {
+        $sites = Craft::$app->getSites()->getAllSites();
+        $result = false;
+        foreach ($sites as $site) {
+            $sitePath = parse_url(self::siteUrl('/', null, null, $site->id), PHP_URL_PATH);
+            if (!empty($sitePath)) {
+                // Normalizes a URI path by trimming leading/ trailing slashes and removing double slashes
+                $sitePath = '/' . preg_replace('/\/\/+/', '/', trim($sitePath, '/'));
+            }
+            // Normalizes a URI path by trimming leading/ trailing slashes and removing double slashes
+            $url = '/' . preg_replace('/\/\/+/', '/', trim($url, '/'));
+            // See if this url ends with a site prefix, and thus is a site index
+            if (str_ends_with($url, $sitePath)) {
+                $result = true;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Return the siteUrlOverride setting, which can be a string or an array of site URLs
      * indexed by the site handle
      *
@@ -248,6 +276,27 @@ class UrlHelper extends CraftUrlHelper
 
             return $siteUrlOverride[$site->handle] ?? '';
         }
+    }
+
+    /**
+     * Encodes non-alphanumeric characters in a URL, except reserved characters and already-encoded characters.
+     *
+     * @param string $url
+     * @return string
+     * @since 4.13.0
+     */
+    public static function encodeUrl(string $url): string
+    {
+        $parts = preg_split('/([:\/?#\[\]@!$&\'()*+,;=%])/', $url, flags: PREG_SPLIT_DELIM_CAPTURE);
+        $url = '';
+        foreach ($parts as $i => $part) {
+            if ($i % 2 === 0) {
+                $url .= urlencode($part);
+            } else {
+                $url .= $part;
+            }
+        }
+        return $url;
     }
 
     // Protected Methods

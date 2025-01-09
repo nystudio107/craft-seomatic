@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 3.5.10 - 2025.01.08
+### Changed
+* Encode the URI in the `canonical` `link` header ([#1519](https://github.com/nystudio107/craft-seomatic/issues/1519))
+* Ensure that URLs that are a site index URL and have a path prefix strip trailing slashes as appropriate ([#717](https://github.com/nystudio107/craft-seomatic/issues/717)) ([#5675](https://github.com/craftcms/cms/issues/5675))
+
 ## 3.5.9 - 2024.12.21
 ### Changed
 * If an incoming URL has a trailing slash, preserve it for things like the Canonical URL ([#1547](https://github.com/nystudio107/craft-seomatic/issues/1547))
