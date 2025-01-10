@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.13 - UNRELEASED
+### Fixed
+* Fixed an issue where the L2 cache was not properly invalidated for containers _after_ a preview request, which could result in stale metadata
+
 ## 3.5.12 - 2025.01.09
 ### Fixed
 * Change default `preg_split()` flags parameter to the default `-1` to further address the platform error in ([#1561](https://github.com/nystudio107/craft-seomatic/pull/1561))
