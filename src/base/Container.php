@@ -22,6 +22,11 @@ use nystudio107\seomatic\helpers\Dependency;
  */
 abstract class Container extends FluentModel implements ContainerInterface
 {
+    // Constants
+    // =========================================================================
+
+    public const CONTAINER_TYPE = 'GenericContainer';
+
     // Traits
     // =========================================================================
 
