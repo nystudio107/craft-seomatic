@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.1.13 - UNRELEASED
+## 3.5.13 - UNRELEASED
 ### Fixed
 * Fixed an issue where the L2 cache was not properly invalidated for containers _after_ a preview request, which could result in stale metadata
 
