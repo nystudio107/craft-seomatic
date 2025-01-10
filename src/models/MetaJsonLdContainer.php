@@ -70,7 +70,8 @@ class MetaJsonLdContainer extends NonceContainer
             $dependency
         );
         // Invalidate the cache we just created if there were pending image transforms in it
-        if (ImageTransformHelper::$pendingImageTransforms) {
+        // or we were asked to clear the cache for this container (because it's a preview request, etc.)
+        if ($this->clearCache || ImageTransformHelper::$pendingImageTransforms) {
             TagDependency::invalidate($cache, $dependency->tags[3]);
         }
         Seomatic::$view->registerScript(
