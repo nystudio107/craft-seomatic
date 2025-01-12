@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 5.1.10 - UNRELEASED
+### Added
+* Added a `ModifySitemapQueryEvent` to allow the modification of the element query used to generate a sitemap ([#1553](https://github.com/nystudio107/craft-seomatic/issues/1553))
+
 ### Changed
 * Use the `site` query parameter used globally by Craft in the CP for SEOmatic settings ([#1527](https://github.com/nystudio107/craft-seomatic/issues/1527))
 
