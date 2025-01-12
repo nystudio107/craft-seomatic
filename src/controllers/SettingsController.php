@@ -12,6 +12,7 @@ namespace nystudio107\seomatic\controllers;
 use Craft;
 use craft\elements\Asset;
 use craft\errors\MissingComponentException;
+use craft\helpers\Cp;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
@@ -1120,6 +1121,12 @@ class SettingsController extends Controller
      */
     protected function getSiteIdFromHandle($siteHandle)
     {
+        // As of Craft 4, the site query parameter is appended to CP urls to indicate the current
+        // site that is being edited, so respect it
+        $cpSite = Cp::requestedSite();
+        if ($cpSite) {
+            return $cpSite->id;
+        }
         // Get the site to edit
         if ($siteHandle !== null) {
             $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
@@ -1205,7 +1212,7 @@ class SettingsController extends Controller
                 $groupSiteItems = array_map(fn(Site $site) => [
                     'status' => $crumbSites[$site->id]['site']->status ?? null,
                     'label' => Craft::t('site', $site->name),
-                    'url' => UrlHelper::cpUrl("seomatic/{$variables['controllerHandle']}/$site->handle"),
+                    'url' => UrlHelper::cpUrl("seomatic/{$variables['controllerHandle']}?site=$site->handle"),
                     'hidden' => !isset($crumbSites[$site->id]),
                     'selected' => $site->id === $variables['currentSiteId'],
                     'attributes' => [
