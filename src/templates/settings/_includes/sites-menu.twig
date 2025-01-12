@@ -22,11 +22,11 @@
                                     <div class="status {{ status }}"></div>{{ site.name|t('site') }}
                                 </a>
                             {% else %}
-                                {% set url = url(baseUrl~site.handle, params) %}
+                                {% set url = url(baseUrl, { 'site': site.handle }) %}
                                 {% if status == "enabled" %}
-                                <a href="{{ url }}">
-                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
-                                </a>
+                                    <a href="{{ url }}">
+                                        <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                    </a>
                                 {% else %}
                                     <div style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
                                         <div class="status {{ status }}"></div>{{ site.name|t('site') }}

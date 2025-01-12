@@ -12,6 +12,7 @@ namespace nystudio107\seomatic\controllers;
 use Craft;
 use craft\elements\Asset;
 use craft\errors\MissingComponentException;
+use craft\helpers\Cp;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
 use craft\web\UrlManager;
@@ -1111,6 +1112,12 @@ class SettingsController extends Controller
      */
     protected function getSiteIdFromHandle($siteHandle)
     {
+        // As of Craft 4, the site query parameter is appended to CP urls to indicate the current
+        // site that is being edited, so respect it
+        $cpSite = Cp::requestedSite();
+        if ($cpSite) {
+            return $cpSite->id;
+        }
         // Get the site to edit
         if ($siteHandle !== null) {
             $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
