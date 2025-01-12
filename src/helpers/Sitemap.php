@@ -15,6 +15,7 @@ use craft\fields\Assets as AssetsField;
 use DateTime;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
+use nystudio107\seomatic\events\ModifySitemapQueryEvent;
 use nystudio107\seomatic\fields\SeoSettings;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
@@ -50,6 +51,21 @@ class Sitemap
      * ```
      */
     public const EVENT_INCLUDE_SITEMAP_ENTRY = 'includeSitemapEntry';
+
+    /**
+     * @event ModifySitemapQueryEvent Allows the modification of the element query used to generate a sitemap
+     *
+     * ---
+     * ```php
+     * use nystudio107\seomatic\events\ModifySitemapQueryEvent;
+     * use nystudio107\seomatic\helpers\Sitemap;
+     * use yii\base\Event;
+     * Event::on(Sitemap::class, Sitemap::EVENT_MODIFY_SITEMAP_QUERY, function(ModifySitemapQueryEvent $e) {
+     *     $e->query->limit(10);
+     * });
+     * ```
+     */
+    public const EVENT_MODIFY_SITEMAP_QUERY = 'modifySitemapQuery';
 
     /**
      * @const The number of assets to return in a single paginated query
@@ -134,11 +150,7 @@ class Sitemap
             if (empty($metaBundle->metaSitemapVars->sitemapLimit)) {
                 $metaBundle->metaSitemapVars->sitemapLimit = null;
             }
-
-            $totalElements = $seoElement::sitemapElementsQuery($metaBundle)->count();
-            if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
-                $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
-            }
+            $totalElements = self::getTotalElementsInSitemap($seoElement, $metaBundle);
         }
 
         // If no elements exist, just exit
@@ -153,7 +165,14 @@ class Sitemap
         // See batch() and each() discussion here: https://github.com/yiisoft/yii2/issues/8420
         // and here: https://github.com/craftcms/cms/issues/7338
 
+        // Allow listeners to modify the query before we use it
         $elementQuery = $seoElement::sitemapElementsQuery($metaBundle);
+        $event = new ModifySitemapQueryEvent([
+            'query' => $elementQuery,
+            'metaBundle' => $metaBundle,
+        ]);
+        Event::trigger(self::class, self::EVENT_MODIFY_SITEMAP_QUERY, $event);
+
         $sitemapPageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
         $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
 
@@ -446,7 +465,14 @@ class Sitemap
      */
     public static function getTotalElementsInSitemap(string $seoElementClass, MetaBundle $metaBundle): ?int
     {
-        $totalElements = $seoElementClass::sitemapElementsQuery($metaBundle)->count();
+        // Allow listeners to modify the query before we use it
+        $query = $seoElementClass::sitemapElementsQuery($metaBundle);
+        $event = new ModifySitemapQueryEvent([
+            'query' => $query,
+            'metaBundle' => $metaBundle,
+        ]);
+        Event::trigger(self::class, self::EVENT_MODIFY_SITEMAP_QUERY, $event);
+        $totalElements = $query->count();
 
         if ($metaBundle->metaSitemapVars->sitemapLimit && ($totalElements > $metaBundle->metaSitemapVars->sitemapLimit)) {
             $totalElements = $metaBundle->metaSitemapVars->sitemapLimit;
