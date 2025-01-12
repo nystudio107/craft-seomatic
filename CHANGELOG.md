@@ -3,6 +3,7 @@
 ## 3.5.13 - UNRELEASED
 ### Fixed
 * Fixed an issue where the L2 cache was not properly invalidated for containers _after_ a preview request, which could result in stale metadata
+* Handle the case where SEOmatic settings for a specific `typeId` ended up in its own metabundle in addition to the default metabundle for that section ([#1557](https://github.com/nystudio107/craft-seomatic/issues/1557))
 
 ## 3.5.12 - 2025.01.09
 ### Fixed
