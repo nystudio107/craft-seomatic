@@ -1249,7 +1249,7 @@ class SettingsController extends Controller
                 }
             }
 
-            if (array_key_exists('crumbs', $variables)) {
+            if (!array_key_exists('crumbs', $variables)) {
                 $variables['crumbs'] = [];
             }
             $variables['crumbs'] = [
@@ -1267,6 +1267,31 @@ class SettingsController extends Controller
                 ],
                 ...$variables['crumbs'],
             ];
+
+            if (isset($variables['typeMenu'])) {
+                $typeCrumbItems = [];
+                foreach ($variables['typeMenu'] as $key => $value) {
+                    $typeCrumbItems[] = [
+                        'status' => null,
+                        'url' => UrlHelper::url("seomatic/{$variables['controllerHandle']}/{$variables['siteHandleUri']}", [
+                            'site' => $variables['currentSiteHandle'],
+                            'typeId' => $key
+                        ]),
+                        'label' => $value,
+                        'selected' => $variables['currentTypeId'] === $key,
+                    ];
+                }
+                $variables['crumbs'][] =
+                    [
+                        'id' => 'types-menu',
+                        'icon' => 'list',
+                        'label' => $variables['typeMenu'][$variables['currentTypeId']],
+                        'menu' => [
+                            'items' => $typeCrumbItems,
+                            'label' => Craft::t('seomatic', 'Entry Types'),
+                        ]
+                    ];
+            }
 
             $variables['sitesMenuLabel'] = Craft::t(
                 'site',
