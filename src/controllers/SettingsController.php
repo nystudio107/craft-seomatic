@@ -1275,7 +1275,7 @@ class SettingsController extends Controller
                         'status' => null,
                         'url' => UrlHelper::url("seomatic/{$variables['controllerHandle']}/{$variables['siteHandleUri']}", [
                             'site' => $variables['currentSiteHandle'],
-                            'typeId' => $key
+                            'typeId' => $key,
                         ]),
                         'label' => $value,
                         'selected' => $variables['currentTypeId'] === $key,
@@ -1289,7 +1289,7 @@ class SettingsController extends Controller
                         'menu' => [
                             'items' => $typeCrumbItems,
                             'label' => Craft::t('seomatic', 'Entry Types'),
-                        ]
+                        ],
                     ];
             }
 
