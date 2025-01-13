@@ -108,6 +108,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Dashboard');
@@ -231,6 +232,7 @@ class SettingsController extends Controller
     public function actionGlobal(string $subSection = 'general', string $siteHandle = null, $loadFromSiteHandle = null, $editedMetaBundle = null): Response
     {
         $variables = [];
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
@@ -449,6 +451,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
@@ -515,6 +518,7 @@ class SettingsController extends Controller
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
         if (is_string($typeId)) {
             $typeId = (int)$typeId;
@@ -717,6 +721,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
@@ -916,6 +921,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
@@ -1103,6 +1109,22 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
+     * @param $siteHandle
+     * @return string|null
+     */
+    protected function getCpSiteHandle($siteHandle)
+    {
+        // As of Craft 4, the site query parameter is appended to CP urls to indicate the current
+        // site that is being edited, so respect it
+        $cpSite = Cp::requestedSite();
+        if ($cpSite) {
+            return $cpSite->handle;
+        }
+
+        return $siteHandle;
+    }
+
+    /**
      * Return a siteId from a siteHandle
      *
      * @param string|null $siteHandle
@@ -1112,12 +1134,6 @@ class SettingsController extends Controller
      */
     protected function getSiteIdFromHandle($siteHandle)
     {
-        // As of Craft 4, the site query parameter is appended to CP urls to indicate the current
-        // site that is being edited, so respect it
-        $cpSite = Cp::requestedSite();
-        if ($cpSite) {
-            return $cpSite->id;
-        }
         // Get the site to edit
         if ($siteHandle !== null) {
             $site = Craft::$app->getSites()->getSiteByHandle($siteHandle);
