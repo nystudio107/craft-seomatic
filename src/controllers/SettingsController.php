@@ -532,7 +532,7 @@ class SettingsController extends Controller
         $variables['typeMenu'] = $typeMenu;
         $variables['currentTypeId'] = null;
         $variables['specificTypeId'] = null;
-        if (!empty($typeMenu)) {
+        if (count($typeMenu) > 1) {
             $currentType = reset($typeMenu);
             $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
             $variables['currentTypeId'] = $typeId ?? key($typeMenu);
@@ -541,8 +541,7 @@ class SettingsController extends Controller
         // If there's only one EntryType, don't bother displaying the menu
         if (count($typeMenu) === 1) {
             $variables['typeMenu'] = [];
-            $variables['specificTypeId'] = $typeId;
-            $typeId = null;
+            $variables['specificTypeId'] = $typeId ?? key($typeMenu);
         }
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
