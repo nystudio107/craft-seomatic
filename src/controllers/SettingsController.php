@@ -1268,12 +1268,12 @@ class SettingsController extends Controller
                 ...$variables['crumbs'],
             ];
 
-            if (isset($variables['typeMenu'])) {
+            if (isset($variables['typeMenu']) && !empty($variables['typeMenu'])) {
                 $typeCrumbItems = [];
                 foreach ($variables['typeMenu'] as $key => $value) {
                     $typeCrumbItems[] = [
                         'status' => null,
-                        'url' => UrlHelper::url("seomatic/{$variables['controllerHandle']}/{$variables['siteHandleUri']}", [
+                        'url' => UrlHelper::url("seomatic/{$variables['controllerHandle']}{$variables['siteHandleUri']}", [
                             'site' => $variables['currentSiteHandle'],
                             'typeId' => $key,
                         ]),
