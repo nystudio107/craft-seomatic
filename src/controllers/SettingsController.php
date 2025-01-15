@@ -527,11 +527,17 @@ class SettingsController extends Controller
         }
         $variables['typeMenu'] = $typeMenu;
         $variables['currentTypeId'] = null;
-        if (!empty($typeMenu)) {
+        $variables['specificTypeId'] = null;
+        if (count($typeMenu) > 1) {
             $currentType = reset($typeMenu);
             $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
             $variables['currentTypeId'] = $typeId ?? key($typeMenu);
             $typeId = (int)$variables['currentTypeId'];
+        }
+        // If there's only one EntryType, don't bother displaying the menu
+        if (count($typeMenu) === 1) {
+            $variables['typeMenu'] = [];
+            $variables['specificTypeId'] = $typeId ?? key($typeMenu);
         }
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
@@ -642,6 +648,7 @@ class SettingsController extends Controller
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
         $typeId = $request->getParam('typeId') ?? null;
+        $specificTypeId = $request->getParam('specificTypeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
@@ -680,6 +687,12 @@ class SettingsController extends Controller
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
             $metaBundle->typeId = $typeId;
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
+            // If there's also a specific typeId associated with this section, save the same
+            // metabundle there too, to fix: https://github.com/nystudio107/craft-seomatic/issues/1557
+            if (!empty($specificTypeId)) {
+                $metaBundle->typeId = $specificTypeId;
+                Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
+            }
 
             Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
