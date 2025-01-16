@@ -13,6 +13,7 @@ namespace nystudio107\seomatic\models;
 
 use Craft;
 use nystudio107\seomatic\base\MetaContainer;
+use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
 
@@ -86,6 +87,11 @@ class MetaTitleContainer extends MetaContainer
             Seomatic::$cacheDuration,
             $dependency
         );
+        // Invalidate the cache we just created if there were pending image transforms in it
+        // or we were asked to clear the cache for this container (because it's a preview request, etc.)
+        if ($this->clearCache || ImageTransformHelper::$pendingImageTransforms) {
+            TagDependency::invalidate($cache, $dependency->tags[3]);
+        }
         // Register the tags
         Seomatic::$view->title = $tagData;
         Craft::endProfile('MetaTitleContainer::includeMetaData', __METHOD__);

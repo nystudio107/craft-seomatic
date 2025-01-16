@@ -29,7 +29,8 @@
     <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
     <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
     <input type="hidden" name="typeId" value="{{ currentTypeId }}">
-    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}?typeId=#{currentTypeId}") }}
+    <input type="hidden" name="specificTypeId" value="{{ specificTypeId }}">
+    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}?site=#{currentSiteHandle}&typeId=#{currentTypeId}") }}
 
     {% if currentUser.can("seomatic:content-meta:twitter") %}
         <div id="tab-content-twitter">
@@ -42,13 +43,13 @@
         message: "Any text fields can include double-bracket tags that output Seomatic properties, such as `{{ seomatic.meta.seoTitle }}`."
     } %}
     {% switch currentSourceBundleType %}
-        {% case "section" %}
-            {% include "seomatic/_includes/footer-message.twig" with {
-                message: "Any text fields can include single-bracket tags that output Entry properties, such as `{entry.title}`."
-            } %}
-        {% case "category" %}
-            {% include "seomatic/_includes/footer-message.twig" with {
-                message: "Any text fields can include single-bracket tags that output Category properties, such as `{category.title}`."
-            } %}
+    {% case "section" %}
+        {% include "seomatic/_includes/footer-message.twig" with {
+            message: "Any text fields can include single-bracket tags that output Entry properties, such as `{entry.title}`."
+        } %}
+    {% case "category" %}
+        {% include "seomatic/_includes/footer-message.twig" with {
+            message: "Any text fields can include single-bracket tags that output Category properties, such as `{category.title}`."
+        } %}
     {% endswitch %}
 {% endblock %}

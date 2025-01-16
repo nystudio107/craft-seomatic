@@ -16,6 +16,7 @@
                             </a>
                         {% else %}
                             {% set params = {
+                                'site': currentSiteHandle,
                                 'typeId': id
                             } %}
                             {% set url = url(baseUrl, params) %}

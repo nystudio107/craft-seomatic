@@ -21,6 +21,11 @@ use nystudio107\seomatic\Seomatic;
  */
 abstract class FrontendTemplate extends FluentModel implements FrontendTemplateInterface
 {
+    // Constants
+    // =========================================================================
+
+    public const TEMPLATE_TYPE = 'GenericTemplate';
+
     // Traits
     // =========================================================================
 

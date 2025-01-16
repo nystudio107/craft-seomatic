@@ -1,5 +1,16 @@
 # SEOmatic Changelog
 
+## 4.1.10 - 2025.01.16
+### Added
+* Added a `ModifySitemapQueryEvent` to allow the modification of the element query used to generate a sitemap ([#1553](https://github.com/nystudio107/craft-seomatic/issues/1553))
+
+### Changed
+* Use the `site` query parameter used globally by Craft in the CP for SEOmatic settings ([#1527](https://github.com/nystudio107/craft-seomatic/issues/1527))
+
+### Fixed
+* Fixed an issue where the L2 cache was not properly invalidated for containers _after_ a preview request, which could result in stale metadata
+* Handle the case where SEOmatic settings for a specific `typeId` ended up in its own metabundle in addition to the default metabundle for that section ([#1557](https://github.com/nystudio107/craft-seomatic/issues/1557))
+
 ## 4.1.9 - 2025.01.08
 ### Changed
 * Encode the URI in the `canonical` `link` header ([#1519](https://github.com/nystudio107/craft-seomatic/issues/1519))
