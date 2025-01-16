@@ -29,6 +29,7 @@
     <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
     <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
     <input type="hidden" name="typeId" value="{{ currentTypeId }}">
+    <input type="hidden" name="specificTypeId" value="{{ specificTypeId }}">
     {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}?site=#{currentSiteHandle}&typeId=#{currentTypeId}") }}
 
     {% if currentUser.can("seomatic:content-meta:sitemap") %}
