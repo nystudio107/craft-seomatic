@@ -133,6 +133,24 @@ Event::on(
 );
 ```
 
+### ModifySitemapQueryEvent
+
+Allows the modification of the element query used to generate a sitemap.
+
+```php
+use nystudio107\seomatic\events\ModifySitemapQueryEvent;
+use nystudio107\seomatic\helpers\Sitemap;
+use yii\base\Event;
+
+Event::on(
+    Sitemap::class,
+    Sitemap::EVENT_MODIFY_SITEMAP_QUERY,
+    function(ModifySitemapQueryEvent $event) {
+        $event->query->limit(10);
+    }
+);
+```
+
 ### RegisterSitemapUrlsEvent
 
 The event that is triggered when registering additional URLs for a sitemap.
