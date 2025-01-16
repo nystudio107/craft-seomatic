@@ -12,6 +12,7 @@ namespace nystudio107\seomatic\controllers;
 use Craft;
 use craft\elements\Asset;
 use craft\errors\MissingComponentException;
+use craft\helpers\Cp;
 use craft\helpers\UrlHelper;
 use craft\models\Site;
 use craft\web\Controller;
@@ -109,6 +110,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
         $pluginName = Seomatic::$settings->pluginName;
         $templateTitle = Craft::t('seomatic', 'Dashboard');
@@ -233,6 +235,7 @@ class SettingsController extends Controller
     public function actionGlobal(string $subSection = 'general', string $siteHandle = null, $loadFromSiteHandle = null, $editedMetaBundle = null): Response
     {
         $variables = [];
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
@@ -453,6 +456,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
@@ -520,6 +524,7 @@ class SettingsController extends Controller
         $variables = [];
         // @TODO: Let people choose an entry/categorygroup/product as the preview
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
         if (is_string($typeId)) {
             $typeId = (int)$typeId;
@@ -532,11 +537,17 @@ class SettingsController extends Controller
         }
         $variables['typeMenu'] = $typeMenu;
         $variables['currentTypeId'] = null;
-        if (!empty($typeMenu)) {
+        $variables['specificTypeId'] = null;
+        if (count($typeMenu) > 1) {
             $currentType = reset($typeMenu);
             $variables['currentType'] = $typeMenu[$typeId] ?? $currentType;
             $variables['currentTypeId'] = $typeId ?? key($typeMenu);
             $typeId = (int)$variables['currentTypeId'];
+        }
+        // If there's only one EntryType, don't bother displaying the menu
+        if (count($typeMenu) === 1) {
+            $variables['typeMenu'] = [];
+            $variables['specificTypeId'] = $typeId ?? key($typeMenu);
         }
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
@@ -648,6 +659,7 @@ class SettingsController extends Controller
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
         $typeId = $request->getParam('typeId') ?? null;
+        $specificTypeId = $request->getParam('specificTypeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $sitemapSettings = $request->getParam('metaSitemapVars');
@@ -686,6 +698,12 @@ class SettingsController extends Controller
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
             $metaBundle->typeId = $typeId;
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
+            // If there's also a specific typeId associated with this section, save the same
+            // metabundle there too, to fix: https://github.com/nystudio107/craft-seomatic/issues/1557
+            if (!empty($specificTypeId)) {
+                $metaBundle->typeId = $specificTypeId;
+                Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
+            }
 
             Seomatic::$plugin->clearAllCaches();
             Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
@@ -709,6 +727,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
 
         $pluginName = Seomatic::$settings->pluginName;
@@ -909,6 +928,7 @@ class SettingsController extends Controller
     {
         $variables = [];
         // Get the site to edit
+        $siteHandle = $this->getCpSiteHandle($siteHandle);
         $siteId = $this->getSiteIdFromHandle($siteHandle);
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
@@ -1097,6 +1117,22 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
+     * @param $siteHandle
+     * @return string|null
+     */
+    protected function getCpSiteHandle($siteHandle)
+    {
+        // As of Craft 4, the site query parameter is appended to CP urls to indicate the current
+        // site that is being edited, so respect it
+        $cpSite = Cp::requestedSite();
+        if ($cpSite) {
+            return $cpSite->handle;
+        }
+
+        return $siteHandle;
+    }
+
+    /**
      * Return a siteId from a siteHandle
      *
      * @param string|null $siteHandle
@@ -1191,7 +1227,7 @@ class SettingsController extends Controller
                 $groupSiteItems = array_map(fn(Site $site) => [
                     'status' => $crumbSites[$site->id]['site']->status ?? null,
                     'label' => Craft::t('site', $site->name),
-                    'url' => UrlHelper::cpUrl("seomatic/{$variables['controllerHandle']}/$site->handle"),
+                    'url' => UrlHelper::cpUrl("seomatic/{$variables['controllerHandle']}?site=$site->handle"),
                     'hidden' => !isset($crumbSites[$site->id]),
                     'selected' => $site->id === $variables['currentSiteId'],
                     'attributes' => [
@@ -1212,38 +1248,50 @@ class SettingsController extends Controller
                 }
             }
 
-            if (array_key_exists('crumbs', $variables)) {
-                $variables['crumbs'] = [
-                    [
-                        'id' => 'language-menu',
-                        'icon' => 'world',
-                        'label' => Craft::t(
-                            'site',
-                            $sites->getSiteById((int)$variables['currentSiteId'])->name
-                        ),
-                        'menu' => [
-                            'items' => $siteCrumbItems,
-                            'label' => Craft::t('site', 'Select site'),
-                        ],
-                    ],
-                    ...$variables['crumbs'],
-                ];
-            } else {
-                $variables['crumbs'] = [
-                    [
-                        'id' => 'language-menu',
-                        'icon' => 'world',
-                        'label' => Craft::t(
-                            'site',
-                            $sites->getSiteById((int)$variables['currentSiteId'])->name
-                        ),
-                        'menu' => [
-                            'items' => $siteCrumbItems,
-                            'label' => Craft::t('site', 'Select site'),
-                        ],
-                    ],
-                ];
+            if (!array_key_exists('crumbs', $variables)) {
+                $variables['crumbs'] = [];
             }
+            $variables['crumbs'] = [
+                [
+                    'id' => 'language-menu',
+                    'icon' => 'world',
+                    'label' => Craft::t(
+                        'site',
+                        $sites->getSiteById((int)$variables['currentSiteId'])->name
+                    ),
+                    'menu' => [
+                        'items' => $siteCrumbItems,
+                        'label' => Craft::t('site', 'Select site'),
+                    ],
+                ],
+                ...$variables['crumbs'],
+            ];
+
+            if (isset($variables['typeMenu']) && !empty($variables['typeMenu'])) {
+                $typeCrumbItems = [];
+                foreach ($variables['typeMenu'] as $key => $value) {
+                    $typeCrumbItems[] = [
+                        'status' => null,
+                        'url' => UrlHelper::url("seomatic/{$variables['controllerHandle']}{$variables['siteHandleUri']}", [
+                            'site' => $variables['currentSiteHandle'],
+                            'typeId' => $key,
+                        ]),
+                        'label' => $value,
+                        'selected' => $variables['currentTypeId'] === $key,
+                    ];
+                }
+                $variables['crumbs'][] =
+                    [
+                        'id' => 'types-menu',
+                        'icon' => 'list',
+                        'label' => $variables['typeMenu'][$variables['currentTypeId']],
+                        'menu' => [
+                            'items' => $typeCrumbItems,
+                            'label' => Craft::t('seomatic', 'Entry Types'),
+                        ],
+                    ];
+            }
+
             $variables['sitesMenuLabel'] = Craft::t(
                 'site',
                 $sites->getSiteById((int)$variables['currentSiteId'])->name

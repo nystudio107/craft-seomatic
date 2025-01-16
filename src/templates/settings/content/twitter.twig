@@ -13,10 +13,6 @@
     {{ block('actionButton') }}
 {% endblock %}
 
-{% block contextMenu %}
-    {% include "seomatic/settings/_includes/types-menu.twig" %}
-{% endblock %}
-
 {% block copyFromMenu %}
     {% include "seomatic/settings/_includes/copy-settings-menu.twig" %}
 {% endblock %}
@@ -28,7 +24,8 @@
     <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
     <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
     <input type="hidden" name="typeId" value="{{ currentTypeId }}">
-    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}?typeId=#{currentTypeId}") }}
+    <input type="hidden" name="specificTypeId" value="{{ specificTypeId }}">
+    {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}?site=#{currentSiteHandle}&typeId=#{currentTypeId}") }}
 
     {% if currentUser.can("seomatic:content-meta:twitter") %}
         <div id="tab-content-twitter">
