@@ -63,6 +63,7 @@ export default defineConfig(({command}) => ({
     preserveSymlinks: true,
   },
   server: {
+    cors: true, // Allow cross-origin requests -- https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6
     fs: {
       strict: false
     },
