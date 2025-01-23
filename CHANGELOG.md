@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.1.11 - UNRELEASED
+## 5.1.11 - 2025.01.23
 ### Changed
 * Removed leading spaces from the `robots.txt` template, [though Google ignores whitespace](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt#syntax)
 
