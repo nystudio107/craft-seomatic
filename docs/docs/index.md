@@ -24,7 +24,7 @@ SEOmatic is a comprehensive, powerful, and flexible turnkey SEO system that faci
 - Various utilities for managing additional meta tags, text excerpts, and more.
 
 ::: tip Use Retour for 404 Redirects
-SEOmatic _does not_ cover is 404 redirects; for that we recommend our [Retour plugin](https://github.com/nystudio107/craft-retour).
+SEOmatic _does not_ handle 404 redirects; for that we recommend our [Retour plugin](https://github.com/nystudio107/craft-retour).
 :::
 
 ## Used By

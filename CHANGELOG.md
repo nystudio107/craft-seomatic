@@ -1,5 +1,12 @@
 # SEOmatic Changelog
 
+## 5.1.11 - 2025.01.23
+### Changed
+* Removed leading spaces from the `robots.txt` template, [though Google ignores whitespace](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt#syntax)
+
+### Fixed
+* Fixed an issue where the Entry Types menu in Content SEO settings would only appear if you had mulitple sites ([#1563](https://github.com/nystudio107/craft-seomatic/issues/1563))
+
 ## 5.1.10 - 2025.01.16
 ### Added
 * Added a `ModifySitemapQueryEvent` to allow the modification of the element query used to generate a sitemap ([#1553](https://github.com/nystudio107/craft-seomatic/issues/1553))

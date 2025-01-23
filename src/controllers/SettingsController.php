@@ -1208,6 +1208,10 @@ class SettingsController extends Controller
     protected function setCrumbVariables(array &$variables)
     {
         $sites = Craft::$app->getSites();
+        if (!array_key_exists('crumbs', $variables)) {
+            $variables['crumbs'] = [];
+        }
+        // Handle adding in the Sites menu if there are multiple sites
         if ($variables['showSites']) {
             $siteCrumbItems = [];
             $siteGroups = Craft::$app->getSites()->getAllGroups();
@@ -1247,10 +1251,7 @@ class SettingsController extends Controller
                     array_push($siteCrumbItems, ...$groupSiteItems);
                 }
             }
-
-            if (!array_key_exists('crumbs', $variables)) {
-                $variables['crumbs'] = [];
-            }
+            // Add in the breadcrumbs
             $variables['crumbs'] = [
                 [
                     'id' => 'language-menu',
@@ -1267,37 +1268,37 @@ class SettingsController extends Controller
                 ...$variables['crumbs'],
             ];
 
-            if (isset($variables['typeMenu']) && !empty($variables['typeMenu'])) {
-                $typeCrumbItems = [];
-                foreach ($variables['typeMenu'] as $key => $value) {
-                    $typeCrumbItems[] = [
-                        'status' => null,
-                        'url' => UrlHelper::url("seomatic/{$variables['controllerHandle']}{$variables['siteHandleUri']}", [
-                            'site' => $variables['currentSiteHandle'],
-                            'typeId' => $key,
-                        ]),
-                        'label' => $value,
-                        'selected' => $variables['currentTypeId'] === $key,
-                    ];
-                }
-                $variables['crumbs'][] =
-                    [
-                        'id' => 'types-menu',
-                        'icon' => 'list',
-                        'label' => $variables['typeMenu'][$variables['currentTypeId']],
-                        'menu' => [
-                            'items' => $typeCrumbItems,
-                            'label' => Craft::t('seomatic', 'Entry Types'),
-                        ],
-                    ];
-            }
-
             $variables['sitesMenuLabel'] = Craft::t(
                 'site',
                 $sites->getSiteById((int)$variables['currentSiteId'])->name
             );
         } else {
             $variables['sitesMenuLabel'] = '';
+        }
+        // Handle adding in the Entry Types menu if there are multiple entry types
+        if (isset($variables['typeMenu']) && !empty($variables['typeMenu'])) {
+            $typeCrumbItems = [];
+            foreach ($variables['typeMenu'] as $key => $value) {
+                $typeCrumbItems[] = [
+                    'status' => null,
+                    'url' => UrlHelper::url("seomatic/{$variables['controllerHandle']}{$variables['siteHandleUri']}", [
+                        'site' => $variables['currentSiteHandle'],
+                        'typeId' => $key,
+                    ]),
+                    'label' => $value,
+                    'selected' => $variables['currentTypeId'] === $key,
+                ];
+            }
+            $variables['crumbs'][] =
+                [
+                    'id' => 'types-menu',
+                    'icon' => 'list',
+                    'label' => $variables['typeMenu'][$variables['currentTypeId']],
+                    'menu' => [
+                        'items' => $typeCrumbItems,
+                        'label' => Craft::t('seomatic', 'Entry Types'),
+                    ],
+                ];
         }
     }
 
