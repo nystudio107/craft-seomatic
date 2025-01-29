@@ -66,7 +66,7 @@ export default defineConfig(({command}) => ({
     // Allow cross-origin requests -- https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6
     allowedHosts: true,
     cors: {
-      origin: /(\.local|\.site|localhost)/
+      origin: /(\.local|\.site|\.test|localhost)/
     },
     fs: {
       strict: false
