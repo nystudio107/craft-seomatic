@@ -24,7 +24,6 @@ new Vue({
   components: {
     'content-seo-table': ContentSeoTable,
   },
-  data: {},
   mounted() {
     this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
   },

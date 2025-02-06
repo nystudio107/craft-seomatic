@@ -15,7 +15,7 @@
  */
 
 // CSS
-import '@/css/app.pcss';
+import '@/css/app.css';
 
 // Images
 import '@/img/Seomatic-icon.svg';
