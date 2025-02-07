@@ -11,8 +11,6 @@ new Vue({
     'dashboard-multi-radial-chart': DashboardMultiRadialChart,
     'dashboard-radial-chart': DashboardRadialChart,
   },
-  data: {},
-  methods: {},
 });
 
 // Accept HMR as per: https://vitejs.dev/guide/api-hmr.html

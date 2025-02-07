@@ -3,13 +3,15 @@
     <div class="ui form">
       <div class="inline field">
         <label class="text-gray-600">Search for:</label>
+        <span class="mx-2">
         <input
           v-model="filterText"
-          type="text"
-          class="text nicetext mx-2"
+          class="text nicetext"
           placeholder=""
+          type="text"
           @keyup="doFilter"
         >
+          </span>
         <button
           class="btn delete icon seomatic-reset"
           @click="resetFilter"
