@@ -1,11 +1,11 @@
 import createVuePlugin from '@vitejs/plugin-vue2';
 import {defineConfig} from 'vite';
+import checker from 'vite-plugin-checker';
+import tailwindcss from "@tailwindcss/vite";
 import {visualizer} from 'rollup-plugin-visualizer';
-import viteEslintPlugin from 'vite-plugin-eslint';
 import viteCompressionPlugin from 'vite-plugin-compression';
 import {viteExternalsPlugin} from 'vite-plugin-externals';
 import viteRestartPlugin from 'vite-plugin-restart';
-import viteStylelintPlugin from 'vite-plugin-stylelint';
 import * as path from 'path';
 
 // https://vitejs.dev/config/
@@ -43,14 +43,30 @@ export default defineConfig(({command}) => ({
       template: 'treemap',
       sourcemap: true,
     }),
-    viteEslintPlugin({
-      cache: false,
-      fix: true,
+    tailwindcss(),
+    checker({
+      eslint: {
+        lintCommand: 'eslint "./src/**/*.{js,ts}"',
+        useFlatConfig: true,
+        dev: {
+          overrideConfig: {
+            cache: true,
+          }
+        }
+      },
+      stylelint: {
+        lintCommand: 'stylelint ./src/**/*.{css} --allow-empty-input --fix',
+        dev: {
+          overrideConfig: {
+            allowEmptyInput: true,
+            cache: true,
+            fix: false
+          }
+        }
+      },
+      typescript: true,
+      vueTsc: true,
     }),
-    viteStylelintPlugin({
-      fix: true,
-      lintInWorker: true
-    })
   ],
   optimizeDeps: {
     include: ['vue-confetti', 'vue-apexcharts', 'vue-axios', '@riophae/vue-treeselect'],
