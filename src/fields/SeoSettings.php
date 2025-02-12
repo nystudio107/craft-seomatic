@@ -384,7 +384,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getTableAttributeHtml(mixed $value, ElementInterface $element): string
+    public function getPreviewHtml(mixed $value, ElementInterface $element): string
     {
         $html = '';
         // Reset this each time to avoid caching issues
@@ -437,6 +437,18 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
         // Render the input template
         return $html;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function previewPlaceholderHtml(mixed $value, ?ElementInterface $element): string
+    {
+        if ($element !== null) {
+            return $this->getPreviewHtml($value, $element);
+        }
+
+        return '';
     }
 
     // Protected Methods
