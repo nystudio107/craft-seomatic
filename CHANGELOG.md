@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.12 - UNRELEASED
+### Fixed
+* Fixed missing SEO Settings previews for element index views in Craft 5 ([#1569](https://github.com/nystudio107/craft-seomatic/issues/1569))
+
 ## 5.1.11 - 2025.01.23
 ### Changed
 * Removed leading spaces from the `robots.txt` template, [though Google ignores whitespace](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt#syntax)
