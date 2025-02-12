@@ -16,7 +16,7 @@
     ]
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard-DCi3iwDZ.js",
+    "file": "assets/dashboard-CDHjc9FA.js",
     "name": "dashboard",
     "src": "src/js/dashboard.js",
     "isEntry": true,
@@ -37,12 +37,12 @@
     ]
   },
   "src/js/seomatic.js": {
-    "file": "assets/seomatic-Cgm1Ddqa.js",
+    "file": "assets/seomatic-Bm5vGx4P.js",
     "name": "seomatic",
     "src": "src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic-D54lCp8g.css"
+      "assets/seomatic-j97g5_fz.css"
     ]
   }
 }
