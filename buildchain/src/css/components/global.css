@@ -10,22 +10,20 @@ div.seomatic-field {
     margin-bottom: 10px;
     padding: 0;
     border-radius: 3px;
-    background-color: rgb(235, 237, 239);
+    background-color: rgb(235 237 239);
 }
 
 div.seomatic-tab-content {
     -webkit-box-flex: 1;
-    -ms-flex: 1;
     flex: 1;
     background: #fff;
     padding: 24px;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 nav.seomatic-tabs {
     position: relative;
     z-index: 1;
-    -webkit-box-shadow: inset 0 -1px 0 #e3e5e8;
     box-shadow: inset 0 -1px 0 #e3e5e8;
     min-height: 40px;
     overflow: hidden;
@@ -33,19 +31,16 @@ nav.seomatic-tabs {
 
 nav.seomatic-tabs ul {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    -ms-flex-direction: row;
     flex-direction: row;
     width: calc(100% + 1px);
 }
 
 nav.seomatic-tabs ul li {
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border-right: 1px solid rgba(0, 0, 20, 0.1);
+    border-right: 1px solid rgb(0 0 20 / 10%);
 }
 
 nav.seomatic-tabs ul li a {
@@ -75,12 +70,12 @@ nav.seomatic-tabs ul li a:not(.sel):hover {
     color: #0d78f2;
 }
 
-nav.seomatic-tabs ul li a:after {
-    background: linear-gradient(to right, rgba(235, 237, 239, 0), #ebedef 17px);
+nav.seomatic-tabs ul li a::after {
+    background: linear-gradient(to right, rgb(235 237 239 / 0%), #ebedef 17px);
 }
 
-nav.seomatic-tabs ul li a.sel:after {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 17px);
+nav.seomatic-tabs ul li a.sel::after {
+    background: linear-gradient(to right, rgb(255 255 255 / 0%), #fff 17px);
 }
 
 div.content-icon-wrapper {
@@ -188,10 +183,9 @@ p.instructions {
 div.preview-modal {
     width: 90vw;
     height: 90vh;
-    background-color: #FFFFFF;
+    background-color: #FFF;
     border-radius: 4px;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden scroll;
     margin-top: 2%;
 }
 
@@ -209,7 +203,7 @@ div.seomatic-container {
 }
 
 div.secondbtn {
-    margin: 14px 0px;
+    margin: 14px 0;
 }
 
 div.displaypreview-container {
@@ -252,7 +246,7 @@ li.checkboxChecklist a {
     color: inherit;
 }
 
-li.checkboxChecklist.checked label:after {
+li.checkboxChecklist.checked label::after {
     content: "";
     position: absolute;
     width: 9px;
@@ -263,13 +257,11 @@ li.checkboxChecklist.checked label:after {
     border: 2px solid;
     border-top: none;
     border-right: none;
-
     transform: rotate(-45deg);
 }
 
 div.vue-treeselect > div.vue-treeselect__control {
-    -webkit-box-shadow: inset 0 1px 4px -1px rgba(96, 125, 159, 0.25);
-    box-shadow: inset 0 1px 4px -1px rgba(96, 125, 159, 0.25);
+    box-shadow: inset 0 1px 4px -1px rgb(96 125 159 / 25%);
     background-color: #fbfcfe;
 }
 
