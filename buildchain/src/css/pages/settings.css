@@ -18,6 +18,7 @@ fieldset {
   .inherited{
     display: block;
   }
+
   .field-settings{
     display: none;
   }
@@ -27,6 +28,7 @@ fieldset {
   .inherited{
     display: none;
   }
+
   .field-settings{
     display: block;
   }
@@ -35,7 +37,7 @@ fieldset {
 body.ltr .inheritable-field .lightswitch-outer-container .lightswitch-inner-container {
   border: none;
 
-  span[data-toggle=off] {
+  span[data-toggle="off"] {
     font-weight: bold;
     padding-left: 0;
   }
@@ -44,6 +46,7 @@ body.ltr .inheritable-field .lightswitch-outer-container .lightswitch-inner-cont
 .value-wrapper .heading + .field{
   margin-top: 0 !important;
 }
+
 .value-wrapper .instructions + .field{
   margin-top: 0 !important;
 }
