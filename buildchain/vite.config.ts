@@ -59,7 +59,6 @@ export default defineConfig(({command}) => ({
         dev: {
           overrideConfig: {
             cache: true,
-            fix: false
           }
         }
       },
@@ -81,7 +80,7 @@ export default defineConfig(({command}) => ({
     // Allow cross-origin requests -- https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6
     allowedHosts: true,
     cors: {
-      origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(localhost|\.local|\.test|\.ddev\.site)(?::\d+)?$/
+      origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(localhost|\.local|\.ddev\.test|\.site)(?::\d+)?$/
     },
     fs: {
       strict: false
