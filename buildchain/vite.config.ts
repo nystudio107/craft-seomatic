@@ -55,10 +55,9 @@ export default defineConfig(({command}) => ({
         }
       },
       stylelint: {
-        lintCommand: 'stylelint ./src/**/*.{css} --allow-empty-input --fix',
+        lintCommand: 'stylelint ./src/**/*.{css,scss,sass,pcss} --fix',
         dev: {
           overrideConfig: {
-            allowEmptyInput: true,
             cache: true,
             fix: false
           }
@@ -82,7 +81,7 @@ export default defineConfig(({command}) => ({
     // Allow cross-origin requests -- https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6
     allowedHosts: true,
     cors: {
-      origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(localhost|\.local|\.test|\.site)(?::\d+)?$/
+      origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(localhost|\.local|\.test|\.ddev\.site)(?::\d+)?$/
     },
     fs: {
       strict: false
