@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.1.11 - 2025.01.23
+### Added
+* Assets & Matrix Blocks are now eager loaded in the query that generates the sitemap, speeding things up significantly for sites with a number of assets in entries
+
 ### Changed
 * Removed leading spaces from the `robots.txt` template, [though Google ignores whitespace](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt#syntax)
 
