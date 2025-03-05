@@ -13,7 +13,6 @@ namespace nystudio107\seomatic\helpers;
 
 use craft\fields\Matrix;
 use craft\models\Section;
-use ECSPrefix202206\Doctrine\Common\Annotations\Annotation\Enum;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\Seomatic;
 
