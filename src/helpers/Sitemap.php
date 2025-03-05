@@ -17,6 +17,7 @@ use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
 use nystudio107\seomatic\events\ModifySitemapQueryEvent;
 use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\helpers\EagerLoad as EagerLoadHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
@@ -174,6 +175,9 @@ class Sitemap
 
         $sitemapPageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
         $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
+
+        // Eager load assets & relations
+        $elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
 
         // If this is not a paged sitemap, go through full results
         if (empty($sitemapPageSize)) {
