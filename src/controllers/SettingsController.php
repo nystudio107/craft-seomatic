@@ -1337,7 +1337,7 @@ class SettingsController extends Controller
      */
     protected function cullDisabledSites($seoElement, string $sourceBundleType, string $sourceHandle, array &$variables)
     {
-        /** @var Section|ProductType $section */
+        /** @var ?Section|?ProductType $section */
         $section = $seoElement::sourceModelFromHandle($sourceHandle);
         $sectionSiteIds = [];
         if ($section) {
