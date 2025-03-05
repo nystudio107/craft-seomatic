@@ -8,6 +8,7 @@ use craft\base\Element;
 use craft\console\Application as ConsoleApplication;
 use craft\db\Paginator;
 use craft\elements\Asset;
+use craft\elements\db\ElementQueryInterface;
 use craft\elements\MatrixBlock;
 use craft\errors\SiteNotFoundException;
 use craft\fields\Assets as AssetsField;
@@ -16,6 +17,7 @@ use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\events\IncludeSitemapEntryEvent;
 use nystudio107\seomatic\events\ModifySitemapQueryEvent;
 use nystudio107\seomatic\fields\SeoSettings;
+use nystudio107\seomatic\helpers\EagerLoad as EagerLoadHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\models\MetaBundle;
 use nystudio107\seomatic\models\SitemapTemplate;
@@ -175,6 +177,9 @@ class Sitemap
 
         $sitemapPageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
         $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
+
+        // Eager load assets & relations
+        $elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
 
         // If this is not a paged sitemap, go through full results
         if (empty($sitemapPageSize)) {
@@ -363,7 +368,10 @@ class Sitemap
                             true
                         );
                         foreach ($assetFields as $assetField) {
-                            $assets = $element[$assetField]->all();
+                            $assets = $element[$assetField];
+                            if ($assets instanceof ElementQueryInterface) {
+                                $assets = $assets->all();
+                            }
                             /** @var Asset[] $assets */
                             foreach ($assets as $asset) {
                                 self::assetSitemapItem($asset, $metaBundle, $lines);
@@ -376,7 +384,10 @@ class Sitemap
                             true
                         );
                         foreach ($blockFields as $blockField) {
-                            $blocks = $element[$blockField]->all();
+                            $blocks = $element[$blockField];
+                            if ($blocks instanceof ElementQueryInterface) {
+                                $blocks = $blocks->all();
+                            }
                             /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
@@ -390,7 +401,11 @@ class Sitemap
                                     $assetFields = FieldHelper::superTableFieldsOfType($block, AssetsField::class);
                                 }
                                 foreach ($assetFields as $assetField) {
-                                    foreach ($block[$assetField]->all() as $asset) {
+                                    $assets = $block[$assetField];
+                                    if ($assets instanceof ElementQueryInterface) {
+                                        $assets = $assets->all();
+                                    }
+                                    foreach ($assets as $asset) {
                                         self::assetSitemapItem($asset, $metaBundle, $lines);
                                     }
                                 }
@@ -408,7 +423,10 @@ class Sitemap
                         true
                     );
                     foreach ($assetFields as $assetField) {
-                        $assets = $element[$assetField]->all();
+                        $assets = $element[$assetField];
+                        if ($assets instanceof ElementQueryInterface) {
+                            $assets = $assets->all();
+                        }
                         foreach ($assets as $asset) {
                             self::assetFilesSitemapLink($asset, $metaBundle, $lines);
                         }
@@ -420,7 +438,10 @@ class Sitemap
                         true
                     );
                     foreach ($blockFields as $blockField) {
-                        $blocks = $element[$blockField]->all();
+                        $blocks = $element[$blockField];
+                        if ($blocks instanceof ElementQueryInterface) {
+                            $blocks = $blocks->all();
+                        }
                         /** @var MatrixBlock[]|NeoBlock[]|SuperTableBlock[]|object[] $blocks */
                         foreach ($blocks as $block) {
                             $assetFields = [];
@@ -434,7 +455,11 @@ class Sitemap
                                 $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
                             }
                             foreach ($assetFields as $assetField) {
-                                foreach ($block[$assetField]->all() as $asset) {
+                                $assets = $block[$assetField];
+                                if ($assets instanceof ElementQueryInterface) {
+                                    $assets = $assets->all();
+                                }
+                                foreach ($assets as $asset) {
                                     self::assetFilesSitemapLink($asset, $metaBundle, $lines);
                                 }
                             }
