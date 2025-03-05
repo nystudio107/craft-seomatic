@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 5.1.12 - UNRELEASED
+### Added
+* Assets & Matrix Blocks are now eager loaded in the query that generates the sitemap, speeding things up significantly for sites with a number of assets in entries
+
 ### Fixed
 * Fixed missing SEO Settings previews for element index views in Craft 5 ([#1569](https://github.com/nystudio107/craft-seomatic/issues/1569))
 
