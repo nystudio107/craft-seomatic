@@ -552,6 +552,12 @@ class SettingsController extends Controller
             $variables['typeMenu'] = [];
             $variables['specificTypeId'] = $typeId ?? key($typeMenu);
         }
+        // If this is the sitemap section, there are no per-entry type settings
+        if ($subSection === 'sitemap') {
+            $variables['typeMenu'] = [];
+            $variables['specificTypeId'] = $typeId ?? key($typeMenu);
+            $typeId = 0;
+        }
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
         try {
@@ -661,7 +667,7 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
-        $typeId = $request->getParam('typeId') ?? null;
+        $typeId = $request->getBodyParam('typeId') ?? null;
         $specificTypeId = $request->getParam('specificTypeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
