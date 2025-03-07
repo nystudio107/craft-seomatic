@@ -28,7 +28,8 @@
     <input type="hidden" name="siteId" value="{{ currentSiteId }}">
     <input type="hidden" name="sourceHandle" value="{{ currentSourceHandle }}">
     <input type="hidden" name="sourceBundleType" value="{{ currentSourceBundleType }}">
-    <input type="hidden" name="typeId" value="{{ currentTypeId }}">
+    {# Sitemaps do not have per-entry type settings #}
+    <input type="hidden" name="typeId" value="0">
     <input type="hidden" name="specificTypeId" value="{{ specificTypeId }}">
     {{ redirectInput("seomatic/edit-content/#{currentSubSection}/#{currentSourceBundleType}/#{currentSourceHandle}/#{currentSiteHandle}?typeId=#{currentTypeId}") }}
 
