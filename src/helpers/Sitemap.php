@@ -177,7 +177,9 @@ class Sitemap
         $elementQuery->limit($metaBundle->metaSitemapVars->sitemapLimit ?? null);
 
         // Eager load assets & relations
-        $elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
+        if ($metaBundle->metaSitemapVars->sitemapAssets || $metaBundle->metaSitemapVars->sitemapFiles) {
+            $elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
+        }
 
         // If this is not a paged sitemap, go through full results
         if (empty($sitemapPageSize)) {
