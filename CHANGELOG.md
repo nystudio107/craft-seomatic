@@ -7,6 +7,9 @@
 ### Changed
 * Removed leading spaces from the `robots.txt` template, [though Google ignores whitespace](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt#syntax)
 
+### Fixed
+* Fixed an issue where Content SEO sitemap settings had per-Entry Type settings, when they should not (one sitemap encompasses all Entry Types for a Section)
+
 ## 3.5.13 - 2025.01.16
 ### Added
 * Added a `ModifySitemapQueryEvent` to allow the modification of the element query used to generate a sitemap ([#1553](https://github.com/nystudio107/craft-seomatic/issues/1553))
