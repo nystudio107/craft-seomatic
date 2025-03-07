@@ -7,6 +7,7 @@
 ### Fixed
 * Fixed missing SEO Settings previews for element index views in Craft 5 ([#1569](https://github.com/nystudio107/craft-seomatic/issues/1569))
 * Fixed an issue where Commerce Product types didn't show the language menu in Content SEO ([#1577](https://github.com/nystudio107/craft-seomatic/issues/1577))
+* Fixed an issue where Content SEO sitemap settings had per-Entry Type settings, when they should not (one sitemap encompasses all Entry Types for a Section)
 
 ## 5.1.11 - 2025.01.23
 ### Changed
