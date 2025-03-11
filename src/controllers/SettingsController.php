@@ -532,6 +532,9 @@ class SettingsController extends Controller
         if (is_string($typeId)) {
             $typeId = (int)$typeId;
         }
+        if (empty($typeId)) {
+            $typeId = null;
+        }
         // Get the (entry) type menu
         $typeMenu = [];
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
