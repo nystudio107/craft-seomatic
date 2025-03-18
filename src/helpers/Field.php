@@ -32,6 +32,7 @@ use nystudio107\seomatic\fields\SeoSettings as SeoSettingsField;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\MetaBundles;
 use verbb\doxter\fields\Doxter as DoxterField;
+use abmat\tinymce\Field as ABMTinymceField;
 use yii\base\InvalidConfigException;
 
 /**
@@ -60,6 +61,7 @@ class Field
             NeoField::class,
             PreparseFieldType::class,
             DoxterField::class,
+            ABMTinymceField::class,
         ],
         self::ASSET_FIELD_CLASS_KEY => [
             AssetsField::class,
