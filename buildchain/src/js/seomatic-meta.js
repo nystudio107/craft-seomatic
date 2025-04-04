@@ -1,5 +1,5 @@
 /**
- * SEOmatic plugin for Craft CMS.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
+/* global Vue $ Craft Garnish */
 import SchemaTypeList from "@/vue/SchemaTypeList.vue";
 import RobotsSelect from "@/vue/RobotsSelect.vue";
 
@@ -28,8 +29,6 @@ if (window.schemaSelectClass !== undefined) {
       components: {
         'schema-type-list': SchemaTypeList,
       },
-      data: {},
-      methods: {},
     });
   }
 }
@@ -45,8 +44,6 @@ if (window.robotsSelectClass !== undefined) {
       components: {
         'robots-select': RobotsSelect,
       },
-      data: {},
-      methods: {},
     });
   }
 }

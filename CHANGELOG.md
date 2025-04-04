@@ -1,5 +1,13 @@
 # SEOmatic Changelog
 
+## 4.1.12 - UNRELEASED
+### Added
+* Assets & Matrix Blocks are now eager loaded in the query that generates the sitemap, speeding things up significantly for sites with a number of assets in entries
+
+### Fixed
+* Fixed an issue where Content SEO sitemap settings had per-Entry Type settings, when they should not (one sitemap encompasses all Entry Types for a Section)
+* Fixed the "back" link on human-readable sitemaps for multi-sites that have a path as part of their URL ([#1591](https://github.com/nystudio107/craft-seomatic/issues/1591))
+
 ## 4.1.11 - 2025.01.23
 ### Changed
 * Removed leading spaces from the `robots.txt` template, [though Google ignores whitespace](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt#syntax)

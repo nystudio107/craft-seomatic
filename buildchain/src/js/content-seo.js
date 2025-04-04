@@ -1,5 +1,5 @@
 /**
- * SEOmatic plugin for Craft CMS.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -24,7 +24,6 @@ new Vue({
   components: {
     'content-seo-table': ContentSeoTable,
   },
-  data: {},
   mounted() {
     this.$events.$on('refresh-table', eventData => this.onTableRefresh(eventData));
   },

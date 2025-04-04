@@ -1,11 +1,10 @@
 import createVuePlugin from '@vitejs/plugin-vue2';
 import {defineConfig} from 'vite';
+import checker from 'vite-plugin-checker';
+import tailwindcss from "@tailwindcss/vite";
 import {visualizer} from 'rollup-plugin-visualizer';
-import viteEslintPlugin from 'vite-plugin-eslint';
 import viteCompressionPlugin from 'vite-plugin-compression';
 import {viteExternalsPlugin} from 'vite-plugin-externals';
-import viteRestartPlugin from 'vite-plugin-restart';
-import viteStylelintPlugin from 'vite-plugin-stylelint';
 import * as path from 'path';
 
 // https://vitejs.dev/config/
@@ -26,11 +25,6 @@ export default defineConfig(({command}) => ({
     sourcemap: true
   },
   plugins: [
-    viteRestartPlugin({
-      reload: [
-        '../src/templates/**/*',
-      ],
-    }),
     createVuePlugin(),
     viteExternalsPlugin({
       'vue': 'Vue',
@@ -43,14 +37,28 @@ export default defineConfig(({command}) => ({
       template: 'treemap',
       sourcemap: true,
     }),
-    viteEslintPlugin({
-      cache: false,
-      fix: true,
+    tailwindcss(),
+    checker({
+      eslint: {
+        lintCommand: 'eslint "./src/**/*.{js,ts}"',
+        useFlatConfig: true,
+        dev: {
+          overrideConfig: {
+            cache: true,
+          }
+        }
+      },
+      stylelint: {
+        lintCommand: 'stylelint ./src/**/*.{css,scss,sass,pcss} --fix',
+        dev: {
+          overrideConfig: {
+            cache: true,
+          }
+        }
+      },
+      typescript: true,
+      vueTsc: true,
     }),
-    viteStylelintPlugin({
-      fix: true,
-      lintInWorker: true
-    })
   ],
   optimizeDeps: {
     include: ['vue-confetti', 'vue-apexcharts', 'vue-axios', '@riophae/vue-treeselect'],
@@ -63,9 +71,16 @@ export default defineConfig(({command}) => ({
     preserveSymlinks: true,
   },
   server: {
-    cors: true, // Allow cross-origin requests -- https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6
+    // Allow cross-origin requests -- https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6
+    allowedHosts: true,
+    cors: {
+      origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(localhost|\.local|\.ddev\.test|\.site)(?::\d+)?$/
+    },
     fs: {
       strict: false
+    },
+    headers: {
+      "Access-Control-Allow-Private-Network": "true",
     },
     host: '0.0.0.0',
     origin: 'http://localhost:' + process.env.DEV_PORT,
