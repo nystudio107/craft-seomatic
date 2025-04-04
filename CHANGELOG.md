@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.1.12 - UNRELEASED
+## 4.1.12 - 2025.04.03
 ### Added
 * Assets & Matrix Blocks are now eager loaded in the query that generates the sitemap, speeding things up significantly for sites with a number of assets in entries
 
