@@ -1,0 +1,36 @@
+/**
+ * app.css
+ *
+ * The entry point for the css.
+ *
+ */
+
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ */
+@import "./tailwind-config.css";
+
+/**
+ * Here we add custom component classes; stuff we want loaded
+ * *before* the utilities so that the utilities can still
+ * override them.
+ *
+ */
+@import "./components/global.css";
+@import "./components/tree-select.css";
+@import "./components/seo-previews.css";
+@import "./components/tables.css";
+
+/**
+ * Include styles for individual pages
+ *
+ */
+@import "./pages/dashboard.css";
+@import "./pages/settings.css";
+
+/**
+ * Include vendor css.
+ *
+ */
+@import "./vendor.css";

@@ -12,10 +12,9 @@ namespace nystudio107\seomatic\controllers;
 use Craft;
 use craft\web\Controller;
 use nystudio107\seomatic\helpers\PluginTemplate;
-
+use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
 use nystudio107\seomatic\services\Sitemaps;
-
 use yii\web\Response;
 
 /**
@@ -85,7 +84,14 @@ class SitemapController extends Controller
      */
     public function actionSitemapStyles(): Response
     {
-        $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', []);
+        $variables = [];
+        try {
+            $variables['sitemapBacklink'] = UrlHelper::siteUrl('/sitemap.xml');
+        } catch (\Throwable $e) {
+            $variables['sitemapBacklink'] = '/sitemap.xml';
+        }
+
+        $xml = PluginTemplate::renderPluginTemplate('_frontend/pages/sitemap-styles.twig', $variables);
 
         $headers = Craft::$app->response->headers;
         $headers->add('Content-Type', 'text/xml; charset=utf-8');
@@ -113,10 +119,10 @@ class SitemapController extends Controller
     /**
      * Returns a rendered sitemap.
      *
-     * @param int    $groupId Which Site Group the sitemap index is for
+     * @param int $groupId Which Site Group the sitemap index is for
      * @param string $type
      * @param string $handle
-     * @param int    $siteId
+     * @param int $siteId
      *
      * @return Response
      */

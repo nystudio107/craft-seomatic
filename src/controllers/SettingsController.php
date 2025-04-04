@@ -10,10 +10,12 @@
 namespace nystudio107\seomatic\controllers;
 
 use Craft;
+use craft\commerce\models\ProductType;
 use craft\elements\Asset;
 use craft\errors\MissingComponentException;
 use craft\helpers\Cp;
 use craft\helpers\UrlHelper;
+use craft\models\Section;
 use craft\models\Site;
 use craft\web\Controller;
 use craft\web\UrlManager;
@@ -21,6 +23,7 @@ use DateTime;
 use Illuminate\Support\Collection;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
+use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
@@ -529,6 +532,9 @@ class SettingsController extends Controller
         if (is_string($typeId)) {
             $typeId = (int)$typeId;
         }
+        if (empty($typeId)) {
+            $typeId = null;
+        }
         // Get the (entry) type menu
         $typeMenu = [];
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
@@ -549,6 +555,12 @@ class SettingsController extends Controller
             $variables['typeMenu'] = [];
             $variables['specificTypeId'] = $typeId ?? key($typeMenu);
         }
+        // If this is the sitemap section, there are no per-entry type settings
+        if ($subSection === 'sitemap') {
+            $variables['typeMenu'] = [];
+            $variables['specificTypeId'] = $typeId ?? key($typeMenu);
+            $typeId = 0;
+        }
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle
         try {
@@ -562,7 +574,7 @@ class SettingsController extends Controller
         );
         // Enabled sites
         $this->setMultiSiteVariables($siteHandle, $siteId, $variables);
-        $this->cullDisabledSites($sourceBundleType, $sourceHandle, $variables);
+        $this->cullDisabledSites($seoElement, $sourceBundleType, $sourceHandle, $variables);
         // Meta Bundle settings
         Seomatic::$previewingMetaContainers = true;
         // Get the site to copy the settings from, if any
@@ -658,7 +670,7 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
-        $typeId = $request->getParam('typeId') ?? null;
+        $typeId = $request->getBodyParam('typeId') ?? null;
         $specificTypeId = $request->getParam('specificTypeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
@@ -1327,17 +1339,18 @@ class SettingsController extends Controller
      * Remove any sites for which meta bundles do not exist (they may be
      * disabled for this section)
      *
+     * @param class-string<SeoElementInterface> $seoElement
      * @param string $sourceBundleType
      * @param string $sourceHandle
      * @param array $variables
      */
-    protected function cullDisabledSites(string $sourceBundleType, string $sourceHandle, array &$variables)
+    protected function cullDisabledSites($seoElement, string $sourceBundleType, string $sourceHandle, array &$variables)
     {
-        $entries = Craft::$app->getEntries();
-        $section = $entries->getSectionByHandle($sourceHandle);
+        /** @var Section|ProductType|null $section */
+        $section = $seoElement::sourceModelFromHandle($sourceHandle);
         $sectionSiteIds = [];
         if ($section) {
-            $sectionSettings = $entries->getSectionSiteSettings($section->id);
+            $sectionSettings = $section->getSiteSettings();
             foreach ($sectionSettings as $sectionSetting) {
                 $sectionSiteIds[] = $sectionSetting->siteId;
             }
