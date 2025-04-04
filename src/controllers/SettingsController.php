@@ -519,6 +519,9 @@ class SettingsController extends Controller
         if (is_string($typeId)) {
             $typeId = (int)$typeId;
         }
+        if (empty($typeId)) {
+            $typeId = null;
+        }
         // Get the (entry) type menu
         $typeMenu = [];
         $seoElement = Seomatic::$plugin->seoElements->getSeoElementByMetaBundleType($sourceBundleType);
@@ -538,6 +541,12 @@ class SettingsController extends Controller
         if (count($typeMenu) === 1) {
             $variables['typeMenu'] = [];
             $variables['specificTypeId'] = $typeId ?? key($typeMenu);
+        }
+        // If this is the sitemap section, there are no per-entry type settings
+        if ($subSection === 'sitemap') {
+            $variables['typeMenu'] = [];
+            $variables['specificTypeId'] = $typeId ?? key($typeMenu);
+            $typeId = 0;
         }
         $pluginName = Seomatic::$settings->pluginName;
         // Asset bundle

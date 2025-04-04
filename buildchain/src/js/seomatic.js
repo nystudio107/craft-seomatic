@@ -1,5 +1,5 @@
 /**
- * SEOmatic plugin for Craft CMS 3.x
+ * SEOmatic plugin for Craft CMS
  *
  * A turnkey SEO implementation for Craft CMS that is comprehensive, powerful,
  * and flexible
@@ -15,7 +15,7 @@
  */
 
 // CSS
-import '@/css/app.pcss';
+import '@/css/app.css';
 
 // Images
 import '@/img/Seomatic-icon.svg';
