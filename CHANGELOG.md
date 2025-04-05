@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.16 - UNRELEASED
+### Fixed
+* Fix an issue where sitemap generation threw an exception for sections with Neo fields in them ([#1593](https://github.com/nystudio107/craft-seomatic/issues/1593))
+
 ## 3.5.15 - 2025.04.03
 ### Added
 * Assets & Matrix Blocks are now eager loaded in the query that generates the sitemap, speeding things up significantly for sites with a number of assets in entries
