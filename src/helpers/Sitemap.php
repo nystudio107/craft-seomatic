@@ -276,7 +276,7 @@ class Sitemap
                     $lines[] = '<url>';
                     // Standard sitemap key/values
                     $lines[] = '<loc>';
-                    $lines[] = Html::encode($url);
+                    $lines[] = self::encodeSitemapEntity($url);
                     $lines[] = '</loc>';
                     $lines[] = '<lastmod>';
                     $lines[] = $dateUpdated->format(DateTime::W3C);
@@ -329,12 +329,12 @@ class Sitemap
                                             if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
                                                 $lines[] = '<xhtml:link rel="alternate"'
                                                     . ' hreflang="x-default"'
-                                                    . ' href="' . Html::encode($altUrl) . '"'
+                                                    . ' href="' . self::encodeSitemapEntity($altUrl) . '"'
                                                     . ' />';
                                             }
                                             $lines[] = '<xhtml:link rel="alternate"'
                                                 . ' hreflang="' . $altSiteSettings['language'] . '"'
-                                                . ' href="' . Html::encode($altUrl) . '"'
+                                                . ' href="' . self::encodeSitemapEntity($altUrl) . '"'
                                                 . ' />';
                                         }
                                     }
@@ -490,6 +490,19 @@ class Sitemap
     }
 
     /**
+     * Encode sitemap entities to make sure they follow the RFC-3986 standard for URIs, the RFC-3987 standard for IRIs
+     * and the XML standard.
+     * ref: https://sitemaps.org/protocol.html#escaping
+     *
+     * @param string $text
+     * @return string
+     */
+    public static function encodeSitemapEntity(string $text): string
+    {
+        return Html::encode(UrlHelper::encodeUrl($text));
+    }
+
+    /**
      * Return the total number of elements in a sitemap, respecting metabundle settings.
      *
      * @param class-string<SeoElementInterface> $seoElementClass
@@ -623,7 +636,7 @@ class Sitemap
                     $transform = Craft::$app->getAssetTransforms()->getTransformByHandle($metaBundle->metaSitemapVars->sitemapAssetTransform ?? '');
                     $lines[] = '<image:image>';
                     $lines[] = '<image:loc>';
-                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl($transform, true)));
+                    $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl($transform, true)));
                     $lines[] = '</image:loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
@@ -631,7 +644,7 @@ class Sitemap
                         $propName = $row['property'] ?? '';
                         if (!empty($fieldName) && !empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '<image:' . $propName . '>';
-                            $lines[] = Html::encode($asset[$fieldName]);
+                            $lines[] = self::encodeSitemapEntity($asset[$fieldName]);
                             $lines[] = '</image:' . $propName . '>';
                         }
                     }
@@ -641,7 +654,7 @@ class Sitemap
                 case 'video':
                     $lines[] = '<video:video>';
                     $lines[] = '<video:content_loc>';
-                    $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                    $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
                     $lines[] = '</video:content_loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
@@ -649,7 +662,7 @@ class Sitemap
                         $propName = $row['property'] ?? '';
                         if (!empty($fieldName) && !empty($asset[$fieldName]) && !empty($propName)) {
                             $lines[] = '<video:' . $propName . '>';
-                            $lines[] = Html::encode($asset[$fieldName]);
+                            $lines[] = self::encodeSitemapEntity($asset[$fieldName]);
                             $lines[] = '</video:' . $propName . '>';
                         }
                     }
@@ -671,7 +684,7 @@ class Sitemap
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new DateTime();
                 $lines[] = '<url>';
                 $lines[] = '<loc>';
-                $lines[] = Html::encode(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
                 $lines[] = '</loc>';
                 $lines[] = '<lastmod>';
                 $lines[] = $dateUpdated->format(DateTime::W3C);
