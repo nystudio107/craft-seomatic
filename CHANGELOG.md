@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 5.1.13 - UNRELEASED
+### Added
+* Added migration to drop the vestigial Craft 2.x tables `seomatic_meta` and `seomatic_settings` tables ([#1558](https://github.com/nystudio107/craft-seomatic/issues/1558))
+
 ### Changed
 * Encode sitemap entities to make sure they follow the RFC-3986 standard for URIs, the RFC-3987 standard for IRIs and the XML standard. ref: https://sitemaps.org/protocol.html#escaping
 
