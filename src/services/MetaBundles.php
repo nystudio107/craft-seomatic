@@ -674,7 +674,7 @@ class MetaBundles extends Component
                     __METHOD__
                 );
                 $metaBundleInvalidated = true;
-                Seomatic::$plugin->metaContainers->invalidateContainerCacheByPath($uri, $sourceSiteId);
+                Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId, $sourceBundleType);
                 // Invalidate the sitemap cache
                 $metaBundle = $this->getMetaBundleBySourceId($sourceBundleType, $sourceId, $sourceSiteId);
                 if ($metaBundle) {
