@@ -353,11 +353,11 @@ class Sitemap
                             }
                             $lines[] = '<news:news>';
                             $lines[] = '<news:publication>';
-                            $lines[] = '<news:name>' . $metaBundle->metaSitemapVars->newsPublicationName . '</news:name>';
+                            $lines[] = '<news:name>' . self::encodeSitemapEntity($metaBundle->metaSitemapVars->newsPublicationName) . '</news:name>';
                             $lines[] = '<news:language>' . $language . '</news:language>';
                             $lines[] = '</news:publication>';
                             $lines[] = '<news:publication_date>' . $dateUpdated->format(DateTime::W3C) . '</news:publication_date>';
-                            $lines[] = '<news:title>' . $element->title . '</news:title>';
+                            $lines[] = '<news:title>' . self::encodeSitemapEntity($element->title) . '</news:title>';
                             $lines[] = '</news:news>';
                         }
                     }
