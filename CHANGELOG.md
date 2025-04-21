@@ -8,6 +8,7 @@
 ### Fixed
 * Fix an issue where sitemap generation threw an exception for sections with Neo fields in them ([#1593](https://github.com/nystudio107/craft-seomatic/issues/1593))
 * Fixed an issue where saving Sitemap settings under Content SEO did not save properly ([#1596](https://github.com/nystudio107/craft-seomatic/issues/1596))
+* Properly XML-encode entities in the News Sitemap so that they validate ([#1596](https://github.com/nystudio107/craft-seomatic/issues/1596#issuecomment-2819222797))
 
 ## 3.5.15 - 2025.04.03
 ### Added
