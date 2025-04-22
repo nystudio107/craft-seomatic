@@ -741,7 +741,7 @@ class MetaBundles extends Component
      *
      * @return array
      */
-    public function getContentMetaBundlesForSiteId($sourceSiteId, $filter = ''): array
+    public function getContentMetaBundlesForSiteId($sourceSiteId, $filter = '', $noTypeId = false): array
     {
         $metaBundles = [];
         $bundles = [];
@@ -752,6 +752,9 @@ class MetaBundles extends Component
                 ->from(['{{%seomatic_metabundles}}'])
                 ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE]);
 
+            if ($noTypeId) {
+                $subQuery->andWhere(['=', 'typeId', null]);
+            }
             if ((int)$sourceSiteId !== 0) {
                 $subQuery->andWhere(['sourceSiteId' => $sourceSiteId]);
             }
