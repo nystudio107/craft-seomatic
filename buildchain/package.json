@@ -21,7 +21,7 @@
     "apexcharts": "^4.0.0",
     "axios": "^1.6.2",
     "regenerator-runtime": "^0.13.2",
-    "vue": "^2.6.0",
+    "vue": "^3.0.0",
     "vue-apexcharts": "^1.7.0",
     "vue-axios": "^2.1.5",
     "vue-confetti": "^0.4.2",
