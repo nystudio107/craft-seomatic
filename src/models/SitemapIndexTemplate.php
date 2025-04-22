@@ -162,7 +162,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>';
             $lines[] = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
             // One sitemap entry for each MeteBundle
-            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId);
+            $metaBundles = Seomatic::$plugin->metaBundles->getContentMetaBundlesForSiteId($siteId, '', true);
             Seomatic::$plugin->metaBundles->pruneVestigialMetaBundles($metaBundles);
             /** @var MetaBundle $metaBundle */
             foreach ($metaBundles as $metaBundle) {
@@ -218,7 +218,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                                 $lines[] = $metaBundle->sourceDateUpdated->format(DateTime::W3C);
                                 $lines[] = '</lastmod>';
                             }
-                            
+
                             $lines[] = '</sitemap>';
                         }
                     }
