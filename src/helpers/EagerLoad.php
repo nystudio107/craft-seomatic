@@ -91,12 +91,22 @@ class EagerLoad
         foreach ($matrixFields as $matrixFieldHandle) {
             /** @var Matrix $matrixField */
             $matrixField = $layout->getFieldByHandle($matrixFieldHandle);
-            $entryTypes = $matrixField->getEntryTypes();
-            foreach ($entryTypes as $entryType) {
-                $matrixLayout = $entryType->getFieldLayout();
-                $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $matrixLayout);
-                foreach ($assetFields as $assetFieldHandle) {
-                    $fieldMap[] = empty($transform) ? "$matrixFieldHandle.$assetFieldHandle" : ["$matrixFieldHandle.$assetFieldHandle", ['withTransforms' => $transform]];
+            $entryTypes = null;
+            // For Matrix blocks
+            if (method_exists($matrixField, 'getEntryTypes')) {
+                $entryTypes = $matrixField->getEntryTypes();
+            }
+            // For other block types like Neo
+            if (method_exists($matrixField, 'getBlockTypes')) {
+                $entryTypes = $matrixField->getBlockTypes();
+            }
+            if ($entryTypes) {
+                foreach ($entryTypes as $entryType) {
+                    $matrixLayout = $entryType->getFieldLayout();
+                    $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $matrixLayout);
+                    foreach ($assetFields as $assetFieldHandle) {
+                        $fieldMap[] = empty($transform) ? "$matrixFieldHandle.$assetFieldHandle" : ["$matrixFieldHandle.$assetFieldHandle", ['withTransforms' => $transform]];
+                    }
                 }
             }
         }
