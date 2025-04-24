@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.5.16 - UNRELEASED
+## 3.5.16 - 2025.04.24
 ### Changed
 * Encode sitemap entities to make sure they follow the RFC-3986 standard for URIs, the RFC-3987 standard for IRIs and the XML standard. ref: https://sitemaps.org/protocol.html#escaping
 * Invalidate the metacontainer caches for every site an element exists in when an element is changed ([#1600](https://github.com/nystudio107/craft-seomatic/issues/1600))
