@@ -91,13 +91,15 @@ class EagerLoad
         foreach ($matrixFields as $matrixFieldHandle) {
             /** @var Matrix $matrixField */
             $matrixField = $layout->getFieldByHandle($matrixFieldHandle);
-            $blockTypes = $matrixField->getBlockTypes();
-            foreach ($blockTypes as $blockType) {
-                $blockName = $blockType->handle;
-                $matrixLayout = $blockType->getFieldLayout();
-                $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $matrixLayout);
-                foreach ($assetFields as $assetFieldHandle) {
-                    $fieldMap[] = empty($transform) ? "$matrixFieldHandle.$assetFieldHandle" : ["$matrixFieldHandle.$assetFieldHandle", ['withTransforms' => $transform]];
+            if (method_exists($matrixField, 'getBlockTypes')) {
+                $blockTypes = $matrixField->getBlockTypes();
+                foreach ($blockTypes as $blockType) {
+                    $blockName = $blockType->handle;
+                    $matrixLayout = $blockType->getFieldLayout();
+                    $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $matrixLayout);
+                    foreach ($assetFields as $assetFieldHandle) {
+                        $fieldMap[] = empty($transform) ? "$matrixFieldHandle.$assetFieldHandle" : ["$matrixFieldHandle.$assetFieldHandle", ['withTransforms' => $transform]];
+                    }
                 }
             }
         }

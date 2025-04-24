@@ -1,5 +1,15 @@
 # SEOmatic Changelog
 
+## 3.5.16 - 2025.04.24
+### Changed
+* Encode sitemap entities to make sure they follow the RFC-3986 standard for URIs, the RFC-3987 standard for IRIs and the XML standard. ref: https://sitemaps.org/protocol.html#escaping
+* Invalidate the metacontainer caches for every site an element exists in when an element is changed ([#1600](https://github.com/nystudio107/craft-seomatic/issues/1600))
+
+### Fixed
+* Fix an issue where sitemap generation threw an exception for sections with Neo fields in them ([#1593](https://github.com/nystudio107/craft-seomatic/issues/1593))
+* Fixed an issue where saving Sitemap settings under Content SEO did not save properly ([#1596](https://github.com/nystudio107/craft-seomatic/issues/1596))
+* Properly XML-encode entities in the News Sitemap so that they validate ([#1596](https://github.com/nystudio107/craft-seomatic/issues/1596#issuecomment-2819222797))
+
 ## 3.5.15 - 2025.04.03
 ### Added
 * Assets & Matrix Blocks are now eager loaded in the query that generates the sitemap, speeding things up significantly for sites with a number of assets in entries
