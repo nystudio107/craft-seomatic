@@ -420,6 +420,7 @@ class MetaContainers extends Component
                     self::METACONTAINER_CACHE_TAG . $metaBundleSourceId . $metaBundleSourceType . $siteId,
                     self::METACONTAINER_CACHE_TAG . $uri . $siteId,
                     self::METACONTAINER_CACHE_TAG . $cacheKey,
+                    self::METACONTAINER_CACHE_TAG . $metaBundleSourceId . $metaBundleSourceType,
                 ],
             ]);
             $this->containerDependency = $dependency;
@@ -832,9 +833,6 @@ class MetaContainers extends Component
         $metaBundleSourceType = '';
         if ($sourceType) {
             $metaBundleSourceType = $sourceType;
-        }
-        if ($siteId === null) {
-            $siteId = Craft::$app->getSites()->currentSite->id ?? 1;
         }
         $cache = Craft::$app->getCache();
         TagDependency::invalidate(

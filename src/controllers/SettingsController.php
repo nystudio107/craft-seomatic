@@ -660,7 +660,7 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
-        $typeId = $request->getParam('typeId') ?? null;
+        $typeId = $request->getBodyParam('typeId') ?? null;
         $specificTypeId = $request->getParam('specificTypeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
