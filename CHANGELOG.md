@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.1.13 - UNRELEASED
+## 5.1.13 - 2025.04.24
 ### Added
 * Added migration to drop the vestigial Craft 2.x tables `seomatic_meta` and `seomatic_settings` tables ([#1558](https://github.com/nystudio107/craft-seomatic/issues/1558))
 
