@@ -16,7 +16,7 @@
     ]
   },
   "src/js/dashboard.js": {
-    "file": "assets/dashboard-CKLx1vxK.js",
+    "file": "assets/dashboard-Bmzps_a1.js",
     "name": "dashboard",
     "src": "src/js/dashboard.js",
     "isEntry": true,
@@ -25,7 +25,7 @@
     ]
   },
   "src/js/seomatic-meta.js": {
-    "file": "assets/seomatic-meta-psWtKoWV.js",
+    "file": "assets/seomatic-meta-CwkBEwc1.js",
     "name": "seomatic-meta",
     "src": "src/js/seomatic-meta.js",
     "isEntry": true,
@@ -37,12 +37,12 @@
     ]
   },
   "src/js/seomatic.js": {
-    "file": "assets/seomatic-DE_W7tgI.js",
+    "file": "assets/seomatic-DAMGU8dV.js",
     "name": "seomatic",
     "src": "src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic-DaUgkadr.css"
+      "assets/seomatic-p5YyFU-y.css"
     ]
   }
 }
