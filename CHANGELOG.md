@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.1.14 - UNRELEASED
+### Fixed
+* Fixed an issue where certain caches (GraphQL & field) were not properly tagged with the new dependency, and thus were not cleared as elements were updated ([#1606](https://github.com/nystudio107/craft-seomatic/issues/1606))
+
 ## 4.1.13 - 2025.04.24
 ### Added
 * Added migration to drop the vestigial Craft 2.x tables `seomatic_meta` and `seomatic_settings` tables ([#1558](https://github.com/nystudio107/craft-seomatic/issues/1558))
