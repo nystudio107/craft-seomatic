@@ -406,6 +406,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
                     MetaContainers::GLOBAL_METACONTAINER_CACHE_TAG,
                     MetaContainers::METACONTAINER_CACHE_TAG . $metaBundleSourceId . $metaBundleSourceType . $siteId,
                     MetaContainers::METACONTAINER_CACHE_TAG . $uri . $siteId,
+                    MetaContainers::METACONTAINER_CACHE_TAG . $metaBundleSourceId . $metaBundleSourceType,
                 ],
             ]);
             $cache = Craft::$app->getCache();
