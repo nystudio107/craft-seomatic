@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.17 - UNRELEASED
+### Fixed
+* Fixed an issue where certain caches (GraphQL & field) were not properly tagged with the new dependency, and thus were not cleared as elements were updated ([#1606](https://github.com/nystudio107/craft-seomatic/issues/1606))
+
 ## 3.5.16 - 2025.04.24
 ### Changed
 * Encode sitemap entities to make sure they follow the RFC-3986 standard for URIs, the RFC-3987 standard for IRIs and the XML standard. ref: https://sitemaps.org/protocol.html#escaping
