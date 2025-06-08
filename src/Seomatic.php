@@ -50,6 +50,8 @@ use nystudio107\codeeditor\events\RegisterCodeEditorAutocompletesEvent;
 use nystudio107\codeeditor\events\RegisterTwigValidatorVariablesEvent;
 use nystudio107\codeeditor\services\AutocompleteService;
 use nystudio107\codeeditor\validators\TwigTemplateValidator;
+use nystudio107\crafttwigsandbox\helpers\SecurityPolicy;
+use nystudio107\crafttwigsandbox\web\SandboxView;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
 use nystudio107\seomatic\debug\panels\SeomaticPanel;
@@ -142,6 +144,11 @@ class Seomatic extends Plugin
     public static ?View $view = null;
 
     /**
+     * @var null|View
+     */
+    public static ?View $sandboxView = null;
+
+    /**
      * @var string
      */
     public static string $language = '';
@@ -232,6 +239,9 @@ class Seomatic extends Plugin
         self::$settings = $settings;
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
         self::$view = Craft::$app->getView();
+        // Use a Twig sandbox for SEOmatic rendering
+        $securityPolicy = SecurityPolicy::createFromFile('seomatic-sandbox', '@nystudio107/seomatic');
+        self::$sandboxView = new SandboxView(['securityPolicy' => $securityPolicy]);
         self::$cacheDuration = self::$devMode
             ? self::DEVMODE_CACHE_DURATION
             : self::$settings->metaCacheDuration ?? 0;
