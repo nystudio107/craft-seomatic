@@ -228,7 +228,7 @@ class MetaValue
         self::$templatePreviewVars['object'] = self::$templateObjectVars;
         self::$templatePreviewVars['seomatic'] = Seomatic::$seomaticVariable;
 
-        self::$view = Seomatic::$view;
+        self::$view = Seomatic::$sandboxView;
     }
 
     // Protected Methods

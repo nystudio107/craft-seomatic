@@ -32,6 +32,7 @@
     "craftcms/cms": "^3.2.0",
     "nystudio107/craft-plugin-vite": "^1.0.31",
     "nystudio107/craft-code-editor": "^1.0.0",
+    "nystudio107/craft-twig-sandbox": "^3.0.3",
     "php-science/textrank": "^1.0.3",
     "davechild/textstatistics": "1.0.2",
     "sunra/php-simple-html-dom-parser": "^1.5.2"
