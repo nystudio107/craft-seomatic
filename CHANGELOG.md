@@ -6,6 +6,7 @@
 
 ### Fixed
 * Fixed an issue where certain caches (GraphQL & field) were not properly tagged with the new dependency, and thus were not cleared as elements were updated ([#1606](https://github.com/nystudio107/craft-seomatic/issues/1606))
+* Fixed regression where the sitemap index `lastmod` would not update properly under certain circumstances
 
 ## 4.1.13 - 2025.04.24
 ### Added
