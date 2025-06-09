@@ -748,7 +748,8 @@ class MetaBundles extends Component
         foreach ($seoElements as $seoElement) {
             $subQuery = (new Query())
                 ->from(['{{%seomatic_metabundles}}'])
-                ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE]);
+                ->where(['=', 'sourceBundleType', $seoElement::META_BUNDLE_TYPE])
+                ->andWhere(['typeId' => null]);
 
             if ((int)$sourceSiteId !== 0) {
                 $subQuery->andWhere(['sourceSiteId' => $sourceSiteId]);
