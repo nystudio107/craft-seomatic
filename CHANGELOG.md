@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 3.5.17 - UNRELEASED
+### Added
+* Use [craft-twig-sandbox](https://github.com/nystudio107/craft-twig-sandbox) for rendering meta values in SEOmatic, for additional (and user-controllable) security
+
 ### Fixed
 * Fixed an issue where certain caches (GraphQL & field) were not properly tagged with the new dependency, and thus were not cleared as elements were updated ([#1606](https://github.com/nystudio107/craft-seomatic/issues/1606))
 
