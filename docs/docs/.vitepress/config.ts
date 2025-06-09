@@ -75,6 +75,7 @@ export default defineConfig({
               {text: 'seomatic.title', link: '/using/title-meta'},
               {text: 'Pagination', link: '/using/pagination'},
               {text: 'Meta Containers', link: '/using/meta-containers'},
+              {text: 'Twig sandbox', link: '/using/twig-sandbox'},
             ]
           },
           {text: 'SEO Settings Field', link: '/fields'},
