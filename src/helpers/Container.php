@@ -98,6 +98,7 @@ class Container
                 $metaContainers::METACONTAINER_CACHE_TAG . $sourceId . $sourceBundleType . $siteId,
                 $metaContainers::METACONTAINER_CACHE_TAG . $uri . $siteId,
                 $metaContainers::METACONTAINER_CACHE_TAG . $cacheKey,
+                $metaContainers::METACONTAINER_CACHE_TAG . $sourceId . $sourceBundleType,
             ],
         ]);
         $cache = Craft::$app->getCache();
