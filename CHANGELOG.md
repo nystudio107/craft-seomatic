@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.5.17 - UNRELEASED
+## 3.5.17 - 2025.06.10
 ### Added
 * Use [craft-twig-sandbox](https://github.com/nystudio107/craft-twig-sandbox) for rendering meta values in SEOmatic, for additional (and user-controllable) security
 
