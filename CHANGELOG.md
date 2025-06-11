@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.16 - 2025.06.11
+### Fixed
+* Removed `parseEnv` from the default `seomatic-sandbox.php`, because it is used by SEOmatic for rendering JSON-LD entity IDs ([#1616](https://github.com/nystudio107/craft-seomatic/issues/1616))
+
 ## 5.1.15 - 2025.06.11
 ### Fixed
 * Fixed an issue with the `???` empty coalesce operator not being present in the Twig sandbox
