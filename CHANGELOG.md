@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.18 - 2025.06.11
+### Fixed
+* Fixed an issue with the `???` empty coalesce operator not being present in the Twig sandbox
+
 ## 3.5.17 - 2025.06.10
 ### Added
 * Use [craft-twig-sandbox](https://github.com/nystudio107/craft-twig-sandbox) for rendering meta values in SEOmatic, for additional (and user-controllable) security
