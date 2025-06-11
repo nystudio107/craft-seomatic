@@ -478,7 +478,9 @@ class Seomatic extends Plugin
         // Install our event listeners only if our table schema exists
         if ($this->migrationsAndSchemaReady()) {
             // Add in our Twig extensions
-            self::$view->registerTwigExtension(new SeomaticTwigExtension());
+            $seomaticTwigExtension = new SeomaticTwigExtension();
+            self::$view->registerTwigExtension($seomaticTwigExtension);
+            self::$sandboxView->registerTwigExtension($seomaticTwigExtension);
             $request = Craft::$app->getRequest();
             // Add in our event listeners that are needed for every request
             $this->installGlobalEventListeners();
