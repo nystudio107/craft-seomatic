@@ -124,7 +124,6 @@ return [
         'hiddenInput',
         'input',
         'parseBooleanEnv',
-        'parseEnv',
         'plugin',
         'redirectInput',
         'renderObjectTemplate',
