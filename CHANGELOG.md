@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.17 - UNRELEASED
+### Changed
+* Use `StringHelper::convertToUtf8()` instead of our homebrew solution
+
 ## 5.1.16 - 2025.06.11
 ### Fixed
 * Removed `parseEnv` from the default `seomatic-sandbox.php`, because it is used by SEOmatic for rendering JSON-LD entity IDs ([#1616](https://github.com/nystudio107/craft-seomatic/issues/1616))
