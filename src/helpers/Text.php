@@ -18,6 +18,7 @@ use craft\elements\db\TagQuery;
 use craft\elements\MatrixBlock;
 use craft\elements\Tag;
 use craft\helpers\HtmlPurifier;
+use craft\helpers\StringHelper;
 use craft\models\FieldLayout;
 use Illuminate\Support\Collection;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
@@ -31,7 +32,6 @@ use verbb\supertable\elements\db\SuperTableBlockQuery;
 use verbb\supertable\elements\SuperTableBlockElement as SuperTableBlock;
 use yii\base\InvalidConfigException;
 use function array_slice;
-use function function_exists;
 use function is_array;
 
 /**
@@ -441,12 +441,7 @@ class Text
             return '';
         }
         // Convert to UTF-8
-        if (function_exists('iconv')) {
-            $text = iconv(mb_detect_encoding($text, mb_detect_order(), true), 'UTF-8//IGNORE', $text);
-        } else {
-            ini_set('mbstring.substitute_character', 'none');
-            $text = mb_convert_encoding($text, 'UTF-8', 'UTF-8');
-        }
+        $text = StringHelper::convertToUtf8($text);
         // Strip HTML tags
         $text = HtmlPurifier::process($text, ['HTML.Allowed' => '']);
         $text = html_entity_decode($text, ENT_NOQUOTES, 'UTF-8');
