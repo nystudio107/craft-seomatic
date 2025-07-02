@@ -5,11 +5,11 @@
       <treeselect
         ref="treeselect"
         v-model="value"
-        :multiple="false"
-        :flat="false"
         :default-expand-level="0"
-        :options="options"
         :disabled="disabled"
+        :flat="false"
+        :multiple="false"
+        :options="options"
       />
     </div>
     <div
@@ -19,11 +19,11 @@
       <div class="instructions">
         <p>
           <a
-            :href="'http://schema.org/' + schemaName"
+            :href="'https://schema.org/' + schemaName"
             rel="noopener"
             target="_blank"
           >{{ schemaName }} info: </a>
-          <span v-html="renderHtml(schemaDescription)" />
+          <span v-html="renderHtml(schemaDescription)"/>
         </p>
         <p v-if="Object.keys(schemaRichSnippetUrls).length">
           <a
