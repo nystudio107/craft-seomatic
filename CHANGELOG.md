@@ -3,6 +3,7 @@
 ## 3.5.20 - UNRELEASED
 ### Changed
 * Use `StringHelper::convertToUtf8()` instead of our homebrew solution
+* Change `http` to `https` for schema.org type `@context`
 
 ## 3.5.19 - 2025.06.11
 ### Fixed
