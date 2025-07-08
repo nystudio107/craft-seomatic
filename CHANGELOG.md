@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 5.1.17 - UNRELEASED
+### Added
+* Added the ability to choose from nested fields in Content Block fields from the SEOmatic GUI in the various Content SEO settings
+
 ### Changed
 * Use `StringHelper::convertToUtf8()` instead of our homebrew solution
 * Change `http` to `https` for schema.org type `@context`
