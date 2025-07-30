@@ -7,6 +7,7 @@
 
 ### Fixed
 * Fix an issue where emptying a section could cause the sitemap to throw an exception with certain versions of PHP ([#1629](https://github.com/nystudio107/craft-seomatic/issues/1629))
+* Fix weirdness in rendering of certain schema type descriptions of the source information was malformed with spurious spaces ([#1623](https://github.com/nystudio107/craft-seomatic/issues/1623))
 
 ## 3.5.19 - 2025.06.11
 ### Fixed
