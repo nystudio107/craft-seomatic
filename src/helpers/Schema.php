@@ -124,6 +124,7 @@ class Schema
         if (isset($result['schemaTypeDescription'])) {
             $description = $result['schemaTypeDescription'];
             $description = preg_replace("`\[\[([A-z]*)\]\]`", '[$1](https://schema.org/$1)', $description);
+            $description = preg_replace('/\s+/', ' ', $description);
             $description = Markdown::process((string)$description);
             $description = str_replace(['<p>', '</p>', '\n'], ['', '', ' '], $description);
             $result['schemaTypeDescription'] = $description;
