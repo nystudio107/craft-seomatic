@@ -329,3 +329,23 @@ This will output:
   * This property is recommended by Google.
 
 If the site has `devMode` on, all of the meta objects are automatically validated as they are rendered, with the results displayed in the Yii Debug Toolbar. The Yii Debug Toolbar can be enabled in your account settings page.
+
+## Unsafe User Input & SSTIs
+
+A [server-side template injection](https://docs.cobalt.io/bestpractices/prevent-ssti/#best-practices) (SSTI) allows an attacker to execute server-side commands by injecting malicious data into a template.
+
+SEOmatic guards against SSTIs by automatically sanitizing unsafe user input that it uses, but if you are manually setting SEOmatic variable to unsafe user input you will need to [sanitize the data](https://docs.cobalt.io/bestpractices/prevent-ssti/#sanitize-data) yourself.
+
+Fortunately, SEOmatic provides a helper function to allow you to do just that:
+
+```twig
+{% set primaryUrl = craft.app.request.getHostInfo %}
+{% set primaryUrl = seomatic.helper.sanitizeUserInput(primaryUrl) %}
+{% do seomatic.meta.setAttributes({
+   canonicalUrl: primaryUrl
+}) %}
+```
+
+Here are we using unsafe user input (the value of `hostInfo` from the `request`), and instead of using it directly, we are using the `seomatic.helper.sanitizeUserInput()` helper function to sanitize the unsafe user input before we set it to an SEOmatic variable.
+
+**Note:** You do _not_ need to sanitize everything you set an SEOmatic variable to, only things that come from unsafe user input.
