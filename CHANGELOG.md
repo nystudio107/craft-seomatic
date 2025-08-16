@@ -4,6 +4,7 @@
 ### Changed
 * Use `StringHelper::convertToUtf8()` instead of our homebrew solution
 * Change `http` to `https` for schema.org type `@context`
+* Don't cache sitemaps if they are somehow generated via a Craft preview with token parameters ([#1636](https://github.com/nystudio107/craft-seomatic/issues/1636))
 
 ### Fixed
 * Fix an issue where emptying a section could cause the sitemap to throw an exception with certain versions of PHP ([#1629](https://github.com/nystudio107/craft-seomatic/issues/1629))
