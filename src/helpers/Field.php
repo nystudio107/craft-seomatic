@@ -17,10 +17,13 @@ use besteadfast\preparsefield\fields\PreparseFieldType;
 use Craft;
 use craft\base\Element;
 use craft\base\Field as BaseField;
+use craft\base\FieldInterface;
 use craft\ckeditor\Field as CKEditorField;
 use craft\elements\Entry;
 use craft\elements\User;
+use craft\fieldlayoutelements\CustomField;
 use craft\fields\Assets as AssetsField;
+use craft\fields\ContentBlock as ContentBlockField;
 use craft\fields\Matrix as MatrixField;
 use craft\fields\PlainText as PlainTextField;
 use craft\fields\Tags as TagsField;
@@ -104,15 +107,24 @@ class Field
      * @param string $fieldClassKey
      * @param FieldLayout $layout
      * @param bool $keysOnly
-     *
+     * @param FieldInterface|null $parentField
+     * @param CustomField|null $parentFieldElement
      * @return array
      */
     public static function fieldsOfTypeFromLayout(
-        string      $fieldClassKey,
-        FieldLayout $layout,
-        bool        $keysOnly = true,
+        string          $fieldClassKey,
+        FieldLayout     $layout,
+        bool            $keysOnly = true,
+        ?FieldInterface $parentField = null,
+        ?CustomField    $parentFieldElement = null,
     ): array {
         $foundFields = [];
+        $handlePrefix = '';
+        $namePrefix = '';
+        if ($parentField !== null && $parentFieldElement !== null) {
+            $handlePrefix = $parentField->handle . '.';
+            $namePrefix = ($parentFieldElement->label() ?? $parentField->name) . ' → ';
+        }
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
             $memoKey = $fieldClassKey . $layout->id . ($keysOnly ? 'keys' : 'nokeys');
@@ -123,10 +135,15 @@ class Field
             $fieldElements = $layout->getCustomFieldElements();
             foreach ($fieldElements as $fieldElement) {
                 $field = $fieldElement->getField();
+                // Handle ContentBlock fields recursively
+                if ($field instanceof ContentBlockField) {
+                    $foundFields = array_merge($foundFields,
+                        self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement));
+                }
                 /** @var array $fieldClasses */
                 foreach ($fieldClasses as $fieldClass) {
                     if ($field instanceof $fieldClass) {
-                        $foundFields[$field->handle] = $fieldElement->label() ?? $field->name;
+                        $foundFields[$handlePrefix . $field->handle] = $namePrefix . ($fieldElement->label() ?? $field->name);
                     }
                 }
             }

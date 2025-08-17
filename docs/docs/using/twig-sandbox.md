@@ -10,7 +10,7 @@ Should you wish to customize it, you can copy the `seomatic-sandbox.php` to the 
 
 The `seomatic-sandbox.php` file in the Craft `config/` directory will be automatically used if it exists, instead of the built-in version of the file, 
 
-Here's what the default `seomatic-sandbox.php` looks like:
+Here’s what the default `seomatic-sandbox.php` looks like:
 
 ```php
 <?php
@@ -139,7 +139,6 @@ return [
         'hiddenInput',
         'input',
         'parseBooleanEnv',
-        'parseEnv',
         'plugin',
         'redirectInput',
         'renderObjectTemplate',

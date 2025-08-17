@@ -1,5 +1,18 @@
 # SEOmatic Changelog
 
+## 5.1.17 - 2025.08.17
+### Added
+* Added the ability to choose from nested fields in Content Block fields from the SEOmatic GUI in the various Content SEO settings
+
+### Changed
+* Use `StringHelper::convertToUtf8()` instead of our homebrew solution
+* Change `http` to `https` for schema.org type `@context`
+* Don't cache sitemaps if they are somehow generated via a Craft preview with token parameters ([#1636](https://github.com/nystudio107/craft-seomatic/issues/1636))
+
+### Fixed
+* Fix an issue where emptying a section could cause the sitemap to throw an exception with certain versions of PHP ([#1629](https://github.com/nystudio107/craft-seomatic/issues/1629))
+* Fix weirdness in rendering of certain schema type descriptions of the source information was malformed with spurious spaces ([#1623](https://github.com/nystudio107/craft-seomatic/issues/1623))
+
 ## 5.1.16 - 2025.06.11
 ### Fixed
 * Removed `parseEnv` from the default `seomatic-sandbox.php`, because it is used by SEOmatic for rendering JSON-LD entity IDs ([#1616](https://github.com/nystudio107/craft-seomatic/issues/1616))

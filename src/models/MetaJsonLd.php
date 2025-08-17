@@ -159,7 +159,7 @@ class MetaJsonLd extends NonceItem
         parent::init();
 
         $this->type = static::$schemaTypeName;
-        $this->context = 'http://schema.org';
+        $this->context = 'https://schema.org';
         // Make sure we have a valid key
         $this->key = $this->key ?: lcfirst($this->type);
     }
