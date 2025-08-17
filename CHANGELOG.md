@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.1.17 - UNRELEASED
+## 5.1.17 - 2025.08.17
 ### Added
 * Added the ability to choose from nested fields in Content Block fields from the SEOmatic GUI in the various Content SEO settings
 
