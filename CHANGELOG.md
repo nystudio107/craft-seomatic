@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 3.5.20 - UNRELEASED
+## 3.5.20 - 2025.08.17
 ### Changed
 * Use `StringHelper::convertToUtf8()` instead of our homebrew solution
 * Change `http` to `https` for schema.org type `@context`
