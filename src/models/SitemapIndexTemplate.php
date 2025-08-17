@@ -149,6 +149,8 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
+        $cacheDuration = Seomatic::$plugin->helper::isPreview() ? 1 : Seomatic::$cacheDuration;
+
         return $cache->getOrSet(self::CACHE_KEY . $groupId . '.' . $siteId, function() use ($groupSiteIds, $siteId) {
             Craft::info(
                 'Sitemap index cache miss',
@@ -190,7 +192,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                             $metaBundle->metaSitemapVars->sitemapLimit = null;
                         }
 
-                        $totalElements = Sitemap::getTotalElementsInSitemap($seoElement, $metaBundle);
+                        $totalElements = Sitemap::getTotalElementsInSitemap($seoElement, $metaBundle) ?? 0;
 
                         $pageSize = $metaBundle->metaSitemapVars->sitemapPageSize;
                         $pageCount = (!empty($pageSize) && $pageSize > 0) ? ceil($totalElements / $pageSize) : 1;
@@ -216,7 +218,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
                                 $lines[] = $metaBundle->sourceDateUpdated->format(DateTime::W3C);
                                 $lines[] = '</lastmod>';
                             }
-                            
+
                             $lines[] = '</sitemap>';
                         }
                     }
@@ -232,7 +234,7 @@ class SitemapIndexTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '</sitemapindex>';
 
             return implode('', $lines);
-        }, Seomatic::$cacheDuration, $dependency);
+        }, $cacheDuration, $dependency);
     }
 
     /**

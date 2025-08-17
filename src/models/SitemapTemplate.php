@@ -165,9 +165,7 @@ class SitemapTemplate extends FrontendTemplate implements SitemapInterface
                     ],
                 ]);
 
-                $cacheDuration = Seomatic::$devMode
-                    ? Seomatic::DEVMODE_CACHE_DURATION
-                    : null;
+                $cacheDuration = Seomatic::$plugin->helper::isPreview() ? 1 : Seomatic::$cacheDuration;
 
                 $result = $cache->set($cacheKey, $sitemap, $cacheDuration, $dependency);
 
