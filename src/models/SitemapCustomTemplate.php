@@ -131,6 +131,8 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
             ],
         ]);
 
+        $cacheDuration = Seomatic::$plugin->helper::isPreview() ? 1 : Seomatic::$cacheDuration;
+
         return $cache->getOrSet(self::CACHE_KEY . $groupId . self::CUSTOM_SCOPE . $handle . $siteId, function() use (
             $handle,
             $siteId
@@ -197,7 +199,7 @@ class SitemapCustomTemplate extends FrontendTemplate implements SitemapInterface
             $lines[] = '</urlset>';
 
             return implode('', $lines);
-        }, Seomatic::$cacheDuration, $dependency);
+        }, $cacheDuration, $dependency);
     }
 
     /**
