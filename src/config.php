@@ -174,4 +174,7 @@ return [
     // string[] URL params that are allowed to be considered part of the unique URL used for the metadata cache
     'allowedUrlParams' => [
     ],
+    // class-string[] Array of TwigExtension classes to instantiate and add to the SandboxView
+    'twigExtensionClasses' => [
+    ],
 ];
