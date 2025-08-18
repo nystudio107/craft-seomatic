@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.21 - UNRELEASED
+### Added
+* Added a `twigExtensionClasses` config setting to allow additional TwigExtension classes to be loaded in the Twig `SandboxView` that SEOmatic uses to render ([#1632](https://github.com/nystudio107/craft-seomatic/issues/1632))
+
 ## 3.5.20 - 2025.08.17
 ### Changed
 * Use `StringHelper::convertToUtf8()` instead of our homebrew solution
