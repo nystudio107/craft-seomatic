@@ -257,6 +257,12 @@ class Settings extends VarsModel
     public $allowedUrlParams = [
     ];
 
+    /**
+     * @var class-string[] Array of TwigExtension classes to instantiate and add to the SandboxView
+     */
+    public $twigExtensionClasses = [
+    ];
+
     // Public Methods
     // =========================================================================
 
@@ -335,6 +341,7 @@ class Settings extends VarsModel
                     'defaultSeoElementTypes',
                     'cspScriptSrcPolicies',
                     'allowedUrlParams',
+                    'twigExtensionClasses',
                 ],
                 ArrayValidator::class,
             ],

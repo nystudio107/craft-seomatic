@@ -481,6 +481,12 @@ class Seomatic extends Plugin
             $seomaticTwigExtension = new SeomaticTwigExtension();
             self::$view->registerTwigExtension($seomaticTwigExtension);
             self::$sandboxView->registerTwigExtension($seomaticTwigExtension);
+            // Register the additional TwigExtension classes
+            foreach (Seomatic::$settings->twigExtensionClasses as $className) {
+                if (class_exists($className)) {
+                    self::$sandboxView->registerTwigExtension(new $className());
+                }
+            }
             $request = Craft::$app->getRequest();
             // Add in our event listeners that are needed for every request
             $this->installGlobalEventListeners();
