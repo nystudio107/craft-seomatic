@@ -4,6 +4,9 @@
 ### Added
 * Added a `twigExtensionClasses` config setting to allow additional TwigExtension classes to be loaded in the Twig `SandboxView` that SEOmatic uses to render ([#1632](https://github.com/nystudio107/craft-seomatic/issues/1632))
 
+### Changed
+* No longer block various AI bots via `robots.txt` by default ([#1635](https://github.com/nystudio107/craft-seomatic/issues/1635))
+
 ## 5.1.17 - 2025.08.17
 ### Added
 * Added the ability to choose from nested fields in Content Block fields from the SEOmatic GUI in the various Content SEO settings
