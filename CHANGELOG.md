@@ -6,6 +6,7 @@
 
 ### Changed
 * No longer block various AI bots via `robots.txt` by default ([#1635](https://github.com/nystudio107/craft-seomatic/issues/1635))
+* Handle setting the focal point for social images that are transformed ([#1626](https://github.com/nystudio107/craft-seomatic/issues/1626))
 
 ## 3.5.20 - 2025.08.17
 ### Changed
