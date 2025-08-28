@@ -149,7 +149,7 @@ class ImageTransform
             }
             try {
                 if ($asset->getHasFocalPoint()) {
-                    $transform->position = $asset->getFocalPoint();
+                    $transform->position = $asset->getFocalPoint(true);
                 }
                 $url = $asset->getUrl($transform, $generateNow);
             } catch (InvalidConfigException $e) {
