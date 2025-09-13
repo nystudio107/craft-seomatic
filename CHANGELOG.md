@@ -9,6 +9,7 @@
 * Handle setting the focal point for social images that are transformed ([#1626](https://github.com/nystudio107/craft-seomatic/issues/1626))
 
 ### Fixed
+* Fixed an issue with page footer text being untranslatable on 3 pages due to filter ordering ([#1651](https://github.com/nystudio107/craft-seomatic/issues/1651))
 * Fixed an issue where sitemap generation could fail with the new Content Block fields under certain conditions ([#1645](https://github.com/nystudio107/craft-seomatic/issues/1645))
 
 ## 5.1.17 - 2025.08.17
