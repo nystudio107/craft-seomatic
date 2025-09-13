@@ -8,6 +8,9 @@
 * No longer block various AI bots via `robots.txt` by default ([#1635](https://github.com/nystudio107/craft-seomatic/issues/1635))
 * Handle setting the focal point for social images that are transformed ([#1626](https://github.com/nystudio107/craft-seomatic/issues/1626))
 
+### Fixed
+* Fixed an issue where sitemap generation could fail with the new Content Block fields under certain conditions ([#1645](https://github.com/nystudio107/craft-seomatic/issues/1645))
+
 ## 5.1.17 - 2025.08.17
 ### Added
 * Added the ability to choose from nested fields in Content Block fields from the SEOmatic GUI in the various Content SEO settings
