@@ -69,7 +69,7 @@ class EagerLoad
     public static function assetFieldEagerLoadMap($layout, $transform): array
     {
         $fieldMap = [];
-        $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $layout);
+        $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $layout, true, null, null, false);
         foreach ($assetFields as $assetFieldHandle) {
             $fieldMap[] = empty($transform) ? $assetFieldHandle : [$assetFieldHandle, ['withTransforms' => $transform]];
         }
@@ -87,7 +87,7 @@ class EagerLoad
     public static function matrixFieldEagerLoadMap($layout, $transform): array
     {
         $fieldMap = [];
-        $matrixFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::BLOCK_FIELD_CLASS_KEY, $layout);
+        $matrixFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::BLOCK_FIELD_CLASS_KEY, $layout, true, null, null, false);
         foreach ($matrixFields as $matrixFieldHandle) {
             /** @var Matrix $matrixField */
             $matrixField = $layout->getFieldByHandle($matrixFieldHandle);
@@ -103,7 +103,7 @@ class EagerLoad
             if ($entryTypes) {
                 foreach ($entryTypes as $entryType) {
                     $matrixLayout = $entryType->getFieldLayout();
-                    $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $matrixLayout);
+                    $assetFields = FieldHelper::fieldsOfTypeFromLayout(FieldHelper::ASSET_FIELD_CLASS_KEY, $matrixLayout, true, null, null, false);
                     foreach ($assetFields as $assetFieldHandle) {
                         $fieldMap[] = empty($transform) ? "$matrixFieldHandle.$assetFieldHandle" : ["$matrixFieldHandle.$assetFieldHandle", ['withTransforms' => $transform]];
                     }

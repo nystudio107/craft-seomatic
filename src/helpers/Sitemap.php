@@ -178,7 +178,8 @@ class Sitemap
 
         // Eager load assets & relations
         if ($metaBundle->metaSitemapVars->sitemapAssets || $metaBundle->metaSitemapVars->sitemapFiles) {
-            $elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
+            $woof = EagerLoadHelper::sitemapEagerLoadMap($metaBundle);
+            //$elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
         }
 
         // If this is not a paged sitemap, go through full results
@@ -362,7 +363,8 @@ class Sitemap
                             true
                         );
                         foreach ($assetFields as $assetField) {
-                            $assets = $element[$assetField]->all();
+                            $resolvedField = self::resolveNestedField($element, $assetField);
+                            $assets = $resolvedField->all();
                             /** @var Asset[] $assets */
                             foreach ($assets as $asset) {
                                 self::assetSitemapItem($asset, $metaBundle, $lines);
@@ -375,7 +377,8 @@ class Sitemap
                             true
                         );
                         foreach ($blockFields as $blockField) {
-                            $blocks = $element[$blockField]->all();
+                            $resolvedField = self::resolveNestedField($element, $blockField);
+                            $blocks = $resolvedField->all();
                             /** @var Entry[]|NeoBlock[]|object[] $blocks */
                             foreach ($blocks as $block) {
                                 $assetFields = [];
@@ -404,7 +407,8 @@ class Sitemap
                         true
                     );
                     foreach ($assetFields as $assetField) {
-                        $assets = $element[$assetField]->all();
+                        $resolvedField = self::resolveNestedField($element, $assetField);
+                        $assets = $resolvedField->all();
                         foreach ($assets as $asset) {
                             self::assetFilesSitemapLink($asset, $metaBundle, $lines);
                         }
@@ -416,7 +420,8 @@ class Sitemap
                         true
                     );
                     foreach ($blockFields as $blockField) {
-                        $blocks = $element[$blockField]->all();
+                        $resolvedField = self::resolveNestedField($element, $blockField);
+                        $blocks = $resolvedField->all();
                         /** @var Entry[]|NeoBlock[]|object[] $blocks */
                         foreach ($blocks as $block) {
                             $assetFields = [];
@@ -453,6 +458,23 @@ class Sitemap
         $lines[] = '</urlset>';
 
         return implode('', $lines);
+    }
+
+    /**
+     * Fields coming back from FieldHelper:: are delimited by a . if they are ContentBlock fields,
+     * so we need to drill down to find the actual field in question
+     *
+     * @param Element $element
+     * @param $name
+     * @return Element|mixed
+     */
+    public static function resolveNestedField(Element $element, $name)
+    {
+        $result = array_reduce(explode('.', $name), function($o, $p) {
+            return $o->$p;
+        }, $element);
+
+        return $result;
     }
 
     /**
