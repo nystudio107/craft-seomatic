@@ -11,6 +11,7 @@
 ### Fixed
 * Fixed an issue with page footer text being untranslatable on 3 pages due to filter ordering ([#1651](https://github.com/nystudio107/craft-seomatic/issues/1651))
 * Fixed an issue where sitemap generation could fail with the new Content Block fields under certain conditions ([#1645](https://github.com/nystudio107/craft-seomatic/issues/1645))
+* Don't overwrite the `dataLayer` if it already exists in the Google Tag Manager default script ([#1642](https://github.com/nystudio107/craft-seomatic/issues/1642))
 
 ## 5.1.17 - 2025.08.17
 ### Added
