@@ -25,6 +25,7 @@ use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\autocompletes\TrackingVarsAutocomplete;
 use nystudio107\seomatic\base\SeoElementInterface;
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\AssetHelper;
 use nystudio107\seomatic\helpers\DynamicMeta as DynamicMetaHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
@@ -326,6 +327,7 @@ class SettingsController extends Controller
             // Image selectors
             $bundleSettings = $metaBundle->metaBundleSettings;
             $variables['elementType'] = Asset::class;
+            $variables['assetVolumeSources'] = AssetHelper::getAssetInputSources();
             $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
                 $bundleSettings->seoImageIds,
                 $siteId
@@ -629,6 +631,7 @@ class SettingsController extends Controller
         $variables['currentSubSection'] = $subSection;
         $bundleSettings = $metaBundle->metaBundleSettings;
         $variables['elementType'] = Asset::class;
+        $variables['assetVolumeSources'] = AssetHelper::getAssetInputSources();
         $variables['seoImageElements'] = ImageTransformHelper::assetElementsFromIds(
             $bundleSettings->seoImageIds,
             $siteId
@@ -809,6 +812,7 @@ class SettingsController extends Controller
             );
         }
         $variables['elementType'] = Asset::class;
+        $variables['assetVolumeSources'] = AssetHelper::getAssetInputSources();
         $this->setCrumbVariables($variables);
 
         // Render the template
