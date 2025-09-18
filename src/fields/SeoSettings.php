@@ -19,6 +19,7 @@ use craft\helpers\Json;
 use craft\helpers\StringHelper;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
 use nystudio107\seomatic\helpers\ArrayHelper;
+use nystudio107\seomatic\helpers\AssetHelper;
 use nystudio107\seomatic\helpers\Config as ConfigHelper;
 use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\helpers\Migration as MigrationHelper;
@@ -348,7 +349,7 @@ class SeoSettings extends Field implements PreviewableFieldInterface
 
         /** @var MetaBundle $value */
         $variables['elementType'] = Asset::class;
-
+        $variables['assetVolumeSources'] = AssetHelper::getAssetInputSources();
         $variables['parentBundles'] = [];
         // Preview the containers so the preview is correct in the field
         if ($element !== null && $element->uri !== null) {

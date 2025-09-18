@@ -10,10 +10,10 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireTwitterImageField(twitterImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+    {% macro entireTwitterImageField(twitterImageElement, elementType, assetVolumeSources, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
+                {{ _self.twitterImageField(twitterImageElement, elementType, assetVolumeSources, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
                 {{ _self.twitterImageTransformField(field, metaBundleSettings, suffix) }}
@@ -51,7 +51,7 @@
             {% set twitterImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entiretwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
+        {{ _self.entiretwitterImageField(twitterImageElement, elementType, assetVolumeSources, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
@@ -60,7 +60,7 @@
             {% set twitterImageElement = craft.assets.id(metaBundleSettings.twitterImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireTwitterImageField(twitterImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "", pageContext) }}
+        {{ _self.entireTwitterImageField(twitterImageElement, elementType, assetVolumeSources, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
 
@@ -123,7 +123,7 @@
         </div>
     {% endmacro %}
 
-    {% macro twitterImageField(twitterImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+    {% macro twitterImageField(twitterImageElement, elementType, assetVolumeSources, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as X (Twitter) Cards on tweets that link to the web page."|t("seomatic") }}</p>
@@ -176,7 +176,7 @@
                     },
                     jsClass: 'Craft.AssetSelectInput',
                     selectionLabel: "Select X (Twitter) Image"|t("seomatic"),
-                    sources: null,
+                    sources: assetVolumeSources,
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("twitterImageIds"),
