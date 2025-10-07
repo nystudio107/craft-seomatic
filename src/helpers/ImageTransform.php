@@ -147,6 +147,9 @@ class ImageTransform
                 }
             }
             try {
+                if ($asset->getHasFocalPoint()) {
+                    $transform->position = $asset->getFocalPoint(true);
+                }
                 $url = $assets->getAssetUrl($asset, $transform, $generateNow);
             } catch (Exception $e) {
                 $url = $asset->getUrl();
