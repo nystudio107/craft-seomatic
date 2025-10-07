@@ -2,7 +2,7 @@
   "name": "nystudio107/craft-seomatic",
   "description": "SEOmatic facilitates modern SEO best practices & implementation for Craft CMS 5. It is a turnkey SEO system that is comprehensive, powerful, and flexible.",
   "type": "craft-plugin",
-  "version": "5.1.17",
+  "version": "5.1.18",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "keywords": [
@@ -38,7 +38,7 @@
     "craftcms/cms": "^5.0.0",
     "nystudio107/craft-plugin-vite": "^5.0.0",
     "nystudio107/craft-code-editor": "^1.0.14",
-    "nystudio107/craft-twig-sandbox": "^5.0.3",
+    "nystudio107/craft-twig-sandbox": "^5.0.5",
     "php-science/textrank": "^1.0.3",
     "davechild/textstatistics": "^1.0.3",
     "sunra/php-simple-html-dom-parser": "^1.5.2"

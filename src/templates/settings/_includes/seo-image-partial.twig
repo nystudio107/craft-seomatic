@@ -10,10 +10,10 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro entireSeoImageField(seoImageElement, elementType, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+    {% macro entireSeoImageField(seoImageElement, elementType, assetVolumeSources, imageOptions, field, assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         <div class="field seomatic-imageSourceWrapper">
             <div class="field">
-                {{ _self.seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
+                {{ _self.seoImageField(seoImageElement, elementType, assetVolumeSources, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) }}
             </div>
             <div class="field seomatic-imageSourceNotFromUrl">
                 {{ _self.seoImageTransformField(field, metaBundleSettings, suffix) }}
@@ -51,7 +51,7 @@
             {% set seoImageElement = craft.assets.id(imageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
+        {{ _self.entireSeoImageField(seoImageElement, elementType, assetVolumeSources, imageOptions, field|default(null), assetFieldSources, imageCropModes, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
@@ -60,7 +60,7 @@
             {% set seoImageElement = craft.assets.id(metaBundleSettings.seoImageIds).limit(1).all() %}
         {% endif %}
 
-        {{ _self.entireSeoImageField(seoImageElement, elementType, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "", pageContext) }}
+        {{ _self.entireSeoImageField(seoImageElement, elementType, assetVolumeSources, imageOptions, field|default(null), assetFieldSources, imageCropModes, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 
 
@@ -122,7 +122,7 @@
         </div>
     {% endmacro %}
 
-    {% macro seoImageField(seoImageElement, elementType, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+    {% macro seoImageField(seoImageElement, elementType, assetVolumeSources, imageOptions, assetFieldSources, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as the global website brand, as well as on X (Twitter) Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
@@ -175,7 +175,7 @@
                     },
                     jsClass: 'Craft.AssetSelectInput',
                     selectionLabel: "Select SEO Image"|t("seomatic"),
-                    sources: null,
+                    sources: assetVolumeSources,
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("seoImageIds"),

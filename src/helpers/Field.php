@@ -117,8 +117,10 @@ class Field
         bool            $keysOnly = true,
         ?FieldInterface $parentField = null,
         ?CustomField    $parentFieldElement = null,
+        bool            $parseContentBlocks = true,
     ): array {
         $foundFields = [];
+        $contentBlockFoundFields = [];
         $handlePrefix = '';
         $namePrefix = '';
         if ($parentField !== null && $parentFieldElement !== null) {
@@ -127,7 +129,7 @@ class Field
         }
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
             // Cache me if you can
-            $memoKey = $fieldClassKey . $layout->id . ($keysOnly ? 'keys' : 'nokeys');
+            $memoKey = $fieldClassKey . $layout->id . ($keysOnly ? 'keys' : 'nokeys') . ($parseContentBlocks ? 'content' : 'nocontent');
             if (!empty(self::$fieldsOfTypeFromLayoutCache[$memoKey])) {
                 return self::$fieldsOfTypeFromLayoutCache[$memoKey];
             }
@@ -136,9 +138,9 @@ class Field
             foreach ($fieldElements as $fieldElement) {
                 $field = $fieldElement->getField();
                 // Handle ContentBlock fields recursively
-                if ($field instanceof ContentBlockField) {
-                    $foundFields = array_merge($foundFields,
-                        self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement));
+                if ($parseContentBlocks && $field instanceof ContentBlockField) {
+                    $contentBlockFoundFields = array_merge($contentBlockFoundFields,
+                        self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement, $parseContentBlocks));
                 }
                 /** @var array $fieldClasses */
                 foreach ($fieldClasses as $fieldClass) {
@@ -147,10 +149,12 @@ class Field
                     }
                 }
             }
+
             // Return only the keys if asked
             if ($keysOnly) {
                 $foundFields = array_keys($foundFields);
             }
+            $foundFields = array_merge($foundFields, $contentBlockFoundFields);
             // Cache for future use
             self::$fieldsOfTypeFromLayoutCache[$memoKey] = $foundFields;
         }
