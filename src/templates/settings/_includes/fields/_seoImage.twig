@@ -10,7 +10,7 @@
 } %}
 
 {% embed "seomatic/settings/_includes/fields/_inheritableField.twig" with additionalVars %}
-    {% macro seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
+    {% macro seoImageField(seoImageElements, elementType, assetVolumeSources, imageOptions, assetFieldSources, seomaticConfig, metaBundleSettings, metaGlobalVars, suffix, pageContext) %}
         {% set disabled = suffix|length > 0 %}
         <div class="instructions">
             <p>{{ "This is the image that will be used for display as the global website brand, as well as on X (Twitter) Cards and Facebook OpenGraph that link to the website, if they are not specified."|t("seomatic") }}</p>
@@ -63,7 +63,7 @@
                     },
                     jsClass: 'Craft.AssetSelectInput',
                     selectionLabel: "Select SEO Image"|t("seomatic"),
-                    sources: null,
+                    sources: assetVolumeSources,
                     limit: 1,
                     warning: false,
                     errors: metaBundleSettings.getErrors("seoImageIds"),
@@ -108,11 +108,11 @@
     {% endif %}
 
     {% block inheritedValues %}
-        {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
+        {{ _self.seoImageField(seoImageElements, elementType, assetVolumeSources, imageOptions, assetFieldSources, seomatic.config, inheritedFrom.metaBundleSettings ?? metaBundleSettings, inheritedFrom.metaGlobalVars ?? metaGlobalVars, "-inherited", pageContext) }}
     {% endblock %}
 
     {% block field %}
-        {{ _self.seoImageField(seoImageElements, elementType, imageOptions, assetFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "", pageContext) }}
+        {{ _self.seoImageField(seoImageElements, elementType, assetVolumeSources, imageOptions, assetFieldSources, seomatic.config, metaBundleSettings, metaGlobalVars, "", pageContext) }}
     {% endblock %}
 {% endembed %}
 
