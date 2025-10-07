@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.1.18 - UNRELEASED
+## 4.1.18 - 2025.10.06
 ### Added
 * Added a `twigExtensionClasses` config setting to allow additional TwigExtension classes to be loaded in the Twig `SandboxView` that SEOmatic uses to render ([#1632](https://github.com/nystudio107/craft-seomatic/issues/1632))
 * Only allow users to pick SEO/Facebook/Twitter images from asset volumes that they had permission to access ([#1650](https://github.com/nystudio107/craft-seomatic/issues/1650))
