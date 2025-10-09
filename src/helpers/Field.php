@@ -144,8 +144,8 @@ class Field
                 $field = $fieldElement->getField();
                 // Handle ContentBlock fields recursively
                 if ($parseContentBlocks) {
-                    foreach(self::FIELD_CLASSES[self::NESTED_FIELD_CLASS_KEY] as $nestedFieldClass) {
-                        if ($field instanceof $nestedFieldClass)) {
+                    foreach (self::FIELD_CLASSES[self::NESTED_FIELD_CLASS_KEY] as $nestedFieldClass) {
+                        if ($field instanceof $nestedFieldClass) {
                             $nestedFoundFields = array_merge($nestedFoundFields,
                                 self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement, $parseContentBlocks));
                         }
