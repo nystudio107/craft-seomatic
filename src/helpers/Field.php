@@ -50,10 +50,15 @@ class Field
     public const TEXT_FIELD_CLASS_KEY = 'text';
     public const ASSET_FIELD_CLASS_KEY = 'asset';
     public const BLOCK_FIELD_CLASS_KEY = 'block';
+    public const NESTED_FIELD_CLASS_KEY = 'nested';
     public const SEO_SETTINGS_CLASS_KEY = 'seo';
     public const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
 
     public const FIELD_CLASSES = [
+        self::NESTED_FIELD_CLASS_KEY => [
+            ContentBlockField::class,
+            MatrixField::class,
+        ],
         self::TEXT_FIELD_CLASS_KEY => [
             CKEditorField::class,
             PlainTextField::class,
@@ -120,7 +125,7 @@ class Field
         bool            $parseContentBlocks = true,
     ): array {
         $foundFields = [];
-        $contentBlockFoundFields = [];
+        $nestedFoundFields = [];
         $handlePrefix = '';
         $namePrefix = '';
         if ($parentField !== null && $parentFieldElement !== null) {
@@ -138,9 +143,13 @@ class Field
             foreach ($fieldElements as $fieldElement) {
                 $field = $fieldElement->getField();
                 // Handle ContentBlock fields recursively
-                if ($parseContentBlocks && $field instanceof ContentBlockField) {
-                    $contentBlockFoundFields = array_merge($contentBlockFoundFields,
-                        self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement, $parseContentBlocks));
+                if ($parseContentBlocks) {
+                    foreach(self::FIELD_CLASSES[self::NESTED_FIELD_CLASS_KEY] as $nestedFieldClass) {
+                        if ($field instanceof $nestedFieldClass)) {
+                            $nestedFoundFields = array_merge($nestedFoundFields,
+                                self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement, $parseContentBlocks));
+                        }
+                    }
                 }
                 /** @var array $fieldClasses */
                 foreach ($fieldClasses as $fieldClass) {
@@ -154,7 +163,7 @@ class Field
             if ($keysOnly) {
                 $foundFields = array_keys($foundFields);
             }
-            $foundFields = array_merge($foundFields, $contentBlockFoundFields);
+            $foundFields = array_merge($foundFields, $nestedFoundFields);
             // Cache for future use
             self::$fieldsOfTypeFromLayoutCache[$memoKey] = $foundFields;
         }

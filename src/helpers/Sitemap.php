@@ -461,8 +461,8 @@ class Sitemap
     }
 
     /**
-     * Fields coming back from FieldHelper:: are delimited by a . if they are ContentBlock fields,
-     * so we need to drill down to find the actual field in question
+     * Fields coming back from FieldHelper:: are delimited by a . if they are nested fields like
+     * ContentBlock or Matrix fields, so we need to drill down to find the actual field in question
      *
      * @param Element $element
      * @param $name
