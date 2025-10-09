@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.19 - UNRELEASED
+### Added
+* Also look for images in nested Matrix block fields for the sitemap images ([#1339](https://github.com/nystudio107/craft-seomatic/issues/1339))
+
 ## 5.1.18 - 2025.10.06
 ### Added
 * Added a `twigExtensionClasses` config setting to allow additional TwigExtension classes to be loaded in the Twig `SandboxView` that SEOmatic uses to render ([#1632](https://github.com/nystudio107/craft-seomatic/issues/1632))
