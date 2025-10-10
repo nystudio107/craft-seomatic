@@ -55,10 +55,6 @@ class Field
     public const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
 
     public const FIELD_CLASSES = [
-        self::NESTED_FIELD_CLASS_KEY => [
-            ContentBlockField::class,
-            MatrixField::class,
-        ],
         self::TEXT_FIELD_CLASS_KEY => [
             CKEditorField::class,
             PlainTextField::class,
@@ -143,13 +139,9 @@ class Field
             foreach ($fieldElements as $fieldElement) {
                 $field = $fieldElement->getField();
                 // Handle ContentBlock fields recursively
-                if ($parseContentBlocks) {
-                    foreach (self::FIELD_CLASSES[self::NESTED_FIELD_CLASS_KEY] as $nestedFieldClass) {
-                        if ($field instanceof $nestedFieldClass) {
-                            $nestedFoundFields = array_merge($nestedFoundFields,
-                                self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement, $parseContentBlocks));
-                        }
-                    }
+                if ($parseContentBlocks && $field instanceof ContentBlockField) {
+                    $nestedFoundFields = array_merge($nestedFoundFields,
+                        self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement, $parseContentBlocks));
                 }
                 /** @var array $fieldClasses */
                 foreach ($fieldClasses as $fieldClass) {
