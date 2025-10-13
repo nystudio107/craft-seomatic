@@ -364,10 +364,12 @@ class Sitemap
                         );
                         foreach ($assetFields as $assetField) {
                             $resolvedField = self::resolveNestedField($element, $assetField);
-                            $assets = $resolvedField->all();
-                            /** @var Asset[] $assets */
-                            foreach ($assets as $asset) {
-                                self::assetSitemapItem($asset, $metaBundle, $lines);
+                            if ($resolvedField !== null) {
+                                $assets = $resolvedField->all();
+                                /** @var Asset[] $assets */
+                                foreach ($assets as $asset) {
+                                    self::assetSitemapItem($asset, $metaBundle, $lines);
+                                }
                             }
                         }
                         // Assets embeded in Block fields
@@ -378,19 +380,21 @@ class Sitemap
                         );
                         foreach ($blockFields as $blockField) {
                             $resolvedField = self::resolveNestedField($element, $blockField);
-                            $blocks = $resolvedField->all();
-                            /** @var Entry[]|NeoBlock[]|object[] $blocks */
-                            foreach ($blocks as $block) {
-                                $assetFields = [];
-                                if ($block instanceof Entry) {
-                                    $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
-                                }
-                                if ($block instanceof NeoBlock) {
-                                    $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
-                                }
-                                foreach ($assetFields as $assetField) {
-                                    foreach ($block[$assetField]->all() as $asset) {
-                                        self::assetSitemapItem($asset, $metaBundle, $lines);
+                            if ($resolvedField !== null) {
+                                $blocks = $resolvedField->all();
+                                /** @var Entry[]|NeoBlock[]|object[] $blocks */
+                                foreach ($blocks as $block) {
+                                    $assetFields = [];
+                                    if ($block instanceof Entry) {
+                                        $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
+                                    }
+                                    if ($block instanceof NeoBlock) {
+                                        $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
+                                    }
+                                    foreach ($assetFields as $assetField) {
+                                        foreach ($block[$assetField]->all() as $asset) {
+                                            self::assetSitemapItem($asset, $metaBundle, $lines);
+                                        }
                                     }
                                 }
                             }
@@ -408,9 +412,11 @@ class Sitemap
                     );
                     foreach ($assetFields as $assetField) {
                         $resolvedField = self::resolveNestedField($element, $assetField);
-                        $assets = $resolvedField->all();
-                        foreach ($assets as $asset) {
-                            self::assetFilesSitemapLink($asset, $metaBundle, $lines);
+                        if ($resolvedField !== null) {
+                            $assets = $resolvedField->all();
+                            foreach ($assets as $asset) {
+                                self::assetFilesSitemapLink($asset, $metaBundle, $lines);
+                            }
                         }
                     }
                     // Assets embeded in Block fields
@@ -421,19 +427,21 @@ class Sitemap
                     );
                     foreach ($blockFields as $blockField) {
                         $resolvedField = self::resolveNestedField($element, $blockField);
-                        $blocks = $resolvedField->all();
-                        /** @var Entry[]|NeoBlock[]|object[] $blocks */
-                        foreach ($blocks as $block) {
-                            $assetFields = [];
-                            if ($block instanceof Entry) {
-                                $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
-                            }
-                            if ($block instanceof NeoBlock) {
-                                $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
-                            }
-                            foreach ($assetFields as $assetField) {
-                                foreach ($block[$assetField]->all() as $asset) {
-                                    self::assetFilesSitemapLink($asset, $metaBundle, $lines);
+                        if ($resolvedField !== null) {
+                            $blocks = $resolvedField->all();
+                            /** @var Entry[]|NeoBlock[]|object[] $blocks */
+                            foreach ($blocks as $block) {
+                                $assetFields = [];
+                                if ($block instanceof Entry) {
+                                    $assetFields = FieldHelper::matrixFieldsOfType($block, AssetsField::class);
+                                }
+                                if ($block instanceof NeoBlock) {
+                                    $assetFields = FieldHelper::neoFieldsOfType($block, AssetsField::class);
+                                }
+                                foreach ($assetFields as $assetField) {
+                                    foreach ($block[$assetField]->all() as $asset) {
+                                        self::assetFilesSitemapLink($asset, $metaBundle, $lines);
+                                    }
                                 }
                             }
                         }
@@ -471,6 +479,8 @@ class Sitemap
     public static function resolveNestedField(Element $element, $name)
     {
         $result = array_reduce(explode('.', $name), function($o, $p) {
+            $r = $o;
+            if ($)
             return $o === null ? $o : $o->$p;
         }, $element);
 
