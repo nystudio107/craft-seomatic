@@ -479,8 +479,6 @@ class Sitemap
     public static function resolveNestedField(Element $element, $name)
     {
         $result = array_reduce(explode('.', $name), function($o, $p) {
-            $r = $o;
-            if ($)
             return $o === null ? $o : $o->$p;
         }, $element);
 
