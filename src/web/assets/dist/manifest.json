@@ -25,7 +25,7 @@
     ]
   },
   "src/js/seomatic-meta.js": {
-    "file": "assets/seomatic-meta-BfDeUDUP.js",
+    "file": "assets/seomatic-meta-J2go8T3s.js",
     "name": "seomatic-meta",
     "src": "src/js/seomatic-meta.js",
     "isEntry": true,
@@ -33,16 +33,16 @@
       "__plugin-vue2_normalizer-BFq-tfv7.js"
     ],
     "css": [
-      "assets/seomatic-meta-BKy4oKKG.css"
+      "assets/seomatic-meta-DVm4XqAS.css"
     ]
   },
   "src/js/seomatic.js": {
-    "file": "assets/seomatic-jz271JAA.js",
+    "file": "assets/seomatic-DFlKkA1X.js",
     "name": "seomatic",
     "src": "src/js/seomatic.js",
     "isEntry": true,
     "css": [
-      "assets/seomatic-D5H9oPv5.css"
+      "assets/seomatic-B_-yeJVk.css"
     ]
   }
 }

@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.22 - 2025.10.23
+### Fixed
+* Revert a regression that caused image transforms for social images to be broken if a focal point was set ([#1665](https://github.com/nystudio107/craft-seomatic/issues/1665))
+
 ## 3.5.21 - 2025.10.06
 ### Added
 * Added a `twigExtensionClasses` config setting to allow additional TwigExtension classes to be loaded in the Twig `SandboxView` that SEOmatic uses to render ([#1632](https://github.com/nystudio107/craft-seomatic/issues/1632))
