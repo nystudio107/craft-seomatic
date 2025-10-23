@@ -50,6 +50,7 @@ class Field
     public const TEXT_FIELD_CLASS_KEY = 'text';
     public const ASSET_FIELD_CLASS_KEY = 'asset';
     public const BLOCK_FIELD_CLASS_KEY = 'block';
+    public const NESTED_FIELD_CLASS_KEY = 'nested';
     public const SEO_SETTINGS_CLASS_KEY = 'seo';
     public const OLD_SEOMATIC_META_CLASS_KEY = 'Seomatic_Meta';
 
@@ -120,7 +121,7 @@ class Field
         bool            $parseContentBlocks = true,
     ): array {
         $foundFields = [];
-        $contentBlockFoundFields = [];
+        $nestedFoundFields = [];
         $handlePrefix = '';
         $namePrefix = '';
         if ($parentField !== null && $parentFieldElement !== null) {
@@ -139,7 +140,7 @@ class Field
                 $field = $fieldElement->getField();
                 // Handle ContentBlock fields recursively
                 if ($parseContentBlocks && $field instanceof ContentBlockField) {
-                    $contentBlockFoundFields = array_merge($contentBlockFoundFields,
+                    $nestedFoundFields = array_merge($nestedFoundFields,
                         self::fieldsOfTypeFromLayout($fieldClassKey, $field->getFieldLayout(), $keysOnly, $field, $fieldElement, $parseContentBlocks));
                 }
                 /** @var array $fieldClasses */
@@ -154,7 +155,7 @@ class Field
             if ($keysOnly) {
                 $foundFields = array_keys($foundFields);
             }
-            $foundFields = array_merge($foundFields, $contentBlockFoundFields);
+            $foundFields = array_merge($foundFields, $nestedFoundFields);
             // Cache for future use
             self::$fieldsOfTypeFromLayoutCache[$memoKey] = $foundFields;
         }
