@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.20 - UNRELEASED
+### Fixed
+* Fixed a regression that caused the sidebar preview to not appear for Solspace Calendar
+
 ## 5.1.19 - 2025.10.23
 ### Fixed
 * Fixed an issue where a `null` element in the nested field chain could throw an error ([#1660](https://github.com/nystudio107/craft-seomatic/issues/1660))
