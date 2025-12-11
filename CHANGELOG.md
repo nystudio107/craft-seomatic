@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.1.20 - UNRELEASED
+### Fixed
+* Fixed a regression that caused the sidebar preview to not appear for Solspace Calendar
+
 ## 4.1.19 - 2025.10.23
 ### Fixed
 * Revert a regression that caused image transforms for social images to be broken if a focal point was set ([#1665](https://github.com/nystudio107/craft-seomatic/issues/1665))
