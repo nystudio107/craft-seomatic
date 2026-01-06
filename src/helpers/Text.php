@@ -24,7 +24,6 @@ use nystudio107\seomatic\helpers\Field as FieldHelper;
 use nystudio107\seomatic\Seomatic;
 use PhpScience\TextRank\TextRankFacade;
 use PhpScience\TextRank\Tool\StopWords\StopWordsAbstract;
-use Stringy\Stringy;
 use verbb\doxter\Doxter;
 use verbb\doxter\fields\data\DoxterData;
 use yii\base\InvalidConfigException;
@@ -71,7 +70,7 @@ class Text
         if (!empty($string)) {
             $string = HtmlPurifier::process($string, ['HTML.Allowed' => '']);
             $string = html_entity_decode($string, ENT_NOQUOTES, 'UTF-8');
-            $result = (string)Stringy::create($string)->truncate($length, $substring);
+            $result = StringHelper::truncate($string, $length, $substring);
         }
 
         return $result;
@@ -96,7 +95,7 @@ class Text
         if (!empty($string)) {
             $string = HtmlPurifier::process($string, ['HTML.Allowed' => '']);
             $string = html_entity_decode($string, ENT_NOQUOTES, 'UTF-8');
-            $result = (string)Stringy::create($string)->safeTruncate($length, $substring);
+            $result = StringHelper::safeTruncate($string, $length, $substring);
         }
 
         return $result;
