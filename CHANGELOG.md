@@ -3,6 +3,7 @@
 ## 5.1.20 - UNRELEASED
 ### Fixed
 * Fixed a regression that caused the sidebar preview to not appear for Solspace Calendar
+* Fixed an issue with Craft `^5.9` where it throws an error because `craftcms/cms` no longer uses the `Stringy` package ([#1684](https://github.com/nystudio107/craft-seomatic/issues/1684))
 
 ## 5.1.19 - 2025.10.23
 ### Fixed
