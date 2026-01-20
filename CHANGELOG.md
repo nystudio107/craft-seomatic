@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 4.1.20 - UNRELEASED
+## 4.1.20 - 2026.01.20
 ### Fixed
 * Fixed a regression that caused the sidebar preview to not appear for Solspace Calendar
 
