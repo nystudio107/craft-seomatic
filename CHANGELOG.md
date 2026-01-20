@@ -1,5 +1,10 @@
 # SEOmatic Changelog
 
+## 5.1.20 - 2026.01.20
+### Fixed
+* Fixed a regression that caused the sidebar preview to not appear for Solspace Calendar
+* Fixed an issue with Craft `^5.9` where it throws an error because `craftcms/cms` no longer uses the `Stringy` package ([#1684](https://github.com/nystudio107/craft-seomatic/issues/1684))
+
 ## 5.1.19 - 2025.10.23
 ### Fixed
 * Fixed an issue where a `null` element in the nested field chain could throw an error ([#1660](https://github.com/nystudio107/craft-seomatic/issues/1660))

@@ -15,7 +15,6 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Model;
 use craft\elements\db\ElementQueryInterface;
-use craft\events\DefineHtmlEvent;
 use craft\models\Site;
 use Exception;
 use nystudio107\seomatic\assetbundles\seomatic\SeomaticAsset;
@@ -165,21 +164,16 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
         if ($request->getIsSiteRequest() && !$request->getIsConsoleRequest()) {
         }
 
-        // Handler: Entry::EVENT_DEFINE_SIDEBAR_HTML
-        BaseEvent::on(
-            Event::class,
-            Event::EVENT_DEFINE_SIDEBAR_HTML,
-            static function(DefineHtmlEvent $event) {
-                Craft::debug(
-                    'Entry::EVENT_DEFINE_SIDEBAR_HTML',
-                    __METHOD__
-                );
+        // Install only for non-console Control Panel requests
+        if ($request->getIsCpRequest() && !$request->getIsConsoleRequest()) {
+            // Events sidebar
+            Seomatic::$view->hook('cp.solspace.calendar.events.edit.details', function(&$context) {
                 $html = '';
                 Seomatic::$view->registerAssetBundle(SeomaticAsset::class);
-                /** @var Event $eventElement */
-                $eventElement = $event->sender ?? null;
-                if ($eventElement !== null && $eventElement->uri !== null) {
-                    Seomatic::$plugin->metaContainers->previewMetaContainers($eventElement->uri, $eventElement->siteId, true);
+                /** @var Event $event */
+                $event = $context[self::getElementRefHandle()] ?? null;
+                if ($event !== null && $event->uri !== null) {
+                    Seomatic::$plugin->metaContainers->previewMetaContainers($event->uri, $event->siteId, true);
                     // Render our preview sidebar template
                     if (Seomatic::$settings->displayPreviewSidebar) {
                         $html .= PluginTemplate::renderPluginTemplate('_sidebars/event-preview.twig');
@@ -190,9 +184,10 @@ class SeoEvent implements SeoElementInterface, GqlSeoElementInterface
 //                    $html .= PluginTemplate::renderPluginTemplate('_sidebars/event-analysis.twig');
 //                }
                 }
-                $event->html .= $html;
-            }
-        );
+
+                return $html;
+            });
+        }
     }
 
     /**
