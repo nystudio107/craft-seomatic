@@ -251,6 +251,13 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
     label: 'Sitemap',
     handle: 'metaSitemapVars',
     fields: [
+		{
+			label: 'Sitemap Enabled',
+			handle: 'sitemapUrls',
+			default: {
+				type: 'lightswitch',
+			}
+		},
         {
             label: 'Change Frequency',
             handle: 'sitemapChangeFreq',
