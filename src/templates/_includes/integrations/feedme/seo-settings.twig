@@ -255,7 +255,12 @@ fields[seoMeta][metaGlobalVars][canonicalUrl]
 			label: 'Sitemap Enabled',
 			handle: 'sitemapUrls',
 			default: {
-				type: 'lightswitch',
+				type: 'select',
+				options: [
+					{ label: 'Don\'t import'|t('feed-me'), value: '' },
+					{ label: 'Enabled', value: '1' },
+					{ label: 'Disabled', value: '0' },
+				],
 			}
 		},
         {
