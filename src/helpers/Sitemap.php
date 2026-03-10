@@ -178,8 +178,7 @@ class Sitemap
 
         // Eager load assets & relations
         if ($metaBundle->metaSitemapVars->sitemapAssets || $metaBundle->metaSitemapVars->sitemapFiles) {
-            $woof = EagerLoadHelper::sitemapEagerLoadMap($metaBundle);
-            //$elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
+            $elementQuery->with(EagerLoadHelper::sitemapEagerLoadMap($metaBundle));
         }
 
         // If this is not a paged sitemap, go through full results
