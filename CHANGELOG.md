@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.21 - 2026.03.13
+### Fixed
+* Restored eager loading functionality of assets to the sitemaps
+
 ## 5.1.20 - 2026.01.20
 ### Fixed
 * Fixed a regression that caused the sidebar preview to not appear for Solspace Calendar
