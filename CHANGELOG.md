@@ -1,6 +1,6 @@
 # SEOmatic Changelog
 
-## 5.1.21 - UNRELEASED
+## 5.1.21 - 2026.03.13
 ### Fixed
 * Restored eager loading functionality of assets to the sitemaps
 
