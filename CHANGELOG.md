@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.1.21 - UNRELEASED
+### Fixed
+* Fixed an issue where sitemaps excluded entries with robots or canonical SEO Settings field override values ([#1724](https://github.com/nystudio107/craft-seomatic/issues/1724))
+
 ## 4.1.20 - 2026.01.20
 ### Fixed
 * Fixed a regression that caused the sidebar preview to not appear for Solspace Calendar
