@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.23 - UNRELEASED
+### Fixed
+* Fixed an issue where sitemaps excluded entries with robots or canonical SEO Settings field override values ([#1724](https://github.com/nystudio107/craft-seomatic/issues/1724))
+
 ## 3.5.22 - 2025.10.23
 ### Fixed
 * Revert a regression that caused image transforms for social images to be broken if a focal point was set ([#1665](https://github.com/nystudio107/craft-seomatic/issues/1665))
