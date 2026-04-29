@@ -596,13 +596,13 @@ class Seomatic extends Plugin
                 $event->types[] = Seomatic_MetaField::class;
             }
         );
-        // Handler: Element::EVENT_AFTER_PROPAGATE
+        // Handler: Elements::EVENT_AFTER_SAVE_ELEMENT
         Event::on(
-            Element::class,
-            Element::EVENT_AFTER_PROPAGATE,
+            Elements::class,
+            Elements::EVENT_AFTER_SAVE_ELEMENT,
             static function(ModelEvent $event) {
                 Craft::debug(
-                    'Element::EVENT_AFTER_PROPAGATE',
+                    'Elements::EVENT_AFTER_SAVE_ELEMENT',
                     __METHOD__
                 );
                 /** @var Element $element */
