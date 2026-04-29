@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.22 - UNRELEASED
+### Fixed
+* Fixed an issue where sitemaps excluded entries with robots or canonical SEO Settings field override values ([#1724](https://github.com/nystudio107/craft-seomatic/issues/1724))
+
 ## 5.1.21 - 2026.03.13
 ### Fixed
 * Restored eager loading functionality of assets to the sitemaps
