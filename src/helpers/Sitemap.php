@@ -613,10 +613,23 @@ class Sitemap
                     }
                     // Combine the meta global vars
                     $attributes = $fieldMetaBundle->metaGlobalVars->getAttributes();
+
+                    // Get the explicitly inherited attributes
+                    $inherited = array_keys(ArrayHelper::remove($attributes, 'inherited', []));
+
+                    $attributes = array_intersect_key(
+                        $attributes,
+                        array_flip((array)$seoSettingsField->sitemapEnabledFields)
+                    );
                     $attributes = array_filter(
                         $attributes,
                         [ArrayHelper::class, 'preserveBools']
                     );
+
+                    foreach ($inherited as $inheritedAttribute) {
+                        unset($attributes[$inheritedAttribute]);
+                    }
+
                     $metaBundle->metaGlobalVars->setAttributes($attributes, false);
                 }
             }
