@@ -619,7 +619,7 @@ class Sitemap
 
                     $attributes = array_intersect_key(
                         $attributes,
-                        array_flip((array)$seoSettingsField->sitemapEnabledFields)
+                        array_flip((array)$seoSettingsField->generalEnabledFields)
                     );
                     $attributes = array_filter(
                         $attributes,
