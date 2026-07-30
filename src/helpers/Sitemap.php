@@ -256,7 +256,7 @@ class Sitemap
                     } catch (Exception $e) {
                         $url = '';
                     }
-                    $url = UrlHelper::absoluteUrlWithProtocol($url);
+                    $url = UrlHelper::absoluteUrlWithProtocol($url, false);
                     if (Seomatic::$settings->excludeNonCanonicalUrls) {
                         Seomatic::$matchedElement = $element;
                         MetaValue::cache();
@@ -266,7 +266,7 @@ class Sitemap
                         } catch (Exception $e) {
                             $canonicalUrl = '';
                         }
-                        $canonicalUrl = UrlHelper::absoluteUrlWithProtocol($canonicalUrl);
+                        $canonicalUrl = UrlHelper::absoluteUrlWithProtocol($canonicalUrl, false);
                         if ($url !== $canonicalUrl) {
                             Craft::info("Excluding URL: {$url} from the sitemap because it does not match the Canonical URL: {$canonicalUrl} - " . $metaBundle->metaGlobalVars->canonicalUrl . " - " . $element->uri);
                             continue;
@@ -324,7 +324,7 @@ class Sitemap
                                             } catch (Exception $e) {
                                                 $altUrl = $altElement->url;
                                             }
-                                            $altUrl = UrlHelper::absoluteUrlWithProtocol($altUrl);
+                                            $altUrl = UrlHelper::absoluteUrlWithProtocol($altUrl, false);
                                             // If this is the primary site, add it as x-default, too
                                             if ($primarySiteId === $altSourceSiteId && Seomatic::$settings->addXDefaultHrefLang) {
                                                 $lines[] = '<xhtml:link rel="alternate"'
@@ -649,7 +649,7 @@ class Sitemap
                     $transform = Craft::$app->getAssetTransforms()->getTransformByHandle($metaBundle->metaSitemapVars->sitemapAssetTransform ?? '');
                     $lines[] = '<image:image>';
                     $lines[] = '<image:loc>';
-                    $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl($transform, true)));
+                    $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl($transform, true), false));
                     $lines[] = '</image:loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapImageFieldMap as $row) {
@@ -667,7 +667,7 @@ class Sitemap
                 case 'video':
                     $lines[] = '<video:video>';
                     $lines[] = '<video:content_loc>';
-                    $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                    $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl(), false));
                     $lines[] = '</video:content_loc>';
                     // Handle the dynamic field => property mappings
                     foreach ($metaBundle->metaSitemapVars->sitemapVideoFieldMap as $row) {
@@ -697,7 +697,7 @@ class Sitemap
                 $dateUpdated = $asset->dateUpdated ?? $asset->dateCreated ?? new DateTime();
                 $lines[] = '<url>';
                 $lines[] = '<loc>';
-                $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl()));
+                $lines[] = self::encodeSitemapEntity(UrlHelper::absoluteUrlWithProtocol($asset->getUrl(), false));
                 $lines[] = '</loc>';
                 $lines[] = '<lastmod>';
                 $lines[] = $dateUpdated->format(DateTime::W3C);
