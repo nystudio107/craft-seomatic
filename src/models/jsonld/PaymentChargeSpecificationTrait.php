@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PaymentChargeSpecification.
  *
  * @author    nystudio107
@@ -22,17 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PaymentChargeSpecificationTrait
 {
     /**
-     * The payment method(s) to which the payment charge specification applies.
-     *
-     * @var array|PaymentMethod|PaymentMethod[]
-     */
-    public $appliesToPaymentMethod;
-
-    /**
      * The delivery method(s) to which the delivery charge or payment charge
      * specification applies.
      *
      * @var array|DeliveryMethod|DeliveryMethod[]
      */
     public $appliesToDeliveryMethod;
+
+    /**
+     * The payment method(s) to which the payment charge specification applies.
+     *
+     * @var array|PaymentMethod|PaymentMethod[]
+     */
+    public $appliesToPaymentMethod;
 }

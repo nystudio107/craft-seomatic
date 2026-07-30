@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for GeoCircle.
  *
  * @author    nystudio107
@@ -22,17 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait GeoCircleTrait
 {
     /**
-     * Indicates the approximate radius of a GeoCircle (metres unless indicated
-     * otherwise via Distance notation).
-     *
-     * @var string|float|array|Distance|Distance[]|array|Text|Text[]|array|Number|Number[]
-     */
-    public $geoRadius;
-
-    /**
      * Indicates the GeoCoordinates at the centre of a GeoShape, e.g. GeoCircle.
      *
      * @var array|GeoCoordinates|GeoCoordinates[]
      */
     public $geoMidpoint;
+
+    /**
+     * Indicates the approximate radius of a GeoCircle (metres unless indicated
+     * otherwise via Distance notation).
+     *
+     * @var float|string|array|Distance|Distance[]|array|Number|Number[]|array|Text|Text[]
+     */
+    public $geoRadius;
 }

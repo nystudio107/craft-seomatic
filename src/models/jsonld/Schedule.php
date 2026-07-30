@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Schedule - A schedule defines a repeating time period used to describe a regularly
  * occurring [[Event]]. At a minimum a schedule will specify
  * [[repeatFrequency]] which describes the interval between occurrences of the
@@ -80,27 +80,28 @@ class Schedule extends MetaJsonLd implements ScheduleInterface, IntangibleInterf
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'byDay' => ['array', 'Text', 'Text[]', 'array', 'DayOfWeek', 'DayOfWeek[]'],
+            'byDay' => ['array', 'DayOfWeek', 'DayOfWeek[]', 'array', 'Text', 'Text[]'],
             'byMonth' => ['array', 'Integer', 'Integer[]'],
             'byMonthDay' => ['array', 'Integer', 'Integer[]'],
             'byMonthWeek' => ['array', 'Integer', 'Integer[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'duration' => ['array', 'Duration', 'Duration[]'],
+            'duration' => ['array', 'Duration', 'Duration[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'endDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'endTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'endTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'exceptDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'repeatCount' => ['array', 'Integer', 'Integer[]'],
             'repeatFrequency' => ['array', 'Duration', 'Duration[]', 'array', 'Text', 'Text[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'scheduleTimezone' => ['array', 'Text', 'Text[]'],
             'startDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'startTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'startTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
@@ -121,7 +122,7 @@ class Schedule extends MetaJsonLd implements ScheduleInterface, IntangibleInterf
             'byMonthWeek' => 'Defines the week(s) of the month on which a recurring Event takes place. Specified as an Integer between 1-5. For clarity, byMonthWeek is best used in conjunction with byDay to indicate concepts like the first and third Mondays of a month.',
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
-            'duration' => 'The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601).',
+            'duration' => 'The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601).',
             'endDate' => 'The end date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).',
             'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to *December*. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file.  Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
             'exceptDate' => 'Defines a [[Date]] or [[DateTime]] during which a scheduled [[Event]] will not take place. The property allows exceptions to       a [[Schedule]] to be specified. If an exception is specified as a [[DateTime]] then only the event that would have started at that specific date and time       should be excluded from the schedule. If an exception is specified as a [[Date]] then any event that is scheduled for that 24 hour period should be       excluded from the schedule. This allows a whole day to be excluded from the schedule without having to itemise every scheduled event.',
@@ -129,6 +130,7 @@ class Schedule extends MetaJsonLd implements ScheduleInterface, IntangibleInterf
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'repeatCount' => 'Defines the number of times a recurring [[Event]] will take place.',
             'repeatFrequency' => 'Defines the frequency at which [[Event]]s will occur according to a schedule [[Schedule]]. The intervals between       events should be defined as a [[Duration]] of time.',

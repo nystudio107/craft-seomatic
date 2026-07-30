@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for FoodEstablishmentReservation.
  *
  * @author    nystudio107
@@ -21,20 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait FoodEstablishmentReservationTrait
 {
-    /**
-     * The startTime of something. For a reserved event or service (e.g.
-     * FoodEstablishmentReservation), the time that it is expected to start. For
-     * actions that span a period of time, when the action was performed. E.g.
-     * John wrote a book from *January* to December. For media, including audio
-     * and video, it's the time offset of the start of a clip within a larger
-     * file.  Note that Event uses startDate/endDate instead of startTime/endTime,
-     * even when describing dates with times. This situation may be clarified in
-     * future revisions.
-     *
-     * @var array|Time|Time[]|array|DateTime|DateTime[]
-     */
-    public $startTime;
-
     /**
      * The endTime of something. For a reserved event or service (e.g.
      * FoodEstablishmentReservation), the time that it is expected to end. For
@@ -45,14 +31,28 @@ trait FoodEstablishmentReservationTrait
      * when describing dates with times. This situation may be clarified in future
      * revisions.
      *
-     * @var array|Time|Time[]|array|DateTime|DateTime[]
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
      */
     public $endTime;
 
     /**
      * Number of people the reservation should accommodate.
      *
-     * @var int|array|QuantitativeValue|QuantitativeValue[]|array|Integer|Integer[]
+     * @var int|array|Integer|Integer[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $partySize;
+
+    /**
+     * The startTime of something. For a reserved event or service (e.g.
+     * FoodEstablishmentReservation), the time that it is expected to start. For
+     * actions that span a period of time, when the action was performed. E.g.
+     * John wrote a book from *January* to December. For media, including audio
+     * and video, it's the time offset of the start of a clip within a larger
+     * file.  Note that Event uses startDate/endDate instead of startTime/endTime,
+     * even when describing dates with times. This situation may be clarified in
+     * future revisions.
+     *
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
+     */
+    public $startTime;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PeopleAudience.
  *
  * @author    nystudio107
@@ -22,20 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PeopleAudienceTrait
 {
     /**
-     * Maximum recommended age in years for the audience or user.
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $suggestedMaxAge;
-
-    /**
-     * Audiences defined by a person's minimum age.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $requiredMinAge;
-
-    /**
      * Specifying the health condition(s) of a patient, medical study, or other
      * target audience.
      *
@@ -44,11 +30,25 @@ trait PeopleAudienceTrait
     public $healthCondition;
 
     /**
+     * Audiences defined by a person's gender.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $requiredGender;
+
+    /**
      * Audiences defined by a person's maximum age.
      *
      * @var int|array|Integer|Integer[]
      */
     public $requiredMaxAge;
+
+    /**
+     * Audiences defined by a person's minimum age.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $requiredMinAge;
 
     /**
      * The age or age range for the intended audience or person, for example 3-12
@@ -59,13 +59,6 @@ trait PeopleAudienceTrait
     public $suggestedAge;
 
     /**
-     * Minimum recommended age in years for the audience or user.
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $suggestedMinAge;
-
-    /**
      * The suggested gender of the intended person or audience, for example
      * "male", "female", or "unisex".
      *
@@ -74,11 +67,11 @@ trait PeopleAudienceTrait
     public $suggestedGender;
 
     /**
-     * Audiences defined by a person's gender.
+     * Maximum recommended age in years for the audience or user.
      *
-     * @var string|array|Text|Text[]
+     * @var float|array|Number|Number[]
      */
-    public $requiredGender;
+    public $suggestedMaxAge;
 
     /**
      * A suggested range of body measurements for the intended audience or person,
@@ -88,4 +81,11 @@ trait PeopleAudienceTrait
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $suggestedMeasurement;
+
+    /**
+     * Minimum recommended age in years for the audience or user.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $suggestedMinAge;
 }

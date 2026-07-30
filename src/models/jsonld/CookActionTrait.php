@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for CookAction.
  *
  * @author    nystudio107
@@ -22,12 +22,12 @@ namespace nystudio107\seomatic\models\jsonld;
 trait CookActionTrait
 {
     /**
-     * A sub property of instrument. The recipe/instructions used to perform the
-     * action.
+     * A sub property of location. The specific food establishment where the
+     * action occurred.
      *
-     * @var array|Recipe|Recipe[]
+     * @var array|FoodEstablishment|FoodEstablishment[]|array|Place|Place[]
      */
-    public $recipe;
+    public $foodEstablishment;
 
     /**
      * A sub property of location. The specific food event where the action
@@ -38,10 +38,10 @@ trait CookActionTrait
     public $foodEvent;
 
     /**
-     * A sub property of location. The specific food establishment where the
-     * action occurred.
+     * A sub property of instrument. The recipe/instructions used to perform the
+     * action.
      *
-     * @var array|FoodEstablishment|FoodEstablishment[]|array|Place|Place[]
+     * @var array|Recipe|Recipe[]
      */
-    public $foodEstablishment;
+    public $recipe;
 }

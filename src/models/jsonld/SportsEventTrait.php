@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for SportsEvent.
  *
  * @author    nystudio107
@@ -29,13 +29,6 @@ trait SportsEventTrait
     public $awayTeam;
 
     /**
-     * A type of sport (e.g. Baseball).
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]
-     */
-    public $sport;
-
-    /**
      * A competitor in a sports event.
      *
      * @var array|Person|Person[]|array|SportsTeam|SportsTeam[]
@@ -48,4 +41,20 @@ trait SportsEventTrait
      * @var array|Person|Person[]|array|SportsTeam|SportsTeam[]
      */
     public $homeTeam;
+
+    /**
+     * An official who watches a game or match closely to enforce the rules and
+     * arbitrate on matters arising from the play such as referees, umpires or
+     * judges. The name of the effective function can vary according to the sport.
+     *
+     * @var array|Person|Person[]
+     */
+    public $referee;
+
+    /**
+     * A type of sport (e.g. Baseball).
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $sport;
 }

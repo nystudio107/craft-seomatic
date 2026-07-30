@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for QuantitativeValueDistribution.
  *
  * @author    nystudio107
@@ -22,11 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait QuantitativeValueDistributionTrait
 {
     /**
-     * The 90th percentile value.
+     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
+     * duration format](http://en.wikipedia.org/wiki/ISO_8601).
+     *
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $duration;
+
+    /**
+     * The median value.
      *
      * @var float|array|Number|Number[]
      */
-    public $percentile90;
+    public $median;
 
     /**
      * The 10th percentile value.
@@ -43,14 +51,6 @@ trait QuantitativeValueDistributionTrait
     public $percentile25;
 
     /**
-     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
-     * date format](http://en.wikipedia.org/wiki/ISO_8601).
-     *
-     * @var array|Duration|Duration[]
-     */
-    public $duration;
-
-    /**
      * The 75th percentile value.
      *
      * @var float|array|Number|Number[]
@@ -58,9 +58,9 @@ trait QuantitativeValueDistributionTrait
     public $percentile75;
 
     /**
-     * The median value.
+     * The 90th percentile value.
      *
      * @var float|array|Number|Number[]
      */
-    public $median;
+    public $percentile90;
 }

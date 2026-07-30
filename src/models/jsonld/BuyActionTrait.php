@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BuyAction.
  *
  * @author    nystudio107
@@ -22,9 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BuyActionTrait
 {
     /**
+     * An entity which offers (sells / leases / lends / loans) the services /
+     * goods.  A seller may also be a provider.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $seller;
+
+    /**
      * 'vendor' is an earlier term for 'seller'.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $vendor;
 
@@ -34,12 +42,4 @@ trait BuyActionTrait
      * @var array|WarrantyPromise|WarrantyPromise[]
      */
     public $warrantyPromise;
-
-    /**
-     * An entity which offers (sells / leases / lends / loans) the services /
-     * goods.  A seller may also be a provider.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $seller;
 }

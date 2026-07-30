@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * BioChemEntity - Any biological, chemical, or biochemical thing. For example: a protein; a
  * gene; a chemical; a synthetic chemical.
  *
@@ -73,24 +73,25 @@ class BioChemEntity extends MetaJsonLd implements BioChemEntityInterface, ThingI
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'associatedDisease' => ['array', 'MedicalCondition', 'MedicalCondition[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'associatedDisease' => ['array', 'MedicalCondition', 'MedicalCondition[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
             'bioChemInteraction' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
             'bioChemSimilarity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
             'biologicalRole' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'hasBioChemEntityPart' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
-            'hasMolecularFunction' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'hasMolecularFunction' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
             'hasRepresentation' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'isEncodedByBioChemEntity' => ['array', 'Gene', 'Gene[]'],
             'isInvolvedInBiologicalProcess' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
-            'isLocatedInSubcellularLocation' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'isLocatedInSubcellularLocation' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
             'isPartOfBioChemEntity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
@@ -126,6 +127,7 @@ class BioChemEntity extends MetaJsonLd implements BioChemEntityInterface, ThingI
             'isPartOfBioChemEntity' => 'Indicates a BioChemEntity that is (in some sense) a part of this BioChemEntity. ',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',

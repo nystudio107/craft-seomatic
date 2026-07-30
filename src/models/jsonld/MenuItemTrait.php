@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MenuItem.
  *
  * @author    nystudio107
@@ -22,21 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MenuItemTrait
 {
     /**
-     * Nutrition information about the recipe or menu item.
-     *
-     * @var array|NutritionInformation|NutritionInformation[]
-     */
-    public $nutrition;
-
-    /**
-     * Indicates a dietary restriction or guideline for which this recipe or menu
-     * item is suitable, e.g. diabetic, halal etc.
-     *
-     * @var array|RestrictedDiet|RestrictedDiet[]
-     */
-    public $suitableForDiet;
-
-    /**
      * Additional menu item(s) such as a side dish of salad or side order of fries
      * that can be added to this menu item. Additionally it can be a menu section
      * containing allowed add-on menu items for this menu item.
@@ -44,6 +29,13 @@ trait MenuItemTrait
      * @var array|MenuItem|MenuItem[]|array|MenuSection|MenuSection[]
      */
     public $menuAddOn;
+
+    /**
+     * Nutrition information about the recipe or menu item.
+     *
+     * @var array|NutritionInformation|NutritionInformation[]
+     */
+    public $nutrition;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
@@ -58,4 +50,12 @@ trait MenuItemTrait
      * @var array|Demand|Demand[]|array|Offer|Offer[]
      */
     public $offers;
+
+    /**
+     * Indicates a dietary restriction or guideline for which this recipe or menu
+     * item is suitable, e.g. diabetic, halal etc.
+     *
+     * @var array|Diet|Diet[]|array|RestrictedDiet|RestrictedDiet[]
+     */
+    public $suitableForDiet;
 }

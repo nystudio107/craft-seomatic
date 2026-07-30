@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * MedicalSign - Any physical manifestation of a person's medical condition discoverable by
  * objective diagnostic tests or physical examination.
  *
@@ -76,9 +76,10 @@ class MedicalSign extends MetaJsonLd implements MedicalSignInterface, MedicalSig
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'associatedAnatomy' => ['array', 'AnatomicalSystem', 'AnatomicalSystem[]', 'array', 'SuperficialAnatomy', 'SuperficialAnatomy[]', 'array', 'AnatomicalStructure', 'AnatomicalStructure[]'],
+            'associatedAnatomy' => ['array', 'AnatomicalStructure', 'AnatomicalStructure[]', 'array', 'AnatomicalSystem', 'AnatomicalSystem[]', 'array', 'SuperficialAnatomy', 'SuperficialAnatomy[]'],
+            'cause' => ['array', 'MedicalCause', 'MedicalCause[]'],
             'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'differentialDiagnosis' => ['array', 'DDxElement', 'DDxElement[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'drug' => ['array', 'Drug', 'Drug[]'],
@@ -86,28 +87,29 @@ class MedicalSign extends MetaJsonLd implements MedicalSignInterface, MedicalSig
             'expectedPrognosis' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'identifyingExam' => ['array', 'PhysicalExam', 'PhysicalExam[]'],
             'identifyingTest' => ['array', 'MedicalTest', 'MedicalTest[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'legalStatus' => ['array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'naturalProgression' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'pathophysiology' => ['array', 'Text', 'Text[]'],
             'possibleComplication' => ['array', 'Text', 'Text[]'],
-            'possibleTreatment' => ['array', 'MedicalTherapy', 'MedicalTherapy[]'],
+            'possibleTreatment' => ['array', 'Drug', 'Drug[]', 'array', 'DrugClass', 'DrugClass[]', 'array', 'LifestyleModification', 'LifestyleModification[]', 'array', 'MedicalTherapy', 'MedicalTherapy[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'primaryPrevention' => ['array', 'MedicalTherapy', 'MedicalTherapy[]'],
             'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
             'relevantSpecialty' => ['array', 'MedicalSpecialty', 'MedicalSpecialty[]'],
             'riskFactor' => ['array', 'MedicalRiskFactor', 'MedicalRiskFactor[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'secondaryPrevention' => ['array', 'MedicalTherapy', 'MedicalTherapy[]'],
+            'secondaryPrevention' => ['array', 'Drug', 'Drug[]', 'array', 'DrugClass', 'DrugClass[]', 'array', 'LifestyleModification', 'LifestyleModification[]', 'array', 'MedicalTherapy', 'MedicalTherapy[]'],
             'signOrSymptom' => ['array', 'MedicalSignOrSymptom', 'MedicalSignOrSymptom[]'],
             'stage' => ['array', 'MedicalConditionStage', 'MedicalConditionStage[]'],
-            'status' => ['array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'EventStatusType', 'EventStatusType[]', 'array', 'Text', 'Text[]'],
+            'status' => ['array', 'EventStatusType', 'EventStatusType[]', 'array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'Text', 'Text[]'],
             'study' => ['array', 'MedicalStudy', 'MedicalStudy[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'typicalTest' => ['array', 'MedicalTest', 'MedicalTest[]'],
@@ -125,6 +127,7 @@ class MedicalSign extends MetaJsonLd implements MedicalSignInterface, MedicalSig
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'associatedAnatomy' => 'The anatomy of the underlying organ system or structures associated with this entity.',
+            'cause' => 'The cause of a medical condition.',
             'code' => 'A medical code for the entity, taken from a controlled vocabulary or ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.',
             'description' => 'A description of the item.',
             'differentialDiagnosis' => 'One of a set of differential diagnoses for the condition. Specifically, a closely-related or competing diagnosis typically considered later in the cognitive process whereby this medical condition is distinguished from others most likely responsible for a similar collection of signs and symptoms to reach the most parsimonious diagnosis or diagnoses in a patient.',
@@ -143,6 +146,7 @@ class MedicalSign extends MetaJsonLd implements MedicalSignInterface, MedicalSig
             'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
             'name' => 'The name of the item.',
             'naturalProgression' => 'The expected progression of the condition if it is not treated and allowed to progress naturally.',
+            'owner' => 'A person or organization who owns this Thing.',
             'pathophysiology' => 'Changes in the normal mechanical, physical, and biochemical functions that are associated with this activity or condition.',
             'possibleComplication' => 'A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc.',
             'possibleTreatment' => 'A possible treatment to address this condition, sign or symptom.',

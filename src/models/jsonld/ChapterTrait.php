@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Chapter.
  *
  * @author    nystudio107
@@ -22,12 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ChapterTrait
 {
     /**
-     * Any description of pages that is not separated into pageStart and pageEnd;
-     * for example, "1-6, 9, 55" or "10-12, 46-49".
+     * The page on which the work ends; for example "138" or "xvi".
      *
-     * @var string|array|Text|Text[]
+     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
      */
-    public $pagination;
+    public $pageEnd;
 
     /**
      * The page on which the work starts; for example "135" or "xiii".
@@ -37,9 +36,10 @@ trait ChapterTrait
     public $pageStart;
 
     /**
-     * The page on which the work ends; for example "138" or "xvi".
+     * Any description of pages that is not separated into pageStart and pageEnd;
+     * for example, "1-6, 9, 55" or "10-12, 46-49".
      *
-     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
+     * @var string|array|Text|Text[]
      */
-    public $pageEnd;
+    public $pagination;
 }

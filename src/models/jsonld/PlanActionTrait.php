@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PlanAction.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait PlanActionTrait
     /**
      * The time the object is scheduled to.
      *
-     * @var array|DateTime|DateTime[]|array|Date|Date[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $scheduledTime;
 }

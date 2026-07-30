@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Seat.
  *
  * @author    nystudio107
@@ -22,18 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait SeatTrait
 {
     /**
-     * The type/class of the seat.
-     *
-     * @var string|array|Text|Text[]|array|QualitativeValue|QualitativeValue[]
-     */
-    public $seatingType;
-
-    /**
-     * The section location of the reserved seat (e.g. Orchestra).
+     * The location of the reserved seat (e.g., 27).
      *
      * @var string|array|Text|Text[]
      */
-    public $seatSection;
+    public $seatNumber;
 
     /**
      * The row location of the reserved seat (e.g., B).
@@ -43,9 +36,16 @@ trait SeatTrait
     public $seatRow;
 
     /**
-     * The location of the reserved seat (e.g., 27).
+     * The section location of the reserved seat (e.g. Orchestra).
      *
      * @var string|array|Text|Text[]
      */
-    public $seatNumber;
+    public $seatSection;
+
+    /**
+     * The type/class of the seat.
+     *
+     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]
+     */
+    public $seatingType;
 }

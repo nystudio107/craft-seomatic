@@ -14,21 +14,21 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ComicCoverArt - The artwork on the cover of a comic.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/ComicCoverArt
  */
-class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverArtInterface, VisualArtworkInterface, CreativeWorkInterface, ThingInterface, ComicStoryInterface
+class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, ComicStoryInterface, CreativeWorkInterface, ThingInterface, CoverArtInterface, VisualArtworkInterface
 {
     use ComicCoverArtTrait;
-    use CoverArtTrait;
-    use VisualArtworkTrait;
+    use ComicStoryTrait;
     use CreativeWorkTrait;
     use ThingTrait;
-    use ComicStoryTrait;
+    use CoverArtTrait;
+    use VisualArtworkTrait;
 
     /**
      * The Schema.org Type Name
@@ -49,7 +49,7 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
      *
      * @var string
      */
-    public static string $schemaTypeExtends = 'CoverArt';
+    public static string $schemaTypeExtends = 'ComicStory';
 
     /**
      * The Schema.org Type Description
@@ -90,20 +90,20 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'alternateName' => ['array', 'Text', 'Text[]'],
             'alternativeHeadline' => ['array', 'Text', 'Text[]'],
             'archivedAt' => ['array', 'URL', 'URL[]', 'array', 'WebPage', 'WebPage[]'],
-            'artEdition' => ['array', 'Text', 'Text[]', 'array', 'Integer', 'Integer[]'],
+            'artEdition' => ['array', 'Integer', 'Integer[]', 'array', 'Text', 'Text[]'],
             'artMedium' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'artform' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'artist' => ['array', 'Person', 'Person[]'],
             'artworkSurface' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'assesses' => ['array', 'Text', 'Text[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'assesses' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'associatedMedia' => ['array', 'MediaObject', 'MediaObject[]'],
             'audience' => ['array', 'Audience', 'Audience[]'],
-            'audio' => ['array', 'AudioObject', 'AudioObject[]', 'array', 'MusicRecording', 'MusicRecording[]', 'array', 'Clip', 'Clip[]'],
-            'author' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'audio' => ['array', 'AudioObject', 'AudioObject[]', 'array', 'Clip', 'Clip[]', 'array', 'MusicRecording', 'MusicRecording[]'],
+            'author' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'award' => ['array', 'Text', 'Text[]'],
             'awards' => ['array', 'Text', 'Text[]'],
             'character' => ['array', 'Person', 'Person[]'],
-            'citation' => ['array', 'Text', 'Text[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'citation' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Text', 'Text[]'],
             'colorist' => ['array', 'Person', 'Person[]'],
             'comment' => ['array', 'Comment', 'Comment[]'],
             'commentCount' => ['array', 'Integer', 'Integer[]'],
@@ -115,24 +115,25 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'copyrightHolder' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'copyrightNotice' => ['array', 'Text', 'Text[]'],
             'copyrightYear' => ['array', 'Number', 'Number[]'],
-            'correction' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]', 'array', 'CorrectionComment', 'CorrectionComment[]'],
+            'correction' => ['array', 'CorrectionComment', 'CorrectionComment[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'countryOfOrigin' => ['array', 'Country', 'Country[]'],
-            'creativeWorkStatus' => ['array', 'Text', 'Text[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'creativeWorkStatus' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'creator' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'creditText' => ['array', 'Text', 'Text[]'],
             'dateCreated' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'dateModified' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'datePublished' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'depth' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'depth' => ['array', 'Distance', 'Distance[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'digitalSourceType' => ['array', 'IPTCDigitalSourceEnumeration', 'IPTCDigitalSourceEnumeration[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'discussionUrl' => ['array', 'URL', 'URL[]'],
+            'displayLocation' => ['array', 'Place', 'Place[]'],
             'editEIDR' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'editor' => ['array', 'Person', 'Person[]'],
             'educationalAlignment' => ['array', 'AlignmentObject', 'AlignmentObject[]'],
-            'educationalLevel' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
-            'educationalUse' => ['array', 'Text', 'Text[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'educationalLevel' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'educationalUse' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'encoding' => ['array', 'MediaObject', 'MediaObject[]'],
             'encodingFormat' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'encodings' => ['array', 'MediaObject', 'MediaObject[]'],
@@ -141,45 +142,46 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'fileFormat' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'funder' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
-            'genre' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
+            'genre' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'hasPart' => ['array', 'CreativeWork', 'CreativeWork[]'],
             'headline' => ['array', 'Text', 'Text[]'],
-            'height' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'height' => ['array', 'Distance', 'Distance[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'inLanguage' => ['array', 'Text', 'Text[]', 'array', 'Language', 'Language[]'],
+            'inLanguage' => ['array', 'Language', 'Language[]', 'array', 'Text', 'Text[]'],
             'inker' => ['array', 'Person', 'Person[]'],
             'interactionStatistic' => ['array', 'InteractionCounter', 'InteractionCounter[]'],
             'interactivityType' => ['array', 'Text', 'Text[]'],
             'interpretedAsClaim' => ['array', 'Claim', 'Claim[]'],
             'isAccessibleForFree' => ['array', 'Boolean', 'Boolean[]'],
-            'isBasedOn' => ['array', 'Product', 'Product[]', 'array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
-            'isBasedOnUrl' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]', 'array', 'Product', 'Product[]'],
+            'isBasedOn' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Product', 'Product[]', 'array', 'URL', 'URL[]'],
+            'isBasedOnUrl' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Product', 'Product[]', 'array', 'URL', 'URL[]'],
             'isFamilyFriendly' => ['array', 'Boolean', 'Boolean[]'],
-            'isPartOf' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
-            'keywords' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'isPartOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
+            'keywords' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'learningResourceType' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'letterer' => ['array', 'Person', 'Person[]'],
-            'license' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'license' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'locationCreated' => ['array', 'Place', 'Place[]'],
             'mainEntity' => ['array', 'Thing', 'Thing[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'maintainer' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
-            'material' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'Product', 'Product[]'],
-            'materialExtent' => ['array', 'Text', 'Text[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'material' => ['array', 'Product', 'Product[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'materialExtent' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Text', 'Text[]'],
             'mentions' => ['array', 'Thing', 'Thing[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'pattern' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'penciler' => ['array', 'Person', 'Person[]'],
             'position' => ['array', 'Integer', 'Integer[]', 'array', 'Text', 'Text[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'producer' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'producer' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'publication' => ['array', 'PublicationEvent', 'PublicationEvent[]'],
             'publisher' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'publisherImprint' => ['array', 'Organization', 'Organization[]'],
-            'publishingPrinciples' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'publishingPrinciples' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'recordedAt' => ['array', 'Event', 'Event[]'],
             'releasedEvent' => ['array', 'PublicationEvent', 'PublicationEvent[]'],
             'review' => ['array', 'Review', 'Review[]'],
@@ -187,16 +189,16 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'sameAs' => ['array', 'URL', 'URL[]'],
             'schemaVersion' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'sdDatePublished' => ['array', 'Date', 'Date[]'],
-            'sdLicense' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'sdLicense' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'sdPublisher' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
-            'size' => ['array', 'Text', 'Text[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'SizeSpecification', 'SizeSpecification[]'],
+            'size' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'SizeSpecification', 'SizeSpecification[]', 'array', 'Text', 'Text[]'],
             'sourceOrganization' => ['array', 'Organization', 'Organization[]'],
             'spatial' => ['array', 'Place', 'Place[]'],
             'spatialCoverage' => ['array', 'Place', 'Place[]'],
             'sponsor' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'surface' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'teaches' => ['array', 'Text', 'Text[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'teaches' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'temporal' => ['array', 'DateTime', 'DateTime[]', 'array', 'Text', 'Text[]'],
             'temporalCoverage' => ['array', 'DateTime', 'DateTime[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'text' => ['array', 'Text', 'Text[]'],
@@ -204,13 +206,15 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'thumbnailUrl' => ['array', 'URL', 'URL[]'],
             'timeRequired' => ['array', 'Duration', 'Duration[]'],
             'translationOfWork' => ['array', 'CreativeWork', 'CreativeWork[]'],
-            'translator' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'translator' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'typicalAgeRange' => ['array', 'Text', 'Text[]'],
             'url' => ['array', 'URL', 'URL[]'],
-            'usageInfo' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'usageInfo' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'version' => ['array', 'Number', 'Number[]', 'array', 'Text', 'Text[]'],
-            'video' => ['array', 'VideoObject', 'VideoObject[]', 'array', 'Clip', 'Clip[]'],
-            'width' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
+            'video' => ['array', 'Clip', 'Clip[]', 'array', 'VideoObject', 'VideoObject[]'],
+            'weight' => ['array', 'Mass', 'Mass[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'width' => ['array', 'Distance', 'Distance[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'wordCount' => ['array', 'Integer', 'Integer[]'],
             'workExample' => ['array', 'CreativeWork', 'CreativeWork[]'],
             'workTranslation' => ['array', 'CreativeWork', 'CreativeWork[]'],
         ];
@@ -223,10 +227,10 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
     public function getSchemaPropertyDescriptions(): array
     {
         return [
-            'about' => 'The subject matter of the content.',
+            'about' => 'The subject matter of an object.',
             'abstract' => 'An abstract is a short description that summarizes a [[CreativeWork]].',
-            'accessMode' => 'The human sensory perceptual system or cognitive faculty through which a person may process or perceive information. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessMode-vocabulary).',
-            'accessModeSufficient' => 'A list of single or combined accessModes that are sufficient to understand all the intellectual content of a resource. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessModeSufficient-vocabulary).',
+            'accessMode' => 'The human sensory perceptual system or cognitive faculty through which a person may process or perceive the intellectual content of a resource, not including any adaptations of the content (e.g., text alternatives for images). Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessMode-vocabulary).',
+            'accessModeSufficient' => 'A list of single or combined access modes that are sufficient to understand all the intellectual content of a resource, including any adaptations. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessModeSufficient-vocabulary).',
             'accessibilityAPI' => 'Indicates that the resource is compatible with the referenced accessibility API. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).',
             'accessibilityControl' => 'Identifies input methods that are sufficient to fully control the described resource. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).',
             'accessibilityFeature' => 'Content features of the resource, such as accessible media, alternatives and supported enhancements for accessibility. Values should be drawn from the [approved vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).',
@@ -277,6 +281,7 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'digitalSourceType' => 'Indicates an IPTCDigitalSourceEnumeration code indicating the nature of the digital source(s) for some [[CreativeWork]].',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'discussionUrl' => 'A link to the page containing the comments of the CreativeWork.',
+            'displayLocation' => 'The location at which an item can be viewed or experienced in-person.',
             'editEIDR' => 'An [EIDR](https://eidr.org/) (Entertainment Identifier Registry) [[identifier]] representing a specific edit / edition for a work of film or television.  For example, the motion picture known as "Ghostbusters" whose [[titleEIDR]] is "10.5240/7EC7-228A-510A-053E-CBB8-J" has several edits, e.g. "10.5240/1F2A-E1C5-680A-14C6-E76B-I" and "10.5240/8A35-3BEE-6497-5D12-9E4F-3".  Since schema.org types like [[Movie]] and [[TVEpisode]] can be used for both works and their multiple expressions, it is possible to use [[titleEIDR]] alone (for a general description), or alongside [[editEIDR]] for a more edit-specific description. ',
             'editor' => 'Specifies the Person who edited the CreativeWork.',
             'educationalAlignment' => 'An alignment to an established educational framework.  This property should not be used where the nature of the alignment can be described using a simple property, for example to express that a resource [[teaches]] or [[assesses]] a competency.',
@@ -319,6 +324,7 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'mentions' => 'Indicates that the CreativeWork contains a reference to, but is not necessarily about a concept.',
             'name' => 'The name of the item.',
             'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.       ',
+            'owner' => 'A person or organization who owns this Thing.',
             'pattern' => 'A pattern that something has, for example \'polka dot\', \'striped\', \'Canadian flag\'. Values are typically expressed as text, although links to controlled value schemes are also supported.',
             'penciler' => 'The individual who draws the primary narrative artwork.',
             'position' => 'The position of an item in a series or sequence of items.',
@@ -326,7 +332,7 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'producer' => 'The person or organization who produced the work (e.g. music album, movie, TV/radio series etc.).',
             'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',
             'publication' => 'A publication event associated with the item.',
-            'publisher' => 'The publisher of the creative work.',
+            'publisher' => 'The publisher of the article in question.',
             'publisherImprint' => 'The publishing division which published the comic.',
             'publishingPrinciples' => 'The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].  While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology. ',
             'recordedAt' => 'The Event where the CreativeWork was recorded. The CreativeWork may capture all or part of the event.',
@@ -359,7 +365,9 @@ class ComicCoverArt extends MetaJsonLd implements ComicCoverArtInterface, CoverA
             'usageInfo' => 'The schema.org [[usageInfo]] property indicates further information about a [[CreativeWork]]. This property is applicable both to works that are freely available and to those that require payment or other transactions. It can reference additional information, e.g. community expectations on preferred linking and citation conventions, as well as purchasing details. For something that can be commercially licensed, usageInfo can provide detailed, resource-specific information about licensing options.  This property can be used alongside the license property which indicates license(s) applicable to some piece of content. The usageInfo property can provide information about other licensing options, e.g. acquiring commercial usage rights for an image that is also available under non-commercial creative commons licenses.',
             'version' => 'The version of the CreativeWork embodied by a specified resource.',
             'video' => 'An embedded video object.',
+            'weight' => 'The weight of the product or person.',
             'width' => 'The width of the item.',
+            'wordCount' => 'The number of words in the text of the CreativeWork such as an Article, Book, etc.',
             'workExample' => 'Example/instance/realization/derivation of the concept of this creative work. E.g. the paperback edition, first edition, or e-book.',
             'workTranslation' => 'A work that is a translation of the content of this work. E.g. 西遊記 has an English workTranslation “Journey to the West”, a German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese  translation Tây du ký bình khảo.',
         ];

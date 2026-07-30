@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * FoodEstablishmentReservation - A reservation to dine at a food-related business.  Note: This type is for
  * information about actual reservations, e.g. in confirmation emails or HTML
  * pages with individual confirmations of reservations.
@@ -76,30 +76,31 @@ class FoodEstablishmentReservation extends MetaJsonLd implements FoodEstablishme
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'bookingAgent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'bookingAgent' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'bookingTime' => ['array', 'DateTime', 'DateTime[]'],
-            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'broker' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'endTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'endTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'modifiedTime' => ['array', 'DateTime', 'DateTime[]'],
             'name' => ['array', 'Text', 'Text[]'],
-            'partySize' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Integer', 'Integer[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'partySize' => ['array', 'Integer', 'Integer[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'priceCurrency' => ['array', 'Text', 'Text[]'],
             'programMembershipUsed' => ['array', 'ProgramMembership', 'ProgramMembership[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'reservationFor' => ['array', 'Thing', 'Thing[]'],
             'reservationId' => ['array', 'Text', 'Text[]'],
             'reservationStatus' => ['array', 'ReservationStatusType', 'ReservationStatusType[]'],
             'reservedTicket' => ['array', 'Ticket', 'Ticket[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'startTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'startTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'totalPrice' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'totalPrice' => ['array', 'Number', 'Number[]', 'array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]'],
             'underName' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
@@ -125,6 +126,7 @@ class FoodEstablishmentReservation extends MetaJsonLd implements FoodEstablishme
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'modifiedTime' => 'The date and time the reservation was modified.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'partySize' => 'Number of people the reservation should accommodate.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'priceCurrency' => 'The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".',

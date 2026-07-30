@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ParcelDelivery - The delivery of a parcel either via the postal service or a commercial
  * service.
  *
@@ -77,20 +77,21 @@ class ParcelDelivery extends MetaJsonLd implements ParcelDeliveryInterface, Inta
             'carrier' => ['array', 'Organization', 'Organization[]'],
             'deliveryAddress' => ['array', 'PostalAddress', 'PostalAddress[]'],
             'deliveryStatus' => ['array', 'DeliveryEvent', 'DeliveryEvent[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'expectedArrivalFrom' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'expectedArrivalUntil' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'hasDeliveryMethod' => ['array', 'DeliveryMethod', 'DeliveryMethod[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'itemShipped' => ['array', 'Product', 'Product[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'originAddress' => ['array', 'PostalAddress', 'PostalAddress[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'partOfOrder' => ['array', 'Order', 'Order[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'trackingNumber' => ['array', 'Text', 'Text[]'],
@@ -122,6 +123,7 @@ class ParcelDelivery extends MetaJsonLd implements ParcelDeliveryInterface, Inta
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
             'originAddress' => 'Shipper\'s address.',
+            'owner' => 'A person or organization who owns this Thing.',
             'partOfOrder' => 'The overall order the items in this delivery were included in.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',

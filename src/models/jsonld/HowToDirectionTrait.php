@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for HowToDirection.
  *
  * @author    nystudio107
@@ -30,13 +30,12 @@ trait HowToDirectionTrait
     public $afterMedia;
 
     /**
-     * The length of time it takes to perform instructions or a direction (not
-     * including time to prepare the supplies), in [ISO 8601 duration
-     * format](http://en.wikipedia.org/wiki/ISO_8601).
+     * A media object representing the circumstances before performing this
+     * direction.
      *
-     * @var array|Duration|Duration[]
+     * @var array|MediaObject|MediaObject[]|array|URL|URL[]
      */
-    public $performTime;
+    public $beforeMedia;
 
     /**
      * A media object representing the circumstances while performing this
@@ -47,12 +46,13 @@ trait HowToDirectionTrait
     public $duringMedia;
 
     /**
-     * A media object representing the circumstances before performing this
-     * direction.
+     * The length of time it takes to perform instructions or a direction (not
+     * including time to prepare the supplies), in [ISO 8601 duration
+     * format](http://en.wikipedia.org/wiki/ISO_8601).
      *
-     * @var array|MediaObject|MediaObject[]|array|URL|URL[]
+     * @var array|Duration|Duration[]
      */
-    public $beforeMedia;
+    public $performTime;
 
     /**
      * The length of time it takes to prepare the items to be used in instructions
@@ -64,13 +64,12 @@ trait HowToDirectionTrait
     public $prepTime;
 
     /**
-     * The total time required to perform instructions or a direction (including
-     * time to prepare the supplies), in [ISO 8601 duration
-     * format](http://en.wikipedia.org/wiki/ISO_8601).
+     * A sub-property of instrument. A supply consumed when performing
+     * instructions or a direction.
      *
-     * @var array|Duration|Duration[]
+     * @var string|array|HowToSupply|HowToSupply[]|array|Text|Text[]
      */
-    public $totalTime;
+    public $supply;
 
     /**
      * A sub property of instrument. An object used (but not consumed) when
@@ -81,10 +80,11 @@ trait HowToDirectionTrait
     public $tool;
 
     /**
-     * A sub-property of instrument. A supply consumed when performing
-     * instructions or a direction.
+     * The total time required to perform instructions or a direction (including
+     * time to prepare the supplies), in [ISO 8601 duration
+     * format](http://en.wikipedia.org/wiki/ISO_8601).
      *
-     * @var string|array|Text|Text[]|array|HowToSupply|HowToSupply[]
+     * @var array|Duration|Duration[]
      */
-    public $supply;
+    public $totalTime;
 }

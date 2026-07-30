@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalWebPage.
  *
  * @author    nystudio107
@@ -33,7 +33,7 @@ trait MedicalWebPageTrait
     /**
      * Medical audience for page.
      *
-     * @var array|MedicalAudienceType|MedicalAudienceType[]|array|MedicalAudience|MedicalAudience[]
+     * @var array|MedicalAudience|MedicalAudience[]|array|MedicalAudienceType|MedicalAudienceType[]
      */
     public $medicalAudience;
 }

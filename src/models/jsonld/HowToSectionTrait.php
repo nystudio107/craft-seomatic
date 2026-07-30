@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for HowToSection.
  *
  * @author    nystudio107
@@ -25,7 +25,7 @@ trait HowToSectionTrait
      * A single step item (as HowToStep, text, document, video, etc.) or a
      * HowToSection (originally misnamed 'steps'; 'step' is preferred).
      *
-     * @var string|array|Text|Text[]|array|CreativeWork|CreativeWork[]|array|ItemList|ItemList[]
+     * @var string|array|CreativeWork|CreativeWork[]|array|ItemList|ItemList[]|array|Text|Text[]
      */
     public $steps;
 }

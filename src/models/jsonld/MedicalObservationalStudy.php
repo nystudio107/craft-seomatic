@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * MedicalObservationalStudy - An observational study is a type of medical study that attempts to infer
  * the possible effect of a treatment through observation of a cohort of
  * subjects over a period of time. In an observational study, the assignment
@@ -82,23 +82,24 @@ class MedicalObservationalStudy extends MetaJsonLd implements MedicalObservation
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
             'healthCondition' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'legalStatus' => ['array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
             'relevantSpecialty' => ['array', 'MedicalSpecialty', 'MedicalSpecialty[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'sponsor' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
-            'status' => ['array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'EventStatusType', 'EventStatusType[]', 'array', 'Text', 'Text[]'],
+            'status' => ['array', 'EventStatusType', 'EventStatusType[]', 'array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'Text', 'Text[]'],
             'study' => ['array', 'MedicalStudy', 'MedicalStudy[]'],
             'studyDesign' => ['array', 'MedicalObservationalStudyDesign', 'MedicalObservationalStudyDesign[]'],
             'studyLocation' => ['array', 'AdministrativeArea', 'AdministrativeArea[]'],
@@ -129,6 +130,7 @@ class MedicalObservationalStudy extends MetaJsonLd implements MedicalObservation
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'recognizingAuthority' => 'If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.',
             'relevantSpecialty' => 'If applicable, a medical specialty in which this entity is relevant.',

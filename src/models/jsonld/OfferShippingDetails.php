@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * OfferShippingDetails - OfferShippingDetails represents information about shipping destinations.
  * Multiple of these entities can be used to represent different shipping
  * rates for different destinations:  One entity for Alaska/Hawaii. A
@@ -82,27 +82,27 @@ class OfferShippingDetails extends MetaJsonLd implements OfferShippingDetailsInt
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'deliveryTime' => ['array', 'ShippingDeliveryTime', 'ShippingDeliveryTime[]'],
-            'depth' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'depth' => ['array', 'Distance', 'Distance[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'doesNotShip' => ['array', 'Boolean', 'Boolean[]'],
-            'height' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'hasShippingService' => ['array', 'ShippingService', 'ShippingService[]'],
+            'height' => ['array', 'Distance', 'Distance[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'shippingDestination' => ['array', 'DefinedRegion', 'DefinedRegion[]'],
-            'shippingLabel' => ['array', 'Text', 'Text[]'],
             'shippingOrigin' => ['array', 'DefinedRegion', 'DefinedRegion[]'],
-            'shippingRate' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
-            'shippingSettingsLink' => ['array', 'URL', 'URL[]'],
+            'shippingRate' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'ShippingRateSettings', 'ShippingRateSettings[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'transitTimeLabel' => ['array', 'Text', 'Text[]'],
             'url' => ['array', 'URL', 'URL[]'],
-            'weight' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
-            'width' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
+            'validForMemberTier' => ['array', 'MemberProgramTier', 'MemberProgramTier[]'],
+            'weight' => ['array', 'Mass', 'Mass[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'width' => ['array', 'Distance', 'Distance[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
         ];
     }
 
@@ -120,21 +120,21 @@ class OfferShippingDetails extends MetaJsonLd implements OfferShippingDetailsInt
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'doesNotShip' => 'Indicates when shipping to a particular [[shippingDestination]] is not available.',
+            'hasShippingService' => 'Specification of a shipping service offered by the organization.',
             'height' => 'The height of the item.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'shippingDestination' => 'indicates (possibly multiple) shipping destinations. These can be defined in several ways, e.g. postalCode ranges.',
-            'shippingLabel' => 'Label to match an [[OfferShippingDetails]] with a [[ShippingRateSettings]] (within the context of a [[shippingSettingsLink]] cross-reference).',
             'shippingOrigin' => 'Indicates the origin of a shipment, i.e. where it should be coming from.',
             'shippingRate' => 'The shipping rate is the cost of shipping to the specified destination. Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are most appropriate.',
-            'shippingSettingsLink' => 'Link to a page containing [[ShippingRateSettings]] and [[DeliveryTimeSettings]] details.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
-            'transitTimeLabel' => 'Label to match an [[OfferShippingDetails]] with a [[DeliveryTimeSettings]] (within the context of a [[shippingSettingsLink]] cross-reference).',
             'url' => 'URL of the item.',
+            'validForMemberTier' => 'The membership program tier(s) an Offer (or a PriceSpecification, OfferShippingDetails, or MerchantReturnPolicy under an Offer) is valid for.',
             'weight' => 'The weight of the product or person.',
             'width' => 'The width of the item.',
         ];

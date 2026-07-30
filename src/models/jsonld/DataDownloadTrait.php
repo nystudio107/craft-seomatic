@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DataDownload.
  *
  * @author    nystudio107
@@ -21,6 +21,14 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait DataDownloadTrait
 {
+    /**
+     * A subproperty of [[measurementTechnique]] that can be used for specifying
+     * specific methods, in particular via [[MeasurementMethodEnum]].
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $measurementMethod;
+
     /**
      * A technique, method or technology used in an [[Observation]],
      * [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]],
@@ -44,17 +52,9 @@ trait DataDownloadTrait
      * are several [[variableMeasured]] properties recorded for some given data
      * object, use a [[PropertyValue]] for each [[variableMeasured]] and attach
      * the corresponding [[measurementTechnique]]. The value can also be from an
-     * enumeration, organized as a [[MeasurementMetholdEnumeration]].
+     * enumeration, organized as a [[MeasurementMethodEnum]].
      *
      * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
      */
     public $measurementTechnique;
-
-    /**
-     * A subproperty of [[measurementTechnique]] that can be used for specifying
-     * specific methods, in particular via [[MeasurementMethodEnum]].
-     *
-     * @var string|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]
-     */
-    public $measurementMethod;
 }

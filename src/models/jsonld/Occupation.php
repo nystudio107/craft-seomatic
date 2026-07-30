@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Occupation - A profession, may involve prolonged training and/or a formal qualification.
  *
  * @author    nystudio107
@@ -73,19 +73,20 @@ class Occupation extends MetaJsonLd implements OccupationInterface, IntangibleIn
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'educationRequirements' => ['array', 'Text', 'Text[]', 'array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]'],
-            'estimatedSalary' => ['array', 'MonetaryAmountDistribution', 'MonetaryAmountDistribution[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
-            'experienceRequirements' => ['array', 'Text', 'Text[]', 'array', 'OccupationalExperienceRequirements', 'OccupationalExperienceRequirements[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'educationRequirements' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]'],
+            'estimatedSalary' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'MonetaryAmountDistribution', 'MonetaryAmountDistribution[]', 'array', 'Number', 'Number[]'],
+            'experienceRequirements' => ['array', 'OccupationalExperienceRequirements', 'OccupationalExperienceRequirements[]', 'array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'occupationLocation' => ['array', 'AdministrativeArea', 'AdministrativeArea[]'],
-            'occupationalCategory' => ['array', 'Text', 'Text[]', 'array', 'CategoryCode', 'CategoryCode[]'],
+            'occupationalCategory' => ['array', 'CategoryCode', 'CategoryCode[]', 'array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'qualifications' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]'],
+            'qualifications' => ['array', 'Credential', 'Credential[]', 'array', 'Text', 'Text[]'],
             'responsibilities' => ['array', 'Text', 'Text[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'skills' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
@@ -114,11 +115,12 @@ class Occupation extends MetaJsonLd implements OccupationInterface, IntangibleIn
             'name' => 'The name of the item.',
             'occupationLocation' => ' The region/country for which this occupational description is appropriate. Note that educational requirements and qualifications can vary between jurisdictions.',
             'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html), [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.  Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'qualifications' => 'Specific qualifications required for this role or Occupation.',
             'responsibilities' => 'Responsibilities associated with this role or Occupation.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
-            'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is desired or required to fulfill this role or to work in this occupation.',
+            'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
             'url' => 'URL of the item.',
         ];

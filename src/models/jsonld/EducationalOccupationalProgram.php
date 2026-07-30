@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * EducationalOccupationalProgram - A program offered by an institution which determines the learning progress
  * to achieve an outcome, usually a credential like a degree or certificate.
  * This would define a discrete set of opportunities (e.g., job, courses) that
@@ -78,29 +78,30 @@ class EducationalOccupationalProgram extends MetaJsonLd implements EducationalOc
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'applicationDeadline' => ['array', 'Date', 'Date[]'],
+            'applicationDeadline' => ['array', 'Date', 'Date[]', 'array', 'Text', 'Text[]'],
             'applicationStartDate' => ['array', 'Date', 'Date[]'],
             'dayOfWeek' => ['array', 'DayOfWeek', 'DayOfWeek[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'educationalCredentialAwarded' => ['array', 'URL', 'URL[]', 'array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]'],
+            'educationalCredentialAwarded' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'educationalProgramMode' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'endDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'financialAidEligible' => ['array', 'Text', 'Text[]', 'array', 'DefinedTerm', 'DefinedTerm[]'],
+            'financialAidEligible' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'hasCourse' => ['array', 'Course', 'Course[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'maximumEnrollment' => ['array', 'Integer', 'Integer[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'numberOfCredits' => ['array', 'Integer', 'Integer[]', 'array', 'StructuredValue', 'StructuredValue[]'],
-            'occupationalCategory' => ['array', 'Text', 'Text[]', 'array', 'CategoryCode', 'CategoryCode[]'],
+            'occupationalCategory' => ['array', 'CategoryCode', 'CategoryCode[]', 'array', 'Text', 'Text[]'],
             'occupationalCredentialAwarded' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'programPrerequisites' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Course', 'Course[]', 'array', 'AlignmentObject', 'AlignmentObject[]', 'array', 'Text', 'Text[]'],
+            'programPrerequisites' => ['array', 'AlignmentObject', 'AlignmentObject[]', 'array', 'Course', 'Course[]', 'array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]', 'array', 'Text', 'Text[]'],
             'programType' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'salaryUponCompletion' => ['array', 'MonetaryAmountDistribution', 'MonetaryAmountDistribution[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'startDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
@@ -124,7 +125,7 @@ class EducationalOccupationalProgram extends MetaJsonLd implements EducationalOc
         return [
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
-            'applicationDeadline' => 'The date at which the program stops collecting applications for the next enrollment cycle.',
+            'applicationDeadline' => 'The date on which the program stops collecting applications for the next enrollment cycle. Flexible application deadlines (for example, a program with rolling admissions) can be described in a textual string, rather than as a DateTime.',
             'applicationStartDate' => 'The date at which the program begins collecting applications for the next enrollment cycle.',
             'dayOfWeek' => 'The day of the week for which these opening hours are valid.',
             'description' => 'A description of the item.',
@@ -143,6 +144,7 @@ class EducationalOccupationalProgram extends MetaJsonLd implements EducationalOc
             'occupationalCategory' => 'A category describing the job, preferably using a term from a taxonomy such as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html), [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or similar, with the property repeated for each applicable value. Ideally the taxonomy should be identified, and both the textual label and formal code for the category should be provided.  Note: for historical reasons, any textual label and formal code provided as a literal may be assumed to be from O*NET-SOC.',
             'occupationalCredentialAwarded' => 'A description of the qualification, award, certificate, diploma or other occupational credential awarded as a consequence of successful completion of this course or program.',
             'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.       ',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'programPrerequisites' => 'Prerequisites for enrolling in the program.',
             'programType' => 'The type of educational or occupational program. For example, classroom, internship, alternance, etc.',

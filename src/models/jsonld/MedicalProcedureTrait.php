@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalProcedure.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MedicalProcedureTrait
 {
     /**
-     * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
+     * Location in the body of the anatomical structure.
      *
-     * @var array|MedicalProcedureType|MedicalProcedureType[]
+     * @var string|array|Text|Text[]
      */
-    public $procedureType;
+    public $bodyLocation;
 
     /**
      * Typical or recommended followup care after the procedure is performed.
@@ -36,25 +36,11 @@ trait MedicalProcedureTrait
     public $followup;
 
     /**
-     * The status of the study (enumerated).
-     *
-     * @var string|array|MedicalStudyStatus|MedicalStudyStatus[]|array|EventStatusType|EventStatusType[]|array|Text|Text[]
-     */
-    public $status;
-
-    /**
      * How the procedure is performed.
      *
      * @var string|array|Text|Text[]
      */
     public $howPerformed;
-
-    /**
-     * Location in the body of the anatomical structure.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $bodyLocation;
 
     /**
      * Typical preparation that a patient must undergo before having the procedure
@@ -63,4 +49,18 @@ trait MedicalProcedureTrait
      * @var string|array|MedicalEntity|MedicalEntity[]|array|Text|Text[]
      */
     public $preparation;
+
+    /**
+     * The type of procedure, for example Surgical, Noninvasive, or Percutaneous.
+     *
+     * @var array|MedicalProcedureType|MedicalProcedureType[]
+     */
+    public $procedureType;
+
+    /**
+     * The status of the study (enumerated).
+     *
+     * @var string|array|EventStatusType|EventStatusType[]|array|MedicalStudyStatus|MedicalStudyStatus[]|array|Text|Text[]
+     */
+    public $status;
 }

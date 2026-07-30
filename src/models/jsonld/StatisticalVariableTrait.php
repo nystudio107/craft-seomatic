@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for StatisticalVariable.
  *
  * @author    nystudio107
@@ -21,14 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait StatisticalVariableTrait
 {
-    /**
-     * Identifies the denominator variable when an observation represents a ratio
-     * or percentage.
-     *
-     * @var array|StatisticalVariable|StatisticalVariable[]
-     */
-    public $measurementDenominator;
-
     /**
      * The measuredProperty of an [[Observation]], typically via its
      * [[StatisticalVariable]]. There are various kinds of applicable
@@ -39,6 +31,30 @@ trait StatisticalVariableTrait
      * @var array|Property|Property[]
      */
     public $measuredProperty;
+
+    /**
+     * Identifies the denominator variable when an observation represents a ratio
+     * or percentage.
+     *
+     * @var array|StatisticalVariable|StatisticalVariable[]
+     */
+    public $measurementDenominator;
+
+    /**
+     * A subproperty of [[measurementTechnique]] that can be used for specifying
+     * specific methods, in particular via [[MeasurementMethodEnum]].
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $measurementMethod;
+
+    /**
+     * Provides additional qualification to an observation. For example, a GDP
+     * observation measures the Nominal value.
+     *
+     * @var array|Enumeration|Enumeration[]
+     */
+    public $measurementQualifier;
 
     /**
      * A technique, method or technology used in an [[Observation]],
@@ -63,38 +79,11 @@ trait StatisticalVariableTrait
      * are several [[variableMeasured]] properties recorded for some given data
      * object, use a [[PropertyValue]] for each [[variableMeasured]] and attach
      * the corresponding [[measurementTechnique]]. The value can also be from an
-     * enumeration, organized as a [[MeasurementMetholdEnumeration]].
+     * enumeration, organized as a [[MeasurementMethodEnum]].
      *
      * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
      */
     public $measurementTechnique;
-
-    /**
-     * Indicates the kind of statistic represented by a [[StatisticalVariable]],
-     * e.g. mean, count etc. The value of statType is a property, either from
-     * within Schema.org (e.g. [[count]], [[median]], [[marginOfError]],
-     * [[maxValue]], [[minValue]]) or from other compatible (e.g. RDF) systems
-     * such as DataCommons.org or Wikidata.org.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|Property|Property[]
-     */
-    public $statType;
-
-    /**
-     * Provides additional qualification to an observation. For example, a GDP
-     * observation measures the Nominal value.
-     *
-     * @var array|Enumeration|Enumeration[]
-     */
-    public $measurementQualifier;
-
-    /**
-     * A subproperty of [[measurementTechnique]] that can be used for specifying
-     * specific methods, in particular via [[MeasurementMethodEnum]].
-     *
-     * @var string|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]
-     */
-    public $measurementMethod;
 
     /**
      * Indicates the populationType common to all members of a
@@ -104,4 +93,15 @@ trait StatisticalVariableTrait
      * @var array|SchemaClass|SchemaClass[]
      */
     public $populationType;
+
+    /**
+     * Indicates the kind of statistic represented by a [[StatisticalVariable]],
+     * e.g. mean, count etc. The value of statType is a property, either from
+     * within Schema.org (e.g. [[median]], [[marginOfError]], [[maxValue]],
+     * [[minValue]]) or from other compatible (e.g. RDF) systems such as
+     * DataCommons.org or Wikidata.org.
+     *
+     * @var string|array|Property|Property[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $statType;
 }

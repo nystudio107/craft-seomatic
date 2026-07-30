@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ListItem.
  *
  * @author    nystudio107
@@ -22,13 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ListItemTrait
 {
     /**
-     * A link to the ListItem that follows the current one.
-     *
-     * @var array|ListItem|ListItem[]
-     */
-    public $nextItem;
-
-    /**
      * An entity represented by an entry in a list or data feed (e.g. an 'artist'
      * in a list of 'artists').
      *
@@ -37,11 +30,11 @@ trait ListItemTrait
     public $item;
 
     /**
-     * A link to the ListItem that precedes the current one.
+     * A link to the ListItem that follows the current one.
      *
      * @var array|ListItem|ListItem[]
      */
-    public $previousItem;
+    public $nextItem;
 
     /**
      * The position of an item in a series or sequence of items.
@@ -49,4 +42,11 @@ trait ListItemTrait
      * @var int|string|array|Integer|Integer[]|array|Text|Text[]
      */
     public $position;
+
+    /**
+     * A link to the ListItem that precedes the current one.
+     *
+     * @var array|ListItem|ListItem[]
+     */
+    public $previousItem;
 }

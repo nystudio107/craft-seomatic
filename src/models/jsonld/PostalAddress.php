@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * PostalAddress - The mailing address.
  *
  * @author    nystudio107
@@ -76,25 +76,27 @@ class PostalAddress extends MetaJsonLd implements PostalAddressInterface, Contac
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'addressCountry' => ['array', 'Country', 'Country[]', 'array', 'Text', 'Text[]'],
             'addressLocality' => ['array', 'Text', 'Text[]'],
-            'addressRegion' => ['array', 'Text', 'Text[]'],
+            'addressRegion' => ['array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'Text', 'Text[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'areaServed' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]'],
+            'areaServed' => ['array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]', 'array', 'Place', 'Place[]', 'array', 'Text', 'Text[]'],
             'availableLanguage' => ['array', 'Language', 'Language[]', 'array', 'Text', 'Text[]'],
             'contactOption' => ['array', 'ContactPointOption', 'ContactPointOption[]'],
             'contactType' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'email' => ['array', 'Text', 'Text[]'],
+            'extendedAddress' => ['array', 'Text', 'Text[]'],
             'faxNumber' => ['array', 'Text', 'Text[]'],
             'hoursAvailable' => ['array', 'OpeningHoursSpecification', 'OpeningHoursSpecification[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'postOfficeBoxNumber' => ['array', 'Text', 'Text[]'],
             'postalCode' => ['array', 'Text', 'Text[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'productSupported' => ['array', 'Text', 'Text[]', 'array', 'Product', 'Product[]'],
+            'productSupported' => ['array', 'Product', 'Product[]', 'array', 'Text', 'Text[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'serviceArea' => ['array', 'AdministrativeArea', 'AdministrativeArea[]', 'array', 'GeoShape', 'GeoShape[]', 'array', 'Place', 'Place[]'],
             'streetAddress' => ['array', 'Text', 'Text[]'],
@@ -112,9 +114,9 @@ class PostalAddress extends MetaJsonLd implements PostalAddressInterface, Contac
     {
         return [
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
-            'addressCountry' => 'The country. For example, USA. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1).',
+            'addressCountry' => 'The country. Recommended to be in 2-letter [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1) format, for example "US". For backward compatibility, a 3-letter [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code such as "SGP" or a full country name such as "Singapore" can also be used.',
             'addressLocality' => 'The locality in which the street address is, and which is in the region. For example, Mountain View.',
-            'addressRegion' => 'The region in which the locality is, and which is in the country. For example, California or another appropriate first-level [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country).',
+            'addressRegion' => 'The region in which the locality is, and which is in the country. For example, California or another appropriate first-level [Administrative division](https://en.wikipedia.org/wiki/List_of_administrative_divisions_by_country) such as the Province in Italy or Region in Germany.',
             'alternateName' => 'An alias for the item.',
             'areaServed' => 'The geographic area where a service or offered item is provided.',
             'availableLanguage' => 'A language someone may use with or at the item, service or place. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47). See also [[inLanguage]].',
@@ -123,12 +125,14 @@ class PostalAddress extends MetaJsonLd implements PostalAddressInterface, Contac
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'email' => 'Email address.',
+            'extendedAddress' => 'An address extension such as an apartment number, C/O or alternative name.',
             'faxNumber' => 'The fax number.',
             'hoursAvailable' => 'The hours during which this service or contact is available.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'postOfficeBoxNumber' => 'The post office box number for PO box addresses.',
             'postalCode' => 'The postal code. For example, 94043.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',

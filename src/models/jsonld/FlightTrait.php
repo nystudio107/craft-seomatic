@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Flight.
  *
  * @author    nystudio107
@@ -22,25 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait FlightTrait
 {
     /**
+     * The kind of aircraft (e.g., "Boeing 747").
+     *
+     * @var string|array|Text|Text[]|array|Vehicle|Vehicle[]
+     */
+    public $aircraft;
+
+    /**
      * The airport where the flight terminates.
      *
      * @var array|Airport|Airport[]
      */
     public $arrivalAirport;
-
-    /**
-     * Description of the meals that will be provided or available for purchase.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $mealService;
-
-    /**
-     * The kind of aircraft (e.g., "Boeing 747").
-     *
-     * @var string|array|Vehicle|Vehicle[]|array|Text|Text[]
-     */
-    public $aircraft;
 
     /**
      * Identifier of the flight's arrival gate.
@@ -50,32 +43,11 @@ trait FlightTrait
     public $arrivalGate;
 
     /**
-     * The time when a passenger can check into the flight online.
-     *
-     * @var array|DateTime|DateTime[]
-     */
-    public $webCheckinTime;
-
-    /**
      * Identifier of the flight's arrival terminal.
      *
      * @var string|array|Text|Text[]
      */
     public $arrivalTerminal;
-
-    /**
-     * The estimated time the flight will take.
-     *
-     * @var string|array|Duration|Duration[]|array|Text|Text[]
-     */
-    public $estimatedFlightDuration;
-
-    /**
-     * Identifier of the flight's departure terminal.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $departureTerminal;
 
     /**
      * The type of boarding policy used by the airline (e.g. zone-based or
@@ -86,34 +58,12 @@ trait FlightTrait
     public $boardingPolicy;
 
     /**
-     * Identifier of the flight's departure gate.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $departureGate;
-
-    /**
-     * An entity which offers (sells / leases / lends / loans) the services /
-     * goods.  A seller may also be a provider.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $seller;
-
-    /**
      * 'carrier' is an out-dated term indicating the 'provider' for parcel
      * delivery and flights.
      *
      * @var array|Organization|Organization[]
      */
     public $carrier;
-
-    /**
-     * The distance of the flight.
-     *
-     * @var string|array|Distance|Distance[]|array|Text|Text[]
-     */
-    public $flightDistance;
 
     /**
      * The airport where the flight originates.
@@ -123,6 +73,34 @@ trait FlightTrait
     public $departureAirport;
 
     /**
+     * Identifier of the flight's departure gate.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $departureGate;
+
+    /**
+     * Identifier of the flight's departure terminal.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $departureTerminal;
+
+    /**
+     * The estimated time the flight will take.
+     *
+     * @var string|array|Duration|Duration[]|array|Text|Text[]
+     */
+    public $estimatedFlightDuration;
+
+    /**
+     * The distance of the flight.
+     *
+     * @var string|array|Distance|Distance[]|array|Text|Text[]
+     */
+    public $flightDistance;
+
+    /**
      * The unique identifier for a flight including the airline IATA code. For
      * example, if describing United flight 110, where the IATA code for United is
      * 'UA', the flightNumber is 'UA110'.
@@ -130,4 +108,26 @@ trait FlightTrait
      * @var string|array|Text|Text[]
      */
     public $flightNumber;
+
+    /**
+     * Description of the meals that will be provided or available for purchase.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $mealService;
+
+    /**
+     * An entity which offers (sells / leases / lends / loans) the services /
+     * goods.  A seller may also be a provider.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $seller;
+
+    /**
+     * The time when a passenger can check into the flight online.
+     *
+     * @var array|DateTime|DateTime[]
+     */
+    public $webCheckinTime;
 }

@@ -1,5 +1,19 @@
 # SEOmatic Changelog
 
+## 5.1.22 - 2026.07.30
+### Added
+* Updated to schema.org version: `v30.0` for the JSON-LD objects([#1737](https://github.com/nystudio107/craft-seomatic/issues/1737))
+* Added a "none" option to the local business price range, which will cause `priceRange` to be omitted if selected ([#1752](https://github.com/nystudio107/craft-seomatic/issues/1752))
+
+### Changed
+* Ensure that sitemap URLs are properly RFC-3986 encoded for legacy crawlers ([#1673](https://github.com/nystudio107/craft-seomatic/issues/1673))
+* Update the schema logo image transform to a more modern 600x600 pixel, with a "fit" to keep the logo dimensions correct ([#1736](https://github.com/nystudio107/craft-seomatic/issues/1736)) ([#1372](https://github.com/nystudio107/craft-seomatic/issues/1372))
+
+### Fixed
+* Fixed an issue where sitemaps excluded entries with robots or canonical SEO Settings field override values ([#1724](https://github.com/nystudio107/craft-seomatic/issues/1724))
+* Fix a potential stale cache of sitemaps in a very specific set of circumstances by switching back to `Elements::EVENT_AFTER_SAVE_ELEMENT` from `Element::EVENT_AFTER_PROPAGATE` ([#1725](https://github.com/nystudio107/craft-seomatic/issues/1725))
+* Properly check whether an entity implements `LocalBusinessInterface` to ensure that `operatingHours` works as expected for all entity sub-types ([#1752](https://github.com/nystudio107/craft-seomatic/issues/1752))
+
 ## 5.1.21 - 2026.03.13
 ### Fixed
 * Restored eager loading functionality of assets to the sitemaps

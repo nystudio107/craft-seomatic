@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ParentAudience.
  *
  * @author    nystudio107
@@ -22,16 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ParentAudienceTrait
 {
     /**
-     * Minimal age of the child.
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $childMinAge;
-
-    /**
      * Maximal age of the child.
      *
      * @var float|array|Number|Number[]
      */
     public $childMaxAge;
+
+    /**
+     * Minimal age of the child.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $childMinAge;
 }

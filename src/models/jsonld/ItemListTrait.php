@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ItemList.
  *
  * @author    nystudio107
@@ -21,6 +21,14 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait ItemListTrait
 {
+    /**
+     * Indicates a prototype of the elements in the list that is used to hold
+     * aggregate information (ratings, offers, etc.).
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $aggregateElement;
+
     /**
      * For itemListElement values, you can use simple strings (e.g. "Peter",
      * "Paul", "Mary"), existing entities, or use ListItem.  Text values are best
@@ -32,7 +40,7 @@ trait ItemListTrait
      * sufficient for indicating the order or elements.  Use ListItem with a
      * 'position' property in such cases.
      *
-     * @var string|array|Text|Text[]|array|Thing|Thing[]|array|ListItem|ListItem[]
+     * @var string|array|ListItem|ListItem[]|array|Text|Text[]|array|Thing|Thing[]
      */
     public $itemListElement;
 

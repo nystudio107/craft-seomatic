@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * BloodTest - A medical test performed on a sample of a patient's blood.
  *
  * @author    nystudio107
@@ -76,17 +76,18 @@ class BloodTest extends MetaJsonLd implements BloodTestInterface, MedicalTestInt
             'affectedBy' => ['array', 'Drug', 'Drug[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'legalStatus' => ['array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'normalRange' => ['array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
             'relevantSpecialty' => ['array', 'MedicalSpecialty', 'MedicalSpecialty[]'],
@@ -122,6 +123,7 @@ class BloodTest extends MetaJsonLd implements BloodTestInterface, MedicalTestInt
             'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
             'name' => 'The name of the item.',
             'normalRange' => 'Range of acceptable values for a typical patient, when applicable.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'recognizingAuthority' => 'If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.',
             'relevantSpecialty' => 'If applicable, a medical specialty in which this entity is relevant.',

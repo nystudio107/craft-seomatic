@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BroadcastFrequencySpecification.
  *
  * @author    nystudio107
@@ -24,14 +24,14 @@ trait BroadcastFrequencySpecificationTrait
     /**
      * The frequency in MHz for a particular broadcast.
      *
-     * @var float|array|QuantitativeValue|QuantitativeValue[]|array|Number|Number[]
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $broadcastFrequencyValue;
 
     /**
      * The modulation (e.g. FM, AM, etc) used by a particular broadcast service.
      *
-     * @var string|array|Text|Text[]|array|QualitativeValue|QualitativeValue[]
+     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]
      */
     public $broadcastSignalModulation;
 

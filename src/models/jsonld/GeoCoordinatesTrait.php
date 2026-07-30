@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for GeoCoordinates.
  *
  * @author    nystudio107
@@ -22,23 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait GeoCoordinatesTrait
 {
     /**
-     * The postal code. For example, 94043.
+     * Physical address of the item.
      *
-     * @var string|array|Text|Text[]
+     * @var string|array|PostalAddress|PostalAddress[]|array|Text|Text[]
      */
-    public $postalCode;
+    public $address;
 
     /**
-     * The longitude of a location. For example ```-122.08585``` ([WGS
-     * 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-     *
-     * @var float|string|array|Number|Number[]|array|Text|Text[]
-     */
-    public $longitude;
-
-    /**
-     * The country. For example, USA. You can also provide the two-letter [ISO
-     * 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1).
+     * The country. Recommended to be in 2-letter [ISO 3166-1
+     * alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1) format, for example "US".
+     * For backward compatibility, a 3-letter [ISO 3166-1
+     * alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code
+     * such as "SGP" or a full country name such as "Singapore" can also be used.
      *
      * @var string|array|Country|Country[]|array|Text|Text[]
      */
@@ -50,7 +45,7 @@ trait GeoCoordinatesTrait
      * the form 'NUMBER UNIT\_OF\_MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while
      * numbers alone should be assumed to be a value in meters.
      *
-     * @var string|float|array|Text|Text[]|array|Number|Number[]
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
      */
     public $elevation;
 
@@ -58,14 +53,22 @@ trait GeoCoordinatesTrait
      * The latitude of a location. For example ```37.42242``` ([WGS
      * 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
      *
-     * @var string|float|array|Text|Text[]|array|Number|Number[]
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
      */
     public $latitude;
 
     /**
-     * Physical address of the item.
+     * The longitude of a location. For example ```-122.08585``` ([WGS
+     * 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
      *
-     * @var string|array|Text|Text[]|array|PostalAddress|PostalAddress[]
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
      */
-    public $address;
+    public $longitude;
+
+    /**
+     * The postal code. For example, 94043.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $postalCode;
 }

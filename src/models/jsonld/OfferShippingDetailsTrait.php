@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for OfferShippingDetails.
  *
  * @author    nystudio107
@@ -22,50 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait OfferShippingDetailsTrait
 {
     /**
-     * The width of the item.
+     * The total delay between the receipt of the order and the goods reaching the
+     * final customer.
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]|array|Distance|Distance[]
+     * @var array|ShippingDeliveryTime|ShippingDeliveryTime[]
      */
-    public $width;
+    public $deliveryTime;
 
     /**
-     * Label to match an [[OfferShippingDetails]] with a [[ShippingRateSettings]]
-     * (within the context of a [[shippingSettingsLink]] cross-reference).
+     * The depth of the item.
      *
-     * @var string|array|Text|Text[]
+     * @var array|Distance|Distance[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $shippingLabel;
-
-    /**
-     * The shipping rate is the cost of shipping to the specified destination.
-     * Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are
-     * most appropriate.
-     *
-     * @var array|MonetaryAmount|MonetaryAmount[]
-     */
-    public $shippingRate;
-
-    /**
-     * Link to a page containing [[ShippingRateSettings]] and
-     * [[DeliveryTimeSettings]] details.
-     *
-     * @var array|URL|URL[]
-     */
-    public $shippingSettingsLink;
-
-    /**
-     * The height of the item.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]|array|Distance|Distance[]
-     */
-    public $height;
-
-    /**
-     * Indicates the origin of a shipment, i.e. where it should be coming from.
-     *
-     * @var array|DefinedRegion|DefinedRegion[]
-     */
-    public $shippingOrigin;
+    public $depth;
 
     /**
      * Indicates when shipping to a particular [[shippingDestination]] is not
@@ -76,26 +45,18 @@ trait OfferShippingDetailsTrait
     public $doesNotShip;
 
     /**
-     * The total delay between the receipt of the order and the goods reaching the
-     * final customer.
+     * Specification of a shipping service offered by the organization.
      *
-     * @var array|ShippingDeliveryTime|ShippingDeliveryTime[]
+     * @var array|ShippingService|ShippingService[]
      */
-    public $deliveryTime;
+    public $hasShippingService;
 
     /**
-     * The weight of the product or person.
+     * The height of the item.
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]
+     * @var array|Distance|Distance[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $weight;
-
-    /**
-     * The depth of the item.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]|array|Distance|Distance[]
-     */
-    public $depth;
+    public $height;
 
     /**
      * indicates (possibly multiple) shipping destinations. These can be defined
@@ -106,10 +67,40 @@ trait OfferShippingDetailsTrait
     public $shippingDestination;
 
     /**
-     * Label to match an [[OfferShippingDetails]] with a [[DeliveryTimeSettings]]
-     * (within the context of a [[shippingSettingsLink]] cross-reference).
+     * Indicates the origin of a shipment, i.e. where it should be coming from.
      *
-     * @var string|array|Text|Text[]
+     * @var array|DefinedRegion|DefinedRegion[]
      */
-    public $transitTimeLabel;
+    public $shippingOrigin;
+
+    /**
+     * The shipping rate is the cost of shipping to the specified destination.
+     * Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are
+     * most appropriate.
+     *
+     * @var array|MonetaryAmount|MonetaryAmount[]|array|ShippingRateSettings|ShippingRateSettings[]
+     */
+    public $shippingRate;
+
+    /**
+     * The membership program tier(s) an Offer (or a PriceSpecification,
+     * OfferShippingDetails, or MerchantReturnPolicy under an Offer) is valid for.
+     *
+     * @var array|MemberProgramTier|MemberProgramTier[]
+     */
+    public $validForMemberTier;
+
+    /**
+     * The weight of the product or person.
+     *
+     * @var array|Mass|Mass[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $weight;
+
+    /**
+     * The width of the item.
+     *
+     * @var array|Distance|Distance[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $width;
 }
