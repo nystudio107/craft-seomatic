@@ -7,6 +7,7 @@
 
 ### Changed
 * Ensure that sitemap URLs are properly RFC-3986 encoded for legacy crawlers ([#1673](https://github.com/nystudio107/craft-seomatic/issues/1673))
+* Update the schema logo image transform to a more modern 600x600 pixel, with a "fit" to keep the logo dimensions correct ([#1736](https://github.com/nystudio107/craft-seomatic/issues/1736)) ([#1372](https://github.com/nystudio107/craft-seomatic/issues/1372))
 
 ### Fixed
 * Fixed an issue where sitemaps excluded entries with robots or canonical SEO Settings field override values ([#1724](https://github.com/nystudio107/craft-seomatic/issues/1724))
