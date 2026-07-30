@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MolecularEntity.
  *
  * @author    nystudio107
@@ -22,19 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MolecularEntityTrait
 {
     /**
-     * Intended use of the BioChemEntity by humans.
+     * A role played by the BioChemEntity within a chemical context.
      *
      * @var array|DefinedTerm|DefinedTerm[]
      */
-    public $potentialUse;
-
-    /**
-     * Systematic method of naming chemical compounds as recommended by the
-     * International Union of Pure and Applied Chemistry (IUPAC).
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $iupacName;
+    public $chemicalRole;
 
     /**
      * Non-proprietary identifier for molecular entity that can be used in printed
@@ -46,6 +38,22 @@ trait MolecularEntityTrait
     public $inChI;
 
     /**
+     * InChIKey is a hashed version of the full InChI (using the SHA-256
+     * algorithm).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $inChIKey;
+
+    /**
+     * Systematic method of naming chemical compounds as recommended by the
+     * International Union of Pure and Applied Chemistry (IUPAC).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $iupacName;
+
+    /**
      * The empirical formula is the simplest whole number ratio of all the atoms
      * in a molecule.
      *
@@ -54,15 +62,31 @@ trait MolecularEntityTrait
     public $molecularFormula;
 
     /**
+     * This is the molecular weight of the entity being described, not of the
+     * parent. Units should be included in the form '<Number> <unit>', for example
+     * '12 amu' or as '<QuantitativeValue>.
+     *
+     * @var string|array|QuantitativeValue|QuantitativeValue[]|array|Text|Text[]
+     */
+    public $molecularWeight;
+
+    /**
      * The monoisotopic mass is the sum of the masses of the atoms in a molecule
      * using the unbound, ground-state, rest mass of the principal (most abundant)
      * isotope for each element instead of the isotopic average mass. Please
      * include the units in the form '<Number> <unit>', for example '770.230488
      * g/mol' or as '<QuantitativeValue>.
      *
-     * @var string|array|Text|Text[]|array|QuantitativeValue|QuantitativeValue[]
+     * @var string|array|QuantitativeValue|QuantitativeValue[]|array|Text|Text[]
      */
     public $monoisotopicMolecularWeight;
+
+    /**
+     * Intended use of the BioChemEntity by humans.
+     *
+     * @var array|DefinedTerm|DefinedTerm[]
+     */
+    public $potentialUse;
 
     /**
      * A specification in form of a line notation for describing the structure of
@@ -73,28 +97,4 @@ trait MolecularEntityTrait
      * @var string|array|Text|Text[]
      */
     public $smiles;
-
-    /**
-     * A role played by the BioChemEntity within a chemical context.
-     *
-     * @var array|DefinedTerm|DefinedTerm[]
-     */
-    public $chemicalRole;
-
-    /**
-     * InChIKey is a hashed version of the full InChI (using the SHA-256
-     * algorithm).
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $inChIKey;
-
-    /**
-     * This is the molecular weight of the entity being described, not of the
-     * parent. Units should be included in the form '<Number> <unit>', for example
-     * '12 amu' or as '<QuantitativeValue>.
-     *
-     * @var string|array|Text|Text[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $molecularWeight;
 }

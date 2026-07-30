@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for TVEpisode.
  *
  * @author    nystudio107
@@ -37,10 +37,17 @@ trait TVEpisodeTrait
     public $countryOfOrigin;
 
     /**
+     * The TV series to which this episode or season belongs.
+     *
+     * @var array|TVSeries|TVSeries[]
+     */
+    public $partOfTVSeries;
+
+    /**
      * Languages in which subtitles/captions are available, in [IETF BCP 47
      * standard format](http://tools.ietf.org/html/bcp47).
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var string|array|Language|Language[]|array|Text|Text[]
      */
     public $subtitleLanguage;
 
@@ -59,11 +66,4 @@ trait TVEpisodeTrait
      * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $titleEIDR;
-
-    /**
-     * The TV series to which this episode or season belongs.
-     *
-     * @var array|TVSeries|TVSeries[]
-     */
-    public $partOfTVSeries;
 }

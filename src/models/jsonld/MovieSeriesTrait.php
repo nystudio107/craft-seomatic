@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MovieSeries.
  *
  * @author    nystudio107
@@ -22,36 +22,13 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MovieSeriesTrait
 {
     /**
-     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
-     * event. Directors can be associated with individual items or with a series,
-     * episode, clip.
+     * An actor (individual or a group), e.g. in TV, radio, movie, video games
+     * etc., or in an event. Actors can be associated with individual items or
+     * with a series, episode, clip.
      *
-     * @var array|Person|Person[]
+     * @var array|PerformingGroup|PerformingGroup[]|array|Person|Person[]
      */
-    public $director;
-
-    /**
-     * The trailer of a movie or TV/radio series, season, episode, etc.
-     *
-     * @var array|VideoObject|VideoObject[]
-     */
-    public $trailer;
-
-    /**
-     * The production company or studio responsible for the item, e.g. series,
-     * video game, episode etc.
-     *
-     * @var array|Organization|Organization[]
-     */
-    public $productionCompany;
-
-    /**
-     * A director of e.g. TV, radio, movie, video games etc. content. Directors
-     * can be associated with individual items or with a series, episode, clip.
-     *
-     * @var array|Person|Person[]
-     */
-    public $directors;
+    public $actor;
 
     /**
      * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
@@ -62,18 +39,41 @@ trait MovieSeriesTrait
     public $actors;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
+     * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
+     * event. Directors can be associated with individual items or with a series,
+     * episode, clip.
      *
      * @var array|Person|Person[]
      */
-    public $actor;
+    public $director;
+
+    /**
+     * A director of e.g. TV, radio, movie, video games etc. content. Directors
+     * can be associated with individual items or with a series, episode, clip.
+     *
+     * @var array|Person|Person[]
+     */
+    public $directors;
 
     /**
      * The composer of the soundtrack.
      *
-     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
+     * @var array|MusicGroup|MusicGroup[]|array|Person|Person[]
      */
     public $musicBy;
+
+    /**
+     * The production company or studio responsible for the item, e.g. series,
+     * video game, episode etc.
+     *
+     * @var array|Organization|Organization[]
+     */
+    public $productionCompany;
+
+    /**
+     * The trailer of a movie or TV/radio series, season, episode, etc.
+     *
+     * @var array|VideoObject|VideoObject[]
+     */
+    public $trailer;
 }

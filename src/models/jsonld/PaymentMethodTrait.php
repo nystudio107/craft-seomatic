@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PaymentMethod.
  *
  * @author    nystudio107
@@ -21,4 +21,10 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait PaymentMethodTrait
 {
+    /**
+     * The type of a payment method.
+     *
+     * @var array|PaymentMethodType|PaymentMethodType[]
+     */
+    public $paymentMethodType;
 }

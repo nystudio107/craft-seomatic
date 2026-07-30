@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ExercisePlan.
  *
  * @author    nystudio107
@@ -22,40 +22,28 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ExercisePlanTrait
 {
     /**
-     * How often one should break from the activity.
-     *
-     * @var string|array|QuantitativeValue|QuantitativeValue[]|array|Text|Text[]
-     */
-    public $restPeriods;
-
-    /**
-     * Quantitative measure of the physiologic output of the exercise; also
-     * referred to as energy expenditure.
-     *
-     * @var array|Energy|Energy[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $workload;
-
-    /**
-     * Number of times one should repeat the activity.
-     *
-     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $repetitions;
-
-    /**
      * Length of time to engage in the activity.
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]|array|Duration|Duration[]
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $activityDuration;
 
     /**
      * How often one should engage in the activity.
      *
-     * @var string|array|Text|Text[]|array|QuantitativeValue|QuantitativeValue[]
+     * @var string|array|QuantitativeValue|QuantitativeValue[]|array|Text|Text[]
      */
     public $activityFrequency;
+
+    /**
+     * Any additional component of the exercise prescription that may need to be
+     * articulated to the patient. This may include the order of exercises, the
+     * number of repetitions of movement, quantitative distance, progressions over
+     * time, etc.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $additionalVariable;
 
     /**
      * Type(s) of exercise or activity, such as strength training, flexibility
@@ -75,12 +63,24 @@ trait ExercisePlanTrait
     public $intensity;
 
     /**
-     * Any additional component of the exercise prescription that may need to be
-     * articulated to the patient. This may include the order of exercises, the
-     * number of repetitions of movement, quantitative distance, progressions over
-     * time, etc.
+     * Number of times one should repeat the activity.
      *
-     * @var string|array|Text|Text[]
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $additionalVariable;
+    public $repetitions;
+
+    /**
+     * How often one should break from the activity.
+     *
+     * @var string|array|QuantitativeValue|QuantitativeValue[]|array|Text|Text[]
+     */
+    public $restPeriods;
+
+    /**
+     * Quantitative measure of the physiologic output of the exercise; also
+     * referred to as energy expenditure.
+     *
+     * @var array|Energy|Energy[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $workload;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for TypeAndQuantityNode.
  *
  * @author    nystudio107
@@ -22,13 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TypeAndQuantityNodeTrait
 {
     /**
-     * The product that this structured value is referring to.
-     *
-     * @var array|Product|Product[]|array|Service|Service[]
-     */
-    public $typeOfGood;
-
-    /**
      * The quantity of the goods included in the offer.
      *
      * @var float|array|Number|Number[]
@@ -36,12 +29,20 @@ trait TypeAndQuantityNodeTrait
     public $amountOfThisGood;
 
     /**
-     * A string or text indicating the unit of measurement. Useful if you cannot
-     * provide a standard unit code for <a href='unitCode'>unitCode</a>.
+     * The business function (e.g. sell, lease, repair, dispose) of the offer or
+     * component of a bundle (TypeAndQuantityNode). The default is
+     * http://purl.org/goodrelations/v1#Sell.
      *
-     * @var string|array|Text|Text[]
+     * @var array|BusinessFunction|BusinessFunction[]
      */
-    public $unitText;
+    public $businessFunction;
+
+    /**
+     * The product that this structured value is referring to.
+     *
+     * @var array|Product|Product[]|array|Service|Service[]
+     */
+    public $typeOfGood;
 
     /**
      * The unit of measurement given using the UN/CEFACT Common Code (3
@@ -53,11 +54,10 @@ trait TypeAndQuantityNodeTrait
     public $unitCode;
 
     /**
-     * The business function (e.g. sell, lease, repair, dispose) of the offer or
-     * component of a bundle (TypeAndQuantityNode). The default is
-     * http://purl.org/goodrelations/v1#Sell.
+     * A string or text indicating the unit of measurement. Useful if you cannot
+     * provide a standard unit code for <a href='unitCode'>unitCode</a>.
      *
-     * @var array|BusinessFunction|BusinessFunction[]
+     * @var string|array|Text|Text[]
      */
-    public $businessFunction;
+    public $unitText;
 }

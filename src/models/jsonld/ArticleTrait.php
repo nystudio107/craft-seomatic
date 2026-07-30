@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Article.
  *
  * @author    nystudio107
@@ -22,37 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ArticleTrait
 {
     /**
-     * For an [[Article]], typically a [[NewsArticle]], the backstory property
-     * provides a textual summary giving a brief explanation of why and how an
-     * article was created. In a journalistic setting this could include
-     * information about reporting process, methods, interviews, data sources,
-     * etc.
-     *
-     * @var string|array|Text|Text[]|array|CreativeWork|CreativeWork[]
-     */
-    public $backstory;
-
-    /**
-     * Any description of pages that is not separated into pageStart and pageEnd;
-     * for example, "1-6, 9, 55" or "10-12, 46-49".
+     * The actual body of the article.
      *
      * @var string|array|Text|Text[]
      */
-    public $pagination;
-
-    /**
-     * The number of words in the text of the Article.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $wordCount;
-
-    /**
-     * The page on which the work starts; for example "135" or "xiii".
-     *
-     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
-     */
-    public $pageStart;
+    public $articleBody;
 
     /**
      * Articles may belong to one or more 'sections' in a magazine or newspaper,
@@ -63,11 +37,15 @@ trait ArticleTrait
     public $articleSection;
 
     /**
-     * The actual body of the article.
+     * For an [[Article]], typically a [[NewsArticle]], the backstory property
+     * provides a textual summary giving a brief explanation of why and how an
+     * article was created. In a journalistic setting this could include
+     * information about reporting process, methods, interviews, data sources,
+     * etc.
      *
-     * @var string|array|Text|Text[]
+     * @var string|array|CreativeWork|CreativeWork[]|array|Text|Text[]
      */
-    public $articleBody;
+    public $backstory;
 
     /**
      * The page on which the work ends; for example "138" or "xvi".
@@ -75,6 +53,21 @@ trait ArticleTrait
      * @var int|string|array|Integer|Integer[]|array|Text|Text[]
      */
     public $pageEnd;
+
+    /**
+     * The page on which the work starts; for example "135" or "xiii".
+     *
+     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
+     */
+    public $pageStart;
+
+    /**
+     * Any description of pages that is not separated into pageStart and pageEnd;
+     * for example, "1-6, 9, 55" or "10-12, 46-49".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $pagination;
 
     /**
      * Indicates sections of a Web page that are particularly 'speakable' in the
@@ -96,7 +89,15 @@ trait ArticleTrait
      * [[SpeakableSpecification]]  which is defined to be a possible value of the
      * *speakable* property.
      *
-     * @var array|URL|URL[]|array|SpeakableSpecification|SpeakableSpecification[]
+     * @var array|SpeakableSpecification|SpeakableSpecification[]|array|URL|URL[]
      */
     public $speakable;
+
+    /**
+     * The number of words in the text of the CreativeWork such as an Article,
+     * Book, etc.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $wordCount;
 }

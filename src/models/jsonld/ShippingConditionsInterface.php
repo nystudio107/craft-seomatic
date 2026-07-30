@@ -12,13 +12,13 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
- * Interface for DeliveryTimeSettings.
+ * schema.org version: v30.0
+ * Interface for ShippingConditions.
  *
  * @author    nystudio107
  * @package   Seomatic
- * @see       https://schema.org/DeliveryTimeSettings
+ * @see       https://schema.org/ShippingConditions
  */
-interface DeliveryTimeSettingsInterface
+interface ShippingConditionsInterface
 {
 }

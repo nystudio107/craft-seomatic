@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for QualitativeValue.
  *
  * @author    nystudio107
@@ -21,14 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait QualitativeValueTrait
 {
-    /**
-     * This ordering relation for qualitative values indicates that the subject is
-     * lesser than or equal to the object.
-     *
-     * @var array|QualitativeValue|QualitativeValue[]
-     */
-    public $lesserOrEqual;
-
     /**
      * A property-value pair representing an additional characteristic of the
      * entity, e.g. a product feature or another characteristic for which there is
@@ -42,6 +34,14 @@ trait QualitativeValueTrait
      * @var array|PropertyValue|PropertyValue[]
      */
     public $additionalProperty;
+
+    /**
+     * This ordering relation for qualitative values indicates that the subject is
+     * equal to the object.
+     *
+     * @var array|QualitativeValue|QualitativeValue[]
+     */
+    public $equal;
 
     /**
      * This ordering relation for qualitative values indicates that the subject is
@@ -68,12 +68,12 @@ trait QualitativeValueTrait
     public $lesser;
 
     /**
-     * A secondary value that provides additional information on the original
-     * value, e.g. a reference temperature or a type of measurement.
+     * This ordering relation for qualitative values indicates that the subject is
+     * lesser than or equal to the object.
      *
-     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]|array|Enumeration|Enumeration[]|array|QuantitativeValue|QuantitativeValue[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementTypeEnumeration|MeasurementTypeEnumeration[]|array|StructuredValue|StructuredValue[]|array|PropertyValue|PropertyValue[]
+     * @var array|QualitativeValue|QualitativeValue[]
      */
-    public $valueReference;
+    public $lesserOrEqual;
 
     /**
      * This ordering relation for qualitative values indicates that the subject is
@@ -84,10 +84,10 @@ trait QualitativeValueTrait
     public $nonEqual;
 
     /**
-     * This ordering relation for qualitative values indicates that the subject is
-     * equal to the object.
+     * A secondary value that provides additional information on the original
+     * value, e.g. a reference temperature or a type of measurement.
      *
-     * @var array|QualitativeValue|QualitativeValue[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Enumeration|Enumeration[]|array|MeasurementTypeEnumeration|MeasurementTypeEnumeration[]|array|PropertyValue|PropertyValue[]|array|QualitativeValue|QualitativeValue[]|array|QuantitativeValue|QuantitativeValue[]|array|StructuredValue|StructuredValue[]|array|Text|Text[]
      */
-    public $equal;
+    public $valueReference;
 }

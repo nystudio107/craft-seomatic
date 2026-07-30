@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for SizeSpecification.
  *
  * @author    nystudio107
@@ -33,31 +33,31 @@ trait SizeSpecificationTrait
     public $hasMeasurement;
 
     /**
-     * The age or age range for the intended audience or person, for example 3-12
-     * months for infants, 1-5 years for toddlers.
+     * The size group (also known as "size type") for a product's size. Size
+     * groups are common in the fashion industry to define size segments and
+     * suggested audiences for wearable products. Multiple values can be combined,
+     * for example "men's big and tall", "petite maternity" or "regular".
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]
+     * @var string|array|SizeGroupEnumeration|SizeGroupEnumeration[]|array|Text|Text[]
      */
-    public $suggestedAge;
+    public $sizeGroup;
 
     /**
      * The size system used to identify a product's size. Typically either a
      * standard (for example, "GS1" or "ISO-EN13402"), country code (for example
      * "US" or "JP"), or a measuring system (for example "Metric" or "Imperial").
      *
-     * @var string|array|Text|Text[]|array|SizeSystemEnumeration|SizeSystemEnumeration[]
+     * @var string|array|SizeSystemEnumeration|SizeSystemEnumeration[]|array|Text|Text[]
      */
     public $sizeSystem;
 
     /**
-     * The size group (also known as "size type") for a product's size. Size
-     * groups are common in the fashion industry to define size segments and
-     * suggested audiences for wearable products. Multiple values can be combined,
-     * for example "men's big and tall", "petite maternity" or "regular".
+     * The age or age range for the intended audience or person, for example 3-12
+     * months for infants, 1-5 years for toddlers.
      *
-     * @var string|array|Text|Text[]|array|SizeGroupEnumeration|SizeGroupEnumeration[]
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $sizeGroup;
+    public $suggestedAge;
 
     /**
      * The suggested gender of the intended person or audience, for example

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for LocationFeatureSpecification.
  *
  * @author    nystudio107
@@ -21,6 +21,13 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait LocationFeatureSpecificationTrait
 {
+    /**
+     * The hours during which this service or contact is available.
+     *
+     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
+     */
+    public $hoursAvailable;
+
     /**
      * The date when the item becomes valid.
      *
@@ -35,11 +42,4 @@ trait LocationFeatureSpecificationTrait
      * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $validThrough;
-
-    /**
-     * The hours during which this service or contact is available.
-     *
-     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
-     */
-    public $hoursAvailable;
 }

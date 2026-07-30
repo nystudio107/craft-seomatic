@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BedDetails.
  *
  * @author    nystudio107
@@ -33,7 +33,7 @@ trait BedDetailsTrait
      * The type of bed to which the BedDetail refers, i.e. the type of bed
      * available in the quantity indicated by quantity.
      *
-     * @var string|array|Text|Text[]|array|BedType|BedType[]
+     * @var string|array|BedType|BedType[]|array|Text|Text[]
      */
     public $typeOfBed;
 }

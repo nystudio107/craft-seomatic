@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MediaSubscription.
  *
  * @author    nystudio107
@@ -22,14 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MediaSubscriptionTrait
 {
     /**
-     * An Offer which must be accepted before the user can perform the Action. For
-     * example, the user may need to buy a movie before being able to watch it.
-     *
-     * @var array|Offer|Offer[]
-     */
-    public $expectsAcceptanceOf;
-
-    /**
      * The Organization responsible for authenticating the user's subscription.
      * For example, many media apps require a cable/satellite provider to
      * authenticate your subscription before playing media.
@@ -37,4 +29,12 @@ trait MediaSubscriptionTrait
      * @var array|Organization|Organization[]
      */
     public $authenticator;
+
+    /**
+     * An Offer which must be accepted before the user can perform the Action. For
+     * example, the user may need to buy a movie before being able to watch it.
+     *
+     * @var array|Offer|Offer[]
+     */
+    public $expectsAcceptanceOf;
 }

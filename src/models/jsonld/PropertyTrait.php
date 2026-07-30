@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Property.
  *
  * @author    nystudio107
@@ -28,14 +28,6 @@ trait PropertyTrait
      * @var array|SchemaClass|SchemaClass[]
      */
     public $domainIncludes;
-
-    /**
-     * Relates a term (i.e. a property, class or enumeration) to one that
-     * supersedes it.
-     *
-     * @var array|SchemaClass|SchemaClass[]|array|Enumeration|Enumeration[]|array|Property|Property[]
-     */
-    public $supersededBy;
 
     /**
      * Relates a property to a property that is its inverse. Inverse properties
@@ -55,4 +47,12 @@ trait PropertyTrait
      * @var array|SchemaClass|SchemaClass[]
      */
     public $rangeIncludes;
+
+    /**
+     * Relates a term (i.e. a property, class or enumeration) to one that
+     * supersedes it.
+     *
+     * @var array|SchemaClass|SchemaClass[]|array|Enumeration|Enumeration[]|array|Property|Property[]
+     */
+    public $supersededBy;
 }

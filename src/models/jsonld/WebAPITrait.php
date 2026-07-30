@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for WebAPI.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait WebAPITrait
     /**
      * Further documentation describing the Web API in more detail.
      *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
      */
     public $documentation;
 }

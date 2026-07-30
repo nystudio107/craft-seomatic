@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for OpeningHoursSpecification.
  *
  * @author    nystudio107
@@ -21,6 +21,27 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait OpeningHoursSpecificationTrait
 {
+    /**
+     * The closing hour of the place or service on the given day(s) of the week.
+     *
+     * @var array|Time|Time[]
+     */
+    public $closes;
+
+    /**
+     * The day of the week for which these opening hours are valid.
+     *
+     * @var array|DayOfWeek|DayOfWeek[]
+     */
+    public $dayOfWeek;
+
+    /**
+     * The opening hour of the place or service on the given day(s) of the week.
+     *
+     * @var array|Time|Time[]
+     */
+    public $opens;
+
     /**
      * The date when the item becomes valid.
      *
@@ -35,25 +56,4 @@ trait OpeningHoursSpecificationTrait
      * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $validThrough;
-
-    /**
-     * The closing hour of the place or service on the given day(s) of the week.
-     *
-     * @var array|Time|Time[]
-     */
-    public $closes;
-
-    /**
-     * The opening hour of the place or service on the given day(s) of the week.
-     *
-     * @var array|Time|Time[]
-     */
-    public $opens;
-
-    /**
-     * The day of the week for which these opening hours are valid.
-     *
-     * @var array|DayOfWeek|DayOfWeek[]
-     */
-    public $dayOfWeek;
 }

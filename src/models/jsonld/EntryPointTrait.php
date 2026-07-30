@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for EntryPoint.
  *
  * @author    nystudio107
@@ -21,21 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait EntryPointTrait
 {
-    /**
-     * An HTTP method that specifies the appropriate HTTP method for a request to
-     * an HTTP EntryPoint. Values are capitalized strings as used in HTTP.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $httpMethod;
-
-    /**
-     * The supported encoding type(s) for an EntryPoint request.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $encodingType;
-
     /**
      * An application that can complete the request.
      *
@@ -48,7 +33,7 @@ trait EntryPointTrait
      * URL. To specify a specific application or operating system instance, use
      * actionApplication.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|DigitalPlatformEnumeration|DigitalPlatformEnumeration[]
+     * @var string|array|DigitalPlatformEnumeration|DigitalPlatformEnumeration[]|array|Text|Text[]|array|URL|URL[]
      */
     public $actionPlatform;
 
@@ -65,6 +50,21 @@ trait EntryPointTrait
      * @var string|array|Text|Text[]
      */
     public $contentType;
+
+    /**
+     * The supported encoding type(s) for an EntryPoint request.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $encodingType;
+
+    /**
+     * An HTTP method that specifies the appropriate HTTP method for a request to
+     * an HTTP EntryPoint. Values are capitalized strings as used in HTTP.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $httpMethod;
 
     /**
      * An url template (RFC6570) that will be used to construct the target of the

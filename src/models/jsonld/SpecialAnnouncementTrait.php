@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for SpecialAnnouncement.
  *
  * @author    nystudio107
@@ -22,18 +22,22 @@ namespace nystudio107\seomatic\models\jsonld;
 trait SpecialAnnouncementTrait
 {
     /**
-     * Guidelines about quarantine rules, e.g. in the context of a pandemic.
+     * Indicates a specific [[CivicStructure]] or [[LocalBusiness]] associated
+     * with the SpecialAnnouncement. For example, a specific testing facility or
+     * business with special opening hours. For a larger geographic region like a
+     * quarantine of an entire region, use [[spatialCoverage]].
      *
-     * @var array|WebContent|WebContent[]|array|URL|URL[]
+     * @var array|CivicStructure|CivicStructure[]|array|LocalBusiness|LocalBusiness[]
      */
-    public $quarantineGuidelines;
+    public $announcementLocation;
 
     /**
-     * Information about public transport closures.
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
      *
-     * @var array|URL|URL[]|array|WebContent|WebContent[]
+     * @var string|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Text|Text[]|array|Thing|Thing[]|array|URL|URL[]
      */
-    public $publicTransportClosuresInfo;
+    public $category;
 
     /**
      * Publication date of an online listing.
@@ -45,26 +49,27 @@ trait SpecialAnnouncementTrait
     /**
      * Information about disease prevention.
      *
-     * @var array|WebContent|WebContent[]|array|URL|URL[]
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
      */
     public $diseasePreventionInfo;
 
     /**
-     * Information about travel bans, e.g. in the context of a pandemic.
+     * Statistical information about the spread of a disease, either as
+     * [[WebContent]], or   described directly as a [[Dataset]], or the specific
+     * [[Observation]]s in the dataset. When a [[WebContent]] URL is   provided,
+     * the page indicated might also contain more such markup.
      *
-     * @var array|WebContent|WebContent[]|array|URL|URL[]
+     * @var array|Dataset|Dataset[]|array|Observation|Observation[]|array|URL|URL[]|array|WebContent|WebContent[]
      */
-    public $travelBans;
+    public $diseaseSpreadStatistics;
 
     /**
-     * Indicates a specific [[CivicStructure]] or [[LocalBusiness]] associated
-     * with the SpecialAnnouncement. For example, a specific testing facility or
-     * business with special opening hours. For a larger geographic region like a
-     * quarantine of an entire region, use [[spatialCoverage]].
+     * Information about getting tested (for a [[MedicalCondition]]), e.g. in the
+     * context of a pandemic.
      *
-     * @var array|CivicStructure|CivicStructure[]|array|LocalBusiness|LocalBusiness[]
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
      */
-    public $announcementLocation;
+    public $gettingTestedInfo;
 
     /**
      * governmentBenefitsInfo provides information about government benefits
@@ -79,24 +84,37 @@ trait SpecialAnnouncementTrait
      * is not required to be) the main page containing [[SpecialAnnouncement]]
      * markup on a site.
      *
-     * @var array|WebContent|WebContent[]|array|URL|URL[]
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
      */
     public $newsUpdatesAndGuidelines;
 
     /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
+     * Information about public transport closures.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Thing|Thing[]
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
      */
-    public $category;
+    public $publicTransportClosuresInfo;
+
+    /**
+     * Guidelines about quarantine rules, e.g. in the context of a pandemic.
+     *
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
+     */
+    public $quarantineGuidelines;
 
     /**
      * Information about school closures.
      *
-     * @var array|WebContent|WebContent[]|array|URL|URL[]
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
      */
     public $schoolClosuresInfo;
+
+    /**
+     * Information about travel bans, e.g. in the context of a pandemic.
+     *
+     * @var array|URL|URL[]|array|WebContent|WebContent[]
+     */
+    public $travelBans;
 
     /**
      * The URL for a feed, e.g. associated with a podcast series, blog, or series
@@ -105,22 +123,4 @@ trait SpecialAnnouncementTrait
      * @var array|DataFeed|DataFeed[]|array|URL|URL[]
      */
     public $webFeed;
-
-    /**
-     * Statistical information about the spread of a disease, either as
-     * [[WebContent]], or   described directly as a [[Dataset]], or the specific
-     * [[Observation]]s in the dataset. When a [[WebContent]] URL is   provided,
-     * the page indicated might also contain more such markup.
-     *
-     * @var array|URL|URL[]|array|Dataset|Dataset[]|array|Observation|Observation[]|array|WebContent|WebContent[]
-     */
-    public $diseaseSpreadStatistics;
-
-    /**
-     * Information about getting tested (for a [[MedicalCondition]]), e.g. in the
-     * context of a pandemic.
-     *
-     * @var array|WebContent|WebContent[]|array|URL|URL[]
-     */
-    public $gettingTestedInfo;
 }

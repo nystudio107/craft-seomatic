@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MusicRelease.
  *
  * @author    nystudio107
@@ -22,27 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MusicReleaseTrait
 {
     /**
-     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
-     * date format](http://en.wikipedia.org/wiki/ISO_8601).
+     * The catalog number for the release.
      *
-     * @var array|Duration|Duration[]
+     * @var string|array|Text|Text[]
      */
-    public $duration;
-
-    /**
-     * The album this is a release of.
-     *
-     * @var array|MusicAlbum|MusicAlbum[]
-     */
-    public $releaseOf;
-
-    /**
-     * Format of this release (the type of recording media used, i.e. compact
-     * disc, digital media, LP, etc.).
-     *
-     * @var array|MusicReleaseFormatType|MusicReleaseFormatType[]
-     */
-    public $musicReleaseFormat;
+    public $catalogNumber;
 
     /**
      * The group the release is credited to if different than the byArtist. For
@@ -54,6 +38,22 @@ trait MusicReleaseTrait
     public $creditedTo;
 
     /**
+     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
+     * duration format](http://en.wikipedia.org/wiki/ISO_8601).
+     *
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $duration;
+
+    /**
+     * Format of this release (the type of recording media used, i.e. compact
+     * disc, digital media, LP, etc.).
+     *
+     * @var array|MusicReleaseFormatType|MusicReleaseFormatType[]
+     */
+    public $musicReleaseFormat;
+
+    /**
      * The label that issued the release.
      *
      * @var array|Organization|Organization[]
@@ -61,9 +61,9 @@ trait MusicReleaseTrait
     public $recordLabel;
 
     /**
-     * The catalog number for the release.
+     * The album this is a release of.
      *
-     * @var string|array|Text|Text[]
+     * @var array|MusicAlbum|MusicAlbum[]
      */
-    public $catalogNumber;
+    public $releaseOf;
 }

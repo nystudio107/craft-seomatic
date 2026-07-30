@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DoseSchedule.
  *
  * @author    nystudio107
@@ -22,11 +22,25 @@ namespace nystudio107\seomatic\models\jsonld;
 trait DoseScheduleTrait
 {
     /**
+     * The unit of the dose, e.g. 'mg'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $doseUnit;
+
+    /**
      * The value of the dose, e.g. 500.
      *
      * @var float|array|Number|Number[]|array|QualitativeValue|QualitativeValue[]
      */
     public $doseValue;
+
+    /**
+     * How often the dose is taken, e.g. 'daily'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $frequency;
 
     /**
      * Characteristics of the population for which this is intended, or which
@@ -35,18 +49,4 @@ trait DoseScheduleTrait
      * @var string|array|Text|Text[]
      */
     public $targetPopulation;
-
-    /**
-     * The unit of the dose, e.g. 'mg'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $doseUnit;
-
-    /**
-     * How often the dose is taken, e.g. 'daily'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $frequency;
 }

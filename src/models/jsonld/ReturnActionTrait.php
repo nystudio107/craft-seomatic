@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ReturnAction.
  *
  * @author    nystudio107
@@ -25,7 +25,7 @@ trait ReturnActionTrait
      * A sub property of participant. The participant who is at the receiving end
      * of the action.
      *
-     * @var array|Organization|Organization[]|array|Audience|Audience[]|array|Person|Person[]|array|ContactPoint|ContactPoint[]
+     * @var array|Audience|Audience[]|array|ContactPoint|ContactPoint[]|array|Organization|Organization[]|array|Person|Person[]
      */
     public $recipient;
 }

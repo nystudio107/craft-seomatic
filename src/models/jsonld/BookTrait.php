@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Book.
  *
  * @author    nystudio107
@@ -22,18 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BookTrait
 {
     /**
-     * The number of pages in the book.
+     * Indicates whether the book is an abridged edition.
      *
-     * @var int|array|Integer|Integer[]
+     * @var bool|array|Boolean|Boolean[]
      */
-    public $numberOfPages;
+    public $abridged;
 
     /**
-     * The ISBN of the book.
+     * The edition of the book.
      *
      * @var string|array|Text|Text[]
      */
-    public $isbn;
+    public $bookEdition;
 
     /**
      * The format of the book.
@@ -50,16 +50,16 @@ trait BookTrait
     public $illustrator;
 
     /**
-     * Indicates whether the book is an abridged edition.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $abridged;
-
-    /**
-     * The edition of the book.
+     * The ISBN of the book.
      *
      * @var string|array|Text|Text[]
      */
-    public $bookEdition;
+    public $isbn;
+
+    /**
+     * The number of pages in the book.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $numberOfPages;
 }

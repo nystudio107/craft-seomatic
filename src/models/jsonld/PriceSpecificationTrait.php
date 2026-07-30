@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PriceSpecification.
  *
  * @author    nystudio107
@@ -22,26 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PriceSpecificationTrait
 {
     /**
-     * The highest price if the price is a range.
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $maxPrice;
-
-    /**
-     * The currency of the price, or a price component when attached to
-     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
-     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
-     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
-     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
-     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
-     * (LETS) and other currency types, e.g. "Ithaca HOUR".
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $priceCurrency;
-
-    /**
      * The interval and unit of measurement of ordering quantities for which the
      * offer or price specification is valid. This allows e.g. specifying that a
      * certain freight charge is valid only for a certain quantity.
@@ -49,6 +29,39 @@ trait PriceSpecificationTrait
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $eligibleQuantity;
+
+    /**
+     * The transaction volume, in a monetary unit, for which the offer or price
+     * specification is valid, e.g. for indicating a minimal purchasing volume, to
+     * express free shipping above a certain order volume, or to limit the
+     * acceptance of credit cards to purchases to a certain minimal amount.
+     *
+     * @var array|PriceSpecification|PriceSpecification[]
+     */
+    public $eligibleTransactionVolume;
+
+    /**
+     * The highest price if the price is a range.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $maxPrice;
+
+    /**
+     * The number of membership points earned by the member. If necessary, the
+     * unitText can be used to express the units the points are issued in. (E.g.
+     * stars, miles, etc.)
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $membershipPointsEarned;
+
+    /**
+     * The lowest price if the price is a range.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $minPrice;
 
     /**
      * The offer price of a product, or of a price component when attached to
@@ -70,26 +83,30 @@ trait PriceSpecificationTrait
      * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE'
      * (U+0039)) rather than superficially similar Unicode symbols.
      *
-     * @var string|float|array|Text|Text[]|array|Number|Number[]
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
      */
     public $price;
 
     /**
-     * The lowest price if the price is a range.
+     * The currency of the price, or a price component when attached to
+     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
+     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
+     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
+     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
+     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
+     * (LETS) and other currency types, e.g. "Ithaca HOUR".
      *
-     * @var float|array|Number|Number[]
+     * @var string|array|Text|Text[]
      */
-    public $minPrice;
+    public $priceCurrency;
 
     /**
-     * The transaction volume, in a monetary unit, for which the offer or price
-     * specification is valid, e.g. for indicating a minimal purchasing volume, to
-     * express free shipping above a certain order volume, or to limit the
-     * acceptance of credit cards to purchases to a certain minimal amount.
+     * The membership program tier(s) an Offer (or a PriceSpecification,
+     * OfferShippingDetails, or MerchantReturnPolicy under an Offer) is valid for.
      *
-     * @var array|PriceSpecification|PriceSpecification[]
+     * @var array|MemberProgramTier|MemberProgramTier[]
      */
-    public $eligibleTransactionVolume;
+    public $validForMemberTier;
 
     /**
      * The date when the item becomes valid.

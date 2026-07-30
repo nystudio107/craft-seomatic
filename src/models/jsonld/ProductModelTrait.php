@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ProductModel.
  *
  * @author    nystudio107
@@ -21,14 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait ProductModelTrait
 {
-    /**
-     * A pointer from a previous, often discontinued variant of the product to its
-     * newer variant.
-     *
-     * @var array|ProductModel|ProductModel[]
-     */
-    public $predecessorOf;
-
     /**
      * Indicates the kind of product that this is a variant of. In the case of
      * [[ProductModel]], this is a pointer (from a ProductModel) to a base product
@@ -44,6 +36,14 @@ trait ProductModelTrait
      * @var array|ProductGroup|ProductGroup[]|array|ProductModel|ProductModel[]
      */
     public $isVariantOf;
+
+    /**
+     * A pointer from a previous, often discontinued variant of the product to its
+     * newer variant.
+     *
+     * @var array|ProductModel|ProductModel[]
+     */
+    public $predecessorOf;
 
     /**
      * A pointer from a newer variant of a product  to its previous, often
