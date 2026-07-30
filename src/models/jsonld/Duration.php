@@ -24,99 +24,99 @@ use nystudio107\seomatic\models\MetaJsonLd;
  */
 class Duration extends MetaJsonLd implements DurationInterface, QuantityInterface
 {
-	use DurationTrait;
-	use QuantityTrait;
+    use DurationTrait;
+    use QuantityTrait;
 
-	/**
-	 * The Schema.org Type Name
-	 *
-	 * @var string
-	 */
-	public static $schemaTypeName = 'Duration';
+    /**
+     * The Schema.org Type Name
+     *
+     * @var string
+     */
+    public static $schemaTypeName = 'Duration';
 
-	/**
-	 * The Schema.org Type Scope
-	 *
-	 * @var string
-	 */
-	public static $schemaTypeScope = 'https://schema.org/Duration';
+    /**
+     * The Schema.org Type Scope
+     *
+     * @var string
+     */
+    public static $schemaTypeScope = 'https://schema.org/Duration';
 
-	/**
-	 * The Schema.org Type Extends
-	 *
-	 * @var string
-	 */
-	public static $schemaTypeExtends = 'Quantity';
+    /**
+     * The Schema.org Type Extends
+     *
+     * @var string
+     */
+    public static $schemaTypeExtends = 'Quantity';
 
-	/**
-	 * The Schema.org Type Description
-	 *
-	 * @var string
-	 */
-	public static $schemaTypeDescription = 'Quantity: Duration (use [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601)).';
-
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getSchemaPropertyNames(): array
-	{
-		return array_keys($this->getSchemaPropertyExpectedTypes());
-	}
+    /**
+     * The Schema.org Type Description
+     *
+     * @var string
+     */
+    public static $schemaTypeDescription = 'Quantity: Duration (use [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601)).';
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSchemaPropertyExpectedTypes(): array
-	{
-		return [
-
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyNames(): array
+    {
+        return array_keys($this->getSchemaPropertyExpectedTypes());
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getSchemaPropertyDescriptions(): array
-	{
-		return [
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyExpectedTypes(): array
+    {
+        return [
 
-		];
-	}
-
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getGoogleRequiredSchema(): array
-	{
-		return [];
-	}
+        ];
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function getGoogleRecommendedSchema(): array
-	{
-		return [];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function getSchemaPropertyDescriptions(): array
+    {
+        return [
+
+        ];
+    }
 
 
-	/**
-	 * @inheritdoc
-	 */
-	public function defineRules(): array
-	{
-		$rules = parent::defineRules();
-		    $rules = array_merge($rules, [
-		        [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
-		        [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-		        [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
-		    ]);
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRequiredSchema(): array
+    {
+        return [];
+    }
 
-		    return $rules;
-	}
+
+    /**
+     * @inheritdoc
+     */
+    public function getGoogleRecommendedSchema(): array
+    {
+        return [];
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
+        $rules = array_merge($rules, [
+                [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+                [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+                [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.'],
+            ]);
+
+        return $rules;
+    }
 }
