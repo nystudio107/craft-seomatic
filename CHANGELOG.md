@@ -2,6 +2,7 @@
 
 ## 4.1.21 - UNRELEASED
 ### Added
+* Updated to schema.org version: `v30.0` for the JSON-LD objects([#1737](https://github.com/nystudio107/craft-seomatic/issues/1737))
 * Added a "none" option to the local business price range, which will cause `priceRange` to be omitted if selected ([#1752](https://github.com/nystudio107/craft-seomatic/issues/1752))
 
 ### Fixed
