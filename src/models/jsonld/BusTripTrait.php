@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BusTrip.
  *
  * @author    nystudio107
@@ -22,18 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BusTripTrait
 {
     /**
+     * The stop or station from which the bus arrives.
+     *
+     * @var array|BusStation|BusStation[]|array|BusStop|BusStop[]
+     */
+    public $arrivalBusStop;
+
+    /**
      * The name of the bus (e.g. Bolt Express).
      *
      * @var string|array|Text|Text[]
      */
     public $busName;
-
-    /**
-     * The stop or station from which the bus departs.
-     *
-     * @var array|BusStation|BusStation[]|array|BusStop|BusStop[]
-     */
-    public $departureBusStop;
 
     /**
      * The unique identifier for the bus.
@@ -43,9 +43,9 @@ trait BusTripTrait
     public $busNumber;
 
     /**
-     * The stop or station from which the bus arrives.
+     * The stop or station from which the bus departs.
      *
      * @var array|BusStation|BusStation[]|array|BusStop|BusStop[]
      */
-    public $arrivalBusStop;
+    public $departureBusStop;
 }

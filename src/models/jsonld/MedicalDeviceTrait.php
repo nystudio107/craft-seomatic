@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalDevice.
  *
  * @author    nystudio107
@@ -21,22 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait MedicalDeviceTrait
 {
-    /**
-     * A description of the procedure involved in setting up, using, and/or
-     * installing the device.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $procedure;
-
-    /**
-     * A description of the workup, testing, and other preparations required
-     * before implanting this device.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $preOp;
-
     /**
      * A possible complication and/or side effect of this therapy. If it is known
      * that an adverse outcome is serious (resulting in death, disability, or
@@ -51,7 +35,7 @@ trait MedicalDeviceTrait
     /**
      * A contraindication for this therapy.
      *
-     * @var string|array|Text|Text[]|array|MedicalContraindication|MedicalContraindication[]
+     * @var string|array|MedicalContraindication|MedicalContraindication[]|array|Text|Text[]
      */
     public $contraindication;
 
@@ -62,6 +46,22 @@ trait MedicalDeviceTrait
      * @var string|array|Text|Text[]
      */
     public $postOp;
+
+    /**
+     * A description of the workup, testing, and other preparations required
+     * before implanting this device.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $preOp;
+
+    /**
+     * A description of the procedure involved in setting up, using, and/or
+     * installing the device.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $procedure;
 
     /**
      * A possible serious complication and/or serious side effect of this therapy.

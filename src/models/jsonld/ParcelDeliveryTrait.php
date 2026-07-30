@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ParcelDelivery.
  *
  * @author    nystudio107
@@ -22,11 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ParcelDeliveryTrait
 {
     /**
-     * Item(s) being shipped.
+     * 'carrier' is an out-dated term indicating the 'provider' for parcel
+     * delivery and flights.
      *
-     * @var array|Product|Product[]
+     * @var array|Organization|Organization[]
      */
-    public $itemShipped;
+    public $carrier;
+
+    /**
+     * Destination address.
+     *
+     * @var array|PostalAddress|PostalAddress[]
+     */
+    public $deliveryAddress;
 
     /**
      * New entry added as the package passes through each leg of its journey (from
@@ -37,25 +45,18 @@ trait ParcelDeliveryTrait
     public $deliveryStatus;
 
     /**
-     * Shipper's address.
+     * The earliest date the package may arrive.
      *
-     * @var array|PostalAddress|PostalAddress[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $originAddress;
+    public $expectedArrivalFrom;
 
     /**
-     * Destination address.
+     * The latest date the package may arrive.
      *
-     * @var array|PostalAddress|PostalAddress[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $deliveryAddress;
-
-    /**
-     * Tracking url for the parcel delivery.
-     *
-     * @var array|URL|URL[]
-     */
-    public $trackingUrl;
+    public $expectedArrivalUntil;
 
     /**
      * Method used for delivery or shipping.
@@ -65,11 +66,18 @@ trait ParcelDeliveryTrait
     public $hasDeliveryMethod;
 
     /**
-     * Shipper tracking number.
+     * Item(s) being shipped.
      *
-     * @var string|array|Text|Text[]
+     * @var array|Product|Product[]
      */
-    public $trackingNumber;
+    public $itemShipped;
+
+    /**
+     * Shipper's address.
+     *
+     * @var array|PostalAddress|PostalAddress[]
+     */
+    public $originAddress;
 
     /**
      * The overall order the items in this delivery were included in.
@@ -83,29 +91,21 @@ trait ParcelDeliveryTrait
      * producer. Another party (a seller) may offer those services or goods on
      * behalf of the provider. A provider may also serve as the seller.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $provider;
 
     /**
-     * 'carrier' is an out-dated term indicating the 'provider' for parcel
-     * delivery and flights.
+     * Shipper tracking number.
      *
-     * @var array|Organization|Organization[]
+     * @var string|array|Text|Text[]
      */
-    public $carrier;
+    public $trackingNumber;
 
     /**
-     * The latest date the package may arrive.
+     * Tracking url for the parcel delivery.
      *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     * @var array|URL|URL[]
      */
-    public $expectedArrivalUntil;
-
-    /**
-     * The earliest date the package may arrive.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $expectedArrivalFrom;
+    public $trackingUrl;
 }

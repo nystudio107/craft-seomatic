@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Drug.
  *
  * @author    nystudio107
@@ -22,22 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait DrugTrait
 {
     /**
-     * A dosage form in which this drug/supplement is available, e.g. 'tablet',
-     * 'suspension', 'injection'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $dosageForm;
-
-    /**
-     * Any information related to overdose on a drug, including signs or symptoms,
-     * treatments, contact information for emergency response.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $overdosage;
-
-    /**
      * An active ingredient, typically chemical compounds and/or biologic
      * substances.
      *
@@ -46,56 +30,60 @@ trait DrugTrait
     public $activeIngredient;
 
     /**
-     * Recommended intake of this supplement for a given population as defined by
-     * a specific recommending authority.
-     *
-     * @var array|MaximumDoseSchedule|MaximumDoseSchedule[]
-     */
-    public $maximumIntake;
-
-    /**
-     * Pregnancy category of this drug.
-     *
-     * @var array|DrugPregnancyCategory|DrugPregnancyCategory[]
-     */
-    public $pregnancyCategory;
-
-    /**
-     * True if the drug is available in a generic form (regardless of name).
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $isAvailableGenerically;
-
-    /**
-     * Any precaution, guidance, contraindication, etc. related to this drug's use
-     * during pregnancy.
+     * A route by which this drug may be administered, e.g. 'oral'.
      *
      * @var string|array|Text|Text[]
      */
-    public $pregnancyWarning;
+    public $administrationRoute;
 
     /**
-     * The insurance plans that cover this drug.
+     * Any precaution, guidance, contraindication, etc. related to consumption of
+     * alcohol while taking this drug.
      *
-     * @var array|HealthInsurancePlan|HealthInsurancePlan[]
+     * @var string|array|Text|Text[]
      */
-    public $includedInHealthInsurancePlan;
+    public $alcoholWarning;
 
     /**
-     * The drug or supplement's legal status, including any controlled substance
-     * schedules that apply.
+     * An available dosage strength for the drug.
      *
-     * @var string|array|Text|Text[]|array|DrugLegalStatus|DrugLegalStatus[]|array|MedicalEnumeration|MedicalEnumeration[]
+     * @var array|DrugStrength|DrugStrength[]
      */
-    public $legalStatus;
+    public $availableStrength;
 
     /**
-     * Any FDA or other warnings about the drug (text or URL).
+     * Any precaution, guidance, contraindication, etc. related to this drug's use
+     * by breastfeeding mothers.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]
+     * @var string|array|Text|Text[]
      */
-    public $warning;
+    public $breastfeedingWarning;
+
+    /**
+     * Description of the absorption and elimination of drugs, including their
+     * concentration (pharmacokinetics, pK) and biological effects
+     * (pharmacodynamics, pD).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $clincalPharmacology;
+
+    /**
+     * Description of the absorption and elimination of drugs, including their
+     * concentration (pharmacokinetics, pK) and biological effects
+     * (pharmacodynamics, pD).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $clinicalPharmacology;
+
+    /**
+     * A dosage form in which this drug/supplement is available, e.g. 'tablet',
+     * 'suspension', 'injection'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $dosageForm;
 
     /**
      * A dosing schedule for the drug for a given population, either observed,
@@ -113,33 +101,11 @@ trait DrugTrait
     public $drugClass;
 
     /**
-     * Link to prescribing information for the drug.
-     *
-     * @var array|URL|URL[]
-     */
-    public $prescribingInfo;
-
-    /**
-     * An available dosage strength for the drug.
-     *
-     * @var array|DrugStrength|DrugStrength[]
-     */
-    public $availableStrength;
-
-    /**
-     * A route by which this drug may be administered, e.g. 'oral'.
+     * The unit in which the drug is measured, e.g. '5 mg tablet'.
      *
      * @var string|array|Text|Text[]
      */
-    public $administrationRoute;
-
-    /**
-     * Any precaution, guidance, contraindication, etc. related to this drug's use
-     * by breastfeeding mothers.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $breastfeedingWarning;
+    public $drugUnit;
 
     /**
      * Any precaution, guidance, contraindication, etc. related to consumption of
@@ -150,20 +116,11 @@ trait DrugTrait
     public $foodWarning;
 
     /**
-     * Description of the absorption and elimination of drugs, including their
-     * concentration (pharmacokinetics, pK) and biological effects
-     * (pharmacodynamics, pD).
+     * The insurance plans that cover this drug.
      *
-     * @var string|array|Text|Text[]
+     * @var array|HealthInsurancePlan|HealthInsurancePlan[]
      */
-    public $clincalPharmacology;
-
-    /**
-     * The unit in which the drug is measured, e.g. '5 mg tablet'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $drugUnit;
+    public $includedInHealthInsurancePlan;
 
     /**
      * Another drug that is known to interact with this drug in a way that impacts
@@ -175,6 +132,20 @@ trait DrugTrait
     public $interactingDrug;
 
     /**
+     * True if the drug is available in a generic form (regardless of name).
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $isAvailableGenerically;
+
+    /**
+     * True if this item's name is a proprietary/brand name (vs. generic name).
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $isProprietary;
+
+    /**
      * Link to the drug's label details.
      *
      * @var array|URL|URL[]
@@ -182,20 +153,20 @@ trait DrugTrait
     public $labelDetails;
 
     /**
-     * Indicates the status of drug prescription, e.g. local catalogs
-     * classifications or whether the drug is available by prescription or
-     * over-the-counter, etc.
+     * The drug or supplement's legal status, including any controlled substance
+     * schedules that apply.
      *
-     * @var string|array|Text|Text[]|array|DrugPrescriptionStatus|DrugPrescriptionStatus[]
+     * @var string|array|DrugLegalStatus|DrugLegalStatus[]|array|MedicalEnumeration|MedicalEnumeration[]|array|Text|Text[]
      */
-    public $prescriptionStatus;
+    public $legalStatus;
 
     /**
-     * The generic name of this drug or supplement.
+     * Recommended intake of this supplement for a given population as defined by
+     * a specific recommending authority.
      *
-     * @var string|array|Text|Text[]
+     * @var array|MaximumDoseSchedule|MaximumDoseSchedule[]
      */
-    public $nonProprietaryName;
+    public $maximumIntake;
 
     /**
      * The specific biochemical interaction through which this drug or supplement
@@ -206,35 +177,50 @@ trait DrugTrait
     public $mechanismOfAction;
 
     /**
-     * True if this item's name is a proprietary/brand name (vs. generic name).
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $isProprietary;
-
-    /**
-     * Any precaution, guidance, contraindication, etc. related to consumption of
-     * alcohol while taking this drug.
+     * The generic name of this drug or supplement.
      *
      * @var string|array|Text|Text[]
      */
-    public $alcoholWarning;
+    public $nonProprietaryName;
 
     /**
-     * The RxCUI drug identifier from RXNORM.
+     * Any information related to overdose on a drug, including signs or symptoms,
+     * treatments, contact information for emergency response.
      *
      * @var string|array|Text|Text[]
      */
-    public $rxcui;
+    public $overdosage;
 
     /**
-     * Description of the absorption and elimination of drugs, including their
-     * concentration (pharmacokinetics, pK) and biological effects
-     * (pharmacodynamics, pD).
+     * Pregnancy category of this drug.
+     *
+     * @var array|DrugPregnancyCategory|DrugPregnancyCategory[]
+     */
+    public $pregnancyCategory;
+
+    /**
+     * Any precaution, guidance, contraindication, etc. related to this drug's use
+     * during pregnancy.
      *
      * @var string|array|Text|Text[]
      */
-    public $clinicalPharmacology;
+    public $pregnancyWarning;
+
+    /**
+     * Link to prescribing information for the drug.
+     *
+     * @var array|URL|URL[]
+     */
+    public $prescribingInfo;
+
+    /**
+     * Indicates the status of drug prescription, e.g. local catalogs
+     * classifications or whether the drug is available by prescription or
+     * over-the-counter, etc.
+     *
+     * @var string|array|DrugPrescriptionStatus|DrugPrescriptionStatus[]|array|Text|Text[]
+     */
+    public $prescriptionStatus;
 
     /**
      * Proprietary name given to the diet plan, typically by its originator or
@@ -251,4 +237,18 @@ trait DrugTrait
      * @var array|Drug|Drug[]
      */
     public $relatedDrug;
+
+    /**
+     * The RxCUI drug identifier from RXNORM.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $rxcui;
+
+    /**
+     * Any FDA or other warnings about the drug (text or URL).
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $warning;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for GovernmentService.
  *
  * @author    nystudio107
@@ -22,6 +22,14 @@ namespace nystudio107\seomatic\models\jsonld;
 trait GovernmentServiceTrait
 {
     /**
+     * Indicates a legal jurisdiction, e.g. of some legislation, or where some
+     * government service is based.
+     *
+     * @var string|array|AdministrativeArea|AdministrativeArea[]|array|Text|Text[]
+     */
+    public $jurisdiction;
+
+    /**
      * The operating organization, if different from the provider.  This enables
      * the representation of services that are provided by an organization, but
      * operated by another organization like a subcontractor.
@@ -29,12 +37,4 @@ trait GovernmentServiceTrait
      * @var array|Organization|Organization[]
      */
     public $serviceOperator;
-
-    /**
-     * Indicates a legal jurisdiction, e.g. of some legislation, or where some
-     * government service is based.
-     *
-     * @var string|array|AdministrativeArea|AdministrativeArea[]|array|Text|Text[]
-     */
-    public $jurisdiction;
 }

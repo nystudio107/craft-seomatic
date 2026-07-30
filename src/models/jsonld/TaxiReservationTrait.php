@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for TaxiReservation.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TaxiReservationTrait
 {
     /**
-     * When a taxi will pick up a passenger or a rental car can be picked up.
+     * Number of people the reservation should accommodate.
      *
-     * @var array|DateTime|DateTime[]
+     * @var int|array|Integer|Integer[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $pickupTime;
+    public $partySize;
 
     /**
      * Where a taxi will pick up a passenger or a rental car can be picked up.
@@ -36,9 +36,9 @@ trait TaxiReservationTrait
     public $pickupLocation;
 
     /**
-     * Number of people the reservation should accommodate.
+     * When a taxi will pick up a passenger or a rental car can be picked up.
      *
-     * @var int|array|QuantitativeValue|QuantitativeValue[]|array|Integer|Integer[]
+     * @var array|DateTime|DateTime[]
      */
-    public $partySize;
+    public $pickupTime;
 }

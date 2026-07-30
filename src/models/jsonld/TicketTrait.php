@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Ticket.
  *
  * @author    nystudio107
@@ -22,30 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TicketTrait
 {
     /**
-     * The person or organization the reservation or ticket is for.
+     * The date the ticket was issued.
      *
-     * @var array|Organization|Organization[]|array|Person|Person[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $underName;
+    public $dateIssued;
 
     /**
-     * The unique identifier for the ticket.
+     * The organization issuing the item, for example a [[Permit]], [[Ticket]], or
+     * [[Certification]].
      *
-     * @var string|array|Text|Text[]
+     * @var array|Organization|Organization[]
      */
-    public $ticketNumber;
-
-    /**
-     * The total price for the reservation or ticket, including applicable taxes,
-     * shipping, etc.  Usage guidelines:  * Use values from 0123456789 (Unicode
-     * 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially
-     * similar Unicode symbols. * Use '.' (Unicode 'FULL STOP' (U+002E)) rather
-     * than ',' to indicate a decimal point. Avoid using these symbols as a
-     * readability separator.
-     *
-     * @var string|float|array|PriceSpecification|PriceSpecification[]|array|Text|Text[]|array|Number|Number[]
-     */
-    public $totalPrice;
+    public $issuedBy;
 
     /**
      * The currency of the price, or a price component when attached to
@@ -61,19 +50,19 @@ trait TicketTrait
     public $priceCurrency;
 
     /**
-     * The organization issuing the item, for example a [[Permit]], [[Ticket]], or
-     * [[Certification]].
+     * The unique identifier for the ticket.
      *
-     * @var array|Organization|Organization[]
+     * @var string|array|Text|Text[]
      */
-    public $issuedBy;
+    public $ticketNumber;
 
     /**
-     * The date the ticket was issued.
+     * Reference to an asset (e.g., Barcode, QR code image or PDF) usable for
+     * entrance.
      *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $dateIssued;
+    public $ticketToken;
 
     /**
      * The seat associated with the ticket.
@@ -83,10 +72,21 @@ trait TicketTrait
     public $ticketedSeat;
 
     /**
-     * Reference to an asset (e.g., Barcode, QR code image or PDF) usable for
-     * entrance.
+     * The total price for the reservation or ticket, including applicable taxes,
+     * shipping, etc.  Usage guidelines:  * Use values from 0123456789 (Unicode
+     * 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially
+     * similar Unicode symbols. * Use '.' (Unicode 'FULL STOP' (U+002E)) rather
+     * than ',' to indicate a decimal point. Avoid using these symbols as a
+     * readability separator.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]
+     * @var float|string|array|Number|Number[]|array|PriceSpecification|PriceSpecification[]|array|Text|Text[]
      */
-    public $ticketToken;
+    public $totalPrice;
+
+    /**
+     * The person or organization the reservation or ticket is for.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $underName;
 }

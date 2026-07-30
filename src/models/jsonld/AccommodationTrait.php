@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Accommodation.
  *
  * @author    nystudio107
@@ -21,62 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait AccommodationTrait
 {
-    /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
-     * This generic property does not make a statement about whether the feature
-     * is included in an offer for the main accommodation or available at extra
-     * costs.
-     *
-     * @var array|LocationFeatureSpecification|LocationFeatureSpecification[]
-     */
-    public $amenityFeature;
-
-    /**
-     * A floorplan of some [[Accommodation]].
-     *
-     * @var array|FloorPlan|FloorPlan[]
-     */
-    public $accommodationFloorPlan;
-
-    /**
-     * The type of bed or beds included in the accommodation. For the single case
-     * of just one bed of a certain type, you use bed directly with a text.
-     * If you want to indicate the quantity of a certain kind of bed, use an
-     * instance of BedDetails. For more detailed information, use the
-     * amenityFeature property.
-     *
-     * @var string|array|Text|Text[]|array|BedDetails|BedDetails[]|array|BedType|BedType[]
-     */
-    public $bed;
-
-    /**
-     * The allowed total occupancy for the accommodation in persons (including
-     * infants etc). For individual accommodations, this is not necessarily the
-     * legal maximum but defines the permitted usage as per the contractual
-     * agreement (e.g. a double room used by a single person). Typical unit
-     * code(s): C62 for person.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $occupancy;
-
-    /**
-     * A page providing information on how to book a tour of some [[Place]], such
-     * as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting,
-     * as well as other kinds of tours as appropriate.
-     *
-     * @var array|URL|URL[]
-     */
-    public $tourBookingPage;
-
-    /**
-     * The total integer number of bedrooms in a some [[Accommodation]],
-     * [[ApartmentComplex]] or [[FloorPlan]].
-     *
-     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $numberOfBedrooms;
-
     /**
      * Category of an [[Accommodation]], following real estate conventions, e.g.
      * RESO (see
@@ -88,6 +32,61 @@ trait AccommodationTrait
      * @var string|array|Text|Text[]
      */
     public $accommodationCategory;
+
+    /**
+     * A floorplan of some [[Accommodation]].
+     *
+     * @var array|FloorPlan|FloorPlan[]
+     */
+    public $accommodationFloorPlan;
+
+    /**
+     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
+     * This generic property does not make a statement about whether the feature
+     * is included in an offer for the main accommodation or available at extra
+     * costs.
+     *
+     * @var array|LocationFeatureSpecification|LocationFeatureSpecification[]
+     */
+    public $amenityFeature;
+
+    /**
+     * The type of bed or beds included in the accommodation. For the single case
+     * of just one bed of a certain type, you use bed directly with a text.
+     * If you want to indicate the quantity of a certain kind of bed, use an
+     * instance of BedDetails. For more detailed information, use the
+     * amenityFeature property.
+     *
+     * @var string|array|BedDetails|BedDetails[]|array|BedType|BedType[]|array|Text|Text[]
+     */
+    public $bed;
+
+    /**
+     * The floor level for an [[Accommodation]] in a multi-storey building. Since
+     * counting   systems [vary
+     * internationally](https://en.wikipedia.org/wiki/Storey#Consecutive_number_floor_designations),
+     * the local system should be used where possible.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $floorLevel;
+
+    /**
+     * The size of the accommodation, e.g. in square meter or squarefoot. Typical
+     * unit code(s): MTK for square meter, FTK for square foot, or YDK for square
+     * yard.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $floorSize;
+
+    /**
+     * Length of the lease for some [[Accommodation]], either particular to some
+     * [[Offer]] or in some cases intrinsic to the property.
+     *
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $leaseLength;
 
     /**
      * The total integer number of bathrooms in some [[Accommodation]], following
@@ -102,13 +101,30 @@ trait AccommodationTrait
     public $numberOfBathroomsTotal;
 
     /**
-     * The year an [[Accommodation]] was constructed. This corresponds to the
-     * [YearBuilt field in
-     * RESO](https://ddwiki.reso.org/display/DDW17/YearBuilt+Field).
+     * The total integer number of bedrooms in a some [[Accommodation]],
+     * [[ApartmentComplex]] or [[FloorPlan]].
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfBedrooms;
+
+    /**
+     * Number of full bathrooms - The total number of full and ¾ bathrooms in an
+     * [[Accommodation]]. This corresponds to the [BathroomsFull field in
+     * RESO](https://ddwiki.reso.org/display/DDW17/BathroomsFull+Field).
      *
      * @var float|array|Number|Number[]
      */
-    public $yearBuilt;
+    public $numberOfFullBathrooms;
+
+    /**
+     * Number of partial bathrooms - The total number of half and ¼ bathrooms in
+     * an [[Accommodation]]. This corresponds to the [BathroomsPartial field in
+     * RESO](https://ddwiki.reso.org/display/DDW17/BathroomsPartial+Field).
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $numberOfPartialBathrooms;
 
     /**
      * The number of rooms (excluding bathrooms and closets) of the accommodation
@@ -121,13 +137,22 @@ trait AccommodationTrait
     public $numberOfRooms;
 
     /**
-     * The size of the accommodation, e.g. in square meter or squarefoot. Typical
-     * unit code(s): MTK for square meter, FTK for square foot, or YDK for square
-     * yard.
+     * The allowed total occupancy for the accommodation in persons (including
+     * infants etc). For individual accommodations, this is not necessarily the
+     * legal maximum but defines the permitted usage as per the contractual
+     * agreement (e.g. a double room used by a single person). Typical unit
+     * code(s): C62 for person.
      *
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $floorSize;
+    public $occupancy;
+
+    /**
+     * Indications regarding the permitted usage of the accommodation.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $permittedUsage;
 
     /**
      * Indicates whether pets are allowed to enter the accommodation or lodging
@@ -138,45 +163,20 @@ trait AccommodationTrait
     public $petsAllowed;
 
     /**
-     * The floor level for an [[Accommodation]] in a multi-storey building. Since
-     * counting   systems [vary
-     * internationally](https://en.wikipedia.org/wiki/Storey#Consecutive_number_floor_designations),
-     * the local system should be used where possible.
+     * A page providing information on how to book a tour of some [[Place]], such
+     * as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting,
+     * as well as other kinds of tours as appropriate.
      *
-     * @var string|array|Text|Text[]
+     * @var array|URL|URL[]
      */
-    public $floorLevel;
+    public $tourBookingPage;
 
     /**
-     * Number of partial bathrooms - The total number of half and ¼ bathrooms in
-     * an [[Accommodation]]. This corresponds to the [BathroomsPartial field in
-     * RESO](https://ddwiki.reso.org/display/DDW17/BathroomsPartial+Field).
+     * The year an [[Accommodation]] was constructed. This corresponds to the
+     * [YearBuilt field in
+     * RESO](https://ddwiki.reso.org/display/DDW17/YearBuilt+Field).
      *
      * @var float|array|Number|Number[]
      */
-    public $numberOfPartialBathrooms;
-
-    /**
-     * Indications regarding the permitted usage of the accommodation.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $permittedUsage;
-
-    /**
-     * Number of full bathrooms - The total number of full and ¾ bathrooms in an
-     * [[Accommodation]]. This corresponds to the [BathroomsFull field in
-     * RESO](https://ddwiki.reso.org/display/DDW17/BathroomsFull+Field).
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $numberOfFullBathrooms;
-
-    /**
-     * Length of the lease for some [[Accommodation]], either particular to some
-     * [[Offer]] or in some cases intrinsic to the property.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]|array|Duration|Duration[]
-     */
-    public $leaseLength;
+    public $yearBuilt;
 }

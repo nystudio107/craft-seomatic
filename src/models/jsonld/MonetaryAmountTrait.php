@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MonetaryAmount.
  *
  * @author    nystudio107
@@ -21,13 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait MonetaryAmountTrait
 {
-    /**
-     * The lower value of some characteristic or property.
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $minValue;
-
     /**
      * The currency in which the monetary amount is expressed.  Use standard
      * formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217),
@@ -42,18 +35,25 @@ trait MonetaryAmountTrait
     public $currency;
 
     /**
-     * The date when the item becomes valid.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $validFrom;
-
-    /**
      * The upper value of some characteristic or property.
      *
      * @var float|array|Number|Number[]
      */
     public $maxValue;
+
+    /**
+     * The lower value of some characteristic or property.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $minValue;
+
+    /**
+     * The date when the item becomes valid.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $validFrom;
 
     /**
      * The date after when the item is not valid. For example the end of an offer,
@@ -73,7 +73,7 @@ trait MonetaryAmountTrait
      * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
      * symbols as a readability separator.
      *
-     * @var float|string|bool|array|StructuredValue|StructuredValue[]|array|Number|Number[]|array|Text|Text[]|array|Boolean|Boolean[]
+     * @var bool|float|string|array|Boolean|Boolean[]|array|Number|Number[]|array|StructuredValue|StructuredValue[]|array|Text|Text[]
      */
     public $value;
 }

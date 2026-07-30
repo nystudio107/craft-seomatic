@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Taxon.
  *
  * @author    nystudio107
@@ -22,20 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TaxonTrait
 {
     /**
-     * The taxonomic rank of this taxon given preferably as a URI from a
-     * controlled vocabulary – typically the ranks from TDWG TaxonRank ontology
-     * or equivalent Wikidata URIs.
-     *
-     * @var string|array|PropertyValue|PropertyValue[]|array|Text|Text[]|array|URL|URL[]
-     */
-    public $taxonRank;
-
-    /**
      * Closest child taxa of the taxon in question.
      *
      * @var string|array|Taxon|Taxon[]|array|Text|Text[]|array|URL|URL[]
      */
     public $childTaxon;
+
+    /**
+     * A Defined Term contained in this term set.
+     *
+     * @var array|DefinedTerm|DefinedTerm[]
+     */
+    public $hasDefinedTerm;
 
     /**
      * Closest parent taxon of the taxon in question.
@@ -45,9 +43,11 @@ trait TaxonTrait
     public $parentTaxon;
 
     /**
-     * A Defined Term contained in this term set.
+     * The taxonomic rank of this taxon given preferably as a URI from a
+     * controlled vocabulary – typically the ranks from TDWG TaxonRank ontology
+     * or equivalent Wikidata URIs.
      *
-     * @var array|DefinedTerm|DefinedTerm[]
+     * @var string|array|PropertyValue|PropertyValue[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $hasDefinedTerm;
+    public $taxonRank;
 }

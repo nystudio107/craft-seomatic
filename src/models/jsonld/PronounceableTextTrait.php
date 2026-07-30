@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PronounceableText.
  *
  * @author    nystudio107
@@ -21,6 +21,16 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait PronounceableTextTrait
 {
+    /**
+     * The language of the content or performance or used in an action. Please use
+     * one of the language codes from the [IETF BCP 47
+     * standard](http://tools.ietf.org/html/bcp47). See also
+     * [[availableLanguage]].
+     *
+     * @var string|array|Language|Language[]|array|Text|Text[]
+     */
+    public $inLanguage;
+
     /**
      * Representation of a text [[textValue]] using the specified
      * [[speechToTextMarkup]]. For example the city name of Houston in IPA:
@@ -31,13 +41,6 @@ trait PronounceableTextTrait
     public $phoneticText;
 
     /**
-     * Text value being annotated.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $textValue;
-
-    /**
      * Form of markup used. eg. [SSML](https://www.w3.org/TR/speech-synthesis11)
      * or [IPA](https://www.wikidata.org/wiki/Property:P898).
      *
@@ -46,12 +49,9 @@ trait PronounceableTextTrait
     public $speechToTextMarkup;
 
     /**
-     * The language of the content or performance or used in an action. Please use
-     * one of the language codes from the [IETF BCP 47
-     * standard](http://tools.ietf.org/html/bcp47). See also
-     * [[availableLanguage]].
+     * Text value being annotated.
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var string|array|Text|Text[]
      */
-    public $inLanguage;
+    public $textValue;
 }

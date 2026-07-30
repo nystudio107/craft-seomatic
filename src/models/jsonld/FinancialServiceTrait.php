@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for FinancialService.
  *
  * @author    nystudio107
@@ -25,7 +25,7 @@ trait FinancialServiceTrait
      * Description of fees, commissions, and other terms applied either to a class
      * of financial product, or by a financial service organization.
      *
-     * @var string|array|URL|URL[]|array|Text|Text[]
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $feesAndCommissionsSpecification;
 }

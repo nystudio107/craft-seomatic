@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for RealEstateListing.
  *
  * @author    nystudio107
@@ -32,7 +32,7 @@ trait RealEstateListingTrait
      * Length of the lease for some [[Accommodation]], either particular to some
      * [[Offer]] or in some cases intrinsic to the property.
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]|array|Duration|Duration[]
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $leaseLength;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BoatTrip.
  *
  * @author    nystudio107
@@ -22,16 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BoatTripTrait
 {
     /**
-     * The terminal or port from which the boat departs.
-     *
-     * @var array|BoatTerminal|BoatTerminal[]
-     */
-    public $departureBoatTerminal;
-
-    /**
      * The terminal or port from which the boat arrives.
      *
      * @var array|BoatTerminal|BoatTerminal[]
      */
     public $arrivalBoatTerminal;
+
+    /**
+     * The terminal or port from which the boat departs.
+     *
+     * @var array|BoatTerminal|BoatTerminal[]
+     */
+    public $departureBoatTerminal;
 }

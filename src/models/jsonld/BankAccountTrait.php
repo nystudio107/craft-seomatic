@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BankAccount.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BankAccountTrait
 {
     /**
-     * The type of a bank account.
+     * A minimum amount that has to be paid in every month.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
-    public $bankAccountType;
+    public $accountMinimumInflow;
 
     /**
      * An overdraft is an extension of credit from a lending institution when an
@@ -39,9 +39,9 @@ trait BankAccountTrait
     public $accountOverdraftLimit;
 
     /**
-     * A minimum amount that has to be paid in every month.
+     * The type of a bank account.
      *
-     * @var array|MonetaryAmount|MonetaryAmount[]
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $accountMinimumInflow;
+    public $bankAccountType;
 }

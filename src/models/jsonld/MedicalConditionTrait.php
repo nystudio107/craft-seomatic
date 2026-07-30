@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalCondition.
  *
  * @author    nystudio107
@@ -21,6 +21,21 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait MedicalConditionTrait
 {
+    /**
+     * The anatomy of the underlying organ system or structures associated with
+     * this entity.
+     *
+     * @var array|AnatomicalStructure|AnatomicalStructure[]|array|AnatomicalSystem|AnatomicalSystem[]|array|SuperficialAnatomy|SuperficialAnatomy[]
+     */
+    public $associatedAnatomy;
+
+    /**
+     * The cause of a medical condition.
+     *
+     * @var array|MedicalCause|MedicalCause[]
+     */
+    public $cause;
+
     /**
      * One of a set of differential diagnoses for the condition. Specifically, a
      * closely-related or competing diagnosis typically considered later in the
@@ -41,20 +56,19 @@ trait MedicalConditionTrait
     public $drug;
 
     /**
-     * A possible unexpected and unfavorable evolution of a medical condition.
-     * Complications may include worsening of the signs or symptoms of the
-     * disease, extension of the condition to other organ systems, etc.
+     * The characteristics of associated patients, such as age, gender, race etc.
      *
      * @var string|array|Text|Text[]
      */
-    public $possibleComplication;
+    public $epidemiology;
 
     /**
-     * The stage of the condition, if applicable.
+     * The likely outcome in either the short term or long term of the medical
+     * condition.
      *
-     * @var array|MedicalConditionStage|MedicalConditionStage[]
+     * @var string|array|Text|Text[]
      */
-    public $stage;
+    public $expectedPrognosis;
 
     /**
      * The expected progression of the condition if it is not treated and allowed
@@ -65,11 +79,28 @@ trait MedicalConditionTrait
     public $naturalProgression;
 
     /**
-     * The characteristics of associated patients, such as age, gender, race etc.
+     * Changes in the normal mechanical, physical, and biochemical functions that
+     * are associated with this activity or condition.
      *
      * @var string|array|Text|Text[]
      */
-    public $epidemiology;
+    public $pathophysiology;
+
+    /**
+     * A possible unexpected and unfavorable evolution of a medical condition.
+     * Complications may include worsening of the signs or symptoms of the
+     * disease, extension of the condition to other organ systems, etc.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $possibleComplication;
+
+    /**
+     * A possible treatment to address this condition, sign or symptom.
+     *
+     * @var array|Drug|Drug[]|array|DrugClass|DrugClass[]|array|LifestyleModification|LifestyleModification[]|array|MedicalTherapy|MedicalTherapy[]
+     */
+    public $possibleTreatment;
 
     /**
      * A preventative therapy used to prevent an initial occurrence of the medical
@@ -80,19 +111,20 @@ trait MedicalConditionTrait
     public $primaryPrevention;
 
     /**
-     * The anatomy of the underlying organ system or structures associated with
-     * this entity.
+     * A modifiable or non-modifiable factor that increases the risk of a patient
+     * contracting this condition, e.g. age,  coexisting condition.
      *
-     * @var array|AnatomicalSystem|AnatomicalSystem[]|array|SuperficialAnatomy|SuperficialAnatomy[]|array|AnatomicalStructure|AnatomicalStructure[]
+     * @var array|MedicalRiskFactor|MedicalRiskFactor[]
      */
-    public $associatedAnatomy;
+    public $riskFactor;
 
     /**
-     * The status of the study (enumerated).
+     * A preventative therapy used to prevent reoccurrence of the medical
+     * condition after an initial episode of the condition.
      *
-     * @var string|array|MedicalStudyStatus|MedicalStudyStatus[]|array|EventStatusType|EventStatusType[]|array|Text|Text[]
+     * @var array|Drug|Drug[]|array|DrugClass|DrugClass[]|array|LifestyleModification|LifestyleModification[]|array|MedicalTherapy|MedicalTherapy[]
      */
-    public $status;
+    public $secondaryPrevention;
 
     /**
      * A sign or symptom of this condition. Signs are objective or physically
@@ -104,48 +136,23 @@ trait MedicalConditionTrait
     public $signOrSymptom;
 
     /**
+     * The stage of the condition, if applicable.
+     *
+     * @var array|MedicalConditionStage|MedicalConditionStage[]
+     */
+    public $stage;
+
+    /**
+     * The status of the study (enumerated).
+     *
+     * @var string|array|EventStatusType|EventStatusType[]|array|MedicalStudyStatus|MedicalStudyStatus[]|array|Text|Text[]
+     */
+    public $status;
+
+    /**
      * A medical test typically performed given this condition.
      *
      * @var array|MedicalTest|MedicalTest[]
      */
     public $typicalTest;
-
-    /**
-     * A possible treatment to address this condition, sign or symptom.
-     *
-     * @var array|MedicalTherapy|MedicalTherapy[]
-     */
-    public $possibleTreatment;
-
-    /**
-     * A modifiable or non-modifiable factor that increases the risk of a patient
-     * contracting this condition, e.g. age,  coexisting condition.
-     *
-     * @var array|MedicalRiskFactor|MedicalRiskFactor[]
-     */
-    public $riskFactor;
-
-    /**
-     * Changes in the normal mechanical, physical, and biochemical functions that
-     * are associated with this activity or condition.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $pathophysiology;
-
-    /**
-     * The likely outcome in either the short term or long term of the medical
-     * condition.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $expectedPrognosis;
-
-    /**
-     * A preventative therapy used to prevent reoccurrence of the medical
-     * condition after an initial episode of the condition.
-     *
-     * @var array|MedicalTherapy|MedicalTherapy[]
-     */
-    public $secondaryPrevention;
 }

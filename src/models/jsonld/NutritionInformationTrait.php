@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for NutritionInformation.
  *
  * @author    nystudio107
@@ -22,6 +22,20 @@ namespace nystudio107\seomatic\models\jsonld;
 trait NutritionInformationTrait
 {
     /**
+     * The number of calories.
+     *
+     * @var array|Energy|Energy[]
+     */
+    public $calories;
+
+    /**
+     * The number of grams of carbohydrates.
+     *
+     * @var array|Mass|Mass[]
+     */
+    public $carbohydrateContent;
+
+    /**
      * The number of milligrams of cholesterol.
      *
      * @var array|Mass|Mass[]
@@ -29,11 +43,25 @@ trait NutritionInformationTrait
     public $cholesterolContent;
 
     /**
-     * The number of milligrams of sodium.
+     * The number of grams of fat.
      *
      * @var array|Mass|Mass[]
      */
-    public $sodiumContent;
+    public $fatContent;
+
+    /**
+     * The number of grams of fiber.
+     *
+     * @var array|Mass|Mass[]
+     */
+    public $fiberContent;
+
+    /**
+     * The number of grams of protein.
+     *
+     * @var array|Mass|Mass[]
+     */
+    public $proteinContent;
 
     /**
      * The number of grams of saturated fat.
@@ -50,11 +78,18 @@ trait NutritionInformationTrait
     public $servingSize;
 
     /**
-     * The number of grams of protein.
+     * The number of milligrams of sodium.
      *
      * @var array|Mass|Mass[]
      */
-    public $proteinContent;
+    public $sodiumContent;
+
+    /**
+     * The number of grams of sugar.
+     *
+     * @var array|Mass|Mass[]
+     */
+    public $sugarContent;
 
     /**
      * The number of grams of trans fat.
@@ -69,39 +104,4 @@ trait NutritionInformationTrait
      * @var array|Mass|Mass[]
      */
     public $unsaturatedFatContent;
-
-    /**
-     * The number of calories.
-     *
-     * @var array|Energy|Energy[]
-     */
-    public $calories;
-
-    /**
-     * The number of grams of fat.
-     *
-     * @var array|Mass|Mass[]
-     */
-    public $fatContent;
-
-    /**
-     * The number of grams of sugar.
-     *
-     * @var array|Mass|Mass[]
-     */
-    public $sugarContent;
-
-    /**
-     * The number of grams of carbohydrates.
-     *
-     * @var array|Mass|Mass[]
-     */
-    public $carbohydrateContent;
-
-    /**
-     * The number of grams of fiber.
-     *
-     * @var array|Mass|Mass[]
-     */
-    public $fiberContent;
 }

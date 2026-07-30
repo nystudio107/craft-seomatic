@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Place.
  *
  * @author    nystudio107
@@ -21,113 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait PlaceTrait
 {
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) touch: "they have at least one boundary point in common, but no
-     * interior points." (A symmetric relationship, as defined in
-     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).)
-     *
-     * @var array|Place|Place[]|array|GeospatialGeometry|GeospatialGeometry[]
-     */
-    public $geoTouches;
-
-    /**
-     * The geo coordinates of the place.
-     *
-     * @var array|GeoShape|GeoShape[]|array|GeoCoordinates|GeoCoordinates[]
-     */
-    public $geo;
-
-    /**
-     * The basic containment relation between a place and one that contains it.
-     *
-     * @var array|Place|Place[]
-     */
-    public $containedInPlace;
-
-    /**
-     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
-     * This generic property does not make a statement about whether the feature
-     * is included in an offer for the main accommodation or available at extra
-     * costs.
-     *
-     * @var array|LocationFeatureSpecification|LocationFeatureSpecification[]
-     */
-    public $amenityFeature;
-
-    /**
-     * A slogan or motto associated with the item.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $slogan;
-
-    /**
-     * Upcoming or past event associated with this place, organization, or action.
-     *
-     * @var array|Event|Event[]
-     */
-    public $event;
-
-    /**
-     * A review of the item.
-     *
-     * @var array|Review|Review[]
-     */
-    public $review;
-
-    /**
-     * The longitude of a location. For example ```-122.08585``` ([WGS
-     * 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-     *
-     * @var float|string|array|Number|Number[]|array|Text|Text[]
-     */
-    public $longitude;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that geospatially overlaps it,
-     * i.e. they have some but not all points in common. As defined in
-     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     *
-     * @var array|Place|Place[]|array|GeospatialGeometry|GeospatialGeometry[]
-     */
-    public $geoOverlaps;
-
-    /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) are topologically disjoint: "they have no point in common. They
-     * form a set of disconnected geometries." (A symmetric relationship, as
-     * defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).)
-     *
-     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
-     */
-    public $geoDisjoint;
-
-    /**
-     * The total number of individuals that may attend an event or venue.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $maximumAttendeeCapacity;
-
-    /**
-     * A URL to a map of the place.
-     *
-     * @var array|URL|URL[]
-     */
-    public $maps;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to one that contains it, i.e. it is inside
-     * (i.e. within) its interior. As defined in
-     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     *
-     * @var array|Place|Place[]|array|GeospatialGeometry|GeospatialGeometry[]
-     */
-    public $geoWithin;
-
     /**
      * A property-value pair representing an additional characteristic of the
      * entity, e.g. a product feature or another characteristic for which there is
@@ -143,77 +36,29 @@ trait PlaceTrait
     public $additionalProperty;
 
     /**
-     * Photographs of this place.
+     * Physical address of the item.
      *
-     * @var array|Photograph|Photograph[]|array|ImageObject|ImageObject[]
+     * @var string|array|PostalAddress|PostalAddress[]|array|Text|Text[]
      */
-    public $photos;
+    public $address;
 
     /**
-     * Indicates whether it is allowed to smoke in the place, e.g. in the
-     * restaurant, hotel or hotel room.
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
      *
-     * @var bool|array|Boolean|Boolean[]
+     * @var array|AggregateRating|AggregateRating[]
      */
-    public $smokingAllowed;
+    public $aggregateRating;
 
     /**
-     * An associated logo.
+     * An amenity feature (e.g. a characteristic or service) of the Accommodation.
+     * This generic property does not make a statement about whether the feature
+     * is included in an offer for the main accommodation or available at extra
+     * costs.
      *
-     * @var array|URL|URL[]|array|ImageObject|ImageObject[]
+     * @var array|LocationFeatureSpecification|LocationFeatureSpecification[]
      */
-    public $logo;
-
-    /**
-     * A flag to signal that the [[Place]] is open to public visitors.  If this
-     * property is omitted there is no assumed default boolean value.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $publicAccess;
-
-    /**
-     * Review of the item.
-     *
-     * @var array|Review|Review[]
-     */
-    public $reviews;
-
-    /**
-     * The International Standard of Industrial Classification of All Economic
-     * Activities (ISIC), Revision 4 code for a particular organization, business
-     * person, or place.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $isicV4;
-
-    /**
-     * The telephone number.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $telephone;
-
-    /**
-     * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that crosses it: "a crosses b:
-     * they have some but not all interior points in common, and the dimension of
-     * the intersection is less than that of at least one of them". As defined in
-     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
-     *
-     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
-     */
-    public $geoCrosses;
-
-    /**
-     * A page providing information on how to book a tour of some [[Place]], such
-     * as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting,
-     * as well as other kinds of tours as appropriate.
-     *
-     * @var array|URL|URL[]
-     */
-    public $tourBookingPage;
+    public $amenityFeature;
 
     /**
      * A short textual code (also called "store code") that uniquely identifies a
@@ -227,54 +72,54 @@ trait PlaceTrait
     public $branchCode;
 
     /**
-     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also
-     * referred to as International Location Number or ILN) of the respective
-     * organization, person, or place. The GLN is a 13-digit number used to
-     * identify parties and physical locations.
+     * The basic containment relation between a place and one that contains it.
+     *
+     * @var array|Place|Place[]
+     */
+    public $containedIn;
+
+    /**
+     * The basic containment relation between a place and one that contains it.
+     *
+     * @var array|Place|Place[]
+     */
+    public $containedInPlace;
+
+    /**
+     * The basic containment relation between a place and another that it
+     * contains.
+     *
+     * @var array|Place|Place[]
+     */
+    public $containsPlace;
+
+    /**
+     * Upcoming or past event associated with this place, organization, or action.
+     *
+     * @var array|Event|Event[]
+     */
+    public $event;
+
+    /**
+     * Upcoming or past events associated with this place or organization.
+     *
+     * @var array|Event|Event[]
+     */
+    public $events;
+
+    /**
+     * The fax number.
      *
      * @var string|array|Text|Text[]
      */
-    public $globalLocationNumber;
+    public $faxNumber;
 
     /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) are topologically equal, as defined in
-     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). "Two geometries are
-     * topologically equal if their interiors intersect and no part of the
-     * interior or boundary of one geometry intersects the exterior of the other"
-     * (a symmetric relationship).
+     * The geo coordinates of the place.
      *
-     * @var array|Place|Place[]|array|GeospatialGeometry|GeospatialGeometry[]
+     * @var array|GeoCoordinates|GeoCoordinates[]|array|GeoShape|GeoShape[]
      */
-    public $geoEquals;
-
-    /**
-     * Indicates whether some facility (e.g. [[FoodEstablishment]],
-     * [[CovidTestingFacility]]) offers a service that can be used by driving
-     * through in a car. In the case of [[CovidTestingFacility]] such facilities
-     * could potentially help with social distancing from other
-     * potentially-infected users.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $hasDriveThroughService;
-
-    /**
-     * The latitude of a location. For example ```37.42242``` ([WGS
-     * 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
-     *
-     * @var string|float|array|Text|Text[]|array|Number|Number[]
-     */
-    public $latitude;
-
-    /**
-     * Keywords or tags used to describe some item. Multiple textual entries in a
-     * keywords list are typically delimited by commas, or by repeating the
-     * property.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]
-     */
-    public $keywords;
+    public $geo;
 
     /**
      * Represents a relationship between two geometries (or the places they
@@ -288,48 +133,13 @@ trait PlaceTrait
     public $geoContains;
 
     /**
-     * A URL to a map of the place.
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that covers it. As defined in
+     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
      *
-     * @var array|Map|Map[]|array|URL|URL[]
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
      */
-    public $hasMap;
-
-    /**
-     * Upcoming or past events associated with this place or organization.
-     *
-     * @var array|Event|Event[]
-     */
-    public $events;
-
-    /**
-     * The special opening hours of a certain place.  Use this to explicitly
-     * override general opening hours brought in scope by
-     * [[openingHoursSpecification]] or [[openingHours]].
-     *
-     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
-     */
-    public $specialOpeningHoursSpecification;
-
-    /**
-     * The opening hours of a certain place.
-     *
-     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
-     */
-    public $openingHoursSpecification;
-
-    /**
-     * A photograph of this place.
-     *
-     * @var array|Photograph|Photograph[]|array|ImageObject|ImageObject[]
-     */
-    public $photo;
-
-    /**
-     * A flag to signal that the item, event, or place is accessible for free.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $isAccessibleForFree;
+    public $geoCoveredBy;
 
     /**
      * Represents a relationship between two geometries (or the places they
@@ -342,21 +152,179 @@ trait PlaceTrait
     public $geoCovers;
 
     /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to another that crosses it: "a crosses b:
+     * they have some but not all interior points in common, and the dimension of
+     * the intersection is less than that of at least one of them". As defined in
+     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
      *
-     * @var array|AggregateRating|AggregateRating[]
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
      */
-    public $aggregateRating;
+    public $geoCrosses;
+
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) are topologically disjoint: "they have no point in common. They
+     * form a set of disconnected geometries." (A symmetric relationship, as
+     * defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).)
+     *
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
+     */
+    public $geoDisjoint;
+
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) are topologically equal, as defined in
+     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). "Two geometries are
+     * topologically equal if their interiors intersect and no part of the
+     * interior or boundary of one geometry intersects the exterior of the other"
+     * (a symmetric relationship).
+     *
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
+     */
+    public $geoEquals;
+
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) have at least one point in common. As defined in
+     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     *
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
+     */
+    public $geoIntersects;
 
     /**
      * Represents a relationship between two geometries (or the places they
-     * represent), relating a geometry to another that covers it. As defined in
+     * represent), relating a geometry to another that geospatially overlaps it,
+     * i.e. they have some but not all points in common. As defined in
      * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
      *
-     * @var array|Place|Place[]|array|GeospatialGeometry|GeospatialGeometry[]
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
      */
-    public $geoCoveredBy;
+    public $geoOverlaps;
+
+    /**
+     * Represents spatial relations in which two geometries (or the places they
+     * represent) touch: "they have at least one boundary point in common, but no
+     * interior points." (A symmetric relationship, as defined in
+     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).)
+     *
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
+     */
+    public $geoTouches;
+
+    /**
+     * Represents a relationship between two geometries (or the places they
+     * represent), relating a geometry to one that contains it, i.e. it is inside
+     * (i.e. within) its interior. As defined in
+     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     *
+     * @var array|GeospatialGeometry|GeospatialGeometry[]|array|Place|Place[]
+     */
+    public $geoWithin;
+
+    /**
+     * The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also
+     * referred to as International Location Number or ILN) of the respective
+     * organization, person, or place. The GLN is a 13-digit number used to
+     * identify parties and physical locations.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $globalLocationNumber;
+
+    /**
+     * Certification information about a product, organization, service, place, or
+     * person.
+     *
+     * @var array|Certification|Certification[]
+     */
+    public $hasCertification;
+
+    /**
+     * Indicates whether some facility (e.g. [[FoodEstablishment]],
+     * [[CovidTestingFacility]]) offers a service that can be used by driving
+     * through in a car. In the case of [[CovidTestingFacility]] such facilities
+     * could potentially help with social distancing from other
+     * potentially-infected users.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $hasDriveThroughService;
+
+    /**
+     * The <a href="https://www.gs1.org/standards/gs1-digital-link">GS1 digital
+     * link</a> associated with the object. This URL should conform to the
+     * particular requirements of digital links. The link should only contain the
+     * Application Identifiers (AIs) that are relevant for the entity being
+     * annotated, for instance a [[Product]] or an [[Organization]], and for the
+     * correct granularity. In particular, for products:<ul><li>A Digital Link
+     * that contains a serial number (AI <code>21</code>) should only be present
+     * on instances of [[IndividualProduct]]</li><li>A Digital Link that contains
+     * a lot number (AI <code>10</code>) should be annotated as [[SomeProducts]]
+     * if only products from that lot are sold, or [[IndividualProduct]] if there
+     * is only a specific product.</li><li>A Digital Link that contains a global
+     * model number (AI <code>8013</code>) should be attached to a [[Product]] or
+     * a [[ProductModel]].</li></ul> Other item types should be adapted similarly.
+     *
+     * @var array|URL|URL[]
+     */
+    public $hasGS1DigitalLink;
+
+    /**
+     * A URL to a map of the place.
+     *
+     * @var array|Map|Map[]|array|URL|URL[]
+     */
+    public $hasMap;
+
+    /**
+     * A flag to signal that the item, event, or place is accessible for free.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $isAccessibleForFree;
+
+    /**
+     * The International Standard of Industrial Classification of All Economic
+     * Activities (ISIC), Revision 4 code for a particular organization, business
+     * person, or place.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $isicV4;
+
+    /**
+     * Keywords or tags used to describe some item. Multiple textual entries in a
+     * keywords list are typically delimited by commas, or by repeating the
+     * property.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $keywords;
+
+    /**
+     * The latitude of a location. For example ```37.42242``` ([WGS
+     * 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
+     *
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
+     */
+    public $latitude;
+
+    /**
+     * An associated logo.
+     *
+     * @var array|ImageObject|ImageObject[]|array|URL|URL[]
+     */
+    public $logo;
+
+    /**
+     * The longitude of a location. For example ```-122.08585``` ([WGS
+     * 84](https://en.wikipedia.org/wiki/World_Geodetic_System)).
+     *
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
+     */
+    public $longitude;
 
     /**
      * A URL to a map of the place.
@@ -366,48 +334,99 @@ trait PlaceTrait
     public $map;
 
     /**
-     * Represents spatial relations in which two geometries (or the places they
-     * represent) have at least one point in common. As defined in
-     * [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM).
+     * A URL to a map of the place.
      *
-     * @var array|Place|Place[]|array|GeospatialGeometry|GeospatialGeometry[]
+     * @var array|URL|URL[]
      */
-    public $geoIntersects;
+    public $maps;
 
     /**
-     * Physical address of the item.
+     * The total number of individuals that may attend an event or venue.
      *
-     * @var string|array|Text|Text[]|array|PostalAddress|PostalAddress[]
+     * @var int|array|Integer|Integer[]
      */
-    public $address;
+    public $maximumAttendeeCapacity;
 
     /**
-     * The fax number.
+     * The opening hours of a certain place.
+     *
+     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
+     */
+    public $openingHoursSpecification;
+
+    /**
+     * A photograph of this place.
+     *
+     * @var array|ImageObject|ImageObject[]|array|Photograph|Photograph[]
+     */
+    public $photo;
+
+    /**
+     * Photographs of this place.
+     *
+     * @var array|ImageObject|ImageObject[]|array|Photograph|Photograph[]
+     */
+    public $photos;
+
+    /**
+     * A flag to signal that the [[Place]] is open to public visitors.  If this
+     * property is omitted there is no assumed default boolean value.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $publicAccess;
+
+    /**
+     * A review of the item.
+     *
+     * @var array|Review|Review[]
+     */
+    public $review;
+
+    /**
+     * Review of the item.
+     *
+     * @var array|Review|Review[]
+     */
+    public $reviews;
+
+    /**
+     * A slogan or motto associated with the item.
      *
      * @var string|array|Text|Text[]
      */
-    public $faxNumber;
+    public $slogan;
 
     /**
-     * The basic containment relation between a place and one that contains it.
+     * Indicates whether it is allowed to smoke in the place, e.g. in the
+     * restaurant, hotel or hotel room.
      *
-     * @var array|Place|Place[]
+     * @var bool|array|Boolean|Boolean[]
      */
-    public $containedIn;
+    public $smokingAllowed;
 
     /**
-     * The basic containment relation between a place and another that it
-     * contains.
+     * The special opening hours of a certain place.  Use this to explicitly
+     * override general opening hours brought in scope by
+     * [[openingHoursSpecification]] or [[openingHours]].
      *
-     * @var array|Place|Place[]
+     * @var array|OpeningHoursSpecification|OpeningHoursSpecification[]
      */
-    public $containsPlace;
+    public $specialOpeningHoursSpecification;
 
     /**
-     * Certification information about a product, organization, service, place, or
-     * person.
+     * The telephone number.
      *
-     * @var array|Certification|Certification[]
+     * @var string|array|Text|Text[]
      */
-    public $hasCertification;
+    public $telephone;
+
+    /**
+     * A page providing information on how to book a tour of some [[Place]], such
+     * as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting,
+     * as well as other kinds of tours as appropriate.
+     *
+     * @var array|URL|URL[]
+     */
+    public $tourBookingPage;
 }

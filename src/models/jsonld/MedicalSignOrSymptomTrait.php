@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalSignOrSymptom.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait MedicalSignOrSymptomTrait
     /**
      * A possible treatment to address this condition, sign or symptom.
      *
-     * @var array|MedicalTherapy|MedicalTherapy[]
+     * @var array|Drug|Drug[]|array|DrugClass|DrugClass[]|array|LifestyleModification|LifestyleModification[]|array|MedicalTherapy|MedicalTherapy[]
      */
     public $possibleTreatment;
 }

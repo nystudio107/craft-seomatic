@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalRiskEstimator.
  *
  * @author    nystudio107
@@ -22,17 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MedicalRiskEstimatorTrait
 {
     /**
+     * The condition, complication, or symptom whose risk is being estimated.
+     *
+     * @var array|MedicalEntity|MedicalEntity[]
+     */
+    public $estimatesRiskOf;
+
+    /**
      * A modifiable or non-modifiable risk factor included in the calculation,
      * e.g. age, coexisting condition.
      *
      * @var array|MedicalRiskFactor|MedicalRiskFactor[]
      */
     public $includedRiskFactor;
-
-    /**
-     * The condition, complication, or symptom whose risk is being estimated.
-     *
-     * @var array|MedicalEntity|MedicalEntity[]
-     */
-    public $estimatesRiskOf;
 }

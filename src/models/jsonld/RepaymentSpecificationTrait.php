@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for RepaymentSpecification.
  *
  * @author    nystudio107
@@ -21,14 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait RepaymentSpecificationTrait
 {
-    /**
-     * The amount to be paid as a penalty in the event of early payment of the
-     * loan.
-     *
-     * @var array|MonetaryAmount|MonetaryAmount[]
-     */
-    public $earlyPrepaymentPenalty;
-
     /**
      * a type of payment made in cash during the onset of the purchase of an
      * expensive good/service. The payment typically represents only a percentage
@@ -39,11 +31,27 @@ trait RepaymentSpecificationTrait
     public $downPayment;
 
     /**
+     * The amount to be paid as a penalty in the event of early payment of the
+     * loan.
+     *
+     * @var array|MonetaryAmount|MonetaryAmount[]
+     */
+    public $earlyPrepaymentPenalty;
+
+    /**
      * The amount of money to pay in a single payment.
      *
      * @var array|MonetaryAmount|MonetaryAmount[]
      */
     public $loanPaymentAmount;
+
+    /**
+     * Frequency of payments due, i.e. number of months between payments. This is
+     * defined as a frequency, i.e. the reciprocal of a period of time.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $loanPaymentFrequency;
 
     /**
      * The number of payments contractually required at origination to repay the
@@ -53,12 +61,4 @@ trait RepaymentSpecificationTrait
      * @var float|array|Number|Number[]
      */
     public $numberOfLoanPayments;
-
-    /**
-     * Frequency of payments due, i.e. number of months between payments. This is
-     * defined as a frequency, i.e. the reciprocal of a period of time.
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $loanPaymentFrequency;
 }

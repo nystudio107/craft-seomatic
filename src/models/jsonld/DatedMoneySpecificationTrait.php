@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DatedMoneySpecification.
  *
  * @author    nystudio107
@@ -21,14 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait DatedMoneySpecificationTrait
 {
-    /**
-     * The end date and time of the item (in [ISO 8601 date
-     * format](http://en.wikipedia.org/wiki/ISO_8601)).
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $endDate;
-
     /**
      * The amount of money.
      *
@@ -48,6 +40,14 @@ trait DatedMoneySpecificationTrait
      * @var string|array|Text|Text[]
      */
     public $currency;
+
+    /**
+     * The end date and time of the item (in [ISO 8601 date
+     * format](http://en.wikipedia.org/wiki/ISO_8601)).
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $endDate;
 
     /**
      * The start date and time of the item (in [ISO 8601 date

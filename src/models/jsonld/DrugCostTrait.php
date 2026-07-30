@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DrugCost.
  *
  * @author    nystudio107
@@ -29,28 +29,6 @@ trait DrugCostTrait
     public $applicableLocation;
 
     /**
-     * Additional details to capture the origin of the cost data. For example,
-     * 'Medicare Part B'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $costOrigin;
-
-    /**
-     * The unit in which the drug is measured, e.g. '5 mg tablet'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $drugUnit;
-
-    /**
-     * The cost per unit of the drug.
-     *
-     * @var string|float|array|Text|Text[]|array|Number|Number[]|array|QualitativeValue|QualitativeValue[]
-     */
-    public $costPerUnit;
-
-    /**
      * The category of cost, such as wholesale, retail, reimbursement cap, etc.
      *
      * @var array|DrugCostCategory|DrugCostCategory[]
@@ -64,4 +42,26 @@ trait DrugCostTrait
      * @var string|array|Text|Text[]
      */
     public $costCurrency;
+
+    /**
+     * Additional details to capture the origin of the cost data. For example,
+     * 'Medicare Part B'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $costOrigin;
+
+    /**
+     * The cost per unit of the drug.
+     *
+     * @var float|string|array|Number|Number[]|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]
+     */
+    public $costPerUnit;
+
+    /**
+     * The unit in which the drug is measured, e.g. '5 mg tablet'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $drugUnit;
 }

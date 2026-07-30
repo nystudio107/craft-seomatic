@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Event.
  *
  * @author    nystudio107
@@ -22,76 +22,57 @@ namespace nystudio107\seomatic\models\jsonld;
 trait EventTrait
 {
     /**
-     * The end date and time of the item (in [ISO 8601 date
-     * format](http://en.wikipedia.org/wiki/ISO_8601)).
+     * The subject matter of an object.
      *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     * @var array|Thing|Thing[]
      */
-    public $endDate;
+    public $about;
 
     /**
-     * A work featured in some event, e.g. exhibited in an ExhibitionEvent.
-     * Specific subproperties are available for workPerformed (e.g. a play), or a
-     * workPresented (a Movie at a ScreeningEvent).
+     * An actor (individual or a group), e.g. in TV, radio, movie, video games
+     * etc., or in an event. Actors can be associated with individual items or
+     * with a series, episode, clip.
      *
-     * @var array|CreativeWork|CreativeWork[]
+     * @var array|PerformingGroup|PerformingGroup[]|array|Person|Person[]
      */
-    public $workFeatured;
+    public $actor;
 
     /**
-     * A review of the item.
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
      *
-     * @var array|Review|Review[]
+     * @var array|AggregateRating|AggregateRating[]
      */
-    public $review;
+    public $aggregateRating;
 
     /**
-     * A performer at the event—for example, a presenter, musician, musical
-     * group or actor.
+     * A person or organization attending the event.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $performer;
+    public $attendee;
 
     /**
-     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
-     * date format](http://en.wikipedia.org/wiki/ISO_8601).
+     * A person attending the event.
      *
-     * @var array|Duration|Duration[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $duration;
+    public $attendees;
 
     /**
-     * The maximum physical attendee capacity of an [[Event]] whose
-     * [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline
-     * aspects, in the case of a [[MixedEventAttendanceMode]]).
+     * An intended audience, i.e. a group for whom something was created.
      *
-     * @var int|array|Integer|Integer[]
+     * @var array|Audience|Audience[]
      */
-    public $maximumPhysicalAttendeeCapacity;
+    public $audience;
 
     /**
-     * The total number of individuals that may attend an event or venue.
+     * The person or organization who wrote a composition, or who is the composer
+     * of a work performed at some event.
      *
-     * @var int|array|Integer|Integer[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $maximumAttendeeCapacity;
-
-    /**
-     * An eventStatus of an event represents its status; particularly useful when
-     * an event is cancelled or rescheduled.
-     *
-     * @var array|EventStatusType|EventStatusType[]
-     */
-    public $eventStatus;
-
-    /**
-     * Events that are a part of this event. For example, a conference event
-     * includes many presentations, each subEvents of the conference.
-     *
-     * @var array|Event|Event[]
-     */
-    public $subEvents;
+    public $composer;
 
     /**
      * A secondary contributor to the CreativeWork or Event.
@@ -110,45 +91,27 @@ trait EventTrait
     public $director;
 
     /**
-     * The maximum virtual attendee capacity of an [[Event]] whose
-     * [[eventAttendanceMode]] is [[OnlineEventAttendanceMode]] (or the online
-     * aspects, in the case of a [[MixedEventAttendanceMode]]).
+     * The time admission will commence.
      *
-     * @var int|array|Integer|Integer[]
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
      */
-    public $maximumVirtualAttendeeCapacity;
+    public $doorTime;
 
     /**
-     * The person or organization who wrote a composition, or who is the composer
-     * of a work performed at some event.
+     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
+     * duration format](http://en.wikipedia.org/wiki/ISO_8601).
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $composer;
+    public $duration;
 
     /**
-     * The location of, for example, where an event is happening, where an
-     * organization is located, or where an action takes place.
+     * The end date and time of the item (in [ISO 8601 date
+     * format](http://en.wikipedia.org/wiki/ISO_8601)).
      *
-     * @var string|array|PostalAddress|PostalAddress[]|array|VirtualLocation|VirtualLocation[]|array|Text|Text[]|array|Place|Place[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $location;
-
-    /**
-     * A work performed in some event, for example a play performed in a
-     * TheaterEvent.
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $workPerformed;
-
-    /**
-     * A [[Grant]] that directly or indirectly provide funding or sponsorship for
-     * this item. See also [[ownershipFundingInfo]].
-     *
-     * @var array|Grant|Grant[]
-     */
-    public $funding;
+    public $endDate;
 
     /**
      * The eventAttendanceMode of an event indicates whether it occurs online,
@@ -157,138 +120,6 @@ trait EventTrait
      * @var array|EventAttendanceModeEnumeration|EventAttendanceModeEnumeration[]
      */
     public $eventAttendanceMode;
-
-    /**
-     * An event that this event is a part of. For example, a collection of
-     * individual music performances might each have a music festival as their
-     * superEvent.
-     *
-     * @var array|Event|Event[]
-     */
-    public $superEvent;
-
-    /**
-     * The main performer or performers of the event—for example, a presenter,
-     * musician, or actor.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $performers;
-
-    /**
-     * A person attending the event.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $attendees;
-
-    /**
-     * An offer to provide this item—for example, an offer to sell a product,
-     * rent the DVD of a movie, perform a service, or give away tickets to an
-     * event. Use [[businessFunction]] to indicate the kind of transaction
-     * offered, i.e. sell, lease, etc. This property can also be used to describe
-     * a [[Demand]]. While this property is listed as expected on a number of
-     * common types, it can be used in others. In that case, using a second type,
-     * such as Product or a subtype of Product, can clarify the nature of the
-     * offer.
-     *
-     * @var array|Demand|Demand[]|array|Offer|Offer[]
-     */
-    public $offers;
-
-    /**
-     * The subject matter of the content.
-     *
-     * @var array|Thing|Thing[]
-     */
-    public $about;
-
-    /**
-     * An intended audience, i.e. a group for whom something was created.
-     *
-     * @var array|Audience|Audience[]
-     */
-    public $audience;
-
-    /**
-     * Keywords or tags used to describe some item. Multiple textual entries in a
-     * keywords list are typically delimited by commas, or by repeating the
-     * property.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]
-     */
-    public $keywords;
-
-    /**
-     * A person or organization that supports a thing through a pledge, promise,
-     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
-     * sponsor of an event.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $sponsor;
-
-    /**
-     * The CreativeWork that captured all or part of this Event.
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $recordedIn;
-
-    /**
-     * A person or organization attending the event.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $attendee;
-
-    /**
-     * The number of attendee places for an event that remain unallocated.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $remainingAttendeeCapacity;
-
-    /**
-     * A flag to signal that the item, event, or place is accessible for free.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $isAccessibleForFree;
-
-    /**
-     * The typical expected age range, e.g. '7-9', '11-'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $typicalAgeRange;
-
-    /**
-     * A person or organization that supports (sponsors) something through some
-     * kind of financial contribution.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $funder;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
-     *
-     * @var array|AggregateRating|AggregateRating[]
-     */
-    public $aggregateRating;
-
-    /**
-     * Used in conjunction with eventStatus for rescheduled or cancelled events.
-     * This property contains the previously scheduled start date. For rescheduled
-     * events, the startDate property should be used for the newly scheduled start
-     * date. In the (rare) case of an event that has been postponed and
-     * rescheduled multiple times, this field may be repeated.
-     *
-     * @var array|Date|Date[]
-     */
-    public $previousStartDate;
 
     /**
      * Associates an [[Event]] with a [[Schedule]]. There are circumstances where
@@ -308,19 +139,44 @@ trait EventTrait
     public $eventSchedule;
 
     /**
-     * An organizer of an Event.
+     * An eventStatus of an event represents its status; particularly useful when
+     * an event is cancelled or rescheduled.
+     *
+     * @var array|EventStatusType|EventStatusType[]
+     */
+    public $eventStatus;
+
+    /**
+     * A person or organization that supports (sponsors) something through some
+     * kind of financial contribution.
      *
      * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $organizer;
+    public $funder;
 
     /**
-     * An Event that is part of this event. For example, a conference event
-     * includes many presentations, each of which is a subEvent of the conference.
+     * A [[Grant]] that directly or indirectly provide funding or sponsorship for
+     * this item. See also [[ownershipFundingInfo]].
      *
-     * @var array|Event|Event[]
+     * @var array|Grant|Grant[]
      */
-    public $subEvent;
+    public $funding;
+
+    /**
+     * An offer to participate in the event, for example, Call for Proposals, Call
+     * for Speakers, or Call for Performers.
+     *
+     * @var array|Offer|Offer[]
+     */
+    public $hasParticipationOffer;
+
+    /**
+     * An offer to sponsor the event, for example, Sponsorship Prospectus,
+     * Sponsorship Opportunities, or Sponsor Packages.
+     *
+     * @var array|Offer|Offer[]
+     */
+    public $hasSponsorshipOffer;
 
     /**
      * The language of the content or performance or used in an action. Please use
@@ -328,9 +184,136 @@ trait EventTrait
      * standard](http://tools.ietf.org/html/bcp47). See also
      * [[availableLanguage]].
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var string|array|Language|Language[]|array|Text|Text[]
      */
     public $inLanguage;
+
+    /**
+     * A flag to signal that the item, event, or place is accessible for free.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $isAccessibleForFree;
+
+    /**
+     * Keywords or tags used to describe some item. Multiple textual entries in a
+     * keywords list are typically delimited by commas, or by repeating the
+     * property.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $keywords;
+
+    /**
+     * The location of, for example, where an event is happening, where an
+     * organization is located, or where an action takes place.
+     *
+     * @var string|array|Place|Place[]|array|PostalAddress|PostalAddress[]|array|Text|Text[]|array|VirtualLocation|VirtualLocation[]
+     */
+    public $location;
+
+    /**
+     * The total number of individuals that may attend an event or venue.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $maximumAttendeeCapacity;
+
+    /**
+     * The maximum physical attendee capacity of an [[Event]] whose
+     * [[eventAttendanceMode]] is [[OfflineEventAttendanceMode]] (or the offline
+     * aspects, in the case of a [[MixedEventAttendanceMode]]).
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $maximumPhysicalAttendeeCapacity;
+
+    /**
+     * The maximum virtual attendee capacity of an [[Event]] whose
+     * [[eventAttendanceMode]] is [[OnlineEventAttendanceMode]] (or the online
+     * aspects, in the case of a [[MixedEventAttendanceMode]]).
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $maximumVirtualAttendeeCapacity;
+
+    /**
+     * An offer to provide this item—for example, an offer to sell a product,
+     * rent the DVD of a movie, perform a service, or give away tickets to an
+     * event. Use [[businessFunction]] to indicate the kind of transaction
+     * offered, i.e. sell, lease, etc. This property can also be used to describe
+     * a [[Demand]]. While this property is listed as expected on a number of
+     * common types, it can be used in others. In that case, using a second type,
+     * such as Product or a subtype of Product, can clarify the nature of the
+     * offer.
+     *
+     * @var array|Demand|Demand[]|array|Offer|Offer[]
+     */
+    public $offers;
+
+    /**
+     * An organizer of an Event.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $organizer;
+
+    /**
+     * A performer at the event—for example, a presenter, musician, musical
+     * group or actor.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $performer;
+
+    /**
+     * The main performer or performers of the event—for example, a presenter,
+     * musician, or actor.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $performers;
+
+    /**
+     * Used in conjunction with eventStatus for rescheduled or cancelled events.
+     * This property contains the previously scheduled start date. For rescheduled
+     * events, the startDate property should be used for the newly scheduled start
+     * date. In the (rare) case of an event that has been postponed and
+     * rescheduled multiple times, this field may be repeated.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $previousStartDate;
+
+    /**
+     * The CreativeWork that captured all or part of this Event.
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $recordedIn;
+
+    /**
+     * The number of attendee places for an event that remain unallocated.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $remainingAttendeeCapacity;
+
+    /**
+     * A review of the item.
+     *
+     * @var array|Review|Review[]
+     */
+    public $review;
+
+    /**
+     * A person or organization that supports a thing through a pledge, promise,
+     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
+     * sponsor of an event.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $sponsor;
 
     /**
      * The start date and time of the item (in [ISO 8601 date
@@ -341,27 +324,60 @@ trait EventTrait
     public $startDate;
 
     /**
-     * The time admission will commence.
+     * An Event that is part of this event. For example, a conference event
+     * includes many presentations, each of which is a subEvent of the conference.
      *
-     * @var array|Time|Time[]|array|DateTime|DateTime[]
+     * @var array|Event|Event[]
      */
-    public $doorTime;
+    public $subEvent;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
+     * Events that are a part of this event. For example, a conference event
+     * includes many presentations, each subEvents of the conference.
      *
-     * @var array|Person|Person[]
+     * @var array|Event|Event[]
      */
-    public $actor;
+    public $subEvents;
+
+    /**
+     * An event that this event is a part of. For example, a collection of
+     * individual music performances might each have a music festival as their
+     * superEvent.
+     *
+     * @var array|Event|Event[]
+     */
+    public $superEvent;
 
     /**
      * Organization or person who adapts a creative work to different languages,
      * regional differences and technical requirements of a target market, or that
      * translates during some event.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $translator;
+
+    /**
+     * The typical expected age range, e.g. '7-9', '11-'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $typicalAgeRange;
+
+    /**
+     * A work featured in some event, e.g. exhibited in an ExhibitionEvent.
+     * Specific subproperties are available for workPerformed (e.g. a play), or a
+     * workPresented (a Movie at a ScreeningEvent).
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $workFeatured;
+
+    /**
+     * A work performed in some event, for example a play performed in a
+     * TheaterEvent.
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $workPerformed;
 }

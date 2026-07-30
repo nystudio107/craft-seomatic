@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for WebPage.
  *
  * @author    nystudio107
@@ -21,13 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait WebPageTrait
 {
-    /**
-     * One of the domain specialities to which this web page's content applies.
-     *
-     * @var array|Specialty|Specialty[]
-     */
-    public $specialty;
-
     /**
      * A set of links that can help a user understand and navigate a website
      * hierarchy.
@@ -52,20 +45,11 @@ trait WebPageTrait
     public $mainContentOfPage;
 
     /**
-     * The most significant URLs on the page. Typically, these are the
-     * non-navigation links that are clicked on the most.
+     * Indicates the main image on the page.
      *
-     * @var array|URL|URL[]
+     * @var array|ImageObject|ImageObject[]
      */
-    public $significantLinks;
-
-    /**
-     * People or organizations that have reviewed the content on this web page for
-     * accuracy and/or completeness.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $reviewedBy;
+    public $primaryImageOfPage;
 
     /**
      * A link related to this web page, for example to other related web pages.
@@ -75,11 +59,12 @@ trait WebPageTrait
     public $relatedLink;
 
     /**
-     * Indicates the main image on the page.
+     * People or organizations that have reviewed the content on this web page for
+     * accuracy and/or completeness.
      *
-     * @var array|ImageObject|ImageObject[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $primaryImageOfPage;
+    public $reviewedBy;
 
     /**
      * One of the more significant URLs on the page. Typically, these are the
@@ -88,6 +73,14 @@ trait WebPageTrait
      * @var array|URL|URL[]
      */
     public $significantLink;
+
+    /**
+     * The most significant URLs on the page. Typically, these are the
+     * non-navigation links that are clicked on the most.
+     *
+     * @var array|URL|URL[]
+     */
+    public $significantLinks;
 
     /**
      * Indicates sections of a Web page that are particularly 'speakable' in the
@@ -109,7 +102,14 @@ trait WebPageTrait
      * [[SpeakableSpecification]]  which is defined to be a possible value of the
      * *speakable* property.
      *
-     * @var array|URL|URL[]|array|SpeakableSpecification|SpeakableSpecification[]
+     * @var array|SpeakableSpecification|SpeakableSpecification[]|array|URL|URL[]
      */
     public $speakable;
+
+    /**
+     * One of the domain specialities to which this web page's content applies.
+     *
+     * @var array|Specialty|Specialty[]
+     */
+    public $specialty;
 }

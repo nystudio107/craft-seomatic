@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ProductGroup.
  *
  * @author    nystudio107
@@ -22,14 +22,12 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ProductGroupTrait
 {
     /**
-     * Indicates the property or properties by which the variants in a
-     * [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties
-     * can be referenced by their short name e.g. "color"; terms defined elsewhere
-     * can be referenced with their URIs.
+     * Indicates a [[Product]] that is a member of this [[ProductGroup]] (or
+     * [[ProductModel]]).
      *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     * @var array|Product|Product[]
      */
-    public $variesBy;
+    public $hasVariant;
 
     /**
      * Indicates a textual identifier for a ProductGroup.
@@ -39,10 +37,12 @@ trait ProductGroupTrait
     public $productGroupID;
 
     /**
-     * Indicates a [[Product]] that is a member of this [[ProductGroup]] (or
-     * [[ProductModel]]).
+     * Indicates the property or properties by which the variants in a
+     * [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties
+     * can be referenced by their short name e.g. "color"; terms defined elsewhere
+     * can be referenced with their URIs.
      *
-     * @var array|Product|Product[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
-    public $hasVariant;
+    public $variesBy;
 }

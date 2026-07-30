@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PostalCodeRangeSpecification.
  *
  * @author    nystudio107
@@ -22,17 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PostalCodeRangeSpecificationTrait
 {
     /**
+     * First postal code in a range (included).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $postalCodeBegin;
+
+    /**
      * Last postal code in the range (included). Needs to be after
      * [[postalCodeBegin]].
      *
      * @var string|array|Text|Text[]
      */
     public $postalCodeEnd;
-
-    /**
-     * First postal code in a range (included).
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $postalCodeBegin;
 }

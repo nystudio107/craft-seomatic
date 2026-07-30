@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Vein.
  *
  * @author    nystudio107
@@ -32,7 +32,7 @@ trait VeinTrait
      * The anatomical or organ system drained by this vessel; generally refers to
      * a specific part of an organ.
      *
-     * @var array|AnatomicalSystem|AnatomicalSystem[]|array|AnatomicalStructure|AnatomicalStructure[]
+     * @var array|AnatomicalStructure|AnatomicalStructure[]|array|AnatomicalSystem|AnatomicalSystem[]
      */
     public $regionDrained;
 

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Airline.
  *
  * @author    nystudio107
@@ -22,17 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait AirlineTrait
 {
     /**
-     * IATA identifier for an airline or airport.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $iataCode;
-
-    /**
      * The type of boarding policy used by the airline (e.g. zone-based or
      * group-based).
      *
      * @var array|BoardingPolicyType|BoardingPolicyType[]
      */
     public $boardingPolicy;
+
+    /**
+     * IATA identifier for an airline or airport.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $iataCode;
 }

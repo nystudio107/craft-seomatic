@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Hospital.
  *
  * @author    nystudio107
@@ -24,16 +24,9 @@ trait HospitalTrait
     /**
      * A medical service available from this provider.
      *
-     * @var array|MedicalTest|MedicalTest[]|array|MedicalProcedure|MedicalProcedure[]|array|MedicalTherapy|MedicalTherapy[]
+     * @var array|MedicalProcedure|MedicalProcedure[]|array|MedicalTest|MedicalTest[]|array|MedicalTherapy|MedicalTherapy[]
      */
     public $availableService;
-
-    /**
-     * A medical specialty of the provider.
-     *
-     * @var array|MedicalSpecialty|MedicalSpecialty[]
-     */
-    public $medicalSpecialty;
 
     /**
      * Indicates data describing a hospital, e.g. a CDC [[CDCPMDRecord]] or as
@@ -42,4 +35,11 @@ trait HospitalTrait
      * @var array|CDCPMDRecord|CDCPMDRecord[]|array|Dataset|Dataset[]
      */
     public $healthcareReportingData;
+
+    /**
+     * A medical specialty of the provider.
+     *
+     * @var array|MedicalSpecialty|MedicalSpecialty[]
+     */
+    public $medicalSpecialty;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for SingleFamilyResidence.
  *
  * @author    nystudio107
@@ -21,6 +21,16 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait SingleFamilyResidenceTrait
 {
+    /**
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfRooms;
+
     /**
      * The allowed total occupancy for the accommodation in persons (including
      * infants etc). For individual accommodations, this is not necessarily the
@@ -31,14 +41,4 @@ trait SingleFamilyResidenceTrait
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $occupancy;
-
-    /**
-     * The number of rooms (excluding bathrooms and closets) of the accommodation
-     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
-     * The type of room can be put in the unitText property of the
-     * QuantitativeValue.
-     *
-     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $numberOfRooms;
 }

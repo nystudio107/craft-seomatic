@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Permit.
  *
  * @author    nystudio107
@@ -30,27 +30,11 @@ trait PermitTrait
     public $issuedBy;
 
     /**
-     * The geographic area where the item is valid. Applies for example to a
-     * [[Permit]], a [[Certification]], or an
-     * [[EducationalOccupationalCredential]].
+     * The service through which the permit was granted.
      *
-     * @var array|AdministrativeArea|AdministrativeArea[]
+     * @var array|Service|Service[]
      */
-    public $validIn;
-
-    /**
-     * The date when the item becomes valid.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $validFrom;
-
-    /**
-     * The date when the item is no longer valid.
-     *
-     * @var array|Date|Date[]
-     */
-    public $validUntil;
+    public $issuedThrough;
 
     /**
      * The target audience for this permit.
@@ -67,9 +51,25 @@ trait PermitTrait
     public $validFor;
 
     /**
-     * The service through which the permit was granted.
+     * The date when the item becomes valid.
      *
-     * @var array|Service|Service[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $issuedThrough;
+    public $validFrom;
+
+    /**
+     * The geographic area where the item is valid. Applies for example to a
+     * [[Permit]], a [[Certification]], or an
+     * [[EducationalOccupationalCredential]].
+     *
+     * @var array|AdministrativeArea|AdministrativeArea[]
+     */
+    public $validIn;
+
+    /**
+     * The date when the item is no longer valid.
+     *
+     * @var array|Date|Date[]
+     */
+    public $validUntil;
 }

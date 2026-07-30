@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Offer.
  *
  * @author    nystudio107
@@ -22,161 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait OfferTrait
 {
     /**
-     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
-     * GeoShape for the geo-political region(s) for which the offer or delivery
-     * charge specification is valid.  See also [[ineligibleRegion]].
+     * The payment method(s) that are accepted in general by an organization, or
+     * for some specific demand or offer.
      *
-     * @var string|array|GeoShape|GeoShape[]|array|Text|Text[]|array|Place|Place[]
+     * @var string|array|LoanOrCredit|LoanOrCredit[]|array|PaymentMethod|PaymentMethod[]|array|Text|Text[]
      */
-    public $eligibleRegion;
+    public $acceptedPaymentMethod;
 
     /**
-     * The GTIN-14 code of the product, or the product to which the offer refers.
-     * See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)
-     * for more details.
+     * An additional offer that can only be obtained in combination with the first
+     * base offer (e.g. supplements and extensions that are available for a
+     * surcharge).
      *
-     * @var string|array|Text|Text[]
+     * @var array|Offer|Offer[]
      */
-    public $gtin14;
-
-    /**
-     * The beginning of the availability of the product or service included in the
-     * offer.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]|array|Time|Time[]
-     */
-    public $availabilityStarts;
-
-    /**
-     * The currency of the price, or a price component when attached to
-     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
-     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
-     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
-     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
-     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
-     * (LETS) and other currency types, e.g. "Ithaca HOUR".
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $priceCurrency;
-
-    /**
-     * A review of the item.
-     *
-     * @var array|Review|Review[]
-     */
-    public $review;
-
-    /**
-     * The warranty promise(s) included in the offer.
-     *
-     * @var array|WarrantyPromise|WarrantyPromise[]
-     */
-    public $warranty;
-
-    /**
-     * The interval and unit of measurement of ordering quantities for which the
-     * offer or price specification is valid. This allows e.g. specifying that a
-     * certain freight charge is valid only for a certain quantity.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $eligibleQuantity;
-
-    /**
-     * A pointer to the organization or person making the offer.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $offeredBy;
-
-    /**
-     * A measurement of an item, For example, the inseam of pants, the wheel size
-     * of a bicycle, the gauge of a screw, or the carbon footprint measured for
-     * certification by an authority. Usually an exact measurement, but can also
-     * be a range of measurements for adjustable products, for example belts and
-     * ski bindings.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $hasMeasurement;
-
-    /**
-     * The typical delay between the receipt of the order and the goods either
-     * leaving the warehouse or being prepared for pickup, in case the delivery
-     * method is on site pickup.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $deliveryLeadTime;
-
-    /**
-     * The amount of time that is required between accepting the offer and the
-     * actual usage of the resource or service.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $advanceBookingRequirement;
-
-    /**
-     * The place(s) from which the offer can be obtained (e.g. store locations).
-     *
-     * @var array|Place|Place[]
-     */
-    public $availableAtOrFrom;
-
-    /**
-     * A predefined value from OfferItemCondition specifying the condition of the
-     * product or service, or the products or services included in the offer. Also
-     * used for product return policies to specify the condition of products
-     * accepted for returns.
-     *
-     * @var array|OfferItemCondition|OfferItemCondition[]
-     */
-    public $itemCondition;
-
-    /**
-     * The offer price of a product, or of a price component when attached to
-     * PriceSpecification and its subtypes.  Usage guidelines:  * Use the
-     * [[priceCurrency]] property (with standard formats: [ISO 4217 currency
-     * format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker
-     * symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
-     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
-     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
-     * (LETS) and other currency types, e.g. "Ithaca HOUR") instead of including
-     * [ambiguous
-     * symbols](http://en.wikipedia.org/wiki/Dollar_sign#Currencies_that_use_the_dollar_or_peso_sign)
-     * such as '$' in the value. * Use '.' (Unicode 'FULL STOP' (U+002E)) rather
-     * than ',' to indicate a decimal point. Avoid using these symbols as a
-     * readability separator. * Note that both
-     * [RDFa](http://www.w3.org/TR/xhtml-rdfa-primer/#using-the-content-attribute)
-     * and Microdata syntax allow the use of a "content=" attribute for publishing
-     * simple machine-readable values alongside more human-friendly formatting. *
-     * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE'
-     * (U+0039)) rather than superficially similar Unicode symbols.
-     *
-     * @var string|float|array|Text|Text[]|array|Number|Number[]
-     */
-    public $price;
-
-    /**
-     * The date after which the price is no longer available.
-     *
-     * @var array|Date|Date[]
-     */
-    public $priceValidUntil;
-
-    /**
-     * The GTIN-12 code of the product, or the product to which the offer refers.
-     * The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C.
-     * Company Prefix, Item Reference, and Check Digit used to identify trade
-     * items. See [GS1 GTIN
-     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more
-     * details.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $gtin12;
+    public $addOn;
 
     /**
      * A property-value pair representing an additional characteristic of the
@@ -193,11 +53,149 @@ trait OfferTrait
     public $additionalProperty;
 
     /**
-     * Review of the item.
+     * The amount of time that is required between accepting the offer and the
+     * actual usage of the resource or service.
      *
-     * @var array|Review|Review[]
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $reviews;
+    public $advanceBookingRequirement;
+
+    /**
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
+     *
+     * @var array|AggregateRating|AggregateRating[]
+     */
+    public $aggregateRating;
+
+    /**
+     * The geographic area where a service or offered item is provided.
+     *
+     * @var string|array|AdministrativeArea|AdministrativeArea[]|array|GeoShape|GeoShape[]|array|Place|Place[]|array|Text|Text[]
+     */
+    public $areaServed;
+
+    /**
+     * An Amazon Standard Identification Number (ASIN) is a 10-character
+     * alphanumeric unique identifier assigned by Amazon.com and its partners for
+     * product identification within the Amazon organization (summary from
+     * [Wikipedia](https://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number)'s
+     * article).  Note also that this is a definition for how to include ASINs in
+     * Schema.org data, and not a definition of ASINs in general - see
+     * documentation from Amazon for authoritative details. ASINs are most
+     * commonly encoded as text strings, but the [asin] property supports URL/URI
+     * as potential values too.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $asin;
+
+    /**
+     * The availability of this item—for example In stock, Out of stock,
+     * Pre-order, etc.
+     *
+     * @var array|ItemAvailability|ItemAvailability[]
+     */
+    public $availability;
+
+    /**
+     * The end of the availability of the product or service included in the
+     * offer.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]|array|Time|Time[]
+     */
+    public $availabilityEnds;
+
+    /**
+     * The beginning of the availability of the product or service included in the
+     * offer.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]|array|Time|Time[]
+     */
+    public $availabilityStarts;
+
+    /**
+     * The place(s) from which the offer can be obtained (e.g. store locations).
+     *
+     * @var array|Place|Place[]
+     */
+    public $availableAtOrFrom;
+
+    /**
+     * The delivery method(s) available for this offer.
+     *
+     * @var array|DeliveryMethod|DeliveryMethod[]
+     */
+    public $availableDeliveryMethod;
+
+    /**
+     * The business function (e.g. sell, lease, repair, dispose) of the offer or
+     * component of a bundle (TypeAndQuantityNode). The default is
+     * http://purl.org/goodrelations/v1#Sell.
+     *
+     * @var array|BusinessFunction|BusinessFunction[]
+     */
+    public $businessFunction;
+
+    /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var string|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Text|Text[]|array|Thing|Thing[]|array|URL|URL[]
+     */
+    public $category;
+
+    /**
+     * A URL template (RFC 6570) for a checkout page for an offer. This approach
+     * allows merchants to specify a URL for online checkout of the offered
+     * product, by interpolating parameters such as the logged in user ID, product
+     * ID, quantity, discount code etc. Parameter naming and standardization are
+     * not specified here.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $checkoutPageURLTemplate;
+
+    /**
+     * The typical delay between the receipt of the order and the goods either
+     * leaving the warehouse or being prepared for pickup, in case the delivery
+     * method is on site pickup.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $deliveryLeadTime;
+
+    /**
+     * The type(s) of customers for which the given offer is valid.
+     *
+     * @var array|BusinessEntityType|BusinessEntityType[]
+     */
+    public $eligibleCustomerType;
+
+    /**
+     * The duration for which the given offer is valid.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $eligibleDuration;
+
+    /**
+     * The interval and unit of measurement of ordering quantities for which the
+     * offer or price specification is valid. This allows e.g. specifying that a
+     * certain freight charge is valid only for a certain quantity.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $eligibleQuantity;
+
+    /**
+     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
+     * GeoShape for the geo-political region(s) for which the offer or delivery
+     * charge specification is valid.  See also [[ineligibleRegion]].
+     *
+     * @var string|array|GeoShape|GeoShape[]|array|Place|Place[]|array|Text|Text[]
+     */
+    public $eligibleRegion;
 
     /**
      * The transaction volume, in a monetary unit, for which the offer or price
@@ -210,20 +208,110 @@ trait OfferTrait
     public $eligibleTransactionVolume;
 
     /**
-     * The geographic area where a service or offered item is provided.
+     * A Global Trade Item Number
+     * ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade
+     * items, including products and services, using numeric identification codes.
+     *  A correct [[gtin]] value should be a valid GTIN, which means that it
+     * should be an all-numeric string of either 8, 12, 13 or 14 digits, or a "GS1
+     * Digital Link" URL based on such a string. The numeric component should also
+     * have a [valid GS1 check
+     * digit](https://www.gs1.org/services/check-digit-calculator) and meet the
+     * other rules for valid GTINs. See also [GS1's GTIN
+     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and
+     * [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for
+     * more details. Left-padding of the gtin values is not required or
+     * encouraged. The [[gtin]] property generalizes the earlier [[gtin8]],
+     * [[gtin12]], [[gtin13]], and [[gtin14]] properties.  The GS1 [digital link
+     * specifications](https://www.gs1.org/standards/Digital-Link/) expresses
+     * GTINs as URLs (URIs, IRIs, etc.). Digital Links should be populated into
+     * the [[hasGS1DigitalLink]] attribute.  Note also that this is a definition
+     * for how to include GTINs in Schema.org data, and not a definition of GTINs
+     * in general - see the GS1 documentation for authoritative details.
      *
-     * @var string|array|Text|Text[]|array|Place|Place[]|array|AdministrativeArea|AdministrativeArea[]|array|GeoShape|GeoShape[]
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $areaServed;
+    public $gtin;
 
     /**
-     * The serial number or any alphanumeric identifier of a particular product.
-     * When attached to an offer, it is a shortcut for the serial number of the
-     * product included in the offer.
+     * The GTIN-12 code of the product, or the product to which the offer refers.
+     * The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C.
+     * Company Prefix, Item Reference, and Check Digit used to identify trade
+     * items. See [GS1 GTIN
+     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more
+     * details.
      *
      * @var string|array|Text|Text[]
      */
-    public $serialNumber;
+    public $gtin12;
+
+    /**
+     * The GTIN-13 code of the product, or the product to which the offer refers.
+     * This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit
+     * UPC codes can be converted into a GTIN-13 code by simply adding a preceding
+     * zero. See [GS1 GTIN
+     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more
+     * details.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $gtin13;
+
+    /**
+     * The GTIN-14 code of the product, or the product to which the offer refers.
+     * See [GS1 GTIN Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin)
+     * for more details.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $gtin14;
+
+    /**
+     * The GTIN-8 code of the product, or the product to which the offer refers.
+     * This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN
+     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more
+     * details.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $gtin8;
+
+    /**
+     * Used to tag an item to be intended or suitable for consumption or use by
+     * adults only.
+     *
+     * @var array|AdultOrientedEnumeration|AdultOrientedEnumeration[]
+     */
+    public $hasAdultConsideration;
+
+    /**
+     * The <a href="https://www.gs1.org/standards/gs1-digital-link">GS1 digital
+     * link</a> associated with the object. This URL should conform to the
+     * particular requirements of digital links. The link should only contain the
+     * Application Identifiers (AIs) that are relevant for the entity being
+     * annotated, for instance a [[Product]] or an [[Organization]], and for the
+     * correct granularity. In particular, for products:<ul><li>A Digital Link
+     * that contains a serial number (AI <code>21</code>) should only be present
+     * on instances of [[IndividualProduct]]</li><li>A Digital Link that contains
+     * a lot number (AI <code>10</code>) should be annotated as [[SomeProducts]]
+     * if only products from that lot are sold, or [[IndividualProduct]] if there
+     * is only a specific product.</li><li>A Digital Link that contains a global
+     * model number (AI <code>8013</code>) should be attached to a [[Product]] or
+     * a [[ProductModel]].</li></ul> Other item types should be adapted similarly.
+     *
+     * @var array|URL|URL[]
+     */
+    public $hasGS1DigitalLink;
+
+    /**
+     * A measurement of an item, For example, the inseam of pants, the wheel size
+     * of a bicycle, the gauge of a screw, or the carbon footprint measured for
+     * certification by an authority. Usually an exact measurement, but can also
+     * be a range of measurements for adjustable products, for example belts and
+     * ski bindings.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $hasMeasurement;
 
     /**
      * Specifies a MerchantReturnPolicy that may be applicable.
@@ -231,13 +319,6 @@ trait OfferTrait
      * @var array|MerchantReturnPolicy|MerchantReturnPolicy[]
      */
     public $hasMerchantReturnPolicy;
-
-    /**
-     * Indicates whether this content is family friendly.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $isFamilyFriendly;
 
     /**
      * This links to a node or nodes indicating the exact quantity of the products
@@ -248,27 +329,38 @@ trait OfferTrait
     public $includesObject;
 
     /**
-     * The end of the availability of the product or service included in the
-     * offer.
+     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
+     * GeoShape for the geo-political region(s) for which the offer or delivery
+     * charge specification is not valid, e.g. a region where the transaction is
+     * not allowed.  See also [[eligibleRegion]].
      *
-     * @var array|Time|Time[]|array|Date|Date[]|array|DateTime|DateTime[]
+     * @var string|array|GeoShape|GeoShape[]|array|Place|Place[]|array|Text|Text[]
      */
-    public $availabilityEnds;
+    public $ineligibleRegion;
 
     /**
-     * Indicates information about the shipping policies and options associated
-     * with an [[Offer]].
+     * The current approximate inventory level for the item or items.
      *
-     * @var array|OfferShippingDetails|OfferShippingDetails[]
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $shippingDetails;
+    public $inventoryLevel;
 
     /**
-     * The date when the item becomes valid.
+     * Indicates whether this content is family friendly.
      *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     * @var bool|array|Boolean|Boolean[]
      */
-    public $validFrom;
+    public $isFamilyFriendly;
+
+    /**
+     * A predefined value from OfferItemCondition specifying the condition of the
+     * product or service, or the products or services included in the offer. Also
+     * used for product return policies to specify the condition of products
+     * accepted for returns.
+     *
+     * @var array|OfferItemCondition|OfferItemCondition[]
+     */
+    public $itemCondition;
 
     /**
      * An item being offered (or demanded). The transactional nature of the offer
@@ -277,17 +369,17 @@ trait OfferTrait
      * definition, others can be used. Using a second type, such as Product or a
      * subtype of Product, can clarify the nature of the offer.
      *
-     * @var array|CreativeWork|CreativeWork[]|array|Trip|Trip[]|array|MenuItem|MenuItem[]|array|Event|Event[]|array|Product|Product[]|array|AggregateOffer|AggregateOffer[]|array|Service|Service[]
+     * @var array|AggregateOffer|AggregateOffer[]|array|CreativeWork|CreativeWork[]|array|Event|Event[]|array|MenuItem|MenuItem[]|array|Product|Product[]|array|Service|Service[]|array|Trip|Trip[]
      */
     public $itemOffered;
 
     /**
-     * Used to tag an item to be intended or suitable for consumption or use by
-     * adults only.
+     * Length of the lease for some [[Accommodation]], either particular to some
+     * [[Offer]] or in some cases intrinsic to the property.
      *
-     * @var array|AdultOrientedEnumeration|AdultOrientedEnumeration[]
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $hasAdultConsideration;
+    public $leaseLength;
 
     /**
      * The [[mobileUrl]] property is provided for specific situations in which
@@ -319,11 +411,48 @@ trait OfferTrait
     public $mpn;
 
     /**
-     * The payment method(s) accepted by seller for this offer.
+     * A pointer to the organization or person making the offer.
      *
-     * @var array|LoanOrCredit|LoanOrCredit[]|array|PaymentMethod|PaymentMethod[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $acceptedPaymentMethod;
+    public $offeredBy;
+
+    /**
+     * The offer price of a product, or of a price component when attached to
+     * PriceSpecification and its subtypes.  Usage guidelines:  * Use the
+     * [[priceCurrency]] property (with standard formats: [ISO 4217 currency
+     * format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker
+     * symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
+     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
+     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
+     * (LETS) and other currency types, e.g. "Ithaca HOUR") instead of including
+     * [ambiguous
+     * symbols](http://en.wikipedia.org/wiki/Dollar_sign#Currencies_that_use_the_dollar_or_peso_sign)
+     * such as '$' in the value. * Use '.' (Unicode 'FULL STOP' (U+002E)) rather
+     * than ',' to indicate a decimal point. Avoid using these symbols as a
+     * readability separator. * Note that both
+     * [RDFa](http://www.w3.org/TR/xhtml-rdfa-primer/#using-the-content-attribute)
+     * and Microdata syntax allow the use of a "content=" attribute for publishing
+     * simple machine-readable values alongside more human-friendly formatting. *
+     * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE'
+     * (U+0039)) rather than superficially similar Unicode symbols.
+     *
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
+     */
+    public $price;
+
+    /**
+     * The currency of the price, or a price component when attached to
+     * [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217
+     * currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD";
+     * [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
+     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
+     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
+     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $priceCurrency;
 
     /**
      * One or more detailed price specifications, indicating the unit price and
@@ -334,98 +463,50 @@ trait OfferTrait
     public $priceSpecification;
 
     /**
-     * A URL template (RFC 6570) for a checkout page for an offer. This approach
-     * allows merchants to specify a URL for online checkout of the offered
-     * product, by interpolating parameters such as the logged in user ID, product
-     * ID, quantity, discount code etc. Parameter naming and standardization are
-     * not specified here.
+     * The date after which the price is no longer available.
      *
-     * @var string|array|Text|Text[]
+     * @var array|Date|Date[]
      */
-    public $checkoutPageURLTemplate;
+    public $priceValidUntil;
 
     /**
-     * A category for the item. Greater signs or slashes can be used to informally
-     * indicate a category hierarchy.
+     * A review of the item.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Thing|Thing[]
+     * @var array|Review|Review[]
      */
-    public $category;
+    public $review;
 
     /**
-     * The date after when the item is not valid. For example the end of an offer,
-     * salary period, or a period of opening hours.
+     * Review of the item.
      *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     * @var array|Review|Review[]
      */
-    public $validThrough;
-
-    /**
-     * A Global Trade Item Number
-     * ([GTIN](https://www.gs1.org/standards/id-keys/gtin)). GTINs identify trade
-     * items, including products and services, using numeric identification codes.
-     *  The GS1 [digital link
-     * specifications](https://www.gs1.org/standards/Digital-Link/) express GTINs
-     * as URLs (URIs, IRIs, etc.). Details including regular expression examples
-     * can be found in, Section 6 of the GS1 URI Syntax specification; see also
-     * [schema.org tracking
-     * issue](https://github.com/schemaorg/schemaorg/issues/3156#issuecomment-1209522809)
-     * for schema.org-specific discussion. A correct [[gtin]] value should be a
-     * valid GTIN, which means that it should be an all-numeric string of either
-     * 8, 12, 13 or 14 digits, or a "GS1 Digital Link" URL based on such a string.
-     * The numeric component should also have a [valid GS1 check
-     * digit](https://www.gs1.org/services/check-digit-calculator) and meet the
-     * other rules for valid GTINs. See also [GS1's GTIN
-     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) and
-     * [Wikipedia](https://en.wikipedia.org/wiki/Global_Trade_Item_Number) for
-     * more details. Left-padding of the gtin values is not required or
-     * encouraged. The [[gtin]] property generalizes the earlier [[gtin8]],
-     * [[gtin12]], [[gtin13]], and [[gtin14]] properties.  Note also that this is
-     * a definition for how to include GTINs in Schema.org data, and not a
-     * definition of GTINs in general - see the GS1 documentation for
-     * authoritative details.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]
-     */
-    public $gtin;
-
-    /**
-     * The GTIN-13 code of the product, or the product to which the offer refers.
-     * This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 12-digit
-     * UPC codes can be converted into a GTIN-13 code by simply adding a preceding
-     * zero. See [GS1 GTIN
-     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more
-     * details.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $gtin13;
+    public $reviews;
 
     /**
      * An entity which offers (sells / leases / lends / loans) the services /
      * goods.  A seller may also be a provider.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $seller;
 
     /**
-     * The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the
-     * GeoShape for the geo-political region(s) for which the offer or delivery
-     * charge specification is not valid, e.g. a region where the transaction is
-     * not allowed.  See also [[eligibleRegion]].
+     * The serial number or any alphanumeric identifier of a particular product.
+     * When attached to an offer, it is a shortcut for the serial number of the
+     * product included in the offer.
      *
-     * @var string|array|Text|Text[]|array|Place|Place[]|array|GeoShape|GeoShape[]
+     * @var string|array|Text|Text[]
      */
-    public $ineligibleRegion;
+    public $serialNumber;
 
     /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
+     * Indicates information about the shipping policies and options associated
+     * with an [[Offer]].
      *
-     * @var array|AggregateRating|AggregateRating[]
+     * @var array|OfferShippingDetails|OfferShippingDetails[]
      */
-    public $aggregateRating;
+    public $shippingDetails;
 
     /**
      * The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a
@@ -436,89 +517,32 @@ trait OfferTrait
     public $sku;
 
     /**
-     * The business function (e.g. sell, lease, repair, dispose) of the offer or
-     * component of a bundle (TypeAndQuantityNode). The default is
-     * http://purl.org/goodrelations/v1#Sell.
+     * The membership program tier(s) an Offer (or a PriceSpecification,
+     * OfferShippingDetails, or MerchantReturnPolicy under an Offer) is valid for.
      *
-     * @var array|BusinessFunction|BusinessFunction[]
+     * @var array|MemberProgramTier|MemberProgramTier[]
      */
-    public $businessFunction;
+    public $validForMemberTier;
 
     /**
-     * The delivery method(s) available for this offer.
+     * The date when the item becomes valid.
      *
-     * @var array|DeliveryMethod|DeliveryMethod[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $availableDeliveryMethod;
+    public $validFrom;
 
     /**
-     * The duration for which the given offer is valid.
+     * The date after when the item is not valid. For example the end of an offer,
+     * salary period, or a period of opening hours.
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $eligibleDuration;
+    public $validThrough;
 
     /**
-     * The GTIN-8 code of the product, or the product to which the offer refers.
-     * This code is also known as EAN/UCC-8 or 8-digit EAN. See [GS1 GTIN
-     * Summary](http://www.gs1.org/barcodes/technical/idkeys/gtin) for more
-     * details.
+     * The warranty promise(s) included in the offer.
      *
-     * @var string|array|Text|Text[]
+     * @var array|WarrantyPromise|WarrantyPromise[]
      */
-    public $gtin8;
-
-    /**
-     * The availability of this item—for example In stock, Out of stock,
-     * Pre-order, etc.
-     *
-     * @var array|ItemAvailability|ItemAvailability[]
-     */
-    public $availability;
-
-    /**
-     * The type(s) of customers for which the given offer is valid.
-     *
-     * @var array|BusinessEntityType|BusinessEntityType[]
-     */
-    public $eligibleCustomerType;
-
-    /**
-     * An Amazon Standard Identification Number (ASIN) is a 10-character
-     * alphanumeric unique identifier assigned by Amazon.com and its partners for
-     * product identification within the Amazon organization (summary from
-     * [Wikipedia](https://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number)'s
-     * article).  Note also that this is a definition for how to include ASINs in
-     * Schema.org data, and not a definition of ASINs in general - see
-     * documentation from Amazon for authoritative details. ASINs are most
-     * commonly encoded as text strings, but the [asin] property supports URL/URI
-     * as potential values too.
-     *
-     * @var string|array|URL|URL[]|array|Text|Text[]
-     */
-    public $asin;
-
-    /**
-     * Length of the lease for some [[Accommodation]], either particular to some
-     * [[Offer]] or in some cases intrinsic to the property.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]|array|Duration|Duration[]
-     */
-    public $leaseLength;
-
-    /**
-     * An additional offer that can only be obtained in combination with the first
-     * base offer (e.g. supplements and extensions that are available for a
-     * surcharge).
-     *
-     * @var array|Offer|Offer[]
-     */
-    public $addOn;
-
-    /**
-     * The current approximate inventory level for the item or items.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $inventoryLevel;
+    public $warranty;
 }

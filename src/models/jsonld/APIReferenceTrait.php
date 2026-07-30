@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for APIReference.
  *
  * @author    nystudio107
@@ -22,11 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait APIReferenceTrait
 {
     /**
-     * Indicates whether API is managed or unmanaged.
+     * Library file name, e.g., mscorlib.dll, system.web.dll.
      *
      * @var string|array|Text|Text[]
      */
-    public $programmingModel;
+    public $assembly;
+
+    /**
+     * Associated product/technology version. E.g., .NET Framework 4.5.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $assemblyVersion;
 
     /**
      * Library file name, e.g., mscorlib.dll, system.web.dll.
@@ -36,11 +43,11 @@ trait APIReferenceTrait
     public $executableLibraryName;
 
     /**
-     * Library file name, e.g., mscorlib.dll, system.web.dll.
+     * Indicates whether API is managed or unmanaged.
      *
      * @var string|array|Text|Text[]
      */
-    public $assembly;
+    public $programmingModel;
 
     /**
      * Type of app development: phone, Metro style, desktop, XBox, etc.
@@ -48,11 +55,4 @@ trait APIReferenceTrait
      * @var string|array|Text|Text[]
      */
     public $targetPlatform;
-
-    /**
-     * Associated product/technology version. E.g., .NET Framework 4.5.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $assemblyVersion;
 }

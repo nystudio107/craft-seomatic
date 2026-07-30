@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for LodgingBusiness.
  *
  * @author    nystudio107
@@ -32,11 +32,11 @@ trait LodgingBusinessTrait
     public $amenityFeature;
 
     /**
-     * The latest someone may check out of a lodging establishment.
+     * An intended audience, i.e. a group for whom something was created.
      *
-     * @var array|DateTime|DateTime[]|array|Time|Time[]
+     * @var array|Audience|Audience[]
      */
-    public $checkoutTime;
+    public $audience;
 
     /**
      * A language someone may use with or at the item, service or place. Please
@@ -48,11 +48,18 @@ trait LodgingBusinessTrait
     public $availableLanguage;
 
     /**
-     * An intended audience, i.e. a group for whom something was created.
+     * The earliest someone may check into a lodging establishment.
      *
-     * @var array|Audience|Audience[]
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
      */
-    public $audience;
+    public $checkinTime;
+
+    /**
+     * The latest someone may check out of a lodging establishment.
+     *
+     * @var array|DateTime|DateTime[]|array|Time|Time[]
+     */
+    public $checkoutTime;
 
     /**
      * The number of rooms (excluding bathrooms and closets) of the accommodation
@@ -63,13 +70,6 @@ trait LodgingBusinessTrait
      * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $numberOfRooms;
-
-    /**
-     * The earliest someone may check into a lodging establishment.
-     *
-     * @var array|Time|Time[]|array|DateTime|DateTime[]
-     */
-    public $checkinTime;
 
     /**
      * Indicates whether pets are allowed to enter the accommodation or lodging

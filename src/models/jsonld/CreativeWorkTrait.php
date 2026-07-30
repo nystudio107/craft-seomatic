@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for CreativeWork.
  *
  * @author    nystudio107
@@ -22,113 +22,34 @@ namespace nystudio107\seomatic\models\jsonld;
 trait CreativeWorkTrait
 {
     /**
-     * The date on which the CreativeWork was most recently modified or when the
-     * item's entry was modified within a DataFeed.
+     * The subject matter of an object.
      *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     * @var array|Thing|Thing[]
      */
-    public $dateModified;
+    public $about;
 
     /**
-     * A media object that encodes this CreativeWork. This property is a synonym
-     * for encoding.
-     *
-     * @var array|MediaObject|MediaObject[]
-     */
-    public $associatedMedia;
-
-    /**
-     * The publishing division which published the comic.
-     *
-     * @var array|Organization|Organization[]
-     */
-    public $publisherImprint;
-
-    /**
-     * A pattern that something has, for example 'polka dot', 'striped', 'Canadian
-     * flag'. Values are typically expressed as text, although links to controlled
-     * value schemes are also supported.
-     *
-     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
-     */
-    public $pattern;
-
-    /**
-     * An embedded audio object.
-     *
-     * @var array|AudioObject|AudioObject[]|array|MusicRecording|MusicRecording[]|array|Clip|Clip[]
-     */
-    public $audio;
-
-    /**
-     * The Event where the CreativeWork was recorded. The CreativeWork may capture
-     * all or part of the event.
-     *
-     * @var array|Event|Event[]
-     */
-    public $recordedAt;
-
-    /**
-     * Indicates an item or CreativeWork that is part of this item, or
-     * CreativeWork (in some sense).
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $hasPart;
-
-    /**
-     * Awards won by or for this item.
+     * An abstract is a short description that summarizes a [[CreativeWork]].
      *
      * @var string|array|Text|Text[]
      */
-    public $awards;
+    public $abstract;
 
     /**
-     * A media object that encodes this CreativeWork. This property is a synonym
-     * for associatedMedia.
+     * The human sensory perceptual system or cognitive faculty through which a
+     * person may process or perceive the intellectual content of a resource, not
+     * including any adaptations of the content (e.g., text alternatives for
+     * images). Values should be drawn from the [approved
+     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessMode-vocabulary).
      *
-     * @var array|MediaObject|MediaObject[]
+     * @var string|array|Text|Text[]
      */
-    public $encoding;
+    public $accessMode;
 
     /**
-     * A work that is a translation of the content of this work. E.g. 西遊記
-     * has an English workTranslation “Journey to the West”, a German
-     * workTranslation “Monkeys Pilgerfahrt” and a Vietnamese  translation
-     * Tây du ký bình khảo.
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $workTranslation;
-
-    /**
-     * The place and time the release was issued, expressed as a PublicationEvent.
-     *
-     * @var array|PublicationEvent|PublicationEvent[]
-     */
-    public $releasedEvent;
-
-    /**
-     * Example/instance/realization/derivation of the concept of this creative
-     * work. E.g. the paperback edition, first edition, or e-book.
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $workExample;
-
-    /**
-     * The "spatial" property can be used in cases when more specific properties
-     * (e.g. [[locationCreated]], [[spatialCoverage]], [[contentLocation]]) are
-     * not known to be appropriate.
-     *
-     * @var array|Place|Place[]
-     */
-    public $spatial;
-
-    /**
-     * A list of single or combined accessModes that are sufficient to understand
-     * all the intellectual content of a resource. Values should be drawn from the
-     * [approved
+     * A list of single or combined access modes that are sufficient to understand
+     * all the intellectual content of a resource, including any adaptations.
+     * Values should be drawn from the [approved
      * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessModeSufficient-vocabulary).
      *
      * @var array|ItemList|ItemList[]
@@ -136,64 +57,60 @@ trait CreativeWorkTrait
     public $accessModeSufficient;
 
     /**
-     * An award won by or for this item.
+     * Indicates that the resource is compatible with the referenced accessibility
+     * API. Values should be drawn from the [approved
+     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).
      *
      * @var string|array|Text|Text[]
      */
-    public $award;
+    public $accessibilityAPI;
 
     /**
-     * A review of the item.
-     *
-     * @var array|Review|Review[]
-     */
-    public $review;
-
-    /**
-     * Used to indicate a specific claim contained, implied, translated or refined
-     * from the content of a [[MediaObject]] or other [[CreativeWork]]. The
-     * interpreting party can be indicated using [[claimInterpreter]].
-     *
-     * @var array|Claim|Claim[]
-     */
-    public $interpretedAsClaim;
-
-    /**
-     * The publisher of the creative work.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $publisher;
-
-    /**
-     * A creative work that this work is an
-     * example/instance/realization/derivation of.
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $exampleOfWork;
-
-    /**
-     * Genre of the creative work, broadcast channel or group.
-     *
-     * @var string|array|URL|URL[]|array|Text|Text[]
-     */
-    public $genre;
-
-    /**
-     * The work that this work has been translated from. E.g. 物种起源 is a
-     * translationOf “On the Origin of Species”.
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $translationOfWork;
-
-    /**
-     * Headline of the article.
+     * Identifies input methods that are sufficient to fully control the described
+     * resource. Values should be drawn from the [approved
+     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).
      *
      * @var string|array|Text|Text[]
      */
-    public $headline;
+    public $accessibilityControl;
+
+    /**
+     * Content features of the resource, such as accessible media, alternatives
+     * and supported enhancements for accessibility. Values should be drawn from
+     * the [approved
+     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $accessibilityFeature;
+
+    /**
+     * A characteristic of the described resource that is physiologically
+     * dangerous to some users. Related to WCAG 2.0 guideline 2.3. Values should
+     * be drawn from the [approved
+     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityHazard-vocabulary).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $accessibilityHazard;
+
+    /**
+     * A human-readable summary of specific accessibility features or
+     * deficiencies, consistent with the other accessibility metadata but
+     * expressing subtleties such as "short descriptions are present but long
+     * descriptions will be needed for non-visual users" or "short descriptions
+     * are present and no long descriptions are needed".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $accessibilitySummary;
+
+    /**
+     * Specifies the Person that is legally accountable for the CreativeWork.
+     *
+     * @var array|Person|Person[]
+     */
+    public $accountablePerson;
 
     /**
      * Indicates a page documenting how licenses can be purchased or otherwise
@@ -204,37 +121,187 @@ trait CreativeWorkTrait
     public $acquireLicensePage;
 
     /**
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
+     *
+     * @var array|AggregateRating|AggregateRating[]
+     */
+    public $aggregateRating;
+
+    /**
+     * A secondary title of the CreativeWork.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $alternativeHeadline;
+
+    /**
+     * Indicates a page or other link involved in archival of a [[CreativeWork]].
+     * In the case of [[MediaReview]], the items in a [[MediaReviewItem]] may
+     * often become inaccessible, but be archived by archival, journalistic,
+     * activist, or law enforcement organizations. In such cases, the referenced
+     * page may not directly publish the content.
+     *
+     * @var array|URL|URL[]|array|WebPage|WebPage[]
+     */
+    public $archivedAt;
+
+    /**
      * The item being described is intended to assess the competency or learning
      * outcome defined by the referenced term.
      *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
     public $assesses;
 
     /**
-     * The status of a creative work in terms of its stage in a lifecycle. Example
-     * terms include Incomplete, Draft, Published, Obsolete. Some organizations
-     * define a set of terms for the stages of their publication lifecycle.
+     * A media object that encodes this CreativeWork. This property is a synonym
+     * for encoding.
      *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     * @var array|MediaObject|MediaObject[]
      */
-    public $creativeWorkStatus;
+    public $associatedMedia;
 
     /**
-     * A license document that applies to this structured data, typically
-     * indicated by URL.
+     * An intended audience, i.e. a group for whom something was created.
      *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     * @var array|Audience|Audience[]
      */
-    public $sdLicense;
+    public $audience;
 
     /**
-     * The purpose of a work in the context of education; for example,
-     * 'assignment', 'group work'.
+     * An embedded audio object.
      *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     * @var array|AudioObject|AudioObject[]|array|Clip|Clip[]|array|MusicRecording|MusicRecording[]
      */
-    public $educationalUse;
+    public $audio;
+
+    /**
+     * The author of this content or rating. Please note that author is special in
+     * that HTML 5 provides a special mechanism for indicating authorship via the
+     * rel tag. That is equivalent to this and may be used interchangeably.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $author;
+
+    /**
+     * An award won by or for this item.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $award;
+
+    /**
+     * Awards won by or for this item.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $awards;
+
+    /**
+     * Fictional person connected with a creative work.
+     *
+     * @var array|Person|Person[]
+     */
+    public $character;
+
+    /**
+     * A citation or reference to another creative work, such as another
+     * publication, web page, scholarly article, etc.
+     *
+     * @var string|array|CreativeWork|CreativeWork[]|array|Text|Text[]
+     */
+    public $citation;
+
+    /**
+     * Comments, typically from users.
+     *
+     * @var array|Comment|Comment[]
+     */
+    public $comment;
+
+    /**
+     * The number of comments this CreativeWork (e.g. Article, Question or Answer)
+     * has received. This is most applicable to works published in Web sites with
+     * commenting system; additional comments may exist elsewhere.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $commentCount;
+
+    /**
+     * Conditions that affect the availability of, or method(s) of access to, an
+     * item. Typically used for real world items such as an [[ArchiveComponent]]
+     * held by an [[ArchiveOrganization]]. This property is not suitable for use
+     * as a general Web access control mechanism. It is expressed only in natural
+     * language.  For example "Available by appointment from the Reading Room" or
+     * "Accessible only from logged-in accounts ".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $conditionsOfAccess;
+
+    /**
+     * The location depicted or described in the content. For example, the
+     * location in a photograph or painting.
+     *
+     * @var array|Place|Place[]
+     */
+    public $contentLocation;
+
+    /**
+     * Official rating of a piece of content—for example, 'MPAA PG-13'.
+     *
+     * @var string|array|Rating|Rating[]|array|Text|Text[]
+     */
+    public $contentRating;
+
+    /**
+     * The specific time described by a creative work, for works (e.g. articles,
+     * video objects etc.) that emphasise a particular moment within an Event.
+     *
+     * @var array|DateTime|DateTime[]
+     */
+    public $contentReferenceTime;
+
+    /**
+     * A secondary contributor to the CreativeWork or Event.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $contributor;
+
+    /**
+     * The party holding the legal copyright to the CreativeWork.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $copyrightHolder;
+
+    /**
+     * Text of a notice appropriate for describing the copyright aspects of this
+     * Creative Work, ideally indicating the owner of the copyright for the Work.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $copyrightNotice;
+
+    /**
+     * The year during which the claimed copyright for the CreativeWork was first
+     * asserted.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $copyrightYear;
+
+    /**
+     * Indicates a correction to a [[CreativeWork]], either via a
+     * [[CorrectionComment]], textually or in another document.
+     *
+     * @var string|array|CorrectionComment|CorrectionComment[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $correction;
 
     /**
      * The country of origin of something, including products as well as creative
@@ -252,19 +319,13 @@ trait CreativeWorkTrait
     public $countryOfOrigin;
 
     /**
-     * Official rating of a piece of content—for example, 'MPAA PG-13'.
+     * The status of a creative work in terms of its stage in a lifecycle. Example
+     * terms include Incomplete, Draft, Published, Obsolete. Some organizations
+     * define a set of terms for the stages of their publication lifecycle.
      *
-     * @var string|array|Rating|Rating[]|array|Text|Text[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
-    public $contentRating;
-
-    /**
-     * The location where the CreativeWork was created, which may not be the same
-     * as the location depicted in the CreativeWork.
-     *
-     * @var array|Place|Place[]
-     */
-    public $locationCreated;
+    public $creativeWorkStatus;
 
     /**
      * The creator/author of this CreativeWork. This is the same as the Author
@@ -275,197 +336,58 @@ trait CreativeWorkTrait
     public $creator;
 
     /**
-     * A human-readable summary of specific accessibility features or
-     * deficiencies, consistent with the other accessibility metadata but
-     * expressing subtleties such as "short descriptions are present but long
-     * descriptions will be needed for non-visual users" or "short descriptions
-     * are present and no long descriptions are needed".
+     * Text that can be used to credit person(s) and/or organization(s) associated
+     * with a published Creative Work.
      *
      * @var string|array|Text|Text[]
      */
-    public $accessibilitySummary;
+    public $creditText;
 
     /**
-     * The number of comments this CreativeWork (e.g. Article, Question or Answer)
-     * has received. This is most applicable to works published in Web sites with
-     * commenting system; additional comments may exist elsewhere.
+     * The date on which the CreativeWork was created or the item was added to a
+     * DataFeed.
      *
-     * @var int|array|Integer|Integer[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $commentCount;
+    public $dateCreated;
 
     /**
-     * The year during which the claimed copyright for the CreativeWork was first
-     * asserted.
+     * The date on which the CreativeWork was most recently modified or when the
+     * item's entry was modified within a DataFeed.
      *
-     * @var float|array|Number|Number[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $copyrightYear;
+    public $dateModified;
 
     /**
-     * A resource that was used in the creation of this resource. This term can be
-     * repeated for multiple sources. For example,
-     * http://example.com/great-multiplication-intro.html.
+     * Date of first publication or broadcast. For example the date a
+     * [[CreativeWork]] was broadcast or a [[Certification]] was issued.
      *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]|array|Product|Product[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $isBasedOnUrl;
+    public $datePublished;
 
     /**
-     * A license document that applies to this content, typically indicated by
-     * URL.
+     * Indicates an IPTCDigitalSourceEnumeration code indicating the nature of the
+     * digital source(s) for some [[CreativeWork]].
      *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     * @var array|IPTCDigitalSourceEnumeration|IPTCDigitalSourceEnumeration[]
      */
-    public $license;
+    public $digitalSourceType;
 
     /**
-     * The schema.org [[usageInfo]] property indicates further information about a
-     * [[CreativeWork]]. This property is applicable both to works that are freely
-     * available and to those that require payment or other transactions. It can
-     * reference additional information, e.g. community expectations on preferred
-     * linking and citation conventions, as well as purchasing details. For
-     * something that can be commercially licensed, usageInfo can provide
-     * detailed, resource-specific information about licensing options.  This
-     * property can be used alongside the license property which indicates
-     * license(s) applicable to some piece of content. The usageInfo property can
-     * provide information about other licensing options, e.g. acquiring
-     * commercial usage rights for an image that is also available under
-     * non-commercial creative commons licenses.
+     * A link to the page containing the comments of the CreativeWork.
      *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     * @var array|URL|URL[]
      */
-    public $usageInfo;
+    public $discussionUrl;
 
     /**
-     * A publication event associated with the item.
+     * The location at which an item can be viewed or experienced in-person.
      *
-     * @var array|PublicationEvent|PublicationEvent[]
+     * @var array|Place|Place[]
      */
-    public $publication;
-
-    /**
-     * Approximate or typical time it usually takes to work with or through the
-     * content of this work for the typical or target audience.
-     *
-     * @var array|Duration|Duration[]
-     */
-    public $timeRequired;
-
-    /**
-     * The predominant mode of learning supported by the learning resource.
-     * Acceptable values are 'active', 'expositive', or 'mixed'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $interactivityType;
-
-    /**
-     * The publishingPrinciples property indicates (typically via [[URL]]) a
-     * document describing the editorial principles of an [[Organization]] (or
-     * individual, e.g. a [[Person]] writing a blog) that relate to their
-     * activities as a publisher, e.g. ethics or diversity policies. When applied
-     * to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of
-     * the party primarily responsible for the creation of the [[CreativeWork]].
-     * While such policies are most typically expressed in natural language,
-     * sometimes related information (e.g. indicating a [[funder]]) can be
-     * expressed using schema.org terminology.
-     *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
-     */
-    public $publishingPrinciples;
-
-    /**
-     * A secondary contributor to the CreativeWork or Event.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $contributor;
-
-    /**
-     * A citation or reference to another creative work, such as another
-     * publication, web page, scholarly article, etc.
-     *
-     * @var string|array|Text|Text[]|array|CreativeWork|CreativeWork[]
-     */
-    public $citation;
-
-    /**
-     * Conditions that affect the availability of, or method(s) of access to, an
-     * item. Typically used for real world items such as an [[ArchiveComponent]]
-     * held by an [[ArchiveOrganization]]. This property is not suitable for use
-     * as a general Web access control mechanism. It is expressed only in natural
-     * language.  For example "Available by appointment from the Reading Room" or
-     * "Accessible only from logged-in accounts ".
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $conditionsOfAccess;
-
-    /**
-     * The predominant type or kind characterizing the learning resource. For
-     * example, 'presentation', 'handout'.
-     *
-     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
-     */
-    public $learningResourceType;
-
-    /**
-     * Indicates a correction to a [[CreativeWork]], either via a
-     * [[CorrectionComment]], textually or in another document.
-     *
-     * @var string|array|URL|URL[]|array|Text|Text[]|array|CorrectionComment|CorrectionComment[]
-     */
-    public $correction;
-
-    /**
-     * The author of this content or rating. Please note that author is special in
-     * that HTML 5 provides a special mechanism for indicating authorship via the
-     * rel tag. That is equivalent to this and may be used interchangeably.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $author;
-
-    /**
-     * Review of the item.
-     *
-     * @var array|Review|Review[]
-     */
-    public $reviews;
-
-    /**
-     * Indicates an item or CreativeWork that this item, or CreativeWork (in some
-     * sense), is part of.
-     *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
-     */
-    public $isPartOf;
-
-    /**
-     * The person or organization who produced the work (e.g. music album, movie,
-     * TV/radio series etc.).
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $producer;
-
-    /**
-     * Thumbnail image for an image or video.
-     *
-     * @var array|ImageObject|ImageObject[]
-     */
-    public $thumbnail;
-
-    /**
-     * The human sensory perceptual system or cognitive faculty through which a
-     * person may process or perceive information. Values should be drawn from the
-     * [approved
-     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessMode-vocabulary).
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $accessMode;
+    public $displayLocation;
 
     /**
      * An [EIDR](https://eidr.org/) (Entertainment Identifier Registry)
@@ -484,32 +406,11 @@ trait CreativeWorkTrait
     public $editEIDR;
 
     /**
-     * The temporalCoverage of a CreativeWork indicates the period that the
-     * content applies to, i.e. that it describes, either as a DateTime or as a
-     * textual string indicating a time period in [ISO 8601 time interval
-     * format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals). In
-     * the case of a Dataset it will typically indicate the relevant time period
-     * in a precise notation (e.g. for a 2011 census dataset, the year 2011 would
-     * be written "2011/2012"). Other forms of content, e.g. ScholarlyArticle,
-     * Book, TVSeries or TVEpisode, may indicate their temporalCoverage in broader
-     * terms - textually or via well-known URL.       Written works such as books
-     * may sometimes have precise temporal coverage too, e.g. a work set in 1939 -
-     * 1945 can be indicated in ISO 8601 interval format format via "1939/1945".
-     * Open-ended date ranges can be written with ".." in place of the end date.
-     * For example, "2015-11/.." indicates a range beginning in November 2015 and
-     * with no specified final date. This is tentative and might be updated in
-     * future when ISO 8601 is officially updated.
+     * Specifies the Person who edited the CreativeWork.
      *
-     * @var string|array|DateTime|DateTime[]|array|Text|Text[]|array|URL|URL[]
+     * @var array|Person|Person[]
      */
-    public $temporalCoverage;
-
-    /**
-     * The party holding the legal copyright to the CreativeWork.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $copyrightHolder;
+    public $editor;
 
     /**
      * An alignment to an established educational framework.  This property should
@@ -522,6 +423,94 @@ trait CreativeWorkTrait
     public $educationalAlignment;
 
     /**
+     * The level in terms of progression through an educational or training
+     * context. Examples of educational levels include 'beginner', 'intermediate'
+     * or 'advanced', and formal sets of level indicators.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $educationalLevel;
+
+    /**
+     * The purpose of a work in the context of education; for example,
+     * 'assignment', 'group work'.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
+     */
+    public $educationalUse;
+
+    /**
+     * A media object that encodes this CreativeWork. This property is a synonym
+     * for associatedMedia.
+     *
+     * @var array|MediaObject|MediaObject[]
+     */
+    public $encoding;
+
+    /**
+     * Media type typically expressed using a MIME format (see [IANA
+     * site](http://www.iana.org/assignments/media-types/media-types.xhtml) and
+     * [MDN
+     * reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)),
+     * e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3
+     * etc.  In cases where a [[CreativeWork]] has several media type
+     * representations, [[encoding]] can be used to indicate each [[MediaObject]]
+     * alongside particular [[encodingFormat]] information.  Unregistered or niche
+     * encoding and file formats can be indicated instead via the most appropriate
+     * URL, e.g. defining Web page or a Wikipedia/Wikidata entry.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $encodingFormat;
+
+    /**
+     * A media object that encodes this CreativeWork.
+     *
+     * @var array|MediaObject|MediaObject[]
+     */
+    public $encodings;
+
+    /**
+     * A creative work that this work is an
+     * example/instance/realization/derivation of.
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $exampleOfWork;
+
+    /**
+     * Date the content expires and is no longer useful or available. For example
+     * a [[VideoObject]] or [[NewsArticle]] whose availability or relevance is
+     * time-limited, a [[ClaimReview]] fact check whose publisher wants to
+     * indicate that it may no longer be relevant (or helpful to highlight) after
+     * some date, or a [[Certification]] the validity has expired.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $expires;
+
+    /**
+     * Media type, typically MIME format (see [IANA
+     * site](http://www.iana.org/assignments/media-types/media-types.xhtml)) of
+     * the content, e.g. application/zip of a SoftwareApplication binary. In cases
+     * where a CreativeWork has several media type representations, 'encoding' can
+     * be used to indicate each MediaObject alongside particular fileFormat
+     * information. Unregistered or niche file formats can be indicated instead
+     * via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $fileFormat;
+
+    /**
+     * A person or organization that supports (sponsors) something through some
+     * kind of financial contribution.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $funder;
+
+    /**
      * A [[Grant]] that directly or indirectly provide funding or sponsorship for
      * this item. See also [[ownershipFundingInfo]].
      *
@@ -530,25 +519,86 @@ trait CreativeWorkTrait
     public $funding;
 
     /**
-     * A material that something is made from, e.g. leather, wool, cotton, paper.
+     * Genre of the creative work, broadcast channel or group.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|Product|Product[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $material;
+    public $genre;
 
     /**
-     * A secondary title of the CreativeWork.
+     * Indicates an item or CreativeWork that is part of this item, or
+     * CreativeWork (in some sense).
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $hasPart;
+
+    /**
+     * Headline of the article.
      *
      * @var string|array|Text|Text[]
      */
-    public $alternativeHeadline;
+    public $headline;
 
     /**
-     * The version of the CreativeWork embodied by a specified resource.
+     * The language of the content or performance or used in an action. Please use
+     * one of the language codes from the [IETF BCP 47
+     * standard](http://tools.ietf.org/html/bcp47). See also
+     * [[availableLanguage]].
      *
-     * @var float|string|array|Number|Number[]|array|Text|Text[]
+     * @var string|array|Language|Language[]|array|Text|Text[]
      */
-    public $version;
+    public $inLanguage;
+
+    /**
+     * The number of interactions for the CreativeWork using the WebSite or
+     * SoftwareApplication. The most specific child type of InteractionCounter
+     * should be used.
+     *
+     * @var array|InteractionCounter|InteractionCounter[]
+     */
+    public $interactionStatistic;
+
+    /**
+     * The predominant mode of learning supported by the learning resource.
+     * Acceptable values are 'active', 'expositive', or 'mixed'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $interactivityType;
+
+    /**
+     * Used to indicate a specific claim contained, implied, translated or refined
+     * from the content of a [[MediaObject]] or other [[CreativeWork]]. The
+     * interpreting party can be indicated using [[claimInterpreter]].
+     *
+     * @var array|Claim|Claim[]
+     */
+    public $interpretedAsClaim;
+
+    /**
+     * A flag to signal that the item, event, or place is accessible for free.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $isAccessibleForFree;
+
+    /**
+     * A resource from which this work is derived or from which it is a
+     * modification or adaptation.
+     *
+     * @var array|CreativeWork|CreativeWork[]|array|Product|Product[]|array|URL|URL[]
+     */
+    public $isBasedOn;
+
+    /**
+     * A resource that was used in the creation of this resource. This term can be
+     * repeated for multiple sources. For example,
+     * http://example.com/great-multiplication-intro.html.
+     *
+     * @var array|CreativeWork|CreativeWork[]|array|Product|Product[]|array|URL|URL[]
+     */
+    public $isBasedOnUrl;
 
     /**
      * Indicates whether this content is family friendly.
@@ -558,30 +608,52 @@ trait CreativeWorkTrait
     public $isFamilyFriendly;
 
     /**
-     * The quantity of the materials being described or an expression of the
-     * physical space they occupy.
+     * Indicates an item or CreativeWork that this item, or CreativeWork (in some
+     * sense), is part of.
      *
-     * @var string|array|Text|Text[]|array|QuantitativeValue|QuantitativeValue[]
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
      */
-    public $materialExtent;
+    public $isPartOf;
 
     /**
-     * A link to the page containing the comments of the CreativeWork.
+     * Keywords or tags used to describe some item. Multiple textual entries in a
+     * keywords list are typically delimited by commas, or by repeating the
+     * property.
      *
-     * @var array|URL|URL[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $discussionUrl;
+    public $keywords;
 
     /**
-     * A standardized size of a product or creative work, specified either through
-     * a simple textual string (for example 'XL', '32Wx34L'), a  QuantitativeValue
-     * with a unitCode, or a comprehensive and structured [[SizeSpecification]];
-     * in other cases, the [[width]], [[height]], [[depth]] and [[weight]]
-     * properties may be more applicable.
+     * The predominant type or kind characterizing the learning resource. For
+     * example, 'presentation', 'handout'.
      *
-     * @var string|array|Text|Text[]|array|QuantitativeValue|QuantitativeValue[]|array|DefinedTerm|DefinedTerm[]|array|SizeSpecification|SizeSpecification[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
-    public $size;
+    public $learningResourceType;
+
+    /**
+     * A license document that applies to this content, typically indicated by
+     * URL.
+     *
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
+     */
+    public $license;
+
+    /**
+     * The location where the CreativeWork was created, which may not be the same
+     * as the location depicted in the CreativeWork.
+     *
+     * @var array|Place|Place[]
+     */
+    public $locationCreated;
+
+    /**
+     * Indicates the primary entity described in some page or other CreativeWork.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $mainEntity;
 
     /**
      * A maintainer of a [[Dataset]], software package ([[SoftwareApplication]]),
@@ -602,19 +674,27 @@ trait CreativeWorkTrait
     public $maintainer;
 
     /**
-     * Text of a notice appropriate for describing the copyright aspects of this
-     * Creative Work, ideally indicating the owner of the copyright for the Work.
+     * A material that something is made from, e.g. leather, wool, cotton, paper.
      *
-     * @var string|array|Text|Text[]
+     * @var string|array|Product|Product[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $copyrightNotice;
+    public $material;
 
     /**
-     * Comments, typically from users.
+     * The quantity of the materials being described or an expression of the
+     * physical space they occupy.
      *
-     * @var array|Comment|Comment[]
+     * @var string|array|QuantitativeValue|QuantitativeValue[]|array|Text|Text[]
      */
-    public $comment;
+    public $materialExtent;
+
+    /**
+     * Indicates that the CreativeWork contains a reference to, but is not
+     * necessarily about a concept.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $mentions;
 
     /**
      * An offer to provide this item—for example, an offer to sell a product,
@@ -631,54 +711,171 @@ trait CreativeWorkTrait
     public $offers;
 
     /**
-     * The textual content of this CreativeWork.
+     * A pattern that something has, for example 'polka dot', 'striped', 'Canadian
+     * flag'. Values are typically expressed as text, although links to controlled
+     * value schemes are also supported.
      *
-     * @var string|array|Text|Text[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
-    public $text;
+    public $pattern;
 
     /**
-     * Media type, typically MIME format (see [IANA
-     * site](http://www.iana.org/assignments/media-types/media-types.xhtml)) of
-     * the content, e.g. application/zip of a SoftwareApplication binary. In cases
-     * where a CreativeWork has several media type representations, 'encoding' can
-     * be used to indicate each MediaObject alongside particular fileFormat
-     * information. Unregistered or niche file formats can be indicated instead
-     * via the most appropriate URL, e.g. defining Web page or a Wikipedia entry.
+     * The position of an item in a series or sequence of items.
+     *
+     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
+     */
+    public $position;
+
+    /**
+     * The person or organization who produced the work (e.g. music album, movie,
+     * TV/radio series etc.).
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $producer;
+
+    /**
+     * The service provider, service operator, or service performer; the goods
+     * producer. Another party (a seller) may offer those services or goods on
+     * behalf of the provider. A provider may also serve as the seller.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $provider;
+
+    /**
+     * A publication event associated with the item.
+     *
+     * @var array|PublicationEvent|PublicationEvent[]
+     */
+    public $publication;
+
+    /**
+     * The publisher of the article in question.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $publisher;
+
+    /**
+     * The publishing division which published the comic.
+     *
+     * @var array|Organization|Organization[]
+     */
+    public $publisherImprint;
+
+    /**
+     * The publishingPrinciples property indicates (typically via [[URL]]) a
+     * document describing the editorial principles of an [[Organization]] (or
+     * individual, e.g. a [[Person]] writing a blog) that relate to their
+     * activities as a publisher, e.g. ethics or diversity policies. When applied
+     * to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of
+     * the party primarily responsible for the creation of the [[CreativeWork]].
+     * While such policies are most typically expressed in natural language,
+     * sometimes related information (e.g. indicating a [[funder]]) can be
+     * expressed using schema.org terminology.
+     *
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
+     */
+    public $publishingPrinciples;
+
+    /**
+     * The Event where the CreativeWork was recorded. The CreativeWork may capture
+     * all or part of the event.
+     *
+     * @var array|Event|Event[]
+     */
+    public $recordedAt;
+
+    /**
+     * The place and time the release was issued, expressed as a PublicationEvent.
+     *
+     * @var array|PublicationEvent|PublicationEvent[]
+     */
+    public $releasedEvent;
+
+    /**
+     * A review of the item.
+     *
+     * @var array|Review|Review[]
+     */
+    public $review;
+
+    /**
+     * Review of the item.
+     *
+     * @var array|Review|Review[]
+     */
+    public $reviews;
+
+    /**
+     * Indicates (by URL or string) a particular version of a schema used in some
+     * CreativeWork. This property was created primarily to     indicate the use
+     * of a specific schema.org release, e.g. ```10.0``` as a simple string, or
+     * more explicitly via URL, ```https://schema.org/docs/releases.html#v10.0```.
+     * There may be situations in which other schemas might usefully be referenced
+     * this way, e.g.
+     * ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but
+     * this has not been carefully explored in the community.
      *
      * @var string|array|Text|Text[]|array|URL|URL[]
      */
-    public $fileFormat;
+    public $schemaVersion;
 
     /**
-     * A media object that encodes this CreativeWork.
+     * Indicates the date on which the current structured data was generated /
+     * published. Typically used alongside [[sdPublisher]].
      *
-     * @var array|MediaObject|MediaObject[]
+     * @var array|Date|Date[]
      */
-    public $encodings;
+    public $sdDatePublished;
 
     /**
-     * The subject matter of the content.
+     * A license document that applies to this structured data, typically
+     * indicated by URL.
      *
-     * @var array|Thing|Thing[]
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
      */
-    public $about;
+    public $sdLicense;
 
     /**
-     * An intended audience, i.e. a group for whom something was created.
+     * Indicates the party responsible for generating and publishing the current
+     * structured data markup, typically in cases where the structured data is
+     * derived automatically from existing published content but published on a
+     * different site. For example, student projects and open data initiatives
+     * often re-publish existing content with more explicitly structured metadata.
+     * The [[sdPublisher]] property helps make such practices more explicit.
      *
-     * @var array|Audience|Audience[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $audience;
+    public $sdPublisher;
 
     /**
-     * Keywords or tags used to describe some item. Multiple textual entries in a
-     * keywords list are typically delimited by commas, or by repeating the
-     * property.
+     * A standardized size of a product or creative work, specified either through
+     * a simple textual string (for example 'XL', '32Wx34L'), a  QuantitativeValue
+     * with a unitCode, or a comprehensive and structured [[SizeSpecification]];
+     * in other cases, the [[width]], [[height]], [[depth]] and [[weight]]
+     * properties may be more applicable.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|QuantitativeValue|QuantitativeValue[]|array|SizeSpecification|SizeSpecification[]|array|Text|Text[]
      */
-    public $keywords;
+    public $size;
+
+    /**
+     * The Organization on whose behalf the creator was working.
+     *
+     * @var array|Organization|Organization[]
+     */
+    public $sourceOrganization;
+
+    /**
+     * The "spatial" property can be used in cases when more specific properties
+     * (e.g. [[locationCreated]], [[spatialCoverage]], [[contentLocation]]) are
+     * not known to be appropriate.
+     *
+     * @var array|Place|Place[]
+     */
+    public $spatial;
 
     /**
      * The spatialCoverage of a CreativeWork indicates the place(s) which are the
@@ -702,163 +899,12 @@ trait CreativeWorkTrait
     public $sponsor;
 
     /**
-     * Indicates that the resource is compatible with the referenced accessibility
-     * API. Values should be drawn from the [approved
-     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityAPI-vocabulary).
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $accessibilityAPI;
-
-    /**
-     * Indicates the party responsible for generating and publishing the current
-     * structured data markup, typically in cases where the structured data is
-     * derived automatically from existing published content but published on a
-     * different site. For example, student projects and open data initiatives
-     * often re-publish existing content with more explicitly structured metadata.
-     * The [[sdPublisher]] property helps make such practices more explicit.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $sdPublisher;
-
-    /**
-     * The location depicted or described in the content. For example, the
-     * location in a photograph or painting.
-     *
-     * @var array|Place|Place[]
-     */
-    public $contentLocation;
-
-    /**
-     * The number of interactions for the CreativeWork using the WebSite or
-     * SoftwareApplication. The most specific child type of InteractionCounter
-     * should be used.
-     *
-     * @var array|InteractionCounter|InteractionCounter[]
-     */
-    public $interactionStatistic;
-
-    /**
-     * Media type typically expressed using a MIME format (see [IANA
-     * site](http://www.iana.org/assignments/media-types/media-types.xhtml) and
-     * [MDN
-     * reference](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)),
-     * e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3
-     * etc.  In cases where a [[CreativeWork]] has several media type
-     * representations, [[encoding]] can be used to indicate each [[MediaObject]]
-     * alongside particular [[encodingFormat]] information.  Unregistered or niche
-     * encoding and file formats can be indicated instead via the most appropriate
-     * URL, e.g. defining Web page or a Wikipedia/Wikidata entry.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]
-     */
-    public $encodingFormat;
-
-    /**
-     * Indicates a page or other link involved in archival of a [[CreativeWork]].
-     * In the case of [[MediaReview]], the items in a [[MediaReviewItem]] may
-     * often become inaccessible, but be archived by archival, journalistic,
-     * activist, or law enforcement organizations. In such cases, the referenced
-     * page may not directly publish the content.
-     *
-     * @var array|URL|URL[]|array|WebPage|WebPage[]
-     */
-    public $archivedAt;
-
-    /**
-     * Indicates the primary entity described in some page or other CreativeWork.
-     *
-     * @var array|Thing|Thing[]
-     */
-    public $mainEntity;
-
-    /**
-     * Date of first publication or broadcast. For example the date a
-     * [[CreativeWork]] was broadcast or a [[Certification]] was issued.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $datePublished;
-
-    /**
-     * A flag to signal that the item, event, or place is accessible for free.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $isAccessibleForFree;
-
-    /**
-     * The date on which the CreativeWork was created or the item was added to a
-     * DataFeed.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $dateCreated;
-
-    /**
      * The item being described is intended to help a person learn the competency
      * or learning outcome defined by the referenced term.
      *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
     public $teaches;
-
-    /**
-     * A thumbnail image relevant to the Thing.
-     *
-     * @var array|URL|URL[]
-     */
-    public $thumbnailUrl;
-
-    /**
-     * Specifies the Person that is legally accountable for the CreativeWork.
-     *
-     * @var array|Person|Person[]
-     */
-    public $accountablePerson;
-
-    /**
-     * The typical expected age range, e.g. '7-9', '11-'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $typicalAgeRange;
-
-    /**
-     * Indicates the date on which the current structured data was generated /
-     * published. Typically used alongside [[sdPublisher]].
-     *
-     * @var array|Date|Date[]
-     */
-    public $sdDatePublished;
-
-    /**
-     * A person or organization that supports (sponsors) something through some
-     * kind of financial contribution.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $funder;
-
-    /**
-     * Date the content expires and is no longer useful or available. For example
-     * a [[VideoObject]] or [[NewsArticle]] whose availability or relevance is
-     * time-limited, a [[ClaimReview]] fact check whose publisher wants to
-     * indicate that it may no longer be relevant (or helpful to highlight) after
-     * some date, or a [[Certification]] the validity has expired.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $expires;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
-     *
-     * @var array|AggregateRating|AggregateRating[]
-     */
-    public $aggregateRating;
 
     /**
      * The "temporal" property can be used in cases where more specific properties
@@ -870,164 +916,134 @@ trait CreativeWorkTrait
     public $temporal;
 
     /**
-     * Identifies input methods that are sufficient to fully control the described
-     * resource. Values should be drawn from the [approved
-     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityControl-vocabulary).
+     * The temporalCoverage of a CreativeWork indicates the period that the
+     * content applies to, i.e. that it describes, either as a DateTime or as a
+     * textual string indicating a time period in [ISO 8601 time interval
+     * format](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals). In
+     * the case of a Dataset it will typically indicate the relevant time period
+     * in a precise notation (e.g. for a 2011 census dataset, the year 2011 would
+     * be written "2011/2012"). Other forms of content, e.g. ScholarlyArticle,
+     * Book, TVSeries or TVEpisode, may indicate their temporalCoverage in broader
+     * terms - textually or via well-known URL.       Written works such as books
+     * may sometimes have precise temporal coverage too, e.g. a work set in 1939 -
+     * 1945 can be indicated in ISO 8601 interval format format via "1939/1945".
+     * Open-ended date ranges can be written with ".." in place of the end date.
+     * For example, "2015-11/.." indicates a range beginning in November 2015 and
+     * with no specified final date. This is tentative and might be updated in
+     * future when ISO 8601 is officially updated.
+     *
+     * @var string|array|DateTime|DateTime[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $temporalCoverage;
+
+    /**
+     * The textual content of this CreativeWork.
      *
      * @var string|array|Text|Text[]
      */
-    public $accessibilityControl;
+    public $text;
 
     /**
-     * Content features of the resource, such as accessible media, alternatives
-     * and supported enhancements for accessibility. Values should be drawn from
-     * the [approved
-     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityFeature-vocabulary).
+     * Thumbnail image for an image or video.
      *
-     * @var string|array|Text|Text[]
+     * @var array|ImageObject|ImageObject[]
      */
-    public $accessibilityFeature;
+    public $thumbnail;
 
     /**
-     * The language of the content or performance or used in an action. Please use
-     * one of the language codes from the [IETF BCP 47
-     * standard](http://tools.ietf.org/html/bcp47). See also
-     * [[availableLanguage]].
+     * A thumbnail image relevant to the Thing.
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var array|URL|URL[]
      */
-    public $inLanguage;
+    public $thumbnailUrl;
 
     /**
-     * The service provider, service operator, or service performer; the goods
-     * producer. Another party (a seller) may offer those services or goods on
-     * behalf of the provider. A provider may also serve as the seller.
+     * Approximate or typical time it usually takes to work with or through the
+     * content of this work for the typical or target audience.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Duration|Duration[]
      */
-    public $provider;
+    public $timeRequired;
 
     /**
-     * An abstract is a short description that summarizes a [[CreativeWork]].
+     * The work that this work has been translated from. E.g. 物种起源 is a
+     * translationOf “On the Origin of Species”.
      *
-     * @var string|array|Text|Text[]
+     * @var array|CreativeWork|CreativeWork[]
      */
-    public $abstract;
-
-    /**
-     * Indicates an IPTCDigitalSourceEnumeration code indicating the nature of the
-     * digital source(s) for some [[CreativeWork]].
-     *
-     * @var array|IPTCDigitalSourceEnumeration|IPTCDigitalSourceEnumeration[]
-     */
-    public $digitalSourceType;
-
-    /**
-     * The position of an item in a series or sequence of items.
-     *
-     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
-     */
-    public $position;
-
-    /**
-     * Indicates that the CreativeWork contains a reference to, but is not
-     * necessarily about a concept.
-     *
-     * @var array|Thing|Thing[]
-     */
-    public $mentions;
-
-    /**
-     * The Organization on whose behalf the creator was working.
-     *
-     * @var array|Organization|Organization[]
-     */
-    public $sourceOrganization;
-
-    /**
-     * An embedded video object.
-     *
-     * @var array|VideoObject|VideoObject[]|array|Clip|Clip[]
-     */
-    public $video;
-
-    /**
-     * Specifies the Person who edited the CreativeWork.
-     *
-     * @var array|Person|Person[]
-     */
-    public $editor;
-
-    /**
-     * Text that can be used to credit person(s) and/or organization(s) associated
-     * with a published Creative Work.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $creditText;
-
-    /**
-     * Indicates (by URL or string) a particular version of a schema used in some
-     * CreativeWork. This property was created primarily to     indicate the use
-     * of a specific schema.org release, e.g. ```10.0``` as a simple string, or
-     * more explicitly via URL, ```https://schema.org/docs/releases.html#v10.0```.
-     * There may be situations in which other schemas might usefully be referenced
-     * this way, e.g.
-     * ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but
-     * this has not been carefully explored in the community.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]
-     */
-    public $schemaVersion;
+    public $translationOfWork;
 
     /**
      * Organization or person who adapts a creative work to different languages,
      * regional differences and technical requirements of a target market, or that
      * translates during some event.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $translator;
 
     /**
-     * A characteristic of the described resource that is physiologically
-     * dangerous to some users. Related to WCAG 2.0 guideline 2.3. Values should
-     * be drawn from the [approved
-     * vocabulary](https://www.w3.org/2021/a11y-discov-vocab/latest/#accessibilityHazard-vocabulary).
+     * The typical expected age range, e.g. '7-9', '11-'.
      *
      * @var string|array|Text|Text[]
      */
-    public $accessibilityHazard;
+    public $typicalAgeRange;
 
     /**
-     * The specific time described by a creative work, for works (e.g. articles,
-     * video objects etc.) that emphasise a particular moment within an Event.
+     * The schema.org [[usageInfo]] property indicates further information about a
+     * [[CreativeWork]]. This property is applicable both to works that are freely
+     * available and to those that require payment or other transactions. It can
+     * reference additional information, e.g. community expectations on preferred
+     * linking and citation conventions, as well as purchasing details. For
+     * something that can be commercially licensed, usageInfo can provide
+     * detailed, resource-specific information about licensing options.  This
+     * property can be used alongside the license property which indicates
+     * license(s) applicable to some piece of content. The usageInfo property can
+     * provide information about other licensing options, e.g. acquiring
+     * commercial usage rights for an image that is also available under
+     * non-commercial creative commons licenses.
      *
-     * @var array|DateTime|DateTime[]
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
      */
-    public $contentReferenceTime;
+    public $usageInfo;
 
     /**
-     * The level in terms of progression through an educational or training
-     * context. Examples of educational levels include 'beginner', 'intermediate'
-     * or 'advanced', and formal sets of level indicators.
+     * The version of the CreativeWork embodied by a specified resource.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
      */
-    public $educationalLevel;
+    public $version;
 
     /**
-     * Fictional person connected with a creative work.
+     * An embedded video object.
      *
-     * @var array|Person|Person[]
+     * @var array|Clip|Clip[]|array|VideoObject|VideoObject[]
      */
-    public $character;
+    public $video;
 
     /**
-     * A resource from which this work is derived or from which it is a
-     * modification or adaptation.
+     * The number of words in the text of the CreativeWork such as an Article,
+     * Book, etc.
      *
-     * @var array|Product|Product[]|array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     * @var int|array|Integer|Integer[]
      */
-    public $isBasedOn;
+    public $wordCount;
+
+    /**
+     * Example/instance/realization/derivation of the concept of this creative
+     * work. E.g. the paperback edition, first edition, or e-book.
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $workExample;
+
+    /**
+     * A work that is a translation of the content of this work. E.g. 西遊記
+     * has an English workTranslation “Journey to the West”, a German
+     * workTranslation “Monkeys Pilgerfahrt” and a Vietnamese  translation
+     * Tây du ký bình khảo.
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $workTranslation;
 }

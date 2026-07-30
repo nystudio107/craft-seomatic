@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for LearningResource.
  *
  * @author    nystudio107
@@ -22,37 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait LearningResourceTrait
 {
     /**
-     * Knowledge, skill, ability or personal attribute that must be demonstrated
-     * by a person or other entity in order to do something such as earn an
-     * Educational Occupational Credential or understand a LearningResource.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]
-     */
-    public $competencyRequired;
-
-    /**
      * The item being described is intended to assess the competency or learning
      * outcome defined by the referenced term.
      *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
      */
     public $assesses;
 
     /**
-     * The purpose of a work in the context of education; for example,
-     * 'assignment', 'group work'.
+     * Knowledge, skill, ability or personal attribute that must be demonstrated
+     * by a person or other entity in order to do something such as earn an
+     * Educational Occupational Credential or understand a LearningResource.
      *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $educationalUse;
-
-    /**
-     * The predominant type or kind characterizing the learning resource. For
-     * example, 'presentation', 'handout'.
-     *
-     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
-     */
-    public $learningResourceType;
+    public $competencyRequired;
 
     /**
      * An alignment to an established educational framework.  This property should
@@ -65,19 +49,35 @@ trait LearningResourceTrait
     public $educationalAlignment;
 
     /**
-     * The item being described is intended to help a person learn the competency
-     * or learning outcome defined by the referenced term.
-     *
-     * @var string|array|Text|Text[]|array|DefinedTerm|DefinedTerm[]
-     */
-    public $teaches;
-
-    /**
      * The level in terms of progression through an educational or training
      * context. Examples of educational levels include 'beginner', 'intermediate'
      * or 'advanced', and formal sets of level indicators.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
      */
     public $educationalLevel;
+
+    /**
+     * The purpose of a work in the context of education; for example,
+     * 'assignment', 'group work'.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
+     */
+    public $educationalUse;
+
+    /**
+     * The predominant type or kind characterizing the learning resource. For
+     * example, 'presentation', 'handout'.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
+     */
+    public $learningResourceType;
+
+    /**
+     * The item being described is intended to help a person learn the competency
+     * or learning outcome defined by the referenced term.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]
+     */
+    public $teaches;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalTest.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MedicalTestTrait
 {
     /**
-     * A sign detected by the test.
+     * Drugs that affect the test's results.
      *
-     * @var array|MedicalSign|MedicalSign[]
+     * @var array|Drug|Drug[]
      */
-    public $signDetected;
+    public $affectedBy;
 
     /**
      * Range of acceptable values for a typical patient, when applicable.
@@ -36,11 +36,11 @@ trait MedicalTestTrait
     public $normalRange;
 
     /**
-     * Device used to perform the test.
+     * A sign detected by the test.
      *
-     * @var array|MedicalDevice|MedicalDevice[]
+     * @var array|MedicalSign|MedicalSign[]
      */
-    public $usesDevice;
+    public $signDetected;
 
     /**
      * A condition the test is used to diagnose.
@@ -50,9 +50,9 @@ trait MedicalTestTrait
     public $usedToDiagnose;
 
     /**
-     * Drugs that affect the test's results.
+     * Device used to perform the test.
      *
-     * @var array|Drug|Drug[]
+     * @var array|MedicalDevice|MedicalDevice[]
      */
-    public $affectedBy;
+    public $usesDevice;
 }

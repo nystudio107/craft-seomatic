@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ShippingRateSettings.
  *
  * @author    nystudio107
@@ -22,21 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ShippingRateSettingsTrait
 {
     /**
-     * Label to match an [[OfferShippingDetails]] with a [[ShippingRateSettings]]
-     * (within the context of a [[shippingSettingsLink]] cross-reference).
+     * Indicates when shipping to a particular [[shippingDestination]] is not
+     * available.
      *
-     * @var string|array|Text|Text[]
+     * @var bool|array|Boolean|Boolean[]
      */
-    public $shippingLabel;
+    public $doesNotShip;
 
     /**
-     * The shipping rate is the cost of shipping to the specified destination.
-     * Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are
-     * most appropriate.
+     * A monetary value above (or at) which the shipping rate becomes free.
+     * Intended to be used via an [[OfferShippingDetails]] with
+     * [[shippingSettingsLink]] matching this [[ShippingRateSettings]].
      *
-     * @var array|MonetaryAmount|MonetaryAmount[]
+     * @var array|DeliveryChargeSpecification|DeliveryChargeSpecification[]|array|MonetaryAmount|MonetaryAmount[]
      */
-    public $shippingRate;
+    public $freeShippingThreshold;
 
     /**
      * This can be marked 'true' to indicate that some published
@@ -53,21 +53,13 @@ trait ShippingRateSettingsTrait
     public $isUnlabelledFallback;
 
     /**
-     * Indicates when shipping to a particular [[shippingDestination]] is not
-     * available.
+     * Value representing the fraction of the value of the order that is charged
+     * as shipping cost. Example: 0.10 would mean shipping rate is 10% of the
+     * total order value.
      *
-     * @var bool|array|Boolean|Boolean[]
+     * @var float|array|Number|Number[]
      */
-    public $doesNotShip;
-
-    /**
-     * A monetary value above (or at) which the shipping rate becomes free.
-     * Intended to be used via an [[OfferShippingDetails]] with
-     * [[shippingSettingsLink]] matching this [[ShippingRateSettings]].
-     *
-     * @var array|MonetaryAmount|MonetaryAmount[]|array|DeliveryChargeSpecification|DeliveryChargeSpecification[]
-     */
-    public $freeShippingThreshold;
+    public $orderPercentage;
 
     /**
      * indicates (possibly multiple) shipping destinations. These can be defined
@@ -76,4 +68,22 @@ trait ShippingRateSettingsTrait
      * @var array|DefinedRegion|DefinedRegion[]
      */
     public $shippingDestination;
+
+    /**
+     * The shipping rate is the cost of shipping to the specified destination.
+     * Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are
+     * most appropriate.
+     *
+     * @var array|MonetaryAmount|MonetaryAmount[]|array|ShippingRateSettings|ShippingRateSettings[]
+     */
+    public $shippingRate;
+
+    /**
+     * Value representing the fraction of the weight that is used to compute the
+     * shipping price. Example: 0.10 and a shipping weight of 15kg would add $1.5
+     * to the order price, where the $ is the currency of the order.
+     *
+     * @var float|array|Number|Number[]
+     */
+    public $weightPercentage;
 }
