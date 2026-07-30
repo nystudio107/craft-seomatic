@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 4.1.21 - UNRELEASED
+### Added
+* Added a "none" option to the local business price range, which will cause `priceRange` to be omitted if selected ([#1752](https://github.com/nystudio107/craft-seomatic/issues/1752))
+
 ### Fixed
 * Fixed an issue where sitemaps excluded entries with robots or canonical SEO Settings field override values ([#1724](https://github.com/nystudio107/craft-seomatic/issues/1724))
 * Fix a potential stale cache of sitemaps in a very specific set of circumstances by switching back to `Elements::EVENT_AFTER_SAVE_ELEMENT` from `Element::EVENT_AFTER_PROPAGATE` ([#1725](https://github.com/nystudio107/craft-seomatic/issues/1725))
