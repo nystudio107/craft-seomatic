@@ -743,6 +743,7 @@ class DynamicMeta
     {
         Craft::beginProfile('DynamicMeta::addOpeningHours', __METHOD__);
         if ($jsonLd instanceof LocalBusinessInterface && $entity !== null) {
+            /** @var LocalBusiness $jsonLd */
             $openingHours = [];
             $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             $times = $entity->localBusinessOpeningHours;
