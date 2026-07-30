@@ -80,7 +80,7 @@ class ImageTransform
         'schema-logo' => [
             'format' => 'png',
             'width' => 600,
-            'height' => 60,
+            'height' => 600,
             'mode' => 'fit',
         ],
     ];
