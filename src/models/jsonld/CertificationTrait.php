@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Certification.
  *
  * @author    nystudio107
@@ -21,6 +21,21 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait CertificationTrait
 {
+    /**
+     * The subject matter of an object.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $about;
+
+    /**
+     * Date when a certification was last audited. See also
+     * [gs1:certificationAuditDate](https://www.gs1.org/voc/certificationAuditDate).
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $auditDate;
+
     /**
      * Identifier of a certification instance (as registered with an independent
      * certification body). Typically this identifier can be used to consult and
@@ -32,22 +47,14 @@ trait CertificationTrait
     public $certificationIdentification;
 
     /**
-     * A measurement of an item, For example, the inseam of pants, the wheel size
-     * of a bicycle, the gauge of a screw, or the carbon footprint measured for
-     * certification by an authority. Usually an exact measurement, but can also
-     * be a range of measurements for adjustable products, for example belts and
-     * ski bindings.
+     * Rating of a certification instance (as defined by an independent
+     * certification body). Typically this rating can be used to rate the level to
+     * which the requirements of the certification instance are fulfilled. See
+     * also [gs1:certificationValue](https://www.gs1.org/voc/certificationValue).
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]
+     * @var array|Rating|Rating[]
      */
-    public $hasMeasurement;
-
-    /**
-     * An associated logo.
-     *
-     * @var array|URL|URL[]|array|ImageObject|ImageObject[]
-     */
-    public $logo;
+    public $certificationRating;
 
     /**
      * Indicates the current status of a certification: active or inactive. See
@@ -57,45 +64,6 @@ trait CertificationTrait
      * @var array|CertificationStatusEnumeration|CertificationStatusEnumeration[]
      */
     public $certificationStatus;
-
-    /**
-     * Date when a certification was last audited. See also
-     * [gs1:certificationAuditDate](https://www.gs1.org/voc/certificationAuditDate).
-     *
-     * @var array|DateTime|DateTime[]|array|Date|Date[]
-     */
-    public $auditDate;
-
-    /**
-     * The organization issuing the item, for example a [[Permit]], [[Ticket]], or
-     * [[Certification]].
-     *
-     * @var array|Organization|Organization[]
-     */
-    public $issuedBy;
-
-    /**
-     * The geographic area where the item is valid. Applies for example to a
-     * [[Permit]], a [[Certification]], or an
-     * [[EducationalOccupationalCredential]].
-     *
-     * @var array|AdministrativeArea|AdministrativeArea[]
-     */
-    public $validIn;
-
-    /**
-     * The date when the item becomes valid.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $validFrom;
-
-    /**
-     * The subject matter of the content.
-     *
-     * @var array|Thing|Thing[]
-     */
-    public $about;
 
     /**
      * Date of first publication or broadcast. For example the date a
@@ -115,4 +83,46 @@ trait CertificationTrait
      * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $expires;
+
+    /**
+     * A measurement of an item, For example, the inseam of pants, the wheel size
+     * of a bicycle, the gauge of a screw, or the carbon footprint measured for
+     * certification by an authority. Usually an exact measurement, but can also
+     * be a range of measurements for adjustable products, for example belts and
+     * ski bindings.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $hasMeasurement;
+
+    /**
+     * The organization issuing the item, for example a [[Permit]], [[Ticket]], or
+     * [[Certification]].
+     *
+     * @var array|Organization|Organization[]
+     */
+    public $issuedBy;
+
+    /**
+     * An associated logo.
+     *
+     * @var array|ImageObject|ImageObject[]|array|URL|URL[]
+     */
+    public $logo;
+
+    /**
+     * The date when the item becomes valid.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $validFrom;
+
+    /**
+     * The geographic area where the item is valid. Applies for example to a
+     * [[Permit]], a [[Certification]], or an
+     * [[EducationalOccupationalCredential]].
+     *
+     * @var array|AdministrativeArea|AdministrativeArea[]
+     */
+    public $validIn;
 }

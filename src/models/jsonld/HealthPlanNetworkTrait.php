@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for HealthPlanNetwork.
  *
  * @author    nystudio107
@@ -22,16 +22,9 @@ namespace nystudio107\seomatic\models\jsonld;
 trait HealthPlanNetworkTrait
 {
     /**
-     * The tier(s) for this network.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $healthPlanNetworkTier;
-
-    /**
      * The costs to the patient for services under this network or formulary.
      *
-     * @var bool|array|Boolean|Boolean[]
+     * @var bool|array|Boolean|Boolean[]|array|HealthPlanCostSharingSpecification|HealthPlanCostSharingSpecification[]
      */
     public $healthPlanCostSharing;
 
@@ -42,4 +35,11 @@ trait HealthPlanNetworkTrait
      * @var string|array|Text|Text[]
      */
     public $healthPlanNetworkId;
+
+    /**
+     * The tier(s) for this network.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $healthPlanNetworkTier;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for VideoGame.
  *
  * @author    nystudio107
@@ -22,11 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait VideoGameTrait
 {
     /**
-     * The server on which  it is possible to play the game.
+     * An actor (individual or a group), e.g. in TV, radio, movie, video games
+     * etc., or in an event. Actors can be associated with individual items or
+     * with a series, episode, clip.
      *
-     * @var array|GameServer|GameServer[]
+     * @var array|PerformingGroup|PerformingGroup[]|array|Person|Person[]
      */
-    public $gameServer;
+    public $actor;
+
+    /**
+     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
+     * associated with individual items or with a series, episode, clip.
+     *
+     * @var array|Person|Person[]
+     */
+    public $actors;
 
     /**
      * Cheat codes to the game.
@@ -45,38 +55,6 @@ trait VideoGameTrait
     public $director;
 
     /**
-     * The edition of a video game.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $gameEdition;
-
-    /**
-     * Indicates whether this game is multi-player, co-op or single-player.  The
-     * game can be marked as multi-player, co-op and single-player at the same
-     * time.
-     *
-     * @var array|GamePlayMode|GamePlayMode[]
-     */
-    public $playMode;
-
-    /**
-     * The electronic systems used to play <a
-     * href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video
-     * games</a>.
-     *
-     * @var string|array|Thing|Thing[]|array|Text|Text[]|array|URL|URL[]
-     */
-    public $gamePlatform;
-
-    /**
-     * The trailer of a movie or TV/radio series, season, episode, etc.
-     *
-     * @var array|VideoObject|VideoObject[]
-     */
-    public $trailer;
-
-    /**
      * A director of e.g. TV, radio, movie, video games etc. content. Directors
      * can be associated with individual items or with a series, episode, clip.
      *
@@ -85,21 +63,27 @@ trait VideoGameTrait
     public $directors;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
-     * associated with individual items or with a series, episode, clip.
+     * The edition of a video game.
      *
-     * @var array|Person|Person[]
+     * @var string|array|Text|Text[]
      */
-    public $actors;
+    public $gameEdition;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
+     * The electronic systems used to play <a
+     * href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video
+     * games</a>.
      *
-     * @var array|Person|Person[]
+     * @var string|array|Text|Text[]|array|Thing|Thing[]|array|URL|URL[]
      */
-    public $actor;
+    public $gamePlatform;
+
+    /**
+     * The server on which  it is possible to play the game.
+     *
+     * @var array|GameServer|GameServer[]
+     */
+    public $gameServer;
 
     /**
      * Links to tips, tactics, etc.
@@ -111,7 +95,23 @@ trait VideoGameTrait
     /**
      * The composer of the soundtrack.
      *
-     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
+     * @var array|MusicGroup|MusicGroup[]|array|Person|Person[]
      */
     public $musicBy;
+
+    /**
+     * Indicates whether this game is multi-player, co-op or single-player.  The
+     * game can be marked as multi-player, co-op and single-player at the same
+     * time.
+     *
+     * @var array|GamePlayMode|GamePlayMode[]
+     */
+    public $playMode;
+
+    /**
+     * The trailer of a movie or TV/radio series, season, episode, etc.
+     *
+     * @var array|VideoObject|VideoObject[]
+     */
+    public $trailer;
 }

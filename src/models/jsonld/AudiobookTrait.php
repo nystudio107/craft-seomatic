@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Audiobook.
  *
  * @author    nystudio107
@@ -23,9 +23,9 @@ trait AudiobookTrait
 {
     /**
      * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
-     * date format](http://en.wikipedia.org/wiki/ISO_8601).
+     * duration format](http://en.wikipedia.org/wiki/ISO_8601).
      *
-     * @var array|Duration|Duration[]
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $duration;
 

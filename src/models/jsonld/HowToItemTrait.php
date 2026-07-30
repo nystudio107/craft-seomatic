@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for HowToItem.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait HowToItemTrait
     /**
      * The required quantity of the item(s).
      *
-     * @var float|string|array|QuantitativeValue|QuantitativeValue[]|array|Number|Number[]|array|Text|Text[]
+     * @var float|string|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]|array|Text|Text[]
      */
     public $requiredQuantity;
 }

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * GameServer - Server that provides game interaction in a multiplayer game.
  *
  * @author    nystudio107
@@ -23,128 +23,130 @@ use nystudio107\seomatic\models\MetaJsonLd;
  */
 class GameServer extends MetaJsonLd implements GameServerInterface, IntangibleInterface, ThingInterface
 {
-    use GameServerTrait;
-    use IntangibleTrait;
-    use ThingTrait;
+	use GameServerTrait;
+	use IntangibleTrait;
+	use ThingTrait;
 
-    /**
-     * The Schema.org Type Name
-     *
-     * @var string
-     */
-    public static $schemaTypeName = 'GameServer';
+	/**
+	 * The Schema.org Type Name
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeName = 'GameServer';
 
-    /**
-     * The Schema.org Type Scope
-     *
-     * @var string
-     */
-    public static $schemaTypeScope = 'https://schema.org/GameServer';
+	/**
+	 * The Schema.org Type Scope
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeScope = 'https://schema.org/GameServer';
 
-    /**
-     * The Schema.org Type Extends
-     *
-     * @var string
-     */
-    public static $schemaTypeExtends = 'Intangible';
+	/**
+	 * The Schema.org Type Extends
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeExtends = 'Intangible';
 
-    /**
-     * The Schema.org Type Description
-     *
-     * @var string
-     */
-    public static $schemaTypeDescription = 'Server that provides game interaction in a multiplayer game.';
-
-
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyNames(): array
-    {
-        return array_keys($this->getSchemaPropertyExpectedTypes());
-    }
+	/**
+	 * The Schema.org Type Description
+	 *
+	 * @var string
+	 */
+	public static $schemaTypeDescription = 'Server that provides game interaction in a multiplayer game.';
 
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyExpectedTypes(): array
-    {
-        return [
-            'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
-            'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'game' => ['array', 'VideoGame', 'VideoGame[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
-            'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
-            'name' => ['array', 'Text', 'Text[]'],
-            'playersOnline' => ['array', 'Integer', 'Integer[]'],
-            'potentialAction' => ['array', 'Action', 'Action[]'],
-            'sameAs' => ['array', 'URL', 'URL[]'],
-            'serverStatus' => ['array', 'GameServerStatus', 'GameServerStatus[]'],
-            'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'url' => ['array', 'URL', 'URL[]'],
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyNames(): array
+	{
+		return array_keys($this->getSchemaPropertyExpectedTypes());
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function getSchemaPropertyDescriptions(): array
-    {
-        return [
-            'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
-            'alternateName' => 'An alias for the item.',
-            'description' => 'A description of the item.',
-            'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
-            'game' => 'Video game which is played on this server.',
-            'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
-            'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
-            'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
-            'name' => 'The name of the item.',
-            'playersOnline' => 'Number of players on the server.',
-            'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
-            'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
-            'serverStatus' => 'Status of a game server.',
-            'subjectOf' => 'A CreativeWork or Event about this Thing.',
-            'url' => 'URL of the item.',
-        ];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyExpectedTypes(): array
+	{
+		return [
+		    'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+		    'alternateName' => ['array', 'Text', 'Text[]'],
+		    'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
+		    'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
+		    'game' => ['array', 'VideoGame', 'VideoGame[]'],
+		    'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+		    'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
+		    'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
+		    'name' => ['array', 'Text', 'Text[]'],
+		    'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+		    'playersOnline' => ['array', 'Integer', 'Integer[]'],
+		    'potentialAction' => ['array', 'Action', 'Action[]'],
+		    'sameAs' => ['array', 'URL', 'URL[]'],
+		    'serverStatus' => ['array', 'GameServerStatus', 'GameServerStatus[]'],
+		    'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
+		    'url' => ['array', 'URL', 'URL[]']
+		];
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function getGoogleRequiredSchema(): array
-    {
-        return ['description', 'name'];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function getSchemaPropertyDescriptions(): array
+	{
+		return [
+		    'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
+		    'alternateName' => 'An alias for the item.',
+		    'description' => 'A description of the item.',
+		    'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
+		    'game' => 'Video game which is played on this server.',
+		    'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
+		    'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
+		    'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
+		    'name' => 'The name of the item.',
+		    'owner' => 'A person or organization who owns this Thing.',
+		    'playersOnline' => 'Number of players on the server.',
+		    'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+		    'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
+		    'serverStatus' => 'Status of a game server.',
+		    'subjectOf' => 'A CreativeWork or Event about this Thing.',
+		    'url' => 'URL of the item.'
+		];
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function getGoogleRecommendedSchema(): array
-    {
-        return ['image', 'url'];
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function getGoogleRequiredSchema(): array
+	{
+		return ['description', 'name'];
+	}
 
 
-    /**
-     * @inheritdoc
-     */
-    public function defineRules(): array
-    {
-        $rules = parent::defineRules();
-        $rules = array_merge($rules, [
-                [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
-                [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
-                [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.'],
-            ]);
+	/**
+	 * @inheritdoc
+	 */
+	public function getGoogleRecommendedSchema(): array
+	{
+		return ['image', 'url'];
+	}
 
-        return $rules;
-    }
+
+	/**
+	 * @inheritdoc
+	 */
+	public function defineRules(): array
+	{
+		$rules = parent::defineRules();
+		    $rules = array_merge($rules, [
+		        [$this->getSchemaPropertyNames(), 'validateJsonSchema'],
+		        [$this->getGoogleRequiredSchema(), 'required', 'on' => ['google'], 'message' => 'This property is required by Google.'],
+		        [$this->getGoogleRecommendedSchema(), 'required', 'on' => ['google'], 'message' => 'This property is recommended by Google.']
+		    ]);
+
+		    return $rules;
+	}
 }

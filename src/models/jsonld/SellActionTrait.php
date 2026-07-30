@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for SellAction.
  *
  * @author    nystudio107
@@ -25,7 +25,7 @@ trait SellActionTrait
      * A sub property of participant. The participant/person/organization that
      * bought the object.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $buyer;
 

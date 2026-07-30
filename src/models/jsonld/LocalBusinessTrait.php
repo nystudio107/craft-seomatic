@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for LocalBusiness.
  *
  * @author    nystudio107
@@ -22,26 +22,34 @@ namespace nystudio107\seomatic\models\jsonld;
 trait LocalBusinessTrait
 {
     /**
-     * The price range of the business, for example ```$$$```.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $priceRange;
-
-    /**
-     * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $paymentAccepted;
-
-    /**
      * The larger organization that this local business is a branch of, if any.
      * Not to be confused with (anatomical) [[branch]].
      *
      * @var array|Organization|Organization[]
      */
     public $branchOf;
+
+    /**
+     * The currency accepted.  Use standard formats: [ISO 4217 currency
+     * format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker
+     * symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
+     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
+     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
+     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $currenciesAccepted;
+
+    /**
+     * The floor level for an [[Accommodation]] in a multi-storey building. Since
+     * counting   systems [vary
+     * internationally](https://en.wikipedia.org/wiki/Storey#Consecutive_number_floor_designations),
+     * the local system should be used where possible.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $floorLevel;
 
     /**
      * The general opening hours for a business. Opening hours can be specified as
@@ -62,14 +70,16 @@ trait LocalBusinessTrait
     public $openingHours;
 
     /**
-     * The currency accepted.  Use standard formats: [ISO 4217 currency
-     * format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker
-     * symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for
-     * cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading
-     * Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system)
-     * (LETS) and other currency types, e.g. "Ithaca HOUR".
+     * Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.
      *
      * @var string|array|Text|Text[]
      */
-    public $currenciesAccepted;
+    public $paymentAccepted;
+
+    /**
+     * The price range of the business, for example ```$$$```.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $priceRange;
 }

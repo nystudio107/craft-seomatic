@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for AggregateOffer.
  *
  * @author    nystudio107
@@ -44,6 +44,13 @@ trait AggregateOfferTrait
     public $lowPrice;
 
     /**
+     * The number of offers for the product.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $offerCount;
+
+    /**
      * An offer to provide this item—for example, an offer to sell a product,
      * rent the DVD of a movie, perform a service, or give away tickets to an
      * event. Use [[businessFunction]] to indicate the kind of transaction
@@ -56,11 +63,4 @@ trait AggregateOfferTrait
      * @var array|Demand|Demand[]|array|Offer|Offer[]
      */
     public $offers;
-
-    /**
-     * The number of offers for the product.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $offerCount;
 }

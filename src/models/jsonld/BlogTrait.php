@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Blog.
  *
  * @author    nystudio107
@@ -22,13 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BlogTrait
 {
     /**
-     * The International Standard Serial Number (ISSN) that identifies this serial
-     * publication. You can repeat this property to identify different formats of,
-     * or the linking ISSN (ISSN-L) for, this serial publication.
+     * A posting that is part of this blog.
      *
-     * @var string|array|Text|Text[]
+     * @var array|BlogPosting|BlogPosting[]
      */
-    public $issn;
+    public $blogPost;
 
     /**
      * Indicates a post that is part of a [[Blog]]. Note that historically, what
@@ -40,9 +38,11 @@ trait BlogTrait
     public $blogPosts;
 
     /**
-     * A posting that is part of this blog.
+     * The International Standard Serial Number (ISSN) that identifies this serial
+     * publication. You can repeat this property to identify different formats of,
+     * or the linking ISSN (ISSN-L) for, this serial publication.
      *
-     * @var array|BlogPosting|BlogPosting[]
+     * @var string|array|Text|Text[]
      */
-    public $blogPost;
+    public $issn;
 }

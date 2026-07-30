@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MusicPlaylist.
  *
  * @author    nystudio107
@@ -29,17 +29,17 @@ trait MusicPlaylistTrait
     public $numTracks;
 
     /**
-     * A music recording (track)—usually a single song.
-     *
-     * @var array|MusicRecording|MusicRecording[]
-     */
-    public $tracks;
-
-    /**
      * A music recording (track)—usually a single song. If an ItemList is given,
      * the list should contain items of type MusicRecording.
      *
      * @var array|ItemList|ItemList[]|array|MusicRecording|MusicRecording[]
      */
     public $track;
+
+    /**
+     * A music recording (track)—usually a single song.
+     *
+     * @var array|MusicRecording|MusicRecording[]
+     */
+    public $tracks;
 }

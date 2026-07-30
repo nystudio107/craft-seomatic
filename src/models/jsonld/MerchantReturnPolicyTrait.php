@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MerchantReturnPolicy.
  *
  * @author    nystudio107
@@ -21,38 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait MerchantReturnPolicyTrait
 {
-    /**
-     * Specifies an applicable return policy (from an enumeration).
-     *
-     * @var array|MerchantReturnEnumeration|MerchantReturnEnumeration[]
-     */
-    public $returnPolicyCategory;
-
-    /**
-     * Amount of shipping costs for defect product returns. Applicable when
-     * property [[itemDefectReturnFees]] equals [[ReturnShippingFees]].
-     *
-     * @var array|MonetaryAmount|MonetaryAmount[]
-     */
-    public $itemDefectReturnShippingFeesAmount;
-
-    /**
-     * A predefined value from OfferItemCondition specifying the condition of the
-     * product or service, or the products or services included in the offer. Also
-     * used for product return policies to specify the condition of products
-     * accepted for returns.
-     *
-     * @var array|OfferItemCondition|OfferItemCondition[]
-     */
-    public $itemCondition;
-
-    /**
-     * The type of return fees for returns of defect products.
-     *
-     * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
-     */
-    public $itemDefectReturnFees;
-
     /**
      * A property-value pair representing an additional characteristic of the
      * entity, e.g. a product feature or another characteristic for which there is
@@ -68,28 +36,19 @@ trait MerchantReturnPolicyTrait
     public $additionalProperty;
 
     /**
-     * The type of return fees for purchased products (for any return reason).
+     * A country where a particular merchant return policy applies to, for example
+     * the two-letter ISO 3166-1 alpha-2 country code.
+     *
+     * @var string|array|Country|Country[]|array|Text|Text[]
+     */
+    public $applicableCountry;
+
+    /**
+     * The type of return fees if the product is returned due to customer remorse.
      *
      * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
      */
-    public $returnFees;
-
-    /**
-     * Use [[MonetaryAmount]] to specify a fixed restocking fee for product
-     * returns, or use [[Number]] to specify a percentage of the product price
-     * paid by the customer.
-     *
-     * @var float|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]
-     */
-    public $restockingFee;
-
-    /**
-     * Amount of shipping costs for product returns (for any reason). Applicable
-     * when property [[returnFees]] equals [[ReturnShippingFees]].
-     *
-     * @var array|MonetaryAmount|MonetaryAmount[]
-     */
-    public $returnShippingFeesAmount;
+    public $customerRemorseReturnFees;
 
     /**
      * The method (from an enumeration) by which the customer obtains a return
@@ -109,52 +68,45 @@ trait MerchantReturnPolicyTrait
     public $customerRemorseReturnShippingFeesAmount;
 
     /**
-     * The type of return fees if the product is returned due to customer remorse.
+     * Are in-store returns offered? (For more advanced return methods use the
+     * [[returnMethod]] property.)
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $inStoreReturnsOffered;
+
+    /**
+     * A predefined value from OfferItemCondition specifying the condition of the
+     * product or service, or the products or services included in the offer. Also
+     * used for product return policies to specify the condition of products
+     * accepted for returns.
+     *
+     * @var array|OfferItemCondition|OfferItemCondition[]
+     */
+    public $itemCondition;
+
+    /**
+     * The type of return fees for returns of defect products.
      *
      * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
      */
-    public $customerRemorseReturnFees;
-
-    /**
-     * The country where the product has to be sent to for returns, for example
-     * "Ireland" using the [[name]] property of [[Country]]. You can also provide
-     * the two-letter [ISO 3166-1 alpha-2 country
-     * code](http://en.wikipedia.org/wiki/ISO_3166-1). Note that this can be
-     * different from the country where the product was originally shipped from or
-     * sent to.
-     *
-     * @var string|array|Text|Text[]|array|Country|Country[]
-     */
-    public $returnPolicyCountry;
-
-    /**
-     * The type of return method offered, specified from an enumeration.
-     *
-     * @var array|ReturnMethodEnumeration|ReturnMethodEnumeration[]
-     */
-    public $returnMethod;
-
-    /**
-     * A refund type, from an enumerated list.
-     *
-     * @var array|RefundTypeEnumeration|RefundTypeEnumeration[]
-     */
-    public $refundType;
-
-    /**
-     * Seasonal override of a return policy.
-     *
-     * @var array|MerchantReturnPolicySeasonalOverride|MerchantReturnPolicySeasonalOverride[]
-     */
-    public $returnPolicySeasonalOverride;
+    public $itemDefectReturnFees;
 
     /**
      * The method (from an enumeration) by which the customer obtains a return
-     * shipping label for a product returned for any reason.
+     * shipping label for a defect product.
      *
      * @var array|ReturnLabelSourceEnumeration|ReturnLabelSourceEnumeration[]
      */
-    public $returnLabelSource;
+    public $itemDefectReturnLabelSource;
+
+    /**
+     * Amount of shipping costs for defect product returns. Applicable when
+     * property [[itemDefectReturnFees]] equals [[ReturnShippingFees]].
+     *
+     * @var array|MonetaryAmount|MonetaryAmount[]
+     */
+    public $itemDefectReturnShippingFeesAmount;
 
     /**
      * Specifies either a fixed return date or the number of days (from the
@@ -162,7 +114,7 @@ trait MerchantReturnPolicyTrait
      * [[returnPolicyCategory]] property is specified as
      * [[MerchantReturnFiniteReturnWindow]].
      *
-     * @var int|array|Integer|Integer[]|array|Date|Date[]|array|DateTime|DateTime[]
+     * @var int|array|Date|Date[]|array|DateTime|DateTime[]|array|Integer|Integer[]
      */
     public $merchantReturnDays;
 
@@ -174,26 +126,82 @@ trait MerchantReturnPolicyTrait
     public $merchantReturnLink;
 
     /**
-     * Are in-store returns offered? (For more advanced return methods use the
-     * [[returnMethod]] property.)
+     * A refund type, from an enumerated list.
      *
-     * @var bool|array|Boolean|Boolean[]
+     * @var array|RefundTypeEnumeration|RefundTypeEnumeration[]
      */
-    public $inStoreReturnsOffered;
+    public $refundType;
+
+    /**
+     * Use [[MonetaryAmount]] to specify a fixed restocking fee for product
+     * returns, or use [[Number]] to specify a percentage of the product price
+     * paid by the customer.
+     *
+     * @var float|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]
+     */
+    public $restockingFee;
+
+    /**
+     * The type of return fees for purchased products (for any return reason).
+     *
+     * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
+     */
+    public $returnFees;
 
     /**
      * The method (from an enumeration) by which the customer obtains a return
-     * shipping label for a defect product.
+     * shipping label for a product returned for any reason.
      *
      * @var array|ReturnLabelSourceEnumeration|ReturnLabelSourceEnumeration[]
      */
-    public $itemDefectReturnLabelSource;
+    public $returnLabelSource;
 
     /**
-     * A country where a particular merchant return policy applies to, for example
-     * the two-letter ISO 3166-1 alpha-2 country code.
+     * The type of return method offered, specified from an enumeration.
      *
-     * @var string|array|Text|Text[]|array|Country|Country[]
+     * @var array|ReturnMethodEnumeration|ReturnMethodEnumeration[]
      */
-    public $applicableCountry;
+    public $returnMethod;
+
+    /**
+     * Specifies an applicable return policy (from an enumeration).
+     *
+     * @var array|MerchantReturnEnumeration|MerchantReturnEnumeration[]
+     */
+    public $returnPolicyCategory;
+
+    /**
+     * The country where the product has to be sent to for returns, for example
+     * "Ireland" using the [[name]] property of [[Country]]. You can also provide
+     * the two-letter [ISO 3166-1 alpha-2 country
+     * code](http://en.wikipedia.org/wiki/ISO_3166-1). Note that this can be
+     * different from the country where the product was originally shipped from or
+     * sent to.
+     *
+     * @var string|array|Country|Country[]|array|Text|Text[]
+     */
+    public $returnPolicyCountry;
+
+    /**
+     * Seasonal override of a return policy.
+     *
+     * @var array|MerchantReturnPolicySeasonalOverride|MerchantReturnPolicySeasonalOverride[]
+     */
+    public $returnPolicySeasonalOverride;
+
+    /**
+     * Amount of shipping costs for product returns (for any reason). Applicable
+     * when property [[returnFees]] equals [[ReturnShippingFees]].
+     *
+     * @var array|MonetaryAmount|MonetaryAmount[]
+     */
+    public $returnShippingFeesAmount;
+
+    /**
+     * The membership program tier(s) an Offer (or a PriceSpecification,
+     * OfferShippingDetails, or MerchantReturnPolicy under an Offer) is valid for.
+     *
+     * @var array|MemberProgramTier|MemberProgramTier[]
+     */
+    public $validForMemberTier;
 }

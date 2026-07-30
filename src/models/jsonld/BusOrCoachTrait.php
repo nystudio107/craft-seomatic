@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BusOrCoach.
  *
  * @author    nystudio107
@@ -21,6 +21,15 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait BusOrCoachTrait
 {
+    /**
+     * The ACRISS Car Classification Code is a code used by many car rental
+     * companies, for classifying vehicles. ACRISS stands for Association of Car
+     * Rental Industry Systems and Standards.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $acrissCode;
+
     /**
      * The permitted total weight of cargo and installations (e.g. a roof rack) on
      * top of the vehicle.  Typical unit code(s): KGM for kilogram, LBR for pound
@@ -33,13 +42,4 @@ trait BusOrCoachTrait
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $roofLoad;
-
-    /**
-     * The ACRISS Car Classification Code is a code used by many car rental
-     * companies, for classifying vehicles. ACRISS stands for Association of Car
-     * Rental Industry Systems and Standards.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $acrissCode;
 }

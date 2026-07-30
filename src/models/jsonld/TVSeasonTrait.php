@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for TVSeason.
  *
  * @author    nystudio107
@@ -37,6 +37,13 @@ trait TVSeasonTrait
     public $countryOfOrigin;
 
     /**
+     * The TV series to which this episode or season belongs.
+     *
+     * @var array|TVSeries|TVSeries[]
+     */
+    public $partOfTVSeries;
+
+    /**
      * An [EIDR](https://eidr.org/) (Entertainment Identifier Registry)
      * [[identifier]] representing at the most general/abstract level, a work of
      * film or television.  For example, the motion picture known as
@@ -51,11 +58,4 @@ trait TVSeasonTrait
      * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $titleEIDR;
-
-    /**
-     * The TV series to which this episode or season belongs.
-     *
-     * @var array|TVSeries|TVSeries[]
-     */
-    public $partOfTVSeries;
 }

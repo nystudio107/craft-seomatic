@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ExerciseAction.
  *
  * @author    nystudio107
@@ -22,19 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ExerciseActionTrait
 {
     /**
-     * A sub property of participant. The sports team that participated on this
-     * action.
+     * A sub property of location. The course where this action was taken.
      *
-     * @var array|SportsTeam|SportsTeam[]
+     * @var array|Place|Place[]
      */
-    public $sportsTeam;
-
-    /**
-     * A sub property of participant. The opponent on this action.
-     *
-     * @var array|Person|Person[]
-     */
-    public $opponent;
+    public $course;
 
     /**
      * A sub property of instrument. The diet used in this action.
@@ -44,41 +36,11 @@ trait ExerciseActionTrait
     public $diet;
 
     /**
-     * A sub property of location. The sports event where this action occurred.
-     *
-     * @var array|SportsEvent|SportsEvent[]
-     */
-    public $sportsEvent;
-
-    /**
-     * A sub property of location. The original location of the object or the
-     * agent before the action.
-     *
-     * @var array|Place|Place[]
-     */
-    public $fromLocation;
-
-    /**
      * The distance travelled, e.g. exercising or travelling.
      *
      * @var array|Distance|Distance[]
      */
     public $distance;
-
-    /**
-     * A sub property of location. The final location of the object or the agent
-     * after the action.
-     *
-     * @var array|Place|Place[]
-     */
-    public $toLocation;
-
-    /**
-     * A sub property of location. The course where this action was taken.
-     *
-     * @var array|Place|Place[]
-     */
-    public $course;
 
     /**
      * A sub property of location. The course where this action was taken.
@@ -95,12 +57,34 @@ trait ExerciseActionTrait
     public $exercisePlan;
 
     /**
+     * A sub property of instrument. The diet used in this action.
+     *
+     * @var array|Diet|Diet[]
+     */
+    public $exerciseRelatedDiet;
+
+    /**
      * Type(s) of exercise or activity, such as strength training, flexibility
      * training, aerobics, cardiac rehabilitation, etc.
      *
      * @var string|array|Text|Text[]
      */
     public $exerciseType;
+
+    /**
+     * A sub property of location. The original location of the object or the
+     * agent before the action.
+     *
+     * @var array|Place|Place[]
+     */
+    public $fromLocation;
+
+    /**
+     * A sub property of participant. The opponent on this action.
+     *
+     * @var array|Person|Person[]
+     */
+    public $opponent;
 
     /**
      * A sub property of location. The sports activity location where this action
@@ -111,9 +95,25 @@ trait ExerciseActionTrait
     public $sportsActivityLocation;
 
     /**
-     * A sub property of instrument. The diet used in this action.
+     * A sub property of location. The sports event where this action occurred.
      *
-     * @var array|Diet|Diet[]
+     * @var array|SportsEvent|SportsEvent[]
      */
-    public $exerciseRelatedDiet;
+    public $sportsEvent;
+
+    /**
+     * A sub property of participant. The sports team that participated on this
+     * action.
+     *
+     * @var array|SportsTeam|SportsTeam[]
+     */
+    public $sportsTeam;
+
+    /**
+     * A sub property of location. The final location of the object or the agent
+     * after the action.
+     *
+     * @var array|Place|Place[]
+     */
+    public $toLocation;
 }

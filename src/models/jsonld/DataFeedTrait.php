@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DataFeed.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait DataFeedTrait
     /**
      * An item within a data feed. Data feeds may have many elements.
      *
-     * @var string|array|Text|Text[]|array|DataFeedItem|DataFeedItem[]|array|Thing|Thing[]
+     * @var string|array|DataFeedItem|DataFeedItem[]|array|Text|Text[]|array|Thing|Thing[]
      */
     public $dataFeedElement;
 }

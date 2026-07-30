@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Order.
  *
  * @author    nystudio107
@@ -22,41 +22,12 @@ namespace nystudio107\seomatic\models\jsonld;
 trait OrderTrait
 {
     /**
-     * The current status of the order.
+     * The offer(s) -- e.g., product, quantity and price combinations -- included
+     * in the order.
      *
-     * @var array|OrderStatus|OrderStatus[]
+     * @var array|Offer|Offer[]
      */
-    public $orderStatus;
-
-    /**
-     * The URL for sending a payment.
-     *
-     * @var array|URL|URL[]
-     */
-    public $paymentUrl;
-
-    /**
-     * 'merchant' is an out-dated term for 'seller'.
-     *
-     * @var array|Person|Person[]|array|Organization|Organization[]
-     */
-    public $merchant;
-
-    /**
-     * An identifier for the method of payment used (e.g. the last 4 digits of the
-     * credit card).
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $paymentMethodId;
-
-    /**
-     * Indicates whether the offer was accepted as a gift for someone other than
-     * the buyer.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $isGift;
+    public $acceptedOffer;
 
     /**
      * The billing address for the order.
@@ -71,9 +42,37 @@ trait OrderTrait
      * service involved in an exchange.  If it is not clear whether an entity is a
      * broker, seller, or buyer, the latter two terms are preferred.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $broker;
+
+    /**
+     * A number that confirms the given order or payment has been received.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $confirmationNumber;
+
+    /**
+     * Party placing the order or paying the invoice.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $customer;
+
+    /**
+     * Any discount applied (to an Order).
+     *
+     * @var float|string|array|Number|Number[]|array|Text|Text[]
+     */
+    public $discount;
+
+    /**
+     * Code used to redeem a discount.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $discountCode;
 
     /**
      * The currency of the discount.  Use standard formats: [ISO 4217 currency
@@ -88,40 +87,19 @@ trait OrderTrait
     public $discountCurrency;
 
     /**
-     * The item ordered.
+     * Indicates whether the offer was accepted as a gift for someone other than
+     * the buyer.
      *
-     * @var array|Product|Product[]|array|OrderItem|OrderItem[]|array|Service|Service[]
+     * @var bool|array|Boolean|Boolean[]
      */
-    public $orderedItem;
+    public $isGift;
 
     /**
-     * The identifier of the transaction.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $orderNumber;
-
-    /**
-     * Party placing the order or paying the invoice.
+     * 'merchant' is an out-dated term for 'seller'.
      *
      * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $customer;
-
-    /**
-     * The offer(s) -- e.g., product, quantity and price combinations -- included
-     * in the order.
-     *
-     * @var array|Offer|Offer[]
-     */
-    public $acceptedOffer;
-
-    /**
-     * Code used to redeem a discount.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $discountCode;
+    public $merchant;
 
     /**
      * Date order was placed.
@@ -131,13 +109,6 @@ trait OrderTrait
     public $orderDate;
 
     /**
-     * The date that payment is due.
-     *
-     * @var array|DateTime|DateTime[]
-     */
-    public $paymentDue;
-
-    /**
      * The delivery of the parcel related to this order or order item.
      *
      * @var array|ParcelDelivery|ParcelDelivery[]
@@ -145,33 +116,39 @@ trait OrderTrait
     public $orderDelivery;
 
     /**
-     * A number that confirms the given order or payment has been received.
+     * The identifier of the transaction.
      *
      * @var string|array|Text|Text[]
      */
-    public $confirmationNumber;
+    public $orderNumber;
 
     /**
-     * Any discount applied (to an Order).
+     * The current status of the order.
      *
-     * @var float|string|array|Number|Number[]|array|Text|Text[]
+     * @var array|OrderStatus|OrderStatus[]
      */
-    public $discount;
+    public $orderStatus;
 
     /**
-     * The name of the credit card or other method of payment for the order.
+     * The item ordered.
      *
-     * @var array|PaymentMethod|PaymentMethod[]
+     * @var array|OrderItem|OrderItem[]|array|Product|Product[]|array|Service|Service[]
      */
-    public $paymentMethod;
+    public $orderedItem;
 
     /**
-     * An entity which offers (sells / leases / lends / loans) the services /
-     * goods.  A seller may also be a provider.
+     * The order is being paid as part of the referenced Invoice.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Invoice|Invoice[]
      */
-    public $seller;
+    public $partOfInvoice;
+
+    /**
+     * The date that payment is due.
+     *
+     * @var array|DateTime|DateTime[]
+     */
+    public $paymentDue;
 
     /**
      * The date that payment is due.
@@ -181,9 +158,32 @@ trait OrderTrait
     public $paymentDueDate;
 
     /**
-     * The order is being paid as part of the referenced Invoice.
+     * The name of the credit card or other method of payment for the order.
      *
-     * @var array|Invoice|Invoice[]
+     * @var string|array|PaymentMethod|PaymentMethod[]|array|Text|Text[]
      */
-    public $partOfInvoice;
+    public $paymentMethod;
+
+    /**
+     * An identifier for the method of payment used (e.g. the last 4 digits of the
+     * credit card).
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $paymentMethodId;
+
+    /**
+     * The URL for sending a payment.
+     *
+     * @var array|URL|URL[]
+     */
+    public $paymentUrl;
+
+    /**
+     * An entity which offers (sells / leases / lends / loans) the services /
+     * goods.  A seller may also be a provider.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $seller;
 }

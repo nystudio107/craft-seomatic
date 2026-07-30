@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for HealthPlanFormulary.
  *
  * @author    nystudio107
@@ -22,16 +22,9 @@ namespace nystudio107\seomatic\models\jsonld;
 trait HealthPlanFormularyTrait
 {
     /**
-     * Whether prescriptions can be delivered by mail.
-     *
-     * @var bool|array|Boolean|Boolean[]
-     */
-    public $offersPrescriptionByMail;
-
-    /**
      * The costs to the patient for services under this network or formulary.
      *
-     * @var bool|array|Boolean|Boolean[]
+     * @var bool|array|Boolean|Boolean[]|array|HealthPlanCostSharingSpecification|HealthPlanCostSharingSpecification[]
      */
     public $healthPlanCostSharing;
 
@@ -41,4 +34,11 @@ trait HealthPlanFormularyTrait
      * @var string|array|Text|Text[]
      */
     public $healthPlanDrugTier;
+
+    /**
+     * Whether prescriptions can be delivered by mail.
+     *
+     * @var bool|array|Boolean|Boolean[]
+     */
+    public $offersPrescriptionByMail;
 }

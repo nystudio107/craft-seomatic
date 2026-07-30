@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MusicAlbum.
  *
  * @author    nystudio107
@@ -21,6 +21,14 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait MusicAlbumTrait
 {
+    /**
+     * Classification of the album by its type of content: soundtrack, live album,
+     * studio album, etc.
+     *
+     * @var array|MusicAlbumProductionType|MusicAlbumProductionType[]
+     */
+    public $albumProductionType;
+
     /**
      * A release of this album.
      *
@@ -36,17 +44,9 @@ trait MusicAlbumTrait
     public $albumReleaseType;
 
     /**
-     * Classification of the album by its type of content: soundtrack, live album,
-     * studio album, etc.
-     *
-     * @var array|MusicAlbumProductionType|MusicAlbumProductionType[]
-     */
-    public $albumProductionType;
-
-    /**
      * The artist that performed this album or recording.
      *
-     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
+     * @var array|MusicGroup|MusicGroup[]|array|Person|Person[]
      */
     public $byArtist;
 }

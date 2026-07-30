@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for EmployeeRole.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait EmployeeRoleTrait
     /**
      * The base salary of the job or of an employee in an EmployeeRole.
      *
-     * @var float|array|PriceSpecification|PriceSpecification[]|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]
+     * @var float|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]|array|PriceSpecification|PriceSpecification[]
      */
     public $baseSalary;
 

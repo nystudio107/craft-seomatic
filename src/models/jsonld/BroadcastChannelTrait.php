@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BroadcastChannel.
  *
  * @author    nystudio107
@@ -22,18 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BroadcastChannelTrait
 {
     /**
-     * The CableOrSatelliteService offering the channel.
+     * The unique address by which the BroadcastService can be identified in a
+     * provider lineup. In US, this is typically a number.
      *
-     * @var array|CableOrSatelliteService|CableOrSatelliteService[]
+     * @var string|array|Text|Text[]
      */
-    public $inBroadcastLineup;
+    public $broadcastChannelId;
 
     /**
-     * Genre of the creative work, broadcast channel or group.
+     * The frequency used for over-the-air broadcasts. Numeric values or simple
+     * ranges, e.g. 87-99. In addition a shortcut idiom is supported for
+     * frequencies of AM and FM radio channels, e.g. "87 FM".
      *
-     * @var string|array|URL|URL[]|array|Text|Text[]
+     * @var string|array|BroadcastFrequencySpecification|BroadcastFrequencySpecification[]|array|Text|Text[]
      */
-    public $genre;
+    public $broadcastFrequency;
 
     /**
      * The type of service required to have access to the channel (e.g. Standard
@@ -44,21 +47,18 @@ trait BroadcastChannelTrait
     public $broadcastServiceTier;
 
     /**
-     * The frequency used for over-the-air broadcasts. Numeric values or simple
-     * ranges, e.g. 87-99. In addition a shortcut idiom is supported for
-     * frequences of AM and FM radio channels, e.g. "87 FM".
+     * Genre of the creative work, broadcast channel or group.
      *
-     * @var string|array|BroadcastFrequencySpecification|BroadcastFrequencySpecification[]|array|Text|Text[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $broadcastFrequency;
+    public $genre;
 
     /**
-     * The unique address by which the BroadcastService can be identified in a
-     * provider lineup. In US, this is typically a number.
+     * The CableOrSatelliteService offering the channel.
      *
-     * @var string|array|Text|Text[]
+     * @var array|CableOrSatelliteService|CableOrSatelliteService[]
      */
-    public $broadcastChannelId;
+    public $inBroadcastLineup;
 
     /**
      * The BroadcastService offered on this channel.

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Movie.
  *
  * @author    nystudio107
@@ -22,12 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MovieTrait
 {
     /**
-     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
-     * date format](http://en.wikipedia.org/wiki/ISO_8601).
+     * An actor (individual or a group), e.g. in TV, radio, movie, video games
+     * etc., or in an event. Actors can be associated with individual items or
+     * with a series, episode, clip.
      *
-     * @var array|Duration|Duration[]
+     * @var array|PerformingGroup|PerformingGroup[]|array|Person|Person[]
      */
-    public $duration;
+    public $actor;
+
+    /**
+     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
+     * associated with individual items or with a series, episode, clip.
+     *
+     * @var array|Person|Person[]
+     */
+    public $actors;
 
     /**
      * The country of origin of something, including products as well as creative
@@ -54,11 +63,27 @@ trait MovieTrait
     public $director;
 
     /**
-     * The trailer of a movie or TV/radio series, season, episode, etc.
+     * A director of e.g. TV, radio, movie, video games etc. content. Directors
+     * can be associated with individual items or with a series, episode, clip.
      *
-     * @var array|VideoObject|VideoObject[]
+     * @var array|Person|Person[]
      */
-    public $trailer;
+    public $directors;
+
+    /**
+     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
+     * duration format](http://en.wikipedia.org/wiki/ISO_8601).
+     *
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $duration;
+
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var array|MusicGroup|MusicGroup[]|array|Person|Person[]
+     */
+    public $musicBy;
 
     /**
      * The production company or studio responsible for the item, e.g. series,
@@ -69,18 +94,10 @@ trait MovieTrait
     public $productionCompany;
 
     /**
-     * A director of e.g. TV, radio, movie, video games etc. content. Directors
-     * can be associated with individual items or with a series, episode, clip.
-     *
-     * @var array|Person|Person[]
-     */
-    public $directors;
-
-    /**
      * Languages in which subtitles/captions are available, in [IETF BCP 47
      * standard format](http://tools.ietf.org/html/bcp47).
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var string|array|Language|Language[]|array|Text|Text[]
      */
     public $subtitleLanguage;
 
@@ -101,26 +118,9 @@ trait MovieTrait
     public $titleEIDR;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
-     * associated with individual items or with a series, episode, clip.
+     * The trailer of a movie or TV/radio series, season, episode, etc.
      *
-     * @var array|Person|Person[]
+     * @var array|VideoObject|VideoObject[]
      */
-    public $actors;
-
-    /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
-     *
-     * @var array|Person|Person[]
-     */
-    public $actor;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
-     */
-    public $musicBy;
+    public $trailer;
 }

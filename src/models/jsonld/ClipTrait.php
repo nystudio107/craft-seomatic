@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Clip.
  *
  * @author    nystudio107
@@ -22,12 +22,28 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ClipTrait
 {
     /**
-     * The start time of the clip expressed as the number of seconds from the
-     * beginning of the work.
+     * An actor (individual or a group), e.g. in TV, radio, movie, video games
+     * etc., or in an event. Actors can be associated with individual items or
+     * with a series, episode, clip.
      *
-     * @var float|array|Number|Number[]|array|HyperTocEntry|HyperTocEntry[]
+     * @var array|PerformingGroup|PerformingGroup[]|array|Person|Person[]
      */
-    public $startOffset;
+    public $actor;
+
+    /**
+     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
+     * associated with individual items or with a series, episode, clip.
+     *
+     * @var array|Person|Person[]
+     */
+    public $actors;
+
+    /**
+     * Position of the clip within an ordered group of clips.
+     *
+     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
+     */
+    public $clipNumber;
 
     /**
      * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
@@ -47,27 +63,6 @@ trait ClipTrait
     public $directors;
 
     /**
-     * Position of the clip within an ordered group of clips.
-     *
-     * @var string|int|array|Text|Text[]|array|Integer|Integer[]
-     */
-    public $clipNumber;
-
-    /**
-     * The series to which this episode or season belongs.
-     *
-     * @var array|CreativeWorkSeries|CreativeWorkSeries[]
-     */
-    public $partOfSeries;
-
-    /**
-     * The season to which this episode belongs.
-     *
-     * @var array|CreativeWorkSeason|CreativeWorkSeason[]
-     */
-    public $partOfSeason;
-
-    /**
      * The end time of the clip expressed as the number of seconds from the
      * beginning of the work.
      *
@@ -76,12 +71,11 @@ trait ClipTrait
     public $endOffset;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
-     * associated with individual items or with a series, episode, clip.
+     * The composer of the soundtrack.
      *
-     * @var array|Person|Person[]
+     * @var array|MusicGroup|MusicGroup[]|array|Person|Person[]
      */
-    public $actors;
+    public $musicBy;
 
     /**
      * The episode to which this clip belongs.
@@ -91,18 +85,24 @@ trait ClipTrait
     public $partOfEpisode;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
+     * The season to which this episode belongs.
      *
-     * @var array|Person|Person[]
+     * @var array|CreativeWorkSeason|CreativeWorkSeason[]
      */
-    public $actor;
+    public $partOfSeason;
 
     /**
-     * The composer of the soundtrack.
+     * The series to which this episode or season belongs.
      *
-     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
+     * @var array|CreativeWorkSeries|CreativeWorkSeries[]
      */
-    public $musicBy;
+    public $partOfSeries;
+
+    /**
+     * The start time of the clip expressed as the number of seconds from the
+     * beginning of the work.
+     *
+     * @var float|array|HyperTocEntry|HyperTocEntry[]|array|Number|Number[]
+     */
+    public $startOffset;
 }

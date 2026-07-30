@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Patient.
  *
  * @author    nystudio107
@@ -21,6 +21,14 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait PatientTrait
 {
+    /**
+     * One or more alternative conditions considered in the differential diagnosis
+     * process as output of a diagnosis process.
+     *
+     * @var array|MedicalCondition|MedicalCondition[]
+     */
+    public $diagnosis;
+
     /**
      * Specifying a drug or medicine used in a medication procedure.
      *
@@ -35,12 +43,4 @@ trait PatientTrait
      * @var array|MedicalCondition|MedicalCondition[]
      */
     public $healthCondition;
-
-    /**
-     * One or more alternative conditions considered in the differential diagnosis
-     * process as output of a diagnosis process.
-     *
-     * @var array|MedicalCondition|MedicalCondition[]
-     */
-    public $diagnosis;
 }

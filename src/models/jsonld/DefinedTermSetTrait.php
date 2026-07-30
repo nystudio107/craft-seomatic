@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DefinedTermSet.
  *
  * @author    nystudio107
@@ -21,6 +21,13 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait DefinedTermSetTrait
 {
+    /**
+     * The subject matter of an object.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $about;
+
     /**
      * A Defined Term contained in this term set.
      *

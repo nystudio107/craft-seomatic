@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalOrganization.
  *
  * @author    nystudio107
@@ -21,6 +21,14 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait MedicalOrganizationTrait
 {
+    /**
+     * Name or unique ID of network. (Networks are often reused across different
+     * insurance plans.)
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $healthPlanNetworkId;
+
     /**
      * Whether the provider is accepting new patients.
      *
@@ -34,12 +42,4 @@ trait MedicalOrganizationTrait
      * @var array|MedicalSpecialty|MedicalSpecialty[]
      */
     public $medicalSpecialty;
-
-    /**
-     * Name or unique ID of network. (Networks are often reused across different
-     * insurance plans.)
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $healthPlanNetworkId;
 }

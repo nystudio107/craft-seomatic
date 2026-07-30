@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for CompoundPriceSpecification.
  *
  * @author    nystudio107
@@ -25,7 +25,7 @@ trait CompoundPriceSpecificationTrait
      * This property links to all [[UnitPriceSpecification]] nodes that apply in
      * parallel for the [[CompoundPriceSpecification]] node.
      *
-     * @var array|UnitPriceSpecification|UnitPriceSpecification[]
+     * @var array|PriceSpecification|PriceSpecification[]
      */
     public $priceComponent;
 
@@ -35,8 +35,9 @@ trait CompoundPriceSpecificationTrait
      * price. If multiple prices are specified for an offer the [[priceType]]
      * property can be used to identify the type of each such specified price. The
      * value of priceType can be specified as a value from enumeration
-     * PriceTypeEnumeration or as a free form text string for price types that are
-     * not already predefined in PriceTypeEnumeration.
+     * PriceTypeEnumeration or, a UN/EDIFACT 5387 code, or as a free form text
+     * string for price types that are not already predefined in
+     * PriceTypeEnumeration.
      *
      * @var string|array|PriceTypeEnumeration|PriceTypeEnumeration[]|array|Text|Text[]
      */

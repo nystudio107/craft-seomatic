@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for WriteAction.
  *
  * @author    nystudio107
@@ -27,7 +27,7 @@ trait WriteActionTrait
      * standard](http://tools.ietf.org/html/bcp47). See also
      * [[availableLanguage]].
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var string|array|Language|Language[]|array|Text|Text[]
      */
     public $inLanguage;
 

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Guide.
  *
  * @author    nystudio107
@@ -22,10 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait GuideTrait
 {
     /**
+     * A category for the item. Greater signs or slashes can be used to informally
+     * indicate a category hierarchy.
+     *
+     * @var string|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Text|Text[]|array|Thing|Thing[]|array|URL|URL[]
+     */
+    public $category;
+
+    /**
      * This Review or Rating is relevant to this part or facet of the
      * itemReviewed.
      *
-     * @var string|array|Text|Text[]
+     * @var string|array|StructuredValue|StructuredValue[]|array|Text|Text[]
      */
     public $reviewAspect;
 }

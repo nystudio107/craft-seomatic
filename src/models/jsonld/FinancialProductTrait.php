@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for FinancialProduct.
  *
  * @author    nystudio107
@@ -21,14 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait FinancialProductTrait
 {
-    /**
-     * The interest rate, charged or paid, applicable to the financial product.
-     * Note: This is different from the calculated annualPercentageRate.
-     *
-     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $interestRate;
-
     /**
      * The annual rate that is charged for borrowing (or made by investing),
      * expressed as a single percentage number that represents the actual yearly
@@ -43,7 +35,15 @@ trait FinancialProductTrait
      * Description of fees, commissions, and other terms applied either to a class
      * of financial product, or by a financial service organization.
      *
-     * @var string|array|URL|URL[]|array|Text|Text[]
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $feesAndCommissionsSpecification;
+
+    /**
+     * The interest rate, charged or paid, applicable to the financial product.
+     * Note: This is different from the calculated annualPercentageRate.
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $interestRate;
 }

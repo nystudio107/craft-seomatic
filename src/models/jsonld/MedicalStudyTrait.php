@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalStudy.
  *
  * @author    nystudio107
@@ -22,34 +22,12 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MedicalStudyTrait
 {
     /**
-     * A subject of the study, i.e. one of the medical conditions, therapies,
-     * devices, drugs, etc. investigated by the study.
-     *
-     * @var array|MedicalEntity|MedicalEntity[]
-     */
-    public $studySubject;
-
-    /**
      * Specifying the health condition(s) of a patient, medical study, or other
      * target audience.
      *
      * @var array|MedicalCondition|MedicalCondition[]
      */
     public $healthCondition;
-
-    /**
-     * The location in which the study is taking/took place.
-     *
-     * @var array|AdministrativeArea|AdministrativeArea[]
-     */
-    public $studyLocation;
-
-    /**
-     * The status of the study (enumerated).
-     *
-     * @var string|array|MedicalStudyStatus|MedicalStudyStatus[]|array|EventStatusType|EventStatusType[]|array|Text|Text[]
-     */
-    public $status;
 
     /**
      * A person or organization that supports a thing through a pledge, promise,
@@ -59,4 +37,26 @@ trait MedicalStudyTrait
      * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $sponsor;
+
+    /**
+     * The status of the study (enumerated).
+     *
+     * @var string|array|EventStatusType|EventStatusType[]|array|MedicalStudyStatus|MedicalStudyStatus[]|array|Text|Text[]
+     */
+    public $status;
+
+    /**
+     * The location in which the study is taking/took place.
+     *
+     * @var array|AdministrativeArea|AdministrativeArea[]
+     */
+    public $studyLocation;
+
+    /**
+     * A subject of the study, i.e. one of the medical conditions, therapies,
+     * devices, drugs, etc. investigated by the study.
+     *
+     * @var array|MedicalEntity|MedicalEntity[]
+     */
+    public $studySubject;
 }

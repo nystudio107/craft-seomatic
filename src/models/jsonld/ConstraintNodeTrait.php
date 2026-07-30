@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ConstraintNode.
  *
  * @author    nystudio107
@@ -27,7 +27,7 @@ trait ConstraintNodeTrait
      * Schema.org or from other compatible (e.g. RDF) systems such as
      * DataCommons.org or Wikidata.org.
      *
-     * @var array|URL|URL[]|array|Property|Property[]
+     * @var array|Property|Property[]|array|URL|URL[]
      */
     public $constraintProperty;
 

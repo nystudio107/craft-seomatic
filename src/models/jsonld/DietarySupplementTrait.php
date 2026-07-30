@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DietarySupplement.
  *
  * @author    nystudio107
@@ -30,26 +30,17 @@ trait DietarySupplementTrait
     public $activeIngredient;
 
     /**
-     * Recommended intake of this supplement for a given population as defined by
-     * a specific recommending authority.
+     * True if this item's name is a proprietary/brand name (vs. generic name).
      *
-     * @var array|MaximumDoseSchedule|MaximumDoseSchedule[]
+     * @var bool|array|Boolean|Boolean[]
      */
-    public $maximumIntake;
-
-    /**
-     * Characteristics of the population for which this is intended, or which
-     * typically uses it, e.g. 'adults'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $targetPopulation;
+    public $isProprietary;
 
     /**
      * The drug or supplement's legal status, including any controlled substance
      * schedules that apply.
      *
-     * @var string|array|Text|Text[]|array|DrugLegalStatus|DrugLegalStatus[]|array|MedicalEnumeration|MedicalEnumeration[]
+     * @var string|array|DrugLegalStatus|DrugLegalStatus[]|array|MedicalEnumeration|MedicalEnumeration[]|array|Text|Text[]
      */
     public $legalStatus;
 
@@ -57,16 +48,9 @@ trait DietarySupplementTrait
      * Recommended intake of this supplement for a given population as defined by
      * a specific recommending authority.
      *
-     * @var array|RecommendedDoseSchedule|RecommendedDoseSchedule[]
+     * @var array|MaximumDoseSchedule|MaximumDoseSchedule[]
      */
-    public $recommendedIntake;
-
-    /**
-     * The generic name of this drug or supplement.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $nonProprietaryName;
+    public $maximumIntake;
 
     /**
      * The specific biochemical interaction through which this drug or supplement
@@ -77,11 +61,27 @@ trait DietarySupplementTrait
     public $mechanismOfAction;
 
     /**
-     * True if this item's name is a proprietary/brand name (vs. generic name).
+     * The generic name of this drug or supplement.
      *
-     * @var bool|array|Boolean|Boolean[]
+     * @var string|array|Text|Text[]
      */
-    public $isProprietary;
+    public $nonProprietaryName;
+
+    /**
+     * Proprietary name given to the diet plan, typically by its originator or
+     * creator.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $proprietaryName;
+
+    /**
+     * Recommended intake of this supplement for a given population as defined by
+     * a specific recommending authority.
+     *
+     * @var array|RecommendedDoseSchedule|RecommendedDoseSchedule[]
+     */
+    public $recommendedIntake;
 
     /**
      * Any potential safety concern associated with the supplement. May include
@@ -93,10 +93,10 @@ trait DietarySupplementTrait
     public $safetyConsideration;
 
     /**
-     * Proprietary name given to the diet plan, typically by its originator or
-     * creator.
+     * Characteristics of the population for which this is intended, or which
+     * typically uses it, e.g. 'adults'.
      *
      * @var string|array|Text|Text[]
      */
-    public $proprietaryName;
+    public $targetPopulation;
 }

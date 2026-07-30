@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalGuideline.
  *
  * @author    nystudio107
@@ -22,13 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MedicalGuidelineTrait
 {
     /**
-     * Date on which this guideline's recommendation was made.
-     *
-     * @var array|Date|Date[]
-     */
-    public $guidelineDate;
-
-    /**
      * Strength of evidence of the data used to formulate the guideline
      * (enumerated).
      *
@@ -37,18 +30,25 @@ trait MedicalGuidelineTrait
     public $evidenceLevel;
 
     /**
-     * The medical conditions, treatments, etc. that are the subject of the
-     * guideline.
-     *
-     * @var array|MedicalEntity|MedicalEntity[]
-     */
-    public $guidelineSubject;
-
-    /**
      * Source of the data used to formulate the guidance, e.g. RCT, consensus
      * opinion, etc.
      *
      * @var string|array|Text|Text[]
      */
     public $evidenceOrigin;
+
+    /**
+     * Date on which this guideline's recommendation was made.
+     *
+     * @var array|Date|Date[]
+     */
+    public $guidelineDate;
+
+    /**
+     * The medical conditions, treatments, etc. that are the subject of the
+     * guideline.
+     *
+     * @var array|MedicalEntity|MedicalEntity[]
+     */
+    public $guidelineSubject;
 }

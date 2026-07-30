@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for EnergyConsumptionDetails.
  *
  * @author    nystudio107
@@ -32,15 +32,6 @@ trait EnergyConsumptionDetailsTrait
     public $energyEfficiencyScaleMax;
 
     /**
-     * Defines the energy efficiency Category (which could be either a rating out
-     * of range of values or a yes/no certification) for a product according to an
-     * international energy efficiency standard.
-     *
-     * @var array|EnergyEfficiencyEnumeration|EnergyEfficiencyEnumeration[]
-     */
-    public $hasEnergyEfficiencyCategory;
-
-    /**
      * Specifies the least energy efficient class on the regulated EU energy
      * consumption scale for the product category a product belongs to. For
      * example, energy consumption for televisions placed on the market after
@@ -49,4 +40,13 @@ trait EnergyConsumptionDetailsTrait
      * @var array|EUEnergyEfficiencyEnumeration|EUEnergyEfficiencyEnumeration[]
      */
     public $energyEfficiencyScaleMin;
+
+    /**
+     * Defines the energy efficiency Category (which could be either a rating out
+     * of range of values or a yes/no certification) for a product according to an
+     * international energy efficiency standard.
+     *
+     * @var array|EnergyEfficiencyEnumeration|EnergyEfficiencyEnumeration[]
+     */
+    public $hasEnergyEfficiencyCategory;
 }

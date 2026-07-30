@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PropertyValue.
  *
  * @author    nystudio107
@@ -22,26 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PropertyValueTrait
 {
     /**
-     * The lower value of some characteristic or property.
+     * The upper value of some characteristic or property.
      *
      * @var float|array|Number|Number[]
      */
-    public $minValue;
+    public $maxValue;
 
     /**
-     * A commonly used identifier for the characteristic represented by the
-     * property, e.g. a manufacturer or a standard code for a property. propertyID
-     * can be (1) a prefixed string, mainly meant to be used with standards for
-     * product properties; (2) a site-specific, non-prefixed string (e.g. the
-     * primary key of the property or the vendor-specific ID of the property), or
-     * (3) a URL indicating the type of the property, either pointing to an
-     * external vocabulary, or a Web resource that describes the property (e.g. a
-     * glossary entry). Standards bodies should promote a standard prefix for the
-     * identifiers of properties from their standards.
+     * A subproperty of [[measurementTechnique]] that can be used for specifying
+     * specific methods, in particular via [[MeasurementMethodEnum]].
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $propertyID;
+    public $measurementMethod;
 
     /**
      * A technique, method or technology used in an [[Observation]],
@@ -66,19 +59,33 @@ trait PropertyValueTrait
      * are several [[variableMeasured]] properties recorded for some given data
      * object, use a [[PropertyValue]] for each [[variableMeasured]] and attach
      * the corresponding [[measurementTechnique]]. The value can also be from an
-     * enumeration, organized as a [[MeasurementMetholdEnumeration]].
+     * enumeration, organized as a [[MeasurementMethodEnum]].
      *
      * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
      */
     public $measurementTechnique;
 
     /**
-     * A string or text indicating the unit of measurement. Useful if you cannot
-     * provide a standard unit code for <a href='unitCode'>unitCode</a>.
+     * The lower value of some characteristic or property.
      *
-     * @var string|array|Text|Text[]
+     * @var float|array|Number|Number[]
      */
-    public $unitText;
+    public $minValue;
+
+    /**
+     * A commonly used identifier for the characteristic represented by the
+     * property, e.g. a manufacturer or a standard code for a property. propertyID
+     * can be (1) a prefixed string, mainly meant to be used with standards for
+     * product properties; (2) a site-specific, non-prefixed string (e.g. the
+     * primary key of the property or the vendor-specific ID of the property), or
+     * (3) a URL indicating the type of the property, either pointing to an
+     * external vocabulary, or a Web resource that describes the property (e.g. a
+     * glossary entry). Standards bodies should promote a standard prefix for the
+     * identifiers of properties from their standards.
+     *
+     * @var string|array|Text|Text[]|array|URL|URL[]
+     */
+    public $propertyID;
 
     /**
      * The unit of measurement given using the UN/CEFACT Common Code (3
@@ -90,27 +97,12 @@ trait PropertyValueTrait
     public $unitCode;
 
     /**
-     * A secondary value that provides additional information on the original
-     * value, e.g. a reference temperature or a type of measurement.
+     * A string or text indicating the unit of measurement. Useful if you cannot
+     * provide a standard unit code for <a href='unitCode'>unitCode</a>.
      *
-     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]|array|Enumeration|Enumeration[]|array|QuantitativeValue|QuantitativeValue[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementTypeEnumeration|MeasurementTypeEnumeration[]|array|StructuredValue|StructuredValue[]|array|PropertyValue|PropertyValue[]
+     * @var string|array|Text|Text[]
      */
-    public $valueReference;
-
-    /**
-     * The upper value of some characteristic or property.
-     *
-     * @var float|array|Number|Number[]
-     */
-    public $maxValue;
-
-    /**
-     * A subproperty of [[measurementTechnique]] that can be used for specifying
-     * specific methods, in particular via [[MeasurementMethodEnum]].
-     *
-     * @var string|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]
-     */
-    public $measurementMethod;
+    public $unitText;
 
     /**
      * The value of a [[QuantitativeValue]] (including [[Observation]]) or
@@ -122,7 +114,15 @@ trait PropertyValueTrait
      * (U+002E)) rather than ',' to indicate a decimal point. Avoid using these
      * symbols as a readability separator.
      *
-     * @var float|string|bool|array|StructuredValue|StructuredValue[]|array|Number|Number[]|array|Text|Text[]|array|Boolean|Boolean[]
+     * @var bool|float|string|array|Boolean|Boolean[]|array|Number|Number[]|array|StructuredValue|StructuredValue[]|array|Text|Text[]
      */
     public $value;
+
+    /**
+     * A secondary value that provides additional information on the original
+     * value, e.g. a reference temperature or a type of measurement.
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Enumeration|Enumeration[]|array|MeasurementTypeEnumeration|MeasurementTypeEnumeration[]|array|PropertyValue|PropertyValue[]|array|QualitativeValue|QualitativeValue[]|array|QuantitativeValue|QuantitativeValue[]|array|StructuredValue|StructuredValue[]|array|Text|Text[]
+     */
+    public $valueReference;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for OnlineStore.
  *
  * @author    nystudio107
@@ -21,4 +21,10 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait OnlineStoreTrait
 {
+    /**
+     * The eCommerce marketplace this online store is on.
+     *
+     * @var array|OnlineMarketplace|OnlineMarketplace[]
+     */
+    public $isStoreOn;
 }

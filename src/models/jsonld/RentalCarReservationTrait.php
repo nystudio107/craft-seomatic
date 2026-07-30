@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for RentalCarReservation.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait RentalCarReservationTrait
 {
     /**
-     * When a taxi will pick up a passenger or a rental car can be picked up.
+     * Where a rental car can be dropped off.
      *
-     * @var array|DateTime|DateTime[]
+     * @var array|Place|Place[]
      */
-    public $pickupTime;
+    public $dropoffLocation;
 
     /**
      * When a rental car can be dropped off.
@@ -36,16 +36,16 @@ trait RentalCarReservationTrait
     public $dropoffTime;
 
     /**
-     * Where a rental car can be dropped off.
-     *
-     * @var array|Place|Place[]
-     */
-    public $dropoffLocation;
-
-    /**
      * Where a taxi will pick up a passenger or a rental car can be picked up.
      *
      * @var array|Place|Place[]
      */
     public $pickupLocation;
+
+    /**
+     * When a taxi will pick up a passenger or a rental car can be picked up.
+     *
+     * @var array|DateTime|DateTime[]
+     */
+    public $pickupTime;
 }
