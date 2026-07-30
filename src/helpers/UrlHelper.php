@@ -118,10 +118,11 @@ class UrlHelper extends CraftUrlHelper
      * Return an absolute URL with protocol that curl will be happy with
      *
      * @param string $url
+     * @param boolean $sanitize
      *
      * @return string
      */
-    public static function absoluteUrlWithProtocol($url): string
+    public static function absoluteUrlWithProtocol($url, $sanitize = true): string
     {
         // Make this a full URL
         if (!self::isAbsoluteUrl($url)) {
@@ -163,8 +164,12 @@ class UrlHelper extends CraftUrlHelper
         if (!$generalConfig->addTrailingSlashesToUrls && (!$preserveTrailingSlash || self::urlIsSiteIndex($url))) {
             $url = rtrim($url, '/');
         }
+        // Only sanitize if we're asked to
+        if ($sanitize) {
+            $url = DynamicMeta::sanitizeUrl($url, false, false);
+        }
 
-        return DynamicMeta::sanitizeUrl($url, false, false);
+        return $url;
     }
 
     /**
