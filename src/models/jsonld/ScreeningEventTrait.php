@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ScreeningEvent.
  *
  * @author    nystudio107
@@ -22,17 +22,10 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ScreeningEventTrait
 {
     /**
-     * The movie presented during this event.
-     *
-     * @var array|Movie|Movie[]
-     */
-    public $workPresented;
-
-    /**
      * Languages in which subtitles/captions are available, in [IETF BCP 47
      * standard format](http://tools.ietf.org/html/bcp47).
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var string|array|Language|Language[]|array|Text|Text[]
      */
     public $subtitleLanguage;
 
@@ -43,4 +36,11 @@ trait ScreeningEventTrait
      * @var string|array|Text|Text[]
      */
     public $videoFormat;
+
+    /**
+     * The movie presented during this event.
+     *
+     * @var array|Movie|Movie[]
+     */
+    public $workPresented;
 }

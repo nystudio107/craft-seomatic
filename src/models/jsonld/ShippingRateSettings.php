@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ShippingRateSettings - A ShippingRateSettings represents re-usable pieces of shipping information.
  * It is designed for publication on an URL that may be referenced via the
  * [[shippingSettingsLink]] property of an [[OfferShippingDetails]]. Several
@@ -78,22 +78,24 @@ class ShippingRateSettings extends MetaJsonLd implements ShippingRateSettingsInt
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'doesNotShip' => ['array', 'Boolean', 'Boolean[]'],
-            'freeShippingThreshold' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'DeliveryChargeSpecification', 'DeliveryChargeSpecification[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'freeShippingThreshold' => ['array', 'DeliveryChargeSpecification', 'DeliveryChargeSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'isUnlabelledFallback' => ['array', 'Boolean', 'Boolean[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'orderPercentage' => ['array', 'Number', 'Number[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'shippingDestination' => ['array', 'DefinedRegion', 'DefinedRegion[]'],
-            'shippingLabel' => ['array', 'Text', 'Text[]'],
-            'shippingRate' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'shippingRate' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'ShippingRateSettings', 'ShippingRateSettings[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'url' => ['array', 'URL', 'URL[]'],
+            'weightPercentage' => ['array', 'Number', 'Number[]'],
         ];
     }
 
@@ -115,13 +117,15 @@ class ShippingRateSettings extends MetaJsonLd implements ShippingRateSettingsInt
             'isUnlabelledFallback' => 'This can be marked \'true\' to indicate that some published [[DeliveryTimeSettings]] or [[ShippingRateSettings]] are intended to apply to all [[OfferShippingDetails]] published by the same merchant, when referenced by a [[shippingSettingsLink]] in those settings. It is not meaningful to use a \'true\' value for this property alongside a transitTimeLabel (for [[DeliveryTimeSettings]]) or shippingLabel (for [[ShippingRateSettings]]), since this property is for use with unlabelled settings.',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'orderPercentage' => 'Value representing the fraction of the value of the order that is charged as shipping cost. Example: 0.10 would mean shipping rate is 10% of the total order value.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'shippingDestination' => 'indicates (possibly multiple) shipping destinations. These can be defined in several ways, e.g. postalCode ranges.',
-            'shippingLabel' => 'Label to match an [[OfferShippingDetails]] with a [[ShippingRateSettings]] (within the context of a [[shippingSettingsLink]] cross-reference).',
             'shippingRate' => 'The shipping rate is the cost of shipping to the specified destination. Typically, the maxValue and currency values (of the [[MonetaryAmount]]) are most appropriate.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
             'url' => 'URL of the item.',
+            'weightPercentage' => 'Value representing the fraction of the weight that is used to compute the shipping price. Example: 0.10 and a shipping weight of 15kg would add $1.5 to the order price, where the $ is the currency of the order.',
         ];
     }
 

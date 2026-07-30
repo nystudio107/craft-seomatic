@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * EmployerAggregateRating - An aggregate rating of an Organization related to its role as an employer.
  *
  * @author    nystudio107
@@ -75,20 +75,21 @@ class EmployerAggregateRating extends MetaJsonLd implements EmployerAggregateRat
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'author' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'author' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'bestRating' => ['array', 'Number', 'Number[]', 'array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'itemReviewed' => ['array', 'Thing', 'Thing[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'ratingCount' => ['array', 'Integer', 'Integer[]'],
             'ratingExplanation' => ['array', 'Text', 'Text[]'],
-            'ratingValue' => ['array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
-            'reviewAspect' => ['array', 'Text', 'Text[]'],
+            'ratingValue' => ['array', 'Number', 'Number[]', 'array', 'Text', 'Text[]'],
+            'reviewAspect' => ['array', 'StructuredValue', 'StructuredValue[]', 'array', 'Text', 'Text[]'],
             'reviewCount' => ['array', 'Integer', 'Integer[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
@@ -107,7 +108,7 @@ class EmployerAggregateRating extends MetaJsonLd implements EmployerAggregateRat
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'author' => 'The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably.',
-            'bestRating' => 'The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.',
+            'bestRating' => 'The highest value allowed in this rating system.',
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
@@ -115,6 +116,7 @@ class EmployerAggregateRating extends MetaJsonLd implements EmployerAggregateRat
             'itemReviewed' => 'The item that is being reviewed/rated.',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'ratingCount' => 'The count of total number of ratings.',
             'ratingExplanation' => 'A short explanation (e.g. one to two sentences) providing background context and other information that led to the conclusion expressed in the rating. This is particularly applicable to ratings associated with "fact check" markup using [[ClaimReview]].',
@@ -124,7 +126,7 @@ class EmployerAggregateRating extends MetaJsonLd implements EmployerAggregateRat
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
             'url' => 'URL of the item.',
-            'worstRating' => 'The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.',
+            'worstRating' => 'The lowest value allowed in this rating system.',
         ];
     }
 

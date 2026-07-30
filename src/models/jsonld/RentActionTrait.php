@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for RentAction.
  *
  * @author    nystudio107
@@ -22,17 +22,17 @@ namespace nystudio107\seomatic\models\jsonld;
 trait RentActionTrait
 {
     /**
+     * A sub property of participant. The owner of the real estate property.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $landlord;
+
+    /**
      * A sub property of participant. The real estate agent involved in the
      * action.
      *
      * @var array|RealEstateAgent|RealEstateAgent[]
      */
     public $realEstateAgent;
-
-    /**
-     * A sub property of participant. The owner of the real estate property.
-     *
-     * @var array|Organization|Organization[]|array|Person|Person[]
-     */
-    public $landlord;
 }

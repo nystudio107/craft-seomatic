@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for TechArticle.
  *
  * @author    nystudio107
@@ -22,16 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TechArticleTrait
 {
     /**
-     * Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $proficiencyLevel;
-
-    /**
      * Prerequisites needed to fulfill steps in article.
      *
      * @var string|array|Text|Text[]
      */
     public $dependencies;
+
+    /**
+     * Proficiency needed for this content; expected values: 'Beginner', 'Expert'.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $proficiencyLevel;
 }

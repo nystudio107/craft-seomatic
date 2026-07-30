@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BusinessAudience.
  *
  * @author    nystudio107
@@ -29,16 +29,16 @@ trait BusinessAudienceTrait
     public $numberOfEmployees;
 
     /**
-     * The age of the business.
-     *
-     * @var array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $yearsInOperation;
-
-    /**
      * The size of the business in annual revenue.
      *
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $yearlyRevenue;
+
+    /**
+     * The age of the business.
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $yearsInOperation;
 }

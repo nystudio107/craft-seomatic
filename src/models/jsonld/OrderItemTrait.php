@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for OrderItem.
  *
  * @author    nystudio107
@@ -22,18 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait OrderItemTrait
 {
     /**
-     * The current status of the order item.
+     * The delivery of the parcel related to this order or order item.
      *
-     * @var array|OrderStatus|OrderStatus[]
+     * @var array|ParcelDelivery|ParcelDelivery[]
      */
-    public $orderItemStatus;
-
-    /**
-     * The item ordered.
-     *
-     * @var array|Product|Product[]|array|OrderItem|OrderItem[]|array|Service|Service[]
-     */
-    public $orderedItem;
+    public $orderDelivery;
 
     /**
      * The identifier of the order item.
@@ -43,17 +36,24 @@ trait OrderItemTrait
     public $orderItemNumber;
 
     /**
-     * The delivery of the parcel related to this order or order item.
+     * The current status of the order item.
      *
-     * @var array|ParcelDelivery|ParcelDelivery[]
+     * @var array|OrderStatus|OrderStatus[]
      */
-    public $orderDelivery;
+    public $orderItemStatus;
 
     /**
      * The number of the item ordered. If the property is not set, assume the
      * quantity is one.
      *
-     * @var float|array|Number|Number[]
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
     public $orderQuantity;
+
+    /**
+     * The item ordered.
+     *
+     * @var array|OrderItem|OrderItem[]|array|Product|Product[]|array|Service|Service[]
+     */
+    public $orderedItem;
 }

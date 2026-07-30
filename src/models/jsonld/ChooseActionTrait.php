@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ChooseAction.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait ChooseActionTrait
     /**
      * A sub property of object. The options subject to this action.
      *
-     * @var string|array|Thing|Thing[]|array|Text|Text[]
+     * @var string|array|Text|Text[]|array|Thing|Thing[]
      */
     public $actionOption;
 

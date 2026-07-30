@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * PsychologicalTreatment - A process of care relying upon counseling, dialogue and communication
  * aimed at improving a mental health condition without use of drugs.
  *
@@ -79,7 +79,7 @@ class PsychologicalTreatment extends MetaJsonLd implements PsychologicalTreatmen
             'alternateName' => ['array', 'Text', 'Text[]'],
             'bodyLocation' => ['array', 'Text', 'Text[]'],
             'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'doseSchedule' => ['array', 'DoseSchedule', 'DoseSchedule[]'],
             'drug' => ['array', 'Drug', 'Drug[]'],
@@ -87,19 +87,20 @@ class PsychologicalTreatment extends MetaJsonLd implements PsychologicalTreatmen
             'funding' => ['array', 'Grant', 'Grant[]'],
             'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
             'howPerformed' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'legalStatus' => ['array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'preparation' => ['array', 'MedicalEntity', 'MedicalEntity[]', 'array', 'Text', 'Text[]'],
             'procedureType' => ['array', 'MedicalProcedureType', 'MedicalProcedureType[]'],
             'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
             'relevantSpecialty' => ['array', 'MedicalSpecialty', 'MedicalSpecialty[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'status' => ['array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'EventStatusType', 'EventStatusType[]', 'array', 'Text', 'Text[]'],
+            'status' => ['array', 'EventStatusType', 'EventStatusType[]', 'array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'Text', 'Text[]'],
             'study' => ['array', 'MedicalStudy', 'MedicalStudy[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'url' => ['array', 'URL', 'URL[]'],
@@ -132,6 +133,7 @@ class PsychologicalTreatment extends MetaJsonLd implements PsychologicalTreatmen
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'preparation' => 'Typical preparation that a patient must undergo before having the procedure performed.',
             'procedureType' => 'The type of procedure, for example Surgical, Noninvasive, or Percutaneous.',

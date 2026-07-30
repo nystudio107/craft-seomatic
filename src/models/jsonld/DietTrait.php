@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Diet.
  *
  * @author    nystudio107
@@ -21,13 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait DietTrait
 {
-    /**
-     * Medical expert advice related to the plan.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $expertConsiderations;
-
     /**
      * Nutritional information specific to the dietary plan. May include dietary
      * recommendations on what foods to avoid, what foods to consume, and specific
@@ -41,16 +34,16 @@ trait DietTrait
     /**
      * People or organizations that endorse the plan.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $endorsers;
 
     /**
-     * Specific physiologic risks associated to the diet plan.
+     * Medical expert advice related to the plan.
      *
      * @var string|array|Text|Text[]
      */
-    public $risks;
+    public $expertConsiderations;
 
     /**
      * Specific physiologic benefits associated to the plan.
@@ -58,4 +51,11 @@ trait DietTrait
      * @var string|array|Text|Text[]
      */
     public $physiologicalBenefits;
+
+    /**
+     * Specific physiologic risks associated to the diet plan.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $risks;
 }

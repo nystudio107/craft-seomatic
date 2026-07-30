@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for FlightReservation.
  *
  * @author    nystudio107
@@ -29,6 +29,14 @@ trait FlightReservationTrait
     public $boardingGroup;
 
     /**
+     * The priority status assigned to a passenger for security or boarding (e.g.
+     * FastTrack or Priority).
+     *
+     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]
+     */
+    public $passengerPriorityStatus;
+
+    /**
      * The passenger's sequence number as assigned by the airline.
      *
      * @var string|array|Text|Text[]
@@ -41,12 +49,4 @@ trait FlightReservationTrait
      * @var string|array|Text|Text[]
      */
     public $securityScreening;
-
-    /**
-     * The priority status assigned to a passenger for security or boarding (e.g.
-     * FastTrack or Priority).
-     *
-     * @var string|array|Text|Text[]|array|QualitativeValue|QualitativeValue[]
-     */
-    public $passengerPriorityStatus;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for SpeakableSpecification.
  *
  * @author    nystudio107
@@ -22,15 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait SpeakableSpecificationTrait
 {
     /**
-     * An XPath, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In
-     * the latter case, multiple matches within a page can constitute a single
-     * conceptual "Web page element".
-     *
-     * @var array|XPathType|XPathType[]
-     */
-    public $xpath;
-
-    /**
      * A CSS selector, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]].
      * In the latter case, multiple matches within a page can constitute a single
      * conceptual "Web page element".
@@ -38,4 +29,13 @@ trait SpeakableSpecificationTrait
      * @var array|CssSelectorType|CssSelectorType[]
      */
     public $cssSelector;
+
+    /**
+     * An XPath, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In
+     * the latter case, multiple matches within a page can constitute a single
+     * conceptual "Web page element".
+     *
+     * @var array|XPathType|XPathType[]
+     */
+    public $xpath;
 }

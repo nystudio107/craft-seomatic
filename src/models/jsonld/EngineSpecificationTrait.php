@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for EngineSpecification.
  *
  * @author    nystudio107
@@ -21,22 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait EngineSpecificationTrait
 {
-    /**
-     * The type of engine or engines powering the vehicle.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|QualitativeValue|QualitativeValue[]
-     */
-    public $engineType;
-
-    /**
-     * The type of fuel suitable for the engine or engines of the vehicle. If the
-     * vehicle has only one engine, this property can be attached directly to the
-     * vehicle.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|QualitativeValue|QualitativeValue[]
-     */
-    public $fuelType;
-
     /**
      * The volume swept by all of the pistons inside the cylinders of an internal
      * combustion engine in a single movement.   Typical unit code(s): CMQ for
@@ -62,6 +46,22 @@ trait EngineSpecificationTrait
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $enginePower;
+
+    /**
+     * The type of engine or engines powering the vehicle.
+     *
+     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $engineType;
+
+    /**
+     * The type of fuel suitable for the engine or engines of the vehicle. If the
+     * vehicle has only one engine, this property can be attached directly to the
+     * vehicle.
+     *
+     * @var string|array|QualitativeValue|QualitativeValue[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $fuelType;
 
     /**
      * The torque (turning force) of the vehicle's engine.  Typical unit code(s):

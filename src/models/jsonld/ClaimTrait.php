@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Claim.
  *
  * @author    nystudio107
@@ -22,14 +22,6 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ClaimTrait
 {
     /**
-     * Indicates the first known occurrence of a [[Claim]] in some
-     * [[CreativeWork]].
-     *
-     * @var array|CreativeWork|CreativeWork[]
-     */
-    public $firstAppearance;
-
-    /**
      * Indicates an occurrence of a [[Claim]] in some [[CreativeWork]].
      *
      * @var array|CreativeWork|CreativeWork[]
@@ -37,11 +29,19 @@ trait ClaimTrait
     public $appearance;
 
     /**
-     * For a [[Claim]] interpreted from [[MediaObject]] content     sed to
-     * indicate a claim contained, implied or refined from the content of a
-     * [[MediaObject]].
+     * For a [[Claim]] interpreted from [[MediaObject]] content, the
+     * [[interpretedAsClaim]] property can be used to indicate a claim contained,
+     * implied or refined from the content of a [[MediaObject]].
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $claimInterpreter;
+
+    /**
+     * Indicates the first known occurrence of a [[Claim]] in some
+     * [[CreativeWork]].
+     *
+     * @var array|CreativeWork|CreativeWork[]
+     */
+    public $firstAppearance;
 }

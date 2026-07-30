@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * MerchantReturnPolicy - A MerchantReturnPolicy provides information about product return policies
  * associated with an [[Organization]], [[Product]], or [[Offer]].
  *
@@ -75,23 +75,24 @@ class MerchantReturnPolicy extends MetaJsonLd implements MerchantReturnPolicyInt
             'additionalProperty' => ['array', 'PropertyValue', 'PropertyValue[]'],
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'applicableCountry' => ['array', 'Text', 'Text[]', 'array', 'Country', 'Country[]'],
+            'applicableCountry' => ['array', 'Country', 'Country[]', 'array', 'Text', 'Text[]'],
             'customerRemorseReturnFees' => ['array', 'ReturnFeesEnumeration', 'ReturnFeesEnumeration[]'],
             'customerRemorseReturnLabelSource' => ['array', 'ReturnLabelSourceEnumeration', 'ReturnLabelSourceEnumeration[]'],
             'customerRemorseReturnShippingFeesAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'inStoreReturnsOffered' => ['array', 'Boolean', 'Boolean[]'],
             'itemCondition' => ['array', 'OfferItemCondition', 'OfferItemCondition[]'],
             'itemDefectReturnFees' => ['array', 'ReturnFeesEnumeration', 'ReturnFeesEnumeration[]'],
             'itemDefectReturnLabelSource' => ['array', 'ReturnLabelSourceEnumeration', 'ReturnLabelSourceEnumeration[]'],
             'itemDefectReturnShippingFeesAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
-            'merchantReturnDays' => ['array', 'Integer', 'Integer[]', 'array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
+            'merchantReturnDays' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]', 'array', 'Integer', 'Integer[]'],
             'merchantReturnLink' => ['array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'refundType' => ['array', 'RefundTypeEnumeration', 'RefundTypeEnumeration[]'],
             'restockingFee' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
@@ -99,12 +100,13 @@ class MerchantReturnPolicy extends MetaJsonLd implements MerchantReturnPolicyInt
             'returnLabelSource' => ['array', 'ReturnLabelSourceEnumeration', 'ReturnLabelSourceEnumeration[]'],
             'returnMethod' => ['array', 'ReturnMethodEnumeration', 'ReturnMethodEnumeration[]'],
             'returnPolicyCategory' => ['array', 'MerchantReturnEnumeration', 'MerchantReturnEnumeration[]'],
-            'returnPolicyCountry' => ['array', 'Text', 'Text[]', 'array', 'Country', 'Country[]'],
+            'returnPolicyCountry' => ['array', 'Country', 'Country[]', 'array', 'Text', 'Text[]'],
             'returnPolicySeasonalOverride' => ['array', 'MerchantReturnPolicySeasonalOverride', 'MerchantReturnPolicySeasonalOverride[]'],
             'returnShippingFeesAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'url' => ['array', 'URL', 'URL[]'],
+            'validForMemberTier' => ['array', 'MemberProgramTier', 'MemberProgramTier[]'],
         ];
     }
 
@@ -135,6 +137,7 @@ class MerchantReturnPolicy extends MetaJsonLd implements MerchantReturnPolicyInt
             'merchantReturnDays' => 'Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]].',
             'merchantReturnLink' => 'Specifies a Web page or service by URL, for product returns.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'refundType' => 'A refund type, from an enumerated list.',
             'restockingFee' => 'Use [[MonetaryAmount]] to specify a fixed restocking fee for product returns, or use [[Number]] to specify a percentage of the product price paid by the customer.',
@@ -148,6 +151,7 @@ class MerchantReturnPolicy extends MetaJsonLd implements MerchantReturnPolicyInt
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
             'url' => 'URL of the item.',
+            'validForMemberTier' => 'The membership program tier(s) an Offer (or a PriceSpecification, OfferShippingDetails, or MerchantReturnPolicy under an Offer) is valid for.',
         ];
     }
 

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * TelevisionChannel - A unique instance of a television BroadcastService on a
  * CableOrSatelliteService lineup.
  *
@@ -78,14 +78,15 @@ class TelevisionChannel extends MetaJsonLd implements TelevisionChannelInterface
             'broadcastChannelId' => ['array', 'Text', 'Text[]'],
             'broadcastFrequency' => ['array', 'BroadcastFrequencySpecification', 'BroadcastFrequencySpecification[]', 'array', 'Text', 'Text[]'],
             'broadcastServiceTier' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'genre' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'genre' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'inBroadcastLineup' => ['array', 'CableOrSatelliteService', 'CableOrSatelliteService[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'providesBroadcastService' => ['array', 'BroadcastService', 'BroadcastService[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
@@ -104,7 +105,7 @@ class TelevisionChannel extends MetaJsonLd implements TelevisionChannelInterface
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'alternateName' => 'An alias for the item.',
             'broadcastChannelId' => 'The unique address by which the BroadcastService can be identified in a provider lineup. In US, this is typically a number.',
-            'broadcastFrequency' => 'The frequency used for over-the-air broadcasts. Numeric values or simple ranges, e.g. 87-99. In addition a shortcut idiom is supported for frequences of AM and FM radio channels, e.g. "87 FM".',
+            'broadcastFrequency' => 'The frequency used for over-the-air broadcasts. Numeric values or simple ranges, e.g. 87-99. In addition a shortcut idiom is supported for frequencies of AM and FM radio channels, e.g. "87 FM".',
             'broadcastServiceTier' => 'The type of service required to have access to the channel (e.g. Standard or Premium).',
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
@@ -114,6 +115,7 @@ class TelevisionChannel extends MetaJsonLd implements TelevisionChannelInterface
             'inBroadcastLineup' => 'The CableOrSatelliteService offering the channel.',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'providesBroadcastService' => 'The BroadcastService offered on this channel.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',

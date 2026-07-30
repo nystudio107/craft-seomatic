@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * MolecularEntity - Any constitutionally or isotopically distinct atom, molecule, ion, ion
  * pair, radical, radical ion, complex, conformer etc., identifiable as a
  * separately distinguishable entity.
@@ -75,31 +75,32 @@ class MolecularEntity extends MetaJsonLd implements MolecularEntityInterface, Bi
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'associatedDisease' => ['array', 'MedicalCondition', 'MedicalCondition[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'associatedDisease' => ['array', 'MedicalCondition', 'MedicalCondition[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
             'bioChemInteraction' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
             'bioChemSimilarity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
             'biologicalRole' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
             'chemicalRole' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'hasBioChemEntityPart' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
-            'hasMolecularFunction' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'hasMolecularFunction' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
             'hasRepresentation' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'inChI' => ['array', 'Text', 'Text[]'],
             'inChIKey' => ['array', 'Text', 'Text[]'],
             'isEncodedByBioChemEntity' => ['array', 'Gene', 'Gene[]'],
             'isInvolvedInBiologicalProcess' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
-            'isLocatedInSubcellularLocation' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'isLocatedInSubcellularLocation' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'URL', 'URL[]'],
             'isPartOfBioChemEntity' => ['array', 'BioChemEntity', 'BioChemEntity[]'],
             'iupacName' => ['array', 'Text', 'Text[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'molecularFormula' => ['array', 'Text', 'Text[]'],
-            'molecularWeight' => ['array', 'Text', 'Text[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
-            'monoisotopicMolecularWeight' => ['array', 'Text', 'Text[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'molecularWeight' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Text', 'Text[]'],
+            'monoisotopicMolecularWeight' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Text', 'Text[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'potentialUse' => ['array', 'DefinedTerm', 'DefinedTerm[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
@@ -144,6 +145,7 @@ class MolecularEntity extends MetaJsonLd implements MolecularEntityInterface, Bi
             'molecularWeight' => 'This is the molecular weight of the entity being described, not of the parent. Units should be included in the form \'<Number> <unit>\', for example \'12 amu\' or as \'<QuantitativeValue>.',
             'monoisotopicMolecularWeight' => 'The monoisotopic mass is the sum of the masses of the atoms in a molecule using the unbound, ground-state, rest mass of the principal (most abundant) isotope for each element instead of the isotopic average mass. Please include the units in the form \'<Number> <unit>\', for example \'770.230488 g/mol\' or as \'<QuantitativeValue>.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'potentialUse' => 'Intended use of the BioChemEntity by humans.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',

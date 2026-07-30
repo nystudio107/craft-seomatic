@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Muscle - A muscle is an anatomical structure consisting of a contractile form of
  * tissue that animals use to effect movement.
  *
@@ -81,20 +81,21 @@ class Muscle extends MetaJsonLd implements MuscleInterface, AnatomicalStructureI
             'bodyLocation' => ['array', 'Text', 'Text[]'],
             'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
             'connectedTo' => ['array', 'AnatomicalStructure', 'AnatomicalStructure[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'diagram' => ['array', 'ImageObject', 'ImageObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'insertion' => ['array', 'AnatomicalStructure', 'AnatomicalStructure[]'],
-            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'legalStatus' => ['array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
             'muscleAction' => ['array', 'Text', 'Text[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'nerve' => ['array', 'Nerve', 'Nerve[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'partOfSystem' => ['array', 'AnatomicalSystem', 'AnatomicalSystem[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
@@ -138,6 +139,7 @@ class Muscle extends MetaJsonLd implements MuscleInterface, AnatomicalStructureI
             'muscleAction' => 'The movement the muscle generates.',
             'name' => 'The name of the item.',
             'nerve' => 'The underlying innervation associated with the muscle.',
+            'owner' => 'A person or organization who owns this Thing.',
             'partOfSystem' => 'The anatomical or organ system that this structure is part of.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'recognizingAuthority' => 'If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.',

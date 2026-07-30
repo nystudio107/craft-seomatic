@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for LymphaticVessel.
  *
  * @author    nystudio107
@@ -22,19 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait LymphaticVesselTrait
 {
     /**
-     * The anatomical or organ system drained by this vessel; generally refers to
-     * a specific part of an organ.
-     *
-     * @var array|AnatomicalSystem|AnatomicalSystem[]|array|AnatomicalStructure|AnatomicalStructure[]
-     */
-    public $regionDrained;
-
-    /**
      * The vasculature the lymphatic structure originates, or afferents, from.
      *
      * @var array|Vessel|Vessel[]
      */
     public $originatesFrom;
+
+    /**
+     * The anatomical or organ system drained by this vessel; generally refers to
+     * a specific part of an organ.
+     *
+     * @var array|AnatomicalStructure|AnatomicalStructure[]|array|AnatomicalSystem|AnatomicalSystem[]
+     */
+    public $regionDrained;
 
     /**
      * The vasculature the lymphatic structure runs, or efferents, to.

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Radiography - Radiography is an imaging technique that uses electromagnetic radiation
  * other than visible light, especially X-rays, to view the internal structure
  * of a non-uniformly composed and opaque object such as the human body.

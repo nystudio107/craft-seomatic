@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for TherapeuticProcedure.
  *
  * @author    nystudio107
@@ -21,13 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait TherapeuticProcedureTrait
 {
-    /**
-     * Specifying a drug or medicine used in a medication procedure.
-     *
-     * @var array|Drug|Drug[]
-     */
-    public $drug;
-
     /**
      * A possible complication and/or side effect of this therapy. If it is known
      * that an adverse outcome is serious (resulting in death, disability, or
@@ -46,4 +39,11 @@ trait TherapeuticProcedureTrait
      * @var array|DoseSchedule|DoseSchedule[]
      */
     public $doseSchedule;
+
+    /**
+     * Specifying a drug or medicine used in a medication procedure.
+     *
+     * @var array|Drug|Drug[]
+     */
+    public $drug;
 }

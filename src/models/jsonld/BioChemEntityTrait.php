@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for BioChemEntity.
  *
  * @author    nystudio107
@@ -22,6 +22,22 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BioChemEntityTrait
 {
     /**
+     * Disease associated to this BioChemEntity. Such disease can be a
+     * MedicalCondition or a URL. If you want to add an evidence supporting the
+     * association, please use PropertyValue.
+     *
+     * @var array|MedicalCondition|MedicalCondition[]|array|PropertyValue|PropertyValue[]|array|URL|URL[]
+     */
+    public $associatedDisease;
+
+    /**
+     * A BioChemEntity that is known to interact with this item.
+     *
+     * @var array|BioChemEntity|BioChemEntity[]
+     */
+    public $bioChemInteraction;
+
+    /**
      * A similar BioChemEntity, e.g., obtained by fingerprint similarity
      * algorithms.
      *
@@ -30,43 +46,11 @@ trait BioChemEntityTrait
     public $bioChemSimilarity;
 
     /**
-     * A common representation such as a protein sequence or chemical structure
-     * for this entity. For images use schema.org/image.
+     * A role played by the BioChemEntity within a biological context.
      *
-     * @var string|array|PropertyValue|PropertyValue[]|array|Text|Text[]|array|URL|URL[]
+     * @var array|DefinedTerm|DefinedTerm[]
      */
-    public $hasRepresentation;
-
-    /**
-     * The taxonomic grouping of the organism that expresses, encodes, or in some
-     * way related to the BioChemEntity.
-     *
-     * @var string|array|DefinedTerm|DefinedTerm[]|array|Taxon|Taxon[]|array|Text|Text[]|array|URL|URL[]
-     */
-    public $taxonomicRange;
-
-    /**
-     * Molecular function performed by this BioChemEntity; please use
-     * PropertyValue if you want to include any evidence.
-     *
-     * @var array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|PropertyValue|PropertyValue[]
-     */
-    public $hasMolecularFunction;
-
-    /**
-     * Biological process this BioChemEntity is involved in; please use
-     * PropertyValue if you want to include any evidence.
-     *
-     * @var array|DefinedTerm|DefinedTerm[]|array|PropertyValue|PropertyValue[]|array|URL|URL[]
-     */
-    public $isInvolvedInBiologicalProcess;
-
-    /**
-     * A BioChemEntity that is known to interact with this item.
-     *
-     * @var array|BioChemEntity|BioChemEntity[]
-     */
-    public $bioChemInteraction;
+    public $biologicalRole;
 
     /**
      * A [[Grant]] that directly or indirectly provide funding or sponsorship for
@@ -77,11 +61,51 @@ trait BioChemEntityTrait
     public $funding;
 
     /**
-     * A role played by the BioChemEntity within a biological context.
+     * Indicates a BioChemEntity that (in some sense) has this BioChemEntity as a
+     * part.
      *
-     * @var array|DefinedTerm|DefinedTerm[]
+     * @var array|BioChemEntity|BioChemEntity[]
      */
-    public $biologicalRole;
+    public $hasBioChemEntityPart;
+
+    /**
+     * Molecular function performed by this BioChemEntity; please use
+     * PropertyValue if you want to include any evidence.
+     *
+     * @var array|DefinedTerm|DefinedTerm[]|array|PropertyValue|PropertyValue[]|array|URL|URL[]
+     */
+    public $hasMolecularFunction;
+
+    /**
+     * A common representation such as a protein sequence or chemical structure
+     * for this entity. For images use schema.org/image.
+     *
+     * @var string|array|PropertyValue|PropertyValue[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $hasRepresentation;
+
+    /**
+     * Another BioChemEntity encoding by this one.
+     *
+     * @var array|Gene|Gene[]
+     */
+    public $isEncodedByBioChemEntity;
+
+    /**
+     * Biological process this BioChemEntity is involved in; please use
+     * PropertyValue if you want to include any evidence.
+     *
+     * @var array|DefinedTerm|DefinedTerm[]|array|PropertyValue|PropertyValue[]|array|URL|URL[]
+     */
+    public $isInvolvedInBiologicalProcess;
+
+    /**
+     * Subcellular location where this BioChemEntity is located; please use
+     * PropertyValue if you want to include any evidence.
+     *
+     * @var array|DefinedTerm|DefinedTerm[]|array|PropertyValue|PropertyValue[]|array|URL|URL[]
+     */
+    public $isLocatedInSubcellularLocation;
 
     /**
      * Indicates a BioChemEntity that is (in some sense) a part of this
@@ -92,34 +116,10 @@ trait BioChemEntityTrait
     public $isPartOfBioChemEntity;
 
     /**
-     * Indicates a BioChemEntity that (in some sense) has this BioChemEntity as a
-     * part.
+     * The taxonomic grouping of the organism that expresses, encodes, or in some
+     * way related to the BioChemEntity.
      *
-     * @var array|BioChemEntity|BioChemEntity[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Taxon|Taxon[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $hasBioChemEntityPart;
-
-    /**
-     * Another BioChemEntity encoding by this one.
-     *
-     * @var array|Gene|Gene[]
-     */
-    public $isEncodedByBioChemEntity;
-
-    /**
-     * Subcellular location where this BioChemEntity is located; please use
-     * PropertyValue if you want to include any evidence.
-     *
-     * @var array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|PropertyValue|PropertyValue[]
-     */
-    public $isLocatedInSubcellularLocation;
-
-    /**
-     * Disease associated to this BioChemEntity. Such disease can be a
-     * MedicalCondition or a URL. If you want to add an evidence supporting the
-     * association, please use PropertyValue.
-     *
-     * @var array|MedicalCondition|MedicalCondition[]|array|URL|URL[]|array|PropertyValue|PropertyValue[]
-     */
-    public $associatedDisease;
+    public $taxonomicRange;
 }

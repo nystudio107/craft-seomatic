@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Joint.
  *
  * @author    nystudio107
@@ -22,18 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait JointTrait
 {
     /**
-     * The degree of mobility the joint allows.
-     *
-     * @var string|array|MedicalEntity|MedicalEntity[]|array|Text|Text[]
-     */
-    public $functionalClass;
-
-    /**
      * The biomechanical properties of the bone.
      *
      * @var string|array|Text|Text[]
      */
     public $biomechnicalClass;
+
+    /**
+     * The degree of mobility the joint allows.
+     *
+     * @var string|array|MedicalEntity|MedicalEntity[]|array|Text|Text[]
+     */
+    public $functionalClass;
 
     /**
      * The name given to how bone physically connects to each other.

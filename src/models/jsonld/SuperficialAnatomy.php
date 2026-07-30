@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * SuperficialAnatomy - Anatomical features that can be observed by sight (without dissection),
  * including the form and proportions of the human body as well as surface
  * landmarks that correspond to deeper subcutaneous structures. Superficial
@@ -92,19 +92,20 @@ class SuperficialAnatomy extends MetaJsonLd implements SuperficialAnatomyInterfa
             'alternateName' => ['array', 'Text', 'Text[]'],
             'associatedPathophysiology' => ['array', 'Text', 'Text[]'],
             'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'legalStatus' => ['array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
-            'relatedAnatomy' => ['array', 'AnatomicalSystem', 'AnatomicalSystem[]', 'array', 'AnatomicalStructure', 'AnatomicalStructure[]'],
+            'relatedAnatomy' => ['array', 'AnatomicalStructure', 'AnatomicalStructure[]', 'array', 'AnatomicalSystem', 'AnatomicalSystem[]'],
             'relatedCondition' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
             'relatedTherapy' => ['array', 'MedicalTherapy', 'MedicalTherapy[]'],
             'relevantSpecialty' => ['array', 'MedicalSpecialty', 'MedicalSpecialty[]'],
@@ -137,6 +138,7 @@ class SuperficialAnatomy extends MetaJsonLd implements SuperficialAnatomyInterfa
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'recognizingAuthority' => 'If applicable, the organization that officially recognizes this entity as part of its endorsed system of medicine.',
             'relatedAnatomy' => 'Anatomical systems or structures that relate to the superficial anatomy.',

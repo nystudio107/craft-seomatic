@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ExerciseAction - The act of participating in exertive activity for the purposes of improving
  * health and fitness.
  *
@@ -73,17 +73,18 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
+            'actionProcess' => ['array', 'HowTo', 'HowTo[]'],
             'actionStatus' => ['array', 'ActionStatusType', 'ActionStatusType[]'],
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'agent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'agent' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'audience' => ['array', 'Audience', 'Audience[]'],
             'course' => ['array', 'Place', 'Place[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'diet' => ['array', 'Diet', 'Diet[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'distance' => ['array', 'Distance', 'Distance[]'],
-            'endTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'endTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'error' => ['array', 'Thing', 'Thing[]'],
             'event' => ['array', 'Event', 'Event[]'],
             'exerciseCourse' => ['array', 'Place', 'Place[]'],
@@ -91,23 +92,24 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
             'exerciseRelatedDiet' => ['array', 'Diet', 'Diet[]'],
             'exerciseType' => ['array', 'Text', 'Text[]'],
             'fromLocation' => ['array', 'Place', 'Place[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'instrument' => ['array', 'Thing', 'Thing[]'],
-            'location' => ['array', 'PostalAddress', 'PostalAddress[]', 'array', 'VirtualLocation', 'VirtualLocation[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'location' => ['array', 'Place', 'Place[]', 'array', 'PostalAddress', 'PostalAddress[]', 'array', 'Text', 'Text[]', 'array', 'VirtualLocation', 'VirtualLocation[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'object' => ['array', 'Thing', 'Thing[]'],
             'opponent' => ['array', 'Person', 'Person[]'],
-            'participant' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'participant' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'result' => ['array', 'Thing', 'Thing[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'sportsActivityLocation' => ['array', 'SportsActivityLocation', 'SportsActivityLocation[]'],
             'sportsEvent' => ['array', 'SportsEvent', 'SportsEvent[]'],
             'sportsTeam' => ['array', 'SportsTeam', 'SportsTeam[]'],
-            'startTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'startTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'target' => ['array', 'EntryPoint', 'EntryPoint[]', 'array', 'URL', 'URL[]'],
             'toLocation' => ['array', 'Place', 'Place[]'],
@@ -122,6 +124,7 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
     public function getSchemaPropertyDescriptions(): array
     {
         return [
+            'actionProcess' => 'Description of the process by which the action was performed.',
             'actionStatus' => 'Indicates the current disposition of the Action.',
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'agent' => 'The direct performer or driver of the action (animate or inanimate). E.g. *John* wrote a book.',
@@ -133,7 +136,7 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'distance' => 'The distance travelled, e.g. exercising or travelling.',
             'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to *December*. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file.  Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
-            'error' => 'For failed actions, more information on the cause of the failure.',
+            'error' => 'For failed actions, more information on the cause of the failure. Consider using the Error type.',
             'event' => 'Upcoming or past event associated with this place, organization, or action.',
             'exerciseCourse' => 'A sub property of location. The course where this action was taken.',
             'exercisePlan' => 'A sub property of instrument. The exercise plan used on this action.',
@@ -148,6 +151,7 @@ class ExerciseAction extends MetaJsonLd implements ExerciseActionInterface, Play
             'name' => 'The name of the item.',
             'object' => 'The object upon which the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn\'t). E.g. John read *a book*.',
             'opponent' => 'A sub property of participant. The opponent on this action.',
+            'owner' => 'A person or organization who owns this Thing.',
             'participant' => 'Other co-agents that participated in the action indirectly. E.g. John wrote a book with *Steve*.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',

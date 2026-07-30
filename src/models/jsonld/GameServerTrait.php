@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for GameServer.
  *
  * @author    nystudio107
@@ -22,18 +22,18 @@ namespace nystudio107\seomatic\models\jsonld;
 trait GameServerTrait
 {
     /**
-     * Number of players on the server.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $playersOnline;
-
-    /**
      * Video game which is played on this server.
      *
      * @var array|VideoGame|VideoGame[]
      */
     public $game;
+
+    /**
+     * Number of players on the server.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $playersOnline;
 
     /**
      * Status of a game server.

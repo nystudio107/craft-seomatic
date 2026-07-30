@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for FollowAction.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait FollowActionTrait
     /**
      * A sub property of object. The person or organization being followed.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $followee;
 }

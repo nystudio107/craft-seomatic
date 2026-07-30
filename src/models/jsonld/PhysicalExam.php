@@ -14,22 +14,22 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * PhysicalExam - A type of physical examination of a patient performed by a physician.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/PhysicalExam
  */
-class PhysicalExam extends MetaJsonLd implements PhysicalExamInterface, MedicalProcedureInterface, MedicalEntityInterface, ThingInterface, MedicalEnumerationInterface, EnumerationInterface, IntangibleInterface
+class PhysicalExam extends MetaJsonLd implements PhysicalExamInterface, MedicalEnumerationInterface, EnumerationInterface, IntangibleInterface, ThingInterface, MedicalProcedureInterface, MedicalEntityInterface
 {
     use PhysicalExamTrait;
-    use MedicalProcedureTrait;
-    use MedicalEntityTrait;
-    use ThingTrait;
     use MedicalEnumerationTrait;
     use EnumerationTrait;
     use IntangibleTrait;
+    use ThingTrait;
+    use MedicalProcedureTrait;
+    use MedicalEntityTrait;
 
     /**
      * The Schema.org Type Name
@@ -50,7 +50,7 @@ class PhysicalExam extends MetaJsonLd implements PhysicalExamInterface, MedicalP
      *
      * @var string
      */
-    public static $schemaTypeExtends = 'MedicalProcedure';
+    public static $schemaTypeExtends = 'MedicalEnumeration';
 
     /**
      * The Schema.org Type Description
@@ -79,25 +79,26 @@ class PhysicalExam extends MetaJsonLd implements PhysicalExamInterface, MedicalP
             'alternateName' => ['array', 'Text', 'Text[]'],
             'bodyLocation' => ['array', 'Text', 'Text[]'],
             'code' => ['array', 'MedicalCode', 'MedicalCode[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'followup' => ['array', 'Text', 'Text[]'],
             'funding' => ['array', 'Grant', 'Grant[]'],
             'guideline' => ['array', 'MedicalGuideline', 'MedicalGuideline[]'],
             'howPerformed' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'legalStatus' => ['array', 'Text', 'Text[]', 'array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'legalStatus' => ['array', 'DrugLegalStatus', 'DrugLegalStatus[]', 'array', 'MedicalEnumeration', 'MedicalEnumeration[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'medicineSystem' => ['array', 'MedicineSystem', 'MedicineSystem[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'preparation' => ['array', 'MedicalEntity', 'MedicalEntity[]', 'array', 'Text', 'Text[]'],
             'procedureType' => ['array', 'MedicalProcedureType', 'MedicalProcedureType[]'],
             'recognizingAuthority' => ['array', 'Organization', 'Organization[]'],
             'relevantSpecialty' => ['array', 'MedicalSpecialty', 'MedicalSpecialty[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'status' => ['array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'EventStatusType', 'EventStatusType[]', 'array', 'Text', 'Text[]'],
+            'status' => ['array', 'EventStatusType', 'EventStatusType[]', 'array', 'MedicalStudyStatus', 'MedicalStudyStatus[]', 'array', 'Text', 'Text[]'],
             'study' => ['array', 'MedicalStudy', 'MedicalStudy[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'supersededBy' => ['array', 'SchemaClass', 'SchemaClass[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'Property', 'Property[]'],
@@ -128,6 +129,7 @@ class PhysicalExam extends MetaJsonLd implements PhysicalExamInterface, MedicalP
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'medicineSystem' => 'The system of medicine that includes this MedicalEntity, for example \'evidence-based\', \'homeopathic\', \'chiropractic\', etc.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'preparation' => 'Typical preparation that a patient must undergo before having the procedure performed.',
             'procedureType' => 'The type of procedure, for example Surgical, Noninvasive, or Percutaneous.',

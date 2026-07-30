@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ImageObject.
  *
  * @author    nystudio107
@@ -22,6 +22,15 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ImageObjectTrait
 {
     /**
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the
+     * [[encodingFormat]].
+     *
+     * @var string|array|MediaObject|MediaObject[]|array|Text|Text[]
+     */
+    public $caption;
+
+    /**
      * Represents textual captioning from a [[MediaObject]], e.g. text of a
      * 'meme'.
      *
@@ -30,13 +39,11 @@ trait ImageObjectTrait
     public $embeddedTextCaption;
 
     /**
-     * The caption for this object. For downloadable machine formats (closed
-     * caption, subtitles etc.) use MediaObject and indicate the
-     * [[encodingFormat]].
+     * exif data for this object.
      *
-     * @var string|array|Text|Text[]|array|MediaObject|MediaObject[]
+     * @var string|array|PropertyValue|PropertyValue[]|array|Text|Text[]
      */
-    public $caption;
+    public $exifData;
 
     /**
      * Indicates whether this image is representative of the content of the page.
@@ -44,11 +51,4 @@ trait ImageObjectTrait
      * @var bool|array|Boolean|Boolean[]
      */
     public $representativeOfPage;
-
-    /**
-     * exif data for this object.
-     *
-     * @var string|array|PropertyValue|PropertyValue[]|array|Text|Text[]
-     */
-    public $exifData;
 }

@@ -14,22 +14,22 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Patient - A patient is any person recipient of health care services.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/Patient
  */
-class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, ThingInterface, MedicalAudienceInterface, PeopleAudienceInterface, AudienceInterface, IntangibleInterface
+class Patient extends MetaJsonLd implements PatientInterface, MedicalAudienceInterface, AudienceInterface, IntangibleInterface, ThingInterface, PeopleAudienceInterface, PersonInterface
 {
     use PatientTrait;
-    use PersonTrait;
-    use ThingTrait;
     use MedicalAudienceTrait;
-    use PeopleAudienceTrait;
     use AudienceTrait;
     use IntangibleTrait;
+    use ThingTrait;
+    use PeopleAudienceTrait;
+    use PersonTrait;
 
     /**
      * The Schema.org Type Name
@@ -50,7 +50,7 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
      *
      * @var string
      */
-    public static $schemaTypeExtends = 'Person';
+    public static $schemaTypeExtends = 'MedicalAudience';
 
     /**
      * The Schema.org Type Description
@@ -77,26 +77,26 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
         return [
             'additionalName' => ['array', 'Text', 'Text[]'],
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'address' => ['array', 'Text', 'Text[]', 'array', 'PostalAddress', 'PostalAddress[]'],
+            'address' => ['array', 'PostalAddress', 'PostalAddress[]', 'array', 'Text', 'Text[]'],
             'affiliation' => ['array', 'Organization', 'Organization[]'],
             'agentInteractionStatistic' => ['array', 'InteractionCounter', 'InteractionCounter[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'alumniOf' => ['array', 'Organization', 'Organization[]', 'array', 'EducationalOrganization', 'EducationalOrganization[]'],
+            'alumniOf' => ['array', 'EducationalOrganization', 'EducationalOrganization[]', 'array', 'Organization', 'Organization[]'],
             'audienceType' => ['array', 'Text', 'Text[]'],
             'award' => ['array', 'Text', 'Text[]'],
             'awards' => ['array', 'Text', 'Text[]'],
             'birthDate' => ['array', 'Date', 'Date[]'],
             'birthPlace' => ['array', 'Place', 'Place[]'],
-            'brand' => ['array', 'Organization', 'Organization[]', 'array', 'Brand', 'Brand[]'],
+            'brand' => ['array', 'Brand', 'Brand[]', 'array', 'Organization', 'Organization[]'],
             'callSign' => ['array', 'Text', 'Text[]'],
             'children' => ['array', 'Person', 'Person[]'],
-            'colleague' => ['array', 'URL', 'URL[]', 'array', 'Person', 'Person[]'],
+            'colleague' => ['array', 'Person', 'Person[]', 'array', 'URL', 'URL[]'],
             'colleagues' => ['array', 'Person', 'Person[]'],
             'contactPoint' => ['array', 'ContactPoint', 'ContactPoint[]'],
             'contactPoints' => ['array', 'ContactPoint', 'ContactPoint[]'],
             'deathDate' => ['array', 'Date', 'Date[]'],
             'deathPlace' => ['array', 'Place', 'Place[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'diagnosis' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'drug' => ['array', 'Drug', 'Drug[]'],
@@ -112,36 +112,39 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
             'givenName' => ['array', 'Text', 'Text[]'],
             'globalLocationNumber' => ['array', 'Text', 'Text[]'],
             'hasCertification' => ['array', 'Certification', 'Certification[]'],
-            'hasCredential' => ['array', 'EducationalOccupationalCredential', 'EducationalOccupationalCredential[]'],
+            'hasCredential' => ['array', 'Credential', 'Credential[]'],
             'hasOccupation' => ['array', 'Occupation', 'Occupation[]'],
             'hasOfferCatalog' => ['array', 'OfferCatalog', 'OfferCatalog[]'],
             'hasPOS' => ['array', 'Place', 'Place[]'],
             'healthCondition' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
-            'height' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Distance', 'Distance[]'],
+            'height' => ['array', 'Distance', 'Distance[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'homeLocation' => ['array', 'ContactPoint', 'ContactPoint[]', 'array', 'Place', 'Place[]'],
             'honorificPrefix' => ['array', 'Text', 'Text[]'],
             'honorificSuffix' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'interactionStatistic' => ['array', 'InteractionCounter', 'InteractionCounter[]'],
             'isicV4' => ['array', 'Text', 'Text[]'],
             'jobTitle' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'knows' => ['array', 'Person', 'Person[]'],
-            'knowsAbout' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'Thing', 'Thing[]'],
+            'knowsAbout' => ['array', 'Text', 'Text[]', 'array', 'Thing', 'Thing[]', 'array', 'URL', 'URL[]'],
             'knowsLanguage' => ['array', 'Language', 'Language[]', 'array', 'Text', 'Text[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'lifeEvent' => ['array', 'Event', 'Event[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'makesOffer' => ['array', 'Offer', 'Offer[]'],
-            'memberOf' => ['array', 'ProgramMembership', 'ProgramMembership[]', 'array', 'Organization', 'Organization[]'],
+            'memberOf' => ['array', 'MemberProgramTier', 'MemberProgramTier[]', 'array', 'Organization', 'Organization[]', 'array', 'ProgramMembership', 'ProgramMembership[]'],
             'naics' => ['array', 'Text', 'Text[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'nationality' => ['array', 'Country', 'Country[]'],
-            'netWorth' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]'],
-            'owns' => ['array', 'OwnershipInfo', 'OwnershipInfo[]', 'array', 'Product', 'Product[]'],
+            'netWorth' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'PriceSpecification', 'PriceSpecification[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'owns' => ['array', 'Thing', 'Thing[]'],
             'parent' => ['array', 'Person', 'Person[]'],
             'parents' => ['array', 'Person', 'Person[]'],
             'performerIn' => ['array', 'Event', 'Event[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'publishingPrinciples' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'pronouns' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'Text', 'Text[]'],
+            'publishingPrinciples' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'relatedTo' => ['array', 'Person', 'Person[]'],
             'requiredGender' => ['array', 'Text', 'Text[]'],
             'requiredMaxAge' => ['array', 'Integer', 'Integer[]'],
@@ -150,6 +153,7 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
             'seeks' => ['array', 'Demand', 'Demand[]'],
             'sibling' => ['array', 'Person', 'Person[]'],
             'siblings' => ['array', 'Person', 'Person[]'],
+            'skills' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Text', 'Text[]'],
             'sponsor' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'spouse' => ['array', 'Person', 'Person[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
@@ -162,8 +166,8 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
             'telephone' => ['array', 'Text', 'Text[]'],
             'url' => ['array', 'URL', 'URL[]'],
             'vatID' => ['array', 'Text', 'Text[]'],
-            'weight' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
-            'workLocation' => ['array', 'Place', 'Place[]', 'array', 'ContactPoint', 'ContactPoint[]'],
+            'weight' => ['array', 'Mass', 'Mass[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'workLocation' => ['array', 'ContactPoint', 'ContactPoint[]', 'array', 'Place', 'Place[]'],
             'worksFor' => ['array', 'Organization', 'Organization[]'],
         ];
     }
@@ -207,7 +211,7 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
             'follows' => 'The most generic uni-directional social relation.',
             'funder' => 'A person or organization that supports (sponsors) something through some kind of financial contribution.',
             'funding' => 'A [[Grant]] that directly or indirectly provide funding or sponsorship for this item. See also [[ownershipFundingInfo]].',
-            'gender' => 'Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of "Mixed".',
+            'gender' => 'Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who are not a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of "Mixed".',
             'geographicArea' => 'The geographic area associated with the audience.',
             'givenName' => 'Given name. In the U.S., the first name of a Person.',
             'globalLocationNumber' => 'The [Global Location Number](http://www.gs1.org/gln) (GLN, sometimes also referred to as International Location Number or ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify parties and physical locations.',
@@ -229,18 +233,21 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
             'knows' => 'The most generic bi-directional social/work relation.',
             'knowsAbout' => 'Of a [[Person]], and less typically of an [[Organization]], to indicate a topic that is known about - suggesting possible expertise but not implying it. We do not distinguish skill levels here, or relate this to educational content, events, objectives or [[JobPosting]] descriptions.',
             'knowsLanguage' => 'Of a [[Person]], and less typically of an [[Organization]], to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).',
+            'lifeEvent' => 'A life event like baptism, communions, Bar Mitzvahs, Aqiqah, Namakarana, Miyamairi, burial, ....',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'makesOffer' => 'A pointer to products or services offered by the organization or person.',
             'memberOf' => 'An Organization (or ProgramMembership) to which this Person or Organization belongs.',
             'naics' => 'The North American Industry Classification System (NAICS) code for a particular organization or business person.',
             'name' => 'The name of the item.',
             'nationality' => 'Nationality of the person.',
-            'netWorth' => 'The total financial value of the person as calculated by subtracting assets from liabilities.',
-            'owns' => 'Products owned by the organization or person.',
+            'netWorth' => 'The total financial value of the person as calculated by subtracting the total value of liabilities from the total value of assets.',
+            'owner' => 'A person or organization who owns this Thing.',
+            'owns' => 'Things owned by the organization or person.',
             'parent' => 'A parent of this person.',
             'parents' => 'A parents of the person.',
             'performerIn' => 'Event that this person is a performer or participant in.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'pronouns' => 'A short string listing or describing pronouns for a person. Typically the person concerned is the best authority as pronouns are a critical part of personal identity and expression. Publishers and consumers of this information are reminded to treat this data responsibly, take country-specific laws related to gender expression into account, and be wary of out-of-date data and drawing unwarranted inferences about the person being described.  In English, formulations such as "they/them", "she/her", and "he/him" are commonly used online and can also be used here. We do not intend to enumerate all possible micro-syntaxes in all languages. More structured and well-defined external values for pronouns can be referenced using the [[StructuredValue]] or [[DefinedTerm]] values. ',
             'publishingPrinciples' => 'The publishingPrinciples property indicates (typically via [[URL]]) a document describing the editorial principles of an [[Organization]] (or individual, e.g. a [[Person]] writing a blog) that relate to their activities as a publisher, e.g. ethics or diversity policies. When applied to a [[CreativeWork]] (e.g. [[NewsArticle]]) the principles are those of the party primarily responsible for the creation of the [[CreativeWork]].  While such policies are most typically expressed in natural language, sometimes related information (e.g. indicating a [[funder]]) can be expressed using schema.org terminology. ',
             'relatedTo' => 'The most generic familial relation.',
             'requiredGender' => 'Audiences defined by a person\'s gender.',
@@ -250,6 +257,7 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
             'seeks' => 'A pointer to products or services sought by the organization or person (demand).',
             'sibling' => 'A sibling of the person.',
             'siblings' => 'A sibling of the person.',
+            'skills' => 'A statement of knowledge, skill, ability, task or any other assertion expressing a competency that is either claimed by a person, an organization or desired or required to fulfill a role or to work in an occupation.',
             'sponsor' => 'A person or organization that supports a thing through a pledge, promise, or financial contribution. E.g. a sponsor of a Medical Study or a corporate sponsor of an event.',
             'spouse' => 'The person\'s spouse.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
@@ -261,7 +269,7 @@ class Patient extends MetaJsonLd implements PatientInterface, PersonInterface, T
             'taxID' => 'The Tax / Fiscal ID of the organization or person, e.g. the TIN in the US or the CIF/NIF in Spain.',
             'telephone' => 'The telephone number.',
             'url' => 'URL of the item.',
-            'vatID' => 'The Value-added Tax ID of the organization or person.',
+            'vatID' => 'The value-added Tax ID of the organization or person with national prefix (for example IT123456789). Can also be described as [[iso6523Code]] with proper prefix.',
             'weight' => 'The weight of the product or person.',
             'workLocation' => 'A contact location for a person\'s place of work.',
             'worksFor' => 'Organizations that the person works for.',

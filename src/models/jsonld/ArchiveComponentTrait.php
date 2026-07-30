@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ArchiveComponent.
  *
  * @author    nystudio107
@@ -32,7 +32,7 @@ trait ArchiveComponentTrait
     /**
      * Current location of the item.
      *
-     * @var string|array|Text|Text[]|array|Place|Place[]|array|PostalAddress|PostalAddress[]
+     * @var string|array|Place|Place[]|array|PostalAddress|PostalAddress[]|array|Text|Text[]
      */
     public $itemLocation;
 }

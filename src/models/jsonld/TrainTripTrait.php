@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for TrainTrip.
  *
  * @author    nystudio107
@@ -22,18 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait TrainTripTrait
 {
     /**
-     * The station from which the train departs.
-     *
-     * @var array|TrainStation|TrainStation[]
-     */
-    public $departureStation;
-
-    /**
-     * The unique identifier for the train.
+     * The platform where the train arrives.
      *
      * @var string|array|Text|Text[]
      */
-    public $trainNumber;
+    public $arrivalPlatform;
 
     /**
      * The station where the train trip ends.
@@ -43,11 +36,18 @@ trait TrainTripTrait
     public $arrivalStation;
 
     /**
-     * The platform where the train arrives.
+     * The platform from which the train departs.
      *
      * @var string|array|Text|Text[]
      */
-    public $arrivalPlatform;
+    public $departurePlatform;
+
+    /**
+     * The station from which the train departs.
+     *
+     * @var array|TrainStation|TrainStation[]
+     */
+    public $departureStation;
 
     /**
      * The name of the train (e.g. The Orient Express).
@@ -57,9 +57,9 @@ trait TrainTripTrait
     public $trainName;
 
     /**
-     * The platform from which the train departs.
+     * The unique identifier for the train.
      *
      * @var string|array|Text|Text[]
      */
-    public $departurePlatform;
+    public $trainNumber;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Dataset.
  *
  * @author    nystudio107
@@ -50,6 +50,38 @@ trait DatasetTrait
     public $distribution;
 
     /**
+     * A data catalog which contains this dataset (this property was previously
+     * 'catalog', preferred name is now 'includedInDataCatalog').
+     *
+     * @var array|DataCatalog|DataCatalog[]
+     */
+    public $includedDataCatalog;
+
+    /**
+     * A data catalog which contains this dataset.
+     *
+     * @var array|DataCatalog|DataCatalog[]
+     */
+    public $includedInDataCatalog;
+
+    /**
+     * The International Standard Serial Number (ISSN) that identifies this serial
+     * publication. You can repeat this property to identify different formats of,
+     * or the linking ISSN (ISSN-L) for, this serial publication.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $issn;
+
+    /**
+     * A subproperty of [[measurementTechnique]] that can be used for specifying
+     * specific methods, in particular via [[MeasurementMethodEnum]].
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $measurementMethod;
+
+    /**
      * A technique, method or technology used in an [[Observation]],
      * [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]],
      * [[DataCatalog]]), corresponding to the method used for measuring the
@@ -72,28 +104,11 @@ trait DatasetTrait
      * are several [[variableMeasured]] properties recorded for some given data
      * object, use a [[PropertyValue]] for each [[variableMeasured]] and attach
      * the corresponding [[measurementTechnique]]. The value can also be from an
-     * enumeration, organized as a [[MeasurementMetholdEnumeration]].
+     * enumeration, organized as a [[MeasurementMethodEnum]].
      *
      * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
      */
     public $measurementTechnique;
-
-    /**
-     * A data catalog which contains this dataset (this property was previously
-     * 'catalog', preferred name is now 'includedInDataCatalog').
-     *
-     * @var array|DataCatalog|DataCatalog[]
-     */
-    public $includedDataCatalog;
-
-    /**
-     * The International Standard Serial Number (ISSN) that identifies this serial
-     * publication. You can repeat this property to identify different formats of,
-     * or the linking ISSN (ISSN-L) for, this serial publication.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $issn;
 
     /**
      * The variableMeasured property can indicate (repeated as necessary) the
@@ -101,22 +116,7 @@ trait DatasetTrait
      * pairs of identifier and description using PropertyValue, or more explicitly
      * as a [[StatisticalVariable]].
      *
-     * @var string|array|Text|Text[]|array|Property|Property[]|array|StatisticalVariable|StatisticalVariable[]|array|PropertyValue|PropertyValue[]
+     * @var string|array|Property|Property[]|array|PropertyValue|PropertyValue[]|array|StatisticalVariable|StatisticalVariable[]|array|Text|Text[]
      */
     public $variableMeasured;
-
-    /**
-     * A subproperty of [[measurementTechnique]] that can be used for specifying
-     * specific methods, in particular via [[MeasurementMethodEnum]].
-     *
-     * @var string|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]
-     */
-    public $measurementMethod;
-
-    /**
-     * A data catalog which contains this dataset.
-     *
-     * @var array|DataCatalog|DataCatalog[]
-     */
-    public $includedInDataCatalog;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Suite.
  *
  * @author    nystudio107
@@ -28,9 +28,19 @@ trait SuiteTrait
      * instance of BedDetails. For more detailed information, use the
      * amenityFeature property.
      *
-     * @var string|array|Text|Text[]|array|BedDetails|BedDetails[]|array|BedType|BedType[]
+     * @var string|array|BedDetails|BedDetails[]|array|BedType|BedType[]|array|Text|Text[]
      */
     public $bed;
+
+    /**
+     * The number of rooms (excluding bathrooms and closets) of the accommodation
+     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
+     * The type of room can be put in the unitText property of the
+     * QuantitativeValue.
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfRooms;
 
     /**
      * The allowed total occupancy for the accommodation in persons (including
@@ -42,14 +52,4 @@ trait SuiteTrait
      * @var array|QuantitativeValue|QuantitativeValue[]
      */
     public $occupancy;
-
-    /**
-     * The number of rooms (excluding bathrooms and closets) of the accommodation
-     * or lodging business. Typical unit code(s): ROM for room or C62 for no unit.
-     * The type of room can be put in the unitText property of the
-     * QuantitativeValue.
-     *
-     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $numberOfRooms;
 }

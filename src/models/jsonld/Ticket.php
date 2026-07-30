@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Ticket - Used to describe a ticket to an event, a flight, a bus ride, etc.
  *
  * @author    nystudio107
@@ -74,13 +74,14 @@ class Ticket extends MetaJsonLd implements TicketInterface, IntangibleInterface,
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'dateIssued' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'issuedBy' => ['array', 'Organization', 'Organization[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'priceCurrency' => ['array', 'Text', 'Text[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
@@ -88,7 +89,7 @@ class Ticket extends MetaJsonLd implements TicketInterface, IntangibleInterface,
             'ticketNumber' => ['array', 'Text', 'Text[]'],
             'ticketToken' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'ticketedSeat' => ['array', 'Seat', 'Seat[]'],
-            'totalPrice' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'totalPrice' => ['array', 'Number', 'Number[]', 'array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]'],
             'underName' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
@@ -111,6 +112,7 @@ class Ticket extends MetaJsonLd implements TicketInterface, IntangibleInterface,
             'issuedBy' => 'The organization issuing the item, for example a [[Permit]], [[Ticket]], or [[Certification]].',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'priceCurrency' => 'The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',

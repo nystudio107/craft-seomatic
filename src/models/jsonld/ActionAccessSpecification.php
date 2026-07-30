@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ActionAccessSpecification - A set of requirements that must be fulfilled in order to perform an Action.
  *
  * @author    nystudio107
@@ -73,20 +73,21 @@ class ActionAccessSpecification extends MetaJsonLd implements ActionAccessSpecif
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'availabilityEnds' => ['array', 'Time', 'Time[]', 'array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'availabilityEnds' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'availabilityStarts' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
-            'category' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Thing', 'Thing[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'category' => ['array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Text', 'Text[]', 'array', 'Thing', 'Thing[]', 'array', 'URL', 'URL[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'eligibleRegion' => ['array', 'GeoShape', 'GeoShape[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
+            'eligibleRegion' => ['array', 'GeoShape', 'GeoShape[]', 'array', 'Place', 'Place[]', 'array', 'Text', 'Text[]'],
             'expectsAcceptanceOf' => ['array', 'Offer', 'Offer[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'ineligibleRegion' => ['array', 'Text', 'Text[]', 'array', 'Place', 'Place[]', 'array', 'GeoShape', 'GeoShape[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'ineligibleRegion' => ['array', 'GeoShape', 'GeoShape[]', 'array', 'Place', 'Place[]', 'array', 'Text', 'Text[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'requiresSubscription' => ['array', 'MediaSubscription', 'MediaSubscription[]', 'array', 'Boolean', 'Boolean[]'],
+            'requiresSubscription' => ['array', 'Boolean', 'Boolean[]', 'array', 'MediaSubscription', 'MediaSubscription[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'url' => ['array', 'URL', 'URL[]'],
@@ -114,6 +115,7 @@ class ActionAccessSpecification extends MetaJsonLd implements ActionAccessSpecif
             'ineligibleRegion' => 'The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, or the GeoShape for the geo-political region(s) for which the offer or delivery charge specification is not valid, e.g. a region where the transaction is not allowed.  See also [[eligibleRegion]].       ',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'requiresSubscription' => 'Indicates if use of the media require a subscription  (either paid or free). Allowed values are ```true``` or ```false``` (note that an earlier version had \'yes\', \'no\').',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',

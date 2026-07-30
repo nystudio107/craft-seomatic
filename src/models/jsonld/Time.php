@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Time - A point in time recurring on multiple days in the form
  * hh:mm:ss[Z|(+|-)hh:mm] (see [XML schema for
  * details](http://www.w3.org/TR/xmlschema-2/#time)).

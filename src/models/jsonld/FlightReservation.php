@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * FlightReservation - A reservation for air travel.  Note: This type is for information about
  * actual reservations, e.g. in confirmation emails or HTML pages with
  * individual confirmations of reservations. For offers of tickets, use
@@ -78,22 +78,23 @@ class FlightReservation extends MetaJsonLd implements FlightReservationInterface
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'boardingGroup' => ['array', 'Text', 'Text[]'],
-            'bookingAgent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'bookingAgent' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'bookingTime' => ['array', 'DateTime', 'DateTime[]'],
-            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'broker' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'modifiedTime' => ['array', 'DateTime', 'DateTime[]'],
             'name' => ['array', 'Text', 'Text[]'],
-            'passengerPriorityStatus' => ['array', 'Text', 'Text[]', 'array', 'QualitativeValue', 'QualitativeValue[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'passengerPriorityStatus' => ['array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'Text', 'Text[]'],
             'passengerSequenceNumber' => ['array', 'Text', 'Text[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'priceCurrency' => ['array', 'Text', 'Text[]'],
             'programMembershipUsed' => ['array', 'ProgramMembership', 'ProgramMembership[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'reservationFor' => ['array', 'Thing', 'Thing[]'],
             'reservationId' => ['array', 'Text', 'Text[]'],
             'reservationStatus' => ['array', 'ReservationStatusType', 'ReservationStatusType[]'],
@@ -101,7 +102,7 @@ class FlightReservation extends MetaJsonLd implements FlightReservationInterface
             'sameAs' => ['array', 'URL', 'URL[]'],
             'securityScreening' => ['array', 'Text', 'Text[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'totalPrice' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'totalPrice' => ['array', 'Number', 'Number[]', 'array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]'],
             'underName' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
@@ -127,6 +128,7 @@ class FlightReservation extends MetaJsonLd implements FlightReservationInterface
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'modifiedTime' => 'The date and time the reservation was modified.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'passengerPriorityStatus' => 'The priority status assigned to a passenger for security or boarding (e.g. FastTrack or Priority).',
             'passengerSequenceNumber' => 'The passenger\'s sequence number as assigned by the airline.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',

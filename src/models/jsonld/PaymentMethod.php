@@ -14,11 +14,11 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * PaymentMethod - A payment method is a standardized procedure for transferring the monetary
  * amount for a purchase. Payment methods are characterized by the legal and
  * technical structures used, and by the organization or group carrying out
- * the transaction.  Commonly used values:  *
+ * the transaction. The following legacy values should be accepted:   *
  * http://purl.org/goodrelations/v1#ByBankTransferInAdvance *
  * http://purl.org/goodrelations/v1#ByInvoice *
  * http://purl.org/goodrelations/v1#Cash *
@@ -27,16 +27,17 @@ use nystudio107\seomatic\models\MetaJsonLd;
  * http://purl.org/goodrelations/v1#DirectDebit *
  * http://purl.org/goodrelations/v1#GoogleCheckout *
  * http://purl.org/goodrelations/v1#PayPal *
- * http://purl.org/goodrelations/v1#PaySwarm
+ * http://purl.org/goodrelations/v1#PaySwarm  Structured values, or [UNCE
+ * payment means](https://vocabulary.uncefact.org/PaymentMeans) are
+ * recommended or for newer annotations.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/PaymentMethod
  */
-class PaymentMethod extends MetaJsonLd implements PaymentMethodInterface, EnumerationInterface, IntangibleInterface, ThingInterface
+class PaymentMethod extends MetaJsonLd implements PaymentMethodInterface, IntangibleInterface, ThingInterface
 {
     use PaymentMethodTrait;
-    use EnumerationTrait;
     use IntangibleTrait;
     use ThingTrait;
 
@@ -59,14 +60,14 @@ class PaymentMethod extends MetaJsonLd implements PaymentMethodInterface, Enumer
      *
      * @var string
      */
-    public static $schemaTypeExtends = 'Enumeration';
+    public static $schemaTypeExtends = 'Intangible';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    public static $schemaTypeDescription = "A payment method is a standardized procedure for transferring the monetary amount for a purchase. Payment methods are characterized by the legal and technical structures used, and by the organization or group carrying out the transaction.\\n\\nCommonly used values:\\n\\n* http://purl.org/goodrelations/v1#ByBankTransferInAdvance\\n* http://purl.org/goodrelations/v1#ByInvoice\\n* http://purl.org/goodrelations/v1#Cash\\n* http://purl.org/goodrelations/v1#CheckInAdvance\\n* http://purl.org/goodrelations/v1#COD\\n* http://purl.org/goodrelations/v1#DirectDebit\\n* http://purl.org/goodrelations/v1#GoogleCheckout\\n* http://purl.org/goodrelations/v1#PayPal\\n* http://purl.org/goodrelations/v1#PaySwarm\n        ";
+    public static $schemaTypeDescription = 'A payment method is a standardized procedure for transferring the monetary amount for a purchase. Payment methods are characterized by the legal and technical structures used, and by the organization or group carrying out the transaction. The following legacy values should be accepted: \n\n* http://purl.org/goodrelations/v1#ByBankTransferInAdvance\n* http://purl.org/goodrelations/v1#ByInvoice\n* http://purl.org/goodrelations/v1#Cash\n* http://purl.org/goodrelations/v1#CheckInAdvance\n* http://purl.org/goodrelations/v1#COD\n* http://purl.org/goodrelations/v1#DirectDebit\n* http://purl.org/goodrelations/v1#GoogleCheckout\n* http://purl.org/goodrelations/v1#PayPal\n* http://purl.org/goodrelations/v1#PaySwarm\n\nStructured values, or [UNCE payment means](https://vocabulary.uncefact.org/PaymentMeans) are recommended or for newer annotations.';
 
 
     /**
@@ -86,16 +87,17 @@ class PaymentMethod extends MetaJsonLd implements PaymentMethodInterface, Enumer
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'paymentMethodType' => ['array', 'PaymentMethodType', 'PaymentMethodType[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'supersededBy' => ['array', 'SchemaClass', 'SchemaClass[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'Property', 'Property[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
     }
@@ -115,10 +117,11 @@ class PaymentMethod extends MetaJsonLd implements PaymentMethodInterface, Enumer
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
+            'paymentMethodType' => 'The type of a payment method.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
-            'supersededBy' => 'Relates a term (i.e. a property, class or enumeration) to one that supersedes it.',
             'url' => 'URL of the item.',
         ];
     }

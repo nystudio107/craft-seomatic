@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Order - An order is a confirmation of a transaction (a receipt), which can contain
  * multiple line items, each represented by an Offer that has been accepted by
  * the customer.
@@ -77,34 +77,35 @@ class Order extends MetaJsonLd implements OrderInterface, IntangibleInterface, T
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'billingAddress' => ['array', 'PostalAddress', 'PostalAddress[]'],
-            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'broker' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'confirmationNumber' => ['array', 'Text', 'Text[]'],
             'customer' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'discount' => ['array', 'Number', 'Number[]', 'array', 'Text', 'Text[]'],
             'discountCode' => ['array', 'Text', 'Text[]'],
             'discountCurrency' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'isGift' => ['array', 'Boolean', 'Boolean[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
-            'merchant' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
+            'merchant' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'orderDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'orderDelivery' => ['array', 'ParcelDelivery', 'ParcelDelivery[]'],
             'orderNumber' => ['array', 'Text', 'Text[]'],
             'orderStatus' => ['array', 'OrderStatus', 'OrderStatus[]'],
-            'orderedItem' => ['array', 'Product', 'Product[]', 'array', 'OrderItem', 'OrderItem[]', 'array', 'Service', 'Service[]'],
+            'orderedItem' => ['array', 'OrderItem', 'OrderItem[]', 'array', 'Product', 'Product[]', 'array', 'Service', 'Service[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'partOfInvoice' => ['array', 'Invoice', 'Invoice[]'],
             'paymentDue' => ['array', 'DateTime', 'DateTime[]'],
             'paymentDueDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'paymentMethod' => ['array', 'PaymentMethod', 'PaymentMethod[]'],
+            'paymentMethod' => ['array', 'PaymentMethod', 'PaymentMethod[]', 'array', 'Text', 'Text[]'],
             'paymentMethodId' => ['array', 'Text', 'Text[]'],
             'paymentUrl' => ['array', 'URL', 'URL[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'seller' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'seller' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
@@ -140,6 +141,7 @@ class Order extends MetaJsonLd implements OrderInterface, IntangibleInterface, T
             'orderNumber' => 'The identifier of the transaction.',
             'orderStatus' => 'The current status of the order.',
             'orderedItem' => 'The item ordered.',
+            'owner' => 'A person or organization who owns this Thing.',
             'partOfInvoice' => 'The order is being paid as part of the referenced Invoice.',
             'paymentDue' => 'The date that payment is due.',
             'paymentDueDate' => 'The date that payment is due.',

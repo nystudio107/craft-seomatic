@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DataCatalog.
  *
  * @author    nystudio107
@@ -21,6 +21,21 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait DataCatalogTrait
 {
+    /**
+     * A dataset contained in this catalog.
+     *
+     * @var array|Dataset|Dataset[]
+     */
+    public $dataset;
+
+    /**
+     * A subproperty of [[measurementTechnique]] that can be used for specifying
+     * specific methods, in particular via [[MeasurementMethodEnum]].
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $measurementMethod;
+
     /**
      * A technique, method or technology used in an [[Observation]],
      * [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]],
@@ -44,24 +59,9 @@ trait DataCatalogTrait
      * are several [[variableMeasured]] properties recorded for some given data
      * object, use a [[PropertyValue]] for each [[variableMeasured]] and attach
      * the corresponding [[measurementTechnique]]. The value can also be from an
-     * enumeration, organized as a [[MeasurementMetholdEnumeration]].
+     * enumeration, organized as a [[MeasurementMethodEnum]].
      *
      * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
      */
     public $measurementTechnique;
-
-    /**
-     * A dataset contained in this catalog.
-     *
-     * @var array|Dataset|Dataset[]
-     */
-    public $dataset;
-
-    /**
-     * A subproperty of [[measurementTechnique]] that can be used for specifying
-     * specific methods, in particular via [[MeasurementMethodEnum]].
-     *
-     * @var string|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]
-     */
-    public $measurementMethod;
 }

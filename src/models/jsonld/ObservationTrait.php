@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Observation.
  *
  * @author    nystudio107
@@ -22,19 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ObservationTrait
 {
     /**
-     * Identifies the denominator variable when an observation represents a ratio
-     * or percentage.
+     * A [[marginOfError]] for an [[Observation]].
      *
-     * @var array|StatisticalVariable|StatisticalVariable[]
+     * @var array|QuantitativeValue|QuantitativeValue[]
      */
-    public $measurementDenominator;
-
-    /**
-     * The observationDate of an [[Observation]].
-     *
-     * @var array|DateTime|DateTime[]
-     */
-    public $observationDate;
+    public $marginOfError;
 
     /**
      * The measuredProperty of an [[Observation]], typically via its
@@ -48,13 +40,28 @@ trait ObservationTrait
     public $measuredProperty;
 
     /**
-     * The length of time an Observation took place over. The format follows
-     * `P[0-9]*[Y|M|D|h|m|s]`. For example, P1Y is Period 1 Year, P3M is Period 3
-     * Months, P3h is Period 3 hours.
+     * Identifies the denominator variable when an observation represents a ratio
+     * or percentage.
      *
-     * @var string|array|Text|Text[]
+     * @var array|StatisticalVariable|StatisticalVariable[]
      */
-    public $observationPeriod;
+    public $measurementDenominator;
+
+    /**
+     * A subproperty of [[measurementTechnique]] that can be used for specifying
+     * specific methods, in particular via [[MeasurementMethodEnum]].
+     *
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $measurementMethod;
+
+    /**
+     * Provides additional qualification to an observation. For example, a GDP
+     * observation measures the Nominal value.
+     *
+     * @var array|Enumeration|Enumeration[]
+     */
+    public $measurementQualifier;
 
     /**
      * A technique, method or technology used in an [[Observation]],
@@ -79,26 +86,35 @@ trait ObservationTrait
      * are several [[variableMeasured]] properties recorded for some given data
      * object, use a [[PropertyValue]] for each [[variableMeasured]] and attach
      * the corresponding [[measurementTechnique]]. The value can also be from an
-     * enumeration, organized as a [[MeasurementMetholdEnumeration]].
+     * enumeration, organized as a [[MeasurementMethodEnum]].
      *
      * @var string|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]|array|URL|URL[]
      */
     public $measurementTechnique;
 
     /**
-     * Provides additional qualification to an observation. For example, a GDP
-     * observation measures the Nominal value.
+     * The [[observationAbout]] property identifies an entity, often a [[Place]],
+     * associated with an [[Observation]].
      *
-     * @var array|Enumeration|Enumeration[]
+     * @var array|Place|Place[]|array|Thing|Thing[]
      */
-    public $measurementQualifier;
+    public $observationAbout;
 
     /**
-     * A [[marginOfError]] for an [[Observation]].
+     * The observationDate of an [[Observation]].
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $marginOfError;
+    public $observationDate;
+
+    /**
+     * The length of time an Observation took place over. The format follows
+     * `P[0-9]*[Y|M|D|h|m|s]`. For example, P1Y is Period 1 Year, P3M is Period 3
+     * Months, P3h is Period 3 hours.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $observationPeriod;
 
     /**
      * The variableMeasured property can indicate (repeated as necessary) the
@@ -106,23 +122,7 @@ trait ObservationTrait
      * pairs of identifier and description using PropertyValue, or more explicitly
      * as a [[StatisticalVariable]].
      *
-     * @var string|array|Text|Text[]|array|Property|Property[]|array|StatisticalVariable|StatisticalVariable[]|array|PropertyValue|PropertyValue[]
+     * @var string|array|Property|Property[]|array|PropertyValue|PropertyValue[]|array|StatisticalVariable|StatisticalVariable[]|array|Text|Text[]
      */
     public $variableMeasured;
-
-    /**
-     * The [[observationAbout]] property identifies an entity, often a [[Place]],
-     * associated with an [[Observation]].
-     *
-     * @var array|Thing|Thing[]|array|Place|Place[]
-     */
-    public $observationAbout;
-
-    /**
-     * A subproperty of [[measurementTechnique]] that can be used for specifying
-     * specific methods, in particular via [[MeasurementMethodEnum]].
-     *
-     * @var string|array|URL|URL[]|array|DefinedTerm|DefinedTerm[]|array|MeasurementMethodEnum|MeasurementMethodEnum[]|array|Text|Text[]
-     */
-    public $measurementMethod;
 }

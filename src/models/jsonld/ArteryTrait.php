@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Artery.
  *
  * @author    nystudio107
@@ -22,16 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ArteryTrait
 {
     /**
-     * The area to which the artery supplies blood.
-     *
-     * @var array|AnatomicalStructure|AnatomicalStructure[]
-     */
-    public $supplyTo;
-
-    /**
      * The branches that comprise the arterial structure.
      *
      * @var array|AnatomicalStructure|AnatomicalStructure[]
      */
     public $arterialBranch;
+
+    /**
+     * The area to which the artery supplies blood.
+     *
+     * @var array|AnatomicalStructure|AnatomicalStructure[]
+     */
+    public $supplyTo;
 }

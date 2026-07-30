@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * SizeSpecification - Size related properties of a product, typically a size code ([[name]]) and
  * optionally a [[sizeSystem]], [[sizeGroup]], and product measurements
  * ([[hasMeasurement]]). In addition, the intended audience can be defined
@@ -80,30 +80,31 @@ class SizeSpecification extends MetaJsonLd implements SizeSpecificationInterface
             'additionalProperty' => ['array', 'PropertyValue', 'PropertyValue[]'],
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'equal' => ['array', 'QualitativeValue', 'QualitativeValue[]'],
             'greater' => ['array', 'QualitativeValue', 'QualitativeValue[]'],
             'greaterOrEqual' => ['array', 'QualitativeValue', 'QualitativeValue[]'],
             'hasMeasurement' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'lesser' => ['array', 'QualitativeValue', 'QualitativeValue[]'],
             'lesserOrEqual' => ['array', 'QualitativeValue', 'QualitativeValue[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'nonEqual' => ['array', 'QualitativeValue', 'QualitativeValue[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'sizeGroup' => ['array', 'Text', 'Text[]', 'array', 'SizeGroupEnumeration', 'SizeGroupEnumeration[]'],
-            'sizeSystem' => ['array', 'Text', 'Text[]', 'array', 'SizeSystemEnumeration', 'SizeSystemEnumeration[]'],
+            'sizeGroup' => ['array', 'SizeGroupEnumeration', 'SizeGroupEnumeration[]', 'array', 'Text', 'Text[]'],
+            'sizeSystem' => ['array', 'SizeSystemEnumeration', 'SizeSystemEnumeration[]', 'array', 'Text', 'Text[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'suggestedAge' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'suggestedGender' => ['array', 'GenderType', 'GenderType[]', 'array', 'Text', 'Text[]'],
             'suggestedMeasurement' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'supersededBy' => ['array', 'SchemaClass', 'SchemaClass[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'Property', 'Property[]'],
             'url' => ['array', 'URL', 'URL[]'],
-            'valueReference' => ['array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'Text', 'Text[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementTypeEnumeration', 'MeasurementTypeEnumeration[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'valueReference' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'MeasurementTypeEnumeration', 'MeasurementTypeEnumeration[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'Text', 'Text[]'],
         ];
     }
 
@@ -130,6 +131,7 @@ class SizeSpecification extends MetaJsonLd implements SizeSpecificationInterface
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
             'nonEqual' => 'This ordering relation for qualitative values indicates that the subject is not equal to the object.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'sizeGroup' => 'The size group (also known as "size type") for a product\'s size. Size groups are common in the fashion industry to define size segments and suggested audiences for wearable products. Multiple values can be combined, for example "men\'s big and tall", "petite maternity" or "regular".',

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PhysicalActivity.
  *
  * @author    nystudio107
@@ -22,17 +22,10 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PhysicalActivityTrait
 {
     /**
-     * The characteristics of associated patients, such as age, gender, race etc.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $epidemiology;
-
-    /**
      * The anatomy of the underlying organ system or structures associated with
      * this entity.
      *
-     * @var array|AnatomicalSystem|AnatomicalSystem[]|array|SuperficialAnatomy|SuperficialAnatomy[]|array|AnatomicalStructure|AnatomicalStructure[]
+     * @var array|AnatomicalStructure|AnatomicalStructure[]|array|AnatomicalSystem|AnatomicalSystem[]|array|SuperficialAnatomy|SuperficialAnatomy[]
      */
     public $associatedAnatomy;
 
@@ -40,9 +33,16 @@ trait PhysicalActivityTrait
      * A category for the item. Greater signs or slashes can be used to informally
      * indicate a category hierarchy.
      *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Thing|Thing[]
+     * @var string|array|CategoryCode|CategoryCode[]|array|PhysicalActivityCategory|PhysicalActivityCategory[]|array|Text|Text[]|array|Thing|Thing[]|array|URL|URL[]
      */
     public $category;
+
+    /**
+     * The characteristics of associated patients, such as age, gender, race etc.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $epidemiology;
 
     /**
      * Changes in the normal mechanical, physical, and biochemical functions that

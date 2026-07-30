@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for HotelRoom.
  *
  * @author    nystudio107
@@ -28,7 +28,7 @@ trait HotelRoomTrait
      * instance of BedDetails. For more detailed information, use the
      * amenityFeature property.
      *
-     * @var string|array|Text|Text[]|array|BedDetails|BedDetails[]|array|BedType|BedType[]
+     * @var string|array|BedDetails|BedDetails[]|array|BedType|BedType[]|array|Text|Text[]
      */
     public $bed;
 

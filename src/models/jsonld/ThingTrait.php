@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Thing.
  *
  * @author    nystudio107
@@ -21,53 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait ThingTrait
 {
-    /**
-     * The name of the item.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $name;
-
-    /**
-     * A description of the item.
-     *
-     * @var string|array|TextObject|TextObject[]|array|Text|Text[]
-     */
-    public $description;
-
-    /**
-     * A CreativeWork or Event about this Thing.
-     *
-     * @var array|CreativeWork|CreativeWork[]|array|Event|Event[]
-     */
-    public $subjectOf;
-
-    /**
-     * URL of the item.
-     *
-     * @var array|URL|URL[]
-     */
-    public $url;
-
-    /**
-     * The identifier property represents any kind of identifier for any kind of
-     * [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-     * dedicated properties for representing many of these, either as textual
-     * strings or as URL (URI) links. See [background
-     * notes](/docs/datamodel.html#identifierBg) for more details.
-     *
-     * @var string|array|Text|Text[]|array|URL|URL[]|array|PropertyValue|PropertyValue[]
-     */
-    public $identifier;
-
-    /**
-     * An image of the item. This can be a [[URL]] or a fully described
-     * [[ImageObject]].
-     *
-     * @var array|ImageObject|ImageObject[]|array|URL|URL[]
-     */
-    public $image;
-
     /**
      * An additional type for the item, typically used for adding more specific
      * types from external vocabularies in microdata syntax. This is a
@@ -84,19 +37,18 @@ trait ThingTrait
     public $additionalType;
 
     /**
-     * Indicates a potential Action, which describes an idealized action in which
-     * this thing would play an 'object' role.
-     *
-     * @var array|Action|Action[]
-     */
-    public $potentialAction;
-
-    /**
      * An alias for the item.
      *
      * @var string|array|Text|Text[]
      */
     public $alternateName;
+
+    /**
+     * A description of the item.
+     *
+     * @var string|array|Text|Text[]|array|TextObject|TextObject[]
+     */
+    public $description;
 
     /**
      * A sub property of description. A short description of the item used to
@@ -109,6 +61,56 @@ trait ThingTrait
     public $disambiguatingDescription;
 
     /**
+     * The identifier property represents any kind of identifier for any kind of
+     * [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+     * dedicated properties for representing many of these, either as textual
+     * strings or as URL (URI) links. See [background
+     * notes](/docs/datamodel.html#identifierBg) for more details.
+     *
+     * @var string|array|PropertyValue|PropertyValue[]|array|Text|Text[]|array|URL|URL[]
+     */
+    public $identifier;
+
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described
+     * [[ImageObject]].
+     *
+     * @var array|ImageObject|ImageObject[]|array|URL|URL[]
+     */
+    public $image;
+
+    /**
+     * Indicates a page (or other CreativeWork) for which this thing is the main
+     * entity being described. See [background
+     * notes](/docs/datamodel.html#mainEntityBackground) for details.
+     *
+     * @var array|CreativeWork|CreativeWork[]|array|URL|URL[]
+     */
+    public $mainEntityOfPage;
+
+    /**
+     * The name of the item.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $name;
+
+    /**
+     * A person or organization who owns this Thing.
+     *
+     * @var array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $owner;
+
+    /**
+     * Indicates a potential Action, which describes an idealized action in which
+     * this thing would play an 'object' role.
+     *
+     * @var array|Action|Action[]
+     */
+    public $potentialAction;
+
+    /**
      * URL of a reference Web page that unambiguously indicates the item's
      * identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or
      * official website.
@@ -118,11 +120,16 @@ trait ThingTrait
     public $sameAs;
 
     /**
-     * Indicates a page (or other CreativeWork) for which this thing is the main
-     * entity being described. See [background
-     * notes](/docs/datamodel.html#mainEntityBackground) for details.
+     * A CreativeWork or Event about this Thing.
      *
-     * @var array|URL|URL[]|array|CreativeWork|CreativeWork[]
+     * @var array|CreativeWork|CreativeWork[]|array|Event|Event[]
      */
-    public $mainEntityOfPage;
+    public $subjectOf;
+
+    /**
+     * URL of the item.
+     *
+     * @var array|URL|URL[]
+     */
+    public $url;
 }

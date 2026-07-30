@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for AggregateRating.
  *
  * @author    nystudio107
@@ -21,13 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait AggregateRatingTrait
 {
-    /**
-     * The count of total number of reviews.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $reviewCount;
-
     /**
      * The item that is being reviewed/rated.
      *
@@ -41,4 +34,11 @@ trait AggregateRatingTrait
      * @var int|array|Integer|Integer[]
      */
     public $ratingCount;
+
+    /**
+     * The count of total number of reviews.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $reviewCount;
 }

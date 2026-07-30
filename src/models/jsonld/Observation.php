@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Observation - Instances of the class [[Observation]] are used to specify observations
  * about an entity at a particular time. The principal properties of an
  * [[Observation]] are [[observationAbout]], [[measuredProperty]],
@@ -22,8 +22,8 @@ use nystudio107\seomatic\models\MetaJsonLd;
  * Some but not all Observations represent a [[QuantitativeValue]].
  * Quantitative observations can be about a [[StatisticalVariable]], which is
  * an abstract specification about which we can make observations that are
- * grounded at a particular location and time.       Observations can also
- * encode a subset of simple RDF-like statements (its observationAbout, a
+ * grounded at a particular location and time.  Observations can also encode a
+ * subset of simple RDF-like statements (its observationAbout, a
  * StatisticalVariable, defining the measuredPoperty; its observationAbout
  * property indicating the entity the statement is about, and [[value]] )  In
  * the context of a quantitative knowledge graph, typical properties could
@@ -34,13 +34,13 @@ use nystudio107\seomatic\models\MetaJsonLd;
  * @package   Seomatic
  * @see       https://schema.org/Observation
  */
-class Observation extends MetaJsonLd implements ObservationInterface, QuantitativeValueInterface, StructuredValueInterface, IntangibleInterface, ThingInterface
+class Observation extends MetaJsonLd implements ObservationInterface, IntangibleInterface, ThingInterface, QuantitativeValueInterface, StructuredValueInterface
 {
     use ObservationTrait;
-    use QuantitativeValueTrait;
-    use StructuredValueTrait;
     use IntangibleTrait;
     use ThingTrait;
+    use QuantitativeValueTrait;
+    use StructuredValueTrait;
 
     /**
      * The Schema.org Type Name
@@ -61,14 +61,14 @@ class Observation extends MetaJsonLd implements ObservationInterface, Quantitati
      *
      * @var string
      */
-    public static $schemaTypeExtends = 'QuantitativeValue';
+    public static $schemaTypeExtends = 'Intangible';
 
     /**
      * The Schema.org Type Description
      *
      * @var string
      */
-    public static $schemaTypeDescription = "Instances of the class [[Observation]] are used to specify observations about an entity at a particular time. The principal properties of an [[Observation]] are [[observationAbout]], [[measuredProperty]], [[statType]], [[value] and [[observationDate]]  and [[measuredProperty]]. Some but not all Observations represent a [[QuantitativeValue]]. Quantitative observations can be about a [[StatisticalVariable]], which is an abstract specification about which we can make observations that are grounded at a particular location and time. \n    \nObservations can also encode a subset of simple RDF-like statements (its observationAbout, a StatisticalVariable, defining the measuredPoperty; its observationAbout property indicating the entity the statement is about, and [[value]] )\n\nIn the context of a quantitative knowledge graph, typical properties could include [[measuredProperty]], [[observationAbout]], [[observationDate]], [[value]], [[unitCode]], [[unitText]], [[measurementMethod]].\n    ";
+    public static $schemaTypeDescription = "Instances of the class [[Observation]] are used to specify observations about an entity at a particular time. The principal properties of an [[Observation]] are [[observationAbout]], [[measuredProperty]], [[statType]], [[value] and [[observationDate]]  and [[measuredProperty]]. Some but not all Observations represent a [[QuantitativeValue]]. Quantitative observations can be about a [[StatisticalVariable]], which is an abstract specification about which we can make observations that are grounded at a particular location and time.\n\nObservations can also encode a subset of simple RDF-like statements (its observationAbout, a StatisticalVariable, defining the measuredPoperty; its observationAbout property indicating the entity the statement is about, and [[value]] )\n\nIn the context of a quantitative knowledge graph, typical properties could include [[measuredProperty]], [[observationAbout]], [[observationDate]], [[value]], [[unitCode]], [[unitText]], [[measurementMethod]].\n    ";
 
 
     /**
@@ -89,32 +89,33 @@ class Observation extends MetaJsonLd implements ObservationInterface, Quantitati
             'additionalProperty' => ['array', 'PropertyValue', 'PropertyValue[]'],
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'marginOfError' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'maxValue' => ['array', 'Number', 'Number[]'],
             'measuredProperty' => ['array', 'Property', 'Property[]'],
             'measurementDenominator' => ['array', 'StatisticalVariable', 'StatisticalVariable[]'],
-            'measurementMethod' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementMethodEnum', 'MeasurementMethodEnum[]', 'array', 'Text', 'Text[]'],
+            'measurementMethod' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementMethodEnum', 'MeasurementMethodEnum[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'measurementQualifier' => ['array', 'Enumeration', 'Enumeration[]'],
             'measurementTechnique' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementMethodEnum', 'MeasurementMethodEnum[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'minValue' => ['array', 'Number', 'Number[]'],
             'name' => ['array', 'Text', 'Text[]'],
-            'observationAbout' => ['array', 'Thing', 'Thing[]', 'array', 'Place', 'Place[]'],
-            'observationDate' => ['array', 'DateTime', 'DateTime[]'],
+            'observationAbout' => ['array', 'Place', 'Place[]', 'array', 'Thing', 'Thing[]'],
+            'observationDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'observationPeriod' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'unitCode' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'unitText' => ['array', 'Text', 'Text[]'],
             'url' => ['array', 'URL', 'URL[]'],
-            'value' => ['array', 'StructuredValue', 'StructuredValue[]', 'array', 'Number', 'Number[]', 'array', 'Text', 'Text[]', 'array', 'Boolean', 'Boolean[]'],
-            'valueReference' => ['array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'Text', 'Text[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementTypeEnumeration', 'MeasurementTypeEnumeration[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'PropertyValue', 'PropertyValue[]'],
-            'variableMeasured' => ['array', 'Text', 'Text[]', 'array', 'Property', 'Property[]', 'array', 'StatisticalVariable', 'StatisticalVariable[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'value' => ['array', 'Boolean', 'Boolean[]', 'array', 'Number', 'Number[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'Text', 'Text[]'],
+            'valueReference' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'MeasurementTypeEnumeration', 'MeasurementTypeEnumeration[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'Text', 'Text[]'],
+            'variableMeasured' => ['array', 'Property', 'Property[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'StatisticalVariable', 'StatisticalVariable[]', 'array', 'Text', 'Text[]'],
         ];
     }
 
@@ -139,12 +140,13 @@ class Observation extends MetaJsonLd implements ObservationInterface, Quantitati
             'measurementDenominator' => 'Identifies the denominator variable when an observation represents a ratio or percentage.',
             'measurementMethod' => 'A subproperty of [[measurementTechnique]] that can be used for specifying specific methods, in particular via [[MeasurementMethodEnum]].',
             'measurementQualifier' => 'Provides additional qualification to an observation. For example, a GDP observation measures the Nominal value.',
-            'measurementTechnique' => 'A technique, method or technology used in an [[Observation]], [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]], [[DataCatalog]]), corresponding to the method used for measuring the corresponding variable(s) (for datasets, described using [[variableMeasured]]; for [[Observation]], a [[StatisticalVariable]]). Often but not necessarily each [[variableMeasured]] will have an explicit representation as (or mapping to) an property such as those defined in Schema.org, or other RDF vocabularies and "knowledge graphs". In that case the subproperty of [[variableMeasured]] called [[measuredProperty]] is applicable.      The [[measurementTechnique]] property helps when extra clarification is needed about how a [[measuredProperty]] was measured. This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but can often serve as a high level summary for dataset discovery.   For example, if [[variableMeasured]] is: molecule concentration, [[measurementTechnique]] could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the [[variableMeasured]] is "depression rating", the [[measurementTechnique]] could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory".   If there are several [[variableMeasured]] properties recorded for some given data object, use a [[PropertyValue]] for each [[variableMeasured]] and attach the corresponding [[measurementTechnique]]. The value can also be from an enumeration, organized as a [[MeasurementMetholdEnumeration]].',
+            'measurementTechnique' => 'A technique, method or technology used in an [[Observation]], [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]], [[DataCatalog]]), corresponding to the method used for measuring the corresponding variable(s) (for datasets, described using [[variableMeasured]]; for [[Observation]], a [[StatisticalVariable]]). Often but not necessarily each [[variableMeasured]] will have an explicit representation as (or mapping to) an property such as those defined in Schema.org, or other RDF vocabularies and "knowledge graphs". In that case the subproperty of [[variableMeasured]] called [[measuredProperty]] is applicable.      The [[measurementTechnique]] property helps when extra clarification is needed about how a [[measuredProperty]] was measured. This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but can often serve as a high level summary for dataset discovery.   For example, if [[variableMeasured]] is: molecule concentration, [[measurementTechnique]] could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the [[variableMeasured]] is "depression rating", the [[measurementTechnique]] could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory".   If there are several [[variableMeasured]] properties recorded for some given data object, use a [[PropertyValue]] for each [[variableMeasured]] and attach the corresponding [[measurementTechnique]]. The value can also be from an enumeration, organized as a [[MeasurementMethodEnum]].',
             'minValue' => 'The lower value of some characteristic or property.',
             'name' => 'The name of the item.',
             'observationAbout' => 'The [[observationAbout]] property identifies an entity, often a [[Place]], associated with an [[Observation]].',
             'observationDate' => 'The observationDate of an [[Observation]].',
             'observationPeriod' => 'The length of time an Observation took place over. The format follows `P[0-9]*[Y|M|D|h|m|s]`. For example, P1Y is Period 1 Year, P3M is Period 3 Months, P3h is Period 3 hours.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
