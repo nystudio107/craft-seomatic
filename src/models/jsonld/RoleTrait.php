@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Role.
  *
  * @author    nystudio107
@@ -34,7 +34,7 @@ trait RoleTrait
      * of an organization. For example, an athlete in a SportsTeam might play in
      * the position named 'Quarterback'.
      *
-     * @var string|array|URL|URL[]|array|Text|Text[]
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $namedPosition;
 
@@ -44,7 +44,7 @@ trait RoleTrait
      * 'inker', 'penciller', and 'letterer'; or an athlete in a SportsTeam might
      * play in the position named 'Quarterback'.
      *
-     * @var string|array|URL|URL[]|array|Text|Text[]
+     * @var string|array|Text|Text[]|array|URL|URL[]
      */
     public $roleName;
 

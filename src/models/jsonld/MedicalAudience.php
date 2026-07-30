@@ -14,20 +14,20 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * MedicalAudience - Target audiences for medical web pages.
  *
  * @author    nystudio107
  * @package   Seomatic
  * @see       https://schema.org/MedicalAudience
  */
-class MedicalAudience extends MetaJsonLd implements MedicalAudienceInterface, PeopleAudienceInterface, AudienceInterface, IntangibleInterface, ThingInterface
+class MedicalAudience extends MetaJsonLd implements MedicalAudienceInterface, AudienceInterface, IntangibleInterface, ThingInterface, PeopleAudienceInterface
 {
     use MedicalAudienceTrait;
-    use PeopleAudienceTrait;
     use AudienceTrait;
     use IntangibleTrait;
     use ThingTrait;
+    use PeopleAudienceTrait;
 
     /**
      * The Schema.org Type Name
@@ -48,7 +48,7 @@ class MedicalAudience extends MetaJsonLd implements MedicalAudienceInterface, Pe
      *
      * @var string
      */
-    public static string $schemaTypeExtends = 'PeopleAudience';
+    public static string $schemaTypeExtends = 'Audience';
 
     /**
      * The Schema.org Type Description
@@ -76,14 +76,15 @@ class MedicalAudience extends MetaJsonLd implements MedicalAudienceInterface, Pe
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'audienceType' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'geographicArea' => ['array', 'AdministrativeArea', 'AdministrativeArea[]'],
             'healthCondition' => ['array', 'MedicalCondition', 'MedicalCondition[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'requiredGender' => ['array', 'Text', 'Text[]'],
             'requiredMaxAge' => ['array', 'Integer', 'Integer[]'],
@@ -117,6 +118,7 @@ class MedicalAudience extends MetaJsonLd implements MedicalAudienceInterface, Pe
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'requiredGender' => 'Audiences defined by a person\'s gender.',
             'requiredMaxAge' => 'Audiences defined by a person\'s maximum age.',

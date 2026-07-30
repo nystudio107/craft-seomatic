@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for UserComments.
  *
  * @author    nystudio107
@@ -22,12 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait UserCommentsTrait
 {
     /**
-     * The creator/author of this CreativeWork. This is the same as the Author
-     * property for CreativeWork.
+     * The text of the UserComment.
      *
-     * @var array|Organization|Organization[]|array|Person|Person[]
+     * @var string|array|Text|Text[]
      */
-    public $creator;
+    public $commentText;
 
     /**
      * The time at which the UserComment was made.
@@ -37,18 +36,12 @@ trait UserCommentsTrait
     public $commentTime;
 
     /**
-     * The text of the UserComment.
+     * The creator/author of this CreativeWork. This is the same as the Author
+     * property for CreativeWork.
      *
-     * @var string|array|Text|Text[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $commentText;
-
-    /**
-     * The URL at which a reply may be posted to the specified UserComment.
-     *
-     * @var array|URL|URL[]
-     */
-    public $replyToUrl;
+    public $creator;
 
     /**
      * Specifies the CreativeWork associated with the UserComment.
@@ -56,4 +49,11 @@ trait UserCommentsTrait
      * @var array|CreativeWork|CreativeWork[]
      */
     public $discusses;
+
+    /**
+     * The URL at which a reply may be posted to the specified UserComment.
+     *
+     * @var array|URL|URL[]
+     */
+    public $replyToUrl;
 }

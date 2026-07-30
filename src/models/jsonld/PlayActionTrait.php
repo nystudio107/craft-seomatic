@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for PlayAction.
  *
  * @author    nystudio107
@@ -22,16 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait PlayActionTrait
 {
     /**
-     * Upcoming or past event associated with this place, organization, or action.
-     *
-     * @var array|Event|Event[]
-     */
-    public $event;
-
-    /**
      * An intended audience, i.e. a group for whom something was created.
      *
      * @var array|Audience|Audience[]
      */
     public $audience;
+
+    /**
+     * Upcoming or past event associated with this place, organization, or action.
+     *
+     * @var array|Event|Event[]
+     */
+    public $event;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for RsvpAction.
  *
  * @author    nystudio107
@@ -30,16 +30,16 @@ trait RsvpActionTrait
     public $additionalNumberOfGuests;
 
     /**
-     * The response (yes, no, maybe) to the RSVP.
-     *
-     * @var array|RsvpResponseType|RsvpResponseType[]
-     */
-    public $rsvpResponse;
-
-    /**
      * Comments, typically from users.
      *
      * @var array|Comment|Comment[]
      */
     public $comment;
+
+    /**
+     * The response (yes, no, maybe) to the RSVP.
+     *
+     * @var array|RsvpResponseType|RsvpResponseType[]
+     */
+    public $rsvpResponse;
 }

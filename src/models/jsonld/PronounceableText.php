@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * PronounceableText - Data type: PronounceableText.
  *
  * @author    nystudio107
@@ -70,7 +70,7 @@ class PronounceableText extends MetaJsonLd implements PronounceableTextInterface
     public function getSchemaPropertyExpectedTypes(): array
     {
         return [
-            'inLanguage' => ['array', 'Text', 'Text[]', 'array', 'Language', 'Language[]'],
+            'inLanguage' => ['array', 'Language', 'Language[]', 'array', 'Text', 'Text[]'],
             'phoneticText' => ['array', 'Text', 'Text[]'],
             'speechToTextMarkup' => ['array', 'Text', 'Text[]'],
             'textValue' => ['array', 'Text', 'Text[]'],

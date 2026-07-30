@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ProgramMembership.
  *
  * @author    nystudio107
@@ -22,33 +22,25 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ProgramMembershipTrait
 {
     /**
-     * The organization (airline, travelers' club, etc.) the membership is made
-     * with.
+     * The Organization (airline, travelers' club, retailer, etc.) the membership
+     * is made with or which offers the  MemberProgram.
      *
      * @var array|Organization|Organization[]
      */
     public $hostingOrganization;
 
     /**
-     * The program providing the membership.
+     * A member of an Organization or a ProgramMembership. Organizations can be
+     * members of organizations; ProgramMembership is typically for individuals.
      *
-     * @var string|array|Text|Text[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $programName;
-
-    /**
-     * The number of membership points earned by the member. If necessary, the
-     * unitText can be used to express the units the points are issued in. (E.g.
-     * stars, miles, etc.)
-     *
-     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $membershipPointsEarned;
+    public $member;
 
     /**
      * A member of this organization.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
     public $members;
 
@@ -60,10 +52,27 @@ trait ProgramMembershipTrait
     public $membershipNumber;
 
     /**
-     * A member of an Organization or a ProgramMembership. Organizations can be
-     * members of organizations; ProgramMembership is typically for individuals.
+     * The number of membership points earned by the member. If necessary, the
+     * unitText can be used to express the units the points are issued in. (E.g.
+     * stars, miles, etc.)
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $member;
+    public $membershipPointsEarned;
+
+    /**
+     * The [MemberProgram](https://schema.org/MemberProgram) associated with a
+     * [ProgramMembership](https://schema.org/ProgramMembership).
+     *
+     * @var array|MemberProgram|MemberProgram[]
+     */
+    public $program;
+
+    /**
+     * The program providing the membership. It is preferable to use
+     * [:program](https://schema.org/program) instead.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $programName;
 }

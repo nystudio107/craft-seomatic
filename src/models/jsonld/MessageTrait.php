@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Message.
  *
  * @author    nystudio107
@@ -24,32 +24,16 @@ trait MessageTrait
     /**
      * A sub property of recipient. The recipient blind copied on a message.
      *
-     * @var array|Organization|Organization[]|array|Person|Person[]|array|ContactPoint|ContactPoint[]
+     * @var array|ContactPoint|ContactPoint[]|array|Organization|Organization[]|array|Person|Person[]
      */
     public $bccRecipient;
 
     /**
-     * A sub property of participant. The participant who is at the sending end of
-     * the action.
+     * A sub property of recipient. The recipient copied on a message.
      *
-     * @var array|Organization|Organization[]|array|Audience|Audience[]|array|Person|Person[]
+     * @var array|ContactPoint|ContactPoint[]|array|Organization|Organization[]|array|Person|Person[]
      */
-    public $sender;
-
-    /**
-     * A sub property of recipient. The recipient who was directly sent the
-     * message.
-     *
-     * @var array|Organization|Organization[]|array|Audience|Audience[]|array|Person|Person[]|array|ContactPoint|ContactPoint[]
-     */
-    public $toRecipient;
-
-    /**
-     * The date/time the message was received if a single recipient exists.
-     *
-     * @var array|DateTime|DateTime[]
-     */
-    public $dateReceived;
+    public $ccRecipient;
 
     /**
      * The date/time at which the message has been read by the recipient if a
@@ -58,6 +42,13 @@ trait MessageTrait
      * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
     public $dateRead;
+
+    /**
+     * The date/time the message was received if a single recipient exists.
+     *
+     * @var array|DateTime|DateTime[]
+     */
+    public $dateReceived;
 
     /**
      * The date/time at which the message was sent.
@@ -77,14 +68,23 @@ trait MessageTrait
      * A sub property of participant. The participant who is at the receiving end
      * of the action.
      *
-     * @var array|Organization|Organization[]|array|Audience|Audience[]|array|Person|Person[]|array|ContactPoint|ContactPoint[]
+     * @var array|Audience|Audience[]|array|ContactPoint|ContactPoint[]|array|Organization|Organization[]|array|Person|Person[]
      */
     public $recipient;
 
     /**
-     * A sub property of recipient. The recipient copied on a message.
+     * A sub property of participant. The participant who is at the sending end of
+     * the action.
      *
-     * @var array|Organization|Organization[]|array|Person|Person[]|array|ContactPoint|ContactPoint[]
+     * @var array|Audience|Audience[]|array|Organization|Organization[]|array|Person|Person[]
      */
-    public $ccRecipient;
+    public $sender;
+
+    /**
+     * A sub property of recipient. The recipient who was directly sent the
+     * message.
+     *
+     * @var array|Audience|Audience[]|array|ContactPoint|ContactPoint[]|array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $toRecipient;
 }

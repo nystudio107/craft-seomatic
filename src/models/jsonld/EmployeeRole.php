@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * EmployeeRole - A subclass of OrganizationRole used to describe employee relationships.
  *
  * @author    nystudio107
@@ -75,18 +75,19 @@ class EmployeeRole extends MetaJsonLd implements EmployeeRoleInterface, Organiza
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'baseSalary' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'baseSalary' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]', 'array', 'PriceSpecification', 'PriceSpecification[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'endDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
-            'namedPosition' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
+            'namedPosition' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'numberedPosition' => ['array', 'Number', 'Number[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'roleName' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
+            'roleName' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'salaryCurrency' => ['array', 'Text', 'Text[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'startDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
@@ -114,6 +115,7 @@ class EmployeeRole extends MetaJsonLd implements EmployeeRoleInterface, Organiza
             'name' => 'The name of the item.',
             'namedPosition' => 'A position played, performed or filled by a person or organization, as part of an organization. For example, an athlete in a SportsTeam might play in the position named \'Quarterback\'.',
             'numberedPosition' => 'A number associated with a role in an organization, for example, the number on an athlete\'s jersey.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'roleName' => 'A role played, performed or filled by a person or organization. For example, the team of creators for a comic book might fill the roles named \'inker\', \'penciller\', and \'letterer\'; or an athlete in a SportsTeam might play in the position named \'Quarterback\'.',
             'salaryCurrency' => 'The currency (coded using [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217)) used for the main salary information in this job posting or for this employee.',

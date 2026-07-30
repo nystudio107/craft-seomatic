@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * FloorPlan - A FloorPlan is an explicit representation of a collection of similar
  * accommodations, allowing the provision of common information (room counts,
  * sizes, layout diagrams) and offers for rental or sale. In typical use, some
@@ -82,14 +82,14 @@ class FloorPlan extends MetaJsonLd implements FloorPlanInterface, IntangibleInte
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'amenityFeature' => ['array', 'LocationFeatureSpecification', 'LocationFeatureSpecification[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'floorSize' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'isPlanForApartment' => ['array', 'Accommodation', 'Accommodation[]'],
             'layoutImage' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'numberOfAccommodationUnits' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'numberOfAvailableAccommodationUnits' => ['array', 'QuantitativeValue', 'QuantitativeValue[]'],
@@ -98,6 +98,7 @@ class FloorPlan extends MetaJsonLd implements FloorPlanInterface, IntangibleInte
             'numberOfFullBathrooms' => ['array', 'Number', 'Number[]'],
             'numberOfPartialBathrooms' => ['array', 'Number', 'Number[]'],
             'numberOfRooms' => ['array', 'Number', 'Number[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'petsAllowed' => ['array', 'Boolean', 'Boolean[]', 'array', 'Text', 'Text[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
@@ -132,6 +133,7 @@ class FloorPlan extends MetaJsonLd implements FloorPlanInterface, IntangibleInte
             'numberOfFullBathrooms' => 'Number of full bathrooms - The total number of full and ¾ bathrooms in an [[Accommodation]]. This corresponds to the [BathroomsFull field in RESO](https://ddwiki.reso.org/display/DDW17/BathroomsFull+Field).',
             'numberOfPartialBathrooms' => 'Number of partial bathrooms - The total number of half and ¼ bathrooms in an [[Accommodation]]. This corresponds to the [BathroomsPartial field in RESO](https://ddwiki.reso.org/display/DDW17/BathroomsPartial+Field). ',
             'numberOfRooms' => 'The number of rooms (excluding bathrooms and closets) of the accommodation or lodging business. Typical unit code(s): ROM for room or C62 for no unit. The type of room can be put in the unitText property of the QuantitativeValue.',
+            'owner' => 'A person or organization who owns this Thing.',
             'petsAllowed' => 'Indicates whether pets are allowed to enter the accommodation or lodging business. More detailed information can be put in a text value.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',

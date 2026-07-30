@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for OwnershipInfo.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait OwnershipInfoTrait
 {
     /**
-     * The date and time of giving up ownership on the product.
+     * The organization or person from which the product was acquired.
      *
-     * @var array|DateTime|DateTime[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $ownedThrough;
+    public $acquiredFrom;
 
     /**
      * The date and time of obtaining the product.
@@ -36,11 +36,11 @@ trait OwnershipInfoTrait
     public $ownedFrom;
 
     /**
-     * The organization or person from which the product was acquired.
+     * The date and time of giving up ownership on the product.
      *
-     * @var array|Person|Person[]|array|Organization|Organization[]
+     * @var array|DateTime|DateTime[]
      */
-    public $acquiredFrom;
+    public $ownedThrough;
 
     /**
      * The product that this structured value is referring to.

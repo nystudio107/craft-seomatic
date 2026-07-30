@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DigitalDocumentPermission.
  *
  * @author    nystudio107
@@ -25,7 +25,7 @@ trait DigitalDocumentPermissionTrait
      * The person, organization, contact point, or audience that has been granted
      * this permission.
      *
-     * @var array|Audience|Audience[]|array|Person|Person[]|array|ContactPoint|ContactPoint[]|array|Organization|Organization[]
+     * @var array|Audience|Audience[]|array|ContactPoint|ContactPoint[]|array|Organization|Organization[]|array|Person|Person[]
      */
     public $grantee;
 

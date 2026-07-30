@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for WorkBasedProgram.
  *
  * @author    nystudio107
@@ -31,7 +31,7 @@ trait WorkBasedProgramTrait
      * textual label and formal code provided as a literal may be assumed to be
      * from O*NET-SOC.
      *
-     * @var string|array|Text|Text[]|array|CategoryCode|CategoryCode[]
+     * @var string|array|CategoryCode|CategoryCode[]|array|Text|Text[]
      */
     public $occupationalCategory;
 

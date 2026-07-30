@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MerchantReturnPolicySeasonalOverride.
  *
  * @author    nystudio107
@@ -30,6 +30,46 @@ trait MerchantReturnPolicySeasonalOverrideTrait
     public $endDate;
 
     /**
+     * Specifies either a fixed return date or the number of days (from the
+     * delivery date) that a product can be returned. Used when the
+     * [[returnPolicyCategory]] property is specified as
+     * [[MerchantReturnFiniteReturnWindow]].
+     *
+     * @var int|array|Date|Date[]|array|DateTime|DateTime[]|array|Integer|Integer[]
+     */
+    public $merchantReturnDays;
+
+    /**
+     * A refund type, from an enumerated list.
+     *
+     * @var array|RefundTypeEnumeration|RefundTypeEnumeration[]
+     */
+    public $refundType;
+
+    /**
+     * Use [[MonetaryAmount]] to specify a fixed restocking fee for product
+     * returns, or use [[Number]] to specify a percentage of the product price
+     * paid by the customer.
+     *
+     * @var float|array|MonetaryAmount|MonetaryAmount[]|array|Number|Number[]
+     */
+    public $restockingFee;
+
+    /**
+     * The type of return fees for purchased products (for any return reason).
+     *
+     * @var array|ReturnFeesEnumeration|ReturnFeesEnumeration[]
+     */
+    public $returnFees;
+
+    /**
+     * The type of return method offered, specified from an enumeration.
+     *
+     * @var array|ReturnMethodEnumeration|ReturnMethodEnumeration[]
+     */
+    public $returnMethod;
+
+    /**
      * Specifies an applicable return policy (from an enumeration).
      *
      * @var array|MerchantReturnEnumeration|MerchantReturnEnumeration[]
@@ -37,14 +77,12 @@ trait MerchantReturnPolicySeasonalOverrideTrait
     public $returnPolicyCategory;
 
     /**
-     * Specifies either a fixed return date or the number of days (from the
-     * delivery date) that a product can be returned. Used when the
-     * [[returnPolicyCategory]] property is specified as
-     * [[MerchantReturnFiniteReturnWindow]].
+     * Amount of shipping costs for product returns (for any reason). Applicable
+     * when property [[returnFees]] equals [[ReturnShippingFees]].
      *
-     * @var int|array|Integer|Integer[]|array|Date|Date[]|array|DateTime|DateTime[]
+     * @var array|MonetaryAmount|MonetaryAmount[]
      */
-    public $merchantReturnDays;
+    public $returnShippingFeesAmount;
 
     /**
      * The start date and time of the item (in [ISO 8601 date

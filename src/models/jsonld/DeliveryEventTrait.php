@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DeliveryEvent.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait DeliveryEventTrait
 {
     /**
-     * Method used for delivery or shipping.
+     * Password, PIN, or access code needed for delivery (e.g. from a locker).
      *
-     * @var array|DeliveryMethod|DeliveryMethod[]
+     * @var string|array|Text|Text[]
      */
-    public $hasDeliveryMethod;
+    public $accessCode;
 
     /**
      * When the item is available for pickup from the store, locker, etc.
@@ -43,9 +43,9 @@ trait DeliveryEventTrait
     public $availableThrough;
 
     /**
-     * Password, PIN, or access code needed for delivery (e.g. from a locker).
+     * Method used for delivery or shipping.
      *
-     * @var string|array|Text|Text[]
+     * @var array|DeliveryMethod|DeliveryMethod[]
      */
-    public $accessCode;
+    public $hasDeliveryMethod;
 }

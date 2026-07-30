@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * MerchantReturnPolicySeasonalOverride - A seasonal override of a return policy, for example used for holidays.
  *
  * @author    nystudio107
@@ -73,16 +73,22 @@ class MerchantReturnPolicySeasonalOverride extends MetaJsonLd implements Merchan
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'endDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
-            'merchantReturnDays' => ['array', 'Integer', 'Integer[]', 'array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
+            'merchantReturnDays' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]', 'array', 'Integer', 'Integer[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
+            'refundType' => ['array', 'RefundTypeEnumeration', 'RefundTypeEnumeration[]'],
+            'restockingFee' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'Number', 'Number[]'],
+            'returnFees' => ['array', 'ReturnFeesEnumeration', 'ReturnFeesEnumeration[]'],
+            'returnMethod' => ['array', 'ReturnMethodEnumeration', 'ReturnMethodEnumeration[]'],
             'returnPolicyCategory' => ['array', 'MerchantReturnEnumeration', 'MerchantReturnEnumeration[]'],
+            'returnShippingFeesAmount' => ['array', 'MonetaryAmount', 'MonetaryAmount[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'startDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
@@ -107,8 +113,14 @@ class MerchantReturnPolicySeasonalOverride extends MetaJsonLd implements Merchan
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'merchantReturnDays' => 'Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]].',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
+            'refundType' => 'A refund type, from an enumerated list.',
+            'restockingFee' => 'Use [[MonetaryAmount]] to specify a fixed restocking fee for product returns, or use [[Number]] to specify a percentage of the product price paid by the customer.',
+            'returnFees' => 'The type of return fees for purchased products (for any return reason).',
+            'returnMethod' => 'The type of return method offered, specified from an enumeration.',
             'returnPolicyCategory' => 'Specifies an applicable return policy (from an enumeration).',
+            'returnShippingFeesAmount' => 'Amount of shipping costs for product returns (for any reason). Applicable when property [[returnFees]] equals [[ReturnShippingFees]].',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'startDate' => 'The start date and time of the item (in [ISO 8601 date format](http://en.wikipedia.org/wiki/ISO_8601)).',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',

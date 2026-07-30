@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for CourseInstance.
  *
  * @author    nystudio107
@@ -21,21 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait CourseInstanceTrait
 {
-    /**
-     * Represents the length and pace of a course, expressed as a [[Schedule]].
-     *
-     * @var array|Schedule|Schedule[]
-     */
-    public $courseSchedule;
-
-    /**
-     * A person assigned to instruct or provide instructional assistance for the
-     * [[CourseInstance]].
-     *
-     * @var array|Person|Person[]
-     */
-    public $instructor;
-
     /**
      * The medium or means of delivery of the course instance or the mode of
      * study, either as a text label (e.g. "online", "onsite" or "blended";
@@ -48,6 +33,13 @@ trait CourseInstanceTrait
     public $courseMode;
 
     /**
+     * Represents the length and pace of a course, expressed as a [[Schedule]].
+     *
+     * @var array|Schedule|Schedule[]
+     */
+    public $courseSchedule;
+
+    /**
      * The amount of work expected of students taking the course, often provided
      * as a figure per week or per month, and may be broken down by type. For
      * example, "2 hours of lectures, 1 hour of lab work and 3 hours of
@@ -56,4 +48,12 @@ trait CourseInstanceTrait
      * @var string|array|Text|Text[]
      */
     public $courseWorkload;
+
+    /**
+     * A person assigned to instruct or provide instructional assistance for the
+     * [[CourseInstance]].
+     *
+     * @var array|Person|Person[]
+     */
+    public $instructor;
 }

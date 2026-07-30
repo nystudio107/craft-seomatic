@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * MenuItem - A food or drink item listed in a menu or menu section.
  *
  * @author    nystudio107
@@ -73,19 +73,20 @@ class MenuItem extends MetaJsonLd implements MenuItemInterface, IntangibleInterf
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'menuAddOn' => ['array', 'MenuItem', 'MenuItem[]', 'array', 'MenuSection', 'MenuSection[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'nutrition' => ['array', 'NutritionInformation', 'NutritionInformation[]'],
             'offers' => ['array', 'Demand', 'Demand[]', 'array', 'Offer', 'Offer[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'suitableForDiet' => ['array', 'RestrictedDiet', 'RestrictedDiet[]'],
+            'suitableForDiet' => ['array', 'Diet', 'Diet[]', 'array', 'RestrictedDiet', 'RestrictedDiet[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
     }
@@ -108,6 +109,7 @@ class MenuItem extends MetaJsonLd implements MenuItemInterface, IntangibleInterf
             'name' => 'The name of the item.',
             'nutrition' => 'Nutrition information about the recipe or menu item.',
             'offers' => 'An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event. Use [[businessFunction]] to indicate the kind of transaction offered, i.e. sell, lease, etc. This property can also be used to describe a [[Demand]]. While this property is listed as expected on a number of common types, it can be used in others. In that case, using a second type, such as Product or a subtype of Product, can clarify the nature of the offer.       ',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',

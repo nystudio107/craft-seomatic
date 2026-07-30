@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DrugStrength.
  *
  * @author    nystudio107
@@ -28,6 +28,13 @@ trait DrugStrengthTrait
      * @var string|array|Text|Text[]
      */
     public $activeIngredient;
+
+    /**
+     * The location in which the strength is available.
+     *
+     * @var array|AdministrativeArea|AdministrativeArea[]
+     */
+    public $availableIn;
 
     /**
      * Recommended intake of this supplement for a given population as defined by
@@ -50,11 +57,4 @@ trait DrugStrengthTrait
      * @var float|array|Number|Number[]
      */
     public $strengthValue;
-
-    /**
-     * The location in which the strength is available.
-     *
-     * @var array|AdministrativeArea|AdministrativeArea[]
-     */
-    public $availableIn;
 }

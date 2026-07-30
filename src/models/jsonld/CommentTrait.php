@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Comment.
  *
  * @author    nystudio107
@@ -22,22 +22,22 @@ namespace nystudio107\seomatic\models\jsonld;
 trait CommentTrait
 {
     /**
+     * The number of downvotes this question, answer or comment has received from
+     * the community.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $downvoteCount;
+
+    /**
      * The parent of a question, answer or item in general. Typically used for Q/A
      * discussion threads e.g. a chain of comments with the first comment being an
      * [[Article]] or other [[CreativeWork]]. See also [[comment]] which points
      * from something to a comment about it.
      *
-     * @var array|CreativeWork|CreativeWork[]|array|Comment|Comment[]
+     * @var array|Comment|Comment[]|array|CreativeWork|CreativeWork[]
      */
     public $parentItem;
-
-    /**
-     * The number of upvotes this question, answer or comment has received from
-     * the community.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $upvoteCount;
 
     /**
      * A CreativeWork such as an image, video, or audio clip shared as part of
@@ -48,10 +48,10 @@ trait CommentTrait
     public $sharedContent;
 
     /**
-     * The number of downvotes this question, answer or comment has received from
+     * The number of upvotes this question, answer or comment has received from
      * the community.
      *
      * @var int|array|Integer|Integer[]
      */
-    public $downvoteCount;
+    public $upvoteCount;
 }

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Number - Data type: Number.  Usage guidelines:  * Use values from 0123456789
  * (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than
  * superficially similar Unicode symbols. * Use '.' (Unicode 'FULL STOP'

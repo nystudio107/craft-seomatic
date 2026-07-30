@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * LodgingReservation - A reservation for lodging at a hotel, motel, inn, etc.  Note: This type is
  * for information about actual reservations, e.g. in confirmation emails or
  * HTML pages with individual confirmations of reservations.
@@ -76,33 +76,34 @@ class LodgingReservation extends MetaJsonLd implements LodgingReservationInterfa
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'bookingAgent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'bookingAgent' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'bookingTime' => ['array', 'DateTime', 'DateTime[]'],
-            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
-            'checkinTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'broker' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'checkinTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'checkoutTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'lodgingUnitDescription' => ['array', 'Text', 'Text[]'],
             'lodgingUnitType' => ['array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'Text', 'Text[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'modifiedTime' => ['array', 'DateTime', 'DateTime[]'],
             'name' => ['array', 'Text', 'Text[]'],
-            'numAdults' => ['array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'Integer', 'Integer[]'],
+            'numAdults' => ['array', 'Integer', 'Integer[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
             'numChildren' => ['array', 'Integer', 'Integer[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'priceCurrency' => ['array', 'Text', 'Text[]'],
             'programMembershipUsed' => ['array', 'ProgramMembership', 'ProgramMembership[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'reservationFor' => ['array', 'Thing', 'Thing[]'],
             'reservationId' => ['array', 'Text', 'Text[]'],
             'reservationStatus' => ['array', 'ReservationStatusType', 'ReservationStatusType[]'],
             'reservedTicket' => ['array', 'Ticket', 'Ticket[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'totalPrice' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
+            'totalPrice' => ['array', 'Number', 'Number[]', 'array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'Text', 'Text[]'],
             'underName' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
@@ -133,6 +134,7 @@ class LodgingReservation extends MetaJsonLd implements LodgingReservationInterfa
             'name' => 'The name of the item.',
             'numAdults' => 'The number of adults staying in the unit.',
             'numChildren' => 'The number of children staying in the unit.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'priceCurrency' => 'The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.  Use standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217), e.g. "USD"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies, e.g. "BTC"; well known names for [Local Exchange Trading Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types, e.g. "Ithaca HOUR".',
             'programMembershipUsed' => 'Any membership in a frequent flyer, hotel loyalty program, etc. being applied to the reservation.',

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Physician.
  *
  * @author    nystudio107
@@ -24,23 +24,9 @@ trait PhysicianTrait
     /**
      * A medical service available from this provider.
      *
-     * @var array|MedicalTest|MedicalTest[]|array|MedicalProcedure|MedicalProcedure[]|array|MedicalTherapy|MedicalTherapy[]
+     * @var array|MedicalProcedure|MedicalProcedure[]|array|MedicalTest|MedicalTest[]|array|MedicalTherapy|MedicalTherapy[]
      */
     public $availableService;
-
-    /**
-     * A category describing the job, preferably using a term from a taxonomy such
-     * as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html),
-     * [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or
-     * similar, with the property repeated for each applicable value. Ideally the
-     * taxonomy should be identified, and both the textual label and formal code
-     * for the category should be provided.  Note: for historical reasons, any
-     * textual label and formal code provided as a literal may be assumed to be
-     * from O*NET-SOC.
-     *
-     * @var string|array|Text|Text[]|array|CategoryCode|CategoryCode[]
-     */
-    public $occupationalCategory;
 
     /**
      * A hospital with which the physician or office is affiliated.
@@ -55,6 +41,20 @@ trait PhysicianTrait
      * @var array|MedicalSpecialty|MedicalSpecialty[]
      */
     public $medicalSpecialty;
+
+    /**
+     * A category describing the job, preferably using a term from a taxonomy such
+     * as [BLS O*NET-SOC](http://www.onetcenter.org/taxonomy.html),
+     * [ISCO-08](https://www.ilo.org/public/english/bureau/stat/isco/isco08/) or
+     * similar, with the property repeated for each applicable value. Ideally the
+     * taxonomy should be identified, and both the textual label and formal code
+     * for the category should be provided.  Note: for historical reasons, any
+     * textual label and formal code provided as a literal may be assumed to be
+     * from O*NET-SOC.
+     *
+     * @var string|array|CategoryCode|CategoryCode[]|array|Text|Text[]
+     */
+    public $occupationalCategory;
 
     /**
      * A <a

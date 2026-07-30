@@ -14,13 +14,13 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ConstraintNode - The ConstraintNode type is provided to support usecases in which a node in
  * a structured data graph is described with properties which appear to
  * describe a single entity, but are being used in a situation where they
  * serve a more abstract purpose. A [[ConstraintNode]] can be described using
  * [[constraintProperty]] and [[numConstraints]]. These constraint properties
- * can serve a      variety of purposes, and their values may sometimes be
+ * can serve a     variety of purposes, and their values may sometimes be
  * understood to indicate sets of possible values rather than single, exact
  * and specific values.
  *
@@ -60,7 +60,7 @@ class ConstraintNode extends MetaJsonLd implements ConstraintNodeInterface, Inta
      *
      * @var string
      */
-    public static string $schemaTypeDescription = "The ConstraintNode type is provided to support usecases in which a node in a structured data graph is described with properties which appear to describe a single entity, but are being used in a situation where they serve a more abstract purpose. A [[ConstraintNode]] can be described using [[constraintProperty]] and [[numConstraints]]. These constraint properties can serve a \n    variety of purposes, and their values may sometimes be understood to indicate sets of possible values rather than single, exact and specific values.";
+    public static string $schemaTypeDescription = "The ConstraintNode type is provided to support usecases in which a node in a structured data graph is described with properties which appear to describe a single entity, but are being used in a situation where they serve a more abstract purpose. A [[ConstraintNode]] can be described using [[constraintProperty]] and [[numConstraints]]. These constraint properties can serve a\n    variety of purposes, and their values may sometimes be understood to indicate sets of possible values rather than single, exact and specific values.";
 
 
     /**
@@ -80,14 +80,15 @@ class ConstraintNode extends MetaJsonLd implements ConstraintNodeInterface, Inta
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'constraintProperty' => ['array', 'URL', 'URL[]', 'array', 'Property', 'Property[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'constraintProperty' => ['array', 'Property', 'Property[]', 'array', 'URL', 'URL[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'numConstraints' => ['array', 'Integer', 'Integer[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
@@ -112,6 +113,7 @@ class ConstraintNode extends MetaJsonLd implements ConstraintNodeInterface, Inta
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
             'numConstraints' => 'Indicates the number of constraints property values defined for a particular [[ConstraintNode]] such as [[StatisticalVariable]]. This helps applications understand if they have access to a sufficiently complete description of a [[StatisticalVariable]] or other construct that is defined using properties on template-style nodes.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Invoice - A statement of the money due for goods or services; a bill.
  *
  * @author    nystudio107
@@ -75,29 +75,30 @@ class Invoice extends MetaJsonLd implements InvoiceInterface, IntangibleInterfac
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'billingPeriod' => ['array', 'Duration', 'Duration[]'],
-            'broker' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
-            'category' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Thing', 'Thing[]'],
+            'broker' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'category' => ['array', 'CategoryCode', 'CategoryCode[]', 'array', 'PhysicalActivityCategory', 'PhysicalActivityCategory[]', 'array', 'Text', 'Text[]', 'array', 'Thing', 'Thing[]', 'array', 'URL', 'URL[]'],
             'confirmationNumber' => ['array', 'Text', 'Text[]'],
             'customer' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
-            'minimumPaymentDue' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
+            'minimumPaymentDue' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'PriceSpecification', 'PriceSpecification[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'paymentDue' => ['array', 'DateTime', 'DateTime[]'],
             'paymentDueDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'paymentMethod' => ['array', 'PaymentMethod', 'PaymentMethod[]'],
+            'paymentMethod' => ['array', 'PaymentMethod', 'PaymentMethod[]', 'array', 'Text', 'Text[]'],
             'paymentMethodId' => ['array', 'Text', 'Text[]'],
-            'paymentStatus' => ['array', 'Text', 'Text[]', 'array', 'PaymentStatusType', 'PaymentStatusType[]'],
+            'paymentStatus' => ['array', 'PaymentStatusType', 'PaymentStatusType[]', 'array', 'Text', 'Text[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'referencesOrder' => ['array', 'Order', 'Order[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'scheduledPaymentDate' => ['array', 'Date', 'Date[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
-            'totalPaymentDue' => ['array', 'PriceSpecification', 'PriceSpecification[]', 'array', 'MonetaryAmount', 'MonetaryAmount[]'],
+            'totalPaymentDue' => ['array', 'MonetaryAmount', 'MonetaryAmount[]', 'array', 'PriceSpecification', 'PriceSpecification[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
     }
@@ -124,6 +125,7 @@ class Invoice extends MetaJsonLd implements InvoiceInterface, IntangibleInterfac
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'minimumPaymentDue' => 'The minimum payment required at this time.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'paymentDue' => 'The date that payment is due.',
             'paymentDueDate' => 'The date that payment is due.',
             'paymentMethod' => 'The name of the credit card or other method of payment for the order.',

@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * QuantitativeValue -  A point value or interval for product characteristics and other purposes.
  *
  * @author    nystudio107
@@ -75,22 +75,23 @@ class QuantitativeValue extends MetaJsonLd implements QuantitativeValueInterface
             'additionalProperty' => ['array', 'PropertyValue', 'PropertyValue[]'],
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'maxValue' => ['array', 'Number', 'Number[]'],
             'minValue' => ['array', 'Number', 'Number[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'unitCode' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'unitText' => ['array', 'Text', 'Text[]'],
             'url' => ['array', 'URL', 'URL[]'],
-            'value' => ['array', 'StructuredValue', 'StructuredValue[]', 'array', 'Number', 'Number[]', 'array', 'Text', 'Text[]', 'array', 'Boolean', 'Boolean[]'],
-            'valueReference' => ['array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'Text', 'Text[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementTypeEnumeration', 'MeasurementTypeEnumeration[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'value' => ['array', 'Boolean', 'Boolean[]', 'array', 'Number', 'Number[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'Text', 'Text[]'],
+            'valueReference' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'Enumeration', 'Enumeration[]', 'array', 'MeasurementTypeEnumeration', 'MeasurementTypeEnumeration[]', 'array', 'PropertyValue', 'PropertyValue[]', 'array', 'QualitativeValue', 'QualitativeValue[]', 'array', 'QuantitativeValue', 'QuantitativeValue[]', 'array', 'StructuredValue', 'StructuredValue[]', 'array', 'Text', 'Text[]'],
         ];
     }
 
@@ -112,6 +113,7 @@ class QuantitativeValue extends MetaJsonLd implements QuantitativeValueInterface
             'maxValue' => 'The upper value of some characteristic or property.',
             'minValue' => 'The lower value of some characteristic or property.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',

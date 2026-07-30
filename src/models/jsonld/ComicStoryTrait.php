@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ComicStory.
  *
  * @author    nystudio107
@@ -21,29 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait ComicStoryTrait
 {
-    /**
-     * The individual who traces over the pencil drawings in ink after pencils are
-     * complete.
-     *
-     * @var array|Person|Person[]
-     */
-    public $inker;
-
-    /**
-     * The individual who draws the primary narrative artwork.
-     *
-     * @var array|Person|Person[]
-     */
-    public $penciler;
-
-    /**
-     * The individual who adds lettering, including speech balloons and sound
-     * effects, to artwork.
-     *
-     * @var array|Person|Person[]
-     */
-    public $letterer;
-
     /**
      * The primary artist for a work         in a medium other than pencils or
      * digital line art--for example, if the         primary artwork is done in
@@ -59,4 +36,27 @@ trait ComicStoryTrait
      * @var array|Person|Person[]
      */
     public $colorist;
+
+    /**
+     * The individual who traces over the pencil drawings in ink after pencils are
+     * complete.
+     *
+     * @var array|Person|Person[]
+     */
+    public $inker;
+
+    /**
+     * The individual who adds lettering, including speech balloons and sound
+     * effects, to artwork.
+     *
+     * @var array|Person|Person[]
+     */
+    public $letterer;
+
+    /**
+     * The individual who draws the primary narrative artwork.
+     *
+     * @var array|Person|Person[]
+     */
+    public $penciler;
 }

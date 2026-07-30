@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for DataFeedItem.
  *
  * @author    nystudio107
@@ -21,6 +21,21 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait DataFeedItemTrait
 {
+    /**
+     * The date on which the CreativeWork was created or the item was added to a
+     * DataFeed.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $dateCreated;
+
+    /**
+     * The datetime the item was removed from the DataFeed.
+     *
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     */
+    public $dateDeleted;
+
     /**
      * The date on which the CreativeWork was most recently modified or when the
      * item's entry was modified within a DataFeed.
@@ -36,19 +51,4 @@ trait DataFeedItemTrait
      * @var array|Thing|Thing[]
      */
     public $item;
-
-    /**
-     * The datetime the item was removed from the DataFeed.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $dateDeleted;
-
-    /**
-     * The date on which the CreativeWork was created or the item was added to a
-     * DataFeed.
-     *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
-     */
-    public $dateCreated;
 }

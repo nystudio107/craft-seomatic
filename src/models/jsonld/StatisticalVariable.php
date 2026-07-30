@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * StatisticalVariable - [[StatisticalVariable]] represents any type of statistical metric that can
  * be measured at a place and time. The usage pattern for
  * [[StatisticalVariable]] is typically expressed using [[Observation]] with
@@ -93,23 +93,24 @@ class StatisticalVariable extends MetaJsonLd implements StatisticalVariableInter
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'constraintProperty' => ['array', 'URL', 'URL[]', 'array', 'Property', 'Property[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'constraintProperty' => ['array', 'Property', 'Property[]', 'array', 'URL', 'URL[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'measuredProperty' => ['array', 'Property', 'Property[]'],
             'measurementDenominator' => ['array', 'StatisticalVariable', 'StatisticalVariable[]'],
-            'measurementMethod' => ['array', 'URL', 'URL[]', 'array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementMethodEnum', 'MeasurementMethodEnum[]', 'array', 'Text', 'Text[]'],
+            'measurementMethod' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementMethodEnum', 'MeasurementMethodEnum[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'measurementQualifier' => ['array', 'Enumeration', 'Enumeration[]'],
             'measurementTechnique' => ['array', 'DefinedTerm', 'DefinedTerm[]', 'array', 'MeasurementMethodEnum', 'MeasurementMethodEnum[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'numConstraints' => ['array', 'Integer', 'Integer[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'populationType' => ['array', 'SchemaClass', 'SchemaClass[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'statType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'Property', 'Property[]'],
+            'statType' => ['array', 'Property', 'Property[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'url' => ['array', 'URL', 'URL[]'],
         ];
@@ -134,13 +135,14 @@ class StatisticalVariable extends MetaJsonLd implements StatisticalVariableInter
             'measurementDenominator' => 'Identifies the denominator variable when an observation represents a ratio or percentage.',
             'measurementMethod' => 'A subproperty of [[measurementTechnique]] that can be used for specifying specific methods, in particular via [[MeasurementMethodEnum]].',
             'measurementQualifier' => 'Provides additional qualification to an observation. For example, a GDP observation measures the Nominal value.',
-            'measurementTechnique' => 'A technique, method or technology used in an [[Observation]], [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]], [[DataCatalog]]), corresponding to the method used for measuring the corresponding variable(s) (for datasets, described using [[variableMeasured]]; for [[Observation]], a [[StatisticalVariable]]). Often but not necessarily each [[variableMeasured]] will have an explicit representation as (or mapping to) an property such as those defined in Schema.org, or other RDF vocabularies and "knowledge graphs". In that case the subproperty of [[variableMeasured]] called [[measuredProperty]] is applicable.      The [[measurementTechnique]] property helps when extra clarification is needed about how a [[measuredProperty]] was measured. This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but can often serve as a high level summary for dataset discovery.   For example, if [[variableMeasured]] is: molecule concentration, [[measurementTechnique]] could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the [[variableMeasured]] is "depression rating", the [[measurementTechnique]] could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory".   If there are several [[variableMeasured]] properties recorded for some given data object, use a [[PropertyValue]] for each [[variableMeasured]] and attach the corresponding [[measurementTechnique]]. The value can also be from an enumeration, organized as a [[MeasurementMetholdEnumeration]].',
+            'measurementTechnique' => 'A technique, method or technology used in an [[Observation]], [[StatisticalVariable]] or [[Dataset]] (or [[DataDownload]], [[DataCatalog]]), corresponding to the method used for measuring the corresponding variable(s) (for datasets, described using [[variableMeasured]]; for [[Observation]], a [[StatisticalVariable]]). Often but not necessarily each [[variableMeasured]] will have an explicit representation as (or mapping to) an property such as those defined in Schema.org, or other RDF vocabularies and "knowledge graphs". In that case the subproperty of [[variableMeasured]] called [[measuredProperty]] is applicable.      The [[measurementTechnique]] property helps when extra clarification is needed about how a [[measuredProperty]] was measured. This is oriented towards scientific and scholarly dataset publication but may have broader applicability; it is not intended as a full representation of measurement, but can often serve as a high level summary for dataset discovery.   For example, if [[variableMeasured]] is: molecule concentration, [[measurementTechnique]] could be: "mass spectrometry" or "nmr spectroscopy" or "colorimetry" or "immunofluorescence". If the [[variableMeasured]] is "depression rating", the [[measurementTechnique]] could be "Zung Scale" or "HAM-D" or "Beck Depression Inventory".   If there are several [[variableMeasured]] properties recorded for some given data object, use a [[PropertyValue]] for each [[variableMeasured]] and attach the corresponding [[measurementTechnique]]. The value can also be from an enumeration, organized as a [[MeasurementMethodEnum]].',
             'name' => 'The name of the item.',
             'numConstraints' => 'Indicates the number of constraints property values defined for a particular [[ConstraintNode]] such as [[StatisticalVariable]]. This helps applications understand if they have access to a sufficiently complete description of a [[StatisticalVariable]] or other construct that is defined using properties on template-style nodes.',
+            'owner' => 'A person or organization who owns this Thing.',
             'populationType' => 'Indicates the populationType common to all members of a [[StatisticalPopulation]] or all cases within the scope of a [[StatisticalVariable]].',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',
-            'statType' => 'Indicates the kind of statistic represented by a [[StatisticalVariable]], e.g. mean, count etc. The value of statType is a property, either from within Schema.org (e.g. [[count]], [[median]], [[marginOfError]], [[maxValue]], [[minValue]]) or from other compatible (e.g. RDF) systems such as DataCommons.org or Wikidata.org. ',
+            'statType' => 'Indicates the kind of statistic represented by a [[StatisticalVariable]], e.g. mean, count etc. The value of statType is a property, either from within Schema.org (e.g. [[median]], [[marginOfError]], [[maxValue]], [[minValue]]) or from other compatible (e.g. RDF) systems such as DataCommons.org or Wikidata.org. ',
             'subjectOf' => 'A CreativeWork or Event about this Thing.',
             'url' => 'URL of the item.',
         ];

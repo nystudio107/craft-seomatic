@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ChemicalSubstance.
  *
  * @author    nystudio107
@@ -21,13 +21,6 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait ChemicalSubstanceTrait
 {
-    /**
-     * Intended use of the BioChemEntity by humans.
-     *
-     * @var array|DefinedTerm|DefinedTerm[]
-     */
-    public $potentialUse;
-
     /**
      * The chemical composition describes the identity and relative ratio of the
      * chemical elements that make up the substance.
@@ -42,4 +35,11 @@ trait ChemicalSubstanceTrait
      * @var array|DefinedTerm|DefinedTerm[]
      */
     public $chemicalRole;
+
+    /**
+     * Intended use of the BioChemEntity by humans.
+     *
+     * @var array|DefinedTerm|DefinedTerm[]
+     */
+    public $potentialUse;
 }

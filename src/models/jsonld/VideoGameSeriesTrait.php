@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for VideoGameSeries.
  *
  * @author    nystudio107
@@ -22,19 +22,29 @@ namespace nystudio107\seomatic\models\jsonld;
 trait VideoGameSeriesTrait
 {
     /**
-     * An item is an object within the game world that can be collected by a
-     * player or, occasionally, a non-player character.
+     * An actor (individual or a group), e.g. in TV, radio, movie, video games
+     * etc., or in an event. Actors can be associated with individual items or
+     * with a series, episode, clip.
+     *
+     * @var array|PerformingGroup|PerformingGroup[]|array|Person|Person[]
+     */
+    public $actor;
+
+    /**
+     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
+     * associated with individual items or with a series, episode, clip.
+     *
+     * @var array|Person|Person[]
+     */
+    public $actors;
+
+    /**
+     * A piece of data that represents a particular aspect of a fictional
+     * character (skill, power, character points, advantage, disadvantage).
      *
      * @var array|Thing|Thing[]
      */
-    public $gameItem;
-
-    /**
-     * A season in a media series.
-     *
-     * @var array|CreativeWorkSeason|CreativeWorkSeason[]
-     */
-    public $seasons;
+    public $characterAttribute;
 
     /**
      * Cheat codes to the game.
@@ -42,6 +52,13 @@ trait VideoGameSeriesTrait
      * @var array|CreativeWork|CreativeWork[]
      */
     public $cheatCode;
+
+    /**
+     * A season that is part of the media series.
+     *
+     * @var array|CreativeWorkSeason|CreativeWorkSeason[]
+     */
+    public $containsSeason;
 
     /**
      * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
@@ -53,44 +70,12 @@ trait VideoGameSeriesTrait
     public $director;
 
     /**
-     * Indicates whether this game is multi-player, co-op or single-player.  The
-     * game can be marked as multi-player, co-op and single-player at the same
-     * time.
+     * A director of e.g. TV, radio, movie, video games etc. content. Directors
+     * can be associated with individual items or with a series, episode, clip.
      *
-     * @var array|GamePlayMode|GamePlayMode[]
+     * @var array|Person|Person[]
      */
-    public $playMode;
-
-    /**
-     * The number of seasons in this series.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $numberOfSeasons;
-
-    /**
-     * The electronic systems used to play <a
-     * href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video
-     * games</a>.
-     *
-     * @var string|array|Thing|Thing[]|array|Text|Text[]|array|URL|URL[]
-     */
-    public $gamePlatform;
-
-    /**
-     * The task that a player-controlled character, or group of characters may
-     * complete in order to gain a reward.
-     *
-     * @var array|Thing|Thing[]
-     */
-    public $quest;
-
-    /**
-     * An episode of a TV/radio series or season.
-     *
-     * @var array|Episode|Episode[]
-     */
-    public $episodes;
+    public $directors;
 
     /**
      * An episode of a TV, radio or game media within a series or season.
@@ -100,11 +85,72 @@ trait VideoGameSeriesTrait
     public $episode;
 
     /**
-     * The trailer of a movie or TV/radio series, season, episode, etc.
+     * An episode of a TV/radio series or season.
      *
-     * @var array|VideoObject|VideoObject[]
+     * @var array|Episode|Episode[]
      */
-    public $trailer;
+    public $episodes;
+
+    /**
+     * An item is an object within the game world that can be collected by a
+     * player or, occasionally, a non-player character.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $gameItem;
+
+    /**
+     * Real or fictional location of the game (or part of game).
+     *
+     * @var array|Place|Place[]|array|PostalAddress|PostalAddress[]|array|URL|URL[]
+     */
+    public $gameLocation;
+
+    /**
+     * The electronic systems used to play <a
+     * href="http://en.wikipedia.org/wiki/Category:Video_game_platforms">video
+     * games</a>.
+     *
+     * @var string|array|Text|Text[]|array|Thing|Thing[]|array|URL|URL[]
+     */
+    public $gamePlatform;
+
+    /**
+     * The composer of the soundtrack.
+     *
+     * @var array|MusicGroup|MusicGroup[]|array|Person|Person[]
+     */
+    public $musicBy;
+
+    /**
+     * The number of episodes in this season or series.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $numberOfEpisodes;
+
+    /**
+     * Indicate how many people can play this game (minimum, maximum, or range).
+     *
+     * @var array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfPlayers;
+
+    /**
+     * The number of seasons in this series.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $numberOfSeasons;
+
+    /**
+     * Indicates whether this game is multi-player, co-op or single-player.  The
+     * game can be marked as multi-player, co-op and single-player at the same
+     * time.
+     *
+     * @var array|GamePlayMode|GamePlayMode[]
+     */
+    public $playMode;
 
     /**
      * The production company or studio responsible for the item, e.g. series,
@@ -115,77 +161,31 @@ trait VideoGameSeriesTrait
     public $productionCompany;
 
     /**
-     * A director of e.g. TV, radio, movie, video games etc. content. Directors
-     * can be associated with individual items or with a series, episode, clip.
+     * The task that a player-controlled character, or group of characters may
+     * complete in order to gain a reward.
      *
-     * @var array|Person|Person[]
+     * @var array|Thing|Thing[]
      */
-    public $directors;
+    public $quest;
 
     /**
      * A season in a media series.
      *
-     * @var array|URL|URL[]|array|CreativeWorkSeason|CreativeWorkSeason[]
+     * @var array|CreativeWorkSeason|CreativeWorkSeason[]|array|URL|URL[]
      */
     public $season;
 
     /**
-     * The number of episodes in this season or series.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $numberOfEpisodes;
-
-    /**
-     * A season that is part of the media series.
+     * A season in a media series.
      *
      * @var array|CreativeWorkSeason|CreativeWorkSeason[]
      */
-    public $containsSeason;
+    public $seasons;
 
     /**
-     * Indicate how many people can play this game (minimum, maximum, or range).
+     * The trailer of a movie or TV/radio series, season, episode, etc.
      *
-     * @var array|QuantitativeValue|QuantitativeValue[]
+     * @var array|VideoObject|VideoObject[]
      */
-    public $numberOfPlayers;
-
-    /**
-     * Real or fictional location of the game (or part of game).
-     *
-     * @var array|PostalAddress|PostalAddress[]|array|Place|Place[]|array|URL|URL[]
-     */
-    public $gameLocation;
-
-    /**
-     * An actor, e.g. in TV, radio, movie, video games etc. Actors can be
-     * associated with individual items or with a series, episode, clip.
-     *
-     * @var array|Person|Person[]
-     */
-    public $actors;
-
-    /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
-     *
-     * @var array|Person|Person[]
-     */
-    public $actor;
-
-    /**
-     * A piece of data that represents a particular aspect of a fictional
-     * character (skill, power, character points, advantage, disadvantage).
-     *
-     * @var array|Thing|Thing[]
-     */
-    public $characterAttribute;
-
-    /**
-     * The composer of the soundtrack.
-     *
-     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
-     */
-    public $musicBy;
+    public $trailer;
 }

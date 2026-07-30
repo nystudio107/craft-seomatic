@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MusicGroup.
  *
  * @author    nystudio107
@@ -22,11 +22,11 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MusicGroupTrait
 {
     /**
-     * Genre of the creative work, broadcast channel or group.
+     * A music album.
      *
-     * @var string|array|URL|URL[]|array|Text|Text[]
+     * @var array|MusicAlbum|MusicAlbum[]
      */
-    public $genre;
+    public $album;
 
     /**
      * A collection of music albums.
@@ -36,18 +36,18 @@ trait MusicGroupTrait
     public $albums;
 
     /**
-     * A music album.
+     * Genre of the creative work, broadcast channel or group.
      *
-     * @var array|MusicAlbum|MusicAlbum[]
+     * @var string|array|DefinedTerm|DefinedTerm[]|array|Text|Text[]|array|URL|URL[]
      */
-    public $album;
+    public $genre;
 
     /**
-     * A music recording (track)—usually a single song.
+     * A member of a music group—for example, John, Paul, George, or Ringo.
      *
-     * @var array|MusicRecording|MusicRecording[]
+     * @var array|Person|Person[]
      */
-    public $tracks;
+    public $musicGroupMember;
 
     /**
      * A music recording (track)—usually a single song. If an ItemList is given,
@@ -58,9 +58,9 @@ trait MusicGroupTrait
     public $track;
 
     /**
-     * A member of a music group—for example, John, Paul, George, or Ringo.
+     * A music recording (track)—usually a single song.
      *
-     * @var array|Person|Person[]
+     * @var array|MusicRecording|MusicRecording[]
      */
-    public $musicGroupMember;
+    public $tracks;
 }

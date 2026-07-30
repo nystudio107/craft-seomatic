@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for CommunicateAction.
  *
  * @author    nystudio107
@@ -22,7 +22,7 @@ namespace nystudio107\seomatic\models\jsonld;
 trait CommunicateActionTrait
 {
     /**
-     * The subject matter of the content.
+     * The subject matter of an object.
      *
      * @var array|Thing|Thing[]
      */
@@ -34,17 +34,9 @@ trait CommunicateActionTrait
      * standard](http://tools.ietf.org/html/bcp47). See also
      * [[availableLanguage]].
      *
-     * @var string|array|Text|Text[]|array|Language|Language[]
+     * @var string|array|Language|Language[]|array|Text|Text[]
      */
     public $inLanguage;
-
-    /**
-     * A sub property of participant. The participant who is at the receiving end
-     * of the action.
-     *
-     * @var array|Organization|Organization[]|array|Audience|Audience[]|array|Person|Person[]|array|ContactPoint|ContactPoint[]
-     */
-    public $recipient;
 
     /**
      * A sub property of instrument. The language used on this action.
@@ -52,4 +44,12 @@ trait CommunicateActionTrait
      * @var array|Language|Language[]
      */
     public $language;
+
+    /**
+     * A sub property of participant. The participant who is at the receiving end
+     * of the action.
+     *
+     * @var array|Audience|Audience[]|array|ContactPoint|ContactPoint[]|array|Organization|Organization[]|array|Person|Person[]
+     */
+    public $recipient;
 }

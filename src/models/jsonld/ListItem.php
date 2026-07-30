@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ListItem - An list item, e.g. a step in a checklist or how-to description.
  *
  * @author    nystudio107
@@ -73,14 +73,15 @@ class ListItem extends MetaJsonLd implements ListItemInterface, IntangibleInterf
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'item' => ['array', 'Thing', 'Thing[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'nextItem' => ['array', 'ListItem', 'ListItem[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'position' => ['array', 'Integer', 'Integer[]', 'array', 'Text', 'Text[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
             'previousItem' => ['array', 'ListItem', 'ListItem[]'],
@@ -107,6 +108,7 @@ class ListItem extends MetaJsonLd implements ListItemInterface, IntangibleInterf
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
             'nextItem' => 'A link to the ListItem that follows the current one.',
+            'owner' => 'A person or organization who owns this Thing.',
             'position' => 'The position of an item in a series or sequence of items.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'previousItem' => 'A link to the ListItem that precedes the current one.',

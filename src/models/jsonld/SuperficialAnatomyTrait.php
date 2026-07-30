@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for SuperficialAnatomy.
  *
  * @author    nystudio107
@@ -21,6 +21,29 @@ namespace nystudio107\seomatic\models\jsonld;
  */
 trait SuperficialAnatomyTrait
 {
+    /**
+     * If applicable, a description of the pathophysiology associated with the
+     * anatomical system, including potential abnormal changes in the mechanical,
+     * physical, and biochemical functions of the system.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $associatedPathophysiology;
+
+    /**
+     * Anatomical systems or structures that relate to the superficial anatomy.
+     *
+     * @var array|AnatomicalStructure|AnatomicalStructure[]|array|AnatomicalSystem|AnatomicalSystem[]
+     */
+    public $relatedAnatomy;
+
+    /**
+     * A medical condition associated with this anatomy.
+     *
+     * @var array|MedicalCondition|MedicalCondition[]
+     */
+    public $relatedCondition;
+
     /**
      * A medical therapy related to this anatomy.
      *
@@ -36,27 +59,4 @@ trait SuperficialAnatomyTrait
      * @var string|array|Text|Text[]
      */
     public $significance;
-
-    /**
-     * Anatomical systems or structures that relate to the superficial anatomy.
-     *
-     * @var array|AnatomicalSystem|AnatomicalSystem[]|array|AnatomicalStructure|AnatomicalStructure[]
-     */
-    public $relatedAnatomy;
-
-    /**
-     * A medical condition associated with this anatomy.
-     *
-     * @var array|MedicalCondition|MedicalCondition[]
-     */
-    public $relatedCondition;
-
-    /**
-     * If applicable, a description of the pathophysiology associated with the
-     * anatomical system, including potential abnormal changes in the mechanical,
-     * physical, and biochemical functions of the system.
-     *
-     * @var string|array|Text|Text[]
-     */
-    public $associatedPathophysiology;
 }

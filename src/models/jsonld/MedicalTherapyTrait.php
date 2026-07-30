@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalTherapy.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait MedicalTherapyTrait
     /**
      * A contraindication for this therapy.
      *
-     * @var string|array|Text|Text[]|array|MedicalContraindication|MedicalContraindication[]
+     * @var string|array|MedicalContraindication|MedicalContraindication[]|array|Text|Text[]
      */
     public $contraindication;
 

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for CreativeWorkSeason.
  *
  * @author    nystudio107
@@ -22,12 +22,13 @@ namespace nystudio107\seomatic\models\jsonld;
 trait CreativeWorkSeasonTrait
 {
     /**
-     * The end date and time of the item (in [ISO 8601 date
-     * format](http://en.wikipedia.org/wiki/ISO_8601)).
+     * An actor (individual or a group), e.g. in TV, radio, movie, video games
+     * etc., or in an event. Actors can be associated with individual items or
+     * with a series, episode, clip.
      *
-     * @var array|Date|Date[]|array|DateTime|DateTime[]
+     * @var array|PerformingGroup|PerformingGroup[]|array|Person|Person[]
      */
-    public $endDate;
+    public $actor;
 
     /**
      * A director of e.g. TV, radio, movie, video gaming etc. content, or of an
@@ -39,11 +40,12 @@ trait CreativeWorkSeasonTrait
     public $director;
 
     /**
-     * An episode of a TV/radio series or season.
+     * The end date and time of the item (in [ISO 8601 date
+     * format](http://en.wikipedia.org/wiki/ISO_8601)).
      *
-     * @var array|Episode|Episode[]
+     * @var array|Date|Date[]|array|DateTime|DateTime[]
      */
-    public $episodes;
+    public $endDate;
 
     /**
      * An episode of a TV, radio or game media within a series or season.
@@ -53,11 +55,25 @@ trait CreativeWorkSeasonTrait
     public $episode;
 
     /**
-     * The trailer of a movie or TV/radio series, season, episode, etc.
+     * An episode of a TV/radio series or season.
      *
-     * @var array|VideoObject|VideoObject[]
+     * @var array|Episode|Episode[]
      */
-    public $trailer;
+    public $episodes;
+
+    /**
+     * The number of episodes in this season or series.
+     *
+     * @var int|array|Integer|Integer[]
+     */
+    public $numberOfEpisodes;
+
+    /**
+     * The series to which this episode or season belongs.
+     *
+     * @var array|CreativeWorkSeries|CreativeWorkSeries[]
+     */
+    public $partOfSeries;
 
     /**
      * The production company or studio responsible for the item, e.g. series,
@@ -68,23 +84,9 @@ trait CreativeWorkSeasonTrait
     public $productionCompany;
 
     /**
-     * The series to which this episode or season belongs.
-     *
-     * @var array|CreativeWorkSeries|CreativeWorkSeries[]
-     */
-    public $partOfSeries;
-
-    /**
-     * The number of episodes in this season or series.
-     *
-     * @var int|array|Integer|Integer[]
-     */
-    public $numberOfEpisodes;
-
-    /**
      * Position of the season within an ordered group of seasons.
      *
-     * @var string|int|array|Text|Text[]|array|Integer|Integer[]
+     * @var int|string|array|Integer|Integer[]|array|Text|Text[]
      */
     public $seasonNumber;
 
@@ -97,11 +99,9 @@ trait CreativeWorkSeasonTrait
     public $startDate;
 
     /**
-     * An actor, e.g. in TV, radio, movie, video games etc., or in an event.
-     * Actors can be associated with individual items or with a series, episode,
-     * clip.
+     * The trailer of a movie or TV/radio series, season, episode, etc.
      *
-     * @var array|Person|Person[]
+     * @var array|VideoObject|VideoObject[]
      */
-    public $actor;
+    public $trailer;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Residence.
  *
  * @author    nystudio107
@@ -27,4 +27,14 @@ trait ResidenceTrait
      * @var array|FloorPlan|FloorPlan[]
      */
     public $accommodationFloorPlan;
+
+    /**
+     * The floor level for an [[Accommodation]] in a multi-storey building. Since
+     * counting   systems [vary
+     * internationally](https://en.wikipedia.org/wiki/Storey#Consecutive_number_floor_designations),
+     * the local system should be used where possible.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $floorLevel;
 }

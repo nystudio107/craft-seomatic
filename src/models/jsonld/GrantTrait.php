@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Grant.
  *
  * @author    nystudio107
@@ -22,13 +22,12 @@ namespace nystudio107\seomatic\models\jsonld;
 trait GrantTrait
 {
     /**
-     * A person or organization that supports a thing through a pledge, promise,
-     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
-     * sponsor of an event.
+     * Indicates something directly or indirectly funded or sponsored through a
+     * [[Grant]]. See also [[ownershipFundingInfo]].
      *
-     * @var array|Organization|Organization[]|array|Person|Person[]
+     * @var array|BioChemEntity|BioChemEntity[]|array|CreativeWork|CreativeWork[]|array|Event|Event[]|array|MedicalEntity|MedicalEntity[]|array|Organization|Organization[]|array|Person|Person[]|array|Product|Product[]
      */
-    public $sponsor;
+    public $fundedItem;
 
     /**
      * A person or organization that supports (sponsors) something through some
@@ -39,10 +38,11 @@ trait GrantTrait
     public $funder;
 
     /**
-     * Indicates something directly or indirectly funded or sponsored through a
-     * [[Grant]]. See also [[ownershipFundingInfo]].
+     * A person or organization that supports a thing through a pledge, promise,
+     * or financial contribution. E.g. a sponsor of a Medical Study or a corporate
+     * sponsor of an event.
      *
-     * @var array|BioChemEntity|BioChemEntity[]|array|Person|Person[]|array|CreativeWork|CreativeWork[]|array|Event|Event[]|array|MedicalEntity|MedicalEntity[]|array|Organization|Organization[]|array|Product|Product[]
+     * @var array|Organization|Organization[]|array|Person|Person[]
      */
-    public $fundedItem;
+    public $sponsor;
 }

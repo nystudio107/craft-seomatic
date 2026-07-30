@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Brand.
  *
  * @author    nystudio107
@@ -22,11 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait BrandTrait
 {
     /**
-     * A slogan or motto associated with the item.
+     * The overall rating, based on a collection of reviews or ratings, of the
+     * item.
      *
-     * @var string|array|Text|Text[]
+     * @var array|AggregateRating|AggregateRating[]
      */
-    public $slogan;
+    public $aggregateRating;
+
+    /**
+     * An associated logo.
+     *
+     * @var array|ImageObject|ImageObject[]|array|URL|URL[]
+     */
+    public $logo;
 
     /**
      * A review of the item.
@@ -36,17 +44,9 @@ trait BrandTrait
     public $review;
 
     /**
-     * An associated logo.
+     * A slogan or motto associated with the item.
      *
-     * @var array|URL|URL[]|array|ImageObject|ImageObject[]
+     * @var string|array|Text|Text[]
      */
-    public $logo;
-
-    /**
-     * The overall rating, based on a collection of reviews or ratings, of the
-     * item.
-     *
-     * @var array|AggregateRating|AggregateRating[]
-     */
-    public $aggregateRating;
+    public $slogan;
 }

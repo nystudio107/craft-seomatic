@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * GeoShape - The geographic shape of a place. A GeoShape can be described using several
  * properties whose values are based on latitude/longitude pairs. Either
  * whitespace or commas can be used to separate latitude and longitude;
@@ -76,19 +76,20 @@ class GeoShape extends MetaJsonLd implements GeoShapeInterface, StructuredValueI
     {
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'address' => ['array', 'Text', 'Text[]', 'array', 'PostalAddress', 'PostalAddress[]'],
+            'address' => ['array', 'PostalAddress', 'PostalAddress[]', 'array', 'Text', 'Text[]'],
             'addressCountry' => ['array', 'Country', 'Country[]', 'array', 'Text', 'Text[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
             'box' => ['array', 'Text', 'Text[]'],
             'circle' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'elevation' => ['array', 'Text', 'Text[]', 'array', 'Number', 'Number[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'elevation' => ['array', 'Number', 'Number[]', 'array', 'Text', 'Text[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'line' => ['array', 'Text', 'Text[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'polygon' => ['array', 'Text', 'Text[]'],
             'postalCode' => ['array', 'Text', 'Text[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
@@ -107,7 +108,7 @@ class GeoShape extends MetaJsonLd implements GeoShapeInterface, StructuredValueI
         return [
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'address' => 'Physical address of the item.',
-            'addressCountry' => 'The country. For example, USA. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1).',
+            'addressCountry' => 'The country. Recommended to be in 2-letter [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1) format, for example "US". For backward compatibility, a 3-letter [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) country code such as "SGP" or a full country name such as "Singapore" can also be used.',
             'alternateName' => 'An alias for the item.',
             'box' => 'A box is the area enclosed by the rectangle formed by two points. The first point is the lower corner, the second point is the upper corner. A box is expressed as two points separated by a space character.',
             'circle' => 'A circle is the circular region of a specified radius centered at a specified latitude and longitude. A circle is expressed as a pair followed by a radius in meters.',
@@ -119,6 +120,7 @@ class GeoShape extends MetaJsonLd implements GeoShapeInterface, StructuredValueI
             'line' => 'A line is a point-to-point path consisting of two or more points. A line is expressed as a series of two or more point objects separated by space.',
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
+            'owner' => 'A person or organization who owns this Thing.',
             'polygon' => 'A polygon is the area enclosed by a point-to-point path for which the starting and ending points are the same. A polygon is expressed as a series of four or more space delimited points where the first and final points are identical.',
             'postalCode' => 'The postal code. For example, 94043.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',

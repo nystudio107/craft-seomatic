@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ApartmentComplex.
  *
  * @author    nystudio107
@@ -32,23 +32,6 @@ trait ApartmentComplexTrait
     public $numberOfAccommodationUnits;
 
     /**
-     * A page providing information on how to book a tour of some [[Place]], such
-     * as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting,
-     * as well as other kinds of tours as appropriate.
-     *
-     * @var array|URL|URL[]
-     */
-    public $tourBookingPage;
-
-    /**
-     * The total integer number of bedrooms in a some [[Accommodation]],
-     * [[ApartmentComplex]] or [[FloorPlan]].
-     *
-     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
-     */
-    public $numberOfBedrooms;
-
-    /**
      * Indicates the number of available accommodation units in an
      * [[ApartmentComplex]], or the number of accommodation units for a specific
      * [[FloorPlan]] (within its specific [[ApartmentComplex]]). See also
@@ -59,10 +42,27 @@ trait ApartmentComplexTrait
     public $numberOfAvailableAccommodationUnits;
 
     /**
+     * The total integer number of bedrooms in a some [[Accommodation]],
+     * [[ApartmentComplex]] or [[FloorPlan]].
+     *
+     * @var float|array|Number|Number[]|array|QuantitativeValue|QuantitativeValue[]
+     */
+    public $numberOfBedrooms;
+
+    /**
      * Indicates whether pets are allowed to enter the accommodation or lodging
      * business. More detailed information can be put in a text value.
      *
      * @var bool|string|array|Boolean|Boolean[]|array|Text|Text[]
      */
     public $petsAllowed;
+
+    /**
+     * A page providing information on how to book a tour of some [[Place]], such
+     * as an [[Accommodation]] or [[ApartmentComplex]] in a real estate setting,
+     * as well as other kinds of tours as appropriate.
+     *
+     * @var array|URL|URL[]
+     */
+    public $tourBookingPage;
 }

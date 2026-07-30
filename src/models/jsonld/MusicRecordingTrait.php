@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MusicRecording.
  *
  * @author    nystudio107
@@ -22,19 +22,19 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MusicRecordingTrait
 {
     /**
-     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
-     * date format](http://en.wikipedia.org/wiki/ISO_8601).
+     * The artist that performed this album or recording.
      *
-     * @var array|Duration|Duration[]
+     * @var array|MusicGroup|MusicGroup[]|array|Person|Person[]
      */
-    public $duration;
+    public $byArtist;
 
     /**
-     * The International Standard Recording Code for the recording.
+     * The duration of the item (movie, audio recording, event, etc.) in [ISO 8601
+     * duration format](http://en.wikipedia.org/wiki/ISO_8601).
      *
-     * @var string|array|Text|Text[]
+     * @var array|Duration|Duration[]|array|QuantitativeValue|QuantitativeValue[]
      */
-    public $isrcCode;
+    public $duration;
 
     /**
      * The album to which this recording belongs.
@@ -51,16 +51,16 @@ trait MusicRecordingTrait
     public $inPlaylist;
 
     /**
+     * The International Standard Recording Code for the recording.
+     *
+     * @var string|array|Text|Text[]
+     */
+    public $isrcCode;
+
+    /**
      * The composition this track is a recording of.
      *
      * @var array|MusicComposition|MusicComposition[]
      */
     public $recordingOf;
-
-    /**
-     * The artist that performed this album or recording.
-     *
-     * @var array|Person|Person[]|array|MusicGroup|MusicGroup[]
-     */
-    public $byArtist;
 }

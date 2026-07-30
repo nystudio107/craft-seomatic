@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * ViewAction - The act of consuming static visual content.
  *
  * @author    nystudio107
@@ -73,28 +73,30 @@ class ViewAction extends MetaJsonLd implements ViewActionInterface, ConsumeActio
     {
         return [
             'actionAccessibilityRequirement' => ['array', 'ActionAccessSpecification', 'ActionAccessSpecification[]'],
+            'actionProcess' => ['array', 'HowTo', 'HowTo[]'],
             'actionStatus' => ['array', 'ActionStatusType', 'ActionStatusType[]'],
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
-            'agent' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'agent' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
-            'endTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'endTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'error' => ['array', 'Thing', 'Thing[]'],
             'expectsAcceptanceOf' => ['array', 'Offer', 'Offer[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
             'instrument' => ['array', 'Thing', 'Thing[]'],
-            'location' => ['array', 'PostalAddress', 'PostalAddress[]', 'array', 'VirtualLocation', 'VirtualLocation[]', 'array', 'Text', 'Text[]', 'array', 'Place', 'Place[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'location' => ['array', 'Place', 'Place[]', 'array', 'PostalAddress', 'PostalAddress[]', 'array', 'Text', 'Text[]', 'array', 'VirtualLocation', 'VirtualLocation[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
             'object' => ['array', 'Thing', 'Thing[]'],
-            'participant' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
+            'participant' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'provider' => ['array', 'Person', 'Person[]', 'array', 'Organization', 'Organization[]'],
+            'provider' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'result' => ['array', 'Thing', 'Thing[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
-            'startTime' => ['array', 'Time', 'Time[]', 'array', 'DateTime', 'DateTime[]'],
+            'startTime' => ['array', 'DateTime', 'DateTime[]', 'array', 'Time', 'Time[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
             'target' => ['array', 'EntryPoint', 'EntryPoint[]', 'array', 'URL', 'URL[]'],
             'url' => ['array', 'URL', 'URL[]'],
@@ -109,6 +111,7 @@ class ViewAction extends MetaJsonLd implements ViewActionInterface, ConsumeActio
     {
         return [
             'actionAccessibilityRequirement' => 'A set of requirements that must be fulfilled in order to perform an Action. If more than one value is specified, fulfilling one set of requirements will allow the Action to be performed.',
+            'actionProcess' => 'Description of the process by which the action was performed.',
             'actionStatus' => 'Indicates the current disposition of the Action.',
             'additionalType' => 'An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in. Typically the value is a URI-identified RDF class, and in this case corresponds to the     use of rdf:type in RDF. Text values can be used sparingly, for cases where useful information can be added without their being an appropriate schema to reference. In the case of text values, the class label should follow the schema.org <a href="https://schema.org/docs/styleguide.html">style guide</a>.',
             'agent' => 'The direct performer or driver of the action (animate or inanimate). E.g. *John* wrote a book.',
@@ -116,7 +119,7 @@ class ViewAction extends MetaJsonLd implements ViewActionInterface, ConsumeActio
             'description' => 'A description of the item.',
             'disambiguatingDescription' => 'A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.',
             'endTime' => 'The endTime of something. For a reserved event or service (e.g. FoodEstablishmentReservation), the time that it is expected to end. For actions that span a period of time, when the action was performed. E.g. John wrote a book from January to *December*. For media, including audio and video, it\'s the time offset of the end of a clip within a larger file.  Note that Event uses startDate/endDate instead of startTime/endTime, even when describing dates with times. This situation may be clarified in future revisions.',
-            'error' => 'For failed actions, more information on the cause of the failure.',
+            'error' => 'For failed actions, more information on the cause of the failure. Consider using the Error type.',
             'expectsAcceptanceOf' => 'An Offer which must be accepted before the user can perform the Action. For example, the user may need to buy a movie before being able to watch it.',
             'identifier' => 'The identifier property represents any kind of identifier for any kind of [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See [background notes](/docs/datamodel.html#identifierBg) for more details.         ',
             'image' => 'An image of the item. This can be a [[URL]] or a fully described [[ImageObject]].',
@@ -125,6 +128,7 @@ class ViewAction extends MetaJsonLd implements ViewActionInterface, ConsumeActio
             'mainEntityOfPage' => 'Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See [background notes](/docs/datamodel.html#mainEntityBackground) for details.',
             'name' => 'The name of the item.',
             'object' => 'The object upon which the action is carried out, whose state is kept intact or changed. Also known as the semantic roles patient, affected or undergoer (which change their state) or theme (which doesn\'t). E.g. John read *a book*.',
+            'owner' => 'A person or organization who owns this Thing.',
             'participant' => 'Other co-agents that participated in the action indirectly. E.g. John wrote a book with *Steve*.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'provider' => 'The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller.',

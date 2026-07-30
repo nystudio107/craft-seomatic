@@ -14,7 +14,7 @@ namespace nystudio107\seomatic\models\jsonld;
 use nystudio107\seomatic\models\MetaJsonLd;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * OrganizationRole - A subclass of Role used to describe roles within organizations.
  *
  * @author    nystudio107
@@ -74,17 +74,18 @@ class OrganizationRole extends MetaJsonLd implements OrganizationRoleInterface, 
         return [
             'additionalType' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'alternateName' => ['array', 'Text', 'Text[]'],
-            'description' => ['array', 'TextObject', 'TextObject[]', 'array', 'Text', 'Text[]'],
+            'description' => ['array', 'Text', 'Text[]', 'array', 'TextObject', 'TextObject[]'],
             'disambiguatingDescription' => ['array', 'Text', 'Text[]'],
             'endDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
-            'identifier' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]', 'array', 'PropertyValue', 'PropertyValue[]'],
+            'identifier' => ['array', 'PropertyValue', 'PropertyValue[]', 'array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'image' => ['array', 'ImageObject', 'ImageObject[]', 'array', 'URL', 'URL[]'],
-            'mainEntityOfPage' => ['array', 'URL', 'URL[]', 'array', 'CreativeWork', 'CreativeWork[]'],
+            'mainEntityOfPage' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'URL', 'URL[]'],
             'name' => ['array', 'Text', 'Text[]'],
-            'namedPosition' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
+            'namedPosition' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'numberedPosition' => ['array', 'Number', 'Number[]'],
+            'owner' => ['array', 'Organization', 'Organization[]', 'array', 'Person', 'Person[]'],
             'potentialAction' => ['array', 'Action', 'Action[]'],
-            'roleName' => ['array', 'URL', 'URL[]', 'array', 'Text', 'Text[]'],
+            'roleName' => ['array', 'Text', 'Text[]', 'array', 'URL', 'URL[]'],
             'sameAs' => ['array', 'URL', 'URL[]'],
             'startDate' => ['array', 'Date', 'Date[]', 'array', 'DateTime', 'DateTime[]'],
             'subjectOf' => ['array', 'CreativeWork', 'CreativeWork[]', 'array', 'Event', 'Event[]'],
@@ -110,6 +111,7 @@ class OrganizationRole extends MetaJsonLd implements OrganizationRoleInterface, 
             'name' => 'The name of the item.',
             'namedPosition' => 'A position played, performed or filled by a person or organization, as part of an organization. For example, an athlete in a SportsTeam might play in the position named \'Quarterback\'.',
             'numberedPosition' => 'A number associated with a role in an organization, for example, the number on an athlete\'s jersey.',
+            'owner' => 'A person or organization who owns this Thing.',
             'potentialAction' => 'Indicates a potential Action, which describes an idealized action in which this thing would play an \'object\' role.',
             'roleName' => 'A role played, performed or filled by a person or organization. For example, the team of creators for a comic book might fill the roles named \'inker\', \'penciller\', and \'letterer\'; or an athlete in a SportsTeam might play in the position named \'Quarterback\'.',
             'sameAs' => 'URL of a reference Web page that unambiguously indicates the item\'s identity. E.g. the URL of the item\'s Wikipedia page, Wikidata entry, or official website.',

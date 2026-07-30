@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for AudioObject.
  *
  * @author    nystudio107
@@ -22,21 +22,21 @@ namespace nystudio107\seomatic\models\jsonld;
 trait AudioObjectTrait
 {
     /**
+     * The caption for this object. For downloadable machine formats (closed
+     * caption, subtitles etc.) use MediaObject and indicate the
+     * [[encodingFormat]].
+     *
+     * @var string|array|MediaObject|MediaObject[]|array|Text|Text[]
+     */
+    public $caption;
+
+    /**
      * Represents textual captioning from a [[MediaObject]], e.g. text of a
      * 'meme'.
      *
      * @var string|array|Text|Text[]
      */
     public $embeddedTextCaption;
-
-    /**
-     * The caption for this object. For downloadable machine formats (closed
-     * caption, subtitles etc.) use MediaObject and indicate the
-     * [[encodingFormat]].
-     *
-     * @var string|array|Text|Text[]|array|MediaObject|MediaObject[]
-     */
-    public $caption;
 
     /**
      * If this MediaObject is an AudioObject or VideoObject, the transcript of

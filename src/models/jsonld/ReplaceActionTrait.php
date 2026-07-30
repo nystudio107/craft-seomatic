@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for ReplaceAction.
  *
  * @author    nystudio107
@@ -22,16 +22,16 @@ namespace nystudio107\seomatic\models\jsonld;
 trait ReplaceActionTrait
 {
     /**
-     * A sub property of object. The object that replaces.
-     *
-     * @var array|Thing|Thing[]
-     */
-    public $replacer;
-
-    /**
      * A sub property of object. The object that is being replaced.
      *
      * @var array|Thing|Thing[]
      */
     public $replacee;
+
+    /**
+     * A sub property of object. The object that replaces.
+     *
+     * @var array|Thing|Thing[]
+     */
+    public $replacer;
 }

@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for MedicalClinic.
  *
  * @author    nystudio107
@@ -24,7 +24,7 @@ trait MedicalClinicTrait
     /**
      * A medical service available from this provider.
      *
-     * @var array|MedicalTest|MedicalTest[]|array|MedicalProcedure|MedicalProcedure[]|array|MedicalTherapy|MedicalTherapy[]
+     * @var array|MedicalProcedure|MedicalProcedure[]|array|MedicalTest|MedicalTest[]|array|MedicalTherapy|MedicalTherapy[]
      */
     public $availableService;
 

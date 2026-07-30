@@ -12,7 +12,7 @@
 namespace nystudio107\seomatic\models\jsonld;
 
 /**
- * schema.org version: v26.0-release
+ * schema.org version: v30.0
  * Trait for Muscle.
  *
  * @author    nystudio107
@@ -22,6 +22,13 @@ namespace nystudio107\seomatic\models\jsonld;
 trait MuscleTrait
 {
     /**
+     * The muscle whose action counteracts the specified muscle.
+     *
+     * @var array|Muscle|Muscle[]
+     */
+    public $antagonist;
+
+    /**
      * The blood vessel that carries blood from the heart to the muscle.
      *
      * @var array|Vessel|Vessel[]
@@ -29,11 +36,11 @@ trait MuscleTrait
     public $bloodSupply;
 
     /**
-     * The underlying innervation associated with the muscle.
+     * The place of attachment of a muscle, or what the muscle moves.
      *
-     * @var array|Nerve|Nerve[]
+     * @var array|AnatomicalStructure|AnatomicalStructure[]
      */
-    public $nerve;
+    public $insertion;
 
     /**
      * The movement the muscle generates.
@@ -43,16 +50,9 @@ trait MuscleTrait
     public $muscleAction;
 
     /**
-     * The muscle whose action counteracts the specified muscle.
+     * The underlying innervation associated with the muscle.
      *
-     * @var array|Muscle|Muscle[]
+     * @var array|Nerve|Nerve[]
      */
-    public $antagonist;
-
-    /**
-     * The place of attachment of a muscle, or what the muscle moves.
-     *
-     * @var array|AnatomicalStructure|AnatomicalStructure[]
-     */
-    public $insertion;
+    public $nerve;
 }
