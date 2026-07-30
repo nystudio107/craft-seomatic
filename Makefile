@@ -20,6 +20,7 @@ release: --code-quality --code-tests --buildchain-clean-build --docs-clean-build
 	${MAKE} -C buildchain/ build
 --code-quality:
 	${MAKE} -C ${PLUGINDEV_PROJECT_DIR} -- ecs check vendor/${PROJECT_PATH}/src --fix
+	${MAKE} -C ${PLUGINDEV_PROJECT_DIR} -- phpstan clear-result-cache
 	${MAKE} -C ${PLUGINDEV_PROJECT_DIR} -- phpstan analyze -c vendor/${PROJECT_PATH}/phpstan.neon
 --code-tests:
 --docs-clean-build:
