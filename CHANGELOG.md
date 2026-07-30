@@ -4,6 +4,7 @@
 ### Fixed
 * Fixed an issue where sitemaps excluded entries with robots or canonical SEO Settings field override values ([#1724](https://github.com/nystudio107/craft-seomatic/issues/1724))
 * Fix a potential stale cache of sitemaps in a very specific set of circumstances by switching back to `Elements::EVENT_AFTER_SAVE_ELEMENT` from `Element::EVENT_AFTER_PROPAGATE` ([#1725](https://github.com/nystudio107/craft-seomatic/issues/1725))
+* Properly check whether an entity implements `LocalBusinessInterface` to ensure that `operatingHours` works as expected for all entity sub-types ([#1752](https://github.com/nystudio107/craft-seomatic/issues/1752))
 
 ## 5.1.21 - 2026.03.13
 ### Fixed
