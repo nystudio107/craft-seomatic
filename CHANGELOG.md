@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 5.1.23 - UNRELEASED
+### Fixed
+* Ensure that nested fields from every ContentBlock field in a field ld layout are available in the source field selector ([#1760](https://github.com/nystudio107/craft-seomatic/issues/1760)) closed via ([#1761](https://github.com/nystudio107/craft-seomatic/pull/1761))
+
 ## 5.1.22 - 2026.07.30
 ### Added
 * Updated to schema.org version: `v30.0` for the JSON-LD objects([#1737](https://github.com/nystudio107/craft-seomatic/issues/1737))
