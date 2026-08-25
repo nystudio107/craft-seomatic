@@ -129,8 +129,18 @@ class Field
             $namePrefix = ($parentFieldElement->label() ?? $parentField->name) . ' → ';
         }
         if (!empty(self::FIELD_CLASSES[$fieldClassKey])) {
-            // Cache me if you can
-            $memoKey = $fieldClassKey . $layout->id . ($keysOnly ? 'keys' : 'nokeys') . ($parseContentBlocks ? 'content' : 'nocontent');
+            // Cache me if you can. Nested field layouts such as the ones from ContentBlock fields have
+            // no `id`, so include the layout `uid` as well as the parent field prefixes (which are baked
+            // into the results) to ensure that every ContentBlock field gets its own memoization key
+            $memoKey = implode(':', [
+                $fieldClassKey,
+                $layout->id ?? '',
+                $layout->uid ?? '',
+                $keysOnly ? 'keys' : 'nokeys',
+                $parseContentBlocks ? 'content' : 'nocontent',
+                $handlePrefix,
+                $namePrefix,
+            ]);
             if (!empty(self::$fieldsOfTypeFromLayoutCache[$memoKey])) {
                 return self::$fieldsOfTypeFromLayoutCache[$memoKey];
             }
