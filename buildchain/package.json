@@ -53,5 +53,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }
