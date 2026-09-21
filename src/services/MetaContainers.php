@@ -122,6 +122,11 @@ class MetaContainers extends Component
     // =========================================================================
 
     /**
+     * @var bool Whether cache invalidation should be deferred
+     */
+    public bool $deferInvalidation = false;
+
+    /**
      * @var MetaGlobalVars|null
      */
     public $metaGlobalVars;
@@ -801,6 +806,10 @@ class MetaContainers extends Component
      */
     public function invalidateCaches()
     {
+        if ($this->deferInvalidation) {
+            return;
+        }
+
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, self::GLOBAL_METACONTAINER_CACHE_TAG);
         Craft::info(
@@ -828,6 +837,10 @@ class MetaContainers extends Component
      */
     public function invalidateContainerCacheById(int $sourceId, $sourceType = null, $siteId = null)
     {
+        if ($this->deferInvalidation) {
+            return;
+        }
+
         $metaBundleSourceId = '';
         if ($sourceId) {
             $metaBundleSourceId = $sourceId;
@@ -865,6 +878,10 @@ class MetaContainers extends Component
      */
     public function invalidateContainerCacheByPath(string $uri, $siteId = null)
     {
+        if ($this->deferInvalidation) {
+            return;
+        }
+
         $cache = Craft::$app->getCache();
         if ($siteId === null) {
             $siteId = Craft::$app->getSites()->currentSite->id ?? 1;

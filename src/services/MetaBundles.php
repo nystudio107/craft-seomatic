@@ -666,13 +666,15 @@ class MetaBundles extends Component
             list($sourceId, $sourceBundleType, $sourceHandle, $sourceSiteId, $typeId)
                 = $this->getMetaSourceFromElement($element);
             if ($sourceId) {
-                Craft::info(
-                    'Invalidating meta bundle: '
-                    . $uri
-                    . '/'
-                    . $sourceSiteId,
-                    __METHOD__
-                );
+                if (!Seomatic::$plugin->metaContainers->deferInvalidation) {
+                    Craft::info(
+                        'Invalidating meta bundle: '
+                        . $uri
+                        . '/'
+                        . $sourceSiteId,
+                        __METHOD__
+                    );
+                }
                 $metaBundleInvalidated = true;
                 Seomatic::$plugin->metaContainers->invalidateContainerCacheById($sourceId, $sourceBundleType);
                 // Invalidate the sitemap cache

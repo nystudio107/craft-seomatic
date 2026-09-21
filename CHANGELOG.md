@@ -1,6 +1,9 @@
 # SEOmatic Changelog
 
 ## 5.1.23 - UNRELEASED
+### Added
+* Added `deferInvalidation` flags to the meta container and sitemap services, allowing bulk operations to suspend repeated cache invalidation
+
 ### Fixed
 * Ensure that nested fields from every ContentBlock field in a field ld layout are available in the source field selector ([#1760](https://github.com/nystudio107/craft-seomatic/issues/1760)) closed via ([#1761](https://github.com/nystudio107/craft-seomatic/pull/1761))
 * Fix Twig deprecation error coming from `ExtensionInterface::getOperators()` ([#1762](https://github.com/nystudio107/craft-seomatic/issues/1762))

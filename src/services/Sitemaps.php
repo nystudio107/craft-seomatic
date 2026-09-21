@@ -52,6 +52,14 @@ class Sitemaps extends Component implements SitemapInterface
     public const SEARCH_ENGINE_SUBMISSION_URLS = [
     ];
 
+    // Public Properties
+    // =========================================================================
+
+    /**
+     * @var bool Whether cache invalidation should be deferred
+     */
+    public bool $deferInvalidation = false;
+
     // Protected Properties
     // =========================================================================
 
@@ -495,6 +503,10 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function invalidateCaches()
     {
+        if ($this->deferInvalidation) {
+            return;
+        }
+
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, self::GLOBAL_SITEMAP_CACHE_TAG);
         Craft::info(
@@ -513,6 +525,10 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function invalidateSitemapCache(string $handle, ?int $siteId, string $type, bool $invalidateCache = true)
     {
+        if ($this->deferInvalidation) {
+            return;
+        }
+
         // Always just invalidate the sitemap cache now, since we're doing paginated sitemaps
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, SitemapTemplate::SITEMAP_CACHE_TAG . $handle . $siteId);
@@ -527,6 +543,10 @@ class Sitemaps extends Component implements SitemapInterface
      */
     public function invalidateSitemapIndexCache()
     {
+        if ($this->deferInvalidation) {
+            return;
+        }
+
         $cache = Craft::$app->getCache();
         TagDependency::invalidate($cache, SitemapIndexTemplate::SITEMAP_INDEX_CACHE_TAG);
         Craft::info(
