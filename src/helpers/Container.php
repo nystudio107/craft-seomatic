@@ -14,6 +14,7 @@ namespace nystudio107\seomatic\helpers;
 use Craft;
 use craft\base\Element;
 use craft\errors\SiteNotFoundException;
+use craft\models\Site;
 use nystudio107\seomatic\helpers\ImageTransform as ImageTransformHelper;
 use nystudio107\seomatic\Seomatic;
 use yii\caching\TagDependency;
@@ -66,7 +67,18 @@ class Container
         } catch (SiteNotFoundException $e) {
             Craft::error($e->getMessage(), __METHOD__);
         }
-        $sites->setCurrentSite($siteId);
+        $request = Craft::$app->getRequest();
+        // Setting the site by ID excludes disabled sites, even with a valid site token.
+        if (
+            !$request->getIsConsoleRequest()
+            && $request->hasValidSiteToken()
+            && $oldCurrentSite instanceof Site
+            && $oldCurrentSite->id === $siteId
+        ) {
+            $sites->setCurrentSite($oldCurrentSite);
+        } else {
+            $sites->setCurrentSite($siteId);
+        }
         // Trim the URI
         $uri = trim($uri, '/');
         // Add a caching layer on top of controller requests
@@ -81,7 +93,6 @@ class Container
         $metaContainers = Seomatic::$plugin->metaContainers;
         // Cache requests that have a token associated with them separately
         $token = '';
-        $request = Craft::$app->getRequest();
         if (!$request->isConsoleRequest) {
             try {
                 $token = $request->getToken() ?? '';
