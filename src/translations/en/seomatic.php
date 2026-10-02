@@ -538,4 +538,5 @@ return [
     'SEO Preview:' => 'SEO Preview:',
     'Controls how many entries will there be per page in this sitemap.' => 'Controls how many entries will there be per page in this sitemap.',
     'Controls whether sitemaps will automatically be invalidated when entries are saved.' => 'Controls whether sitemaps will automatically be invalidated when entries are saved.',
+    'Save to all sites' => 'Save to all sites',
 ];

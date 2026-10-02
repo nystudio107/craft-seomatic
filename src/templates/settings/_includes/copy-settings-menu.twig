@@ -5,6 +5,7 @@
 ] %}
 
 {% if showSites %}
+<div id="action-buttons" class="flex">
     {% if loadFromSiteHandle is defined and loadFromSiteHandle | length %}
         {% js on ready %}
         {# I am not proud, but this needs to happen after Craft has determined #}
@@ -18,41 +19,44 @@
             }, 1000);
         {% endjs %}
     {% endif %}
-    <div class="pr-2">
-        <div id="sites-btn" class="btn menubtn" data-icon="copy">{{ 'Copy Settings From:' }}</div>
 
-        <div class="menu">
-            {% set siteGroups = craft.app.sites.getAllGroups() %}
-            {% for group in siteGroups %}
-                {% set groupSiteIds = group.getSiteIds()|intersect(siteIds) %}
-                {% if groupSiteIds %}
-                    {% if siteGroups|length > 1 %}<h6>{{ group.name|t('site') }}</h6>{% endif %}
-                    <ul class="padded">
-                        {% for siteId in groupSiteIds %}
-                            {% set site = craft.app.sites.getSiteById(siteId) %}
-                            {% set status = siteId in enabledSiteIds ? 'enabled' : 'disabled' %}
-                            <li>
-                                {% if siteId == currentSiteId %}
-                                    {% set status = 'disabled' %}
-                                {% endif %}
-                                {% set url = url(baseUrl ~ currentSiteHandle, {
-                                    'loadFromSiteHandle': site.handle,
-                                    'typeId': currentTypeId ?? null,
-                                }) %}
-                                {% if status == "enabled" %}
-                                    <a href="{{ url }}">
-                                        <div class="status {{ status }}"></div>{{ site.name|t('site') }}
-                                    </a>
-                                {% else %}
-                                    <div style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
-                                        <div class="status {{ status }}"></div>{{ site.name|t('site') }}
-                                    </div>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endfor %}
-        </div>
+    <div id="sites-btn" class="btn menubtn" data-icon="copy">{{ 'Copy Settings From:' }}</div>
+
+    <div class="menu">
+        {% set siteGroups = craft.app.sites.getAllGroups() %}
+        {% for group in siteGroups %}
+            {% set groupSiteIds = group.getSiteIds()|intersect(siteIds) %}
+            {% if groupSiteIds %}
+                {% if siteGroups|length > 1 %}<h6>{{ group.name|t('site') }}</h6>{% endif %}
+                <ul class="padded">
+                    {% for siteId in groupSiteIds %}
+                        {% set site = craft.app.sites.getSiteById(siteId) %}
+                        {% set status = siteId in enabledSiteIds ? 'enabled' : 'disabled' %}
+                        <li>
+                            {% if siteId == currentSiteId %}
+                                {% set status = 'disabled' %}
+                            {% endif %}
+                            {% set url = url(baseUrl ~ currentSiteHandle, {
+                                'loadFromSiteHandle': site.handle,
+                                'typeId': currentTypeId ?? null,
+                            }) %}
+                            {% if status == "enabled" %}
+                                <a href="{{ url }}">
+                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                </a>
+                            {% else %}
+                                <div style="color: #b9bfc6; margin: 0 -14px; padding: 10px 14px 10px 24px;">
+                                    <div class="status {{ status }}"></div>{{ site.name|t('site') }}
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
     </div>
+
+    {# Save to all sites button #}
+    <button id="save-to-all-sites-btn" class="btn" type="submit" name="saveToAllSites" value="1" data-icon="copy">{{ 'Save to all sites'|t('seomatic') }}</button>
+</div>
 {% endif %}

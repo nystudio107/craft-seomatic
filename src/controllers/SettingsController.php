@@ -363,6 +363,7 @@ class SettingsController extends Controller
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
+        $siteIds = $this->getSettingsSaveSiteIds((int)$siteId);
         $globalsSettings = $request->getParam('metaGlobalVars');
         $bundleSettings = $request->getParam('metaBundleSettings');
         $robotsTemplate = $request->getParam('robotsTemplate');
@@ -379,10 +380,13 @@ class SettingsController extends Controller
 
         $hasErrors = false;
         // The site settings for the appropriate meta bundle
-        Seomatic::$previewingMetaContainers = true;
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
-        Seomatic::$previewingMetaContainers = false;
-        if ($metaBundle !== null) {
+        foreach ($siteIds as $siteId) {
+            Seomatic::$previewingMetaContainers = true;
+            $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+            Seomatic::$previewingMetaContainers = false;
+            if ($metaBundle === null) {
+                continue;
+            }
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
@@ -441,9 +445,9 @@ class SettingsController extends Controller
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
-            Seomatic::$plugin->clearAllCaches();
-            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic global settings saved.'));
         }
+        Seomatic::$plugin->clearAllCaches();
+        Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic global settings saved.'));
 
         return $this->redirectToPostedUrl();
     }
@@ -673,6 +677,7 @@ class SettingsController extends Controller
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
         $siteId = $request->getParam('siteId');
+        $siteIds = $this->getSettingsSaveSiteIds((int)$siteId);
         $typeId = $request->getBodyParam('typeId') ?? null;
         $specificTypeId = $request->getParam('specificTypeId') ?? null;
         $globalsSettings = $request->getParam('metaGlobalVars');
@@ -688,15 +693,18 @@ class SettingsController extends Controller
             $elementName = $seoElement::getElementRefHandle();
         }
         // The site settings for the appropriate meta bundle
-        Seomatic::$previewingMetaContainers = true;
-        $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
-            $sourceBundleType,
-            $sourceHandle,
-            $siteId,
-            $typeId
-        );
-        Seomatic::$previewingMetaContainers = false;
-        if ($metaBundle) {
+        foreach ($siteIds as $siteId) {
+            Seomatic::$previewingMetaContainers = true;
+            $metaBundle = Seomatic::$plugin->metaBundles->getMetaBundleBySourceHandle(
+                $sourceBundleType,
+                $sourceHandle,
+                $siteId,
+                $typeId
+            );
+            Seomatic::$previewingMetaContainers = false;
+            if (!$metaBundle) {
+                continue;
+            }
             if (is_array($globalsSettings) && is_array($bundleSettings)) {
                 PullFieldHelper::parseTextSources($elementName, $globalsSettings, $bundleSettings);
                 PullFieldHelper::parseImageSources($elementName, $globalsSettings, $bundleSettings, $siteId);
@@ -720,9 +728,9 @@ class SettingsController extends Controller
                 Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
             }
 
-            Seomatic::$plugin->clearAllCaches();
-            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
         }
+        Seomatic::$plugin->clearAllCaches();
+        Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic content settings saved.'));
 
         return $this->redirectToPostedUrl();
     }
@@ -829,6 +837,7 @@ class SettingsController extends Controller
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
+        $siteIds = $this->getSettingsSaveSiteIds((int)$siteId);
         $siteSettings = $request->getParam('seomaticSite');
 
         // Make sure the twitter handle isn't prefixed with an @
@@ -840,10 +849,13 @@ class SettingsController extends Controller
             $siteSettings['sameAsLinks'] = ArrayHelper::index($siteSettings['sameAsLinks'], 'handle');
         }
         // The site settings for the appropriate meta bundle
-        Seomatic::$previewingMetaContainers = true;
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
-        Seomatic::$previewingMetaContainers = false;
-        if ($metaBundle) {
+        foreach ($siteIds as $siteId) {
+            Seomatic::$previewingMetaContainers = true;
+            $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+            Seomatic::$previewingMetaContainers = false;
+            if (!$metaBundle) {
+                continue;
+            }
             if (is_array($siteSettings)) {
                 if (!empty($siteSettings['identity'])) {
                     $settings = $siteSettings['identity'];
@@ -866,9 +878,9 @@ class SettingsController extends Controller
             Seomatic::$plugin->metaBundles->syncBundleWithConfig($metaBundle, true);
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
-            Seomatic::$plugin->clearAllCaches();
-            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic site settings saved.'));
         }
+        Seomatic::$plugin->clearAllCaches();
+        Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic site settings saved.'));
 
         return $this->redirectToPostedUrl();
     }
@@ -1028,14 +1040,18 @@ class SettingsController extends Controller
         $this->requirePostRequest();
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
+        $siteIds = $this->getSettingsSaveSiteIds((int)$siteId);
         $scriptSettings = $request->getParam('scripts');
 
         // The site settings for the appropriate meta bundle
-        Seomatic::$previewingMetaContainers = true;
-        $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
-        Seomatic::$previewingMetaContainers = false;
         $hasErrors = false;
-        if ($metaBundle) {
+        foreach ($siteIds as $siteId) {
+            Seomatic::$previewingMetaContainers = true;
+            $metaBundle = Seomatic::$plugin->metaBundles->getGlobalMetaBundle($siteId);
+            Seomatic::$previewingMetaContainers = false;
+            if (!$metaBundle) {
+                continue;
+            }
             /** @var array $scriptSettings */
             foreach ($scriptSettings as $scriptHandle => $scriptData) {
                 foreach ($metaBundle->metaContainers as $metaContainer) {
@@ -1074,9 +1090,9 @@ class SettingsController extends Controller
 
             Seomatic::$plugin->metaBundles->updateMetaBundle($metaBundle, $siteId);
 
-            Seomatic::$plugin->clearAllCaches();
-            Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic site settings saved.'));
         }
+        Seomatic::$plugin->clearAllCaches();
+        Craft::$app->getSession()->setNotice(Craft::t('seomatic', 'SEOmatic site settings saved.'));
 
         return $this->redirectToPostedUrl();
     }
@@ -1131,6 +1147,24 @@ class SettingsController extends Controller
 
     // Protected Methods
     // =========================================================================
+
+    /**
+     * Returns the site IDs to receive submitted site-based settings.
+     *
+     * @param int $siteId
+     *
+     * @return int[]
+     * @throws ForbiddenHttpException
+     */
+    protected function getSettingsSaveSiteIds(int $siteId): array
+    {
+        $request = Craft::$app->getRequest();
+        if (!$request->getBodyParam('saveToAllSites')) {
+            return [$siteId];
+        }
+
+        return Craft::$app->getSites()->getEditableSiteIds();
+    }
 
     /**
      * @param $siteHandle
