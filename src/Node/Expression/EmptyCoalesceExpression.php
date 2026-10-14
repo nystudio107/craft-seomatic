@@ -60,19 +60,22 @@ class EmptyCoalesceExpression extends AbstractExpression
         );
     }
 
+    /**
+     * Compiles `left ??? right` so that each operand is evaluated only once:
+     * `(empty($l = left) ? (empty($r = right) ? null : $r) : $l)`
+     *
+     * @param Compiler $compiler
+     */
     public function compile(Compiler $compiler)
     {
-        //$this->getNode('expr1')->setAttribute('always_defined', true);
+        $leftVar = '$' . $compiler->getVarName();
+        $rightVar = '$' . $compiler->getVarName();
         $compiler
-            ->raw('((' . self::class . '::empty(')
+            ->raw('(' . self::class . '::empty(' . $leftVar . ' = ')
             ->subcompile($this->getNode('left'))
-            ->raw(') ? null : ')
-            ->subcompile($this->getNode('left'))
-            ->raw(') ?? (' . self::class . '::empty(')
+            ->raw(') ? (' . self::class . '::empty(' . $rightVar . ' = ')
             ->subcompile($this->getNode('right'))
-            ->raw(') ? null : ')
-            ->subcompile($this->getNode('right'))
-            ->raw('))')
+            ->raw(') ? null : ' . $rightVar . ') : ' . $leftVar . ')')
         ;
     }
 }
