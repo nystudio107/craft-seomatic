@@ -4,6 +4,7 @@
 ### Fixed
 * Ensure that nested fields from every ContentBlock field in a field ld layout are available in the source field selector ([#1760](https://github.com/nystudio107/craft-seomatic/issues/1760)) closed via ([#1761](https://github.com/nystudio107/craft-seomatic/pull/1761))
 * Fix Twig deprecation error coming from `ExtensionInterface::getOperators()` ([#1762](https://github.com/nystudio107/craft-seomatic/issues/1762))
+* Fix the `???` empty coalesce operator evaluating its operands twice, which ran element queries and other expensive expressions more than once
 
 
 ## 5.1.22 - 2026.07.30
