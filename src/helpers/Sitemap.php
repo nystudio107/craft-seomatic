@@ -345,11 +345,11 @@ class Sitemap
                             }
                             $lines[] = '<news:news>';
                             $lines[] = '<news:publication>';
-                            $lines[] = '<news:name>' . self::encodeSitemapEntity($metaBundle->metaSitemapVars->newsPublicationName) . '</news:name>';
+                            $lines[] = '<news:name>' . self::encodeSitemapText($metaBundle->metaSitemapVars->newsPublicationName) . '</news:name>';
                             $lines[] = '<news:language>' . $language . '</news:language>';
                             $lines[] = '</news:publication>';
                             $lines[] = '<news:publication_date>' . $dateUpdated->format(DateTime::W3C) . '</news:publication_date>';
-                            $lines[] = '<news:title>' . self::encodeSitemapEntity($element->title) . '</news:title>';
+                            $lines[] = '<news:title>' . self::encodeSitemapText((string)$element->title) . '</news:title>';
                             $lines[] = '</news:news>';
                         }
                     }
@@ -495,6 +495,18 @@ class Sitemap
     public static function encodeSitemapEntity(string $text): string
     {
         return Html::encode(UrlHelper::encodeUrl($text));
+    }
+
+    /**
+     * Encode text for a sitemap element that holds plain text rather than a URL, such as a News sitemap
+     * publication name or title. Only the XML special characters are escaped; the text is not URL-encoded.
+     *
+     * @param string $text
+     * @return string
+     */
+    public static function encodeSitemapText(string $text): string
+    {
+        return Html::encode($text);
     }
 
     /**
