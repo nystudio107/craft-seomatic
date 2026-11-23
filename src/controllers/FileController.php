@@ -13,11 +13,9 @@ namespace nystudio107\seomatic\controllers;
 
 use Craft;
 use craft\helpers\FileHelper;
-
 use craft\web\Controller;
 use nystudio107\seomatic\helpers\UrlHelper;
 use nystudio107\seomatic\Seomatic;
-
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -62,7 +60,7 @@ class FileController extends Controller
      * @param        $url
      * @param string $robots
      * @param string $canonical
-     * @param bool   $inline
+     * @param bool $inline
      * @param string $fileName
      *
      * @return Response|\yii\console\Response
@@ -72,11 +70,14 @@ class FileController extends Controller
     public function actionSeoFileLink($url, $robots = '', $canonical = '', $inline = true, $fileName = '')
     {
         $url = base64_decode($url);
+        $url = UrlHelper::absoluteUrlWithProtocol($url);
+        $response = Craft::$app->getResponse();
+        if (!$this->isValidHttpUrl($url)) {
+            return $response;
+        }
         $robots = base64_decode($robots);
         $canonical = base64_decode($canonical);
-        $url = UrlHelper::absoluteUrlWithProtocol($url);
         $contents = file_get_contents($url);
-        $response = Craft::$app->getResponse();
         if ($contents) {
             // Add the X-Robots-Tag header
             if (!empty($robots)) {
@@ -111,5 +112,18 @@ class FileController extends Controller
         }
 
         return $response;
+    }
+
+    public function isValidHttpUrl(string $url): bool
+    {
+        // 1. Ensure the string is a structurally valid URL
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return false;
+        }
+
+        // 2. Extract and verify the protocol scheme (case-insensitive)
+        $scheme = parse_url($url, PHP_URL_SCHEME);
+
+        return in_array(strtolower((string)$scheme), ['http', 'https'], true);
     }
 }

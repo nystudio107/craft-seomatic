@@ -14,6 +14,7 @@ use craft\elements\Asset;
 use craft\errors\MissingComponentException;
 use craft\helpers\UrlHelper;
 use craft\web\Controller;
+use craft\web\ServiceUnavailableHttpException;
 use craft\web\UrlManager;
 use craft\web\User;
 use DateTime;
@@ -37,6 +38,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\web\UnauthorizedHttpException;
 use function count;
 use function in_array;
 use function is_array;
@@ -94,6 +96,27 @@ class SettingsController extends Controller
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @param $action
+     * @return bool
+     * @throws BadRequestHttpException
+     * @throws ForbiddenHttpException
+     * @throws ServiceUnavailableHttpException
+     * @throws UnauthorizedHttpException
+     *
+     * Require CP access to save the settings, as well as specific SEOmatic settings
+     */
+    public function beforeAction($action): bool
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $this->requirePermission('accessCp');
+
+        return true;
+    }
 
     /**
      * Dashboard display
@@ -351,6 +374,7 @@ class SettingsController extends Controller
     public function actionSaveGlobal()
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:global-meta');
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
         $globalsSettings = $request->getParam('metaGlobalVars');
@@ -655,6 +679,7 @@ class SettingsController extends Controller
     public function actionSaveContent(): Response
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:content-meta');
         $request = Craft::$app->getRequest();
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
@@ -811,6 +836,7 @@ class SettingsController extends Controller
     public function actionSaveSite(): Response
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:site-settings');
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
         $siteSettings = $request->getParam('site');
@@ -1010,6 +1036,7 @@ class SettingsController extends Controller
     public function actionSaveTracking()
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:tracking-scripts');
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
         $scriptSettings = $request->getParam('scripts');
