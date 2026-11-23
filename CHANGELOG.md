@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 3.5.24 - 2026.11.23 [CRITICAL]
+### Fixed
+* Change `PluginTemplate::renderStringTemplate()` to use the Sandbox Twig environment, so rendered templates are also sandboxed
+
 ## 3.5.23 - 2026.07.30
 ### Added
 * Updated to schema.org version: `v30.0` for the JSON-LD objects([#1737](https://github.com/nystudio107/craft-seomatic/issues/1737))
