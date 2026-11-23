@@ -3,6 +3,7 @@
 ## 4.1.22 - 2026.11.23 [CRITICAL]
 ### Fixed
 * Change `PluginTemplate::renderStringTemplate()` to use the Sandbox Twig environment, so rendered templates are also sandboxed
+* Check permissions for CP access, and also the specific SEOmatic permission for each controller action before allowing it to save changes
 
 ## 4.1.21 - 2026.07.30
 ### Added
