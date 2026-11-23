@@ -101,6 +101,27 @@ class SettingsController extends Controller
     // =========================================================================
 
     /**
+     * @param $action
+     * @return bool
+     * @throws BadRequestHttpException
+     * @throws ForbiddenHttpException
+     * @throws \craft\web\ServiceUnavailableHttpException
+     * @throws \yii\web\UnauthorizedHttpException
+     *
+     * Require CP access to save the settings, as well as specific SEOmatic settings
+     */
+    public function beforeAction($action): bool
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        $this->requirePermission('accessCp');
+
+        return true;
+    }
+
+    /**
      * Dashboard display
      *
      * @param string|null $siteHandle
@@ -361,6 +382,7 @@ class SettingsController extends Controller
     public function actionSaveGlobal()
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:global-meta');
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
         $globalsSettings = $request->getParam('metaGlobalVars');
@@ -669,6 +691,7 @@ class SettingsController extends Controller
     public function actionSaveContent(): Response
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:content-meta');
         $request = Craft::$app->getRequest();
         $sourceBundleType = $request->getParam('sourceBundleType');
         $sourceHandle = $request->getParam('sourceHandle');
@@ -827,6 +850,7 @@ class SettingsController extends Controller
     public function actionSaveSite(): Response
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:site-settings');
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
         $siteSettings = $request->getParam('seomaticSite');
@@ -1026,6 +1050,7 @@ class SettingsController extends Controller
     public function actionSaveTracking()
     {
         $this->requirePostRequest();
+        $this->requirePermission('seomatic:tracking-scripts');
         $request = Craft::$app->getRequest();
         $siteId = $request->getParam('siteId');
         $scriptSettings = $request->getParam('scripts');
