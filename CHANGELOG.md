@@ -4,6 +4,7 @@
 ### Fixed
 * Change `PluginTemplate::renderStringTemplate()` to use the Sandbox Twig environment, so rendered templates are also sandboxed
 * Check permissions for CP access, and also the specific SEOmatic permission for each controller action before allowing it to save changes
+* Restrict the SEO File Link controller to only `http` or `https` URLs
 
 ## 3.5.23 - 2026.07.30
 ### Added
