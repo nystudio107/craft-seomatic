@@ -4,6 +4,7 @@
 ### Fixed
 * Change `PluginTemplate::renderStringTemplate()` to use the Sandbox Twig environment, so rendered templates are also sandboxed
 * Check permissions for CP access, and also the specific SEOmatic permission for each controller action before allowing it to save changes
+* Restrict the SEO File Link controller to only `http` or `https` URLs
 * Ensure that nested fields from every ContentBlock field in a field ld layout are available in the source field selector ([#1760](https://github.com/nystudio107/craft-seomatic/issues/1760)) closed via ([#1761](https://github.com/nystudio107/craft-seomatic/pull/1761))
 * Fix Twig deprecation error coming from `ExtensionInterface::getOperators()` ([#1762](https://github.com/nystudio107/craft-seomatic/issues/1762))
 
