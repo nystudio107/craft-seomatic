@@ -12,13 +12,10 @@
 namespace nystudio107\seomatic\helpers;
 
 use Craft;
-
 use craft\helpers\Template;
-
 use craft\web\View;
 use nystudio107\minify\Minify;
 use nystudio107\seomatic\Seomatic;
-
 use yii\base\Exception;
 
 /**
@@ -46,7 +43,7 @@ class PluginTemplate
     public static function renderStringTemplate(string $templateString, array $params = []): string
     {
         try {
-            $html = Seomatic::$view->renderString($templateString, $params);
+            $html = Seomatic::$sandboxView->renderString($templateString, $params);
         } catch (\Exception $e) {
             $html = Craft::t(
                 'seomatic',
@@ -62,15 +59,15 @@ class PluginTemplate
     /**
      * Render a plugin template
      *
-     * @param string      $templatePath
-     * @param array       $params
+     * @param string $templatePath
+     * @param array $params
      * @param string|null $minifier
      *
      * @return string
      */
     public static function renderPluginTemplate(
         string $templatePath,
-        array $params = [],
+        array  $params = [],
         string $minifier = null,
     ): string {
         $template = 'seomatic/' . $templatePath;
