@@ -114,7 +114,7 @@ class FileController extends Controller
         return $response;
     }
 
-    function isValidHttpUrl(string $url): bool
+    public function isValidHttpUrl(string $url): bool
     {
         // 1. Ensure the string is a structurally valid URL
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
