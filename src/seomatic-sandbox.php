@@ -72,7 +72,6 @@ return [
         'filesize',
         'filter',
         'hash',
-        'json_encode',
         'json_decode',
         'multisort',
         'namespace',
