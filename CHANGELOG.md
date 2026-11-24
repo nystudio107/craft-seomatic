@@ -1,5 +1,9 @@
 # SEOmatic Changelog
 
+## 4.1.23 - 2026.11.24
+### Fixed
+* Remove `json_encode` from the default SEOmatic Twig sandbox, since it is used by some of the frontend tracking scripts ([#1791](https://github.com/nystudio107/craft-seomatic/issues/1791))
+
 ## 4.1.22 - 2026.11.23 [CRITICAL]
 ### Fixed
 * Change `PluginTemplate::renderStringTemplate()` to use the Sandbox Twig environment, so rendered templates are also sandboxed
