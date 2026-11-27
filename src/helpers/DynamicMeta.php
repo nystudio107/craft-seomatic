@@ -693,6 +693,7 @@ class DynamicMeta
      */
     public static function sanitizeUrl(string $url, bool $checkStatus = true, bool $stripQueryString = true): string
     {
+        $url = rawurldecode($url);
         // Remove the query string
         if ($stripQueryString) {
             $url = UrlHelper::stripQueryString($url);
